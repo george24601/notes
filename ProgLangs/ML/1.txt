@@ -1,0 +1,202 @@
+(* this is comment*)
+
+val x = 34;
+-->type checking before evaluation and extend staic environment
+-> evaluate expression and extend dynamic environment
+
+val abs_of_z = if z < 0 then 0 - z else z; 
+
+every expression has: 
+1 sytax 
+2. type checking rules 
+3. evaluation rules => and we build the whole program recursivley this way
+
+type-checking rule will not return 
+
+use "first.sml" -> REPL
+
+=> your mistake should be syntax, type-checking, evaluation (i.e. how it is checked)
+
+~ neg, div as division of ints
+
+there is no way to assign to a varaible -> can only shadow it in a later enviroment
+because evaluation is done eagerly
+
+fun pow(x: int, y : int) =
+	if y=0
+	then 1
+	else x * pow(x, y-1)
+
+in the same file...
+fun cube(x : int) =
+	pow(x,3)
+
+type of function pow : int * int -> int
+
+better! 
+x = (2,3)
+pow x;
+
+fun sum_pair_list (xs : (int * int) list) =
+	if null xs
+	then 0
+	else
+	#1 (hd xs) + #2 (hd xs) + sum_pair_list (tl xs)
+
+fun firsts (xs: (int * int) list)
+	if null xs
+	then []
+	else #1(hd xs) :: firsts (tl xs)
+
+let expression
+syntax: 
+let b1 b2...bn in e end
+-each bi is any binding and e is any expression
+
+evaluation: evalutate each bi and e in a dynamic environment that includes the previous bidings
+type-check each bi and e in a static environment that includes the preivous bidnings
+
+fun silly1(z :int) =
+	let 
+		val x = ...
+		val y =..
+	in
+		if x > y then....
+	end
+
+
+fun silly2() =
+	let val x = 1
+	in (let val x = 2 in x+ 1 end) + (let val y = x+ 2 in y+1) (* shadowing happening here*)
+	end
+
+let
+
+fun count(from : int, to:int) =
+	if from=to
+	then to::[]
+	else from :: count(from +1, to)
+in
+
+fun pow(x: int, y :int) =
+	if y=0
+	then 1
+	else x * pow(x,y-1)
+
+
+fun cube(x: int) =
+	pow(x, 3)
+
+use "functions.sml"
+
+var par = (x,3)
+pow par;
+
+function evalutaiotn: is already a value we add a xo to environment so later expressions can call it!
+
+type-checking:
+adds binding x0:(t1 *...*tn)-> if
+
+can type -check body e to have type t in the staticenviroment
+
+teh return type of x0 is the type of e
+
+the type checker magically figure out if t exists
+
+Function calls: a new type of expression!
+syntax e0(e1,....en)
+
+type-checking if
+e0 has some type (t1 * ....*tn) -> t
+e1 has type t1,....en has type tn
+then 
+e0(e1,....,en) has type t
+
+evalutaiton :
+evalute e0 to a function
+2. eva,uate argiments to 
+3.result is evalution of e in an envivonment extended to map x1 to v1,...xn to vn:
+
+pairts:
+evaluation e1 to v1 and e2 to v2, result is (v1, v2)
+-a pair of values is a value
+
+type-checking if e1 has type ta and e2 ahs type tb, then the pair expression has type ta * tb
+
+syntax: #1 e and #2 e
+evalute e to a pair 
+
+fun swap (pr : int* bool) = 
+	(#2 pr, #1 pr)
+
+val it = [3,4,5,6]
+
+e1 :: e2 (*cons*)
+
+[6] :: [[1,2], [3,4]]
+
+null e evalutes to truf iff e is []
+
+hd e evalutes to v1
+
+tl e evalutes to the remaining part as list
+
+'a (alpha: any type)
+
+hd: 'a list -> 'a
+
+fun sum_list( xs: int list) =
+	if null xs
+	then 0
+	else hd xs + sum_list(tl xs)
+
+fun countdown(x: int) =
+	if x = 0
+	then []
+	else x :: countdown(x-1)
+
+
+fun append(xs: int list, ys : int list) =
+	if null ys
+	then xs
+	else
+	append(xs :: hd ys, hd tail)
+(this is wrong! why?)
+
+if null xs
+then ys
+else
+hd xs :: append(tl xs, ys)
+
+let expression
+
+
+nested functions:
+unlikely to be useful elsewhere
+likely to be misused if available else where
+likely to be changed or removed later
+
+bad_max example: 2 recursive calls in each call--> exp growth!
+
+options:construct
+NONE has type 'a option
+SOME (e )has type t option
+
+accesing isSome has type 'a option
+valOf has type 'a optional -> 'a
+
+empty list case?-> use one elment case as base case in another recurison-> cleaner
+
+andalso, orelse, not e1-> short circuiting means it is an expression since you dont eval all parameteres
+but they aren't actually needed in the language
+
+real is NOT equality types-> normally not correct in other cases anyway
+
+no mutation: alias or cp implementation difference doesnt matter anymore!
+
+Fix things in a language
+syntax
+semantics
+idioms: typical pattenrs for uing lanaguage
+libararies
+tools: e.g. REPL, debugger, code formatting..

@@ -1,0 +1,57 @@
+type inference: recursion case
+
+fun f1 p1 = e1
+and f2 p2 = e2
+and f3 p3 = e3
+
+similarly, and adds mutually recursive datatype bindings
+
+e.g. state machine
+fun state1 inpput_left =
+and state2 input_left =
+adn .....
+
+without add, can pass easier funtion as argument
+
+structure MyModule = struct bindings end
+
+singature SINGNAEM =
+sign types-for-bindings end
+
+ascribing signature to a modle 
+structure mymodel :> SIGNAME =
+struct bindings end
+
+notice it cant be used outside sig, but can used inside sig if it is not part of sig
+
+abstract type: in signature just use type foo w/o =
+
+signature matching: non-abstract type in bar is provided in Foo, as sepcified
+abstract type in BAR is provied in Foo is some way: can be a datatype or a type synonym
+Every val-binging in bar is provided in Foo, pissibley with a more genral and/or less abstract internal type
+
+fun g(f, x) =
+(f x) + (f x)
+y=2
+fun g (f,x) = y * (f x)
+
+equiavlent? NOT if f has side effect because it calls twice (e.g. printes)
+
+e.g.
+fun f x = 
+let
+	val z = h x
+	val y = g x
+in (y ,z)
+end
+(swap z,y lines, same? => NO! if mutation/side effect printing)/exception etc..
+i.e. don't write funtion with side-effects
+
+funcaiton wrapping 
+
+fun g y = f y vs val g = f
+
+fun g y = (h()) y
+
+when you call it calls h() takes result then call y
+the other one: just evals val g and never calls h again when evals 

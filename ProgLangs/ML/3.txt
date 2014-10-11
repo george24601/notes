@@ -1,0 +1,33 @@
+function body is evaluated in teh enviromnet where the function waqs defiened-> extended with the function arugment
+
+but the environment may involve nested let-expressions not just the top-level sequence of bidnings
+
+why lexical scope:
+1.can change body of f to use q everywher instead of x
+lexical scope: doesnt matter
+dynamic scope: depsnds how result is used
+2. functions can be type-checed and reson about where defiend
+3.closures can easily steor the data they need
+
+Function body is not evaled until it is called
+it is evaled eveyr time it is called
+a variable ding evaluts isexpression when the ding is evaluated, not every time the variable is used
+e.g. one coputes string.size once per element of xs
+closer can avoid repeating computations that do not depend o function arguments
+another one computes string.sze once per list with list
+
+use of closure
+pass functoins with private data to iterators
+combine functoins
+currying callbaks...
+
+currying:
+syntactic suger
+fun f p1 p2 p3 = e is fun f p1 = fn  p2 => fn p3 =>....-> e
+
+parital applicatiopn: we dont supply all curries argument..it returns a function!
+espcially nice for iterator-like functions=> one reason why lib functoins of this form usually curred
+
+but if use partial palicaiton to create a polyumorphic funciton, it may not work due to the value restirction!
+
+dont program against an implemenatiaon until it mateters
