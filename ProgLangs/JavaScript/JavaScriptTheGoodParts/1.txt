@@ -1,0 +1,121 @@
+objects in JS are mutable keyed collections.
+
+An object is a container of properties, where a property has a name and a
+value. Name can be any sring, including the empty string. value can be any JS
+value excpet for undefined
+
+objects in JS are class-free
+
+prototype linkage can reduce object initialization time and memory
+consumption.
+----
+
+var empty_object = {};
+
+var stooge = {
+	"first-name" : "Jerome",
+	"last-name": "Howard"
+}
+
+quotes are optional if the name would be a legal JS name and not a reserved
+word,e.g. "first-name" => first_name.
+
+Comma to separate pairs
+
+property's value can be another object literal
+---------
+if string expression is a legal JS name and not a reserved word, then can use
+. instead of []
+
+e.g.,
+
+stooge ["first-name"]
+flight.departure.IAtA
+
+if member does not exist, an undefined is returned => can use || to fill
+default value
+
+var middle = stooge["middle-name"] || "(none)"
+var status = flight.status || "unknown"
+
+Retrieving values from undefined will throw TypeError => can use && to defend
+against it
+
+flight.equipment //undefined
+flight.equipment.model //throw "TypeError"
+flight.equipment && flight.equipemnt.model //undefined
+---
+
+If object does not have that property name, updating a property will augment
+the object
+
+objects are passed by ref. They are NEVER copied
+
+a = b = c = {} //they are refer to the same empty object
+
+--------
+
+Every object is linked to a prototype object from which it can inherit
+properties. All objects from object literals are linked to Object.prototype
+
+To select an object's prototype during creation, we will add a create method
+to the object function.
+
+if(typeof Object.create != 'function'){
+Object.create = function (o) {
+var F = function(o) {};
+F.prototype = o;
+return new F();
+};
+}
+
+var another_stooge = Object.create(stooge);
+(???)
+
+The prototype link has no effect on update. When we make changes to an object,
+the object's prototype is not touched
+
+delegation retrieval of property value with prototype
+
+The relationship is dynamic => if we add a new property to a prototype, that
+property will be visibel in all of the objects based on that prototype.
+
+-------
+
+hasOwnProperty returns true if the object has a particular property and
+does not look at the prototype chain
+
+flight.hasOwnProperty('number') //true
+flight.hasOwnProperty('consructor') //false => typeof flight.constructor will
+be 'function'
+
+----
+
+for will loop over all property names in an object, INCLUDING functions and
+prototype properties 
+
+solution: use typeof and hasOwnProperties
+
+var name;
+for (name in another_stooge)
+{
+	if(typeof another_stooge[name] !== 'function')
+{
+}
+}
+
+NO guarantee on the order of the names, in that case, make an array with names
+of the properties in the correct order
+
+-----
+delete antoher_stooge.nickname => will let its prototype value shine
+
+To minize the use of global var, create a single global variable for the
+application. This will be the container for your application
+
+var MYAPP = {};
+
+MYAPP.stooge = {}
+MYAPP>flight = {}
+
+
