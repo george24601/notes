@@ -1,0 +1,14 @@
+6 kinds of values: objects, arrays, strings, numbers, booleans, and null
+
+unordered container of n/v pairs
+
+JSON string in double quotes , \ to escape.
+
+var myData = eval('(' + myJSONText')'); //BAD!!
+use JSON.parse() instead
+
+Ajax pattern: server to send an HTML fragment that gets assigned to innerHTML
+propery of an HTML element => BAD!!
+
+JSON parser in javascript
+

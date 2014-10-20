@@ -1,0 +1,30 @@
+JS converts array subscripts into strings that are used to make properties =>
+much slower
+
+.length => length
+if you store an element with a subscript >= current length, length will
+increatwe to contain the new element
+.push => to last
+
+same as object, can use delete to remove "properties" 
+=> delete numbers[2];//leaves hole in the array
+or
+.splice(startIndex, length)
+
+for makes no guarantee on order
+
+typeof gives 'object' => workaround
+var is_array = function(value){ 
+return value && typeof value === 'object' && value.length === 'number'
+&& typeof value.splice === 'function' &&
+!(value.propertyIsEnumberable('lenght'));
+}
+----
+we can add properties to array.prototype or array itself, just like objects.
+But the string name can not be an integer
+
+........
+
+-----------
+
+

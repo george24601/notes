@@ -1,0 +1,74 @@
+PseudoClassical
+inside function ctor
+this.prototype = {constructor: this}
+
+Function.method('inherits', function(Parent) {
+this.prototype = new Parent();
+return this;
+});
+
+Problems
+1. privacy
+2. access to super
+3. if use constructor without new, it will not be boudn to a new object, it
+will be bound to the global object
+
+Class hierachies is motivated by the constraints of static type checking,i.e.,
+no need to solve a problem that doesnt exist
+--------
+Object Specifiers
+
+var myObject = maker( {first: f, last: l, state: s, city: c });
+we can just pass the JSON object to the constructor and it will return a fully
+constituted object.
+
+------
+
+In a purely prototypal pattern, we focus on the objects instead of classes
+
+var block = function (){
+var oldScope = scope;
+scope = Object.create(scope);
+advance ('{'}
+parse (scope);
+advance('}');
+scope = oldScope;
+};
+--------
+constructor in a module pattern
+1. create new object
+2. optionally define private instance varaibles and methods
+3.aguments new object with methods.
+4. returns that new object
+
+var mammal = function (spec) {
+var that = {};
+that.get_name = function() {return spec.name;};
+that.says = function () {return ...;};
+return that;
+};
+
+var myMammal = mammal ({name: 'Herb'});
+
+Object.method('superior', function(name) {
+var that = this,
+	method = that[name];
+	return function() {
+		return method.apply(that, arguments);
+	};
+});
+
+var coolcat = function(spec)
+{
+var that = cat(spec), super_get_name = that.superior('get_name');
+that.get_name = function(n) {
+return 'like ' + super_get_name() + 'baby';
+
+};
+return that;
+};
+
+var myCoolCat = coolcat({name: 'Bix'});
+var name = myCoolCate.get_name();
+---------
+Parts

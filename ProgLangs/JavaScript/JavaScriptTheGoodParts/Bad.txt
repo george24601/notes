@@ -1,0 +1,57 @@
+global variable: 3 ways to declare
+place var outside any function
+use a varaible without declaring it!!
+
+lack of block scope => forces you to declare all varibles at the top of
+function
+
+semicolom insertion => put bracket same line as return. Otherwise, SI will
+return an undefined
+
+typof null is 'object' => my_value === null for nullity test
+
+parseInt()
+
++: make sure if both operands are numbers or not
+
+JS's floating point's inherent precision problem
+
+NaN: not a number, BUT type NaN === 'number', NaN === NaN //false
+Use isNaN instead
+better
+var isNumber = function isNumber(value) {return typeof value === 'number' &&
+isFinite(value);}
+
+Phoney array
+
+Falsy values
+-------
+Always use === and !==
+
+continue
+
+eval
+
+switch Fall Through
+Worst features: features that are both useful and dangerous
+
+Block-less Statement
+
+++--
+
+Avoid new Object and new Array. Use {} and [] instead
+
+----
+new
+Creates a new object that inherits from the operand's prototype member, and
+then calls the operand, binding the new object to this.
+
+if you forget new, you get a function call, and this is bound to the global
+object instead of the new one
+
+Dont use new at all
+----
+
+Avoid void
+
+Use of JSLint
