@@ -1,0 +1,166 @@
+Function: objects => k/v pairs with link to prototype object
+
+Function object has a prototype property, DISTINCT from Function.prototype. The property's value is an object with a constructor property whose value is the function
+
+Every function has two additoinal parameters: this and arguments
+
+If there are too many argument values, the extra argument values will be ignored. If there are too few, undefined will the used for that argument => NO runtime error in either case!
+
+----
+Method invocation: function as property of object, when invoked: this is bound to that object
+
+var myObj = { val: 0, increment: function(inc) { }};
+
+---
+Function invocation: this is bound to global object => method cannot use inner function to do the same job,because inner function cant see method's this.
+
+Workaround:
+
+myObject.double = function() {
+	var that = this;
+	var helper = function()
+{
+that.value = add(that.value, that.value);
+};
+
+helper();
+};
+
+Constructor Invocation: use constructor without new is bad
+
+Apply Invocation: apply method of the function accepts a value for this (optional) and an array of arguments
+----
+function has access to the arguments array=> so function can take an unspecified number of parameters
+
+A function always returns a value or undefined. If it is invoked with new prefix and return value is not an object, then this (the new object) is returned
+----
+throw : {name:  'TypeError', message: ' '};
+
+e handler have to inspect the name to determine the type of the exception.
+------
+
+Function.prototype.method = function(name, func) {
+	if(!this.prototype[name])
+{
+	this.prototype[name] = func;
+	return this;
+}
+};
+
+so we can
+
+Number.method('integer', function() {});
+---
+
+var hanoi = function (..) {
+hanoi (...)
+
+hanoi (...)
+}
+
+JS has NO tail recursion optimization!
+-----
+JS has NO block scope, only function scope. Therefore, all variables need to
+be declared at the top of the function body
+----
+Case: inner function has a longer lifetime than its outer function
+
+var myObject = function() { var value = 0;
+return {
+	inrement: function(inc) {
+	value += typeof inc == 'number' ? inc: 1;},
+	getValue: function() {return value;}
+};
+} ();
+
+The function returns an object with two methods, which have access to the
+value variable. => NO ONE ELSE can modify value 
+
+var quo = function(status) {return { get_status: function() {return status;} };};
+
+var myQuo = quo ("amazed");
+myQuo.get_status();
+
+get_access has access to the parameter itself, because function has access to
+the context in which it was created. => closure
+
+var fade = function (node)
+{
+	var level = 1
+	var step = function() {
+	
+	if(level < 15) 
+	{
+	level += 1;
+	setTimeout(step, 100);
+	};
+	setTimeout(step, 100);
+};
+
+inner function has access to the actual variables of the outerfunction and not
+copies!!
+
+var add_the_handlers = function(nodes) {var i;
+for(i = 0; i < nodes.length; i+=1)
+{
+	nodes[i].onclick = function(e) {alert(i);};
+}
+};
+
+When we click the node, the value of i is already node.length. To fix it:
+nodes[i].onclick = function(i){return function(e) {alert(e);};}(i);
+-------
+String.method('deentityify', function() {
+	var entity = { };
+	return function () {
+
+	return this.replace( , function(a, b) { 
+var r = entity[b];
+return typeof r == 'string' ? r: a
+});
+};}());
+
+general pattern of a module is a function that defineds private varaibles and
+functions, creates privileged functions which, through closure, have access to
+the private variables and functions; then returns or stores those privileged
+functions.
+
+var serial_maker = function()
+{
+var prefix = '';
+var seq = 0;
+return {
+	set_prefix: function(p){prefix = String(p) },
+	set_seq: function(s){seq = s },
+	gensym: function() {var result = prefix + seq; seq += 1; return
+result; }
+};
+};
+
+var seqer = serial_maker();
+
+if we pass gensym to a third party's function, that function would be able to
+generate unique strings, but would be unable to change the prefix or seq
+---------
+cascades: return this instead of undefined for setters (builder pattern)
+
+currying
+----
+var fibonacci = function() {
+	var memo = [0,1];
+	var fib = function(n){
+	var result = memo[n];
+	if(typeof result !== 'number')
+{
+	result = fib(n -1) + fib(n-2)
+	memo[n] = result;
+}
+return result;
+};
+retrun fib;
+}();
+
+To generalize
+
+var fib = meomoizer([0,1], function(shell, n) { return shell(n-1) +
+shell(n-2); });
