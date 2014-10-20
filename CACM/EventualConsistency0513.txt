@@ -1,0 +1,95 @@
+CAP theorem: distributed systems requiring always-on, highly available
+operation cannot guarantee the illusion of coherent, consistent single-system
+operation in the presence of network partitions, which cut communicaiton
+between active servers.
+
+If no additional updates are made to a given data item, all reads to that item
+will eventually return the same value.
+
+3 major questions:
+1. How eventual is eventual consistency? new prediction and measurement
+techiniques => when verified via measurement, the systems appear strongly
+consistent
+
+2.How should one program under eventual consistency?  via external
+compensation outside of system or by limiting themselves to data structures
+that avoid inconsistencies altogether.
+
+3.Is it possible to provide stronger guarantees than eventual consistency
+without losing its benefits? Possible to achieve the benfits of eventual
+consistency while providing substantially stronger guarantees, including
+causality and several ACID properties from traditional DBMS
+
+To ensure convergence, replicas must exchange info with one another about
+which writes they have seen => anti-entropy, e.g, asych all-to-all broadcast
+
+Anti-entropy is asynch in nature, can also return after W repicas have
+ackknowleged the write.
+
+EC makes no safety ("nothing bad happens") guarantees => it is purely a
+liveness property ("something good will happen") => EC is the MINIMUM
+requirment for data consistency
+
+one common metric is time: how long will it take for writes to become visible
+to readers.
+Another is versions: how many versions old will a given read be
+
+Two main kinds of mechanisms for quantifying eventual consistency are
+measurement and prediciton: how consistent is my store under my given workload
+right now? How consistent will my store be under a given configuration and
+workload?
+
+Probabilistically Bounded Staleness (PBS) => an expectation of recency for
+reads of data items. e.g., 100 msec after a write completes, 99.9% of reads
+will return the most recent version and 85% of reads will return a version
+that is within two of the most recent
+
+How does PBS work?
+LinkedIn's data stores returned consistent data 99.9% of time within 13.6ms,
+on SSDs within 1.63ms
+Yammer's data stores experienced 99% inconsistency window of 0.2 sec at 81.1
+latency reduction
+
+Compensate outside the system, e.g. , overdrafting fee when people withdraw
+more than the account balance.i.e, max
+
+B-C * R
+
+AND need to design compensation: HARD that can be more onerous than designing
+a solution for strong consistency. 
+When the cost of inconsistency is high, compensation is more likely to be well
+thought out => some compensation protocols may already exist.
+----
+
+CALM theorem: programs that are monotoic, or compute an ever-growing set of
+facts and do not ever "retract" facts that they emit can always be safely run
+on an eventually consistent store.
+e.g. trade database, because trade cannot be undone, any answers based on
+historical data would be true, but latest trade data cannot guarantee so.
+
+CALM => ACID 2.0
+Associativity: can apply a function in any order
+Commutativity: function's arguments are order-insensitive
+(i.e. they can tolerate message re-ordering)
+Idempotence => at least once message delivery
+Distributed
+
+CRDT (commutative, replicated data types), 
+e.g., an increment-only counter that is replicated on two servers.
+instead of reading and writing counter values, each invocation distributes an
+inrement operation.
+insight: separate data store and application-level consistency concerns
+
+No consistency model stronger than causal consistency is available in the
+presence of partitions,i.e.,
+each process's writes are seen in order, that writes follow reads, and that
+transitive data dependencies hold.
+
+staleness guarantees are impossible in a highly available system. 
+Reads that
+specify a constraint on data recency are not generally available in the
+presence of long-lasting network partitions
+cannot maintain arbitrary global correctness constraints over sets of data
+items.
+In some cases, correctness constraints on individual data items are not
+achievable
