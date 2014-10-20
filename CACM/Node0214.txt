@@ -1,0 +1,75 @@
+On the server side, LinkedIn's mobile frontend is now built entirely in Node.
+=> What was needed to improve efficiency was an event-driven system.
+
+Was a Ruby on Rails process-based system. Mobile model has a lot of
+microconnections => problem
+
+A lot of string manipulation and Ruby had performance problem GCing small
+string objects. Not optimized for JSON translation, which is what is passed
+from backend to frontend
+
+controllers and views are on client/mobile system whenever you are doing
+client-side rendering. 
+
+Middle layer is thin and focuses on string manipulation => so need something
+even based, good at string manipulation, light and quick and easy to use.
+Options: Ruby => Eventmachine, Twisted => Python, Play=>Java
+
+50k QPS, Node is 20 times faster than their Ruby stack. 25 MB memory
+footprint. The other 2 options took 80 MB+
+
+A very structured, statically typed model => so oo language => model moves to
+view controllers, which got pushed out all the way to client => what is left
+in the middle? => bunch of functions that manipulate hashes of data to format
+them: formatting and some aggregation
+
+Functional language is the best fit for glue between front end, which is in
+the client and back end (data model).
+
+backe-end stack is process-based Java.
+
+Their mobile-specific backend chose a more typed language. But Rest.li is
+being used.
+
+For RESTful APIs, we need to create a set of functions that sit in front of
+each resource type we're looking to communicate with, like proxying that
+interface
+
+Took 0.1 sec to start node app, 15 sec to start Ruby app.
+
+Interface between client and server: REST, Node server returns view-based
+models
+
+Each REST endpoint has a file that represents all the responses for that
+endpoint, as well as the public interface for the module mapped to the routes.
+
+Every function inside the module, whether public or private, was defined in C
+style. Module.export works as a C header
+
+Use Step as flow-control library => waterfall callback. If you pass into Step
+an array of functions and then it will call each function in order such that
+as the first function returns, the second one will be called. Step guarantees
+the order of this sequence. If the function is asynchronous, the function will
+be passed a callback, and it has to call once it is done. Independent of
+whether each function is synchronous or asynch, the waterfall will execute in
+sequence.
+
+group method => give a group of functions and it will exe all of them in
+parallel, and return when all of them are done executing
+
+problem they had with error detection and how they fixed it
+
+60k lines of Ruby vs 2k lines of Node
+
+Mobile vs Web-based systems => templates and views are on client side. For web
+the rendering is more server-based
+
+Watch out for flow control and exception handling
+
+Things to help
+1. good IDE, InteliJ IDEA currently is good
+2. evolving performance analysis and monitoring => probably JMX layer the java
+VM provides
+3. something that can inspect everything your Node system is doing and
+actually understand your application so it can provide you with detailed
+breakdowns of where your bottlenecks and slowdowns are.
