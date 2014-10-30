@@ -1,0 +1,64 @@
+Consider pass-by-value isntead of reference if the function requires a copy of its argument
+
+Prefer passing by (smart) pointer if the argument is optioanl or if the funciton stores a copy of the pointer or otherwise manipulats ownership of the argument.
+
+Prefer passing by reference if the argumetn is required and the function wont store a pointer to it or otherwise affect its ownership.
+
+if you a+b, also a += b: When defining binary arithmetic operators, provide thier assignment versions as well,a dn write to minimize duplication and max efficienty.
+
+Use overload to avoid implicit type conversions,e.g., == operator in String
+
+-------
+Value class: modeled after built-in types
+public dtor, ctor, assignmnt with value semantics
+no virtual functions,including dtor
+used as concrete class, not as base class
+
+Base class:
+dtor that is public and virtual or protected and nonvirtual, and a nonpublic copy ctor and assignment operator
+establishes interfaces through virtual functions
+-----
+
+Dependency Inversion Principle:
+High-level modules should not depend upon low-level moduels. Rather, both should depend upon abstractions
+Abstractions should not depend upon details, Rather, details should depend upon abstractiosn.
+----
+
+make virtual funcitons nonpublic, and public functions nonvirtual
+-----
+Pimpl judiciouisly
+
+----------
+Define and initialize member variables in the same order.
+
+---
+Prefer initialization to assignment in constructors
+
+A(): s1_("Hello,"), s2_("world") {}
+
+avoid calling virtual functions in ctor and dtor
+
+--------
+If deletion through a pointer to a base Base should be allowed, then Base's dtor must b epublic and virtual
+
+--------
+
+Destructors, deallocation, and swap never fail.
+
+-----
+
+In base classes, consider cisabling the copy ctor and cpy assignmewnt operator, and isntead supplying a virual Clonet member function if clients need to make polymorphic (complete, deep) copies
+
+====
+
+cliassic assignment operator
+T& operator=(T const &) => they should not be virtual
+
+dont return const T& => cant be put into std libs
+
+--------
+provide a no-fail swap
+
+
+
+

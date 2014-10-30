@@ -1,0 +1,20 @@
+Know what not to standardize
+
+Compile cleanly at high warning levels
+How to fix warnings?
+
+realloc: bad design example
+basic_string: bad design example
+
+Avoid excessive operator overloading
+
+use flexible, dynamically-allocated data and instead of fixed-size arrays => static array is terrible correctness fallacy
+
+Dont pessimize prematurely: 
+pass-by-val vs pass-by-ref
+use assignment inside ctor instead of initializer list
+
+Code for concurrency....
+
+
+
