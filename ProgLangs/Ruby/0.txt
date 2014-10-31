@@ -1,0 +1,194 @@
+pure oo => every exp evaluates to an object
+
+every object is an instance of a class
+
+mixins => compromise between multiple inheritance and interfaces
+
+dynamically typed, allow instance variables and methods to be added and
+removed from objects while a program executes
+
+reflection: every object has class and methods objects
+------
+class Foo
+	def m1
+	..
+end
+
+def m2 (x,7)
+....
+
+class names must be capitalized
+
+If a method argument has a defualt, then all arguments to its right must also
+have a default
+
+def myMethod(x,y, z=0, w="hi")
+...
+end
+
+call itself => self.m
+
+All instance variables start with an @, @@ => class variables
+
+Create instance => Foo.new(,...)
+
+class constant: starts with a capital letter instead of @@. Should not mutate
+it. Publicly visible. To access, use :: ,e.g., Math::PI
+
+class method:
+
+def self.method_name args
+..
+end
+
+getter and setter => methods are public by default:
+
+def foo
+ @foo
+end
+
+def foo= x
+@foo =x
+end
+
+conditials treats everything but false and nil as true
+
+nil? method
+
+Often convenicent for methods to return self so that subsequent method calls
+can be put together
+
+duck-typing:
+def mirror_update pt
+	pt.x = pt.x * -1
+end
+
+=> normally in place unless you use instance_of? or is_a?
+-----
+
+Array.new(x) creates an array of length x with each index initially mapped to
+nil
+
+Array.new(5) {|i| -i} =>
+
+can hold obje ts that are instances of different classes
+
+negative array indices
+
+no array-bound errors => nil for getter, grow array for setter
+
++ and | operator
+
+push, pop, shift, unshift
+---------
+
+int.times {puts "hi"}
+
+y = 7 
+[4,6,8].each {y += 1}
+
+sum = 0
+[4,6,8].each {|x| 
+sum += x
+puts sum
+}
+
+But blocks are not objects. can NOT pass them as arguments to a method.
+Rather, any method can be passed either 0 or 1 blocks, sepearte from the other
+arguments.
+
+inject is like fold
+sum = [4,6,8].inject(0) {|acc, elt| acc + elt}
+
+map, select (filter in ML), any?, all?
+
+-------
+using blocks => yield keyword. e.g, prints "hi" 3 times
+
+def foo x
+	if x
+		yield
+	else
+		yield
+		yield
+foo true {puts "hi"}
+foo false{puts "hi"}
+
+pass arguments to a block => yield (8, "str")
+
+a recursive method passing block
+
+def coutn i
+	if yield i
+	1
+	else
+	1 + (count (i+ 1) { |x| yield x})
+	end
+end
+------
+Blocks are NOT closures because they are not objects => they are not
+"first-class values", which is something that can be stored and passed like
+anything else in the language
+
+Suppose we want to create an array of blocks => cant because array holds
+objects are blocks are not objects, but we can use lambda to careate an array
+of instances of Proc
+
+c = a.map {|x| lambda {|y| x >= y}}
+
+c[2].call 17
+j = c.count {|x| x.call(5)}
+-------
+
+Hashes
+
+{"SML" => 7, "Racket" =>12, "Ruby" => 42}
+
+keys, values, delete, each, inject
+
+Range (2...10) => because of duck typing, most methods using array can accept
+range as well.
+
+---
+class C < D ...end
+
+reflection => superclass method
+is_a? instance_of? => in conflict with duck typing
+
+-----
+
+class Point
+attr_accessor :x, :y
+
+def initialize(x,y)
+	@x = x
+	@y = y
+end
+
+def distFromOrigin
+	Math.sqrt(@x * @x + @y * @y)
+end
+
+def distFromOrigin2
+	Math.sqrt(x * x + y * y)//uses getter method
+end
+
+end
+
+class ColorPoint < Point
+attr_accessor :color
+
+def initialize(x,y,c="clear")
+	super(x,y) //not required but often desired
+	@color = c
+end
+
+end
+-----
+Dynamic dispatch explained
+
+------
+Dynamic dispatch vs Closures
+
+Overriding and dynamic dispatch is the biggest thing that distinguishes oop
+from functional programming
