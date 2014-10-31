@@ -1,0 +1,40 @@
+linux kernel -> 
+Security
+memory & process
+File/network I/O
+Device driver
++
+Power management
+Low memory killer
+Andriod shared memory
+Interprocess communication
+
+next layer: system libraries
+System C Library
+Surface mgr
+Media
+Audio/video framework
+SQLite
+Webkit....
++ Android runtime:
+Core java lib + Dalvik VM
+
+Java cod => java byte code => DX convert to dex => install on the device, Dalvik exes
+
+Dalvik VM is designed for resource-constrainted environment
+
+next layer: application framework
+package manager, windows manager, view system (GUI elements), resource manager (non-compiled resoruces)
+Activity manager (manages app lifecycle and navigation stack),contentprovider (inter-application data sharing)
+location manager (location and movement information), notification manager
+
+last layer: applicaiton layer
+Home, conatacts, phone, browser, email reader
+
+-----------------
+
+Install the ADT bundle
+Using the eclipse IDE
+using the android emulator
+Debugging android applications
+other tools
