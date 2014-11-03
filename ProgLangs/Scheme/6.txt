@@ -1,0 +1,167 @@
+in ml, to have a lise of "ints or strings", so use a datatype
+
+datatype int_or_string =  I of int | S of string
+
+fun funny xs =
+	case xs of
+	[] => 0
+| (I i) :: xs' => ...
+} (S s) :: xs' =>...
+
+(define (funny-sum xs)
+	(cond [(nll? xs) 0]
+		[(number? (car xs)) (...)])
+
+///will write such functions with type exp-> exp instead of exp ->
+datatye exp = Const of int
+| Negate of exp
+|Add of exp
+
+fun eval_exp_new e =
+let 
+fun get_int e =
+case e of
+Const i => i
+| _ => raise (Error
+
+(define  (Const i) (list 'Const i))
+(define  (Negate e) (liset 'Negate e))
+(define (Add e1 e2) (list 'Add e d2))
+(define (Multiply e1 e1) (liset 'Multiply e1 e2 ))
+(define (Const? x) (eq? (car x) 'Const))
+(define (>utlply? x) (eq? (car x) 'Multiply))
+
+(define (add-e1 e) (car (cdr e)))
+(define (add-e2 e) (car (cdr (cdr e))))
+
+(define (eval-exp e)
+(cond [(Const? e) e]
+	[(Negate? e) e] (Const (- (cosnt-int (eval -exp e)))))
+---------------
+(struct foo (bar bz quux) #: transparent)
+(foo e1 e2 e3)
+(foo? e) (foo-bar e) (foo-baz e) (foo-quux) are given automattical
+this is call dynamic typing,i.e., the type info doesnt exist in the type system
+---------
+two approache to implete a pL b:
+wreite an interprester in antoher lanugae A
+take a program in b and produce an answer
+write a compiler in another language A to a third language c
+
+tranlate must preserve meaning(equivalent)
+
+A is the metalangaugae: crucial to keep A and B straight
+
+but i modern practice have both and multiple layers
+so there is no such as a complied langauge or an interpreted langauge
+programs cannot see how the implementaion work
+interpreter vs compliler combintiaton is aobut a particluar langauge implementan, not the language defintion
+
+if implementing PL B in PL A, we cna skip parsing
+Have B programmers write ASTs directly in PL A
+embeds B programs as trees in A
+
+e.g. the aritimeitc language example: the interpreter is eval-exp
+----------
+intepreter can assume input is a leage AST for B
+but, it must check that resive results are the right kind of value-> Gi
+
+illegael ASTs can cash the interpreter- this is fine
+
+so can assume right types for struck fields
+const hodls a number, negate holds a leage AST, andd hold 2 legal ASTs
+
+interpreter return expressions-> should always be a vlues, a kind of expression that evalutes to itelst-> if not the intepreter has a bug
+
+you should detect eval of it which tries to use the wrong kind of values
+means checkking a recursive result whenver a particular type of value is needed
+
+eval-right and eval wrong
+--------
+an eviroment is a mapping from vars to valeus
+eval takes palce in anenvoriemnt
+envi pased arg to intpretor helper funcitn
+a variable expression looks up the varibale in the nviroment
+most subepxressions use same enviroemnt as outer epxression
+a let-expression evalutes itsbody in a larger environment
+
+(define (eval-under-env e env)
+(cond  ...))
+
+then eval-exp just calls eval-under-enve iwth same epxre and the empty enviroment
+
+the interpreter uses a closeru data sructure to keep the enviroemt it willneed to use later
+
+(struct closuer(env fun) #:tranpsarent)
+
+A function is not a vlaue; a cloure is a value
+*evalute a function reutrns a closure
+create a closure out of (a) the function and (b) the current enviment when the function was evaluted
+
+functions calls
+
+(call e1 e2)
+Use curent enviment to eavluet e1 to a closure
+use current enviner to eval e2 to a vlue
+evualte function's bod int he closre's envoment
+map the funciton's argument-name to the argiument-vale
+-map the funciont name to the whoel closure
+
+Gieven a cloure the code part is only ever evulated using the vnvionment part, nto the vnvionment at hte call-site
+-----------
+closure expensive: time to uild:tiny just building a sricut
+space to store cloures might be large if enviment is large
+alternative, store pooisble smaller vnviment olding only the variabe that are free variables in the function budy: varaibles that occur, not couitn shadowed uses of the sname varialbes
+-a function boyd would never need anything else from the environment
+lambda (x) (+ x y z)) ; {y, z} are free varaibles
+
+bofer the eval begins, compute free variables of every funciton in program and store htis info wiht the function=> a bit more tiem, a lot less space
+o
+
+if we are compilin t oa lnage wihtou closures,c annot rely on there being a curent envorment
+
+so compile funcions by having hte translate produce regular funciosn that all take an extra explicit argument
+
+and compuler recales alluses of gree arible with code that llooks up the varilbe using the enviment arugment
+-----------------
+use of a macro expands into languge syntax beofre the program is run, i.e., before calling the main interpreter funciton
+
+we use lanugage A functions that produce lanague B AS as lalnauge b macros
+
+lanauge B programs can use the macro as toug they are part of lanauge B
+(define (ist-produce es)
+(if (null? es)
+(const 1)
+(multiply (car es) (lise-produce (cdr es)))
+
+(define test (andlaso (eq-num (double (const 4)))
+	(list-proguce (list (const 2)....
+overall: produce the expanded syntax that can be evaled later
+teh macro appraoch probmesl wih shadoiwn varibla when using local vairables to avoid evaluing expressions more than once (surprise variable shadoiwng, use werid lang instean)
+
+-----------
+racket and ML from each other's perspective: transform from one to another!
+(ML to racket) each struct-definitno cereat  new contructor, dynamically adding to "theType:ca
+
+
+catcin a bug beofre it matters is in inherent tension with dont' report a bug that might not matter
+------------
+sound: no false negatives
+complete: no false positives
+
+ususal for a PL tpe system to be sound but not complete
+
+any stic chekc cnnot do all of: alays terminate, be ocund, be complete
+
+eak typing: there exist program that , b fei, must pass stati chcking but hten when run can "set th ecomputer on fire"
+benefis: ease of lang implemnation:perforamcne, lower level
+e.g. array bounds
+
+staticv vs.dynamic chekci != "what is the run-tiem semantics of the primitive"
+but related beucase it involves trade-offs between cathcin bugs sooner vs. maybe more convenienet
+--------
+eval: a run-tiem ceate some data, then tream the data as a prognd and run it
+but do need ot "shop a lnague implementaion " in any program containing eval
+
+quo and eavl areinverses
+

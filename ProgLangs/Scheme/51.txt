@@ -1,0 +1,133 @@
+scheme: dynamic typing
+
+(define xs (list 4 5 6))
+
+(define ys (list (list 4 5) 6 7 (list 8))
+
+(define (sum1 xs)
+	if (null? xs)
+	0
+	(if (number? (car xs))
+		(+ (car xs) (sum1 (cdr xs)))
+		(+ (sum1 (car xs) (sum1( cdr xs)))
+
+(define (sum2 xs)
+	(if (null? xs)
+	0
+	(if (number? (car xs))
+		(+ (car xs) (sum2 (cdr xs)))
+		(if (list? (car xs))
+			(+ (sum2 (car xs)) (sum2 (cdr xs)))
+			(sum2 (cdr xs)))
+
+(cond [e1a e1b]
+	pe2a e2b]
+[eNa eNb]) 
+Good style eNa should be #t
+
+(define (sum3 xs)
+	(cond [(null? xs) 0]
+	[(number ?  (car xs)) )_(car xs) ( sum3 (cdr xs))))
+
+[#t (let  ([x1 e1] [x2 e2][xn en])
+	body)
+
+[#t (let ([tlans (max-of-liet (cdr xs))])
+	(if (> tlans (car xs))
+
+the expressions are all evaluted in the enviroment from BEFORE THE LET-EXPRESSION
+
+let*: same as ML's let
+
+letret: the expression are evaluted in the envomer that inclues ALL THE BIDNINGS
+needed for mutal recursion, but expresss are still evualted in order-> out of order will give #undeifned
+
+(lambda (z) (_ z y w x))
+
+(define (sillu-mode 2x)
+	(if (even? x) 0 1))
+
+top-level define: can be forward ref as long as when it is called all needed parts ar evaled
+
+(set! x e) assignment statemnet
+
+if soemthng you need not to change might change, kae a local copy of it
+
+so you can set! even system functions!
+
+cons just e makes a pair
+
+list: recursive cons ends with a nil
+(define lst (cons 1 (cons #t (cons "hi" nll)))) ;just create a list
+(length pr)
+
+list? 
+pair?
+
+mcons:cells are mutabls
+
+functiaon args: eval eagerly
+
+cond: not much
+
+example: my if bad=>  never ending recursion because both are evaled regardless
+
+(if e1 e2 e3)) vs(if e1 (r2) (e3))
+
+(e2) calls a zero arg functions: so that function body is not evaled until it is hit!-common techini
+
+a zero arg lambda used to delay evalution: thunk
+
+problem: thunk will be evaled every time its re-called, e.g. recursive case!
+if in the expression, it is evaled already=> net loss
+best of both worlds: lazy evalutaion->thunks and mutable pairs are enough to build
+
+
+(define (my-dealy th)
+	(mcons #f th))
+
+(define (my-force p)
+(if (mcar p)
+	(mcdr p)
+	(begin (set-mcar! p #2)
+		(set-mcdr! p ((mcdr p)))
+		(mcdr p))))
+
+(f (my-delay( lambda() e))))=> passed
+
+
+(my-mult x (let ([x (my-delay (lambda*( (slow-add 3 4)))[) (labmda() (my-force p))))
+
+steram:   an infiite sequence of values
+
+use a thunk to delya creating most of the sequence=> cannot make a stream by making all the values
+
+stream producer knows how creat nay number of values
+
+stream consumer decides how many values to ask for
+
+let a stream be a thunk that when called returns a pair
+
+(car (powers-of-tow))
+(cdr (powers-of-tow))
+
+(define (number-until stream tester)
+	(letrec ([f (lambda (stream ans)
+(let ([]r (stream)])
+	(if (tester (car pr))
+		ans
+	(f (cdr pr) (+ ans 1)))])
+
+(number-until powers-of-tow (lambda (x) (=x 16)))
+
+(define ones (lamdbda() (cons 1 ones)))
+
+(define (f x) (cons x (lambda () (f (+ x 1))))
+
+(define nats
+	(letrec([f (lambda (x) (cons x(lambda () (f (+ x 1)))
+		(lambdasa (f 1)))
+
+
+	(f stream 1)
+
