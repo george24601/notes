@@ -98,9 +98,9 @@ best of both worlds: lazy evalutaion->thunks and mutable pairs are enough to bui
 
 (my-mult x (let ([x (my-delay (lambda*( (slow-add 3 4)))[) (labmda() (my-force p))))
 
-steram:   an infiite sequence of values
+stream: an infinite sequence of values
 
-use a thunk to delya creating most of the sequence=> cannot make a stream by making all the values
+use a thunk to delay creating most of the sequence=> cannot make a stream by making all the values
 
 stream producer knows how creat nay number of values
 
@@ -108,8 +108,8 @@ stream consumer decides how many values to ask for
 
 let a stream be a thunk that when called returns a pair
 
-(car (powers-of-tow))
-(cdr (powers-of-tow))
+(car (powers-of-two))
+(cdr (powers-of-two))
 
 (define (number-until stream tester)
 	(letrec ([f (lambda (stream ans)
@@ -125,9 +125,7 @@ let a stream be a thunk that when called returns a pair
 (define (f x) (cons x (lambda () (f (+ x 1))))
 
 (define nats
-	(letrec([f (lambda (x) (cons x(lambda () (f (+ x 1)))
-		(lambdasa (f 1)))
+	(letrec([f (lambda (x) (cons x (lambda () (f (+ x 1)))))])
+		(lambda () (f 1))))
 
-
-	(f stream 1)
 

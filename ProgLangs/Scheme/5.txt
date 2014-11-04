@@ -123,7 +123,7 @@ top level biding can call later bidning as long as the caller appears after the 
 cons: just make a pair
 list: just a list of cons that ends with null
 
-list? pair?: build -in primitives
+list? pair?: build-in primitives
 
 mcons
 (set-mcdr!@ mpr 47) 47
@@ -203,12 +203,15 @@ anw
 (deien mat (stream-m,aekr + 1))
 (define powers-of-tow )stream-maker * 2))
 
-note
 
-(define on-bad (cons 1 oens-bad)) doesnt work. becaue ones-bad is evales=> not completed! as a compariosn, the correct verison returns lambda not eval=> done
+(define one-bad (lambda () (cons 1 (ones-bad))); infinite loop! because we
+keep evaling! as a compariosn, the correct verison returns lambda not eval=> done
 
-(defiine one-bad (lamdsa () (cons 1 (ones-bad))); infinite loop! because we keep evaling!
 (f stream 1)
+
+-----
+Memoization
+
 
 (define fib
 	(letrec ([memo null]
@@ -219,8 +222,14 @@ note
 			(let ([new-ans (if (or (= x 1) (= x 2))
 				1
 				(+ (f (-x 1)) (f (-x 2))))])
-(bein 
+(begin 
 (set! memo (cons (cons x new-ans) memo))
-new-anws))))])
+new-anws)))))])
 
+f))
+
+Note that where memo is defined, if it is defined inside call to f then it is
+always using an empty table
+
+assoc: takes a value and a list of pairs and returns the first pair in the list where the car of the pair equal to the value. It returns #f if no pair has such a car. 
 
