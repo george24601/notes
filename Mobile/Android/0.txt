@@ -38,3 +38,33 @@ Using the eclipse IDE
 using the android emulator
 Debugging android applications
 other tools
+
+ADT Bundle
+Latest Android Platform
+Eclipse + ADT Plugin
+latest system image for emulator
+additonal dev tools
+(Note a new IDE by google is coming)
+
+use android virtual device manager to switch devices, eclipse will install the app on the virtual device and run it
+hardware options in avd
+but some features are not available
+performance/UX can be misleading
+
+But can emulate
+Network speed/latencies
+battery power
+location coordinates
+
+------
+telnet localhost {emulator port}
+sample commands:
+network speed edge
+network speed full
+power capacity 5
+power status not-charging
+geo fix 0.00 40.00
+
+sms send {phone number} "{txt message}"
+
+dial the second emulator number is the port
