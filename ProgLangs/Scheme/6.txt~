@@ -1,0 +1,177 @@
+in ml, to have a list of "ints or strings", so use a datatype
+
+datatype int_or_string =  I of int | S of string
+
+fun funny xs =
+	case xs of
+	[] => 0
+| (I i) :: xs' => ...
+} (S s) :: xs' =>...
+
+(define (funny-sum xs)
+	(cond [(nll? xs) 0]
+		[(number? (car xs)) (...)])
+
+///will write such functions with type exp-> exp instead of exp -> int
+datatye exp = Const of int
+| Negate of exp
+|Add of exp
+
+fun eval_exp_new e =
+let 
+fun get_int e =
+case e of
+Const i => i
+| _ => raise (Error
+-----------
+
+
+(define  (Const i) (list 'Const i))
+(define  (Negate e) (list 'Negate e))
+(define (Add e1 e2) (list 'Add e d2))
+(define (Multiply e1 e1) (list 'Multiply e1 e2 ))
+(define (Const? x) (eq? (car x) 'Const))
+(define (Multiply? x) (eq? (car x) 'Multiply))
+.....
+(define (add-e1 e) (car (cdr e)))
+(define (add-e2 e) (car (cdr (cdr e))))
+
+'foo: Racket symbol, can compare symbol with eq?
+
+(define (eval-exp e)
+(cond [(Const? e) e]
+	[(Negate? e) e] (Const (- (cosnt-int (eval -exp e)))))
+	.....
+
+In dynamic typing there is no definition of "expression"
+---------------
+Racket's struct
+
+(struct foo (bar baz quux) #: transparent)
+
+bar- first field
+baz -second field
+quux - third field
+foo? is value a foo?
+foo-bar a function that returns bar field => raises error if it is not foo type
+
+#:transparent makes fields and accessor functions visible even outside the moudle that defines struct => REPL can print contents instead of abstract values
+
+#:mutable makes all fields mutable but giving mutator set-foo-bar!, set-foo-baz!
+
+(foo? e) (foo-bar e) (foo-baz e) (foo-quux) are given automatically
+
+struct cannot be defined in terms of function or macros. It creates a new type of data.
+
+this is call dynamic typing,i.e., the type info doesnt exist in the type system
+
+why struct approach is better?
+---------
+two approaches to implement a pL b:
+write an interprester in antoher language A - take a program in B and produce an answer
+write a compiler in another language A to a third language c
+
+tranlate must preserve meaning(equivalent)
+
+A is the metalangaugae: crucial to keep A and B straight
+
+but modern systems often have both and multiple layers
+so there is no such thing as a complied langauge or an interpreted langauge
+programs cannot see how the implementaion work
+interpreter vs compliler combintiaton is aobut a particluar langauge implementation, not the language definition
+
+if implementing PL B in PL A, we can skip parsing.
+Have B programmers write ASTs directly in PL A. embeds B programs as trees in A
+
+e.g. the aritimeitc language example: the interpreter is eval-exp
+----------
+intepreter can assume input is a leagl AST for B. But it should check the eval of subexp to have a certain type, rather than assuming the recursive result has the right type.
+
+eval-right and eval-wrong: additioal type checking of subexpression added
+illegael ASTs can crash the interpreter- this is fine
+
+--------
+To support variable: need an enviroment that maps variables to values
+
+To evaluate a variable exp, interpreter looks up the variable name in the environment
+To evaluate most subexpressions, the interpreter passes to the recursive calls the same enviroment that was passed for evaluating the outer expressions
+To evaludate things like body of a let-expression, the interpreter passes to the recursive call a slightly different environemnt
+
+so the recursive helper function just takes an environment with the program and a suitable initial environment
+
+
+--------
+the interpreter uses a closure data sructure to keep the environmemt it will need to use later
+
+(struct closuer(env fun) #:tranpsarent) => it has bith function and environment
+
+A function is not a vlaue; a cloure is a value => evalute a function reutrns a closure
+
+create a closure out of (a) the function and (b) the current enviment when the function was evaluted
+
+evalutate functions calls: (e1 e2)
+
+Use curent environment to evaluate e1 to a closure
+use current environment to eval e2 to a value
+evaluate function's body in the environment part of the closure extneded with the argument of the code part mapping the argument at the call site
+
+Basic idea: extend the environment-stored-with-the closure to eavluate the closure's function body
+-----------
+closure expensive: time to uild:tiny just building a sricut
+space to store cloures might be large if enviment is large
+alternative, store pooisble smaller vnviment olding only the variabe that are free variables in the function budy: varaibles that occur, not couitn shadowed uses of the sname varialbes
+-a function boyd would never need anything else from the environment
+lambda (x) (+ x y z)) ; {y, z} are free varaibles
+
+bofer the eval begins, compute free variables of every funciton in program and store htis info wiht the function=> a bit more tiem, a lot less space
+o
+
+if we are compilin t oa lnage wihtou closures,c annot rely on there being a curent envorment
+
+so compile funcions by having hte translate produce regular funciosn that all take an extra explicit argument
+
+and compuler recales alluses of gree arible with code that llooks up the varilbe using the enviment arugment
+-----------------
+Define "macros" via functions in the meta language
+
+Since we are writing our to-be-evaled programs in Racket, we can use Racket helper function to help us create these programs, basically define macros for our language using Racket functions as macro language => we embed our langugate inside the Racket metalanguage. But it has problem with variable shadowing as well as a macro system that has hygienic macros
+
+
+lanauge B programs can use the macro as toug they are part of lanauge B
+
+(define (list-produce es)
+(if (null? es)
+(const 1)
+(multiply (car es) (list-produce (cdr es)))
+
+1. the arugment is a Racket list of language-being-implemented expressions
+2. "macro" is recursive
+
+-----------
+racket and ML from each other's perspective: transform from one to another!
+ML can be viewed as a subset of Racket, but rejects many more programes as illegal
+Racket is just ML where every exp is part of one big datatype=> pattern match and check type as body of function
+
+------------
+static checking: reject a program after it parses but before it runs
+
+trade-off: static checker has to reject some programs that would not actually do anyting wrong
+
+sound: no false negative
+complete: no false posivite
+
+ususal for a PL type system to be sound but not complete.any static checker cannot do all of: always terminate, be sound, be complete => so we have to give up completeness, due to undecidability
+
+---
+weak typing: there exist program that , must pass static checking but then when run can "set th ecomputer on fire"
+benefits: ease of lang implemnation:perforamcne, lower level
+e.g. array bounds
+
+staticv vs.dynamic chekci != "what is the run-tiem semantics of the primitive"
+but related beucase it involves trade-offs between cathcin bugs sooner vs. maybe more convenienet
+--------
+eval: a run-tiem ceate some data, then tream the data as a prognd and run it
+but do need ot "shop a lnague implementaion " in any program containing eval
+
+quo and eavl areinverses
+

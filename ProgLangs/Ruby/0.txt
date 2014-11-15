@@ -187,8 +187,21 @@ end
 -----
 Dynamic dispatch explained
 
+support we have call e0.m(e1,....,en)
+
+1.Evaluate e0,e1,...en to values obj0, obj1,...,objn
+2.Get the calss of obj0 (think of the class as part of the state of obj0)
+3.Suppose obj0 has class A, if m is defined in A, call that method. Otherwise, call the super classes recursivly
+4.bind self to obj0 (different from FP), obj1...objn to x1....xn
+
+Step 4 is what called "late-binding", "dynamic dispatch", "virtual method call"
+
+
 ------
 Dynamic dispatch vs Closures
+
+Example: two ML functions
+=> this creates two closures that both have the other closure in their environment => lexical scoping => subclass and dynamic dispatch would violate it
 
 Overriding and dynamic dispatch is the biggest thing that distinguishes oop
 from functional programming

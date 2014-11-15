@@ -1,0 +1,104 @@
+---------
+two approaches to implement a pL b:
+write an interpreter in another language A - take a program in B and produce an answer
+write a compiler in another language A to a third language c
+
+tranlate must preserve meaning(equivalent)
+
+A is the metalangaugae: crucial to keep A and B straight
+
+but modern systems often have both and multiple layers
+so there is no such thing as a complied langauge or an interpreted langauge
+interpreter vs compliler combintiaton is about a particluar langauge implementation, not the language definition
+
+----------
+
+if implementing PL B in PL A, we can skip parsing.
+Have B programmers write ASTs directly in PL A. embeds B programs as trees in A
+
+i.e.
+(negate (add (const 2) (const 2))) instead of "- (2 + 2)"
+
+e.g. the aritimeitc language example: the interpreter is eval-exp
+
+----------
+intepreter can assume input is a leagl AST for B. But it should check the eval of subexp to have a certain type, rather than assuming the recursive result has the right type.
+
+eval-right and eval-wrong: additioal type checking of subexpression added
+illegael ASTs can crash the interpreter- this is fine
+
+[(add? e)
+(let ([v1 (eval-exp (add-e1 e))]
+	[v2 (eval-exp (add-e2 e))])
+	(if (and (const? v1) (const? v2))
+		(const (+ (const-int v1) (const-int v2)))
+		(error "add applied to non-number")))]
+
+--------
+To support variable: need an enviroment that maps variables to values
+
+To evaluate a variable exp, interpreter looks up the variable name in the environment
+To evaluate most subexpressions, the interpreter passes to the recursive calls the same enviroment that was passed for evaluating the outer expressions
+To evaludate things like body of a let-expression, the interpreter passes to the recursive call a slightly different environemnt
+
+so the recursive helper function just takes an environment with the program and a suitable initial environment
+
+
+--------
+the interpreter uses a closure data structure to keep the environmemt it will need to use later
+
+(struct closure(env fun) #:tranpsarent) => it has bith function and environment
+
+A function is not a value; a cloure is a value => evalute a function reutrns a closure
+
+create a closure out of (a) the function and (b) the current enviroment when the function was evaluted
+
+evalutate functions calls: (e1 e2)
+
+Use current environment to evaluate e1 to a closure
+use current environment to eval e2 to a value
+evaluate function's body in the environment part of the closure exteneded with the argument of the code part mapping the argument at the call site
+
+Basic idea: extend the environment-stored-with-the closure to eavluate the closure's function body
+-----------
+;
+closure expensive: time to uild:tiny just building a sricut
+space to store cloures might be large if enviment is large
+alternative, store pooisble smaller vnviment olding only the variabe that are free variables in the function budy: varaibles that occur, not couitn shadowed uses of the sname varialbes
+-a function boyd would never need anything else from the environment
+lambda (x) (+ x y z)) ; {y, z} are free varaibles
+
+bofer the eval begins, compute free variables of every funciton in program and store htis info wiht the function=> a bit more tiem, a lot less space
+o
+
+if we are compilin t oa lnage wihtou closures,c annot rely on there being a curent envorment
+
+so compile funcions by having hte translate produce regular funciosn that all take an extra explicit argument
+
+and compuler recales alluses of gree arible with code that llooks up the varilbe using the enviment arugment
+;
+-----------------
+Define "macros" via functions in the meta language
+
+eval-exp is a Racket function that takes our languange expression that produces out language value
+
+Since we are writing our to-be-evaled programs in Racket, we can use Racket helper function to help us create these programs, basically define macros for our language using Racket functions as macro language 
+=> we embed our langugae inside the Racket metalanguage. 
+(define (double e)
+	(multiply e (const 2)))
+
+double: a racket function that takes the syntax for an expression and produces syntax for an expression => much like macro expansion
+
+But this approach  has problem with variable shadowing as well as a macro system that has hygienic macros
+
+lanauge B programs can use the macro as if they are part of lanauge B
+
+(define (list-produce es)
+(if (null? es)
+(const 1)
+(multiply (car es) (list-produce (cdr es)))
+
+1. the arugment is a Racket list of language-being-implemented expressions
+2. "macro" is recursive
+
+-----------
