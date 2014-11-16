@@ -32,14 +32,21 @@ All instance variables start with an @, @@ => class variables
 
 Create instance => Foo.new(,...)
 
+Foo.new create a new instance of Foo and before Foo.new returns, call the new
+object's initialize method with all the arguments passed to Foo.new
+
 class constant: starts with a capital letter instead of @@. Should not mutate
 it. Publicly visible. To access, use :: ,e.g., Math::PI
 
 class method:
 
+in class C:
+
 def self.method_name args
 ..
 end
+
+=> C.method_anme args
 
 getter and setter => methods are public by default:
 
