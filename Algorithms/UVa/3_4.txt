@@ -1,0 +1,46 @@
+305:
+Suppose that there are k good guys and k bad guys. In the circle the first k are good guys and the last k bad guys. You have to determine such minimal m that all the bad guys will be executed before the first good guy. 
+--------
+331:
+Sorting an array can be done by swapping certain pairs of adjacent entries in the array. But how many swap maps of minimum size will place a given array in order? 
+--------
+334:
+In this problem you will be supplied with lists of sequential events for an arbitrary number of computations, and the identification of an arbitrary number of messages sent between these computations. Your task is to identify those pairs of events that are concurrent. 
+
+352:
+0-1 matrix, identify list of consecutive 1s
+
+357:
+Write a program which will determine the number of different combinations of US coins (penny: 1c, nickel: 5c, dime: 10c, quarter: 25c, half-dollar: 50c) which may be used to produce a given amount of money. 
+
+386:
+This problem requires that you write a program to find all sets of numbers {a, b, c, d} which satisfy this equation for a^3 = b^3 + c^3 + d^3
+
+435:
+the power index. The key idea is that a party's power is determined by the number of minority coalitions that it can join and turn into a (winning) majority coalition. Note that the empty coalition is also a minority coalition and that a coalition only forms a majority when it has more than half of the total number of votes. In the example just given, a majority coalition must have at least 13 votes.  
+computes for each party its power index.  
+
+436:
+given a matrix, calculate its arbitrage
+
+439:
+Your job is to write a program that takes two squares a and b as input and then determines the number of knight moves on a shortest route from a to b. 
+
+440:
+that will read in a number of cities n and then determine the smallest integer m that will ensure that Ulm can surf the net while the rest of the country is cut off. 
+
+459:
+Write a program to determine the number of maximal connected subgraphs of a given graph. 
+
+471:
+Find all pairs of integers s1 and s2 such that
+s1, s2 has no digits repeated
+s1/s2 = N, where N is given
+
+474:
+Print a table of n and 2-n in the following for the given values of n, using the following format:
+
+2^-n = z.xxxe-y
+
+where z is a nonzero decimal digit, each x is a decimal digit and each y is a decimal integer with no leading zeros or spaces. 
+
