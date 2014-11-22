@@ -1,0 +1,42 @@
+e.g.
+PUT/POST-store video
+put video in a multipart body, k-v pair of name, content-type in header
+GET - query/fetch
+maybe send query as params in URL
+---
+layered protocoles
+videoSrv | web services (WSDL/SOAP)| REST ->HTTP -> TCP/IP
+
+design restful URLS
+/video => all videos
+	GET: list of all vidoe
+	PUT: create the whole collection
+	POST: create a new video and add it to the video list, the newly created resource will be returned
+/video/1 => specific one video
+	PUT: create/replace the one video
+/video/1/duration => a part of a video
+------------
+http is client-driven protocol. to get update from server
+Solution 1:
+client polling => potentially performance problem => adaptive way T, 2T, 4T.... between polls
+Solution 2:
+Web socket: once connections is established, either side can send data over. Less overhead for each message. 
+For mobile, connection drop is much more frequent => need to reconnect. Can be heavier on server overhead
+
+Or
+
+Push Notifications
+Andorid client sets up a persistent connection to GCM over XMPP. Whenenver GCM has access to XMPP, it can push message over
+1. client sets up request
+2. client gets registration id back from GCML
+3. client sents reg id to server
+4. server sents POST HTTP to GCM with reg ID and Message
+5. GCM sents message to android client
+
+Andorid client lib handles connection and reconnection
+
+Server-GCM-Client: msg: who subs
+	Get message to client ASAP, but 4KB only
+Push (to client) to sync model to transfer large data,i.e., after trigger this step, client directly poll from server
+Another benefit is to control data + security
+

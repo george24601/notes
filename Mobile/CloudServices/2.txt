@@ -1,0 +1,53 @@
+browser sents HTTP request to web container
+Inside web container it has many servlets: java objects with methods to handle incoming request
+key methods:
+doGet()
+doPost()
+doDelete()
+
+web.xml: routes requests to servlets
+----
+public class VideoServlet extends HttpServlet
+{
+	private List<Video> videos = new ArrayList<Video>();
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+{
+	resp.setContentType("text/plain");
+	
+	PrintWriter sendToClient = resp.getWriter();
+	for(Video v: this.videos)
+{
+	sendToClient.write(v.getName() + ":" + v.getUrl() + "\n");
+}
+}
+
+	protected void doPost(..req, resp) throws....
+{
+	String name = req.getParameter("name");
+	String url = req.getParameter("url");
+	String durationStr = req.getParameter("duration");
+	resp.setContentType("text/plain");
+	
+	//if error checking
+	/// resp.sendError(400);
+	//resp.getWriter().write("missing...");
+	//else
+	//Video v = new Video(name, url, duration);
+	//videos.add(v);
+	//resp.getWriter().writer("video added")
+}
+}
+-------
+in web.xml
+	<servlet>
+	<servlet-name>video</servlet-name>
+	<servlet-class>org.mobilecloud.VidoeServlet</servlet-class>
+	</servlet>
+
+<servlet-mapping>
+	<servlet-name>video</servlet-name>
+	<url-pattern>/video</url-pattern>
+</servelt-mapping>
+-------
+

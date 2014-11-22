@@ -1,0 +1,86 @@
+Consider our program, a system of operations, each of which has form 
+
+Op: InParam -> ReturnVal
+
+FP would break the program down into different operations, i.e., each Op will be a function. Inside the function definition, each type of InParam will have a branch handling it.
+
+OOP would break the program down into different entities, i.e., each type of InParam will be a class, and each Op will be a method in that class.
+
+------
+Scenario:
+
+A program handling arithmetic expression trees. The program can evaluate the expression tree (eval), or convert the expression tree to string (toString)
+
+---
+FP design approach:
+
+1.for each ACTUAL expression type, define a data type (e.g. add expression, subtract expression, actual integer value). Our functions will act on these types
+2.for each Op, define a function. eval and toString in this example
+3.inside function, add a branch for each actual expression type, e.g,
+
+fun eval e = 
+	case e of
+	Int  _ =>  e
+	Add(e1, e2) => (eval e1) + (eval e2)
+	Negate e => ~(eval e)
+	......
+
+OOP design approach
+1. abstract class expression, with method eval and toString, because the target of eval/toString op is the abstract idea of express tree.
+2. each ACTUAL expression type will be a subclass of expression
+
+---
+What if we need to add a new operation to the program, e.g., a hasZero
+operation that decides if the expression tree has 0 in it?
+
+FP: another function. Existing function code not changed
+OOP: another method in EACH of the actual expression type
+
+----
+What if we need to support new type of expression, e.g., a mod b?
+FP: need a new data type for mod expression, and each existing function (eval, toString...) will need a new branch
+OOP: just another subclass
+
+----
+Suppose we extend the expression to include string, adding a number and a string is invalid, but adding two strings will return the concat of the string
+
+FP:
+the eval function would become
+
+fun eval e =
+	case e of
+	Int _ => e
+	Add(e1, e2) => new_add(eval e1, eval e2) (*actual logic in the
+new_add*)
+	.....
+
+OOP:
+In the class of Add expression
+
+def eval
+	e1.eval.new_add e2.eval	
+end
+
+so each class needs a new_add method. In the Int class
+
+def new_add v
+
+if v.is_a? Int
+...
+elsif v.is_a? String
+...
+end
+
+=> This is ugly!
+
+Solution 1: double dispatch (visitor pattern has similar idea)
+
+def new_add v #first dispatch
+	v.addInt self #second dispatch
+end
+
+and each class will define an addInt method. 
+
+Solution 2: Multimethods
+Int and String class will define a new_add with each expected param type declared, i.e., one for int and one for string.
+Add.eval will pick the current method to call during run time. This behavior can be simulated with c#'s dynamic keyword  
