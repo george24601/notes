@@ -1,0 +1,17 @@
+1.the most important thing: build an acyclic graph between states. This means
+A. identify the subproblem (node in graph)
+B. relationships (edge in graph)
+
+2. In a lot of problems, 
+we need to inspect all neighbors and generate the best solution based on the results from ALL potential neighbors
+
+3. when choosing a subproblem, we need to include easy to store info as state, e.g., int, simple string. 
+This may alos mean we need to state needs additional inforation (concretely, dimension of your array)
+
+4. Common recurrence relationship
+O(n) => 1-D max subarray SUM
+node: max sum subarray ending at index
+O(nlogn) => LIS
+O(n^2) => Edit distance
+
+5.Often, we need to gain additional insight from the problem to decide the max dimension of our index

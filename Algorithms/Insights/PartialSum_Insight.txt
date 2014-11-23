@@ -4,3 +4,5 @@
 and O(n) search to narrow down scope
 
 3. An array of N means at most n partial sums mod n => mod triggers a pighole principle insight => so two partial sums will have same mod or one is mod 0
+
+4. for subarrays, a common way to break down the problem is the subarray ending at index i

@@ -15,3 +15,5 @@ Retrive(end)
 	Retrieve(last[start][lastNode])
 	append lastNode to toReturn list
 }
+
+3.can consider F-W for all questions related to all node pair problems

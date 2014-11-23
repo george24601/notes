@@ -1,0 +1,8 @@
+1. log: quickly compute large power or hard to compute power, especially if we dont need precise number
+
+2. inversion index: how many swaps it needs to sort an array => relation to merge sort and proof
+
+3. A "corner case" may or may not be gracely handled by the general case. Sometimes, it may be the base case of the recursion.
+Need to analyze it on a case-by-case basis
+
+4. base number is about representation. It doesnt affect the arithmetic properties
