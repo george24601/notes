@@ -1,0 +1,6 @@
+1. Sum[i...j] = partialSum[j] - partialSum[i- 1]
+
+2. this minus relationship can be connected to a sorted array, using the fact that difference between ends > difference between neighbors
+and O(n) search to narrow down scope
+
+3. An array of N means at most n partial sums mod n => mod triggers a pighole principle insight => so two partial sums will have same mod or one is mod 0
