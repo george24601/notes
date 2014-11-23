@@ -1,0 +1,17 @@
+701
+
+For every one of these integers a line containing the smallest positive integer E such that the first digits of 2E are precisely the digits of N, or, if there is no one, the sentence ``no power of 2".
+----
+712
+
+---
+725
+
+all pairs of 5-digit numbers that between them use the digits 0 through 9 once each
+
+abcde / fghij = N
+
+-----
+727
+
+Write a program that changes an infix expression to a postfix expression according to the following specifications.
