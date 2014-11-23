@@ -1,0 +1,6 @@
+1. often need to reconstruct the tree from the string rep first
+
+2. when inspecting the problem, a BFS might give more insight than DFS. 
+The key of expanding is that finding the continuous subproblem, i.e., the slibling wont affect the part of solution. So that we can start applying recursion
+
+3. adding any edge to a connected tree will yield a cycle

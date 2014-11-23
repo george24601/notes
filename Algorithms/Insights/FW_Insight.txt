@@ -1,0 +1,19 @@
+1.the most valuable part of F-W is its recurrence relationship
+
+P[i][j][k] points to two states
+1.P[i][j][k - 1]
+2.p[i][k][k -1] and p[j][k][k -1]
+
+2.To retrieve path
+
+last[i][j] = the last node before j on the shortest path from i to j
+
+Retrive(end)
+{
+	if(end == start) return;
+	lastNode = last[start][end]
+	Retrieve(last[start][lastNode])
+	append lastNode to toReturn list
+}
+
+3.can consider F-W for all questions related to all node pair problems

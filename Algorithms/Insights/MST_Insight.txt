@@ -1,0 +1,5 @@
+1. MST is about the CONNECTIVITY
+
+2.because how kruskal is implemnted, you can decide the longest/smallest edges
+
+3.adding any edge to the tree will give a cycle

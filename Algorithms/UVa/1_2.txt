@@ -1,4 +1,3 @@
---------
 103:
 In this problem you will analyze a property of a group of n-dimensional boxes. You are to determine the longest nesting string of boxes
 

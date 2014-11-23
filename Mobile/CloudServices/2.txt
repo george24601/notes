@@ -51,3 +51,35 @@ in web.xml
 </servelt-mapping>
 -------
 
+public class VideoServlet extends HttpServlet
+{
+	protected void doGet(req, resp)
+	{
+		resp.setContentType("text/plain");
+		PrintWriter sendToClient = resp.getWriter();
+
+		for (v : this.videos)
+		{
+			sendToClient.write(....);
+		}
+	}
+
+	protected void doPost(req, resp)
+	{
+		string name = req.getParameter("name");
+		string url = req.getParameter("url");
+		string duration= req.getParameter("duration")
+//from http post request body 
+
+		long duration = long.parseLong(duration);
+		
+		resp.setContentType("text/plain");
+
+		//if invalid
+		//resp.sendError(400, "missing..")
+
+		Video v = new Video(name, url,duration);
+		videos.add(v);
+		resp.getWriter().write(VIDEO_added);
+	}
+}

@@ -1,0 +1,21 @@
+1. DP solution requiring no more than O(nlogn) can consider a reduction of LIS
+
+2. LIS: a discontinuous sorted linked list, so cant bsearch directly on it
+
+3. Consider a mapping f: rank of element -> index of element, LIS means that
+"lines" of mapping will not intersect with each other, i.e., the mapping
+retains the relative order between the elements
+
+4. Aside from nlogn DP solution, we can use a topo sort to build the linked
+list tree, because we know a < b < a can not happen,i.e., the graph must be
+acyclic
+
+But DFS in the topo sort may require too much stack space => have to use DP solution
+
+After topo sort is done, we can relax in the topo sorted order
+
+in topo order n....1
+	for each neighbor in node order[n]
+		longsetLink[neighbor] = longestLink[n] + 1
+
+This topo sort and relax pattern alos applies to the shorest path of acyclic graph

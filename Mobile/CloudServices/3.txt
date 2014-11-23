@@ -1,0 +1,141 @@
+only want people authorized to do stuff
+
+@secured(role="user")
+in the definite can define the types that the annotation can be applied
+
+public @interface secured
+{
+	public string role();
+}
+
+in httpRequest => send key/value pairs to servlets=> convert k-v pairs to
+objects (marshalling) 
+object mapping in the framework automakte the converstion of data to objects
+and vice versa,e.g., XStream, Jackson
+
+JSON:
+{
+	"name" : "...",
+	"mobilecloud" : { ...},
+	"year": 2014
+	"dates"; [ ...,...,...]
+}
+----
+spring 
+dispatcher servelt: register controllers, second layer of routing after
+web.xml
+routes to indiviual methods in controller, based on the parameters=> will look
+at the request to see if able to extract parameter from http request
+
+---
+@controller
+public class contactsctorl
+{
+	@RequestMapping("/contacts") //informs dispatcher servlet
+	public contacts getcontacts()
+	{
+	Contacts c =...
+	return c;
+}
+	
+	@RequestMapping("/friends")
+	public contacts friends() {}
+	
+	@RequestMapping("/search")
+	public contacts search (
+
+@RequestParam("search")
+string searchStr, 
+@RequestParam("flag")
+int searchFlag)
+	{
+}
+
+alternatively  for /search/ab style URL
+
+@RequestionMapping("/search/{str}")
+public contacts search (
+@pathvar("str") string searchstr
+)
+{
+}
+
+public 
+
+@ResponseBody
+constacs 
+search (
+@RequestBody (HttpMsg converter will look at request params)
+SearchObj s)
+{
+}
+}
+
+----
+for large binary data, use multi-part data
+
+public class vidoesrv{
+	public boolean uploadvideo(
+	@RequestParam("data")
+	MultpartFile videoData)
+	{
+
+	InputStream in = videoData.getInputStream();
+	//save it to disk
+}
+}
+
+
+public class Application
+{
+//add this to config 
+	@Bean
+	public MultipartConfigElement getMultipartConfig()
+	{
+		MultipartConfigFactor f = ...
+		f.setMaxFielSize(200);
+		f.setMaxRequestSize(..)
+		return f.createMultipartConfigElement();
+	}
+
+}
+
+getOps gets translated into JSON fields
+
+web.xml sets up web container
+Spring Boot sets up web container, jetty, tomcat...
+=> create set of controllers
+Application.java define the config and controllers
+Application's main got invoked by cmd line
+=> set up web container
+disover controllers
+set up dispatchers
+connecting to db, etc...
+--------
+
+public class VideoSv implements {
+	@RequestMapping(value=VIDEO_SVC_PATH, method=REquestMehot.POS)
+	public @ResponseBody boolean addVidoe(@RequestBody Video v)
+{
+	return videos.add(v);
+}
+
+@ReqeustMapping(value=VIDEO_SVC_PAT, mthod=REqeustMethod.GET)
+public @ResponseBody List<Video> getVideoList()
+{
+return videos;
+}
+}
+//video class, need a default ctor to help spring framework
+---
+@Configuration
+@EnableWebMvc
+@ComponentScan("org.mangu....")
+@EnableAutoConfiguration
+public class Application
+{
+	public static void main(string[] args)
+{
+	SpringApplication.run(Application.class, args);
+}
+}

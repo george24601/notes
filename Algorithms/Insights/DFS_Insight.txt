@@ -1,0 +1,13 @@
+1. The most common use of DFS is to traverse the DP state graph: the top-down DP approach
+Conversely, if you can create a acyclic graph of states <=> a recurrence relationship exists
+
+But DFS may have stack overflow problem. In those cases, need to use the bottom up approach
+
+2. DFS can be used to find cycles, but if we know each node has only one out edge,e.g., 
+tree in reverse direction, flyod's cycle finding algorithm is better
+
+3. relatedly algorithm:
+topological sort, which leads to strongly connected graphs algorithm
+
+4.For graph traversal, the key is to identify potential max number of nodes to decide if it is feasible to apply DFS.
+A node may be a combinition of identity states to represent the state of the system
