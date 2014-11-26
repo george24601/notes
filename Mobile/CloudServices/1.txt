@@ -19,7 +19,7 @@ design restful URLS
 http is client-driven protocol. to get update from server
 Solution 1:
 client polling => potentially performance problem => adaptive way T, 2T, 4T.... between polls
-Solution 2:
+Solution 2: 
 Web socket: once connections is established, either side can send data over. Less overhead for each message. 
 For mobile, connection drop is much more frequent => need to reconnect. Can be heavier on server overhead
 

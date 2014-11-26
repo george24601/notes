@@ -23,11 +23,12 @@ Content-type communnicates the the body's MIME type
 
 common request body MIME types: 
 URL-enconded key-value pairs,e.g, form data, better for small amount of data due to less format overhead in this case
+
 Multi part encoded data, e.g., file/large amount of data uploaded from form. Broken into part, each has its own key-value paris, 
 better for large amount of data due to URL-encoding will increase amont of data sent in this case
 Another one: Application/JSON
 ----
-Resonpse
+Response
 	Status Line: response code + phrase/text description
 	Headers: content-type
 	Body:
@@ -44,4 +45,5 @@ Response code:
 ------
 Cookies: (small piece of) data sent to client client should store and send it back to the server in future requests
 In response header, sent to client, client extracts data and store it in a temp storage. Associated with sessions
+
 options: expiration date of cookie, use only https

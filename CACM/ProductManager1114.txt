@@ -1,0 +1,25 @@
+PMs talk to users to help figure out what to build, define requirements, and write functional specs=> a sounding board for ideas, help balance the schedule when technical challenges occur. 
+
+PMs are invloved from before the first code is written, until after it goes out the door
+
+The PMs are part of the engineering team. Good product managers are the marketing counterparts of the engineering manager. 
+
+In software it is not just about executing the advertising strategy. Because the products change so quickly, it is also about deciding what to build, and executing that
+
+3 major areas for product manager
+1.UI/UX
+Not necessarily what makes money but what makes a better produt
+2.Tech
+understanding implementation, managing the schedule and checking in on accomplishments. A more technical pm might work directly with engineering team to create an API spec
+3.Strategy/Business
+Similar to brand management in other industries. Which business areas the product needs to grow in and why. It also means running A/B tests and other experiments to help optimize the performance and revenue of the product 
+
+engineering leads can set clear expectations of what they need from PMs. This will help PM prioritize their own work and create a more solid relationship the engineering team. 
+
+Engieering lead and PM can absorb their shared responsibilities, including keeping track of schedules, breakdowns, and progress
+
+senior engieers have built many products and worked with many product managers and should not be afraid to give feedback to new PMs
+
+Engieers can offer new pm with technical education
+
+observing a design critique is a good way to see how designers view their work.
