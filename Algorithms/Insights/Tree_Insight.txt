@@ -4,3 +4,5 @@
 The key of expanding is that finding the continuous subproblem, i.e., the slibling wont affect the part of solution. So that we can start applying recursion
 
 3. adding any edge to a connected tree will yield a cycle
+
+4. Heap is a special form of tree => it is packed (?) so can be reprsented as an array

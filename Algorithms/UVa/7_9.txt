@@ -1,8 +1,9 @@
 701
 
-For every one of these integers a line containing the smallest positive integer E such that the first digits of 2E are precisely the digits of N, or, if there is no one, the sentence ``no power of 2".
+the smallest positive integer E such that the first digits of 2^E are precisely the digits of N, or, if there is no one, the sentence ``no power of 2".
 ----
 712
+Tree-related
 
 ---
 725
@@ -15,3 +16,53 @@ abcde / fghij = N
 727
 
 Write a program that changes an infix expression to a postfix expression according to the following specifications.
+--
+763
+
+compute the sum of two fibnary numbers
+---
+787
+
+given an int array, find the subarray with max product
+
+---
+821
+
+find average shortest path length between arbitrary pairs of nodes
+----
+836
+
+ the number of elements of the largest submatrix of ones in a 0-1 matrix A
+
+----
+847
+
+Game theory => DP
+
+---
+872
+
+Given a list of variable constraints of the form A < B, you are to write a program that prints all orderings of the variables that are consistent with the constraints. For example, given the contraints A < B and A < C there are two orderings of the variables A, B and C that are consistent with these constraints: ABC and ACB.
+
+---
+880
+
+Write a program that finds the i-th Cantor fraction following the mapping outlined above.
+
+-----
+900
+
+Your task is to write a program that given the length of a wall, determines how many patterns there
+may be for a wall of that leng
+
+-----
+944
+
+find all happy/unhappy numbers, ideas similar to sieve
+
+------
+957
+
+Write a program that given the list of years in which each Pope was elected and a positive number
+Y , computes the largest number of Popes that were in office in a Y -year period, and the year of election
+for the first and last Popes in that period.
