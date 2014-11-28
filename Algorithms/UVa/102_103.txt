@@ -1,62 +1,53 @@
-10201
------
 10218
+
+simple probability 
 
 ----
 10238
 
-----
-10259
+DP
 
 ---
 10276
 
---
-10281
----
-10285
-----
-10305
+complete search
 
 ----
 10306
+
+DP with a twist
 
 
 ----
 10308
 
+longest dist on topo graph
+
 --
 10313
 
+twisted coin change problem
 --
 10328
 
----
-10336
+combinatorical counting
 
 ---
 10340
 
-----
-10346
-
----
-10350
-
---
-10354
+detect if string a is a subsequence of b
 
 --
 10356
 
+graph modelling
+
 --
 10360
 
---
-10363
-
---
-10365
+reverse search direction
 
 --
 10368
+
+Game theory

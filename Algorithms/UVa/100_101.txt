@@ -1,59 +1,50 @@
-10077
------
 10066
 
------
-10056
+longest common subsequence (not necessarily continuous)
 
------
-10048
-
----
-10041
-
-
+n^2 DP
 -----
 10036
 
------
-10035
-
-------
-10018
-
+DP: insight, more "powerful" problem
 ------
 10004
+DFS
 
 -----
 10000
+Topo sort & reduction
 
 -----
 10192
+LIS
 
 -----
 10189
-
-----
-10182
+search direction reversal
 
 ---
-10177
+10177 (!!!)
 
 ---
 10165
 
 ---
-10141
-
-
----
 10130
+
+interesting DP n^2
 
 ---
 10125
 
+n^2 logn algorithm + ordering of searching matters
+Insight: how do you handle distinct requiremnt?
+
 ---
 10110
 
+math, simple insight
 ---
 10107
+
+try not to use n^2 algorithm

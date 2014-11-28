@@ -84,3 +84,14 @@ and each class will define an addInt method.
 Solution 2: Multimethods
 Int and String class will define a new_add with each expected param type declared, i.e., one for int and one for string.
 Add.eval will pick the current method to call during run time. This behavior can be simulated with c#'s dynamic keyword  
+
+-----
+essentially, if you know A and B have operational relationshop
+then who should be calling whom
+the top down approach would mean
+that the answer based on how you model the problem
+which often means either case is fine
+but often bottom up approach means because you need access to private information
+or runtime concrete type
+you need to design the message receiver direction in a specific way
+this may mean the break-down of the problem appears counter-intuitive

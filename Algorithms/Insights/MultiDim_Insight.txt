@@ -1,0 +1,4 @@
+1.
+most patterns can be seen in lower dim case, however, we may not be able to reuse the pattern directly. One common cause is that a unit value is often split into two values when going 1 dimension up. This means we have to search all related combos related to that lower-dim value
+
+
