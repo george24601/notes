@@ -1,0 +1,1 @@
+1. most combinatorical counting are recursive/DP in nature, but when we break down the problem, often we need to include the "cushion" as part of subproblem, relationship

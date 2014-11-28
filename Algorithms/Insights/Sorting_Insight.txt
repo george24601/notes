@@ -1,0 +1,5 @@
+1. sorting is immediately assoicated with bsearch, 
+but one potential problem is that bsearch we need to specify the range of bsearch carefully if our element of interest may be in the range
+
+2.another insight is that difference between neighbor < difference between ends, 
+we can gradually narrow down the range of interval to find value of interest

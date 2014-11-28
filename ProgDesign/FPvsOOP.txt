@@ -84,8 +84,12 @@ and each class will define an addInt method.
 Solution 2: Multimethods
 Int and String class will define a new_add with each expected param type declared, i.e., one for int and one for string.
 Add.eval will pick the current method to call during run time. This behavior can be simulated with c#'s dynamic keyword  
+----
+Double dispatch is used when the parameter's run time matters. This will create a cyclic relationship between paramter's class and the objects class
 
+This MAY be ok because it reflects the nature where the two types are recursived defined with each other
 -----
+
 essentially, if you know A and B have operational relationshop
 then who should be calling whom
 the top down approach would mean
