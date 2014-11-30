@@ -2,7 +2,7 @@
 A. identify the subproblem (node in graph)
 B. relationships (edge in graph)
 
-2. In a lot of problems, 
+2. In a lot of problems, espeically optimization problems
 we need to inspect all neighbors and generate the best solution based on the results from ALL potential neighbors
 
 3. when choosing a subproblem, we need to include easy to store info as state, e.g., int, simple string. 

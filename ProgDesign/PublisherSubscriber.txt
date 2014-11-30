@@ -1,0 +1,28 @@
+Publisher-Subscriber
+
+Event: Intent
+Subscriber:BroadcastReceiver
+Filter inside Subscriber: IntentFilter
+Publisher: Activity, Service, etc...
+Event Channel: Context & ActivityManagerService
+
+Dymanics
+1. Subscriber registers with Event Channel
+2. Publisher produces Event and push it to the event channel
+3. event channel pushs the event to the subscriber
+4. Subscriber consumes event
+5. later, Subscriber sends detachSub message to the Event channel
+
+Note that is pattern is push-based so that subscribers can update immediately after state change in publishers
+
+--------
+
+Comparison with Observer
+
+1. Subject is similar to Publisher, and Observer is similar to the Subscriber
+2. Observer pattern doesnt have the intermediate event channel, and therefore, doesnt have to event as medium. Event is replaced by a directly method call
+3. This addtional EventChannel/Event abstraction also means that Subscriber could be in another process, since this Event abstraction is similar to the command pattern
+4. Overall, Pub-Sub focuses on the architecture of software, while Observer pattern's focus is much smaller
+5. Similar to all event-related patterns, subscriber/observer needs to detach themselves carefully, 
+because it may accidentally have reference to resources that will not be released automatically/quickly.
+This is a common source of memory problem/memory leak. e.g., observer waiting for static resources to notify, Subscriber forgets to detach itself from event channel

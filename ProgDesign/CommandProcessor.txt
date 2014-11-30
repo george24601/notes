@@ -1,0 +1,54 @@
+Context
+Synchronous method calls can block client for extended periods
+
+Solution
+Encapsulate a download request as an Intent object. 
+	Activity makes a non-blocking startService() call with Intent
+	pass the intent from Activity to the Service to process the intent asynchronously
+
+Intent
+package a piece of application functionality and its parameterization in an object to make it usable in another context. Similar to GoF's Command pattern
+
+Application
+specify, queue, execute service requests at different times
+need to ensure service enhancements dont break exisitng code
+additional capacilities must be implemented consistently for all requests to a service, e.g., undo/redo/persisitence
+
+Structure
+Creator: Activity
+Executor: IntentService
+ExecutionContext: Context
+
+Dynamics
+1. Creator creates command
+2. Creator passes command to executer
+3. Inside executor, command.execute(execution context)
+	Concretely, this means onHandleIntent() to process the Intent
+
+
+Consequences
++ non-blocking action
+Inside Activity
+	Intent intent = new DownloadService.makeIntent(this, Uri.parse(uri), handler);
+	startService(intent);//non-blocking
++ able to work with service in different ways based on commands pased to the Command Processer
+Inside IntentService
+	
+	public void onHandleIntent(Intent intent)
+	{
+		Bundle extras = intent.getExtras();
+		if(extras != null && extras.get("MESSENGER") != null)
+			messengerDownload(intent, extras.get("MESSENGER")); // con: tedious and error-prone to program
+		else
+			broadcastDownload(intent)
+	}
+- two-way operations requires additioanl programming effort
+
+Known uses
+Android IntentService
+Interpreters for comandline shells
+Java Runnable interface
+
+-------
+implementation discussion: an undo/redo stack
+

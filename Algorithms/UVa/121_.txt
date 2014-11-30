@@ -1,0 +1,25 @@
+12149
+"how many different squares are there in a grid of N ×N squares?".
+-------
+
+12290
+
+------
+
+12293
+
+-----
+
+12346
+
+----
+
+12347
+
+Given the pre-order traversal of a binary search tree, you task is to find the post-order traversal of this tree.
+
+---
+
+12457
+
+
