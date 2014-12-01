@@ -1,0 +1,58 @@
+Motivation for concurrency
+1. leverage hardware/software advances: from hardware to middleware
+2. improve peformance
+
+example: half-sync/half async
+//variables defined here
+button.setOnClickListener( new OnClickListener()
+{
+	public void onClick(View v)
+	{
+		new Thread (new Runnable() {
+			public void run()
+			{
+				bitmap = downloadImage(URI) //blocking context
+				iview.post (new Runnable() 
+				{
+					public void run()
+					{
+						iview.setImageBitmap(bitmap); //non-blocking
+					}
+				}
+			}
+		}
+	}
+
+}).start(); //starts a new thread
+
+----------
+
+Accidental complexity: 
+low-level API,e.g., pthread
+limited debugging tools
+
+Inherent complexities: synchronization/thread safty, scheduling, deadlock
+------
+All threads must be given code to run by either: Extending the Thread class and implement the run()
+or Implement the Runnable interface
+new Thread (new Runnable ()).start()
+
+Run time heap can by access by many threads
+
+join(): waits for a thread to finish
+currentThread(): object representing current thread
+---
+no safe way to stop a java thread involuntarily
+One way to stop a thread is to use a volatile boolean stop flag.
+volatile keyword:
+another way to stop is interrrupt(), which is NOT like hardware interrupt, i.e., it is asych. But when thread moves out of runnable state, it will check if is interrupted and throw exception
+For non blocking op
+	processNonBlocking()
+{
+	while(!stop)
+{
+	if(Thread.interrupted()) thrownew InterruptedExcpetion //must check explicitly
+}
+}
+
+conclusion: stopping Java threads requires cooperation between threads
