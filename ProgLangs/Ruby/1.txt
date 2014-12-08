@@ -34,36 +34,13 @@ Note you can not wrap the original datatype in a newdatatype to support new data
 
 In fact, languages often provide contructs exactly to prevent extensibility: ML moduels can hide datatpes, Java's final prevents subclasses
 
----
-example: suppose now we have rational number and strings as expression
-if the arguments are ints or rationals, do the arithmetic
-if either agument is a string, convert the other arugment to a string and return the concat of the strings
-
-=> add_values will be really complex
----
-OOP
-
-helper function is not oop, each value should know how to add
-=> e1.eval.add_values e2.eval
-but in the add_values implementation, we will have to do is_a? check, which counters OOP style
-
-Root problem: we need to know the type => so replace is_a? with the type's call
-
-so 
-
-def add_values v
-v.addInt self
-end
-
-def addInt v
-	Int.new(v.i + i)
-end
-
 ----
+
 mixin:
 mixin methods calling methods that they assume are defined in all clasess that inluce the mixin, somewhere between multiple inheritance and interface
 
 interface:
+An interface is a type, can solve some problems with multiple inheritance
 fundamental to type checking, which is why they dont exist in ruby
 
 module Color
@@ -87,13 +64,26 @@ ML: parametric polymorphism/generics
 C#: subtype polymorphism/subtyping
 
 ---
+Simple type system rules
 
-idea subtyuping
+1. if e1 has type t1, e2 has t2, then {f1 = e1, f2 = e2} has type {f1:t1, f2:t2}
+2. If e has a record type containing f: t, then e.f has type t
+3. if e1 has a record  f: t and e2 has type t, then e1.f = e2 has type t
 
-if some exp has a record type, then let hte expresison also have a type where some of the fields are removed => letting an expression that has one type also hae another type that has less information is the idea of subtyping
+=> relax type rule a bit
+
+if some exp has a record type, then let the expression also have a type where some of the fields are removed => letting an expression that has one type also hae another type that has less information is the idea of subtyping
+
+=> 4. If e has type t1 and t1 <: t2 then e has type t2
 
 if our goal is to prevent field-missing erors, then we cannot add any subtyping rules that would cause su to stop metting our goal => "subtyping is not a matter of opinion"
 
+=> width subtyping: Asuberfypt can hve a subset of fields with the same type,i.e., a subtype can have "extra" fileds
+=> permutation subtyping: A supertype can have the same set of fields with the same types in a different order
+=> if t1 <: t2, and t2 <: t2, then t1 <: t3
+=> Every type is a subtype of itself
+
+--------
 so "depth checking"
 
 e.g. passing a sphere into a circle function => will not type check, because the type is {{x, y, z}, r} instead of {{x, y}, r}
@@ -110,11 +100,13 @@ Java and c# allow null to have any object type, so every feild access and method
 
 ---
 function subtyping
-if ta <: tb then t->ta <: t-> tb => return tyeps are covariants for function subtyping meaning the suttyping fo rthe return types works "the same way" as for types overall
+if ta <: tb then t->ta <: t-> tb => return tyeps are covariants for function subtyping meaning the subtyping for the return types works "the same way" as for types overall
 
 but arugment types are NOT covariant for function subtyping => but contravariance, i.e. => f accepting super type
 
-needed for higher-order functions or for stoirng functions themselves in records
+If tb <: ta, then ta -> t <: tb -> t
+
+function subtyping is needed for higher-order functions or for stoirng functions themselves in records
 
 ---
 a subtype can have extra fields
@@ -123,15 +115,20 @@ a sybytpe can have extra methods
 because methods are immutable, a subytpe can have a subtype for a mehtod, which means the method in the subtype can have contravariant argument types ans a covaraint result type
 => a subclass can override a method a with a covaraint return type
 
-class and types are different! => class defines an object's behavior, a type describes what fiels an object has and what messages it can reponsd to
+class and types are different! => class defines an object's behavior, a type describes what fields an object has and what messages it can repond to. Subtyping is a question of substitutability and what we want to flag as a type error
 
+-----------
+
+Subtyping is a bad substitute for Generics
 in general, when you use Object and downcasts, you are essentially taking a dynamic typing approach
 
 key of generic => mark mutliple uses of that is of same type
+
+Generics are a bad substitute for subtyping
 ---
 bounded generic types:
 instead of just saying "a subtype of T" or "for all types 'a" => for all types 'a that are a subtype of T =>
 
-static <T extneds Pt> List<T> inCircle(List<T> pts, Pt center, double radius)
+static <T extends Pt> List<T> inCircle(List<T> pts, Pt center, double radius)
 {
 }

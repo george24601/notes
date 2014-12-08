@@ -161,12 +161,14 @@ futhuer improvment: lazy evaluation: Thunk and mutalbe pairs are enough
 (define (my-force p)
 (if (mcar p)
 	(mcdr p)
-(begin (set_mar!p #t) ;mark as evaled
-	(set-mcder! p((mcdr p))) ;replace thunk with value
+(begin (set_mar! p #t) ;mark as evaled
+	(set-mcder! p ((mcdr p))) ;replace thunk with value
 	(mcdr p)))) ;return the value; the thunk is already gone!
 
 (my-mult x (let([p (my-delay (lamdda() (slow-add 3 4))))])
-		(lamdsa() (my-force p)))
+		(lambda() (my-force p)))
+
+----------
 
 Stream producer knows how create any number of values
 stream consumder decides how many values to ask for
@@ -194,7 +196,7 @@ anw
 (define natx (lamda() (f 1)))
 (define nats
 	(letrec ([f (lamda(x) (cons x (lamdsa () (f (+ x 1))])
-(lamdsa (f 1)))
+(lambda (f 1)))
 
 (define powers - of tow
 (letrec([f (lamda(x) (cons x (lamdsa() (f (* x 2))))])

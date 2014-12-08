@@ -138,7 +138,7 @@ Blocks are NOT closures because they are not objects => they are not
 anything else in the language
 
 Suppose we want to create an array of blocks => cant because array holds
-objects are blocks are not objects, but we can use lambda to careate an array
+objects are blocks are not objects, but we can use lambda to create an array
 of instances of Proc
 
 c = a.map {|x| lambda {|y| x >= y}}
@@ -210,5 +210,4 @@ Dynamic dispatch vs Closures
 Example: two ML functions
 => this creates two closures that both have the other closure in their environment => lexical scoping => subclass and dynamic dispatch would violate it
 
-Overriding and dynamic dispatch is the biggest thing that distinguishes oop
-from functional programming
+Overriding and dynamic dispatch is the biggest thing that distinguishes oop from functional programming

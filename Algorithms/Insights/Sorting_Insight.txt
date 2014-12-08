@@ -3,3 +3,5 @@ but one potential problem is that bsearch we need to specify the range of bsearc
 
 2.another insight is that difference between neighbor < difference between ends, 
 we can gradually narrow down the range of interval to find value of interest
+
+3. If order doesnt matter,e.g., operation related to set, sorting can provide a forced order easy to work on
