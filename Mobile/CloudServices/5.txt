@@ -1,0 +1,64 @@
+@Controller
+public class VidoeSvc
+{
+	@Autowired
+	privaet VideoRepo repo;
+	
+	@RequestMapping("/vidoe/save")
+	public void svae(Video v)
+	{
+		repo.save(v);
+	}
+
+	public void delete(..){}
+	public List<Video> findByName();
+}
+=>
+
+@RepositoryRestResource(
+	collecitonREsourceRet=:vidoes:";
+	path="video"
+
+)
+public interface VideoRepo ...
+{
+}
+
+@Import({RepositoryRestMVCCOnfiguration})
+@ComponentScan({"org.mobiles"})
+@EnableJpaRepositoryies
+@Configuration
+public clas Application
+{
+	...
+}
+---------------
+
+ @RepostioryRestResource(path = "path") //expose it, get rid of controller
+public interface VideoRepository extends CrudRepsotiory<Video.Long>
+{
+	 //GET to /video
+	//POST to /video to add video with the JSOn for a vidoe
+	//GET to /video/{videoId}
+	///video/search/findByName?title=foo
+
+public Colletion<Video> findByName(@Param(TITLE_PARAM) string tilel);
+
+----------
+
+@Controller
+public class VideoSvc
+{
+	@PreAuthoerize("hasRole(admin)")
+	public void upload()
+{
+}}}
+----------
+UserDeatilsService: look up user by name
+-------
+@PreAutheroize("...")
+public boolean  uploadVideo(..., Preicpla p)
+
+@PreAutheorize("#v.owner == principal.name")
+public blloean uploda(Video v)
+{...}

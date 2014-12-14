@@ -1,0 +1,58 @@
+NoSQL style:
+key/value pair
+big table
+document
+graph
+-----
+Optimize read query performance:
+e.g. comments page
+1. Comments
+	user name
+	country
+2. comments
+	product
+	all comments with user name and countery
+
+so force user name unchangable to reduce write cost
+------
+e.g. get comments counts for user
+do you need a comment count by user table?
+what if mutilple comments created by user a thte same time
+transaction issue?
+
+--------
+# counts by product table: write contention?
+=> sharding
+queyr & coutn upt to N entries on N-shareds
+then sum values to get count
+
+So when we write, we just update 1 shard
+-------
+Documents-oriented database: mongo db
+key ->value(JSON), No idea of schema
+
+changes in spring config and code
+-----
+Dynamo DB: backed by SSD, can allocate read/write per sec
+annotations changes in spring
+
+Create Vidoes, 
+Hash key +range key: composite key combined create an overall unique key
+or hash key has to be unique
+
+@DynamoDBHashKey
+@DynamoDBAutoGenerateKye
+getId(); //Hash attribute name
+
+@DynamoDBAttribute
+public String getName()
+{
+	return name;
+}
+--------
+
+
+
+
+
+

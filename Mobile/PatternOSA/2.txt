@@ -1,0 +1,110 @@
+ReentrantLocks have lower overhead than ReentrantReadWriteLock
+
+ConditionObjects & Semaphores have higher overhead than ReentrantLocks & RWRL but more expressive
+
+A thread uses a lock to keep other threads out of a critical section
+A thread uses a CO to keep itself out of a critical section until it can make forward progress.
+----------
+
+ReentrantLock: uses bridge pattern, must be used via "fully bracketed" protocol
+lock(), unlock()
+
+In Android's ArrayBlockingQueue
+
+public E take()
+{
+final RentrantLock lock = this.lock;
+
+lock.lockInterruptibly()
+
+try
+{
+.....
+}finally
+{
+	lock.unlock();
+}
+
+}
+
+-------------
+RRWL: bridge pattern
+readLock(), writeLock()
+
+BluetoothSocket
+
+public void close()
+{
+	mLock.readLock().lock();
+try
+{ ...}
+	finally {mLock.writeLock().unlock();}
+}
+
+---------
+Counting semaphores and binary semaphores
+acquire(), tryAcquire() within given time, & release()
+NO NEED to be fully bracketed
+
+e.g. force no more than 1 background thread to preview at a time
+
+rarely seen in android, mostly used in unit test
+---------
+CV: used to implement Guarded Suspension pattern
+
+Lock l = new Lock()
+CondVar condVar = l.makeConditions()
+
+l.lock()
+while(condidtionNotSatisfied())
+	condVar.await()
+doOperationProcessing()
+
+
+await(), signal(), signalAll() //maps monitor objects
+
+ArrayBlockingQueue
+final ReentrantLock lock;
+Condition notEmpty;
+Condition notFull;
+
+public E take() ..
+{
+	final ReentrantLock lock = this.lock;
+	lock.lockInteruptibly();
+	try
+	{
+		while(count == 0)
+			notEmpty.await();
+		return extract();
+	}
+	finally
+{
+	lock.unlock();
+}
+	}
+}
+
+private void Insert(E x){
+....
+notEmpty.signal();
+}
+
+used sparingly in android
+
+----------
+CountDownLatch: halts the progress of one or more threads at a particluar point
+
+Usages: Defer the start of concurrent computations until an object is initiallized
+Wait util all concurrent threads are done with their processing before continuing
+
+await() countDown(): Threads calling countDown() needn't wait for count to reach 0 before proceeding
+
+ContactsProvider: mehtods must not read form or write to the database
+separate read and write CDL for better performance
+--------
+
+PingPong program analysis
+
+---------
+Buggy synchronized keyword
