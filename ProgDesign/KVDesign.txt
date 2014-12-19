@@ -1,0 +1,23 @@
+1.
+Suppose we have a product comment page. Each comment has user name
+
+Option 1:
+Have a comment entity, inside it stores user name. Because we cant join on KV store, we cant just store user id.
+
+Option 2:
+Have a product comment page entity, which will store ALL comments, for better read performance
+
+In either case, updating the user name will be expensive => have to update all comments as well. So we force user name to be constant to avoid this case
+
+-------
+2.
+What if you want to get comment counts for user
+
+Option 1:
+comment counts by user table
+Problem:
+1.multiple updates from same user => write contention 
+2.Adding a comment requires updating the comment page table AND the count table => transaction issue
+
+One solution: sharding 
+query and count up to N entries on N-shards, then sum values to get count. Note that when we add a new comment, we just randomly select a shard and update that single shard 

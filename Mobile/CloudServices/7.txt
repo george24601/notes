@@ -23,7 +23,7 @@ transaction issue?
 --------
 # counts by product table: write contention?
 => sharding
-queyr & coutn upt to N entries on N-shareds
+query & count up to N entries on N-shards
 then sum values to get count
 
 So when we write, we just update 1 shard

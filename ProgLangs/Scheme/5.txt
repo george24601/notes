@@ -189,25 +189,29 @@ a stream is a thrunk when call returns pair
 anw
 (f (cdr pr) (+anw 1)))]) ; how to use streams
 
-(define ones (lamdda () (cons 1 one))
+(define ones (lambda () (cons 1 one))
 
-(define (f x) (cons x (lamdda () (f  (+ x 1))))
+(define (f x) (cons x (lambda () (f  (+ x 1))))
 
-(define natx (lamda() (f 1)))
+(define natx (lambda() (f 1)))
+
 (define nats
-	(letrec ([f (lamda(x) (cons x (lamdsa () (f (+ x 1))])
+	(letrec ([f (lambda(x) (cons x (lambda () (f (+ x 1))])
 (lambda (f 1)))
 
-(define powers - of tow
-(letrec([f (lamda(x) (cons x (lamdsa() (f (* x 2))))])
-(feind (sterm-maker fn arg)...)
+(define powers-of-tow
+(letrec([f (lambda(x) 
+	(cons x (lambda() 
+		(f (* x 2)))
+)])
+
+(define (stream-maker fn arg)...)
 
 (deien mat (stream-m,aekr + 1))
 (define powers-of-tow )stream-maker * 2))
 
 
-(define one-bad (lambda () (cons 1 (ones-bad))); infinite loop! because we
-keep evaling! as a compariosn, the correct verison returns lambda not eval=> done
+(define one-bad (lambda () (cons 1 (ones-bad))); infinite loop! because we keep evaling! as a compariosn, the correct verison returns lambda not eval=> done
 
 (f stream 1)
 

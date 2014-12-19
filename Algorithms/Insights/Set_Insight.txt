@@ -1,0 +1,7 @@
+1.options:
+	bitset/simple dictionary
+	if it involves set operation, brute force implementation is often too slow.	
+	i.e. we either have to work with set INDIRECTLY => keep tracking of properties without knowing the exact content in set
+	or need a reduction on insight so we no longer deal with set direclty
+
+2.Because set has the commutativity property, all commutatitivy insight can be used.

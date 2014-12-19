@@ -7,6 +7,16 @@
 11022
 
 --
+11035(!!!)
+customize sort code. Problem with string combo approach
+
+--
+11038(!!!)
+
+how many 0s is the 01234...91011....n?
+Watch out for special cases,i.e., identity vs boundary case
+
+--
 11044
 
 --
