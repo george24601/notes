@@ -1,0 +1,79 @@
+A subset of scheme
+1. no define, but we support lambda
+2. no if, but we support cond and else
+3. list must be declared with quote (),e.g., (quote (a b c)). This also means
+() exclusively means calling a function in our subset.
+4. no nested list via quote declaration, i.e, nested quotes still mean a
+single level list
+
+--------
+1.
+Because () is either function call or list declaration in true scheme, we
+treat the function call () in the input as the list declaration in our full
+version. In this way, we get a parsed but to-be-interpreted expression tree in our full scheme version
+
+2.
+When we evaluation, we first decide what action we need to apply to the
+expression, and then we apply the function representing the action to the
+expression we accept
+
+A. when our expression is a list, we look into the first element of the list,
+which represents the next action. Valid cases are:
+lambda, cond, quote,
+a name representing a funciton, or another expression list.
+
+lambda, cond, quote, being system names, needs special action for each type.
+The other two cases mean the current expression is a function call, so we need
+to use *apply on the expression
+
+B.When we are evaluating the expression, we will break down the expression
+list as eval process, so when we reach level where the expression is only an
+atom, the atom maybe
+simple number, simple #t #f, atom?, system defined functions such as null?, eq?, con,
+car, cdr, and number?, or an identifier
+
+In all but last case, we will apply the *const operation on the expression,
+meaning evaluating system operations. We need special *identifier operation to
+perform the lookup.
+------------
+
+Now that we have decided what actions to apply, we need to check the
+implementation
+
+*lambda:
+function evaluates to a closure. Therefore, we include current environemnt,
+lambda's formal parameter, and lambda's body as a closure collection. We also
+mark this closure collection as non-primitive/user defined
+
+*cond: note we need to skip the first cond keyword before we start recursion
+recurisvely, eval the part of each line, if it evals to true, eval the second
+part of the line. Otherwise, keep recursiving
+
+*quote:
+since it represents a list, just take the second part of quote expression as
+the list written in full version of scheme
+
+*const:
+if it is a simple number, #t, #f, just be the full scheme equivalent part
+otherwise, it means it is a primitive/system defined function, the
+corresponding clousre would just be the function name itself, since we dont need
+to know function body anyway. We then mark it the closure as primitive
+
+*application:
+we know the first part of the expression is a function, so we need to eval
+that part to get corresponding closure, and eval the parameter/second part of
+expression. After that, we apply the closure with evaled parameter
+
+Inside apply:  we look into the tag in our packaged closure to see if it is a
+primitive function or not
+if function is primitive, we can do a match on name and apply corresponding
+full-scheme functions on to the evaled parameters. One catch is that the value
+of the parameter might be a closure => first-class function, i.e., closure is
+treated same as primitive values
+
+if function is non-primitive/user-defined
+we extend the environment with the formal name : parameter values pair, then
+we evaluate the function body with this extended environment => i.e. we
+reduced the expression to be evaluated, evaluating a closure gives the
+primitive value
+	

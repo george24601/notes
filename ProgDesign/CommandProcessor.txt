@@ -52,3 +52,11 @@ Java Runnable interface
 -------
 implementation discussion: an undo/redo stack
 
+command class represent the action
+content of the class:
+concrete object to added/removed/changed. Note that GUID of the object may not be enough, because we need to handle the case of deleted data
+
+In classic executor, command.execute(execution context), this is OOP ways's of design
+In a functional design, an "interpreter" will decide which executior/execution context to use, then executor.execute(command). 
+This breaks encapsulation of OOP, because the interpreter will inspect command's concrete type,i.e., pattern matching, but this way also makes command much more lightweight and decoupled
+
