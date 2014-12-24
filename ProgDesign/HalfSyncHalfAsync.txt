@@ -1,0 +1,50 @@
+Intent:
+Decouple asynch & sync service processing
+
+Components:
+1.Synchronous service layer: Background thread 
+
+2. BlockingQueue
+1 + 2 => async task framework. sync service: read/write the queue
+
+3.Asynchronous service layer:
+	Dequeue/enqueue queue layer.
+
+Applicability
+1.Ensure that user of concurrency simplifies programming
+2.special constraints in certain contexts,e.g, short-duration/blocking vs long-duration/non-blocking
+
+Dynamics
+1. External event source notifies async service
+2. async service reads message from event source
+3. async service works on the message and enqueue that	
+4. queue notifies sync service to pick up message (push or pull), then sync service starts working on it
+
+------
+Use in Android's AsynchTask framework
+
+1.Activity: 
+	AsyncTask.setDefaultExecutor()
+	AsyncTask.execute(url)
+2.AsyncTask
+	onPreExecute();
+	Executor.execute();
+3.Executor: 
+runs a pool of worker threads that remove user request, downloads file synchrounsly, and then displays the result on the UI thread
+	BlockingQueue.offer();
+	BlockingQueue.take();
+	WorkerRunnable.call();
+4.WorkerRunnable
+	AsynchTask.doInBackground();
+	AsynchTask.postResult();
+5.AsynchTask
+	onPostExecute();
+
+Also supports reporting progress of the running tasks
+
+----------
+Comparison with Reactor 
+
+
+-----
+Comparison with Active Object
