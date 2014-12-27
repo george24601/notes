@@ -27,9 +27,11 @@ Comparison with Observer
 because it may accidentally have reference to resources that will not be released automatically/quickly.
 This is a common source of memory problem/memory leak. e.g., observer waiting for static resources to notify, Subscriber forgets to detach itself from event channel
 
---------
+---------
 Comparison with Reactor
-
+1. Reactor is more low-level oriented, due to its background from network messaging
+2. Reactor pays more attention to how service inside event handler communicates with client, in network environment, this means client and service , after service got dispatched by the event hanlder, will talk via the open handle.
+3. The dispatcher in reactor is single threaded. No such requirement for publisher/subscriber
 
 ------
 Comparison wiht Proactor

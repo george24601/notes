@@ -1,0 +1,58 @@
+Context:
+Threads that interact via handlers/messages => decouple method invocation from method execution
+
+Intent:
+Service requests as the units of concurrency and run service requests in a different thread
+produce/consume of service request is now asynchronous
+
+Applicability
+object's interface methods should define its concurrency boundaries
+no explicit client intervention for method synch & scheduling
+multiple client method requests can run concurrently on an object
+
+Dynamics
+Client
+	proxy.method()
+		creates future
+		insert method request to scheduler
+			scheduler into activation list
+		return future to client
+
+Scheduler picks request off activation list
+	MethodRequest.call()
+		Servant.method();
+		return result all the way back to future
+
+---------
+Inside Android
+
+Handler: proxy
+MessageQueue: activation list
+Looper: scheduler
+	msg = queue.next() 
+	msg.target.dispatchMessage(msg);//double dispatch here
+WorkHandler extends Handler: servant
+
+To pass result back: pass the original Handler via a Message to a worker thread, which can then pass a response back to the original Handler,e.g.,
+
+Message reply = msg.obj.handler.obtainMessage()
+reply.obj = msg.obj
+reply.arg1 = msg.arg1
+reply.sendToTarget();
+---------
+AsyncQueryHandler in android: a helper class that invokes ContentResolver calls asynchronously
+
+Activity
+	AQH.startQuery()
+		WorkerHandler.sendMessage()//Workerhandler in a different thread
+			workHandler handles message //dispatched by the looper
+				contentProvider.query()
+
+
+When return, inside Workerhandler
+	AsyncQueryhandler.sendToTarget()
+
+Inside AsyncQueryhandler
+handleMessage()
+onQueryComplete()
+
