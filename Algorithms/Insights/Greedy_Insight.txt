@@ -2,3 +2,5 @@
 => the "each step" part strongly resembles DP. In fact, greedy is a viable option at each state of DP. However, it is also easy to ignore the fact that "globally optimal" doesnt not lead to "locally optimal" 
 
 2. Often used as part of solution
+
+3. Because heap has a property of "currently best option", it is often used in greedy algorithm,e.g., MST and Dijkstra

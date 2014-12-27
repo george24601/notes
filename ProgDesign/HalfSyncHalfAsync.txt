@@ -48,3 +48,14 @@ Comparison with Reactor
 
 -----
 Comparison with Active Object
+
+Similiaries
+Both decouple method invocation with method execution. Therefore, an executor/scheuder and queue/buffer are involved
+Convert a method call to a method request object, which may just wrap the closure of execution
+Invocation part just sends the message to executor
+
+Difference
+AO separate proxy and servant, but HSHA may use a single task class
+AO's message request is another abstraction due to the existance of proxy, while HSHA's task is directly runnable.
+AO's servant is similar to runnable task in HSHA, except that servant may choose to be the generic task and handle each request type explicitly inside. Each runnable task type in HSHA is highly specialized
+
