@@ -1,0 +1,63 @@
+Context
+Android allows only one looper per thread. A looper registry may become
+bottleneck in a multi-threaded environment
+
+Solution
+multiple threads to use one 'logically global' access point to retrive the
+looper local to a thread without,i.e., access it without locking overhead
+
+Applicability
+want concurrent program easy to program and efficient
+retroit legacy, single-thread code to be thread-safe
+
+Dynamics
+In application thread
+Tread-SpecificObjectProxy.method()
+	Thread-SpecificObjectSet.get(key)
+	Thread-SpecificObject.method()
+return result to the application thread
+--------
+Implementation in Android
+
+public class ThreadLocal<T>
+{...
+	public void set(T value)
+{
+	Thread currentThread = Thread.currentThread();
+	Values values = values(currentThread);
+	if(values == null)
+{
+	values = initializeValues(currentThread);
+}
+	values.put(this,value);
+}
+
+public T get()
+{
+	Thread currentThread = Thread.currentThread();
+	Values values = values(currentThread);
+	
+	if(values != null)
+{
+	Object[] table = values.table;
+	int index = hash & values.mask;
+	if(this.reference == table[index])
+		return (T) table [index + 1];
+
+}
+	
+}
+}
+
+public class Looper
+{
+	static final ThreadLocal<Looper> sThreadLocal = new
+ThreadLocal<Looper>();
+
+	private static void prepare()
+{
+	sThreadLocal.set(newLooper(quitAllowed));
+}
+
+public static Looper myLooper() {return sThreadLocal.get();}
+}
