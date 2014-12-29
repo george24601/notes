@@ -1,20 +1,9 @@
-JS is Lisp in C's clothing, e.g., JS is dynamic-typed, same as Scheme
-
 Powerful object literal notation => this leads to JSON
 
-Prototypal inheritance => something similar in Ruby?
-
-BAD: all top level  varaibles of all compilation units are all in "the global
+BAD: all top level varaibles of all compilation units are all in "the global
 object" namespace
 
 JSLint: a parser that reports bad JS parts
------
-
-literals in ovals, and rules or descriptions in rectangles
-
-Railroad diagrams with one bar at each end allow whitespace to be inserted
-between any pair of tokens. Railroad diagrams with two bars at each end do
-not. (???)
 
 /* */ is NOT safe to comment out block of code, because it may appear is regex
 literals
@@ -56,7 +45,7 @@ falsy values:
 false, null, undefined, '', 0, NaN
 Everything ELSE is truthy
 
-in enumerates teh property names of an object. On each iteration, another
+in enumerates the property names of an object. On each iteration, another
 property name string from the object is assigned to variable
 
 necessary to test object.hasOwnProperty(variable) to determine whether
@@ -76,7 +65,7 @@ for(myvar in obj) {
 exception is usually an object literal containing a name property and a
 message property.
 
-If a return expression is not specified, then the return valeu will be
+If a return expression is not specified, then the return value will be
 UNDEFINED
 
 typeof returns number, string, boolean, undefined, function, object. if the

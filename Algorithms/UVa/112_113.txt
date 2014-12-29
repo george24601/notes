@@ -25,6 +25,10 @@ DP
 number system conversion
 
 ---
+11294
+Search direction matters, notice the commutativity insight
+
+---
 11307
 
 11310

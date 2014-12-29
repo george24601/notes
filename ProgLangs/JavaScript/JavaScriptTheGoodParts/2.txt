@@ -26,7 +26,7 @@ that.value = add(that.value, that.value);
 helper();
 };
 
-Constructor Invocation: use constructor without new is bad
+Constructor Invocation: use constructor without new is bad(???)
 
 Apply Invocation: apply method of the function accepts a value for this (optional) and an array of arguments
 ----

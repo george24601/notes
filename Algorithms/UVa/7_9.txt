@@ -25,10 +25,19 @@ compute the sum of two fibnary numbers
 
 given an int array, find the subarray with max product
 
+--
+808
+coding practice
+
 ---
 821
 
 find average shortest path length between arbitrary pairs of nodes
+
+--
+834
+coding practice
+
 ----
 836
 
@@ -54,6 +63,10 @@ Write a program that finds the i-th Cantor fraction following the mapping outlin
 
 Your task is to write a program that given the length of a wall, determines how many patterns there
 may be for a wall of that leng
+
+---
+927
+math practice
 
 -----
 944
