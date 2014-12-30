@@ -1,3 +1,23 @@
 1. can be used for shortest path of all edges are unit length
 
 2. when we are expanding, we may or may not need a new queue, depending on the problem
+
+3. pseudo code
+
+curDist
+//populate all seeds
+
+LP(dist, 0, max)
+{
+	nextDist
+	for each seed in curDist
+	{
+		if seed is target
+			return dist
+		
+		Try expand seed //mark visited inside
+		insert expanded into nextDist
+	}
+
+	replace curDist with nextDist
+}

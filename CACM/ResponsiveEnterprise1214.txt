@@ -1,0 +1,16 @@
+Internal processes and the desire to control risk start to overrule real innovaction.
+The workforce ossifies because of a recursive feedback system that over time ejects employees that are open to external stimuli in facor of yes-men who worship legacy and process
+
+Continuous delivery and A/B or multi-armed bandit testing require quick rollout AND quick rollback. Accepting that decisions can be wrong contradicts the risk-control processes
+
+Resposive enterprises accept that failures will always happen and guard themselves from cascading failures by purposefully causing failures
+
+Can shorten feedback loop by using the DevOps model: Decoupling the development process from the operations side removes a valuable recursive feedback loop
+
+Devil's advocate helps prevent fallying into the trap of getting stuck in a local optimum or making wrong decisions because changes in customer preferences were ignored
+
+Context, not control:strict guidelines and orders about what to optimize for, and provide immediate feedback about the consequences of decisions
+
+To support the fluid and chaotic nature of the battlefield, subordinate leaders must use their own initiative to accomplish tasks which support their senior's intent
+
+bidirectional feedback loop between layers
