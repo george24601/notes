@@ -1,6 +1,6 @@
 global variable: 3 ways to declare
 place var outside any function
-use a varaible without declaring it!!
+use a varaible without declaring it with var
 
 lack of block scope => forces you to declare all varibles at the top of function
 
@@ -48,3 +48,4 @@ Dont use new at all
 Avoid void
 
 Use of JSLint
+------------

@@ -10,7 +10,7 @@ return this;
 Problems
 1. privacy
 2. access to super
-3. if use constructor without new, it will not be boudn to a new object, it
+3. if use constructor without new, it will not be bound to a new object, it
 will be bound to the global object
 
 Class hierachies is motivated by the constraints of static type checking,i.e.,
