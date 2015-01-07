@@ -1,7 +1,11 @@
-1.options:
-	bitset/simple dictionary
-	if it involves set operation, brute force implementation is often too slow.	
-	i.e. we either have to work with set INDIRECTLY => keep tracking of properties without knowing the exact content in set
-	or need a reduction on insight so we no longer deal with set direclty
+1.direct apporach: bitset/simple dictionary but implementation is often too slow, due to the 2^n number of substes. 
 
-2.Because set has the commutativity property, all commutatitivy insight can be used.
+To test all subsets for a set of size n
+
+int all = 1 << n; then for each set in [0, all)
+
+
+2. we either have to work with set INDIRECTLY => keep tracking of properties without knowing the exact content in set
+	or need a reduction on insight so we no longer deal with set direclty, often, this means deals the content of set organized in a continous way instead of holed way.
+
+3.Because set has the commutativity property, all commutatitivy insight can be used.

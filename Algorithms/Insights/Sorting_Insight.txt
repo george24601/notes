@@ -5,3 +5,17 @@ but one potential problem is that bsearch we need to specify the range of bsearc
 we can gradually narrow down the range of interval to find value of interest
 
 3. If order doesnt matter,e.g., operation related to set, sorting can provide a forced order easy to work on
+
+4. another form of bsearch: iterate on bits
+
+int num = todelete = 1 << n;
+
+while(todelete > 0) //to delete is similar to search size in classic version, halved each iteration
+{
+	if(num >= delete && Try(num - toDelete)) //notice that num - toDelete maybe greater than actually upperbound but should still work
+		num -= delete; //this digit is currently 1, but may turn 0 in later iterations
+
+	todelte /= 2;
+}
+
+5.Notice if a < b => f(a) > f(b) or f(a) < f(b),i.e., relative order is preserved, we can bsearch the answer

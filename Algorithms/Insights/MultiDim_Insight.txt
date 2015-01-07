@@ -3,7 +3,9 @@ most patterns can be seen in lower dim case, however, we may not be able to reus
 
 2. options.
 	1.maintain relationship: similar relationship, except each part has multiple dimensions instead of one
-	2.maintain entity: Each part still handles simple dimensions, but we have multiple layers of relationship, and layers cycles through dimensions
+	2.maintain entity: Each part still handles simple dimensions, but we have multiple layers of relationship. then options: 
+layers cycles through dimensions
+inspect the next dimension, see if we have additional insight
 
 3.Often need to view the dimension breakdown in different orders to gain additional insight
 

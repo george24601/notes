@@ -1,7 +1,7 @@
 objects in JS are mutable keyed collections.
 
 An object is a container of properties, where a property has a name and a
-value. Name can be any sring, including the empty string. value can be any JS
+value. Name can be any string, including the empty string. value can be any JS
 value excpet for undefined
 
 objects in JS are class-free
@@ -110,12 +110,7 @@ of the properties in the correct order
 -----
 delete antoher_stooge.nickname => will let its prototype value shine
 
-To minize the use of global var, create a single global variable for the
+To minimize the use of global var, create a single global variable for the
 application. This will be the container for your application
 
 var MYAPP = {};
-
-MYAPP.stooge = {}
-MYAPP>flight = {}
-
-

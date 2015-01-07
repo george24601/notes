@@ -1,11 +1,29 @@
 11504
 
+----
+11516
+Somewhat similar to greedy, but cant greedy directly
+
+----
 11517
 
 11549
 
 11553
 
+---
+11572
+How to handle set?
+
+---
+11573
+coding practice
+
+--
+11576
+coding practice
+
+----
 11597
 
 11609
@@ -15,6 +33,12 @@
 11666
 
 11690
+
+--
+11699
+Complete search
+
+--
 
 11701
 

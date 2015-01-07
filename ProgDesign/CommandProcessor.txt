@@ -60,7 +60,7 @@ In classic executor, command.execute(execution context), this is OOP ways's of d
 In a functional design, an "interpreter" will decide which executior/execution context to use, then executor.execute(command). 
 This breaks encapsulation of OOP, because the interpreter will inspect command's concrete type,i.e., pattern matching, but this way also makes command much more lightweight and decoupled
 
--------
-Commonly associated with active object pattern, since both patterns try to separate method invocation and method execution,i.e., Executor can act as scheduler + servant in the active object pattern.
-
 ---------
+The command/request type is a closure in the method invocation's context. In terms of an interpreter, method invocation is the "eval" that turns action/function to a closure. the execute is the apply/call part of the interpreter that extends current/executor's context/environment with closure's and then eval function's body expression with this extended environment
+
+-----

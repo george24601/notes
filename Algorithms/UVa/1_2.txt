@@ -35,6 +35,10 @@ Given a list of variable constraints of the form x < y, you are to write a progr
 Given the intersections connected by one-way streets in a city, you are to write a program that determines the number of different routes between each intersection. A route is a sequence of one-way streets connecting two intersections. 
 It is possible for an infinite number of different routes to exist
 
+---
+133
+reduction to insertion sort?
+
 ----
 138:
  A computer programmer lives in a street with houses numbered consecutively (from 1) down one side of the street. Every evening she walks her dog by leaving her house and randomly turning left or right and walking to the end of the street and back. One night she adds up the street numbers of the houses she passes (excluding her own). The next time she walks the other way she repeats this and finds, to her astonishment, that the two sums are the same. Although this is determined in part by her house number and in part by the number of houses in the street, she nevertheless feels that this is a desirable property for her house to have and decides that all her subsequent houses should exhibit it.
@@ -62,6 +66,10 @@ Write a program that will read in two strings (the input string and the target s
 202:
 For each line of input, print the fraction, its decimal expansion through the first occurrence of the cycle to the right of the decimal or 50 decimal places (whichever comes first), and the length of the entire repeating cycle. 
 
+---
+253
+coding practice
+
 -----
 256:
 find all 4 digits number x, y such that (x + y)^2 = [digits of x] concat [digits of y], including the leading 0s
@@ -74,6 +82,10 @@ Neither of these 2 palindromes may be embedded in the other palindrome. but they
 
 260:
 Diamond-shaped board: see if row or col connects to the other end 
+
+---
+264
+coding practice
 
 -----
 299:
