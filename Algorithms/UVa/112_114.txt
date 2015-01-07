@@ -16,6 +16,17 @@
 
 11258
 
+11287
+
+11290
+Number system. notice the bucket inside bucket case
+
+11293
+Greedy can do. Notice the tree insight
+
+11294
+Search direction
+
 11307
 
 11310
