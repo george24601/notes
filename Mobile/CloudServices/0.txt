@@ -26,7 +26,7 @@ URL-enconded key-value pairs,e.g, form data, better for small amount of data due
 
 Multi part encoded data, e.g., file/large amount of data uploaded from form. Broken into part, each has its own key-value paris, 
 better for large amount of data due to URL-encoding will increase amont of data sent in this case
-Another one: Application/JSON
+Another one: Application/JSON (!!! more information of multi part)
 ----
 Response
 	Status Line: response code + phrase/text description

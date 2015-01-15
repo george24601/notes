@@ -8,7 +8,7 @@ hypertext links to reference related resources
 Collection URI
 http://example.com/resources
 GET: list URIs and other details of the collection members
-PUT: replace teh collection with another collection
+PUT: replace the collection with another collection
 POST: Create a new entry in the collection. The new entry's URI is auto-assigned and ususally returned by the ops
 DELETE: delete the entire collection
 
@@ -20,3 +20,13 @@ POST: Not generally used
 DELETE: delete the addressed member of the collection
 
 PUT and DELETE are idempotent
+
+----
+Design restful URLS
+/video => all videos
+	GET: list of all vidoe
+	PUT: create/replace the whole collection
+	POST: create a new video and add it to the video list, the newly created resource will be returned
+/video/1 => specific one video
+	PUT: create/replace the one video
+/video/1/duration => a part of a video

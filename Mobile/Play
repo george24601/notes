@@ -1,0 +1,84 @@
+Action handles most of requests and produces a Result to be sent to the client. Result represents an HTTP response. Parameter, which is in URL path or URL query string to Action will be resolved by Router
+
+Controller: groups several action methods
+
+Results's ok, notFound, badRequest,redirect, temporaryRedirect...helper functions. 
+-------
+#Routes defined in the conf/routes. By default dynamic part matchs exactly one URI path segment
+GET /clients/:id controllers.Clients.show(id: Long)
+
+#Dynamic part to capture more than one URI path segment
+GET   /files/*name          controllers.Application.download(name)
+e.g.
+
+#$id<regex> syntax
+GET /clients/$id<[0=9]+> controllers.Clients.show(id: Long)
+
+The HEAD method is identical to GET except that the server MUST NOT return a message-body in the response. 
+
+#extract from path
+GET /:page controllers.Application.show(page) 
+
+#extract from the query string 
+GET / controllers.Application.show(page)
+
+# Extract the page parameter from the path, or fix the value for /
+GET   /                     controllers.Application.show(page = "home")
+GET   /:page                controllers.Application.show(page)
+
+# Pagination links, like /clients?page=3
+GET   /clients              controllers.Clients.list(page: Int ?= 1)
+
+# The version parameter is optional. E.g. /api/list-all?version=3.0
+GET   /api/list-all         controllers.Api.list(version ?= null)
+
+For each controller in routes file, the router will generate a "reverse controller" so that we dont hard code paths in controller
+-----------
+
+The result content type is automatically inferred from the Java value you specify as body. Can use as() to override
+
+//Setting an HTTP header will discard any previous value
+public static Result index() {
+    response().setContentType("text/html");
+    response().setHeader(CACHE_CONTROL, "max-age=3600");
+    response().setHeader(ETAG, "xxx");
+    return ok("<h1>Hello World!</h1>");
+}
+------
+
+response().setCookie()
+response().discardCookie()//name, path ,and domain must match!
+
+------
+Session data: available during the whole user session. Flash scope available only to next request. These data are added to cookies, so max 4kb. Session Cookies are signed by a private key. Sessions are NOT for caching. Use play's built-in cache mechanism and use the session to store a unique ID to assocciate teh cached data with a specific user.
+If you need functional timeout, store a timestamp into the user Session
+
+flash scope: transport success/error messages on simple non-ajax applications
+------
+body parser API
+----
+
+Action composition by annotation. 
+Onto controller
+Passing objects from actiont to controller vis ctx.args map
+
+---
+Actions are asynch
+-------
+Stream content with know size
+chucked transfer encoding
+
+---
+Comet socket technique
+
+--
+WebSockets
+
+---
+web cache API
+
+----
+asynch use of play WS API
+
+---
+authentication

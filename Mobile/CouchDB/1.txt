@@ -1,0 +1,110 @@
+Two document types: load the document in one request and something to display
+Event log => e.g. dont trust user input or trigger an asynchronous job. When load the document for further work we will check for relations-style constraints.
+
+batch=ok for Couch as log store
+
+-----
+strive for one-to-one corrspondence between applications and design documents, which is prefixed with _design/
+
+{
+"id": "_design/ID",
+"_rev":...,
+"language" : "javascript",
+"validate_doc_update" : "function (newDoc, oldDoc, userCtx) {...}", //NO side effect/blocking at all
+
+"views": {
+	"comments": {
+"map": "function(doc) {...};",
+"reduce": "function(keys, values, rereduce) {...};"
+}
+},
+
+"shows": {
+"post" : "function(doc, req) {...}"
+},
+
+"_attachments": { //allow us to avoid updating attachemnts that have not changed between the disk and DB
+	...
+},
+
+"signatures" :{
+...
+},
+
+"lib" : {
+...
+}
+
+}
+
+To query view and get view result
+GET http://host/db/_design/designDocID/_view/nameInsideView
+?key=...
+?startkey=...&endkey=...
+&descending=true //reading NOT sorting order is reversed
+
+
+If a document is changed, the map function is only run once, to recompute the keys and values for that single document
+
+result of view
+{
+"total_rows" : 3,
+"offset" : 0,
+"rows" : [
+{
+	"key":...
+	"id": ... //id of the doc the row is from
+	"value": ...
+},
+....
+
+]
+}
+
+-------
+the reduce function is run on every node in the tree to calc the final reduce value, so it can be inrementailly updated upon changes to the map. 
+When run on leaf nodes, rereduce is false, and args are keys and values as output by map, which is stored on the inner node that a working set of leaf nodes have in common, also use as cache for future reduce calculations
+When run on inner nodes, rereduce is true
+
+Full reductions should result in scalar value(s), and not complex aggregate values
+
+-----
+If you have multiple design documents, each with a validate_doc_update function, all are called upon each incoming write request, but order of execution is undefined
+force user to authenticate: throw({unauthorized: message});
+prevent user from saving: throw({forbidden: message});
+
+Typed: use a field called type to store document types 
+untyped/duck typing validation
+
+required function
+
+unchanged function
+
+toJSON is not guarantted to work for deply nested objects
+
+author same as user name function
+
+show function
+
+accept headers
+
+Etags: thie second time the client makes a request against the same reosurce, the server determins that the Etag stilmatches the resource, it can avoid seding the full response, which works well with an HTTP proxy cache
+
+Template for show function
+-------
+list functions: 
+"lists" property of a design document, accepts 2 args: head(information about the view) and req (the request object avialbe to show,update, and filter)
+
+function(head, req)
+{
+	send(configHeader);/ //just sends HHTP chuck to the client
+	
+	while(row = getRow())
+	{
+		var userConf = renderUserConf(row);
+		send(userConf);
+	}
+	
+	configFoot = renderConfTail();
+	return configFoot;//return the final string value to be sent as the last HTTP chuck
+}

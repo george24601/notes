@@ -1,0 +1,88 @@
+1.measurable improvements
+tool to measure performance
+
+2. platform stability
+
+3.environment neutrality
+apple to apple. Same hardware/software, cache similar state, backgroudn rpcoess
+
+4.scenario focused => make scenario faster instead of whole app
+
+5. preset goals, e.g., rendering page 50% faster. or time out
+
+6. Descending granularity. Most of time, network biggest problem
+--
+Network performance=> developer tool, network section
+22/27 requests are on images => size of content and time latency
+overhead of http request and latency.
+
+HAR: performance protocl, based on JSON
+
+Audit tab: scan HAR file and gives recommendation
+or Pagespeed
+
+--
+Network
+
+1.fewer http requests, fewer bytes, e.g., use gzip, cache, bundle,i.e., combined ccss file, use sprites, embed image in css. Reduced request number from 27 to 1
+
+2. script tag to the end of body as much as possible, to paint page before loading and execing scripting => or can use async script tag
+
+3. dns-prefetch link, e.g., resolve cdn
+prefetch link , but make sure you cache what user is using
+prerender link, 
+
+stream/flush html
+
+-----
+Server
+
+CPU profiler,.e.g, redgate profiler for asp.net
+
+stay local: stay in process if possible,e.g., data cacheing
+iterate less: lowering hit count is usually easier
+cache liberally
+stream: loading lots of data at once is slow
+string concatination
+
+---
+Octane
+
+---
+Compute
+Scope managment
+favor local vars
+avoid with statement
+careful w/closures
+
+LOOPING: avoid for_in LOOPS
+
+avoid dom! 1s/60Hz => 16 ms repaint. browser may try to repaint oo much with in 16ms per sec
+
+---
+breakdown: network activiey, javscript, recalculate sytle & layout,  paint
+
+requestAnimationFrame() => most amount of time to render
+in the call back to do JS/DOM and paint. if Paint goes over 16 ms, borwer will drop the entireframe,i.e., framerate drop
+
+---
+layout thrashing
+
+for (vvr i = 0; p < paragraphs.lenght.i++)
+{
+	var para = paragraphs[i];//last iteration marked this diretion, nee dto render the whole page
+	var with = div.offsetWidth;
+	para.style.left = width + 'px';
+}
+
+so do all reads before writes
+
+FastDom library
+----
+Render
+
+
+
+
+
+
