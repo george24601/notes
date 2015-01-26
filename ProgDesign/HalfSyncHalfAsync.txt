@@ -28,11 +28,11 @@ Use in Android's AsynchTask framework
 	AsyncTask.execute(url)
 2.AsyncTask
 	onPreExecute();
-	Executor.execute();
+	Executor.execute(this);
 3.Executor: 
+	BlockingQueue.offer(WorkerRunnable(AsynchTask));
 runs a pool of worker threads that remove user request, downloads file synchrounsly, and then displays the result on the UI thread
-	BlockingQueue.offer();
-	BlockingQueue.take();
+	BlockingQueue.take(); //get the runnable
 	WorkerRunnable.call();
 4.WorkerRunnable
 	AsynchTask.doInBackground();

@@ -12,6 +12,10 @@ DP
 
 complete search
 
+--
+10298
+pattern recognition: how to avoid scaning whole string?
+
 ----
 10306
 
