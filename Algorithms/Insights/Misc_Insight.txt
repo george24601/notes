@@ -6,3 +6,6 @@
 Need to analyze it on a case-by-case basis
 
 4. base number is about representation. It doesnt affect the arithmetic properties
+
+5. curIndex - length you want to skip = start index of that subarray you want to skip
+similarly start of index + length = start index of the new subarray

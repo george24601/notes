@@ -1,0 +1,34 @@
+m: current match start at index m of S
+i: current match at index i of W, i.e. S[m + i] = W[i]
+
+---
+Second stage ops
+
+if matchs => increment i
+
+if mismatch, we want to move m as close to i as possible, that is, we want to
+find highest m such that m...i-1 is a prefix of W, so we need to answer
+
+at i of W, what is longest prefix of W that ends at i-1? no that we dont even
+care about S now! 
+
+so m = m + i - T[i], i = T[i]
+
+----
+Runtime of the second stage
+1. by defintion of our problem, T[i] <= i
+T[i] < i, because we know m has to increase after a mismatch
+
+if match => m+i increase by 1
+if mismatch => m+i stays same, m is increased by at least 1, so in total, each
+branch can execute at most length(S) times => 2n times loop max
+
+
+---
+Build the T[i] table
+
+insight: we can infer T[i]'s state based on T[i-1]'s state
+
+T[0] = -1 //invalid
+if T[i - 1] = 0, T[i] = 1 if W[i-1] = W[0]
+if T[i - 1] = l, T[i] = l + 1, if W[i -1] = W[l], otherwise, T[i] = 0;

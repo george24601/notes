@@ -1,0 +1,13 @@
+How is CB turned into deploy
+1. build: code repo to exe bundle, a build, the build stage vendors
+dependencies and compiles binaries/assents. Initialized when new code is
+deployed.
+2. release: takes the build and combine it with deploy's config
+3. run: launch app processes against selected release. can happen
+automatically,e.g., to restart the process. This stage needs to be simple so
+if app fails to run, we can solve it without dev help
+
+ability to rollback a release with deployment tools
+
+Releases are append-only ledger and immutable. Have to create a new release
+for changes
