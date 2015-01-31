@@ -36,4 +36,61 @@ that stores related data under nearby keys
 
 When a map function fails regularly, Couch shuts off indexing the prevent
 further resource usage. So it is important to check for the existence of any
-fields before you use them
+fields before you use them,i.e.,
+
+function (doc)
+{
+	var store, price, key;
+	if(doc.item && doc.prices)
+	{
+		for(store in doc.prices)
+		{
+			price = doc.prices[store];
+			key = [doc.item, price];
+			emit (key, store);
+		}
+	}
+}
+
+-------
+Sample request to server
+
+PUT /db_name HTTP/1.1
+User-Agent: ...
+Host: ....
+Accept: */*
+
+Response
+
+HTTP/1.1 201 Created
+Server: ...
+Date: ... (purely informational, shouldnt build any logic)
+Content-Type: ...
+Content-Length:...
+Cache-Control: must-revalidate
+
+Create doc with UUID
+PUT http://host/db/GUID
+and JSON in body
+
+Response
+HTTP/1.1 201 Created
+Location: http://host/db/UUID
+Etag: rev
+and id and rev as JSON in body
+
+let Couch generate UUID for you
+GET http://host/_uuids
+
+-------
+
+To change doc in Couch, load full doc, make changes in JSON, and save the entire new revision of that doc. This also means when you update or delete, Couch expects you to know which revision you are going to change, or you will get "Document update conflict" error. The rev number is the md5 hash of the transport representation of a doc with an N-prefix denoting the number of times a document got updated.
+
+Add attachment: _attachment in a body
+PUT http://host/db/doc's UUID/attachmentname?rev=revNum
+binary data in body
+
+-----
+Replication: notice the non-RESTness
+
+

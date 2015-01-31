@@ -21,10 +21,8 @@ JSON:
 	"dates"; [ ...,...,...]
 }
 ----
-spring 
-dispatcher servlet: register controllers, second layer of routing after
-web.xml
-routes to indiviual methods in controller, based on the parameters=> will look
+spring dispatcher servlet: register controllers, second layer of routing after
+web.xml routes to indiviual methods in controller, based on the parameters=> will look
 at the request to see if able to extract parameter from http request
 
 ---

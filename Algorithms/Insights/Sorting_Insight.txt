@@ -7,6 +7,7 @@ we can gradually narrow down the range of interval to find value of interest
 3. If order doesnt matter,e.g., operation related to set, sorting can provide a forced order easy to work on
 
 4. another form of bsearch: iterate on bits
+This one gets the smallest number such that the try condition is satisfied
 
 int num = todelete = 1 << n;
 

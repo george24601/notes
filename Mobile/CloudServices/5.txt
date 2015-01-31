@@ -5,7 +5,7 @@ public class VidoeSvc
 	privaet VideoRepo repo;
 	
 	@RequestMapping("/vidoe/save")
-	public void svae(Video v)
+	public void save(Video v)
 	{
 		repo.save(v);
 	}
@@ -28,7 +28,7 @@ public interface VideoRepo ...
 @ComponentScan({"org.mobiles"})
 @EnableJpaRepositoryies
 @Configuration
-public clas Application
+public class Application
 {
 	...
 }

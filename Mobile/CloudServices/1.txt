@@ -1,3 +1,5 @@
+REST means to most people if your resource URLs are structured in the format they expect
+
 e.g.
 PUT/POST-store video
 put video in a multipart body, k-v pair of name, content-type in header

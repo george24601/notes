@@ -16,27 +16,14 @@ DFS
 Topo sort & reduction
 
 ---
-10182
-coding practice
+10107
 
------
-10192
-LIS
-
------
-10189
-search direction reversal
+try not to use n^2 algorithm
 
 ---
-10177 (!!!)
+10110
 
----
-10165
-
----
-10130
-
-interesting DP n^2
+math, simple insight
 
 ---
 10125
@@ -45,10 +32,45 @@ n^2 logn algorithm + ordering of searching matters
 Insight: how do you handle distinct requiremnt?
 
 ---
-10110
+10127
+mod
 
-math, simple insight
+--
+10128
+combinatorics
+
 ---
-10107
+10130
 
-try not to use n^2 algorithm
+interesting DP n^2
+
+---
+10139
+
+--
+10154
+LIS insight: how to reduction, which option to use? what is the search direction?
+
+---
+10165
+
+---
+10177 (!!!)
+
+
+--
+10179
+Euler's phi function
+
+---
+10182
+coding practice
+
+-----
+10189
+search direction reversal
+
+-----
+10192
+LIS
+
