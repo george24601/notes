@@ -1,0 +1,29 @@
+1-to-1 correspondence between CB and app. That means:
+
+1.
+1 app to multiple code base means a distributed system, with each CB mapping
+to a (maybe silightly) different app
+2.
+part of the same code base used by multiple apps: refactor the shared code
+into libs and included via dependency manager
+3. 
+One CB per app
+4.
+Same codebase, maybe at different verions, across all deploys,i.e., dev,
+qa, staging, prod
+
+------
+Discussion
+
+1.
+No code sharing across repositories. If app A depends on (partly or fully) on
+app B. the common part needs to be factored out, and app A should not
+include/refer app B's code directly in A's CB
+
+2.
+Concretely, code should not branch based on deployment
+
+Conceptually, from an interpreter perspective, CB provides the lexical
+scope,i.e., function definition, and deploy(= CB + environment) provides runtime environment,
+i.e.,arguments to the function. Code difference between deploys would means
+loss of lexcial scoping

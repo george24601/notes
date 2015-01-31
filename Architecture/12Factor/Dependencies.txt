@@ -1,0 +1,12 @@
+vendoring/bundling vs site packages
+
+Never rely on IMPLICIT existence of site packages,e.g., curl, include them in dependency declaration. 
+
+Use dependency isolation tool(e.g., virtualenv for python) to ensure no IMPLICIT site package dependency leaking into your app
+
+This means to get the app running, there is no prerequisite to install except language runtime and dependency manager. We can simply check out the CB and get the app running
+
+-----
+Discussion
+
+Because our code defines the actual packages to use, dependency declaration should go with our code, i.e., in CB as well
