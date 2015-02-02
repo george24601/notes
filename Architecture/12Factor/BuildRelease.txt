@@ -11,3 +11,28 @@ ability to rollback a release with deployment tools
 
 Releases are append-only ledger and immutable. Have to create a new release
 for changes
+-----------
+
+app processes are stateless and share-nothing. Persistant data has to go into
+backing service.
+
+Never assume thing in memory or on disk will be available on a future request
+to handle the case of multiple worker/process restart
+
+compile assets in build stage, instead of using filesystem as cache or JIT
+compiling
+
+sticky session is a direct violation. Use datastore with expiry feature to
+store them.
+
+---------
+Discussion
+
+1. shared-nothing solution is the common solution to multi-instance problem.
+It also fits FP very well
+
+2. storing data in backing service vs. sending state info as payload of
+request => reling on either side too much will for sure introduce problems
+
+---------------
+app is self-contained and does not rely on the existence of web server app on the host. The only contract it has is that it binds itself to ports
