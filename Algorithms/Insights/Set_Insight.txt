@@ -1,4 +1,4 @@
-1.direct apporach: bitset/simple dictionary but implementation is often too slow, due to the 2^n number of substes. 
+1.direct apporach: bitset/simple dictionary but implementation is often too slow, due to the 2^n number of subsets. However, since small exhaustive search is feasible, it might lead a way to "fix" one dimension of multi-dimension problem
 
 To test all subsets for a set of size n
 
