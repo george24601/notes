@@ -1,0 +1,19 @@
+Graph data: PageRank, Community detection, spam detection
+
+Search challenge: who to "trust". no single right answer to query
+
+Link analysis approach for computing importances of nodes in a graph.
+
+---------
+Incoming link as votes => links from important pages are more important
+
+Each link's vote is porportional to the importance of its course page => split among importance/n votes => the page itself is defined this way as well
+
+so force sum of all ranks = 1 to solve the linear system
+
+-----
+Stochastic adjacency matrix M: columns sum to 1
+
+Rank vector r: so r = M * r,i.e., r is an eigenvector with eigenvalue 1
+
+How to solve eigenvector? power iteration
