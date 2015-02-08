@@ -17,3 +17,49 @@ Stochastic adjacency matrix M: columns sum to 1
 Rank vector r: so r = M * r,i.e., r is an eigenvector with eigenvalue 1
 
 How to solve eigenvector? power iteration
+
+-------
+Power iteration:
+Init r0 = 1/N * 1
+Keep interating until
+r(i+ 1) = M * r(i) is within epsilon. If not converged, go to 1
+
+Random walk interpretation: p(t)= vector whose ith coordinate is page i at time t
+So relationship between p(t+1) and p(t)
+=>
+Stationary distribution of random walk, for certain conditions
+
+stationary distribution is unique and eventually will be reached no matter
+waht the intial probablily distribution at time t = 0
+------
+
+Converge: 
+Spider trap (out links within the group): trap will absorb all importance
+dead end: importance will leak out
+
+---
+solution: 
+With prob P, follow link at random
+with probm 1-p, teleport to a random page
+between 0.8-0.9
+
+So surfer will jump out of spider trap with in a few time steps
+
+For dead one, teleport to a random page=> how to translate this into M?
+
+-----
+Markov chains in PR: transition matrix P where Pij = P(Xt=i | xt-i = j)
+
+For any start vector, power method will converge to a unique postive
+stationary vector as long as P is stochastic, irreducible, and aperiodic
+
+Stochastic: every col sums to 1. so give dead end page special link to all
+pages
+periodic: exists k > 1 s.t. interval between two visits to some state s is
+always a multiple of k. A simple cycle exists. So add special link to itself. 
+Irreducible: always can go to one state to another state
+
+final forumla: notice the 1-p part
+rj =?
+So transform M to A to take random jump into account
+A = P*M +(1-P)/n * e * eT, So that r(t+1) = A * r(t)

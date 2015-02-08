@@ -1,0 +1,102 @@
+Classical data mining: look at disk, bring part of data into memory => Not
+enough to handle web load
+
+Cluster Architecture: 1G swtich between nodes in a rack, 2-10 G backbone
+switch between racks
+
+Problem: 
+node failure is normal, how to store data persistently and keep it
+available? => store data redundantly
+How to handle node failure in the middle of long computation
+Network becomes bottleneck => move computation close to data to minimize
+movement
+
+Redundant Storage Infrastructure: Distributed file system => global file
+namespace, redundancy, and availability.
+Common pattern is huge file > 100 G. Rarely update in place, reads and appends
+are common
+
+Data kept in chunks and spread acorss machines, each chunk is replicated on
+different machines(chuck servers), which is also the compute server
+
+Chuck servers:
+File is in contiguous chunks (16-64 MB). Chuck is replicated 2x or 3x and kept
+in different racks(not machines in same rack)
+
+Master node/Name node:
+Stores metadata about where files are stored. will be replicated
+
+Client access library:
+talk to master to find chuck servers, and then connects directly to chuck
+server
+
+-------------
+
+Scenario: huge text document, calculate number times each distinct word
+appears in the file
+
+Case 1: file too large, but full dict fits in memory
+Case 2: too many words to fit all entries in memory
+
+words(txt) | sort | unique -c
+
+input k-v values => intermediate k'-v' pairs => group by key => reduce a
+k'-v's pairs to k'-single v pair
+
+map will be on each node. System will copy map results of same key into a
+single node and do final reduce,e.g., via hashing. 
+
+Each map/sort/reduce step tries to use as much sequential scan instead of random access of disk
+
+pseudo code
+
+map(key, value)://key doc name, value:text of doc
+	for each word w in value
+		emit(w, 1)
+
+reduce (key, values)
+	result = 0
+	for each count v in values
+		result += v
+	emit(key, values)
+
+Example:
+each record of the form (URL, size,date..), find total number of bytes on HOST
+
+-------
+map => reduce are distributed in parallel by partitioning function/hash
+function
+
+The framework needs to:
+partitioning the input
+scheduling execution across machines
+group by key
+handling failure
+inter-machine communication
+
+Scheduler schedule map tasks close to physical storage location of input data
+intermediate resutls are on local FS of map/reduce workers (NOT on DFS, which
+is the case for input/findal output)
+
+Master node coorndate: task status, idel, in-progress, completed
+
+When a map task completes, sends the master the location and sizes of its R
+intermediate files, one for each reducer. Master pushes this info to reducers
+
+Master pings workers periodically to detect failures => 
+set map tasks at that worker are reset to idle. 
+set in-progress reduce tasks at that worker to idel
+abort task if master failed
+
+Make # of map tasks much larger than # of nodes in the cluster. Often one DFS chuck per map
+R is much smaller than M
+
+-----
+Combiner: pre-aggregating values in the mapper. Combiner is ususally same as
+the reduce function. Provided by the programmer.
+This requires functions asscociatative and commutative
+
+exameple: combiner for average function 
+combiner for median function?
+
+
