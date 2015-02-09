@@ -1,0 +1,16 @@
+Shingling: convert documets etc to sets
+Minhashing:large sets to short signatures
+Locality-sensitive hashing: on pairs of signatures likely to be similar
+
+Doc -> Shingling -> set of strings of length k that appear in the document -> minhashing -> short integer vectors that represent the
+sets, and reflect their similarity -> LSH -> candidate pairs: those pairs of
+sigs that we need to test for similarity
+
+k-shingle/gram: sequence of k chars that appears in the doc => represent doc
+with set of singles
+
+Can hash long shingle to token => represent a doc by its tokens
+
+---------
+
+

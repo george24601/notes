@@ -1,0 +1,50 @@
+Context:
+We have different service processes across many servers. We want to monitor states
+of these services in a centralized place. 
+
+Problem:
+Design a framework so that 
+1. user can view internal states of other services.
+2. Note user should be able to define what internal state is "interesting",i.e.,
+this definition is specifc to each type of services. Generic health information is not enough
+3. User should be able to define monitoring rules specifc to each service from our centralized
+monitor
+
+Discussion:
+1.Should those processes know the existence of our monitor?
+Yes. If not, 
+A. the public info they expose may not directly relate to the status
+we are going to monitor, which is very likely given number of services our
+monitor will handle in the future
+B. Or our monitor has to tranlsate the public stats into ones interesting to user
+
+2.how much information should we expose to those processes?
+A. We expose our monitoring service API, and other services have to explicitly
+use it => possible 
+B. We force other services to expose certain, monitoring specific API to us =>
+interface coupling => NO
+C. We force other service to expose generic API that could be used for
+monitoring purposes => reasonable since they want that to be monitored
+
+3. How do we define the monitoring rules, espeically it is very process-type-specific?
+
+A. on process's side
+Client service will preprocess the data and post the result to us.
+To visualize the rule, need to ask client to push the rule to us => coupling of API
+
+B. on our monitor's side
+Polling: need to know the channel/API to poll via rules=> our monitor needs to know the every single app it interests
+Pushing: need to send rule over to client. so client knows which data to push => coupling of client's API with ours, BAD
+
+C. neither: third party
+In effect, a dispatcher in publisher/subscriber model, a compromise of the first 2 options.
+
+4.How do we "visualize" the rules?
+Because our monitor, which has only access to public data, has knowledge of rules, the actual state must be exposed
+to us, i.e., from our monitor, the rule should be simple API call(s) to client
+service. That also means our monitor does as little domain-specfic
+computation as possible
+
+5.How do we transfer the computation result of the rules?
+Polling: easy given our definition of rules
+Pushing: need to expose our API to client
