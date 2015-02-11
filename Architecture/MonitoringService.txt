@@ -1,14 +1,11 @@
 Context:
 We have different service processes across many servers. We want to monitor states
-of these services in a centralized place. 
-
-Problem:
-Design a framework so that 
-1. user can view internal states of other services.
-2. Note user should be able to define what internal state is "interesting",i.e.,
+of these services in a centralized place. Note user should be able to define what internal state is "interesting",i.e.,
 this definition is specifc to each type of services. Generic health information is not enough
-3. User should be able to define monitoring rules specifc to each service from our centralized
-monitor
+
+Problem
+Do we allow user to define monitoring rules specifc to each service from our centralized
+monitor?
 
 Discussion:
 1.Should those processes know the existence of our monitor?
@@ -46,5 +43,14 @@ service. That also means our monitor does as little domain-specfic
 computation as possible
 
 5.How do we transfer the computation result of the rules?
-Polling: easy given our definition of rules
+Polling: easy given our definition of rules, i.e., one API call with parameters.
 Pushing: need to expose our API to client
+
+Conclusions:
+The requirement of being able to define process-specific rule in a centralize place caused additonal coupling of services,i.e., requiring monitor and client services know each other. This is not scalable if we have many types of services we want to monitor.
+
+-------------------
+
+So how to design the framework, now that each service is responsible for the definition of state collector, i.e., which state to collect?
+
+
