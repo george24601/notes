@@ -53,4 +53,41 @@ The requirement of being able to define process-specific rule in a centralize pl
 
 So how to design the framework, now that each service is responsible for the definition of state collector, i.e., which state to collect?
 
+Previous discussion shows that the major problem is to pass client context to our monitor. Very hard to implement in a clean way with rich UI experience without close collaboration of monitor and clients.
 
+Therefore, the design decisions are
+Client is responsible for defining the internal states to watch for.
+Client will push the state data to our monitor
+
+Discussion:
+1.What kind of settings can user specify for us, i.e., what kind of settings do we store on our monitor?
+	
+Anything not related to client’s domain context but related to our monitor,e.g., visual/formatting rules, authorization rules. But our monitor will not be responsible for converting the literal value to display value, and client has to compute them on their side and pass them to us
+
+2. Authentication and authorization
+Ideally, all services, including ours, should use SSO to simplify authentication. Authorization rule will be stored our side
+
+3. Persistent layer design: what do we store
+monitor viewer identities 
+monitor editor identities
+visual rules related to the monitor, e.g., formatting, type of monitored state: single value, list of values, histrogram?
+actual state data, which includes:
+literal value(s), display value(s), version info (e.g., timestamp)
+
+4.User dynamics from UI level. Each side's UI should be single page app
+On monitor side:
+Visualization of monitored states
+Define visualization rules
+access control
+
+On client side, do we need to expose UI for
+access control?
+visualization rules?
+add/delete monitors?
+
+----------
+Tech stack
+1. D3 is the most popular data visualiztion library, which is exactly what our monitor does
+2. Persistant layer, should we use a schema less solution?
+3. Framework choice does not matter much in : 
+web service layer, client side MVC, and client side interaction
