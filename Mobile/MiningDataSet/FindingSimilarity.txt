@@ -13,4 +13,66 @@ Can hash long shingle to token => represent a doc by its tokens
 
 ---------
 
+Jaccard Similary: size of intersection/size of union
+
+To boolean matrics:  Rows = elements of the universal set. Columns = sets
+Sim(C1, C2) = a/(a+b+c)
+
+rows permuted randomly
+h(C) = # of the first row in which column C has 1
+Use several independent hash functions to create a signature for each col
+=> signature matrix col : sets, rows, minhash for that column. in order for
+that column
+
+prob of h(C1) = h(C2) over all permutations is the same as Sim(C1, C2) => proof
+
+similarity of signaturs=> farction of minhash functions in which they agree
+
+implementation: approximation, what if data avaible in columns, not rows?
+
+-------------
+
+LSH: generate from the collection of all elements a small list of candidate pairs: pairs of elemns whose similarity must be evalulutaed
+
+For signature matrices: hash cols to many bucks, and make elements of the same bucket candidate pairs
+
+make cols c and d candidate pairs if M(i,c) = M(i,d) for at least t fractions
+
+Hash cols of signature matrix M several times. Arrange that only similar cols are likely to hash to the same bucket.
+Candidate pairs are those that hash at least once to the same bucket
+
+divind rows to b bands * r rows per band, for each band, hash its portion of each column  to a hash table with k buckets (K as large as possible)
+Candidate pairs are those that hash to the same bucket for >= 1 band
+
+Tune b and r to catch most similar pairs, but few nonsimilar pairs.
+
+Suppose C1, C2 are 80% similar, probability
+C1,C2 idential in one particluar band =
+C1,C2 NOT idential in any of the 20 bands =
+
+Why b banding works
+
+LSH: tune to get almost all pairs with similar sigs, but eliminate most pairs that do not ahve similar signatures
+Check that candidate pairs realy do have similar signatures
+May need to check the remainign candiate pairs really represnt similar sets
+
+--------
+Entity resolution: examine a collection of records adn determine which refer to the same entity
+
+----
+Represent a fingerprint by the set of positions of minutiae
+Place a grid on a fingerprint
+Set of grid squares wher eminutiae are located represents the fingerprint
+Treat minutiae near a grid boundary as if also present in adjacent grid points]
+No need to minhash since number of sqaures is not too large
+Represent each FP by a bit vector with one position for each sqaure
+
+Pick 1023 sets of 3 grid squares, randomly
+for each set, two prints that each have 1 for all three squares are candidate pairs
+
+Pr(two fingerprints from the same finger each have 1s in 3 given squares) =
+Pr(at least one of 1024 sets of three)
+Same probability for random fingerprints
+
+-------
 
