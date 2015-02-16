@@ -63,3 +63,7 @@ final forumla: notice the 1-p part
 rj =?
 So transform M to A to take random jump into account
 A = P*M +(1-P)/n * e * eT, So that r(t+1) = A * r(t)
+
+-------
+IRL, how to compute r(new) = A * r(old) => we can handle only the sparse matrix. so cant compute with A directly
+for leaked score, evenly redistribute among rs (i.e., jumping)

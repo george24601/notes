@@ -1,0 +1,46 @@
+Support for itemset I = # of baskets containing all items in I
+support threshold s: sets of itmes that appear in at least s baskets: frequent itemsets
+
+Example:
+Basket= sentences, items=documents containing those sneences
+items do not have to be "in" baskets, i.e., just need many to many relationship
+
+Baskets=documents; items=words
+
+Assocuation rules: {i1,i2,...ik}-> j
+Confidence of association rule
+
+Algorithm:
+Find all sets with support at least cs
+Find all sets with suport at least s
+from cs, remove one element, see which subsets have support at lease s.
+How to compute confidence in this algo?
+
+Computation model:
+data kept basket-by-bastket on flat file
+
+=> hardest problem is finding the frequent pairs. Support thresold is et high enought that you dont get too many frequesnt itemsets
+-------
+monotonicity: if a set of items appears at least s times, so does eveyr subset of S
+Conversely, if item i does not appear in s, then no pair including i can appear in s
+
+A-Priorit:
+Read baskets and count in main memory the occurence of each time
+Items that appear at least s times are the frequent items
+Read bakets again and count in main memory only those pairs both of which were found in pas 1 to be frequent
+
+Can use the triangular matrix method with n = # of frequestn items
+
+So use more passes to extend to k-sets from 2
+C1 -> filter -> L1 -> construct->c2 -> filter -> L2
+---------
+Improvement:
+in pass 1, keep counts of buckets into which pairs of items are hashed
+for each basket, enumerate all its pairs, hash them, and increment the resulting bucket count by 1
+
+a bucket is frequent if its count is at least the support threshold
+
+
+
+
+

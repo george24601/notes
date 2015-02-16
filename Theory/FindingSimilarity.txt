@@ -74,5 +74,6 @@ Pr(two fingerprints from the same finger each have 1s in 3 given squares) =
 Pr(at least one of 1024 sets of three)
 Same probability for random fingerprints
 
--------
+
+
 
