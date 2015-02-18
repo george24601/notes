@@ -89,5 +89,17 @@ add/delete monitors?
 Tech stack
 1. D3 is the most popular data visualiztion library, which is exactly what our monitor does
 2. Persistant layer, should we use a schema less solution?
+Which parts have rigid schema?
+user id to viewable/editable monitors
+
+Which parts do not have applicable schema?
+data in our monitor sinks, because it may be a single value or a list of values. Moreover, the display value may be a number, string, or date
+If we want to fit it into a schema-based solution:
+one row for each solution: the cell has to contain multiple values: not that different from schema-less solution
+one col for each solution: this means one table for each monitor sink. Each table has 2 columns: one for literal value, one for actual value, and we need a row counter just to enforce order in set logic
+
+Also, because monitored data is so dynamic, the visual rules will be dynamic as well, i.e., may be a compisition of schema-based rules
+
+
 3. Framework choice does not matter much in : 
-web service layer, client side MVC, and client side interaction
+web service layer, client side MVC, and client side interaction. Too many similar competitors
