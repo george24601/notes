@@ -1,6 +1,6 @@
 K/V relationships is the mathematical dual of FK/PK relationships
 
-monads and monad comprehensions forms the basis of a common query language for SQL and noSQL
+monads and monad comprehensions form the basis of a common query language for SQL and noSQL
 
 translate object graph into k/v store : key is ram address, value is actual content
 

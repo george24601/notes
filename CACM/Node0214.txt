@@ -12,11 +12,10 @@ controllers and views are on client/mobile system whenever you are doing
 client-side rendering. 
 
 Middle layer is thin and focuses on string manipulation => so need something
-even based, good at string manipulation, light and quick and easy to use.
+event based, good at string manipulation, light and quick and easy to use.
 Options: Ruby => Eventmachine, Twisted => Python, Play=>Java
 
-50k QPS, Node is 20 times faster than their Ruby stack. 25 MB memory
-footprint. The other 2 options took 80 MB+
+50k QPS, Node is 20 times faster than their Ruby stack. 25 MB memory footprint. The other 2 options took 80 MB+
 
 A very structured, statically typed model => so oo language => model moves to
 view controllers, which got pushed out all the way to client => what is left
@@ -68,8 +67,7 @@ Watch out for flow control and exception handling
 
 Things to help
 1. good IDE, InteliJ IDEA currently is good
-2. evolving performance analysis and monitoring => probably JMX layer the java
-VM provides
+2. evolving performance analysis and monitoring => probably JMX layer the java VM provides
 3. something that can inspect everything your Node system is doing and
 actually understand your application so it can provide you with detailed
 breakdowns of where your bottlenecks and slowdowns are.

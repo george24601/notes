@@ -1,0 +1,31 @@
+INCR, INCRBY: parses underlying string as interger to operate on
+
+GETSET: sets a key to a new value, returning the old value
+
+MSET/MGET: set/get multiple values
+
+EXISTS:
+
+LTRIM
+
+BRPOP: an spedivy multiple lists and wait on at the same time.get notified when the first list receives an element
+
+(B)RPOPLPUSH
+
+hashes
+
+sets:
+SINTER
+SPOP
+SUNIONSTORE
+
+sorted set:
+operation on range with scores
+
+bitmaps
+
+HLL:used to count unique things
+
+scan command
+
+PUB/SUB with redis
