@@ -1,0 +1,21 @@
+Context:
+User is browsing various single page application(SPA)s, and he wants to bookmark these SPA's in a centralized place
+
+Problem:
+Design a framework to record user's current URL,including hash portion in SPA. User will view SPAs and define bookmarks from our portal
+
+
+Discussion
+1.Client side, we can:
+A. when URL changes, push the URL to our service.
+B. change the behavior, for user to explicitly push the URL to us, since we are interested only in the last one.
+From performance point of view, B is better. But A has potential to integrate into a more powerful action collector
+ 
+2. SAP and our portal will have the handle for channel. The handle is distributed by our service. i.e.
+
+
+3. How do we know the last URL gets registered
+A. client side, gets an ACK from our service
+B.
+C. service side, gets an ACk from our logger, our logger sends ACK only after logging. If service side doesnt receive ACK from logger, resend it. After a few tries, if logger doesnt reply, that means it is dead, and we can discard the message
+D: logger's logging action needs to be ideompotent, because service side ensures at least once delivery mechanism
