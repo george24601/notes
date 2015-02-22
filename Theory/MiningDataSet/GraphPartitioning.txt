@@ -1,0 +1,42 @@
+What makes a good cluster: edge cut of the cluster=> conductance: connectivity of the group to the rest of the network relative to the desnity of the group
+Computing optimal cut is NP-hard
+
+y= A*X
+yi sum of laels xj of neighbors of i
+
+Spectrum: egienvectgos xi of a graph, ordered by the magnitude of their crresponding eigenvalues
+
+--------
+In d-regular graph, Ax = lambda * x => what is x and lambda
+
+What if G is not connected => reduce to reg g for each component
+what is the x to pick, what is the corresponding eigenvalue?
+
+then what if components are a bit connected? how will that affect our eigen vectoers
+---------
+
+Degree matrix D
+Laplacian matrix: L = D - A
+
+------
+Calculate 2nd smallest eigenvalue for symmetric matrix/L 
+x is unit vector, SUM(xi^2) = 1
+and orthogonal to 1st eigenvector SUM(xi) = 0
+=>transform into labelling optimization problem
+
+Express partition (A,B) as vector: minimize the cut of the parition by findng a non-trivial vector x that minimizes
+=>but cant solve exactly, need to relax y and allow y to take real value
+
+Rayleigh Theorrem
+
+
+---------
+spectrual clustering algorithms basic stages:
+pre-processing: construct a matrix presentation
+decomposition: eigenvalues and eigenvectors of the matrix. map each point to a lower-dimensional repsentaiton based on eigenvectors
+grouping: assign points to two or more clusters, based on the new representation
+
+--------------
+Trawling: dense 2 layer graphs: 
+Enumerate complete bipartiitel subgraphs Ks,t
+translate into frequent itemsets problems

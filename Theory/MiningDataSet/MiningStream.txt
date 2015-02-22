@@ -1,0 +1,60 @@
+Two forms of query: ad hoc: normal queries asked one time about streams
+Standing queries: queires that asked about stream at all times
+-------
+Counting bit problem
+
+Summarize expoentially increasing blocks of the stream, looking backward
+drop small blocks if they begin at the same point as a larger region or a larger region begins to their right
+Error analysis, space analysis
+
+Fixup: summarize blocks with specific numbers of 1s
+A bucket is a segment of the window: timestamp of its end + # of 1s between its beggining and end 
+# of 1s must be a power of 2 => space analysis
+Update bucket:
+
+Querying: why half teh size of oldest bucket
+------
+Bloom filter
+Pr(false positivie): throwing darts argument => to e => calculate false positive
+------
+Unique search queries: why sampling doest work sometiems
+Suppoer a query occurs exactly twice in teh stream, and we take 10% sample
+
+Fix: sampling by stream rather than value
+
+What if the total sample size is limited
+
+Generallize to KV pair: sample based on picking soem set of keys onlyh, not pairs
+----------
+FM:pich h that maps n lements to at least log2n bits
+r(a),h(a), R.
+Pr(h(a) at least i 0s)
+Pr(R >= i there are m elements) => approximate to e form
+use taylor expansion on to m/2^i 
+if 2^i>>m, 2^i << m, => 2^R is around m
+
+But E(2^R) is infinite => workaround
+partiion samples into small groups log n
+take the average of groups,  then take the mediian of the averages
+
+Suppose stream has elments chosen from a set of n values, mi: # of times value i occurs. kth moment is sum of (mi)k over all i
+0th momennt = number of differnet elements in the stream
+1st moment = # of elements
+2nd moment = how uneven the distribution is (surprise number)
+
+AMS method: based on calc of multiple random variables X
+assume stream has lenght n. pick a random time to start, so that nay time is equally likely.
+Let the chosen time have element a in the stream
+X = n * ((2* num(a) in stream starting at the chosen time)-1)
+proof: E(x) = 2nd moment
+
+But stream has no size...
+the variables X have n as a factor - keep n separately, just hold the count in X
+Suppose we can only store k counts. We must throw some Xs out:
+choose the first k times for k variables, when the nth element arrives, choose it with porbablility k/n
+choose it with prob k/n(?), if you choose it, thorw one of the prviosuly stored variables out, with equal probablility
+Pr(each of the first n-1 positions chosen)=
+
+
+
+

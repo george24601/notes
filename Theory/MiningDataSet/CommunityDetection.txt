@@ -1,0 +1,21 @@
+Plan:
+Given a model, generate the network. Then given the network, find the "best" model. Models will have set of parameters we  use to evaluate
+
+AMG:
+generative model B(V,C,M, {Pc}), for each pair of nodes in community A, we connect htem with prob. Pa
+Overal edge probability P(u, v) =
+----------
+FuA: the membershp strengh of node u to community A.
+PA(u,v) = 1 - exp(-FuA * FvA) => Community membershp strenght matrix F(Nodes * Communities)
+Generate P(u,v) from PA(u,v)
+P(u,v) = 1 - exp(-Fu dotProduct FvT)
+
+-----
+Given a network G(V, E), estimate F that maximized the likelihood of:
+we use log-likelihood to make numeric error small
+Gradiant descant
+Compute a gradient of a single row Fu of F
+
+Coordinate gradient ascent: but slow
+
+improvement and why it works
