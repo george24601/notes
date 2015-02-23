@@ -5,4 +5,4 @@ The key of expanding is that finding the continuous subproblem, i.e., the slibli
 
 3. adding any edge to a connected tree will yield a cycle
 
-4. Heap is a special form of tree => it is packed (?) so can be reprsented as an array
+4. Heap is a special form of tree => it is packed so can be reprsented as an array

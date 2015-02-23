@@ -19,6 +19,8 @@ for each mapping
 total cost will be 150*150*40
 
 --------
+Input: N <=1000
+
 in a FBT, 1 node with deg 2, s with deg 3, s+1 with degree 1
 
 for each level
@@ -29,11 +31,25 @@ for each level
 	leave deg three untouched
 	add current parent to next level
 
+Hard to code, plus something seems wrong.
+
+Notice its BST, probably some form of recursion? 
+we know the root is special=> only 1, but which one? Try them all!
+
+Cost(v1, v2) = cost to make v1 FBT with its parent coming from v2
+
+for each neighbor m of v1 but not v2
+	calculate cost(m, v1)
+
+cost(v1, v2) = 2 min cost(m,v1) => answer is trivial if 0 neighbor after v2, answer is invalid if 1 neighbor
+
+feasible because our matrix has at most 1mil entries
+
 --------
 One way is to generate many permutations, check its distribution of "scores"
 
 Why is standard algo good?
-Why is "swap with all" bad?
+Why is "swap with all" bad? => how to build a score function
 
 another approach: naive bayes classifier
 
