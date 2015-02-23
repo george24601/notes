@@ -1,11 +1,15 @@
 Context:
-User is browsing various single page application(SPA)s, and he wants to bookmark these SPA's in a centralized place
+User is browsing various single page application(SPA)s, and he wants to view
+and bookmark these SPA's in a centralized place
 
 Problem:
 Design a framework to record user's current URL,including hash portion in SPA. User will view SPAs and define bookmarks from our portal
 
-
 Discussion
+1. How to transfer URL data from 3rd party to our portal.
+A. do we need a 3rd party coordinator/dispatcher?
+
+
 1.Client side, we can:
 A. when URL changes, push the URL to our service.
 B. change the behavior, for user to explicitly push the URL to us, since we are interested only in the last one.

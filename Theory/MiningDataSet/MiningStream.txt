@@ -12,12 +12,13 @@ A bucket is a segment of the window: timestamp of its end + # of 1s between its 
 # of 1s must be a power of 2 => space analysis
 Update bucket:
 
-Querying: why half teh size of oldest bucket
+Querying: why half the size of oldest bucket=>error analysis
 ------
 Bloom filter
-Pr(false positivie): throwing darts argument => to e => calculate false positive
+Pr(false positivie): throwing darts argument => E(# of 1s after d throws) =
+to e => calculate false positive
 ------
-Unique search queries: why sampling doest work sometiems
+Unique search queries: why sampling doest work sometimes
 Suppoer a query occurs exactly twice in teh stream, and we take 10% sample
 
 Fix: sampling by stream rather than value
@@ -26,15 +27,15 @@ What if the total sample size is limited
 
 Generallize to KV pair: sample based on picking soem set of keys onlyh, not pairs
 ----------
-FM:pich h that maps n lements to at least log2n bits
+FM:pick h that maps n elments to at least log2n bits
 r(a),h(a), R.
-Pr(h(a) at least i 0s)
-Pr(R >= i there are m elements) => approximate to e form
+Pr(r(a) at least i 0s)
+Pr(m elements | R >= i) => approximate to e form
 use taylor expansion on to m/2^i 
 if 2^i>>m, 2^i << m, => 2^R is around m
 
 But E(2^R) is infinite => workaround
-partiion samples into small groups log n
+partiion samples into small groups logn
 take the average of groups,  then take the mediian of the averages
 
 Suppose stream has elments chosen from a set of n values, mi: # of times value i occurs. kth moment is sum of (mi)k over all i
@@ -43,7 +44,7 @@ Suppose stream has elments chosen from a set of n values, mi: # of times value i
 2nd moment = how uneven the distribution is (surprise number)
 
 AMS method: based on calc of multiple random variables X
-assume stream has lenght n. pick a random time to start, so that nay time is equally likely.
+assume stream has lenght n. pick a random time to start, so that any time is equally likely.
 Let the chosen time have element a in the stream
 X = n * ((2* num(a) in stream starting at the chosen time)-1)
 proof: E(x) = 2nd moment

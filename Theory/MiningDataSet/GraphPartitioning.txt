@@ -1,18 +1,18 @@
-What makes a good cluster: edge cut of the cluster=> conductance: connectivity of the group to the rest of the network relative to the desnity of the group
+What makes a good cluster: edge cut of the cluster=> 
+conductance: connectivity of the group to the rest of the network relative to the desnity of the group
 Computing optimal cut is NP-hard
 
-y= A*X
-yi sum of laels xj of neighbors of i
+y= A*X, what does y mean
+y(i) sum of labels x(j) of neighbors of i,i.e., we think X as the labelling
 
-Spectrum: egienvectgos xi of a graph, ordered by the magnitude of their crresponding eigenvalues
+Spectrum: egienvectors x(i) of a graph, ordered by the magnitude of their corresponding eigenvalues
 
 --------
 In d-regular graph, Ax = lambda * x => what is x and lambda
 
-What if G is not connected => reduce to reg g for each component
-what is the x to pick, what is the corresponding eigenvalue?
+What if G is not connected => reduce to reg g for each component => what is the x to pick, what is the corresponding eigenvalue?
 
-then what if components are a bit connected? how will that affect our eigen vectoers
+then what if components are a bit connected? how will that affect our eigen vectors
 ---------
 
 Degree matrix D
@@ -35,6 +35,8 @@ spectrual clustering algorithms basic stages:
 pre-processing: construct a matrix presentation
 decomposition: eigenvalues and eigenvectors of the matrix. map each point to a lower-dimensional repsentaiton based on eigenvectors
 grouping: assign points to two or more clusters, based on the new representation
+
+
 
 --------------
 Trawling: dense 2 layer graphs: 

@@ -1,0 +1,39 @@
+notice that flipping bits are independent. Also, if we have a solution, no
+more than half of the bits are flipped, i.e., at most 20 flipped in the
+solution
+for each bit column, if #0s and #1s are different, we know for sure to flip or not
+if they are same....
+
+or think horizontally
+find the mapping for source i to target j => 150^2 choices
+for each choice, we can infer a flipping order, verify this flipping
+order,i.e.,
+
+for each mapping
+	get fillping order
+	for each row
+		apply map to row
+		if mapped is occupied, error
+		else marked as mapped
+
+total cost will be 150*150*40
+
+--------
+in a FBT, 1 node with deg 2, s with deg 3, s+1 with degree 1
+
+for each level
+	leaf node: delete obvious nos, so its parent has degree at most 3
+
+	for all degree 2 nodes
+	if parent is 2 as well, delete current one's and its child,update degree
+	leave deg three untouched
+	add current parent to next level
+
+--------
+One way is to generate many permutations, check its distribution of "scores"
+
+Why is standard algo good?
+Why is "swap with all" bad?
+
+another approach: naive bayes classifier
+

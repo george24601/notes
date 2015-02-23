@@ -34,11 +34,11 @@ Can use the triangular matrix method with n = # of frequestn items
 So use more passes to extend to k-sets from 2
 C1 -> filter -> L1 -> construct->c2 -> filter -> L2
 ---------
-Improvement:
+Improvement (PCY):
 in pass 1, keep counts of buckets into which pairs of items are hashed
 for each basket, enumerate all its pairs, hash them, and increment the resulting bucket count by 1
 
-a bucket is frequent if its count is at least the support threshold
+a bucket is frequent if its count is at least the support threshold. We can use rest of memory as buckets
 
 Threadsold for PCY to beat a priori
 

@@ -1,0 +1,39 @@
+Formal Model:
+C= set of Customers
+S=set of Items
+Utility funciton u:C *S -> R(atings)
+problem: U is sparse. Cold start problem
+------
+content-based recoomendation: recommend items to x similar to previous items rated highly by x
+for each item, create an item profile
+Profile=set of "important" words in item
+TF-IDF => doc profile: set of words with hightest TF-IFD scores
+
+distance in higher dimension space, User profile x, item profile i
+Estimate U(x, i) = (x dp i)/ (|x||i|)
+
+No need for data on other users
+able to recommend to users with unique tastes
+no first-rater problem
+explanations for recommended items
+
+finding the appropriate features is hard
+overspecialization
+
+-----------
+Collaborative: centered cosine nromaliz ratings by substracing row mean
+Handles tough raters and easy raters
+
+how about item-item collaborative filtering
+
+-------
+How to find k most similar users? NN/LSH in high dimenstions, clustering, dimensionality reduction
+
+No feature selection needed, but has cold start,sparsity, first rater, popularity bias problem
+So use hybrid methods: item profiles for new item problem, deomographics to deal with new user problems
+or use two or more different recommenders and combine results
+------
+Evaluate recommender system: compare predictions agains withheld known ratings 
+=> RMSE but it has problems => precision at top k
+
+
