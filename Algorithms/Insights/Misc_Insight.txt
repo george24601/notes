@@ -1,4 +1,5 @@
-1. log: quickly compute large power or hard to compute power, especially if we dont need precise number
+1. log: quickly compute large power or hard to compute power, especially if we dont need precise number.
+Another use of that is dealing with small double multipllications, this can avoid a lot of underflow problems, espeically important in probability calculations
 
 2. inversion index: how many swaps it needs to sort an array => relation to merge sort and proof
 
