@@ -1,0 +1,24 @@
+Spark SQL is inspired by HiveSQL instead of SQL 92 standard. This means to check if a feature is available, we will look it up in HiveSQL documentation.
+
+What is supported:
+1. standard SQL operators
+SELECT, JOIN, CROSS JOIN, LEFT/RIGHT JOIN, GROUP, ORDER
+
+2. math/string functions
+e.g., round, floor, rand, exp....length, concat....
+
+3.  aggregate functions
+count, sum, ave, min, max.....
+
+4. data types
+int, bigint (8 byte integer), date, timestamp, string, boolean, double
+
+5. UDF functions
+You can register a python/scala function as UDF, and use it as part of SQL query, similar to NZ's UDF
+
+What is surprising
+1. When using outer joins with non-equal join conditions,e.g., a < b , SparkSQL will give wrong result for null tuples
+2. NO varchar support, and it is a conscious design decision
+3. decimal type support was added in late December and has bugs. decimal type has 38 digits precision, similar to SQL server's
+4. No window function support
+

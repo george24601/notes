@@ -1,0 +1,33 @@
+memory per executor process: 512m
+
+meomory to use per python worker process during aggregation: 512m. If the memory used during aggregation goes above this amount, it will spill data into disks
+
+spark.suffle.consolidateFiles: set true for ex4 or xfs file systems
+
+Size of map outputs to fetch simulatenously from each reduce task: 48mb => fixed memory overhead per reduce task
+
+Number of actor threads to use for communication: 4
+
+Number of cores to allocate for each task: 1
+
+total amount of memory to allow spark applications to use on the machine: total - 1G => spark.executor.memory: each application's individual memory
+
+number of worker instances to run on each machine: 1
+memory to allocate to Spark master and worker daemon themselves: 512 m
+
+-------
+
+If at all possible, run Spark on the same nodes as HDFS.The simplest way is to set up a Spark standalone mode cluster on the same nodes, and configure Spark and Hadoop’s memory and CPU usage to avoid interference (for Hadoop, the relevant options are mapred.child.java.opts for the per-task memory and mapred.tasktracker.map.tasks.maximum and mapred.tasktracker.reduce.tasks.maximum for number of tasks).
+
+We recommend having 4-8 disks per node, configured without RAID (just as separate mount points)
+
+In general, Spark can run well with anywhere from 8 GB to hundreds of gigabytes of memory per machine. In all cases, we recommend allocating only at most 75% of the memory for Spark
+
+In our experience, when the data is in memory, a lot of Spark applications are network-bound. Using a 10 Gigabit or higher network is the best way to make these applications faster
+ This is especially true for distributed reduce applications such as group-bys, reduce-bys, and SQL joins
+
+You should likely provision at least 8-16 cores per machine. Depending on the CPU cost of your workload, you may also need more: once data is in memory, most applications are either CPU- or network-bound.
+
+
+
+
