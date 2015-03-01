@@ -1,0 +1,29 @@
+A:
+try dp? but n^2 state not maintainable!
+so must be some insight..
+
+O(nlogn)
+
+O(n)
+
+------
+B:
+insight:
+each side's slot is either a tick, or an end
+each side heigh diff no more than 1
+i.e,
+(1 + odd)* odd/2 (-1) has fixed format
+so, first, identify last complete triangle formed with T, if (x,y) in it, then 1
+
+if not, result = Pr(at least k slides to a certain direction) =
+
+p *PR(at least k-1 slides to a certain direction) + (1-p) Pr(at least k slide to a cetain direction)
+need to use log to compute!
+
+
+when falling into position, 
+if must slide, one side 
+
+-------
+C
+Defintely need special insight...

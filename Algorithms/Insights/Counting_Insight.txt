@@ -1,1 +1,3 @@
 1. most combinatorical counting are recursive/DP in nature, but when we break down the problem, often we need to include the "cushion" as part of subproblem, relationship
+
+2. common way to gain inside is to consider an instance within the solution space, and the generation/filtering process. Since steps can be represented as * , and categories +
