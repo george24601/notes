@@ -1,0 +1,49 @@
+1. etc/hadoop/hadoop-env.sh
+export JAVA_HOME={java installation folder}
+export HADOOP_PREFIX={absolute path of your hadoop folder}
+
+2. etc/hadoop/core-site.xml
+
+<property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://{host name of name manager node}/</value>
+ </property>
+
+default port is 8020, or whatever shows
+
+3. etc/hadoop/yarn-site.xml
+
+<property>
+  <name>yarn.resourcemanager.hostname</name>
+  <value>{hostname of resource manager node}</value>
+</property>
+
+4. etc/hadoop/slaves
+list ALL nodes hostname, including data node, name node, and resource node, 1 per line
+
+5. setup SSH
+On name node and resource node
+
+ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
+cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
+ssh-copy-id {user}@{data node hostname}
+
+Do this for each data node
+
+repeat 1-5 for all nodes in the cluster
+
+6. /etc/hosts
+we MAY need to add host name rules for ALL nodes in the cluster
+
+7. start nameManager on name node
+sbin/hadoop-daemon.sh --script hdfs start namenode
+
+8. for each data node
+sbin/hadoop-daemon.sh --script hdfs start datanode
+
+9. start resourceManager on resource node
+sbin/yarn-daemon.sh start resourcemanager
+
+10. for each node, start nodeManager
+sbin/yarn-daemon.sh start nodemanager
+ 
