@@ -1,0 +1,37 @@
+SVD
+A[m * n] = U [m * r] Sig[r*r](V[n*r])^T
+r: rank of the matrix A. 
+
+U: left singular vectors, r concepts, user to concept
+Sig, singular values: concept strength
+
+V:right singluar vectors: movie-to-concept
+
+Always possible to decompose A where U, Sig, V, unique, U, V, coulmn orthonormal, Sig: diagonal
+----------
+SVD: best axis to project on: min sum of squares of projection erros =? minimum reconstruction error
+
+use movie-to-concert to find axis => Sig gives spread on the axis
+
+U*Sig = coordinates of proints in the axis
+
+How to do dr: set smallest singular values to zero
+
+how to mark similarily of matrices
+
+-----
+
+SVD: best low rank approx.
+
+U = sig1 * U1 * V1^T + sig2 * U2 ....
+Ui and Vi are unti length, sigi scales them
+
+How many sigs to keep => preserve Ssig(i)^2
+
+--------
+map query into a concep space?
+q(concept) = q * V
+
+relation to eigen-decomposition:
+
+singular vectors are dense
