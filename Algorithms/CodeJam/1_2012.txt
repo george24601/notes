@@ -1,0 +1,95 @@
+
+--------
+
+sorted by size
+
+1st one,
+need to add size - 1, repeating 
+i.e, at each step, 
+if can eat: eat
+if not, 
+inserting, each one increases size - 1 vs deleting the remaining, choose the cheaper one
+NOte, if we delete the one, we will have the size problem as well, so we need to delete all.
+
+--------------
+
+find # of substrings with at least 3 consecutive consonatns
+consider the bands of consecutives
+*b*b*b
+
+for each i
+if i, i+1, i+2 are all consonant
+	num += N - i - 2
+else
+	Get next band starts
+	num += N - nextstart - 2
+------
+
+2012 A:
+complete:
+Ex = Pr(all correct) * num remaining length + ! - Pr(all correct) * length
+give up:
+Ex = length
+back pedal:
+Ex = Pr(first off) * curLength + Pr(second off) * curLength - 1 +.....
+
+pick min one
+
+-------
+2012 B
+so find X s.t. as least high as potential second lowest
+sort by scores
+
+for each i
+	cost to bring all 0...i-1 to the value of i
+	if can afford
+		continue:
+	
+	if(remaining cost % i+1 != i)
+		final round is remaning cost/i
+	else
+		final round is remaining cost/i + 1
+	
+--------
+2012 C:
+DFS for each node
+If your DFS reachs any visited node, then you know you already have a path => bad
+
+----------
+2011 A:
+D <= N, D <= G
+
+Wd = 0 <=> Pd = 0 <= Pg = 0;
+Pd = 100 <=> Pg = 100
+
+N *  Pg < 1 && Pg != 0 => bad
+------
+2011 B
+
+first: calculate WP
+second: calcuate OP
+third: calcuate OOP
+-----
+2011 C
+
+simple greedy
+---
+2010 A
+
+rotate => coding problem
+afer than check horizontal, vertical, diagonal (both directions)
+
+-----
+2010 B
+# of distinct token
+each token's id is a prefix => add to a set
+size of set => answer
+
+----
+2010 C
+
+# of intersection points in n^2: brute force would do
+
+------
+
+

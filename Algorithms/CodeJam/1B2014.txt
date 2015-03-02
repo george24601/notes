@@ -1,0 +1,55 @@
+notice we only rubber band strings. i.e. all can be reduced into form abcd...where a, b, c,d are distince letters
+so first, they need to reduce to the same basic form
+what is their final form?
+for each position, try N from 1 to 100, and compute count
+total cost 100 * 100 * 100
+
+-----
+DP on bits, since value itself is too big, consider container/uninterpretated value instead of value itself
+
+motivating question: calculate # of number of < than M, recursively
+
+Num(position, lessThan)
+{
+	if less than
+		return 2 * Num(position +1, lessThan)
+	
+	if cur bit is 1
+		return Num(position + 1, false) + Num(position + 1, true)
+	else
+		return Num(position + 1, false)
+		
+}
+
+this also means, at least level, we need to know if we are less than previous
+prefix or not,i.e., are we in free mode?
+
+Num(position, lessThanA, lessThanB, lessThanK)
+{
+	if less than M
+	{
+		4 cases of less than A, less than B
+
+	}else
+		4 cases of less than A, less than B
+}
+--
+another approach is to base on least significant bit, divide search space into
+different sets. Consider pairs (a,b) that is the solution space
+
+if(a, b) both even, => Generation by (A >> 1, B >> 1, K >> 1)
+(a, b) both odd => if K odd, A odd, B odd => Gen (A >> 1, B >> 1, K >> 1)
+if any is even use A-1, B-1, K-1 instead
+
+
+a odd, b even, => if K even, K -1 >> 1, if K odd, K >> 1
+a even, b odd
+
+
+
+
+----------
+
+At step, 2 choices, proceed or step back
+proceed: smallest neighbors current
+step back: smallest neighbors of the existing stack

@@ -1,0 +1,43 @@
+or think horizontally
+find the mapping for source i to target j => 150^2 choices
+for each choice, we can infer a flipping order, verify this flipping
+order,i.e.,
+
+for each mapping
+	get fillping order
+	for each row
+		apply map to row
+		if mapped is occupied, error
+		else marked as mapped
+
+total cost will be 150*150*40
+--------
+
+A:
+Insight: calculate min deletion is equivalent of calculating max retention => computation becomes much easier. So my count part is not needed
+
+linear solution: pre-compute 3 largest subtree
+
+each pre-computation part has
+node, parent, largest 3 childs along with its size, pick a random root node and start DFSing
+
+how do we fix the root node? we will try to move the root to a child position, and see if it can improve overall size count,e.g., if root become first level child, second level child....etc. This means we need to try to make each node root once, note if we do DFS/BFS, we can reuse previous step's calculation result=> instant calc. Another insight is that, when we are making a root, the state in the root would be enough the determine the total maxsize, even though we do not know the arrangement of the rotated out root
+
+-----
+A:
+(HARD)
+One way is to generate many permutations, check its distribution of "scores"
+
+Why is standard algo good? i has 1/n chance to be on each position j
+
+proof:
+1st element: trivial proof
+2nd element: Pr(2 at 1) = 1/N, other case (1 - (1/N)) * 1/N-1 = 1/N
+3rd element: Pr(3 at 1) = 1/N, Pr(3 at 2) = Pr(2 at 3) = 1/N //induciton here....
+
+Why is "swap with all" bad? 
+The difference is that at each step, we can swap with previous index, compared to the perfect approach, the means j is more likley to be swapped under j => how to build a score function
+
+another approach: naive bayes classifier
+P(GOOD|S)
+
