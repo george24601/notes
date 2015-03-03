@@ -35,6 +35,10 @@ repeat 1-5 for all nodes in the cluster
 6. /etc/hosts
 we MAY need to add host name rules for ALL nodes in the cluster
 
+6.5 
+bin/hdfs namenode -format
+bin/hdfs datanode -format
+
 7. start nameManager on name node
 sbin/hadoop-daemon.sh --script hdfs start namenode
 
@@ -46,4 +50,18 @@ sbin/yarn-daemon.sh start resourcemanager
 
 10. for each node, start nodeManager
 sbin/yarn-daemon.sh start nodemanager
+
+----
+make the following web ui ports public
+
+hdfs Name node:50070
+spark master node:8080
+each spark woker node:8081
+
+start spark master
+./sbin/start-master.sh
+
+or, create/modify conf/slaves, then use start-all.sh
  
+start spark workers
+./bin/spark-class org.apache.spark.deploy.worker.Worker spark://{master's hostname}:7077

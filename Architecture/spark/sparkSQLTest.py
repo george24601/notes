@@ -1,4 +1,5 @@
 from pyspark.sql import SQLContext, Row
+from pyspark import SparkContext, SparkConf
 
 appName= 'test app'
 master= #use "local" to run the local mode
@@ -10,22 +11,18 @@ sqlContext = SQLContext(sc)
 
 #all operations are done on schemaRDD, which can be from existing RDD, a Parquetfile, JSON, or HiveSQL result set
 
-
 #to convert to schemaRDD, either infer schema or construct schema yourselves
 
-URI="examples/src/main/resources/people.txt" #TODO:CHANGE THIS
-
+# a bigger table
+URI=#TODO: change this into hdfs://...
 lines = sc.textFile(URI)
-parts = lines.map(lambda l: l.split(","))
-people = parts.map(lambda p: Row(name=p[0], age=int(p[1])))
 
-# Infer the schema, and register the SchemaRDD as a table.
-schemaPeople = sqlContext.inferSchema(people)
-schemaPeople.registerTempTable("people")
+data = lines.map(lambda l: l.split(",")).map(lambda p: Row(value=int(p[4]), payee=p[3])) # a 5 column table. NOTE: how do we handle date?
 
-teenagers = sqlContext.sql("SELECT name FROM people WHERE age >= 13 AND age <= 19")
+schemaData = sqlContext.inferSchema(data)
+schemaData.registerTempTable("data")
 
-# The results of SQL queries are RDDs and support all the normal RDD operations.
-teenNames = teenagers.map(lambda p: "Name: " + p.name)
-for teenName in teenNames.collect():
-  print teenName
+resultSet = sqlContext.sql("SELECT payee p1, SUM(value) v FROM data GROUP BY payee").map(lambda p:[p.p1, p.v]) #NOTE: SUM(value) needs aliasing
+
+for result in resultSet.collect():
+	print result[0] + ',' + str(result[1])
