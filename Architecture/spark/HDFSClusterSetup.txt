@@ -45,11 +45,16 @@ sbin/hadoop-daemon.sh --script hdfs start namenode
 8. for each data node
 sbin/hadoop-daemon.sh --script hdfs start datanode
 
+7-8 can use . sbin/start-dfs.sh
+
 9. start resourceManager on resource node
 sbin/yarn-daemon.sh start resourcemanager
 
 10. for each node, start nodeManager
 sbin/yarn-daemon.sh start nodemanager
+
+we can probably skip 9-10 if we use only hdfs
+
 
 ----
 make the following web ui ports public
@@ -65,3 +70,6 @@ or, create/modify conf/slaves, then use start-all.sh
  
 start spark workers
 ./bin/spark-class org.apache.spark.deploy.worker.Worker spark://{master's hostname}:7077
+
+to invoke remote hdfs command
+bin/hdfs dfs -fs hdfs://{master host}:8020 -ls /
