@@ -11,6 +11,32 @@ export HADOOP_PREFIX={absolute path of your hadoop folder}
 
 default port is 8020, or whatever shows
 
+2.5 add mounting points to data nodes
+for each data node,
+
+spark recommends 4+ mounting points, i.e,
+
+sudo chmod 777 -R /mnt/disk1
+mkdir /mnt/disk1/dn
+
+sudo chmod 777 -R /mnt/disk2
+mkdir /mnt/disk2/dn
+
+sudo chmod 777 -R /mnt/disk3
+mkdir /mnt/disk3/dn
+
+sudo chmod 777 -R /mnt/disk4
+mkdir /mnt/disk4/dn
+
+and then make sure hadoop user has permission to these /dn folders
+
+then in hdfs-site.xml 
+ <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///mnt/disk1/dn,file:///mnt/disk2/dn,file:///mnt/disk3/dn,file:///mnt/disk4/dn</value>
+ </property>
+
+
 3. etc/hadoop/yarn-site.xml
 
 <property>

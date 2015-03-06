@@ -1,21 +1,4 @@
-memory per executor process: 512m
-
-meomory to use per python worker process during aggregation: 512m. If the memory used during aggregation goes above this amount, it will spill data into disks
-
-spark.suffle.consolidateFiles: set true for ex4 or xfs file systems
-
-Size of map outputs to fetch simulatenously from each reduce task: 48mb => fixed memory overhead per reduce task
-
-Number of actor threads to use for communication: 4
-
-Number of cores to allocate for each task: 1
-
-total amount of memory to allow spark applications to use on the machine: total - 1G => spark.executor.memory: each application's individual memory
-
-number of worker instances to run on each machine: 1
-memory to allocate to Spark master and worker daemon themselves: 512 m
-
--------
+Spark:
 
 If at all possible, run Spark on the same nodes as HDFS.The simplest way is to set up a Spark standalone mode cluster on the same nodes, and configure Spark and Hadoop’s memory and CPU usage to avoid interference (for Hadoop, the relevant options are mapred.child.java.opts for the per-task memory and mapred.tasktracker.map.tasks.maximum and mapred.tasktracker.reduce.tasks.maximum for number of tasks).
 
@@ -27,6 +10,25 @@ In our experience, when the data is in memory, a lot of Spark applications are n
  This is especially true for distributed reduce applications such as group-bys, reduce-bys, and SQL joins
 
 You should likely provision at least 8-16 cores per machine. Depending on the CPU cost of your workload, you may also need more: once data is in memory, most applications are either CPU- or network-bound.
+
+------
+HDFS Data node:
+
+For general-purpose Hadoop applications, we recommend using relatively large number of hard drives (typically eight to twelve SATA LFF drives) per server. At the time of this publication, typical capacity in production environments is around 2 TB per drive. Based on our experience, highly I/O intensive environments have started using 12 x 2 TB SATA drives.
+
+ Depending on the number of cores, your slave nodes typically require 24 GB to 48 GB of RAM for Hadoop applications. For large clusters, this amount of memory sufficiently provides extra RAM (approximately 4 GB) for the Hadoop framework and for your query and analysis processes (HBase and/or Map/Reduce).
+
+ For large clusters, use at least two quad core CPU for the slave machines.
+
+------
+HDFS Name node:
+
+We recommend using dual NameNode servers - one primary and one secondary.
+
+The master servers should have at least four redundant storage volumes, some local and some networked, but each can be relatively small (typically 1TB).
+
+The amount of memory required for the master nodes depends on the number of file system objects (files and block replicas) to be created and tracked by the NameNode.  64 GB of RAM supports approximately 100 million files. 
+The NameNodes and their clients are very chatty. We therefore recommend providing 16 or even 24 CPU cores to handle messaging traffic for the master nodes
 
 
 
