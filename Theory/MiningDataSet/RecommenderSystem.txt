@@ -1,7 +1,7 @@
 Formal Model:
 C= set of Customers
 S=set of Items
-Utility funciton u:C *S -> R(atings)
+Utility funciton U:C *S -> R(atings)
 problem: U is sparse. Cold start problem
 ------
 content-based recoomendation: recommend items to x similar to previous items rated highly by x
@@ -21,7 +21,7 @@ finding the appropriate features is hard
 overspecialization
 
 -----------
-Collaborative: centered cosine nromaliz ratings by substracing row mean
+Collaborative: centered cosine nromalized ratings by substracing row mean
 Handles tough raters and easy raters
 
 how about item-item collaborative filtering
@@ -30,7 +30,7 @@ how about item-item collaborative filtering
 How to find k most similar users? NN/LSH in high dimenstions, clustering, dimensionality reduction
 
 No feature selection needed, but has cold start,sparsity, first rater, popularity bias problem
-So use hybrid methods: item profiles for new item problem, deomographics to deal with new user problems
+So use hybrid methods: item profiles for new item problem, demographics to deal with new user problems
 or use two or more different recommenders and combine results
 ------
 Evaluate recommender system: compare predictions agains withheld known ratings 

@@ -11,7 +11,7 @@ Always possible to decompose A where U, Sig, V, unique, U, V, coulmn orthonormal
 ----------
 SVD: best axis to project on: min sum of squares of projection erros =? minimum reconstruction error
 
-use movie-to-concert to find axis => Sig gives spread on the axis
+use movie-to-concept to find axis => Sig gives spread on the axis
 
 U*Sig = coordinates of proints in the axis
 
@@ -35,3 +35,29 @@ q(concept) = q * V
 relation to eigen-decomposition:
 
 singular vectors are dense
+
+-------
+make A = C* U * R make ||A - C* U * R||f small
+
+Constraint: C contains cols from A, R contains rows from A, U psedudo-inverse of the interseciton of C and R
+
+Ak , is SVD of A of rank k, CUR in O(mn) s.t. reconstruct error of CUR 
+<= |A-Ak|f + Ep |A|f, with probablility at least 1 - ep, by picking
+in practice pick 4k cons/rows
+------
+for A: m *n, sample size c
+
+col case for c
+for x = 1: n
+	calc P(x)
+for i = 1 : c
+	pick j in [1..n] based on P(x)
+	compute Cd(:, i)
+
+let W the intersecion of sampled cols C and R, W = XZY^T
+then U = YZ+X^T, Z+: 1/Zii
+-----
+CUR: basis vectors are actual cols and rows, and basis will be sparse, but may have duplicate ocls and rows
+to handle duplicate: throw away, or scale the cols/rows by the square root of # of nums
+
+In SVD, Sig is sparse and small, U is dense and small
