@@ -11,6 +11,32 @@ export HADOOP_PREFIX={absolute path of your hadoop folder}
 
 default port is 8020, or whatever shows
 
+2.5 add mounting points to data nodes
+for each data node,
+
+spark recommends 4+ mounting points, i.e,
+
+sudo chmod 777 -R /mnt/disk1
+mkdir /mnt/disk1/dn
+
+sudo chmod 777 -R /mnt/disk2
+mkdir /mnt/disk2/dn
+
+sudo chmod 777 -R /mnt/disk3
+mkdir /mnt/disk3/dn
+
+sudo chmod 777 -R /mnt/disk4
+mkdir /mnt/disk4/dn
+
+and then make sure hadoop user has permission to these /dn folders
+
+then in hdfs-site.xml 
+ <property>
+        <name>dfs.datanode.data.dir</name>
+        <value>file:///mnt/disk1/dn,file:///mnt/disk2/dn,file:///mnt/disk3/dn,file:///mnt/disk4/dn</value>
+ </property>
+
+
 3. etc/hadoop/yarn-site.xml
 
 <property>
@@ -45,11 +71,16 @@ sbin/hadoop-daemon.sh --script hdfs start namenode
 8. for each data node
 sbin/hadoop-daemon.sh --script hdfs start datanode
 
+7-8 can use . sbin/start-dfs.sh
+
 9. start resourceManager on resource node
 sbin/yarn-daemon.sh start resourcemanager
 
 10. for each node, start nodeManager
 sbin/yarn-daemon.sh start nodemanager
+
+we can probably skip 9-10 if we use only hdfs
+
 
 ----
 make the following web ui ports public
@@ -65,3 +96,6 @@ or, create/modify conf/slaves, then use start-all.sh
  
 start spark workers
 ./bin/spark-class org.apache.spark.deploy.worker.Worker spark://{master's hostname}:7077
+
+to invoke remote hdfs command
+bin/hdfs dfs -fs hdfs://{master host}:8020 -ls /
