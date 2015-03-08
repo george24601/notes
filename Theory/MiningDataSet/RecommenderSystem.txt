@@ -4,36 +4,51 @@ S=set of Items
 Utility funciton U:C *S -> R(atings)
 problem: U is sparse. Cold start problem
 ------
-content-based recoomendation: recommend items to x similar to previous items rated highly by x
+content-based recommendation: recommend items to x similar to previous items rated highly by x
 for each item, create an item profile
 Profile=set of "important" words in item
 TF-IDF => doc profile: set of words with hightest TF-IFD scores
 
-distance in higher dimension space, User profile x, item profile i
-Estimate U(x, i) = (x dp i)/ (|x||i|)
+and then create user profile: user has rated items with profiles ,
+then use normalized weight average for each feature based on user's rating.
 
+distance in higher dimension space, User profile x, item profile i
+To estimate U(x, i) =>cos(x,i) = (x dp i)/ (|x||i|)
+
+Pro:
 No need for data on other users
 able to recommend to users with unique tastes
 no first-rater problem
 explanations for recommended items
 
+Con:
 finding the appropriate features is hard
 overspecialization
 
 -----------
-Collaborative: centered cosine nromalized ratings by substracing row mean
+Collaborative: 
+User-User similarilites/Pearson correlation: centered cosine normalized ratings by substracing row mean
+We need to normalized, otherwise, missing entry will carry too much weight in the negative direction
+
+To estimate:
+r(x,i) = (sum over all y) S(x,y)r(y,i)/S(x,y)
+
 Handles tough raters and easy raters
 
-how about item-item collaborative filtering
+item-item: similar idea and formula, this time based on ratings of similar items => process U in the other direction
+Often out-perform user-user because items belongs to a smaller set of genres
 
 -------
 How to find k most similar users? NN/LSH in high dimenstions, clustering, dimensionality reduction
 
 No feature selection needed, but has cold start,sparsity, first rater, popularity bias problem
 So use hybrid methods: item profiles for new item problem, demographics to deal with new user problems
+
+Global baseline: all movie mean + user mean diff + movie mean diff => then combine it with CF, note that in CF, we need to apply rating mean diff to another user's rating as well
+
 or use two or more different recommenders and combine results
 ------
 Evaluate recommender system: compare predictions agains withheld known ratings 
-=> RMSE but it has problems => precision at top k
+=> RMSE but it has problems => precision at top k, because we care only predictions with high ratings
 
 
