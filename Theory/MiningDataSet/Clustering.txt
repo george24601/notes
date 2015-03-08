@@ -1,0 +1,49 @@
+In high dimension, all points look same distance
+
+-----
+
+how to represent cluster of points?
+how to determin "nearness" of clusters?
+
+possible meanings of "closest"
+
+when to stop combining clusters?
+
+-------
+k-means
+pick k, # of clusters
+pick one point per cluster
+
+for each point, place it int he cluster whose centriod is nearest
+update the locations of cnetroids of the k clusters
+reassign all points to their closest centroid
+
+repeat until converge
+
+how to pick k? look at distance to centroid as relation to k
+
+pick initial k points
+pick first at random, pick the next point to be the one whose min distance from the selected points is as large as possible
+-----------
+BFR: k-means for very large data, assume cluster is normally distributed around a centroid 
+
+select the initial k centroids
+discard set:
+compression set:
+retained set:
+
+for each cluster: DS is summarized:
+N, vector SUM, vector SUMSQ
+=> can calc mean and variance with the 2 vectors
+
+for each chunk of points
+find points that are close to a cluster centroid, add tem to DS
+remaining poins: cluster them and the old RS => clusters go to the CS, outlying to RS
+
+merging compressed sets in the cs
+if this is last round, merge all sets in the CS and all RSp oints into their nerares cluster
+
+How do we decide to put a new point into a cluster?
+Should 2 CS subclusters be combined?
+-----------
+CURE
