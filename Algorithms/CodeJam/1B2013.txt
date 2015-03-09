@@ -1,7 +1,38 @@
 A:
-try dp? but n^2 state not maintainable!
-so must be some insight..
+Sort by size:
+insight: each time mote increases at most double - 1
+min(i, size) = min # of ops to reach i with size 
 
-O(nlogn)
+approach 2
+at index i, we know we have done k insertions and j deletions => we want to know the max size
 
-O(n)
+for i+1, if
+if can fit, go to i+1, j, k
+if can fit after insertion => i+1, j+1, k
+if can not fit after insertion => i, j+1, k
+or deletion, i+1, j, k+ 1
+------------
+B:
+when falling down:
+notice the pattern is, 
+1. form a triangle
+2. build up until we form a slope
+3. fill the other slope until we fit a perfect trigangle again
+
+i.e., after a closed formula drop, we know the position
+
+so each to detect Pr =1 or Pr = 0 case. 
+
+Pr(at least i falling on a side) = Pr( at most l - l falling on the other side)
+Pr(i, N) = Pr(this side) Pr(i-1, N-1) + (1 -Pr(this side)) Pr(i, N - 1)
+
+----------
+C:
+for each word, we need to generate potential matches, i.e., generate all potential wild card 
+min(i)(j) = min changes to make last word match at i, with last char change at j
+for i + 1 to n
+	find all next matches, update corresponding min(i)(j)
+
+now how to find all next matches
+for j = 1 to max size
+	generate all strings from i+1 to i+j 

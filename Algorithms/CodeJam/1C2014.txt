@@ -69,9 +69,17 @@ try to connect to last head/tail with same
 distince at head or tail
 
 ------------
+(FAILED)
 N, M, K points
 
 insight: the optimal solution must have symetric structure => symmetric to the long end, symmetric to both ends
 
 in a generation approach: generate symmetric patterns, can calculate points.
 We will bsearch to find closest one, add extra stones to fill the difference
+
+To solve small input:
+start from base row, just guess the number
+for num of empties from 1..n
+	for each row
+		for each  guess
+			calc the enclosure based on previous orw 

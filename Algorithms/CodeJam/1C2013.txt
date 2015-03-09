@@ -1,16 +1,20 @@
+A:
+# of substrings with m consecutive non-vowels => nlogn max
+
+for each index i
+	if (i...i+m) is good
+		return N-i+m
+	else
+		find next good block starts
+		return N - start -3
+
+-------
 B:
-insight:
-each side's slot is either a tick, or an end
-each side heigh diff no more than 1
-i.e,
-(1 + odd)* odd/2 (-1) has fixed format
-so, first, identify last complete triangle formed with T, if (x,y) in it, then 1
+trick. notice it doesnt matter which + or -, the parity will remain same. Since it is hard to break down into steps, we consider them together!
+so we know
+1+...N >= |x| + |y|
+1+...N is same parity as |x| + |y|
+proof: the condition is satisfied after each move, notice the first inequality case
 
-if not, result = Pr(at least k slides to a certain direction) =
-
-p *PR(at least k-1 slides to a certain direction) + (1-p) Pr(at least k slide to a cetain direction)
-need to use log to compute!
-
-
-when falling into position, 
-if must slide, one side 
+-----
+C:

@@ -1,0 +1,13 @@
+A:
+can calc amount of paint based on # of rings
+bsearch on that
+
+----
+B:
+Insight: to break down the problem, when we are at a point, we are interested only in the next point higher than ours.i.e., 
+if we can not reach E at next highest point: do nothing
+If we can reach E at next hight point but less than 2E: spend the remainder at the current point
+If higher than 2E: spend all here, go to next point
+
+--------
+C:(FAILED)
