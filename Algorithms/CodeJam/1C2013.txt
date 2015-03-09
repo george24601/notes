@@ -16,5 +16,15 @@ so we know
 1+...N is same parity as |x| + |y|
 proof: the condition is satisfied after each move, notice the first inequality case
 
+assume |x| > |y|, when we remove the N part, the second part is always maintained, the first part
+if (N <= |x|) => we move to x-N, x+N based on sign
+if( N >= |x|, |x| >= |y|) => if x positive, move to x - N, if x negative, move to x + N
+positive case:
+N -x + |y| < N < 1 + N....1
+negative case
+N + x + |y| ...same argument
+
+so for each (x,y) pair, we always deduce from the higher one
+
 -----
 C:

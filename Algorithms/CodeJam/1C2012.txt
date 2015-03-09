@@ -1,0 +1,21 @@
+A:
+1k input => n^2logn max
+
+acyclic graph
+
+for each node
+	DFS try all path, if we run into one => bad
+
+-------
+B:
+
+------
+C:
+
+at each index , we can:
+try match with one as much, leave the remaining
+throw box at hand
+throw toy at hand
+
+so at each (i, j) match, we need to know how many are remaining, and which side is remaining
+3 choices => DP to decide which one is best
