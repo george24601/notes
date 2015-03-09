@@ -1,0 +1,33 @@
+A:
+If hit enter:
+Ex(enter) = Pr(bad) * (n -m + n) + (1-Pr(bad)) * n
+If back space
+Ex(back at m) = Pr(m-1 good) * (1 + n -  m) + (1-Pr(m-1 good)) * (Ex(back at m -1)) 
+If retype
+Ex = m - 1
+
+
+------
+B
+
+Greedy: sorted by <requirement, star inverse>
+
+linear scan it, and keep track of which are done already to solve the case where level 2 has <= requirement than level 1
+
+
+-------
+C
+think all cars run in parallel
+collision will happen iff when 2 cars meet, a thrid car is within that "block"
+
+we can normalize the calculation by setting lowest speed to 0, lowest distance to 0
+
+for each car i
+	for each car j
+		if( speed i < j && position i < j)
+			continue
+		calculate moment of collision
+		
+		for each car k
+			if k within that block during moment of collsion
+				update candidate
