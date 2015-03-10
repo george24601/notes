@@ -38,12 +38,17 @@ N, vector SUM, vector SUMSQ
 
 for each chunk of points
 find points that are close to a cluster centroid, add tem to DS
-remaining poins: cluster them and the old RS => clusters go to the CS, outlying to RS
+remaining points: cluster them and the old RS with any in memory clustering algo => clusters go to the CS, outlying to RS
 
 merging compressed sets in the cs
 if this is last round, merge all sets in the CS and all RSp oints into their nerares cluster
 
 How do we decide to put a new point into a cluster?
+M distance is less than a threshold
+
 Should 2 CS subclusters be combined?
+compute the variance of the subclusters, combine if the variance is below some threshould
 -----------
 CURE
+problem with BFR: clusters normally distributed, axies are fixed direction, cant be with angle
+

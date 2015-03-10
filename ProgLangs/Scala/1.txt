@@ -1,0 +1,40 @@
+why no mutation in FP?
+
+name is evalutated by replacing...stops when it results in a value
+
+def ph = 1;
+
+def square(x: Double) = x * x
+
+def power(x: Double, y:Int): Double =...
+
+function evalute:
+1. eval all args from L to R
+2. replace function app by RLH
+3. replace formal params of function by argument
+
+--substution model (notice it DFS not BFS)
+
+alternative: apply the function to unreduced argiments (call by name)
+
+call by name vs call by value, pro n cons of each other
+
+if CBV eval terminates => CBN terminates, but not vice versa
+
+scala normally uses call by value-> faster in practice
+
+def constOne(x: Int, y: => Int) = 
+ |1 //call by name by force
+
+def can be passed by value/name as well
+
+val x = 2; which is "by-value"
+
+so implement your own and/or? => non terminating arg?
+
+no return:last line in block is the return
+
+newton iteration..why our implementation doesnt work well with small/big num
+
+span several lines => put in parenthesis, put operator in the first line
+----------

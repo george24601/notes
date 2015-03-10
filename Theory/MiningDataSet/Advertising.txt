@@ -1,0 +1,22 @@
+Online algo: bipartite matching:
+offline: hopcroft-Karp
+
+Greedy algo and competitive ratio analysis => worst case example
+
+------
+AdWord problem
+
+simple algo: sort on expected value
+but CTR of an ad is unknown, and advertisers ahve lim,ited budges and bid on multipe ads
+
+--------
+Simplified environment:
+1 ad shown for each query
+all advertisers have the same budge
+all ads are equally likely to be clicked
+value of each ad is the same
+
+simplest algo: => competitive ratio?
+
+balance algo: for each queyr, pick the advertiser with larget unspent dubge, break ties arbitarrily but in a deterministic way
+=> competitive ratio?
