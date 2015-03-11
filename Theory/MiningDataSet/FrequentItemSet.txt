@@ -65,7 +65,7 @@ An itemset is in the negative border if it is not frequent in the sample, but al
 In a second pass, count all candidate frequent itemsets from the first pass, and also count their negative border
 
 Theorem and proof:
-If there is an itemset that is frequent in the whole, but not frequent in the sample, then there is a member for the sample that is frequent in the whole
+If there is an itemset that is frequent in the whole, but not frequent in the sample, then there is a member in the negative border that is frequent in the whole
 
 
 

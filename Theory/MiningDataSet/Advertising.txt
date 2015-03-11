@@ -20,3 +20,7 @@ simplest algo: => competitive ratio?
 
 balance algo: for each queyr, pick the advertiser with larget unspent dubge, break ties arbitarrily but in a deterministic way
 => competitive ratio?
+-------
+N advertiser case, each with budget B > N
+N * B queries appear in N rounds of B queries each
+Optimal: N * B: allocate round i queries to A(i)

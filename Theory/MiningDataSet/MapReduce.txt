@@ -96,7 +96,75 @@ Combiner: pre-aggregating values in the mapper. Combiner is ususally same as
 the reduce function. Provided by the programmer.
 This requires functions asscociatative and commutative
 
-exameple: combiner for average function 
+example: combiner for average function 
 combiner for median function?
 
 
+------------
+
+Two principal costs:
+Computation cost of mappers, reducers, and system => sort k-v pairs by key and merging them at Reduce tasks
+Communication cost of shipping k-v paris from mappers to reducers
+
+Computation at the mapper is usually small, but system cost of sorting is typically porportional to the communication cost, which donimates cost
+
+high parallelism pushing the communicaiton higher than you'd like for min cost
+
+In many cases, the big issue is wheter a reducer has too much input to operate in main memory: the cost function is stepped when communication gets too low
+---------
+Example: 3000 drugs, 1M of data per drug, find drug interactions
+
+naive approach: key: pair (i, j), value: record (R(i), R(j))
+
+Performance: 3000 * 3000/2 pairs, each k-v pair has 1 Mb data over 1Gb network
+
+Solution: use fewer keys with longer list of values
+group drugs into 30 groups of 100 drugs each=>g(i) = group the drug i goes
+
+map key: set of 2 group members, so mapper for drug i gives 29 key-value pairs
+value: pair (i, megabyte-long record for drug i)
+
+the reducer gets that key and a list of 200 records => drugs belongs to m and n, and it will compare each record from group m with each record from group n.
+
+special case: key (i, i)
+
+Each pair is compared at exactly one reducer
+
+instead of 3000 * 3000 records we send over network, we have 3000 * 29 records send instead
+
+-----------
+Model for m-r algorithms:
+
+inputs: drug numbers and records
+outputs: one output for each pair of drugs
+
+A many-many relationship between in and out
+
+In drug case, output pair is related to both i and j
+
+In matrix multiplication case, (i, j) is related to row i and col j
+
+e.g. join:
+Input: all R(a,b) and all R(b, c)
+output: all (a,b,c)
+
+how to solve it?
+
+Reducer size q: max # of inputs that a given reducer can have
+Replication rate r: number of k-v pairs created by each mapper => represents communication cost
+
+The requirement that there be a mapping shcema is what distinguishs map-reduce algos from general parallel algo
+
+-----------
+matrix multiplication
+If a reducer covers (i,k) and (f,g), then it also covers (i,g) and (f, k) => each reducer covers all the outputs in the rectangle defined by a set of rows and a set of cols of matrix C
+
+If a reducer gets q inputs, it gets q/n rows or cols => to max # outputs, make the input "square" => q/2n rows and q/2n cols and sqaure of that output
+
+total outputs = n^2 => so need at least 4*n^4/q^2 reducers => 2 n^2 total inputs gives 2n^2/q replication rate
+
+so algo:
+divide rows/cols of the first matrix into n/g rows each, so q = 2n^2/g, # of reducers =g^2 based on the result above
+r = g 
+
+Two-job approach

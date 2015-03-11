@@ -9,7 +9,7 @@ if matchs => increment i
 if mismatch, we want to move m as close to i as possible, that is, we want to
 find highest m such that m...i-1 is a prefix of W, so we need to answer
 
-at i of W, what is longest prefix of W that ends at i-1? no that we dont even
+at i of W, what is longest prefix of W that is also the suffix of W[0... i-1]? no that we dont even
 care about S now! 
 
 so m = m + i - T[i], i = T[i]
@@ -27,8 +27,12 @@ branch can execute at most length(S) times => 2n times loop max
 ---
 Build the T[i] table
 
-insight: we can infer T[i]'s state based on T[i-1]'s state
+insight: we can infer T[i]'s state based on T[i-1]'s state:
+if W[i - 1] = W[T[i - 1]], then T[i] = T[i-1] + 1 //infer T[i] based on T[i-1]
 
 T[0] = -1 //invalid
-if T[i - 1] = 0, T[i] = 1 if W[i-1] = W[0]
-if T[i - 1] = l, T[i] = l + 1, if W[i -1] = W[l], otherwise, T[i] = 0;
+T[1] = 0 //special case
+
+else if T[i - 1] <= 0, T[i] = 0 //last one doesnt match, 
+
+
