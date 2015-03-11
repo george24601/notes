@@ -8,32 +8,16 @@ export HADOOP_PREFIX={absolute path of your hadoop folder}
     <name>fs.defaultFS</name>
     <value>hdfs://{host name of name manager node}/</value>
  </property>
+<property>
+  <name>hadoop.tmp.dir</name>
+  <value>{comma-delimited paths}</value>
+</property>
 
 default port is 8020, or whatever shows
-
-2.5 add mounting points to data nodes
-for each data node,
-
-spark recommends 4+ mounting points, i.e,
-
-sudo chmod 777 -R /mnt/disk1
-mkdir /mnt/disk1/dn
-
-sudo chmod 777 -R /mnt/disk2
-mkdir /mnt/disk2/dn
-
-sudo chmod 777 -R /mnt/disk3
-mkdir /mnt/disk3/dn
-
-sudo chmod 777 -R /mnt/disk4
-mkdir /mnt/disk4/dn
-
-and then make sure hadoop user has permission to these /dn folders
-
 then in hdfs-site.xml 
  <property>
         <name>dfs.datanode.data.dir</name>
-        <value>file:///mnt/disk1/dn,file:///mnt/disk2/dn,file:///mnt/disk3/dn,file:///mnt/disk4/dn</value>
+        <value>file://{local file system path1}, file://{local file system path2},file://{local file system path3},....</value>
  </property>
 
 
@@ -82,20 +66,28 @@ sbin/yarn-daemon.sh start nodemanager
 we can probably skip 9-10 if we use only hdfs
 
 
-----
-make the following web ui ports public
+------------
+Spark configs
 
-hdfs Name node:50070
-spark master node:8080
-each spark woker node:8081
+1. set these environment variable in EACH note's spark-env.sh 
+SPARK_EXECUTOR_MEMORY, SPARK_DRIVER_MEMORY,  SPARK_WORKER_MEMORY, SPARK_LOCAL_DIRS
 
+
+2.  create/modify conf/slaves, then use start-all.sh
+
+or 
 start spark master
 ./sbin/start-master.sh
-
-or, create/modify conf/slaves, then use start-all.sh
  
 start spark workers
 ./bin/spark-class org.apache.spark.deploy.worker.Worker spark://{master's hostname}:7077
 
+
+----------
 to invoke remote hdfs command
 bin/hdfs dfs -fs hdfs://{master host}:8020 -ls /
+
+make the following web ui ports public
+hdfs Name node:50070
+spark master node:8080
+each spark woker node:8081

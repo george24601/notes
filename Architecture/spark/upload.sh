@@ -1,9 +1,13 @@
-SSH_PORT=
 SSH_USER=
 DEST_HOST=
 
-#transfer files
-scp -P $SSH_PORT hadoop-2.6.0.tar.gz $SSH_USER@$DEST_HOST:hadoop-2.6.0.tar.gz
-scp -P $SSH_PORT spark-1.2.1-bin-hadoop2.4.tgz $SSH_USER@$DEST_HOST:spark-1.2.1-bin-hadoop2.4.tgz
+#setup SSH
+ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
+cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
+ssh-copy-id {user}@{data node hostname}
 
-ssh -p $SSH_PORT $SSH_USER@$DEST_HOST
+#transfer files
+scp  -r hadoop-2.6.0/ $SSH_USER@$DEST_HOST:hadoop-2.6.0/
+scp -r spark-1.2.1-bin-hadoop2.4/ $SSH_USER@$DEST_HOST:spark-1.2.1-bin-hadoop2.4/
+
+ssh  $SSH_USER@$DEST_HOST
