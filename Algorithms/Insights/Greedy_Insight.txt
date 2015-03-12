@@ -1,5 +1,6 @@
 1. makes locally optimal choice at each step
-=> the "each step" part strongly resembles DP. In fact, greedy is a viable option at each state of DP. However, it is also easy to ignore the fact that "globally optimal" doesnt not lead to "locally optimal" 
+=> the "each step" part strongly resembles DP. In fact, greedy is a viable option at each state of DP. However, it is also easy to ignore the fact that "globally optimal" doesnt not lead to "locally optimal": greedy is the other way around! 
+The tricky part, therefore, is what is the step/state information we need to capture?
 
 2. Often used as part of solution
 

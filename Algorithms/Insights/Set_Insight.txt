@@ -12,3 +12,5 @@ int all = 1 << n; then for each set in [0, all)
 
 4.A common indirect approach is the compute the complement of current set/problem space
 ,e.g, Pr(max number in collection > i) = 1 - Pr(all number in colleciton <= i). max addition = total - mindeletion. This can make computation a lot easier
+
+5. because sets can introduce so many children, it is easy to incur pigeon hole princple as well => we just need to search wisely/fitering only the set we need

@@ -167,4 +167,12 @@ so algo:
 divide rows/cols of the first matrix into n/g rows each, so q = 2n^2/g, # of reducers =g^2 based on the result above
 r = g 
 
-Two-job approach
+Two-job approach: first divide both inputs into rectangles, and sum the partial sum
+divide rows of A into g groups, cols into 2g groups, cols of B into g groups, rows into 2g group, note that for groups of columns for A and rows for B must have indices that match
+
+Reducer correspond to an n/g * n/2g rectangle in A and an n/2g * n/g matrix in B => i.e., we can identify reducer with (i,j,k) => result is a n/g * n/g matrix, j times the result will go into this matrix, i.e., 2g reducers contribute
+
+One job method communication: 2n^2/q * 2n^2
+Two job method: job 2: 2n^2/g
+job 1:  2n^2 *g k-v pairs => total
+
