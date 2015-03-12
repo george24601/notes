@@ -8,10 +8,6 @@ export HADOOP_PREFIX={absolute path of your hadoop folder}
     <name>fs.defaultFS</name>
     <value>hdfs://{host name of name manager node}/</value>
  </property>
-<property>
-  <name>hadoop.tmp.dir</name>
-  <value>{comma-delimited paths}</value>
-</property>
 
 default port is 8020, or whatever shows
 then in hdfs-site.xml 
@@ -19,6 +15,11 @@ then in hdfs-site.xml
         <name>dfs.datanode.data.dir</name>
         <value>file://{local file system path1}, file://{local file system path2},file://{local file system path3},....</value>
  </property>
+
+<property>
+<name>dfs.name.dir</name>
+ <value>/home/george/hadooptmp/tmp1,/home/george/hadooptmp/tmp2</value>
+</property>
 
 
 3. etc/hadoop/yarn-site.xml
@@ -30,17 +31,6 @@ then in hdfs-site.xml
 
 4. etc/hadoop/slaves
 list ALL nodes hostname, including data node, name node, and resource node, 1 per line
-
-5. setup SSH
-On name node and resource node
-
-ssh-keygen -t dsa -P '' -f ~/.ssh/id_dsa
-cat ~/.ssh/id_dsa.pub >> ~/.ssh/authorized_keys
-ssh-copy-id {user}@{data node hostname}
-
-Do this for each data node
-
-repeat 1-5 for all nodes in the cluster
 
 6. /etc/hosts
 we MAY need to add host name rules for ALL nodes in the cluster
@@ -69,8 +59,12 @@ we can probably skip 9-10 if we use only hdfs
 ------------
 Spark configs
 
-1. set these environment variable in EACH note's spark-env.sh 
-SPARK_EXECUTOR_MEMORY, SPARK_DRIVER_MEMORY,  SPARK_WORKER_MEMORY, SPARK_LOCAL_DIRS
+1. set these environment variable in EACH note's conf/spark-env.sh 
+
+SPARK_EXECUTOR_MEMORY= {no more than 75% of actual ram}
+SPARK_DRIVER_MEMORY=  
+SPARK_WORKER_MEMORY= 
+SPARK_LOCAL_DIRS={comma delimited local paths}
 
 
 2.  create/modify conf/slaves, then use start-all.sh
