@@ -31,33 +31,30 @@ int T[MaxSize];  //length of suffix that ends at previous char which is also a p
 char S[MaxSize];
 int sLen;
 
-void BuildT()
-{
-	T[0] =-1; //special case
-	T[1] = 0;//0 because we have no suffix right now
+void BuildT() {
+	T[0] = -1; //special case
+	T[1] = 0; //0 because we have no suffix right now
 
 	int i = 2;
-	int tI = i - 1;
+	int tI = 0;
 
-	while(i < wLen)
-	{
-		if(W[i - 1] == W[T[tI]])
-		{
+	while (i < wLen) {
+		//if(i >= 6)
+		//	printf("%d %d %d\n", i, tI, T[tI]);
+
+		if (W[i - 1] == W[tI]) {
 			//i - 1 can extend an existing suffix which is also a prefix
-			T[i] = T[tI] + 1;
+			T[i] = tI + 1;
 			i += 1;
 			tI = tI + 1;
-		}else if (T[tI] > 0)
-		{
+		} else if (tI > 0) {
 			//so the suffix ending at i-1 will not work for current starting point, can we try a shorter suffix?
-			//notice the suffix ending at i-2 has T[tI] matches already, so we will try that match's starting point
+			//notice the suffix ending at i-2 has T[tI] matches already, so we will try that match's starting point,i.e, that matching's length
 			tI = T[tI];
-		}else
-		{
-			//i -2 is not part of prefix, and i-1 is not same as the first char, so no valid suffix => reset to a fresh start
+		} else {
+			//tI== 0, i.e., first character doesnt match
 			T[i] = 0;
 			i += 1;
-			tI = i - 1;
 		}
 	}
 
