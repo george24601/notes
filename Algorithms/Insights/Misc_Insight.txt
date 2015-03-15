@@ -19,3 +19,5 @@ This indirect state should capture the problem space we are interested in
 e.g. knapsack problem, LIS and other DP/greedy problems
 
 8.When we try to pin down moving parts but hard to summarize a closed form. We can complete search on all possible inputs, provided overall search process is cheap enough
+
+9. mid point index of array = length/2

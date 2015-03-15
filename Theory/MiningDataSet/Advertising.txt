@@ -7,20 +7,24 @@ Greedy algo and competitive ratio analysis => worst case example
 AdWord problem
 
 simple algo: sort on expected value
-but CTR of an ad is unknown, and advertisers ahve lim,ited budges and bid on multipe ads
+but CTR of an ad is unknown, and advertisers have limited budges and bid on multipe ads
 
 --------
 Simplified environment:
 1 ad shown for each query
-all advertisers have the same budge
+all advertisers have the same budget
 all ads are equally likely to be clicked
 value of each ad is the same
 
 simplest algo: => competitive ratio?
 
-balance algo: for each queyr, pick the advertiser with larget unspent dubge, break ties arbitarrily but in a deterministic way
-=> competitive ratio?
+balance algo: for each query, pick the advertiser with larget unspent budget, break ties arbitarrily but in a deterministic way
+=> competitive ratio for 2 user case, assuming optimal solution gives full to both
 -------
-N advertiser case, each with budget B > N
+N advertiser case, each with budget B > N, bidding scheme:
 N * B queries appear in N rounds of B queries each
-Optimal: N * B: allocate round i queries to A(i)
+Optimal: N * B: allocate round i queries to the advertiser i
+balance: What is the stop condition? what is total in this case?
+
+for large n:
+ln(N - k) = ln(N) - 1 => why?

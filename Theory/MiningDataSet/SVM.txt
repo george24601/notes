@@ -1,0 +1,51 @@
+Instance space x: binary or real-valued feature vector x of word occurences, d features
+, class y
+
+Binary classification: input vectors xj and lablesl yj, fine vector w s.t. f(x) = 1 if w * x >= theta
+-1 otherwise
+
+linear classifier: each feature has a weight, prediciton is based on w * x => positive 1, negative -1
+
+-----------
+
+separate + from - using a line:
+training examples => each example with xi, and yi
+
+which is the best linear separator?
+Margin r: distance of cloest example from the decision line/hyperplace
+
+Why maximizing it a good idea?
+
+Consider point A and line L: a(A, L) = w * A + b
+L: w * x + b = 0
+
+so confidence = (w* x + b) y
+to get larget margin, we wnat to solve
+max of (min r over all points i) over all w
+
+-----------
+separating hyperplane is defined by the support vectors
+points on +/- planes from the solution
+if no degeneracies => d+1 support vector for d dim data
+
+but scaling w increases margin => work with normalized w. also require support vector to be on the place defined by w * x + b  is 1 or -1
+
+want to maximize r => r = 1 /|w| => so we can rewrite SVM as 
+min 1/2 ||w||^2 s.t. for all i, yi(w * xi + b) >= 1 over all w
+
+-------
+if data is not separable introduce penalty C to our SVM
+introduce slack variables, since not all mistakes are equally bad => if x(i is on the wrong side of the amrgin then get penalty)
+
+SVM natural form
+
+"hinge loss"
+
+-----------
+SVM solver inefficient for big data
+so gradient descent on f but gradiant of delta(j) take s O(n) time =>i.e. need to check all data in the training set
+
+Stochastic gradient descent
+instead of evaluating gradient over all examples, eval it for each individual training example
+
+---------

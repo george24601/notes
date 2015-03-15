@@ -7,14 +7,16 @@ how to determin "nearness" of clusters?
 
 possible meanings of "closest"
 
-when to stop combining clusters?
-
+when to stop combining clusters? low cohesion cluster
+Diameter: max dist between poins
+Radius: max dist between point from centroid/clustroid
+Density: # of points per unit volumn
 -------
 k-means
 pick k, # of clusters
 pick one point per cluster
 
-for each point, place it int he cluster whose centriod is nearest
+for each point, place it in the cluster whose centriod is nearest
 update the locations of cnetroids of the k clusters
 reassign all points to their closest centroid
 
@@ -37,14 +39,13 @@ N, vector SUM, vector SUMSQ
 => can calc mean and variance with the 2 vectors
 
 for each chunk of points
-find points that are close to a cluster centroid, add tem to DS
+find points that are close to any cluster centroid, add them to DS, update DS summary
 remaining points: cluster them and the old RS with any in memory clustering algo => clusters go to the CS, outlying to RS
 
-merging compressed sets in the cs
-if this is last round, merge all sets in the CS and all RSp oints into their nerares cluster
+if this is last round, merge all sets in the CS and all RS points into their nearest cluster
 
 How do we decide to put a new point into a cluster?
-M distance is less than a threshold
+M distance from cluster entroid is less than a threshold => calc normalized distance y => RSUMSQ of that
 
 Should 2 CS subclusters be combined?
 compute the variance of the subclusters, combine if the variance is below some threshould
