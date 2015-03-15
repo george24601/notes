@@ -94,7 +94,7 @@ R is much smaller than M
 -----
 Combiner: pre-aggregating values in the mapper. Combiner is ususally same as
 the reduce function. Provided by the programmer.
-This requires functions asscociatative and commutative
+This requires functions associatative and commutative
 
 example: combiner for average function 
 combiner for median function?

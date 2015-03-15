@@ -1,0 +1,53 @@
+n * n matrix:
+m(i, j) = # of times word i occurs within the same context as word j
+
+pair approach: each co-occurring event
+Mapper:
+	for each word w(i) in doc
+		for each neighbor  w(j) of i
+			emit((i,j), 1)
+
+Reducer
+	for each value
+		sum += value
+	emit((i,j), sum) //final result is a cell
+
+stripe approach: all cooccurring events related to a conditioning event
+Mapper 
+	for each word i in doc
+		for each neighbor j of i
+			H[j] += 1
+	emit (i, H)
+
+Reducer
+	final result
+	for each H
+		elemental sum with final result
+	emit(i, final result) //final result is a row
+
+middle ground: bucket approach
+
+-----
+Compute relative frequency f(i | j): proportion of time i happens in the context of j
+	
+Stripe approach: the data to sum to readily avaiable
+
+---
+pair approach: order inversion pattern
+
+In reducer: keep in memory all co-occurence count with word i. We also need to
+define sort such that all i pairs are processed so we know when to sum. Need
+to also define partitioner so that all i goes to the same reducer
+
+Insight: the data needed can be sorted to appear eariler to the reducer
+
+let mapper emit special (i, *) count, aggregate them in combiner /in-memory
+combiner
+the sort order and partitioner requirement still applies
+When reducer encounters a new (j, *), reset state to process new thing
+-----
+buffer + in memory sort vs value-to-key conversion: trade-off on where the
+sorting is performed
+
+
+
