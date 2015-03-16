@@ -1,0 +1,25 @@
+reduce side join: partition the databset by join keys
+1 to 1 join: simple case, map emits the join key
+1 to many join: value-to-key conversion, i.e., need to emit (join key, S/T
+key) as composite key.
+Need to enforce sort and partitioner constraints as well, so that "1" comes
+before all "many"s
+many to many idea is similar, but we need to buffer one many side
+
+reduce side join requires shuffling all data on both sides
+
+---------
+map side joins: assume both sides are sorted in same way by partition key
+
+additional constraints on reducer in/out types
+
+---
+memory backed join:
+small dataset fit into node memory => hash join here
+What if cant fit => further partition into fit parts
+
+or use distributed in memory store
+
+Order inversion: use sorting to enforce dependency
+Value to key: moving value to key enables secondary sorting.
+
