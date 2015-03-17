@@ -3,7 +3,7 @@ sudo apt-get install openjdk-7-jdk
 
 #open all tcp/udp ports
 sudo apt-get install ufw
-sudo ufw enabled
+sudo ufw enable
 sudo ufw allow 1:65535/tcp
 sudo ufw allow 1:65535/udp
 

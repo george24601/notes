@@ -1,0 +1,21 @@
+Use case -> implementation
+
+What are the use cases of docker in deployment?
+One common case is to isolate lib/code dependencies from the environment it runs on. Are there other cases?
+
+How can we use docker in development process?
+Common patterns?
+
+----------------
+implementation -> use case
+
+the docker file and their commands
+FROM => parent relationship?
+RUN => bootstrap script goes here?
+CMD => runs the app
+
+How is dependency version managed?
+RUN will probably just to apt-get install, but which version? Is there some nicer way to do package management such as pip's requirements.txt?
+
+How does docker build the executable from code?
+When we run docker given the docker file, what is the sequence of action,i.e., what does docker do to build and launch exe from code?
