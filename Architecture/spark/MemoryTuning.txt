@@ -15,3 +15,8 @@ If a full GC is invoked multiple times for before a task completes, it means tha
 In the GC stats that are printed, if the OldGen is close to being full, reduce the amount of memory used for caching. 
 
 f there are too many minor collections but not many major GCs, allocating more memory for Eden would help.
+
+-----
+spark.executor.memory: memory to use per executor process, default 512m. Executor memory must fit spark worker memory
+
+SPARK_WORKER_MEMORY: total amount of memory allocated to the standalone cluster

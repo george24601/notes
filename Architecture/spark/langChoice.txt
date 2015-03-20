@@ -1,0 +1,13 @@
+Java: obviously no. Map reduce is functional in nature.
+
+Scala vs Python for your map reduce code?
+
+Scala:
+If map reduce code is complex, especially with a lot of logic outside of spark API call. Scala will outperform python by a large margin
+
+Python:
+Scala needs to use sbt to package a jar file and send it to worker nodes. Python will execute script directly
+Python has much more libraries related to data analysis
+
+Map reduce job is more likely written in scala, but driver program can be written in Python as long as it doesnt do any heavy-lifting
+

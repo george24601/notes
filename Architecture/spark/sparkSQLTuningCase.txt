@@ -1,0 +1,33 @@
+We have a spark SQL statement that is slow. How to solve it?
+
+Top-down, conceptually:
+1. How to detect the amount of unnecessary work based on action log?
+
+2. Is there too much broadcast?
+
+3. Can "query plan" it generates faulty?
+
+4. Is the work distributed evenly?
+
+5. Is serialization efficient?
+Use kryo, may need to increase spark.kryoserializer.buffer.mb 
+
+6. since we have many objects, GC's impact?
+
+7, Use of cachetable?
+
+
+bottom-up, concretely:
+
+4. how is master node's CPU/RAM/disk usage?
+very low
+
+5. how is each data node's resource usage? => can use sampling approach
+noticed lot of disk IO, CPU usage is high, although not as offending, ram usage normal
+look at the SparkContext logs on your driver program for memory usage on data nodes
+
+
+
+6. how is network traffic overall? => can use sampling approach
+for each data node, noticed network IO about 200MBits per sec, and often it happens after disks stop being busy. This implies it is transferring previously computed result out
+
