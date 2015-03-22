@@ -1,0 +1,37 @@
+d features, each feature has a domain
+Y:output variable with domain Y
+D:n examples (x(i), y(i))
+Task: given an input data vector x predict y
+------
+Consider we are at node G:
+Do we continue building the tree? then which variable and which value do we
+use for a split?
+Or how do we make a prediction?
+
+How to split? pick attribute & value that optimizes some crierion
+Mesure how much a given attribute X tells us about the class Y
+
+--------
+Entropy: smallest possible # of bits, on aerage, per smbol, need to transmit a
+sream of symbols drawn form X's distribution?
+
+Specific conditioal entropy H(Y | X = v)
+H(Y|X) = Sum Pr(X = v) H(Y | X = v)
+------
+
+Build tree level by level: each MR sp builds 1 level
+mapper: # of possible splits on subset of he data => partial split -satistics
+sent to reducers
+drops each datapoint to find the leaf node L, whichknows the data reaching L.
+and the data in left/right subtree under split S
+
+reducer: collects all parital statistics and determins best split
+
+master grows the tree for one level
+
+-------
+SVM vs DT
+
+
+
+

@@ -9,8 +9,9 @@ for each item, create an item profile
 Profile=set of "important" words in item
 TF-IDF => doc profile: set of words with hightest TF-IFD scores
 
-and then create user profile: user has rated items with profiles ,
-then use normalized weight average for each feature based on user's rating.
+and then create user profile: 
+user has rated items with profiles ,
+use normalized(minus user mean) weighted (mean of item profiles)s average for each feature based on user's rating.
 
 distance in higher dimension space, User profile x, item profile i
 To estimate U(x, i) =>cos(x,i) = (x dp i)/ (|x||i|)

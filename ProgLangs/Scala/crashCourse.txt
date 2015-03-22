@@ -1,0 +1,9 @@
+Build and run
+Type inference
+Pair,collection
+Type definition
+Patern matching
+Currying
+Lambda and anonoymous variables
+Type rule, variance, and covariance
+Trait

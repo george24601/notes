@@ -39,6 +39,7 @@ grouping: assign points to two or more clusters, based on the new representation
 
 
 --------------
-Trawling: dense 2 layer graphs: 
-Enumerate complete bipartiitel subgraphs Ks,t
+Trawling: Enumerate complete bipartite subgraphs K(s,t)
+dense 2 layer graphs: what the same people talk about on the right
+
 translate into frequent itemsets problems

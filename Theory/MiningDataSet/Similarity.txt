@@ -46,15 +46,15 @@ Candidate pairs are those that hash to the same bucket for >= 1 band
 
 Tune b and r to catch most similar pairs, but few nonsimilar pairs.
 
-Suppose C1, C2 are 80% similar, probability
-C1,C2 idential in one particluar band =
-C1,C2 NOT idential in any of the 20 bands =
+Suppose C1, C2 are 80% similar,
+Pr(C1,C2 idential in one particluar band) =
+Pr(C1,C2 NOT idential in any of the 20 bands) =
 
 Why b banding works
 
 LSH: tune to get almost all pairs with similar sigs, but eliminate most pairs that do not ahve similar signatures
 Check that candidate pairs realy do have similar signatures
-May need to check the remainign candiate pairs really represnt similar sets
+May need to check the remaining candiate pairs really represnt similar sets
 
 --------
 Entity resolution: examine a collection of records adn determine which refer to the same entity
@@ -67,13 +67,51 @@ Treat minutiae near a grid boundary as if also present in adjacent grid points]
 No need to minhash since number of sqaures is not too large
 Represent each FP by a bit vector with one position for each sqaure
 
-Pick 1023 sets of 3 grid squares, randomly
+Pick 1024 sets of 3 grid squares, randomly
 for each set, two prints that each have 1 for all three squares are candidate pairs
 
+Suppose typical fingerprints have minutiae in 20% of the grid squares. 
+fingerprints from the same finger agree at least 80% of their sqaures
+
 Pr(two fingerprints from the same finger each have 1s in 3 given squares) =
-Pr(at least one of 1024 sets of three)
-Same probability for random fingerprints
+Pr(at least one of 1024 sets of three satisfied the Pr above) =
+Pr(false positive)=
+
+-----------
+In LSH context, hash function really takes 2 elements x and y, and return a
+decision whether x and y are candidates for comparision
+
+Suppose we have a space S of points with distance meaure d
+A family H of hash functions is (d1,d2, p1, p2)=sensitive if for x, y in S
+
+what the minhashing's sensitive family? notice we use Jaccard dist instead of
+Jaccard sim directly!
 
 
+AND ("rows in a band")/OR ("many bands") contruction
+Given family H, construct H' whose members each consist of r functions from H
+=> H''s sensitivity?
 
+AND-OR construction => p's transformation based on r, b
+OR-AND construction
+
+Can even do cascading construction: OR-AND followed by AND-OR
+
+for each S-curse, there is a hreshold t, for which 1-(1-t^r)^b = t
+when do we stop iterating?
+
+
+-------
+consine distance: random hyperplances
+Pr(h(x) = h(y)) = (?)
+
+simplification: v with only 1, -1 entries is enough
+
+euclidean distance:
+hash function correspond t lines
+parititon the line into buckets of size a
+hash each point to the bucket containing its projection on the tline
+
+d >> a, d << a analysis => family sensitivity
+---------
 

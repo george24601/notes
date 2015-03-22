@@ -1,0 +1,37 @@
+treat doc as set of words, can order words exicographically
+or, order lowest-frequency-first => index docs based on the early words in
+their lists=> doc spread over more buvkets
+
+JD J and s1, s2 with length c and edit distance E,, then
+J =E/(C + E), notice in the set settings, symbels neer repeat
+
+string length L, M and J relationship?
+
+B-Tree index for length-based index => but length doesnt mean too much?
+
+----
+can base an idnex on symbols in just the firs tJ* L + 1 positions of a string
+of lenght L
+
+each sring of length L is placed in the bucket for each of its first J*L + 1
+posisiitons => B-tree with symbol as key leads to the string
+
+probe string s of len L, with J the limit on JD
+-----
+
+if pos i of prob string is the first match on s pos j=> implies LCS, edit distance
+bound, combine this bound with J's relationshp with E and C
+
+so create index on (symbol, position), B-tree index with keys ordered first by
+symbol, then position
+
+visit position i of s in numerical order,  assume no matches for eariler
+positions, we can use upper bound on j to decide what buckets we need to lok
+in 
+
+
+--------
+
+Index on 3 attributes(symbol, #, len of suffix)
+
+but note that each string is placed in j*l + 1 buckets, no matter the scheme!

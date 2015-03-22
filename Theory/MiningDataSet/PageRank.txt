@@ -67,3 +67,29 @@ A = P*M +(1-P)/n * e * eT, So that r(t+1) = A * r(t)
 -------
 IRL, how to compute r(new) = A * r(old) => we can handle only the sparse matrix. so cant compute with A directly
 for leaked score, evenly redistribute among rs (i.e., jumping)
+
+-------------
+
+final form of page rank
+
+M is sparse, but most likely wont fit in memory, but will fit in disk
+In power-iteration, each iteration we read r(old) and M, and write r(new) to disk
+What if r(new) is too big for memory? 
+block-based update
+break r(new) into k blocks, scan M and r(old) once for each block
+
+improvement: block-stripe update
+break M into stripes
+Each strip contains only destination nodes 
+
+problems with pageRank:
+biased toward topic-specific authorities
+other models
+link spam
+-----
+topic specific: when walker teleports, she pick a page from a set S => only
+pages that are relevant to the topic => i.e., and r(s) for teleport set S
+
+
+
+

@@ -24,12 +24,12 @@ data kept basket-by-bastket on flat file
 monotonicity: if a set of items appears at least s times, so does eveyr subset of S
 Conversely, if item i does not appear in s, then no pair including i can appear in s
 
-A-Priorit:
+A-Priori:
 Read baskets and count in main memory the occurence of each time
 Items that appear at least s times are the frequent items
-Read bakets again and count in main memory only those pairs both of which were found in pas 1 to be frequent
+Read bakets again and count in main memory only those pairs both of which were found in pass 1 to be frequent
 
-Can use the triangular matrix method with n = # of frequestn items
+Can use the triangular matrix method with n = # of frequent items
 
 So use more passes to extend to k-sets from 2
 C1 -> filter -> L1 -> construct->c2 -> filter -> L2

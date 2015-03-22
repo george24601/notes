@@ -1,7 +1,7 @@
 Instance space x: binary or real-valued feature vector x of word occurences, d features
 , class y
 
-Binary classification: input vectors xj and lablesl yj, fine vector w s.t. f(x) = 1 if w * x >= theta
+Binary classification: input vectors x(j) and lablesl y(j), find vector w s.t. f(x) = 1 if w * x >= theta
 -1 otherwise
 
 linear classifier: each feature has a weight, prediciton is based on w * x => positive 1, negative -1
@@ -9,19 +9,19 @@ linear classifier: each feature has a weight, prediciton is based on w * x => po
 -----------
 
 separate + from - using a line:
-training examples => each example with xi, and yi
+training examples => each example with x(i), and y(i)
 
 which is the best linear separator?
 Margin r: distance of cloest example from the decision line/hyperplace
 
 Why maximizing it a good idea?
 
-Consider point A and line L: a(A, L) = w * A + b
+Consider point A and line L: d(A, L) = w * A + b
 L: w * x + b = 0
 
-so confidence = (w* x + b) y
-to get larget margin, we wnat to solve
-max of (min r over all points i) over all w
+so confidence = (w* x + b) y, because we predict on the sign of w*A + b
+to get larget margin, we want to solve
+max of (min margin distance over all points i) over all w
 
 -----------
 separating hyperplane is defined by the support vectors
@@ -35,13 +35,13 @@ min 1/2 ||w||^2 s.t. for all i, yi(w * xi + b) >= 1 over all w
 
 -------
 if data is not separable introduce penalty C to our SVM
-introduce slack variables, since not all mistakes are equally bad => if x(i is on the wrong side of the amrgin then get penalty)
+introduce slack variables, since not all mistakes are equally bad => if x(i) is on the wrong side of the margin then get penalty
+and w * x + b >= 1 - penalty
 
-SVM natural form
-
-"hinge loss"
+SVM natural form: add regularization param C * "hinge loss"
 
 -----------
+Want to estimate w, b => instead of natural form, minimize f(w,b)
 SVM solver inefficient for big data
 so gradient descent on f but gradiant of delta(j) take s O(n) time =>i.e. need to check all data in the training set
 
