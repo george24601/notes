@@ -136,8 +136,3 @@ idea: for expression will work as long as the collection provides map, flatmap, 
 
 LINQ has similar idea
 
-		
-
-
-
-

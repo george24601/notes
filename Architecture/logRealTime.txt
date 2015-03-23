@@ -1,0 +1,34 @@
+log: append-only, ordered sequence of records
+
+state machine model:active-active keep a log of the incoming requests and each replica processes each request
+
+primary-backup model: elect one replica as the leader, which process requests and logs out the changes from processing the request. Other replicas apply in order the state changes the leader makes
+
+----
+Data integration: capture all the relevent data, put it together in an applicable processing enviroment. Data is modeled in auniform way to make it easy to read and process => infrastructure to process this data in various ways
+
+Challenges: massive amount of event data. speicalized data system
+
+Take all the organization's data and put it into a central log for real-time subscription. Data production is now async from data consumption
+
+In their experience, getting data out of Oracle is hard, and procesisng was non-reversable and specific to the reporting, So they had to go into source databases and log files=> reliable data loads would require deep support from the data pipline
+Final result is all data sources go into a unified log bus
+
+Having a batch system be the only repository of clean complete data means the data is unavailable for systems requiriing a real-time feed
+
+In the log approach, the producer of data is responsible for clean, well-structured data. Value-added transformation that can be done in real-time should be done as post-processing on the raw log feed produced, but original log is still available
+aggregation specific to the destination system should be performed as part of the loading process
+
+Scalable log: 
+partition the log: assignment of the messages to a particular parition is controllable by the writer
+optimizing throughput by batching reads and writes, 
+avoid needless data copies: simple binary format between in-memory, on-disk and in network data transfers
+Detailed example in Kafka
+
+---------
+A stream processor can keep its state in a local "table", contents of this store is fed from input streams. It can journal out a changelog for this local index it keeps to allow it to restore its state in the event of a crash and restart=> keepin gco-partitioned state in arbitary index types local with the incoming stream data.
+
+Detailed example in Samza
+
+log compaction
+

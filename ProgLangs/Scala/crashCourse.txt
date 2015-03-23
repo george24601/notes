@@ -1,9 +1,24 @@
-Build and run
-Type inference
-Pair,collection
-Type definition
-Patern matching
-Currying
-Lambda and anonoymous variables
-Type rule, variance, and covariance
-Trait
+Build and run:
+simple compiling, use of sbt
+
+Patern matching:
+nested pattern matching
+
+Compound types:
+compare trait with ML's signature
+
+Generics:
+Compare with alpha type in ML
+
+Nested functions:
+compare with various let operators in ML
+
+currying
+What is the type of curried/parital applied function
+
+lambda and higher-order functions
+
+Type inference:
+local parameter type, function return type
+
+Variance, and covariance
