@@ -1,21 +1,23 @@
-var subTopic = 'test'; //TODO: change this
-var topicPartition = 0; //TODO: changethis 
-var zookeeperHandle = 'localhost:2181/';//TODO: change this
+var subTopic = 'test'; //TODO:which topic are you subscribing?
+var topicPartition = 0; //TODO: keep in mind each partition can be consumed by only one instance inside each consumer group 
+var logOffset = 6000; //TODO: auto commit is off for now
+var zookeeperHandle = 'localhost:2181/';
 
-var messageAction = function(message){
-    console.log(message);
-}; //TODO: change this
+function messageAction(message){
+    console.log(message); //TODO: your concrete function goes here
+};
+
 
 
 var kafka = require('kafka-node');
-var client = new kafka.Client(zookeeperHandle);
 var consumer = new kafka.Consumer(
-        client,
+	new kafka.Client(zookeeperHandle),
         [
-            { topic: subTopic, partition: topicPartition }
+            { topic: subTopic, partition: topicPartition, offset: logOffset }
         ],
         {
-            autoCommit: false //maybe true?
+            fromOffset: true,
+            autoCommit: false 
         }
     );
 
