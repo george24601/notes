@@ -1,9 +1,6 @@
 Shingling: convert documets etc to sets
-Minhashing:large sets to short signatures
-Locality-sensitive hashing: on pairs of signatures likely to be similar
 
-Doc -> Shingling -> set of strings of length k that appear in the document -> minhashing -> short integer vectors that represent the
-sets, and reflect their similarity -> LSH -> candidate pairs: those pairs of
+Doc -> Shingling -> set of strings of length k that appear in the document -> minhashing -> LSH -> candidate pairs: those pairs of
 sigs that we need to test for similarity
 
 k-shingle/gram: sequence of k chars that appears in the doc => represent doc
@@ -12,7 +9,6 @@ with set of singles
 Can hash long shingle to token => represent a doc by its tokens
 
 ---------
-
 Jaccard Similary: size of intersection/size of union
 
 To boolean matrics:  Rows = elements of the universal set. Columns = sets
@@ -26,15 +22,12 @@ that column
 
 prob of h(C1) = h(C2) over all permutations is the same as Sim(C1, C2) => proof
 
-similarity of signaturs=> farction of minhash functions in which they agree
+implementation: approximation to permute rows, 
 
-implementation: approximation, what if data avaible in columns, not rows?
+what if data avaible in columns, not rows?
 
 -------------
-
-LSH: generate from the collection of all elements a small list of candidate pairs: pairs of elemns whose similarity must be evalulutaed
-
-For signature matrices: hash cols to many bucks, and make elements of the same bucket candidate pairs
+For signature matrices: hash cols to many buckets, and make elements of the same bucket candidate pairs
 
 make cols c and d candidate pairs if M(i,c) = M(i,d) for at least t fractions
 
@@ -52,12 +45,7 @@ Pr(C1,C2 NOT idential in any of the 20 bands) =
 
 Why b banding works
 
-LSH: tune to get almost all pairs with similar sigs, but eliminate most pairs that do not ahve similar signatures
-Check that candidate pairs realy do have similar signatures
 May need to check the remaining candiate pairs really represnt similar sets
-
---------
-Entity resolution: examine a collection of records adn determine which refer to the same entity
 
 ----
 Represent a fingerprint by the set of positions of minutiae
@@ -77,16 +65,27 @@ Pr(two fingerprints from the same finger each have 1s in 3 given squares) =
 Pr(at least one of 1024 sets of three satisfied the Pr above) =
 Pr(false positive)=
 
+-------
+Euclidean space: there is a notion of "average" of two points
+distance measure function axiom
+>= 0. =0 if x =y, d(x.y) = d(y,x), d(x,y) <= d(x,z) + d(z.y)
+
+proof of JD is distance measure => convert to minhash to prove: whenever mh(x) != mh(y), at least one of the two statements are ture
+
+consine is p1 *p2/|p1|*|p2|
+
+why edit distance is also distance
+
 -----------
 In LSH context, hash function really takes 2 elements x and y, and return a
 decision whether x and y are candidates for comparision
 
 Suppose we have a space S of points with distance meaure d
-A family H of hash functions is (d1,d2, p1, p2)=sensitive if for x, y in S
+A family H of hash functions is (d1,d2, p1, p2)-sensitive if for x, y in S
+<=d1 => at least p1, >=d2 => at most p2
 
 what the minhashing's sensitive family? notice we use Jaccard dist instead of
 Jaccard sim directly!
-
 
 AND ("rows in a band")/OR ("many bands") contruction
 Given family H, construct H' whose members each consist of r functions from H
@@ -97,12 +96,12 @@ OR-AND construction
 
 Can even do cascading construction: OR-AND followed by AND-OR
 
-for each S-curse, there is a hreshold t, for which 1-(1-t^r)^b = t
+for each S-curse, there is a threshold t, for which 1-(1-t^r)^b = t
 when do we stop iterating?
 
 
 -------
-consine distance: random hyperplances
+consine distance: random hyperplances, h(v, x) = 1 if v * x > 0 otherwise -1
 Pr(h(x) = h(y)) = (?)
 
 simplification: v with only 1, -1 entries is enough

@@ -1,10 +1,3 @@
-Graph data: PageRank, Community detection, spam detection
-
-Search challenge: who to "trust". no single right answer to query
-
-Link analysis approach for computing importances of nodes in a graph.
-
----------
 Incoming link as votes => links from important pages are more important
 
 Each link's vote is porportional to the importance of its course page => split among importance/n votes => the page itself is defined this way as well
@@ -90,6 +83,16 @@ link spam
 topic specific: when walker teleports, she pick a page from a set S => only
 pages that are relevant to the topic => i.e., and r(s) for teleport set S
 
+--------
 
+SimRank: random walks from a fixed node on k-partite graphs => random walk with restarts 
+bu doesnt not scale well
+
+-----
+spam: topology => get y's page rank in related to M/N
+
+----
+TrustRank: topic-specific page rank with teleport set of trusted pages
+filtering: thresold/spam mass
 
 
