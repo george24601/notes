@@ -1,18 +1,7 @@
-Classical data mining: look at disk, bring part of data into memory => Not
-enough to handle web load
-
-Cluster Architecture: 1G swtich between nodes in a rack, 2-10 G backbone
-switch between racks
-
-Problem: 
-node failure is normal, how to store data persistently and keep it
-available? => store data redundantly
 How to handle node failure in the middle of long computation
 Network becomes bottleneck => move computation close to data to minimize
 movement
 
-Redundant Storage Infrastructure: Distributed file system => global file
-namespace, redundancy, and availability.
 Common pattern is huge file > 100 G. Rarely update in place, reads and appends
 are common
 
@@ -31,24 +20,9 @@ talk to master to find chuck servers, and then connects directly to chuck
 server
 
 -------------
-
-Scenario: huge text document, calculate number times each distinct word
-appears in the file
-
-Case 1: file too large, but full dict fits in memory
-Case 2: too many words to fit all entries in memory
-
-words(txt) | sort | unique -c
-
-input k-v values => intermediate k'-v' pairs => group by key => reduce a
-k'-v's pairs to k'-single v pair
-
-map will be on each node. System will copy map results of same key into a
-single node and do final reduce,e.g., via hashing. 
-
 Each map/sort/reduce step tries to use as much sequential scan instead of random access of disk
 
-pseudo code
+word count example:
 
 map(key, value)://key doc name, value:text of doc
 	for each word w in value
@@ -60,19 +34,7 @@ reduce (key, values)
 		result += v
 	emit(key, values)
 
-Example:
-each record of the form (URL, size,date..), find total number of bytes on HOST
-
 -------
-map => reduce are distributed in parallel by partitioning function/hash
-function
-
-The framework needs to:
-partitioning the input
-scheduling execution across machines
-group by key
-handling failure
-inter-machine communication
 
 Scheduler schedule map tasks close to physical storage location of input data
 intermediate resutls are on local FS of map/reduce workers (NOT on DFS, which
@@ -85,7 +47,7 @@ intermediate files, one for each reducer. Master pushes this info to reducers
 
 Master pings workers periodically to detect failures => 
 set map tasks at that worker are reset to idle. 
-set in-progress reduce tasks at that worker to idel
+set in-progress reduce tasks at that worker to idle
 abort task if master failed
 
 Make # of map tasks much larger than # of nodes in the cluster. Often one DFS chuck per map
@@ -98,7 +60,6 @@ This requires functions associatative and commutative
 
 example: combiner for average function 
 combiner for median function?
-
 
 ------------
 
@@ -114,9 +75,7 @@ In many cases, the big issue is wheter a reducer has too much input to operate i
 ---------
 Example: 3000 drugs, 1M of data per drug, find drug interactions
 
-naive approach: key: pair (i, j), value: record (R(i), R(j))
-
-Performance: 3000 * 3000/2 pairs, each k-v pair has 1 Mb data over 1Gb network
+naive approach: 3000 * 3000/2 pairs, each k-v pair has 1 Mb data over 1Gb network
 
 Solution: use fewer keys with longer list of values
 group drugs into 30 groups of 100 drugs each=>g(i) = group the drug i goes
@@ -133,22 +92,6 @@ Each pair is compared at exactly one reducer
 instead of 3000 * 3000 records we send over network, we have 3000 * 29 records send instead
 
 -----------
-Model for m-r algorithms:
-
-inputs: drug numbers and records
-outputs: one output for each pair of drugs
-
-A many-many relationship between in and out
-
-In drug case, output pair is related to both i and j
-
-In matrix multiplication case, (i, j) is related to row i and col j
-
-e.g. join:
-Input: all R(a,b) and all R(b, c)
-output: all (a,b,c)
-
-how to solve it?
 
 Reducer size q: max # of inputs that a given reducer can have
 Replication rate r: number of k-v pairs created by each mapper => represents communication cost

@@ -7,8 +7,8 @@ items do not have to be "in" baskets, i.e., just need many to many relationship
 
 Baskets=documents; items=words
 
-Assocuation rules: {i1,i2,...ik}-> j
-Confidence of association rule
+Confidence of Assocuation rules: 
+{i1,i2,...ik}-> j: if all i1,i2,...,ik are in the set, how likely j is in the set as well?
 
 Algorithm:
 Find all sets with support at least cs
