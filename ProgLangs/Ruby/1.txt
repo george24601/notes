@@ -76,11 +76,11 @@ if some exp has a record type, then let the expression also have a type where so
 
 => 4. If e has type t1 and t1 <: t2 then e has type t2
 
-if our goal is to prevent field-missing erors, then we cannot add any subtyping rules that would cause su to stop metting our goal => "subtyping is not a matter of opinion"
-
-=> width subtyping: Asuberfypt can hve a subset of fields with the same type,i.e., a subtype can have "extra" fileds
+if our goal is to prevent field-missing erors, then we cannot add any subtyping rules that would cause us to stop meeting our goal 
+=> "subtyping is not a matter of opinion"
+=> width subtyping: A subtype can have a subset of fields with the same type,i.e., a subtype can have "extra" fileds
 => permutation subtyping: A supertype can have the same set of fields with the same types in a different order
-=> if t1 <: t2, and t2 <: t2, then t1 <: t3
+=> if t1 <: t2, and t2 <: t3, then t1 <: t3
 => Every type is a subtype of itself
 
 --------
@@ -110,12 +110,12 @@ function subtyping is needed for higher-order functions or for stoirng functions
 
 ---
 a subtype can have extra fields
-because fiels ar emutable, a subtype cannot have a different type for a feild
-a sybytpe can have extra methods
-because methods are immutable, a subytpe can have a subtype for a mehtod, which means the method in the subtype can have contravariant argument types ans a covaraint result type
+because fields are mutable, a subtype cannot have a different type for a field
+a subytpe can have extra methods
+because methods are immutable, a subtype can have a subtype for a method, which means the method in the subtype can have contravariant argument types and a covaraint result type
 => a subclass can override a method a with a covaraint return type
 
-class and types are different! => class defines an object's behavior, a type describes what fields an object has and what messages it can repond to. Subtyping is a question of substitutability and what we want to flag as a type error
+class and types are different! => class defines an object's behavior, a type describes what fields an object has and what messages it can respond to. Subtyping is a question of substitutability and what we want to flag as a type error
 
 -----------
 

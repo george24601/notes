@@ -18,7 +18,7 @@ use movie-to-concept to find axis => Sig gives spread on the axis
 
 U*Sig = coordinates of proints in the axis
 
-How to do dimensionality reduction? set smallest singular values to zero
+How to do dimensionality reduction? set smallest singular values to zero => multiply back
 
 how to mark similarily of matrices
 
@@ -26,14 +26,15 @@ how to mark similarily of matrices
 
 SVD: best low rank approx.
 
-spectral decompostion of the matrix
-U = sig1 * U1 * V1^T + sig2 * U2 ....
-Ui and Vi are unti length, sigi scales them
+spectral decompostion of the matrix, based on each concept
+U = sig(1) * U(1) * V(1)^T + sig(2) * U(2) ....
+U(i) and V(i) are unti length, sig(i) scales them
 
 How many sigs to keep => preserve Sum(sig(i)^2)
 
 --------
-map query (movies ratings by user) into a concept space? Inner product with each concept vector v
+map query (movies ratings by user) into a concept space? 
+Inner product with each concept vector v
 q(concept) = q * V => this gives concept strength
 
 
@@ -45,7 +46,7 @@ so calculate SVD via eigen decomposition
 singular vectors are dense
 
 -------
-make A = C* U * R make ||A - C* U * R||f small
+make A = C * U * R make ||A - C * U * R||f small
 
 Constraint: C contains cols from A, R contains rows from A, U psedudo-inverse of the interseciton of C and R
 
