@@ -31,8 +31,8 @@ Collaborative:
 User-User similarilites/Pearson correlation: centered cosine normalized ratings by substracing row mean
 We need to normalized, otherwise, missing entry will carry too much weight in the negative direction
 
-To estimate:
-r(x,i) = (sum over all y) S(x,y)r(y,i)/S(x,y)
+To estimate: N as a NN set
+r(x,i) = (sum over all y in N) S(x,y)r(y,i)/ (sum over all y in N) S(x,y)
 
 Handles tough raters and easy raters
 
@@ -45,11 +45,56 @@ How to find k most similar users? NN/LSH in high dimenstions, clustering, dimens
 No feature selection needed, but has cold start,sparsity, first rater, popularity bias problem
 So use hybrid methods: item profiles for new item problem, demographics to deal with new user problems
 
-Global baseline: all movie mean + user mean diff + movie mean diff => then combine it with CF, note that in CF, we need to apply rating mean diff to another user's rating as well
+Global baseline: all movie mean + user mean diff + movie mean diff => then combine it with CF,
+i.e.
+r(x,i) = b(x, i) + ...r(x,j) - b(x,j)... instead of simply r (x,j) here
 
 or use two or more different recommenders and combine results
 ------
 Evaluate recommender system: compare predictions agains withheld known ratings 
 => RMSE but it has problems => precision at top k, because we care only predictions with high ratings
+
+Mult-scale modleing of the data:
+Global: overall deivation of users/movies
+Facotrization: regional effects
+Collborative filter: local patterns
+
+Global: mean rating + movie diff with averate + user's avg diff
+Local nieghborhodd (Collaborative filtering/NN) => final estimate
+
+problem: similarity measures arbitary
+pairwise similarities neglect dependences among users
+a weighted average can be restricting
+
+----------
+buld a system s.t. it works well on known (user, item) ratings, and hope the system wil also predict well the unknown ratings
+
+"SVD" on R = Q * P^T
+R: item to users, Q: items to factors, P: users to factors
+
+R has missing entries but ignore for now
+
+How to estimate the missing rating of user x for item i?
+
+SVD gives min reconstruction error SSE => SVD is minimizing RMSE
+but, SVD error is over all entries, but R has missing entries.
+=> used specialized methods to find P, Q
+min sum of (r(x,i) - q(i) * p(x)T)^2 over all (i,x) in R
+
+P,Q dont require to be orthogonal/unit length. 
+P,Q map users/moves to a latent space
+----------
+
+Want large number of factors to capture all the signals => but SSE on TEST data begins to rise for k>2==> overefitting: fits too well the training dtat and thus not generailzing well to unseen test data
+
+regularization: allow rich model where there are sufficient data, shrink aggresively where data are scarce
+
+add a "length" part lambda (||P(x)||^2 + ||q(i)||^2)
+
+min multi-dimension optimization? => gradient descent, init P and Q with SVD, pretitng missing ratings as 0
+------
+gloabl effect, similar to CF: prediction + baseline. regularatiation include item and user base line as well
+
+
 
 

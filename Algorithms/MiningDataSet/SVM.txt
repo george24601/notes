@@ -31,12 +31,12 @@ if no degeneracies => d+1 support vector for d dim data
 but scaling w increases margin => work with normalized w. also require support vector to be on the place defined by w * x + b  is 1 or -1
 
 want to maximize r => r = 1 /|w| => so we can rewrite SVM as 
-min 1/2 ||w||^2 s.t. for all i, yi(w * xi + b) >= 1 over all w
+min 1/2 ||w||^2 s.t. for all i, y(i)*(w * x(i) + b) >= 1 over all w
 
 -------
 if data is not separable introduce penalty C to our SVM
-introduce slack variables, since not all mistakes are equally bad => if x(i) is on the wrong side of the margin then get penalty
-and w * x + b >= 1 - penalty
+use slack variables/penalty, since not all mistakes are equally bad => if x(i) is on the wrong side of the margin then get penalty
+and y * (w * x + b) >= 1 - penalty
 
 SVM natural form: add regularization param C * "hinge loss"
 

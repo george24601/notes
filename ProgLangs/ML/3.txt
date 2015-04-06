@@ -23,11 +23,11 @@ currying callbaks...
 
 currying:
 syntactic suger
-fun f p1 p2 p3 = e is fun f p1 = fn  p2 => fn p3 =>....-> e
+fun f p1 p2 p3 = e 
+is equivalent to
+fun f p1 = fn p2 => fn p3 =>....-> e
 
-parital applicatiopn: we dont supply all curries argument..it returns a function!
+parital application: we dont supply all curries argument..it returns a function!
 espcially nice for iterator-like functions=> one reason why lib functoins of this form usually curred
 
 but if use partial palicaiton to create a polyumorphic funciton, it may not work due to the value restirction!
-
-dont program against an implemenatiaon until it mateters

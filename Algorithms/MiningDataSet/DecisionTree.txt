@@ -13,7 +13,7 @@ Mesure how much a given attribute X tells us about the class Y
 
 --------
 Entropy: smallest possible # of bits, on aerage, per smbol, need to transmit a
-sream of symbols drawn form X's distribution?
+stream of symbols drawn form X's distribution?
 
 Specific conditioal entropy H(Y | X = v)
 H(Y|X) = Sum Pr(X = v) H(Y | X = v)
