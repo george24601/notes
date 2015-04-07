@@ -1,3 +1,5 @@
+package testScala
+
 object GeneratorTest extends App {
   println("hello!!!")
 
@@ -85,6 +87,19 @@ case class Inner(left:Tree, right: Tree) extends Tree
 case class Leaf(x: Int) extends Tree
 
 //generator that creates random Tree objects
+def leafs = for{
+  num <- integers
+} yield Leaf (num)
+
+def parents = for {
+  left <- trees
+  right <- trees
+} yield Inner (left, right)
+
+def trees: Generator[Tree] = for{
+  isLeaf <- booleans
+  tree <- if (isLeaf) leafs else parents
+} yield tree
 
 //ScalaCheck: use generator to write test case, write properties that should hold instead of explicit test
 
