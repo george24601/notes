@@ -1,3 +1,10 @@
+package testScala
+
+object GeneratorTest extends App {
+  println("hello!!!")
+
+}
+
 //monad has to satisfy 2 requirements
 trait M[T]{
   self =>
@@ -10,9 +17,7 @@ trait M[T]{
 
 
 /* 
-
 3 monad laws
-
 
 associativity,i.e., you can inline nested for-expression
 m flatMap f flatMap g == m flatMap (x => f(x) flatMap g)
@@ -23,8 +28,11 @@ unit(x) flatMap f == f(x)
 right unit,i.e., for (x <- m) yield x
 m flatMap unit == m
 
+monads with zero: monad with withFilter defined
+*/
 
 
+/*
 is Option type a monad?
 left rule
 Some(x) flatMap f = f(x)
@@ -47,45 +55,53 @@ opt match { case Some(x) =>
  case None => None} //i.e., opt flatMap (x => f(x) flatMap g) 
 */
 
-
 abstract class Try[+T]{
-  def apply[T](expr: T): Try[T] =
-    try Success(expr)
-    catch{
-      case scala.util.control.NonFatal(ex) => Failure(new Exception()) //should be ex, throwable vs exception?
-    }
-  
-  def flatMap[U](f: T => Try[U]): Try[U] = this match {
+   def flatMap[U](f: T => Try[U]): Try[U] = this match {
     case Success(x) => try f(x) catch { case scala.util.control.NonFatal(ex) => Failure(new Exception())  }
     case fail: Failure => fail
   }
   
   def map[U](f: T=> U): Try[U] = this match {
-    case Success(x) => Try(f(x)) //??
+    case Success(x) => Try(f(x))
     case fail: Failure => fail
   }
-  
 }
 case class Success[T](x: T) extends Try[T]
 case class Failure(ex: Exception) extends Try[Nothing]
+
+object Try{
+  def apply[T](expr: => T): Try[T] =
+    try Success(expr)
+    catch{
+      case scala.util.control.NonFatal(ex) => Failure(new Exception()) //should be ex, throwable vs exception?
+    }
+}
 
 
 /*
 so we can use Try as Some with for-expression
 
 for {
- x<- computeX
+ x<- computeX //so x, y is the content of monad
  y<- computeY
 
-} yield f (x, y)
+} yield f (x, y) //yield gives the content of the new monad, notice the new monad will have same type, as per definition of monads
+
+this expands to 
+
+computeX flatMap (x => for ( y <- computeY } yield f (x, y))
 
 if computeX and computeY both Success(x), return Success(f(x, y)),  otherwise, Failure(ex)
-
-Is Try a monad?
-
-monads with zero: monad with withFilter defined
 */
------------
 
-Synchronous: Try[T], Iterable[T]
-Asynchronous: Future[T], Observable[T]
+/*
+Is Try a monad? with unit = Try?
+
+right rule: Try(x) flatMap unit should be Try (x)
+
+left rule: Try(x) flatMap f should be f(x)
+success: try f(x) catch {Failure(ex)} this is not equivalent to f(x)
+
+*/
+
+
