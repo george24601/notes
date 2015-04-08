@@ -1,3 +1,4 @@
+sudo apt-get update
 #or use openjdk
 sudo apt-get install openjdk-7-jdk
 
@@ -29,11 +30,13 @@ sudo chmod 777 -R /mnt/disk3
 
 sudo chmod 777 -R /mnt/disk4
 
+# spark tempSpace
 mkdir /mnt/disk1/sparkTmp
 mkdir /mnt/disk2/sparkTmp
 mkdir /mnt/disk3/sparkTmp
 mkdir /mnt/disk4/sparkTmp
 
+#HDFS storage
 mkdir /mnt/disk1/dn
 mkdir /mnt/disk2/dn
 mkdir /mnt/disk3/dn
