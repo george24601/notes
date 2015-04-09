@@ -1,31 +1,35 @@
-Algorithm and Software Engineering Notes
-=================
-### Algorithm ###
+### Algorithms ###
 
 Programming contest problems, mostly UVa Online Judge
+
 MapReduce related
+
 Stream processing algorithms
 
 ### Architecture ###
 
 Reflections on architecture problems
 
-### CACM###
+### CACM ###
 
 Communications of the ACM reading notes
 
 ### Program Design ###
 
 Code-level design
+
 Patterns
 
 ### Languages ###
 
 Javascript
+
 ML
+
 Scheme
+
 Scala
 
-### Specific ###
+### Notes on specific tools/software ###
 
-notes on specific tools/software
+
