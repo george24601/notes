@@ -1,0 +1,11 @@
+high level consumer stores the last offset read from a specific partition in ZK. offest is sotred based on the consumer group, whose name is global acorss a Kafka cluster(!!). So old living logic will interfere with new logic
+
+High level consumer should be multi-threaded application, if you have multiple parititons per thread there is no guarantee about the order you receive messages
+
+When will message be replayed? => need to clean shutdown
+
+more commonly, topics have a small number of consumer groups
+
+group id: by seeting the same group id multiple processes mean they are in the same consumer group
+
+consumer group and stream-partition auto balancing. Consumer group can listen to multiple topics

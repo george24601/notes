@@ -26,6 +26,7 @@ Comparison with Observer
 5. Similar to all event-related patterns, subscriber/observer needs to detach themselves carefully, 
 because it may accidentally have reference to resources that will not be released automatically/quickly.
 This is a common source of memory problem/memory leak. e.g., observer waiting for static resources to notify, Subscriber forgets to detach itself from event channel
+6. With event handling moving to reactive programming paradigm, observer is losing use cases. However, pub/sub model remains popular way to decouple executions
 
 ---------
 Comparison with Reactor
