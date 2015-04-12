@@ -1,0 +1,9 @@
+input size ~ 1k => around n^2
+
+each of frineds may have any S => greedy all 0
+
+at index i, S(i) <= i to stand, 
+
+so consider the highest value
+
+input is sorted => ans is sum of digits - last digit
