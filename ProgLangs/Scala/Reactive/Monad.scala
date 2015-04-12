@@ -102,6 +102,18 @@ right rule: Try(x) flatMap unit should be Try (x)
 left rule: Try(x) flatMap f should be f(x)
 success: try f(x) catch {Failure(ex)} this is not equivalent to f(x)
 
+
+Example use of try monad:
+
+val adventure = new Adventure()
+val t1: Try[Int] = adventure.collect().flatMap(coins => { adventure.buy(coins) })
+
+  //this is equvalent to
+ val t2: Try[Int] = for {
+    coins <- adventure.collect()
+    treasure <- adventure.buy(coins)
+  } yield treasure
+
 */
 
 

@@ -29,7 +29,7 @@ trait Simulation {
   def OrGateDelay = 5
   
   def afterDelay (delay: Int) (block: => Unit): Unit = {
-    val item = Event (currentTime + delay, () => block) //why wrap it again?
+    val item = Event (currentTime + delay, () => block) //why wrap it again? seems that if you use block will just eval it!
     agenda = insert (agenda, item)
   }
 

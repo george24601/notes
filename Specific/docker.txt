@@ -1,0 +1,13 @@
+run the image, will pull from public registry if not avaiable locally yet
+docker run {image name}:{version}
+
+conversely
+docker stop 68f1898493dd
+
+list running containers:
+docker ps
+
+go into containers with bash
+sudo docker exec -i -t {container ID} bash
+
+sudo docker exec -i -t 461b0cf63274 bash

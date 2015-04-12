@@ -7,3 +7,35 @@ at index i, S(i) <= i to stand,
 so consider the highest value
 
 input is sorted => ans is sum of digits - last digit
+
+D non empty plates with multiple pancakes
+speical minute, move some pancake over
+
+D, P, 1000 
+T 100
+
+no pancake left to eat, how quickly?
+infinitly many diners: always move 1 to empty!
+
+claim: should always special, if cost < saved, need to increase throughput as soon as possible
+
+morever, if there are multple with same #'s gotta move them all!
+
+consider the hightest stack, need to partition it
+wait 2 mins then move vs move immediately => 1min could be saved by move early
+
+calculate next cost
+
+--------
+a repition of words => probably need 
+L = 10k n logn most
+
+need to calculate: 
+from left to right, accumlated product
+from right to left, accumlated product
+min # of powers for the whole string to reach 1, i, j,k
+
+notice that x * x is always -1, x * x *x * x is always 1
+
+so we care about the one string itself, or 1, or -1
+
