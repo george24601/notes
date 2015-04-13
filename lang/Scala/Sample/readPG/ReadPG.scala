@@ -30,5 +30,5 @@ object ReadPG extends App {
   for {
     con <- createCon()
     re <- process(con)
-  } yield con.close()
+  } yield con.close() //should be a match to detect failure case
 }
