@@ -1,0 +1,23 @@
+1.how many topics to have? how many partions each topic or in total?
+i.e., how to choose # of topic partitions
+
+less than 10k topics, because each topic has a ZooKeepr znode
+moreover 100k partitions on a single topic is same as 100k topics with one parttion each
+
+ZK is a non-shared in-memory database that stores per-partition configuraiton information
+ it’s probably better to limit the number of partitions per broker to two to four thousand and the total number of partitions in the cluster to low tens of thousand.
+
+# of parititons should scale only with the number of consuming machines not with any charactieristics of the data. e.g. single topic and partioin it by user_id
+
+2.how to add paritions to topic?
+script avaialbe
+
+3.how to rebalance paritions within a same topic?
+script available but with caches
+
+4.What if the message is big?
+big message doesnt fit message queue system, probably should pass a handle instead
+
+5.can store the data persistantly to do peridocially recalc
+
+6.Limitation of the message size

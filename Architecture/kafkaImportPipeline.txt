@@ -1,0 +1,31 @@
+Problem:
+
+Design a system with Kafka so that in a multi-tenant environment, user can
+1.define a topic and schema of the message to upload. Note that user can change the schema of a topic's message
+2.upload the messages, the Kafka consumer will process the messages and write the result to the persistant layer. Note that the processing pipleline may involve more read/write to different topics
+3.We should be aware of the order of actions: i.e., between different upload, between schema defining and and uploads, and between schema definitions
+
+Uploading and defining schema should be done asynchronously,i.e., requests will go through the Kafka cluster before evaled and applied
+
+Discussion
+
+Because we need to do validation on a row bais and the op most likely is NOT stateless, it may be hard to work directly work with import file handle
+
+1. how do we paritition the import data?
+To meet our performance goal: import data can not be processed by a single consumer ,e.g., easily meet the target with 5 parititons, hopeless with 1
+
+2. Interactions: can not edit the schema/import if another one is under way
+this suggest that editing/importing same data should put into a same partition, so that we can enforce the ordering. i.e., partition scheme needs enforce that
+=> i.e. a table ops topics so that we keep the order of ALL things happened to that table, so when we get an import request, we need to add the import start, and by symmery, import end when it ends
+
+3.After we decide to kick off import, and starts loading message, what happens in between?
+
+Since it has the ordering, maybe we can force the import data to coming after the ACK put into the actual data loading queue, Or, just make sure the payload doesnt get into until we are sure it is ok to kick off data, probably possible, because we can process the data really quickly, can pub this to a consumer saying reading to ACC payloads
+
+Now, multi-tenant case, how will this affect our partition scheme.
+
+Recall Kafka's limitation on over all # of partitions => our partitions shouldnt be fine grained in the end, i.e., if we have topic/partition specific, the # of partitions will scale linearing with our # of clients, this COULD be a potential problem, i.e., 100 tenents => 100 * partitions specific to the tenant
+Plus, a single consumer may read from multiple partitions on high level consumer (when you have more partitions than threads, some threads may get data from multiple partitions) so the multi-tenantness must be built in
+
+
+
