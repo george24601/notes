@@ -1,0 +1,17 @@
+Challenges with messaging system
+when we are read in the middle and the machine dies, how do we recover? Where should the processor be run when it restarts? 
+What if messaging systems sends same message twice or lose a message?
+How to distribute teh compuatation across machines?
+=> we need stream processing system to abstract these details
+
+Features:
+Samza manages snapshotting and resotration of a stream processor's state
+When a machine failes, Samza with YARN to migrate tasks to another mancine. YARN also provies distributed environment for Samza containers to run in
+local state is modeled as a stream. If the local state is lost due to machine failure, the state stream is replayed to restore it
+
+Job: code taht performs a logical transofmration on a set of input sreams to append output messages to set of output streams
+A job is broken into tasks: unit of parallelism of the job, each consumes data from one partition for each of the job's input stream
+The assignment of partitions to tasks nver changes
+
+Partitions and taks are logical units of parallelism; Containers are the unit of physical parallelism
+

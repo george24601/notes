@@ -4,6 +4,7 @@ Design a system with Kafka so that in a multi-tenant environment, user can
 1.define a topic and schema of the message to upload. Note that user can change the schema of a topic's message
 2.upload the messages, the Kafka consumer will process the messages and write the result to the persistant layer. Note that the processing pipleline may involve more read/write to different topics
 3.We should be aware of the order of actions: i.e., between different upload, between schema defining and and uploads, and between schema definitions
+4. Somehow track the progess of current load and be notified of errors
 
 Uploading and defining schema should be done asynchronously,i.e., requests will go through the Kafka cluster before evaled and applied
 
@@ -25,7 +26,41 @@ Since it has the ordering, maybe we can force the import data to coming after th
 Now, multi-tenant case, how will this affect our partition scheme.
 
 Recall Kafka's limitation on over all # of partitions => our partitions shouldnt be fine grained in the end, i.e., if we have topic/partition specific, the # of partitions will scale linearing with our # of clients, this COULD be a potential problem, i.e., 100 tenents => 100 * partitions specific to the tenant
-Plus, a single consumer may read from multiple partitions on high level consumer (when you have more partitions than threads, some threads may get data from multiple partitions) so the multi-tenantness must be built in
+Plus, a single consumer may read from multiple partitions on high level consumer (when you have more partitions than threads, some threads may get data from multiple partitions) so the multi-tenantness must be built in. But building multi-tenantness in for all consumer is hard! => but # of paritions will quickly grow => we will have to add a new cluster
 
 
+Insights so far
+1. each import must be processed in parallel
+2. actions done to a single table must go into the same partition, so we can process in the order they are announced
+3. putting all tenants into a single cluster is most likely impractical because A. limit on # of partitions, B.inherently multi-tenantness on all consumer constraint is too hard
+
+How to track the progress?
+producer: can get offset of the first message sent in the message set
+consumer: each message has an offset associated with it 
+so as local state, very easy to track how many messages are processed based on offset
+
+How to track/handle errors?
+When error happens
+1.how do we notify consumer to stop, and to an extend, the initiator of the stream the error?
+so producer needs to be aware of "SOME" state
+2.how to "mark" yet unprocessed as invalid/ignore?
+probably set the local state as invalid, and just read through => which means our queue will need to mark the start of each import,i.e., a reset state message
+A.
+one way is to at where the error happens, pop the message back to the initiator of the whole stream. the initiator will push a terminal signal down the line
+B.
+More generally, at long as we know where the state of exec is shared, all producer can listen to that,.e.g., pulling or subing, and stop the current process.
+Essentially, two streams, status of job and current data load, cooperate with each other
+
+Then how do we keep track the status of current job, options:
+In-memory store,e.g., redis, you will pull form it
+incorporate YARN, let it help us
+another kafka topic is probably questionable, because what we want to know is very specific, just the status of ONE job
+
+----------
+How do we organize topics?
+probalby one topic for import data, too specific topic info will cause problem of too many partitions
+one package needs to "slice" the data for parallel processing
+then pump the data into the pipe with both start and end message
+
+This means each partition may have multiple table's import data => may not be a wise idea,i.e., why not limit it so that between start and end we expect data from only 1 table,i.e., local state involves only 1 table. Also notice that, a start message might be redundant => EoF class message is good enough
 
