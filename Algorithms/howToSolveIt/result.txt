@@ -1,0 +1,29 @@
+Checking result, including intermediate ones
+Test by specialization
+Test by dimension
+Test by variation of data and see trend
+
+check argument
+avoid mere repetition, at least change order of the steps or grouping to
+introduce variation
+pick out weakest point of the argument and examine it first. One point is: did
+you use all the data?
+
+Can you derive the result differently?
+Although this is less likely to happen to a student
+
+Can use use the method or result for some other problems?
+construct problems which can be solved with current solutions => but these problems are likely to be uninteresting
+Finding a new problme both interesting and accessible is hard
+One common pattern: original unknown as given and one of the original data as unknown
+Others including generalization, specialization, and analogy
+ceratin of its elements as variable => critical stage changes
+The experience is incomplete if never had opportunity to solve a problem invented by himself!
+
+Euclidean exposition, perfect for checking argument, often preceeds in an order opposite to the natural order
+of invention. Comman problem is that precieving a plan often have different
+order from carrying it out
+Intutition and formal proof: verify correctness in both cases?
+
+from unknown: a problem with similar unknown?
+from data: soemthing useful from data? This is less preferable but worth trying
