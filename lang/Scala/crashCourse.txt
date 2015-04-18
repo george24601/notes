@@ -21,4 +21,4 @@ lambda and higher-order functions
 Type inference:
 local parameter type, function return type
 
-Variance, and covariance
+invariance, covariance, and contravariance

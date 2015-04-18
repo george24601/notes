@@ -1,3 +1,25 @@
+input size 10K
+first method:
+
+if there is a decrease: the delta is # of eatan
+if there is increase: could each nothing, with only put
+i.e.
+
+for each one, we check previous,
+if less, the delta is eaten, otherwise, do nothing
+
+second method
+what is the min rate that she eats?
+=> to be precise, how many she eats within 10 sec
+
+if only increasing: 1 per sec
+the slowest speed = max delta => otherwise she can't decrease as much!!
+
+so find the largest delta => that is the MIN speed she eats, this delta >= 10
+for each interval
+if num < delta => eat += num
+
+------
 all Bs will operate at full capacity
 1B Cs, 1k Bs, each takes 100k mins to cut
 
