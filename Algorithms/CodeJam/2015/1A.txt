@@ -1,0 +1,26 @@
+all Bs will operate at full capacity
+1B Cs, 1k Bs, each takes 100k mins to cut
+
+when is the time that processed + being process = N or N - 1
+
+log2 (100KB) = log2 (100 * (10^3)* (10^9)) = 10 + 30 + 7 = 47 probes
+
+each check cost = 1K * 47 => 47 * 47 => total less than 2.5 mil
+
+so for each probe
+	calculate processed + being processed + # of open slotes
+
+if processed + being processed + # of open slots(total) < N => need to do more
+if  total == N there we go
+if total > N
+	if calc processed + being proceesed >= N => too big
+	< N => there we go
+
+so max time = #C * 100k
+
+invalid + valid
+
+------------
+for each set,
+gscan
+update max set size number
