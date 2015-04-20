@@ -1,108 +1,88 @@
-package testScala
-
-object GeneratorTest extends App {
-  println("hello!!!")
-
-}
-
-/*
- 
- digital circuit simulation
- 
- The components have a reaction time,i.e., their outputs dont change immediately after a change to their inputs
- */
-trait Parameters {
-  def InverterDelay = 2
-  def AndGateDelay = 3
-  def OrGateDelay = 5
-}
+package eventSim
 
 trait Simulation {
   type Action = () => Unit
   case class Event(time: Int, action: Action)
-  private type Agenda = List[Event]
-  private var agenda: Agenda = List()
-  private var currentTime = 0
-  
-  def InverterDelay = 2
-  def AndGateDelay = 3
-  def OrGateDelay = 5
-  
-  def afterDelay (delay: Int) (block: => Unit): Unit = {
-    val item = Event (currentTime + delay, () => block) //why wrap it again? seems that if you use block will just eval it!
-    agenda = insert (agenda, item)
+
+  private var currentTime = 0;
+  private var agenda: List[Event] = List()
+  def delayAction(delay: Int)(block: => Unit): Unit = { //notice it passes a block
+    val item = Event(currentTime + delay, () => block)
+    updateAgenda(agenda, item)
   }
 
-  //insert events, sorted by time
-  private def insert (ag: List[Event], item:Event):List[Event]= ag match {
-    case first :: rest if first.time <= item.time =>
-      first :: insert(rest, item)
-    case _ =>
-      item :: ag
+  def updateAgenda(agenda: List[Event], item: Event): Unit = {
+
   }
-  
-  private def loop(): Unit = agenda match {
-    case first :: rest =>
-      agenda = rest
+
+  def loop(): Unit = agenda match {
+    case first :: tail =>
+      agenda = tail
       currentTime = first.time
       first.action()
       loop()
-    case Nil => //no agenda
+    case Nil =>
   }
-  
-  def run(): Unit = {
-    afterDelay(0) {
-      println("test")      
-    }
-    
-    loop()
-  }
-  
-  class Wire {
-    var sigVal = false
-    var actions: List[Action] = Nil //actions attached to the wirte
-
-    def getSignal: Boolean = sigVal
-    def setSignal(s: Boolean): Unit =
-      if (s != sigVal) {
-        sigVal = s
-        actions foreach (_()) //all attached actions are executed at each change of the transported signal, i.e. broadcast to all gates this wire goes to
-      }
-
-    def addAction(a: Action): Unit = {
-      actions = a :: actions
-      a() //activate the action now, the real effect kicks in after delay
-    }
-  }
-  
-  def probe (name: String, wire: Wire): Unit = {
-    def probeAction(): Unit = {
-      //can print here
-    }
-    
-    wire addAction probeAction
-  }
-
-  def inverter(input: Wire, output: Wire): Unit = {
-    def invertAction(): Unit = {
-      val inputSig = input.getSignal
-      afterDelay(InverterDelay) { output setSignal !inputSig } //output is closured
-    }
-
-    input addAction invertAction
-  }
-
-  def andGate(in1: Wire, in2: Wire, output: Wire): Unit = {
-    def andAction(): Unit = {
-      val in1Sig = in1.getSignal
-      val in2Sig = in2.getSignal
-      afterDelay(AndGateDelay) { output setSignal (in1Sig & in2Sig) }
-    }
-
-    in1 addAction andAction //in1 and in2 both need to know of this event, but this also mean andAction will be run once by each in wire
-    in2 addAction andAction
-  }
-
 }
 
+trait Parameters {
+  def AndDelay = 7
+}
 
+abstract class Gate extends Simulation {
+
+  def AndDelay: Int //notice def here
+
+  class Wire {
+    private var signal = false
+    private var actions: List[Action] = Nil //notice how privates are inited here
+
+    def getSig: Boolean = signal
+
+    def setSig(newSig: Boolean) = {
+      if (newSig != signal) {
+        signal = newSig
+
+        actions.foreach(_()) //anoymous fuction here , need to broadcast sig chances
+      }
+    }
+
+    def addAction(newAction: Action) = {
+      actions = newAction :: actions
+      newAction() //first action
+    }
+  }
+
+  def andGate(first: Wire, second: Wire, out: Wire) = {
+    def delayed(): Unit = {
+      val firstVal = first.getSig
+      val secondVal = second.getSig
+
+      //delayed action here
+      delayAction(AndDelay) {
+        out.setSig(firstVal && secondVal)
+      }
+    }
+
+    first.addAction(delayed) //register here 
+    second.addAction(delayed)
+  }
+
+  //can add a probe action to wire to print inner state
+}
+
+object EventSim extends App {
+  println("hello!")
+
+  object sim extends Gate with Parameters //mixin with Parameters
+
+  import sim._ //need to import concrete here!
+  val first, second, out = new Wire //notice the init pattern
+
+  andGate(first, second, out)
+
+  first setSig true
+  loop()
+  second setSig true
+  loop()
+}
