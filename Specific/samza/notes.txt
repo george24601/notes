@@ -1,0 +1,39 @@
+implement StreamTask for processor
+
+configuration file:
+class
+task.inputs: kafka topic(s?)
+systems.kafka.streams.{kafka}.samza.msg.serde=json
+
+Receive message:
+for each envelope, you can get key, message, and system/stream/partition info
+
+Send message: 
+MessageCollector + OutgoingMessageEnvelope: similar to the InEnvelope, parition/key/message info, similar to lower-level kafka api
+use MessageCollector ONLY inside process()
+
+InitableTask: 
+container will call the init()
+
+# of partitions = # instances of task class
+each task receivers messages from one parition of each of the input stearm => matching of partition number
+
+bootstrap stream
+
+consumer batching
+
+serde:
+configuration for stream
+configuration for k-v store
+
+checkpointing: 
+default checkpoint interval 60 sec 
+configurations and samza.reset.offset, samza.offset.default
+export checkpoints,and reset checkpoints
+
+local state:
+replicated to changelog strea. With right tuning, changelog is not much bigger than the database
+When a container is restarted, we can expect 50MB/sec restore time
+
+k-v store
+configuration file
