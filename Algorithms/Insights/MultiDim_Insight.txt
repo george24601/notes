@@ -1,12 +1,13 @@
-1.
-most patterns can be seen in lower dim case, however, we may not be able to reuse the pattern directly. One common cause is that a unit value is often split into two values when going 1 dimension up. This means we have to search all related combos related to that lower-dim value
+Multi-dimenstion/multi-part problem:
 
-2. options.
-	1.maintain relationship: similar relationship, except each part has multiple dimensions instead of one
-	2.maintain entity: Each part still handles simple dimensions, but we have multiple layers of relationship. then options: 
-layers cycles through dimensions
-inspect the next dimension, see if we have additional insight
+From problem solving heuristics perspective,  We need to decompose the problem. Note that we decompose to get INSIGHT , NOT direct answers
+1. what problem can you recall 
+normally a same problem in lower dimension
 
-3.Often need to view the dimension breakdown in different orders to gain additional insight
+2. keep the unknown and change data/condition?
+Separate part of conditions: 
+fix a dimension, how will other dimensions get affected to reach the solution?
 
-4. To carry over insight from lower dimension to uppoer dimension, our lower dimension insight needs to be abstract enough to hide all lower-dimension specific detials
+This can be linked to our insight in 1). Then we can probably do a complete search on that
+
+

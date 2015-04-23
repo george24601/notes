@@ -5,3 +5,5 @@ The tricky part, therefore, is what is the step/state information we need to cap
 2. Often used as part of solution
 
 3. Because heap has a property of "currently best option", it is often used in greedy algorithm,e.g., MST and Dijkstra
+
+4. by nature, greedy problems are decomposable, but need to define "step" carefully, i.e., step is the dual of "locally optimally solution"

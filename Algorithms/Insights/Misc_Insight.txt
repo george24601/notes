@@ -11,13 +11,4 @@ Need to analyze it on a case-by-case basis
 5. curIndex - length you want to skip = start index of that subarray you want to skip
 similarly start of index + length = start index of the new subarray
 
-6. When transformation is in steps/can be broken down into steps, 
-we "observe" the build process and find the relationship of indirect state of the solution between steps.
-This indirect state should capture the problem space we are interested in
-
-7.When trying to recognize patterns, instead of fixing one dimesnion of input and observe the change of values, we can fix the value and observe the insight of inputs.
-e.g. knapsack problem, LIS and other DP/greedy problems
-
-8.When we try to pin down moving parts but hard to summarize a closed form. We can complete search on all possible inputs, provided overall search process is cheap enough
-
 9. mid point index of array = length/2

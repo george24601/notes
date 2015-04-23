@@ -14,7 +14,5 @@ node: max sum subarray ending at index
 O(nlogn) => LIS
 O(n^2) => Edit distance
 
-5.Often, we need to gain additional insight from the problem to decide the max dimension of our index
-
 6. When defining the subproblem, the actual solution may or may not "anchor" our index. 
-This design option shares the same principle in recursion design: solving a more powerful recursion problem might be easier than the current problem 
+This design option shares the same principle in recursion design: solving a more general recursion might be easier than the current problem 

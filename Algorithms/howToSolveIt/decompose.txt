@@ -1,0 +1,19 @@
+examine datum by itself, to separate various parts of condiiton
+
+may need to go back to definition to introduce new elements
+
+may recomine elements of the problem which we use as an auxiliary problem
+
+recall a familiar problme having similar unknown. If not, invent one: think of other data appropriate to determine the unknown
+
+common method: keep unknown and keep only part of the condition and do not introduce new clause or datum
+
+the decisive idea often consits in carving out some more accesible but essential part from the problem
+
+interesting way of changing unkwn and dat ais interchanging the unknown with one of the data
+
+after we drop condition to restrict less on unknown. How far is the uknwon then determined, how can it vary?
+
+start from a statment of problme with terms and arrived at a restatment free of those terms
+
+We cannot know we need to use the notion or theorem about it. But we have to use one or the other. But which definition we use matters!

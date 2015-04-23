@@ -1,5 +1,17 @@
-1. DP solution requiring no more than O(nlogn) can consider a reduction of LIS
+Common problem solving heuristics with LIS: 
 
+1. Reduction:
+best solution <=> longest list
+core insgiht:
+each step, all potential candidates must appear before the step, and NO candidate can appear after the step, and we will pick one of them 
+
+May need O(nlogn) (However, be aware of the risk of being distracted by detail too early!)
+
+2. from unknown to data:
+what properties would the solution have? does it satisfy the core LIS insight
+
+
+--------
 2. LIS: a discontinuous sorted linked list, so cant bsearch directly on it
 
 3. Consider a mapping f: rank of element -> index of element, LIS means that
