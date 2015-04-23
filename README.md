@@ -27,4 +27,6 @@ Scheme
 
 Scala
 
-### Notes on specific tools/software ###
+### Specific tools/frameworks ###
+Apache Kafka
+Apache Samza
