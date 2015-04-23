@@ -37,3 +37,23 @@ When a container is restarted, we can expect 50MB/sec restore time
 
 k-v store
 configuration file
+
+monitor performance via metrics
+
+windowing: do something in regular timeintervals
+WindowableTask interface
+
+Event loop:
+every container is designed to use a single CPU core. In general, Samza is not thread-safe. Storgly discourgae form using threads in job's code
+
+run-job.sh to start job
+
+configuration:
+4 major sections
+Job, Task, Serilizaer, Systems
+
+pakcage sturcture
+bin/...
+lib/
+
+to run the package in yarn

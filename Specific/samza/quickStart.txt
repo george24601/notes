@@ -1,0 +1,42 @@
+1. What to install?
+Use Dockerfile to set up dev samsa environment
+
+2.  How To make a samsa job?
+You need to make: 
+A. a samza package, 
+B. a samza job configuration file.
+
+3. What is a samza package?
+Just a folder with the following structure
+
+bin/run-am.sh
+bin/run-class.sh
+bin/run-job.sh
+bin/run-container.sh
+lib/
+
+The 4 .sh files are from samza and should be included as part of packaging process. Your code should be compiled into JARs and put into lib/
+
+4. What is in the JARs?
+The class represents your job processing logic. All your stream processing logic should be in a class that implement org.apache.samza.task.StreamTask interface, and more specifically, its process() method
+
+5. How to implement process() method?
+A. read incoming messages from envelope
+B. use collector to send output message wrapped in OutgoingMessageEnveloope, whose format is just dual of incoming envelope's
+NOTE: do NOT use collector outside process()
+C. coordinator
+for advanced use
+
+6. Complie your classes into JAR, and put it in a package's lib folder mentioned in 3
+
+7.Now how to make configuration file
+see the sample configuration file, at minimum, you need to define:
+job.factory.class
+job.name
+task.class
+task.inputs
+
+8. run the job with package and configuration file
+$PACKAGE_PATH/bin/run-job.sh \
+  --config-factory=samza.config.factories.PropertiesConfigFactory \
+  --config-path=$CONFIG_PATH
