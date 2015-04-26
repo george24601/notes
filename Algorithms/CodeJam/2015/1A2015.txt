@@ -19,6 +19,13 @@ so find the largest delta => that is the MIN speed she eats, this delta >= 10
 for each interval
 if num < delta => eat += num
 
+Reflection:
+1. Can I reuse the result? Can I invent a new problem?
+Streaming processing vs batch processing: given the final state (batch) what happened inside stream
+
+2. Can I reuse the method?
+The extreme actions with ceiling/boxing
+
 ------
 all Bs will operate at full capacity
 1B Cs, 1k Bs, each takes 100k mins to cut
@@ -41,6 +48,15 @@ if total > N
 so max time = #C * 100k
 
 invalid + valid
+
+
+Reflection:
+1. Can I reuse the result? Can I invent a new problem?
+How many we can server given a certain time => actually one of our steps!
+
+2. Can I reuse the method?
+Classic unknown-data swapping
+Classic bsearch
 
 ------------
 for each set,

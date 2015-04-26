@@ -27,3 +27,6 @@ Intutition and formal proof: verify correctness in both cases?
 
 from unknown: a problem with similar unknown?
 from data: soemthing useful from data? This is less preferable but worth trying
+
+If you cannot solve the proposed problem, try to solve first some related problem. Could you solve a part of the problem
+

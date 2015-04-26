@@ -8,6 +8,18 @@ so consider the highest value
 
 input is sorted => ans is sum of digits - last digit
 
+Reflection:
+Can I reuse the result? What problems can I invent?
+
+Swap data and unkown
+1. Suppose I know the overall cost and list of members, how many can I trigger?
+2. packman eating problem
+
+Can I reuse methods?
+Yes, given that we have hard contrainst to satisfiy for each element, we can get a topologically sorted order and iterate in that order
+
+-------------
+
 D non empty plates with multiple pancakes
 speical minute, move some pancake over
 
@@ -26,6 +38,18 @@ wait 2 mins then move vs move immediately => 1min could be saved by move early
 
 calculate next cost
 
+Reflection:
+Can I reuse the result? What problems can I invent?
+
+Swap data and unkown
+Suppose I know the final size, to start consuming, how long it takes to finish => this is actually our subproblem!
+
+Can I reuse methods?
+1.
+when split data, what options can we try? seems that we may need to partition data evenly to avoid potential worst case, (although not necessarily binary!)
+2.
+By swapping unkown and data, we may have a new search direciton => search space much less reduced
+
 --------
 a repition of words => probably need 
 L = 10k n logn most
@@ -38,4 +62,6 @@ min # of powers for the whole string to reach 1, i, j,k
 notice that x * x is always -1, x * x *x * x is always 1
 
 so we care about the one string itself, or 1, or -1
+
+Explaination:
 
