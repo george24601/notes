@@ -15,7 +15,13 @@ bin/run-job.sh
 bin/run-container.sh
 lib/
 
-The 4 .sh files are from samza and should be included as part of packaging process. Your code should be compiled into JARs and put into lib/
+The .sh files are from dependency 
+groupID: org.apahce.samza 
+artifactID: samza-shell
+classifier: dist
+type: tgz
+
+They should be included as part of packaging process. Your code should be compiled into JARs and put into lib/
 
 4. What is in the JARs?
 The class represents your job processing logic. All your stream processing logic should be in a class that implement org.apache.samza.task.StreamTask interface, and more specifically, its process() method
