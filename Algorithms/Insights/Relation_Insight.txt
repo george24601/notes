@@ -1,3 +1,0 @@
-1. often, an a -> b relationship is much easier to handle if we translate it to b <- a
-
-2. 

@@ -11,6 +11,9 @@ int all = 1 << n; then for each set in [0, all)
 3.Because set has the commutativity property, all commutatitivy insight can be used.
 
 4.A common indirect approach is the compute the complement of current set/problem space
-,e.g, Pr(max number in collection > i) = 1 - Pr(all number in colleciton <= i). max addition = total - mindeletion. This can make computation a lot easier
+Examples:
+Pr(max number in collection > i) = 1 - Pr(all number in colleciton <= i). 
+max addition <=> total - mindeletion.
+Grow a set <=> total set - visited sets
 
 5. because sets can introduce so many children, it is easy to incur pigeon hole princple as well => we just need to search wisely/fitering only the set we need

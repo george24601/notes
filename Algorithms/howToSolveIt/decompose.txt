@@ -6,6 +6,7 @@ may recomine elements of the problem which we use as an auxiliary problem
 
 recall a familiar problme having similar unknown. If not, invent one: think of other data appropriate to determine the unknown
 
+Can you solve a part of the problem?
 common method: keep unknown and keep only part of the condition and do not introduce new clause or datum
 
 the decisive idea often consits in carving out some more accesible but essential part from the problem
