@@ -1,8 +1,0 @@
-# Job
-job.factory.class=org.apache.samza.job.local.ThreadJobFactory #Use this value for dev only
-job.name=my-job-name
-
-# Task
-task.class=SimpleTask #full class name of your StreamTask class
-task.inputs=kafka.action #kafka.{topic you are listening to}. Topics separated by comma
-
