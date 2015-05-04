@@ -1,29 +1,52 @@
 simple rewind: restaring the job at an older point in time in the stream, and running thoruhg all th messages since that time
 
 parallel rewind:
-run two jobs in parallel: one job continues to handle live updates iwht low latency while the other is started at an older point in the stream => eventually the reprocessing job catches up with the real-time job
+run two jobs in parallel: one job continues to handle live updates with low latency while the other is started at an older point in the stream => eventually the reprocessing job catches up with the real-time job
 
 to jump back, you can
 1. stop the job and change the last check points
-2. start a new job with a different job.name or job.id => but it wills tart at the oldest offset available
+2. start a new job with a different job.name or job.id => but it will start at the oldest offset available
 
-In most cases, a job that jumps back in time shoudl start with an empty state. can reset state by deleting the changelog topic, or by changing the name of the changelog topic in job config (?)
+In most cases, a job that jumps back in time should start with an empty state. can reset state by deleting the topic, or by changing the name of the topic in job config
 
-common to kafka brokers to keep one or two weeks of mesage history acceisible, even for high volumn topics => can handle TBs of history
+common to kafka brokers to keep one or two weeks of message history acceissible, even for high volume topics => can handle TBs of history
 
 activity events: time-based retention, events odler than the retention period are deleted or archived in HDFS
 
 database changes: last change matters => changelog streams used by samza's persistent state => but need to jump to the beginning of time with log compaction
 
-potential problems with parallel rewind
-1. different job.name or job.id
-2. different changelog to maintain persistant state
-3. each job to have separarte output stream, or if you use same output, newer data cant be overriden by older data
+To implement parallel rewind
+1. need different job.name or job.id
+2. need different changelog to maintain persistant state
+3. each job to have separarte output stream, or if you use same output, newer data can NOT be overriden by older data
 4. new output test case ideal for A/B testing
 5. eventually need to shut down the old job, delete the checkpoint and changelog streams belonging to the old versin
 
 
+------
 Relevent concepts:
 changelog: in this context, just kafka topics
 
+persistant state for samza:
+stored same machine as the stream task. replicated for fault tolerance
+
 log compaction: kafka concept
+deleting old segemnts of log works well for temporal systems
+but what if only the last state matters => log compaction: support retaining messges by key instead of purely by time.
+usage:
+maintain a replica of the data stream by key,e.g, indexing, cache
+Event sourcing: each occurence is maintained and various devrived values are computed off of this
+journally arbitrary processing
+
+Kafka acts as source of truth, so it is fine if upstream source is not replayable
+
+message with a key and null payload will be treated as a delete from the log. any prior message with that key will be removed. NOTE: delete markers will themselves be cleaned out of the log after a period of time
+
+compaction is done in the background by periodically recopying log segments, can be throttled
+deletion retention SLA to handle race condition
+---------
+Discussion:
+
+log compaction is a physical optimization, similar to caching,i.e., we can assume log tail doesnt exist when coding
+
+
