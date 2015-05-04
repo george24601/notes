@@ -1,3 +1,4 @@
+1.
 import scala.concurrent.ExecutionContext.Impicits.global
 
 val socket = Socket()
@@ -7,41 +8,42 @@ val confirmation : Future [Array[Byte]] = packet.flatMap ( p => socket.sendToEur
 
 def sendToEurope(packet: Array[Byte]) : Fture [Array[Byte]] =
 Http(URL, Request(packet))
-.filter(response => response.isOK) //how does this work??
+.filter(response => response.isOK) //will throw exception if it doesnt satisfy. Future will capture this in a try
 .map(response => response.toByteArray) 
 
-//now send the thing twice
+2. now send the thing twice
 
-val enropeConfirm = sendTo
+val europeConfirm = sendTo
 val usaConfirm = sendTo
 
-enropeConfimr.zip)useConfirm) //when zipping 2 futures, and one of them fails, the zip will fail!!
+europeConfirm.zip(useConfirm) //when zipping 2 futures, and one of them fails, the zip will fail!!
 
 //so introduce recover and recoverWith
 
 sendTo(europe, packet) recoverWith {
 	case europeError => sendTo(usa, packet) recover {
-	case usaError => usaerror.getMessage.toByteArray
-
+			case usaError => usaerror.getMessage.toByteArray
 }
 }
 
+3.
+if that future fails to, take the error of THIS future
 
 def fallbackTo(that: => Future[T]): Future[T] = {
  this recoverWith {
   case _ => that recoverWith { case _ => this}
 }
 
-//if that future fails to, take the error of THIS future
 }
 
-//awaitable => dont use it in production!
+4. awaitable.ready/result: useful for testing. do NOT use it in production!
 
 import scala.language. postfixOps
 
 val c = Await.result(confirmation, 2 seconds)
 
 
+5.
 def retry (noTimes: Int) (block: => Future[T]): Future[T] = {
 	if (noTimes == 0)
 		Future.failed(new Exception("sorry"))
@@ -51,10 +53,10 @@ def retry (noTimes: Int) (block: => Future[T]): Future[T] = {
 		}
 }
 
-//recursion is GOTO of functional programming!
-//use foldLeft and foldRight
-//List(a,b,c).foldLeft(e)(f) = f( f(f(e, a), b), c)
-//List(a,b,c).foldRight(e)(f) = f(a, f(b, f(c,e)))
+recursion is GOTO of functional programming!
+use foldLeft and foldRight
+List(a,b,c).foldLeft(e)(f) = f( f(f(e, a), b), c)
+List(a,b,c).foldRight(e)(f) = f(a, f(b, f(c,e)))
 
 def retry (noTimes: Int) (block: => Future[T]): Future[T] = {
 val ns = (1 to noTimes).toList
@@ -66,11 +68,12 @@ val result = attemps.foldLeft(failed)
 result
 }
 
+
 val result = attempts.foldRight(() => failed)
  ((block, a) => () => {block() fallbackTo {a()})
 result()
 
-//implicit future
+6. implicit future with async await
 
 import scala.async.Async._
 
@@ -89,6 +92,8 @@ while (result.isFaiulre && i < noTimes) {
 result.get
 }
 
+7. use async-await to implement future.filter
+
 def filter(p : T => Boolean) : Future[T] = async {
  val x = await {this}
 if(!p(x)) {
@@ -97,17 +102,12 @@ if(!p(x)) {
 x
 }
 
-def flatMap[S] (f: T => Future[S]) : Future[S] = async {
-val x: T = await {this}
-await {f(x)}
-}
-
 def filter(pred: T => Boolean) : Future[T] = {
 
 val p = Promise[T] ()
 
 this onComplete {
-case Fialure(e) =>
+case Failure(e) =>
 	p.failure(e)
 case Success(x) =>
 	if(!pred(x)) p.failure(new NoSuchElementException)
@@ -115,24 +115,34 @@ case Success(x) =>
 }
 
 p.future
+}
+
+8.future.flatmap
+
+def flatMap[S] (f: T => Future[S]) : Future[S] = async {
+val x: T = await {this}
+await {f(x)}
+}
 
 implement zip with async-await vs promise
+
+
+9. race condition fill a promise
+def race (left: Future[T], right: Future[T]) : Future[T] = {
+Promise[T] p = Promise[T]()
+
+left.onComplete {p.tryComplete(_)}
+right.onComplete {p.tryComplete(_)}
+
+p.Future
+}
+
+10. implement sequence: Future vs async-await vs promise
 
 def sequence(fts: List[Future[T]]) : Future[List[T]} = {
 fts match {
 	case Nil => Future(Nil)
-	case (ft:: fts) => ft.flatMap (t => sequence (fts).flatMap (ts => Futuren(t::ts))
+	case (ft:: fts) => ft.flatMap (t => sequence (fts).flatMap (ts => Future(t::ts))
 
 }
-
-
 }
-
-
-}
-
-
-}
-
-
-//race condition fill a promise
