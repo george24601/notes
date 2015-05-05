@@ -1,0 +1,9 @@
+How do people generate ids for records, so they can identify, locate, and potentially retrieve data quickly?
+1.Trivial case: id themselves has no relationship with data
+auto incremental number, global GUID store...
+implementation would be interesting
+
+2.more interesting case: id is somewhat related to data
+git's revision number: why designed that way?
+
+Any other cases?

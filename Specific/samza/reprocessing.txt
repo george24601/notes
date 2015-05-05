@@ -20,11 +20,10 @@ To implement parallel rewind
 2. need different changelog to maintain persistant state
 3. each job to have separarte output stream, or if you use same output, newer data can NOT be overriden by older data
 4. new output test case ideal for A/B testing
-5. eventually need to shut down the old job, delete the checkpoint and changelog streams belonging to the old versin
-
+5. eventually need to shut down the old job, delete the checkpoint and changelog streams belonging to the old version
 
 ------
-Relevent concepts:
+Relevent concepts/What is data/known?
 changelog: in this context, just kafka topics
 
 persistant state for samza:
@@ -46,7 +45,22 @@ compaction is done in the background by periodically recopying log segments, can
 deletion retention SLA to handle race condition
 ---------
 Discussion:
+1.
+log compaction is a physical optimization, similar to caching,i.e., we should assume log tail doesnt exist when coding at the beginning. But we need to factor log compaction in when we do performance and handling deletions
 
-log compaction is a physical optimization, similar to caching,i.e., we can assume log tail doesnt exist when coding
+2.
+With updated rules do we start with a new job id?
+Yes, then our offset will start from beginning
+No, then we need to somehow rewind offset so we can reprocess (some of) the past data
+
+3. Our new job will write to a new output stream?
+if so, then we need to start new downstream jobs, to notify of input stream change, because once a job is running, it is config is immutable
+this also means we will probably delete the old output stream in the end
+
+if to same topic, then the downstream job must be able to handle the newly updated data. This requirement seems common requirement of stream jobs
+
+4.when we are inside reprocessing logic, can we avoid recalcing everything?
+	when we read each message => ignore uninteresting ones
+	or dont read all messages => only partitions that we know will change
 
 

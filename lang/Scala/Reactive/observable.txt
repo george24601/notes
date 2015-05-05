@@ -1,0 +1,13 @@
+1. Future and Try are duals
+Future trait onComplete is of type
+(Try[T] => Unit) => Unit
+reverse the direction, we get
+() =>(() =>Try[T])
+
+i.e., when this executes many times, we get Try[T]
+
+2. Iterable and observable are duals
+Iterator can be simplified to type
+() => Option[T]
+
+Iterable, therefore, can be simplifed to () =>(() => Try[Option[T]])
