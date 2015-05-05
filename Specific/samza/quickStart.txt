@@ -1,48 +1,60 @@
 1. What to install?
+-------------
 Use Dockerfile to set up dev samsa environment
 
 2.  How To make a samsa job?
+-------------
 You need to make: 
-A. a samza package, 
-B. a samza job configuration file.
+* a samza package, which is a tarball 
+* a samza job configuration file.
 
 3. What is a samza package?
-Just a folder with the following structure
+------------------
+Just a tarball with the following structure (unzipped)
 
-bin/run-am.sh
-bin/run-class.sh
-bin/run-job.sh
-bin/run-container.sh
-lib/
+* bin/run-am.sh
+* bin/run-class.sh
+* bin/run-job.sh
+* bin/run-container.sh
+* lib/
 
 The .sh files are from dependency 
-groupID: org.apahce.samza 
-artifactID: samza-shell
-classifier: dist
-type: tgz
-
-They should be included as part of packaging process. Your code should be compiled into JARs and put into lib/
+* groupID: org.apahce.samza 
+* artifactID: samza-shell
+* classifier: dist
+* type: tgz
 
 4. What is in the JARs?
+-----------------
 The class represents your job processing logic. All your stream processing logic should be in a class that implement org.apache.samza.task.StreamTask interface, and more specifically, its process() method
+Note that all jars from samza will be in lib as well. This is part of their design decision to isolate dependency
 
 5. How to implement process() method?
-A. read incoming messages from envelope
-B. use collector to send output message wrapped in OutgoingMessageEnveloope, whose format is just dual of incoming envelope's
+-----------------
+* read incoming messages from envelope
+* use collector to send output message wrapped in OutgoingMessageEnveloope, whose format is just dual of incoming envelope's
 NOTE: do NOT use collector outside process()
-C. coordinator
-for advanced use
+* coordinator for advanced use
 
-6. Complie your classes into JAR, and put it in a package's lib folder mentioned in 3
+6.How to make configuration file?
+------------
+see the sample configuration .properties file for detailed explaination, at minimum, you need to define:
+* job.factory.class
+* job.name
+* task.class
+* task.inputs
 
-7.Now how to make configuration file
-see the sample configuration file, at minimum, you need to define:
-job.factory.class
-job.name
-task.class
-task.inputs
+7. How to build and deploy package?
+-------------
+* Create a configuration .properties file for your new task class
+* sudo mvn package
+* put the generated tarball to a location the worker process/box can access. When developing locally, a file path is generally enough.
 
-8. run the job with package and configuration file
-$PACKAGE_PATH/bin/run-job.sh \
-  --config-factory=samza.config.factories.PropertiesConfigFactory \
-  --config-path=$CONFIG_PATH
+8. How to run the package?
+-------------
+$PACKAGE_PATH/bin/run-job.sh --config-factory=samza.config.factories.PropertiesConfigFactory --config-path=$CONFIG_FILE_PATH
+
+9. How to know if my job is running correctly?
+------------
+* YARN's web UI lists running, waiting, killed jobs. web UI port default is 8088
+* check the $YARN_BIN_PATH/logs/usrlog. 

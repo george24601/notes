@@ -4,6 +4,13 @@ auto incremental number, global GUID store...
 implementation would be interesting
 
 2.more interesting case: id is somewhat related to data
-git's revision number: why designed that way?
+git's revision hash: why designed that way?
+1. hard to assign serial # as revision in distributed system,i.e., a hybrid approach, where local uses revision number, across uses hashes
+2. 
+The source tree of the commit (which unravels to all the subtrees and blobs)
+The parent commit sha1
+The author info
+The committer info (right, those are different!)
+The commit message
 
 Any other cases?

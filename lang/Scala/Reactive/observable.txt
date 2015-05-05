@@ -11,3 +11,20 @@ Iterator can be simplified to type
 () => Option[T]
 
 Iterable, therefore, can be simplifed to () =>(() => Try[Option[T]])
+
+reverse the direciton
+
+(Throwable => Unit, ()=> Unit, T=> Unit) => Unit
+
+type Observer[T] = (Throwable => Unit, ()=> Unit, T=> Unit)
+
+trait Observer[T] = {
+	def onError(..
+	def onCompleted(
+	def onNext(Value:..)
+}
+
+and introduce trait Observable[T]
+subscribe returns a Subscribtion => you can send unsubscribe to Subscribtion
+
+

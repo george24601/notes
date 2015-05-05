@@ -1,17 +1,3 @@
-implement StreamTask for processor
-
-configuration file:
-class
-task.inputs: kafka topic(s?)
-systems.kafka.streams.{kafka}.samza.msg.serde=json
-
-Receive message:
-for each envelope, you can get key, message, and system/stream/partition info
-
-Send message: 
-MessageCollector + OutgoingMessageEnvelope: similar to the InEnvelope, parition/key/message info, similar to lower-level kafka api
-use MessageCollector ONLY inside process()
-
 InitableTask: 
 container will call the init()
 
@@ -31,10 +17,6 @@ default checkpoint interval 60 sec
 configurations and samza.reset.offset, samza.offset.default
 export checkpoints,and reset checkpoints
 
-local state:
-replicated to changelog strea. With right tuning, changelog is not much bigger than the database
-When a container is restarted, we can expect 50MB/sec restore time
-
 k-v store
 configuration file
 
@@ -45,15 +27,3 @@ WindowableTask interface
 
 Event loop:
 every container is designed to use a single CPU core. In general, Samza is not thread-safe. Storgly discourgae form using threads in job's code
-
-run-job.sh to start job
-
-configuration:
-4 major sections
-Job, Task, Serilizaer, Systems
-
-pakcage sturcture
-bin/...
-lib/
-
-to run the package in yarn

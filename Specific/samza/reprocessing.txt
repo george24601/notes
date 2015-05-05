@@ -1,4 +1,4 @@
-simple rewind: restaring the job at an older point in time in the stream, and running thoruhg all th messages since that time
+simple rewind: restaring the job at an older point in time in the stream, and running through all messages since that time
 
 parallel rewind:
 run two jobs in parallel: one job continues to handle live updates with low latency while the other is started at an older point in the stream => eventually the reprocessing job catches up with the real-time job
@@ -11,7 +11,7 @@ In most cases, a job that jumps back in time should start with an empty state. c
 
 common to kafka brokers to keep one or two weeks of message history acceissible, even for high volume topics => can handle TBs of history
 
-activity events: time-based retention, events odler than the retention period are deleted or archived in HDFS
+activity events: time-based retention, events older than the retention period are deleted or archived in HDFS
 
 database changes: last change matters => changelog streams used by samza's persistent state => but need to jump to the beginning of time with log compaction
 
@@ -23,31 +23,20 @@ To implement parallel rewind
 5. eventually need to shut down the old job, delete the checkpoint and changelog streams belonging to the old version
 
 ------
-Relevent concepts/What is data/known?
+What is data/known?
+1.
 changelog: in this context, just kafka topics
 
+2.
 persistant state for samza:
-stored same machine as the stream task. replicated for fault tolerance
+stored on disk, on the same machine as the stream task. 
+replicated for fault tolerance. No problem check pointing large amounts of state
+all writes to the database partition are replicated to a durable kafka. So when a mahcine fails, we can restart the tasks on another machine, and consume the changelog to restore the contents of the database partition (50 MB/sec)
 
+3.
 log compaction: kafka concept
-deleting old segemnts of log works well for temporal systems
-but what if only the last state matters => log compaction: support retaining messges by key instead of purely by time.
-usage:
-maintain a replica of the data stream by key,e.g, indexing, cache
-Event sourcing: each occurence is maintained and various devrived values are computed off of this
-journally arbitrary processing
-
-Kafka acts as source of truth, so it is fine if upstream source is not replayable
-
-message with a key and null payload will be treated as a delete from the log. any prior message with that key will be removed. NOTE: delete markers will themselves be cleaned out of the log after a period of time
-
-compaction is done in the background by periodically recopying log segments, can be throttled
-deletion retention SLA to handle race condition
 ---------
 Discussion:
-1.
-log compaction is a physical optimization, similar to caching,i.e., we should assume log tail doesnt exist when coding at the beginning. But we need to factor log compaction in when we do performance and handling deletions
-
 2.
 With updated rules do we start with a new job id?
 Yes, then our offset will start from beginning
@@ -61,6 +50,12 @@ if to same topic, then the downstream job must be able to handle the newly updat
 
 4.when we are inside reprocessing logic, can we avoid recalcing everything?
 	when we read each message => ignore uninteresting ones
-	or dont read all messages => only partitions that we know will change
+	or dont read all messages => only partitions that we know will change. However, you can not specifiy which partitions to read
 
 
+Devise a simpler auxilary problem:
+just rewind to start, what do we need to do?
+1.How do we know where the job tarball/config file is located
+2.need to set config to ignore saved check points, => a new job id is good enough
+
+So we need new config file for sure, even for different job id => probalby have to generate one

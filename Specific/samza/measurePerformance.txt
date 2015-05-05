@@ -1,0 +1,24 @@
+Problem:
+Measure performance of a samza process
+
+Can you solve part of the problem?
+only need to measure consumer-producer pair one by one
+
+To devise a new problem, can you drop some condition?
+measure consumer with process logic
+measure consumer-producer without processing logic,i.e., dummy data
+
+What is the unknown?
+the throughput in terms of row count, MB/sec, we are more interested in MB/sec
+
+Have you seen a similar problem with similar unknown?
+Program to measure Kafka performance
+
+Can you reuse the problem's result?
+we have a good idea of producer/consumer's through put without processing logic
+producer: 25MB/sec each partition
+
+Can you reuse the problem's method?
+check how they measure physical size throughput
+double mbSec = msgsSec * (recordSize + Records.LOG_OVERHEAD) / (1024.0 * 1024.0);
+because we get a byte array, we can know how much time it takes
