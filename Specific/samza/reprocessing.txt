@@ -24,9 +24,6 @@ To implement parallel rewind
 
 ------
 What is data/known?
-1.
-changelog: in this context, just kafka topics
-
 2.
 persistant state for samza:
 stored on disk, on the same machine as the stream task. 
@@ -36,7 +33,45 @@ all writes to the database partition are replicated to a durable kafka. So when 
 3.
 log compaction: kafka concept
 ---------
+Problem: 
+Design a service that can reprocess the data if required
+
 Discussion:
+What is the unknown?
+Structure of service
+what information does it accept? what does it return?
+
+What is the data?
+All the known samza/kafka rules
+
+What is the condition?
+if a job's processing logic changes, the service should reprocess the data to reflect changes 
+
+Definitely need auxilary problem. This problem is very generic, need to introduce specialized, less ambitious problems
+When we reprocess, the offset we set will start from 0
+
+Now swap unknown and part of data
+given whatever input we want, what do we need to run jobs (known to unknown)?
+We need: 1. tarball locaiton
+	2. a config file
+
+i.e. enough information to determine the location of tarball
+enough information to get/generate the config file
+Service needs to kill existing job anyway => need to find a way to locate application id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 2.
 With updated rules do we start with a new job id?
 Yes, then our offset will start from beginning
