@@ -1,8 +1,6 @@
 ### Algorithms ###
 How To Solve It notes and practices
 
-Programming contest problems: UVa Online Judge and Google Code Jam
-
 MapReduce related
 
 Stream processing algorithms
