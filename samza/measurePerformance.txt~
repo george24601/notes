@@ -1,0 +1,58 @@
+Problem:
+Measure performance of a samza process
+
+Can you solve part of the problem?
+only need to measure consumer-producer pair one by one
+
+To devise a new problem, can you drop some condition?
+measure consumer with process logic
+measure consumer-producer without processing logic,i.e., dummy data
+
+What is the unknown?
+the throughput in terms of row count, MB/sec, we are more interested in MB/sec
+
+Have you seen a similar problem with similar unknown?
+Program to measure Kafka performance
+
+Can you reuse the problem's result?
+we have a good idea of producer/consumer's through put without processing logic
+producer: 35MB/sec each partition with 100 Byte message => 350k messages per sec
+
+Can you reuse the problem's method?
+check how they measure physical size throughput
+double mbSec = msgsSec * (recordSize + Records.LOG_OVERHEAD) / (1024.0 * 1024.0);
+because we get a byte array, we can know how much time it takes
+
+----------
+iteration 1:
+empty samza job: 100k msgs/sec
+simple job that only measures input physical size: 40k msgs/sec
+
+How do we explain the performance difference? 
+
+What is the unknown?
+reason for slowness
+
+What is the condition?
+samza, yarn, kafka, and our cluster
+
+What is the data?
+samza metrics, measured performance throughput, and resource usage
+
+Need to devise auxilary problems:
+1. Drop some condition => 
+kafka only => 300k messages/sec
+yarn + kafka => ???
+no cluster => single machine performance with yarn/samza/kafka setup,i.e., all local host ???
+
+Have you seen problems with similar unknowns?
+slowness, yes, degration, no => ??? then need to find out, including similar auxilary problems
+
+What can we get from data?
+based on metrics, cpu/RAM usage < 10%, Disk, network IO < 1M/s
+
+=> network IO vs calculated throughput inconsistent???
+
+What can we get from unknown?
+slowness is most likely from resource exhaustion or contention, given our data, contention seems more likely on exhaustion => mostly network related, followed by disk related
+
