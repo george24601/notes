@@ -1,45 +1,80 @@
 Common setup:
 each container periodically publish to "metrics" topic, then another job to consume these metrics. Note that each task instance will write a separate message
 
-Inside RunLoop:
-	process
-      window
-      commit
+----------
+SystemConsumersMetrics
 
-TaskInstanceMetrics/SamzaContainerMetrics
+Used by SystemConsumers
 
-metric fields
-1.commit-calls
+SystemConsumers poll each SystemConsumer for messages, update the messagechooser with the new messages, poll the message chooser for the next message, and return that message to the SamzaContainer
 
-Inside RunLoop
+Sequence of actions
+A. poll
+Poll all SystemStreamPartitions for which there are currently no new messages to process, i.e., poll system consumer => increase kafka-polls by 1
+
+Getting fetch map for system
+
+if there is empty SystemStreamPartitions
+	get system consumers => increase kafka-ssp-fetches-per-poll by fetch set size
+	consumers poll the systemFetchSet and get incoming message envelopes => increases kafka-messages-per-poll by 1
+	for each envelope, increase unprocessed-messages by size of envelops
+
+B.choose
+if chooser is empty, this means no new message, set timeout to sleep for a while => increase chose-null by 1
+
+Otherwise:
+we get an envelope from chooser => increase chose-object by 1, increase kafka-{topic}-messages-chosen by 1
+
+-------
+SamzaContainerMetrics
+
+Used by RunLoop, which controls the container needs to do what at when
+
+Each container is single-threaded, activities for all task instances within a container are multiplexed onto one execution thread
+
+8.window-ms
+  val windowMs = newTimer("window-ms")
+
+Sequence of action
+A. process
+Attempting to choose a message to process => increase process-call by 1
+
+the following logic will contribute to process-ms
+	get an envelope from consumerMultplexer => update choose-ms
+	if envelope is null => inc process-null-envelopes by 1
+	otherwise
+	inc process-envelopes by 1
+	ask taskInstance to process message
+	checkCoordinator
+
+B.commit
+This contributes to commit-ms
+
 "Committing task instances because the commit interval has elapsed."
 "Committing due to explicit commit request."
+either case increases commit-calls by 1
 
-Inside TaskInstance:
-"Flushing state stores for taskName: %s" 
+----------
+TaskInstanceMetrics
+used by TaskInstanceCollector
+inc both sent-calls and messages-sent in Send()
+inc flush-calls in flush()
 
-2.kafka-input-topic-offset
-currently processing???
+used by TaskInstance
+inc process-calls by 1 in process()
+inc window-calls by 1 in window()
+inc commit-calls by 1 in commit()
+when register consumer for target,  update kafka-{topic}-{partition}-offset to the last processed offset of that partition
 
-3.messages-sent
-TaskInstance => send , then increment
-
-4.process-calls: # of process() called in samza
-similar to commit-calls
-
-RunLoop:
-"Attempting to choose a message to process."
-
-TaskInstance:
-process:
-"Processing incoming message envelope for taskName and SSP"
-
-5.send-calls
-KafkaSystemProducer: send(source: String, envelope: OutgoingMessageEnvelope)
-Similar thing in SystemProducer
-
-6 window-calls
-related to window stream tasks
+----------
+KafkaSystemConsumerMetrics
 
 
-counter and gauge for custom metrics
+
+-----------
+KafkaSystemProducerMetrics
+
+-----------
+SystemProducersMetrics
+
+

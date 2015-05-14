@@ -56,3 +56,9 @@ based on metrics, cpu/RAM usage < 10%, Disk, network IO < 1M/s
 What can we get from unknown?
 slowness is most likely from resource exhaustion or contention, given our data, contention seems more likely on exhaustion => mostly network related, followed by disk related
 
+
+From samza metrics:
+"kafka-messages-per-poll":8297
+"kafka-throughput-test-messages-chosen":60393228,
+"kafka-polls":18686,
+"poll-timeout":10
