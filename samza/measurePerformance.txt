@@ -43,10 +43,12 @@ Need to devise auxilary problems:
 1. Drop some condition => 
 kafka only => 300k messages/sec
 yarn + kafka => ???
-no cluster => single machine performance with yarn/samza/kafka setup,i.e., all local host ???
+no cluster => single machine performance with yarn/samza/kafka setup,i.e., all local host, performance 40% faster! This is a contradiction
 
 Have you seen problems with similar unknowns?
 slowness, yes, degration, no => ??? then need to find out, including similar auxilary problems
+=> this means, yarn performance, samza performance, kafka performance is known
+
 
 What can we get from data?
 based on metrics, cpu/RAM usage < 10%, Disk, network IO < 1M/s
@@ -57,8 +59,15 @@ What can we get from unknown?
 slowness is most likely from resource exhaustion or contention, given our data, contention seems more likely on exhaustion => mostly network related, followed by disk related
 
 
-From samza metrics:
-"kafka-messages-per-poll":8297
-"kafka-throughput-test-messages-chosen":60393228,
-"kafka-polls":18686,
-"poll-timeout":10
+------
+Samza performance
+
+13 megs/sec peak spread across 5 container, but the need for 5 containers has more to do with memory requirements than throughput requirements
+
+Multiplexing the computation for all tasks onto a single thread per container is actually great for multi-tenancy. It means you can allocate a bundle of resources per container (we generally use 1.5 CPUs and 3GB of memory) and get reasonably predictable performance. 
+
+Samza’s really great for CPU and memory isolation, but network isolation is tough. In our experience so far, network saturation is the main cause of irregular performance. (!!!)
+
+To that end, we’ve added a set of utilization metrics to our Samza jobs and are building a service that can analyze them and relaunch jobs accordingly.
+
+------

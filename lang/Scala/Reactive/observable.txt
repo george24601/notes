@@ -1,12 +1,13 @@
-1. Future and Try are duals
+Future and Try are duals
 Future trait onComplete is of type
 (Try[T] => Unit) => Unit
 reverse the direction, we get
 () =>(() =>Try[T])
 
 i.e., when this executes many times, we get Try[T]
+------
 
-2. Iterable and observable are duals
+Iterable and observable are duals
 Iterator can be simplified to type
 () => Option[T]
 
@@ -26,16 +27,44 @@ trait Observer[T] = {
 
 and introduce trait Observable[T]
 subscribe returns a Subscribtion => you can send unsubscribe to Subscribtion
+-------
 
-3. Operators
+Operators
 flatMap: sequence problem
 flatten vs concat
 Obserable from future
 groupBy
+-------
 
-4.cold vs hot observable
-composite subscriptin
-multassignment sbscription
-serialsbscription
+cold vs hot observable
+composite subscription
+multassignment subscription
+serialsubscription
 
+-------
 
+Subject vs promise
+has onComplete , onComplete
+
+Promise complete twice => error , so tryComplete
+Subject wont fail in this case
+onCompelted => close the channel =>next will do nothing
+
+PublishSubject, ReplaySubject, asyncSubject, behaviorSubject
+
+Potential problems, most likely you dont need that
+
+--
+Convert Future to Observable
+
+Notication: represents signal sent to observable
+use matrizliae to turn into Observable
+toBlocking useful for demo and debug
+
+iterable to observable
+
+-----
+always use observable from factory methods
+contracts: auto unsubscribe
+(onNext)*(onCompleted+onError)?
+onNexts will be serialized
