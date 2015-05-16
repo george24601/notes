@@ -1,0 +1,13 @@
+# -nn host or port name not resolved
+#-S changes the display of sequence nubmers to absolute
+#-s $BYTES_TO_CAP , default 96
+#-i any : Listen on all interfaces just to see if you’re seeing any traffic
+
+#look for traffic based on IP address
+tcpdump host $HOST_IP
+
+#look for traffic from/to with src/dst
+
+#-w $target_fiile
+
+#-r $target_fiile
