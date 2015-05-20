@@ -66,3 +66,12 @@ add ID to withdraw and deposit
 store IDs of completed actions within bankaccount
 
 In akka, if an actor sends multiple messgae to the same destination, they will not arrive out of order
+
+-------
+Akka scheduler: high vol, short durations, and frequent cancellation
+
+reactive applicaito is non-blocking and event-drivent top to bottom
+actors are run by a (shared) dispatcher, which can also run futures
+prefer imutable data structures
+prefer context.become for differnet stats, with data local to the behavor
+do not refer to actor state from code running synchronously

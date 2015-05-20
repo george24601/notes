@@ -71,3 +71,6 @@ Samza’s really great for CPU and memory isolation, but network isolation is toug
 To that end, we’ve added a set of utilization metrics to our Samza jobs and are building a service that can analyze them and relaunch jobs accordingly.
 
 ------
+observation
+1. tweaking JVM settings, buffer size does help performance around 30%
+2. between each fetech, there is a 0.3 sec delay, which are 3 handshakes between yarn worker node and kafka broker node, each has an interval of 100 ms

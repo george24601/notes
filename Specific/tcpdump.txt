@@ -1,4 +1,6 @@
 # -nn host or port name not resolved
+sudo tcpdump -nn
+
 #-S changes the display of sequence nubmers to absolute
 #-s $BYTES_TO_CAP , default 96
 #-i any : Listen on all interfaces just to see if you’re seeing any traffic
@@ -8,6 +10,10 @@ tcpdump host $HOST_IP
 
 #look for traffic from/to with src/dst
 
-#-w $target_fiile
+#-X: show the packet's contents
+#-w $target_fiile : dump content to a text file
+sudo tcpdump -nn -w d1
 
-#-r $target_fiile
+#-r $target_fiile : load the file written by -w
+sudo tcpdump -nn -r d1 > readable
+
