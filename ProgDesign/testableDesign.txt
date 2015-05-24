@@ -1,0 +1,87 @@
+Note: * part marks the problem solving techiques
+
+What example to use?
+*Think about a previously solved problem, which parts of solutions/methods can we reuse?
+Recall: to learn a programming language, the best way is probably to write a compiler/interpretor of that language in the very same language
+
+Conclusion:
+In general, something directly related to programming languages itself, since it is in the purest form of abstraction. So a nice abstraction is the REPL (read-evalulate-print-loop) of programming languages 
+
+So we devise the following problem:
+Design the components of a REPL,i.e., 
+
+	while the program is running
+		read from input
+		eval the input
+		print the result of eval
+
+
+Decompose the problem:
+1. Loop and block within suggest two component/auxilary problems. Should we build the solution to REP or L first?
+* Depending on how you view which piece of detail is more important. 
+I choose REP part because I think the eval part is more related to the core of the problem. However, the gut feeling may not always be correct, so trail-and-error based on educated guesses is not surprising.
+
+Naturally, R,E, and P each suggests another auxilary problem, and we need to inspect them in sequence
+
+2.Design Read (R), but what should R do?
+*Inspect what is known
+R must be linked to some medium outside OUR program's domain
+
+*Inspect what is unknown
+At minimum, We need to know the input and output of R
+
+*What properties can we infer from unkown: output?
+output of R will be fed into a compiler/interpretor => R will get information from one domain and translate the information into the form of our domain =>
+
+pseudo code would be
+
+Read(input)
+	val rawInput = GetInfo(source)
+	val translated = Translate(rawInput)
+	return translated
+
+*What properties can we infer from unkown: input?
+* recall a previously solved problem
+how do we get access to a source in a different domain => we use some form of handle, e.g., URL, GUID, process id
+This means input will be handle in plain string form
+
+so pseudo code would be
+
+Read(handle)
+	val rawInput = GetInfo(ToSource(handle))
+	val translated = Translate(rawInput)
+	return translated
+
+
+2.1. Design testable GetInfo(source)
+*What is the contraint?
+GetInfo should get line(s) of string from source, this suggests source should implement some kind of interface. 
+
+One major benefit of this that during testing, we can use some local dummy class instead of using cross domain calls => but GetInfo is most likely private! => cant swap it easily during unit test! => This means we need to expose/encapulate the logic to create Source type somehow?
+*Can we reuse the results/methonds of a previously solved problems?
+Use factory pattern in OOP, or a lambda in functional way => During testing, the factory will be created by us as dummy
+so pseudo code becomes
+
+Read(handle, factory)
+	val rawInput = GetInfo(factory.ToSource(handle))
+	val translated = Translate(rawInput)
+	return translated
+
+* Notice by understanding details, we updated the preception of the problem as a whole!
+
+But factory itself becomes a new auxilary problem, how do you make factory testable?
+generally speaking, factory methods should be one-liner, i.e., very easy to break if there is ever bug in it. If not, then it is doing too much
+
+2.2 Design testable Translate
+recall what eval takes? we can translate can be empty
+* Notice by understanding details, we update out preception of the problem as a whole!
+
+3.Design Eval (E)
+For the sake of simplicity, I will skip the design of an interpretor, we just need to recall interpretor will read translated input and gives back the value of 
+
+
+4. Design Print(p)
+Left as excerice
+* Can you reuse methods/solutions of a previously solved problem?
+
+5. Design the L

@@ -74,3 +74,22 @@ To that end, we’ve added a set of utilization metrics to our Samza jobs and are 
 observation
 1. tweaking JVM settings, buffer size does help performance around 30%
 2. between each fetech, there is a 0.3 sec delay, which are 3 handshakes between yarn worker node and kafka broker node, each has an interval of 100 ms
+
+500k fetch thresold in ms
+Fetch block 1: 1202
+Idle block 1: 3567
+
+Fetch block 2: 1319
+Idle block 2: 3230
+
+250k fetch thresold in ms
+Fetch block 1: 592
+idle block 1: 1833
+
+Fetch block 2: 632
+idle block 2: 1903
+
+3. during the run, 
+
+-------
+

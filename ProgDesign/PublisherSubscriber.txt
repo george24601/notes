@@ -8,6 +8,8 @@ Event Channel: Context & ActivityManagerService
 
 Dymanics
 1. Subscriber registers with Event Channel
+implementation-wise, we need to send subscriber or channel info to the publisher,i.e., as a parameter. The channel or publisher can generate a sub token upon success sub. Later on, subscriber can use this token to unsub, instead of talking to channel directly
+
 2. Publisher produces Event and push it to the event channel
 3. event channel pushs the event to the subscriber
 4. Subscriber consumes event
