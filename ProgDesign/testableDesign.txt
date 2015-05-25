@@ -79,9 +79,24 @@ recall what eval takes? we can translate can be empty
 3.Design Eval (E)
 For the sake of simplicity, I will skip the design of an interpretor, we just need to recall interpretor will read translated input and gives back the value of 
 
-
 4. Design Print(p)
 Left as excerice
 * Can you reuse methods/solutions of a previously solved problem?
 
 5. Design the L
+I will leave out detailed thought process as excercise. Here are general guide lines
+
+A simple run loop seems easy, but in practice, the run() may include intialization, logging, and optimization techiniques such as caching and batching. 
+
+Problem to address in your L design:
+1. How to design so we can test REPL as a whole
+2. How to design so that we can test L separately?
+If REP test is successful, but REPL test failed, is it because of the implementation of L, or because of miscommunication of contracts between REP and L?
+
+------------
+Post mortem:
+Can we reuse some of the methods to reach the solution?
+Can we use (parts of) the solution to solve some other problems?
+
+
+
