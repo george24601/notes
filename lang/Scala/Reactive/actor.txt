@@ -75,3 +75,49 @@ actors are run by a (shared) dispatcher, which can also run futures
 prefer imutable data structures
 prefer context.become for differnet stats, with data local to the behavor
 do not refer to actor state from code running synchronously
+
+---------
+
+Thrown failure reified as messages
+
+Individual failure is handled by the team leader
+
+failed actor is termincated or restarted
+decision must be taken by one other Actor
+supervised Actors form a tree structure
+the supervisor needs to create its subordinate
+
+If decision applied to all children: AllForOneStrategy
+
+recovery by restart requires stable ids to refer to the service
+in Akka, the ActorRef stays valid after a restart, although the actor behind ref maynot:w
+
+Actor-local state cannot be kept across restarts, onl external state can span restarts
+child actors not stoppped during restart willb e restarted recursively
+
+-------------
+
+haivng an ActorRef implies liveness at some earlier point
+restarts are not externally visible
+after stop there will be no more responses
+
+But what about no reply case? which part is wrong
+Actor registers interest: receives Terminated(target) message when arget stops, will not receive any direct messagess from target thereafter
+
+restarts are recursive, more frqeunt nrea the leaves
+avoid restaring actors with importatn state
+keep imporatatn data near the root, delegate risk to the lavess
+
+-------
+shall not lose importatn state due to failure
+must persist state as needed
+must recover state at restart
+
+solution:
+in-place updates
+persiste change in append ponly fashion
+
+performing the effect and persisting that it was done cannot be atomic
+
+peform it before persisting for at least once sematnics
+perform it  after persisting for at most once sematics
