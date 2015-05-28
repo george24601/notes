@@ -1,41 +1,7 @@
-blocking sync introduces dea-locks
+blocking sync introduces dead-locks
 blocking is bad for CPU utilization
 sync ommunication couples sender and receiver
 ----
-actor : object with id
-has a behavior
-only interacts using synch message passing
-
-class Counter extends Actor {
-var count = 0
-def receive = {
- case "incr" => count += 1
- case ("get") => sender ! count
-}
-
-}
-
-def counter(n: Int): Receive = {
- case  "incr" => context.become(countter(n +1))
- case "get" => sender ! n
-}
-
-def receive = counter(0)
-
-class Main extends Actor {
- val counter - context.actorOf(Props[Counter], "counter")
-
-counter ! "incr" //inside itself, self will be sender
-counter ! "get"
-
-def recive = {
-	case count: Int =>
-	context.stop(self)
-
-}
-
-}
--------
 every actor knows its own address
 creating an actor returns its address
 addresses can be sent within messages
@@ -56,11 +22,10 @@ and exactly-once: only the first received in processed, sender needs to buffer, 
 
 good thing for messages: all messages can be persisted
 can include unique correlation IDs => enables exactly once
-delivery can be tretried until successufl
+delivery can be retried until successufl
 
-make transfer relaible
-
-log activitis of wiretransfer to persistent storage
+make transfer relaible:
+log activities of wiretransfer to persistent storage
 each transfer has a unique ID
 add ID to withdraw and deposit
 store IDs of completed actions within bankaccount
@@ -70,10 +35,10 @@ In akka, if an actor sends multiple messgae to the same destination, they will n
 -------
 Akka scheduler: high vol, short durations, and frequent cancellation
 
-reactive applicaito is non-blocking and event-drivent top to bottom
+reactive application is non-blocking and event-driven top to bottom
 actors are run by a (shared) dispatcher, which can also run futures
 prefer imutable data structures
-prefer context.become for differnet stats, with data local to the behavor
+prefer context.become for differnet stats, with data local to the behavior
 do not refer to actor state from code running synchronously
 
 ---------
@@ -82,7 +47,7 @@ Thrown failure reified as messages
 
 Individual failure is handled by the team leader
 
-failed actor is termincated or restarted
+Failed actor is terminated or restarted
 decision must be taken by one other Actor
 supervised Actors form a tree structure
 the supervisor needs to create its subordinate
@@ -90,34 +55,43 @@ the supervisor needs to create its subordinate
 If decision applied to all children: AllForOneStrategy
 
 recovery by restart requires stable ids to refer to the service
-in Akka, the ActorRef stays valid after a restart, although the actor behind ref maynot:w
+in Akka, the ActorRef stays valid after a restart, although the actor behind ref may not
 
-Actor-local state cannot be kept across restarts, onl external state can span restarts
-child actors not stoppped during restart willb e restarted recursively
+Actor-local state cannot be kept across restarts, only external state can span restarts
+child actors not stoppped during restart will be restarted recursively
 
 -------------
 
-haivng an ActorRef implies liveness at some earlier point
+havng an ActorRef implies liveness at some earlier point
 restarts are not externally visible
 after stop there will be no more responses
 
 But what about no reply case? which part is wrong
-Actor registers interest: receives Terminated(target) message when arget stops, will not receive any direct messagess from target thereafter
+Actor registers interest: receives Terminated(target) message when argent stops, will not receive any direct messagess from target thereafter
 
-restarts are recursive, more frqeunt nrea the leaves
-avoid restaring actors with importatn state
-keep imporatatn data near the root, delegate risk to the lavess
+restarts are recursive, more frqeunt near the leaves
+avoid restaring actors with important state
+keep important data near the root, delegate risk to the leaves
 
 -------
-shall not lose importatn state due to failure
+shall not lose important state due to failure
 must persist state as needed
 must recover state at restart
 
 solution:
 in-place updates
-persiste change in append ponly fashion
+persiste change in append only fashion
 
 performing the effect and persisting that it was done cannot be atomic
 
 peform it before persisting for at least once sematnics
-perform it  after persisting for at most once sematics
+perform it after persisting for at most once sematics
+-------
+
+actor communication is asynch, one-way and not guaranteed
+actors are location transparent, hidden behind ActorRef
+
+to turn on cluster
+-Dakka.actor.provider=akka.cluster.ClusterActorRefProvider
+-Dakka.remoate.netty.tcp.port=0
+-Dakka.cluster.auto-down=on

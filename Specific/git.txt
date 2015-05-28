@@ -1,0 +1,28 @@
+git commit --amend
+
+#unstage
+git reset HEAD <file>
+
+#discard changes in unstaged files
+git checkout -- <file>.
+
+#tag important revisions
+git tag
+
+#git alias for short commands
+
+
+#switch to branch, -b to create branch at the same time
+git checkout testing
+
+#remove branch, --merged, --no-merged opition
+git branch -d testing
+
+#show history of commits
+git log --oneline --decorate --graph --all
+
+#merge brnach
+git merge branchName
+
+#get data from remote projects
+git fetch [remote-name]
