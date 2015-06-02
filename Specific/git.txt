@@ -6,6 +6,9 @@ git reset HEAD <file>
 #discard changes in unstaged files
 git checkout -- <file>.
 
+#unstage delete, reset then checkout
+git reset -- <file>.
+
 #tag important revisions
 git tag
 
