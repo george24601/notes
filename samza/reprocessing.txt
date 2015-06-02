@@ -23,74 +23,36 @@ To implement parallel rewind
 5. eventually need to shut down the old job, delete the checkpoint and changelog streams belonging to the old version
 
 ------
-What is data/known?
-2.
-persistant state for samza:
+Problem: 
+If a job is accumulative, i.e., later results depend on previous result, how do we handle reprocessing?
+Scenario:
+User makes corrections to tax return filed in the past, all the following years credit/balance needs to be recalculated.
+
+What is the condition:
+fault tolerance,i.e., updating state and persist state locations. message most likely needs to be idempotent
+
+What is known?
+1.
+persistant state for samza: k-v store
 stored on disk, on the same machine as the stream task. 
 replicated for fault tolerance. No problem check pointing large amounts of state
-all writes to the database partition are replicated to a durable kafka. So when a mahcine fails, we can restart the tasks on another machine, and consume the changelog to restore the contents of the database partition (50 MB/sec)
-
-3.
-log compaction: kafka concept
----------
-Problem: 
-Design a service that can reprocess the data if required
-
-Discussion:
-What is the unknown?
-Structure of service
-what information does it accept? what does it return?
-
-What is the data?
-All the known samza/kafka rules
-
-What is the condition?
-if a job's processing logic changes, the service should reprocess the data to reflect changes 
-
-Definitely need auxilary problem. This problem is very generic, need to introduce specialized, less ambitious problems
-When we reprocess, the offset we set will start from 0
-
-Now swap unknown and part of data
-given whatever input we want, what do we need to run jobs (known to unknown)?
-We need: 1. tarball locaiton
-	2. a config file
-
-i.e. enough information to determine the location of tarball
-enough information to get/generate the config file
-Service needs to kill existing job anyway => need to find a way to locate application id
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+all writes to the database partition are replicated to a durable kafka. So when a machine fails, we can restart the tasks on another machine, and consume the changelog to restore the contents of the database partition (50 MB/sec)
 2.
-With updated rules do we start with a new job id?
-Yes, then our offset will start from beginning
-No, then we need to somehow rewind offset so we can reprocess (some of) the past data
+log compaction:
+A kafka optimization we can exploit but not rely on
 
-3. Our new job will write to a new output stream?
-if so, then we need to start new downstream jobs, to notify of input stream change, because once a job is running, it is config is immutable
-this also means we will probably delete the old output stream in the end
+From unknown
+When we reach the correction to previous facts, we need to recompute later results,i.e., we need to know later facts to begin with, so they must be available as local state
 
-if to same topic, then the downstream job must be able to handle the newly updated data. This requirement seems common requirement of stream jobs
+Swap unknown and known
+After we update this period's result, the updated result will propergate to the output topic as well, forcing the follow up consumer to update their old result, i.e., this "backtracking" of facts is a cascading and is a common pattern
 
-4.when we are inside reprocessing logic, can we avoid recalcing everything?
-	when we read each message => ignore uninteresting ones
-	or dont read all messages => only partitions that we know will change. However, you can not specifiy which partitions to read
+Therefore, every time we see an entry, we need to recompute ALL periods starting from the current one, and output all updated results to the result. 
 
+How is local state organized?
+Depends on what is the rate of this backtracking change. Note that similar to map-reduce, such stateful stream processing logic requires deep coupling with business rules to be efficient
 
-Devise a simpler auxilary problem:
-just rewind to start, what do we need to do?
-1.How do we know where the job tarball/config file is located
-2.need to set config to ignore saved check points, => a new job id is good enough
-
-So we need new config file for sure, even for different job id => probalby have to generate one
+Potential optimization
+batch processing
+may be able to compute only deltas
+similar to the idea of log compaction, set up rules so only last change matters
