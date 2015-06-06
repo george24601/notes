@@ -1,0 +1,99 @@
+1.
+Unknown: Color of bear
+From unknown: only 3- 4 choices
+Condition: turn 3 times and go back to itself
+From condition: Impossible to do so on a surface => so it can NOT be on a surface => it is on a sphere!
+Try those colors' locations on a sphere one by one => what do you discover
+
+2.
+Condition: parralel north/south, and parallel east/west border?, with size 100 ft
+No problem if it is surface => have we seen this problem before? => the previous one! => can you reuse methods in the last problem?
+
+3.
+Known: 10 pockets, 44 dollars
+conditions: no two pockets have same amount
+
+Auxillary problem: 
+A.drop some conditions => how to put 44 coins in 10 pockets
+B.swap unknown with known => given 10 pockets, what values of coin can you put in total, with no same amount between pockets?
+
+
+4.
+unknown: # of pages
+known: total # of digits in those pages
+
+Auxillary problem:
+A how many digits in total for 9 pages => 45
+B. how many digits in total for 100 pages => 2 *10 * 9 + A + 3
+C. 1000 => notice the odd padding for 100, 1000 => insight: should count from 0 to 9 instead of 1 to 10
+D. 999 => Total(0 - 99) + 1000 * 3 => notice this is REALLY close to our number
+
+E. Counding down form 999, how many digits in total when we count down to 900?
+
+
+5.
+known:  72 turkeys
+unknown: unit price
+condition: 72 * unit price = a67.9b
+
+from unknown:
+price > 233 and price < 1344 
+
+swap unknown and know and generate auxilary problem
+we know price has 3 digits, i.e., {xyz} = x * 100 + y * 10 + z , what is the value of {xyz} * 72 in the form of x, y, z
+
+
+if the price has 4 digits => first one must be 1 => we can reuse methods of the auxillary problem
+
+6.
+unknown: line layout
+known: point
+condition: line separating area in equal
+
+swap unknown and known
+given a line separating regular hexgaon, how to draw it?
+It must pass the central
+
+8.
+unknown: location of axis and rotate angles
+condition: rotate around a certain angle will make it coincide with itself
+
+auxilary problem: 
+A. drop dimension: axises on a square?  4 of them
+B. drop edges: axises on a regular tretrahedron => must pass the central point of mass , look back at A, same thing applies!
+insight: our axises must pass central point of mass 
+
+Seen similar problem before? the previous problem! => so we can try points and connect it with the mass central and see if it is an axis for cube
+
+11.
+notice the symmerty?
+
+12.
+separate parts of the condition, how to split them into parts
+a:suppose the first dropoff dist at D => easy to calculate the next meet up time
+b: based on a), easy to get the drop off dist
+c:p =0, for every distance forward, the car has to go back one
+p = c, no car needed 
+
+13.
+from condition:
+we know mid term is 42 and 34. Notice that the 76 gap, one is increasing, one is decreasing
+85 + 84 will ignore the delta of arithemetic series
+
+14.
+notice that x are symmetric, i.e., x(1) = 2 * x(2)
+
+17.
+induction
+
+19
+Auxilary problem
+n = 1
+n = 2
+n = 3
+
+20
+auxilary problem
+1.only cents
+2.only cents and nickles
+3.all types, but with lower amounts
