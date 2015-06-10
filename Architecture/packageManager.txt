@@ -1,8 +1,0 @@
-use npm as example
-
-It should support:
-1. same library with different versions coexist in dependency graph
-2. same library with same versions, install only 1 copy
-3. bump my package's version with ease
-
-
