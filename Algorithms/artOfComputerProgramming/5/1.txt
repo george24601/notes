@@ -1,0 +1,41 @@
+most important applications of sorting: 
+togetherness
+matching items in two or more files
+searching for info by key value: a listing that has been sorted into alphabetic order often looks quite authoritative even when the associated numerical information has benn incorrectly computed!
+
+stable sorting: records with equal keys should maintain relative order
+internal sorting
+external sorting
+----
+Excercise:
+1.
+If not, then at least one element e position is different. Consider the blocks with values = e. In both runs, e must be within the block. So the relative order between elements = e changes,i.e., sorting is not stable
+
+2.
+Reductio ad absurdum 
+If sorting is unstable => no guarentee in anyway. So if sorting is stable:
+Solve part of the problem:
+all minor keys unique, major key unique => A, B, C same => A,B,C same as long as major key unique
+non-unique majors, minor keys unique => A, C same, b is properly sorted as well, because after the first pass + second pass is stable
+Introduce a theorem: 
+as long as each composite key is unique, A,B,C result will be same...and discussion continues...try another direction
+
+Reuse the previous result.Claim: 
+1. A, B, and C sort things properly as long as sorting is stable
+2. A, B, and C sorting themselves are stable
+=> reuse the method: if all paths lead to a unique solution with same properties, then they lead to the same solution
+
+3.
+
+4. reuse the previous major key/minor key idea
+
+5.
+Condition:
+1. if m < n, then p(m) < p(n)
+2. if m != n, then one is not a prefix of another
+3. size is lgn + O(lglgn)
+Consider natural coding scheme: 123 vs 21 => bad! => however, notice that as long as the they are of same length, it is good
+what if we map 1 to a, 2 to aa , 3 to aaa => the prefix requirment is violated! => if the p(x) is variable length, we need some special char to mark eof
+Reuse previous result/method? majorkey, minor key idea:
+major key: # of digits => can be in padded natual coding scheme as well => will take loglogn to track number of digits in a number
+minor key: natural coding scheme
