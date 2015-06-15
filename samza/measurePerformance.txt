@@ -93,3 +93,9 @@ idle block 2: 1903
 
 -------
 
+More performance points
+
+simple message partitioner: 1m/ MIN, on a 4 core machine, cpu usage > 35%, this suggets buffer queue mostly fll => processing is the bottleneck
+
+simple calc with local storage + retrival : 500k /min, on 4 core machine, cpu usage > 35%. pulls < 10 times per sec, this suggests buffer queue is mostly full
+

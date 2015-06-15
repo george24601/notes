@@ -1,0 +1,34 @@
+no more than 2 column families
+
+avoid hotspotting caused by row key: salting, hashing, reversing the key
+
+avoid monotocially increasing row keys time series because they create hotspot
+
+if row and col names are large => cell value coordinates are large
+
+keep column family names short => one character ideally
+
+short attribute name, short rowkey length as long it keeps semantics
+
+reverse timestamps at the end of key to find the earliest version
+
+support any types that can be turned into bytes
+
+supports counter
+
+time to live deletes current val
+
+secondary index to help query
+
+client request filters: dont do a full can on a large table from an application
+
+row key size:
+HashKey to have fixed-size row key
+
+rows vs versions: rows
+
+extremely wide tables: row vs columns: rows
+
+
+
+

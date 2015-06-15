@@ -43,7 +43,10 @@ git checkout --track {remote/branch}
 #set a local branch to remote branch
 git branch -u origin/serverfix
 
-$rebase local changes you’ve made but haven’t shared yet before you push them in order to clean up your story, but never rebase anything you’ve pushed somewhere
+#rebase local changes you’ve made but haven’t shared yet before you push them in order to clean up your story, but never rebase anything you’ve pushed somewhere
+
+#change remote to forked repository
+git remote set-url origin $FORKED_URLt
 
 
 #git alias for short commands

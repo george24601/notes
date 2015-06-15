@@ -1,0 +1,19 @@
+Operations:
+
+repartition: changes the level of parallelism
+reduce: function should be associative 
+countByValue:
+reduceByKey:
+join: note that they must be within the same stream batches
+cogroup:
+When called on DStream of(K,V) and (K,W) pairs, return a new DStream of(K, Seq[V], Seq[W]) tuples
+
+updateStateByKey: state for each key is updated by applying the givne function on the previous state of the key => need to turn on updateStateByKey
+
+transform: rdd to rdd operations, the function provided to tranform is evaluated every batch interval
+
+print(): first ten elements of every batch of data
+
+saveAsTextFiles|ObjectFiles|HadoopFiles
+
+foreachRDD: push the data in each RDD to a external system => problems and patterns
