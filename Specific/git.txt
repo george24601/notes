@@ -48,5 +48,13 @@ git branch -u origin/serverfix
 #change remote to forked repository
 git remote set-url origin $FORKED_URLt
 
+#set up upstream repo
+git remote add upstream $Repo_synced_with_the_fork
+
+#sync forked with upstream
+git fetch upstream
+
+#merge the synced content with master
+git merge upstream/master
 
 #git alias for short commands
