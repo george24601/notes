@@ -4,6 +4,7 @@
 127.0.0.1 ubuntu.ubuntu-domain ubuntu
 
 2.
+wget http://www.gtlib.gatech.edu/pub/apache/hbase/1.1.0.1/hbase-1.1.0.1-bin.tar.gz
 tar xzvf hbase-1.1.0.1-bin.tar.gz
 cd hbase-1.1.0.1
 
@@ -34,11 +35,25 @@ export HBASE_MANAGES_ZK=false #if you want to use existing zk cluster. default i
                         <value>2181</value> <!--2181 is default ZK port-->
 	</property>	
 
+<property>
+      <name>hbase.zookeeper.quorum</name>
+      <value>wirthmaster</value> <!--comma separated , default localhost-->
+</property>
 
 
+
+5. conf/regionservers
+list of region servers, format same to slave file
+
+6. conf/backup-masters
 
 --------
 sample commands
+
+may need to force HDFS out of safe mode
+
+sudo -i
+bin/hadoop dfsadmin -safemode leave
 
 ./bin/start-hbase.sh
 
