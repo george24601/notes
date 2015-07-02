@@ -1,0 +1,5 @@
+include "shared", "api", "services:webservice", "services:shared"
+
+//setttings file for multi-project gradle
+
+//use common configuration among sub projects
