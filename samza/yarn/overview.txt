@@ -1,0 +1,12 @@
+global RM and per-application AM.
+RM and per-node slave NM form the data-computation framework. RM is the ultimate authority that arbitrates resources among al the applications in the system
+
+AM is taksed with neogtiating reosurces from RM and working with the NM to execute and monitor the tasks
+
+RM has 2 components: scheduler and AsM
+Scedular performs no monitoring or tracking of status for the application, and offeres no guarantees about restarting failed tasks due to application failure or hardware failure
+
+AsM is responsible for accepting job-submission, neogtiating the first container for exectuing the app specific AM and provids the service for restarting the AM container on failure
+
+NM is the per-machine framework agaent respohnsible for containers
+AM negotistas resource containers fromt he Scheduler, trackking status and monitoring for progress

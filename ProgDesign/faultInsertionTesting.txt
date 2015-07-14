@@ -1,0 +1,9 @@
+code injection:
+changing a predetermined portion of the source code to produce semantically incorrect mutatnt
+applying a ptach to the object code at a designated location
+
+state injection: system-level fault "manifestation" is injected as an errorneous state intended to minic the error produced by a fault,e.g., by debugger, message, storage, or command
+
+Faults are inserted in the service manager to trigger the reaction in the fault manager
+
+detection, isolation, recovery, and reporting are rarely implemented in one centralized location phsically. They are often distributed in separate software components and cooperate and coomunicate using a fault tolerance protocol

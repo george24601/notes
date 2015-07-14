@@ -1,0 +1,18 @@
+application submission client submtis application to RM => 
+setting up a YarnClient object
+set up application context
+prepare the first container of the applicaiton that contains theAM
+submit the application
+
+RM will lanucn AM on an allocated container. AM wiill
+a) communicate with RM to negotiate and allocate resourcs for future containers
+b) after container allocation, communicating NMs to launch application contains
+
+During execution, AM communicats NM , container events handles client start, stop, status update and error
+
+-----------
+
+start a YarnClient
+YarnClient creates an aplication, and get its paplication id
+setup ApplicationSubmissionContext which defins all the information needed by the RM to launch th AM.
+ContainerLaunchContext
