@@ -1,0 +1,22 @@
+Stackable trait
+
+contract: abstract class
+stackable part: trait that extends the abstract class. functions should be "abstract override". implementation will call super method before/after the stackable's own modification
+concrete part: just extend the abstract class, no need to override in scala
+
+compose: a new class that
+
+class Composed extends Concrete with StackableA with StackableB
+
+----
+
+Decorator
+
+contract: abstract class
+stackable part: class that extends the abstract class. Function is overrideable
+difference is that decorator itself has a reference to the internal core
+concrete part: just extend the abstract class
+
+compose: a new object that
+
+new DecoractorA(new DecoratorB(new Concrete)))
