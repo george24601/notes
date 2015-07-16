@@ -1,0 +1,25 @@
+known cases:
+task instance failure, 
+container(s) failure
+yarn job failure, 
+node failure
+network failure
+
+expected behavior:
+task instance faillure: need knowledge from samza => probably will trigger container failure?
+
+container failure: who will restart it? samza or yarn => can force failure at code level
+
+yarn job failure: yarn knowledge. AM coordinates execution of all task within the application. will restart failed tasks
+
+node failure: common scenario, must be tool somewhere
+
+network failure: should test, but less likely to happen
+
+yarn/samza am should handle the failed task instance and restart
+
+so to test:
+1. forced failure of task instance
+2. forced failure of a node
+
+if your AM failed, there is nothing you can do
