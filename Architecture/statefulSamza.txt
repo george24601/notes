@@ -1,33 +1,33 @@
-
-1. Overview: single thread, per message process model for each topic partition. Can decompose DAG into only single nodes(job) and its in/out edges (kafka topics)
+1. Overview: 
+single thread, per message process model for each topic partition. 
+Can decompose graph into only a single nodes(task) and its in/out edges (kafka topics). 
 
 2. Update local state from outside sources: 
 Kafka holds the ultimate truth => all state update actions have to come from input topics. Samza job will send state change message to output topics
 
 Option 1: Read state updates from different topics
+Option 2: Read state update from the same topic, if you have ordering requirement.
 
-Option 2: Read state update from a single topic, if you have ordering requirement.
+Unit testing:
+We can pass in a org.apache.samza.storage.kv.CachedStore to the job, but this breaks encapsulation. Still looking for a better solution
 
-3. Problem to be solved: fault tolerance with local state
-When a job restarts, it reads the local state's change log and repopulate it
+Integration testing: 
+Use of kafka.utils.{TestUtils,TestZKUtils} and org.apache.samza.job.local.ThreadJobFactory to spawn a test zk/kafka cluster in test process
+
+3. Fault tolerance with local state
+Ideally, action on local state should be idempotent.
+When a job restarts, it reads the local state's kakfa changelog and repopulate it
+Partial flushing of local state problem
+
+Testing: 
+Use a stackable trait/decorator to inject message redelivery, partial flushing, and process failure.
 
 4. Problem to be solved: Reprocessing with local state besides the naive way
 
 5. Multi-tenant local state
+Kakfa's partition is more of physical than logical. That is why we prefer tasks that are truly multi-tenant,i.e., handles multiple tenant's data from a single partition
 Similar to how we handle multi-tenant data in redis. We force each message to contain tenant information and then add a stackable trait/decorator to enable transparent access
-
-6. Testing with local state
-Unit test: we can pass in a org.apache.samza.storage.kv.CachedStore to the job, but this breaks encapsulation. Still looking for a better solution
-
-Integration test: use of kafka.utils.{TestUtils,TestZKUtils} and org.apache.samza.job.local.ThreadJobFactory. Basically spawn a test zk/kafka cluster in process
-
-Can show some code snippet
-
-Problem to be solved : how to simulate fault tolerance and reprocess scenario
 
 6. Performance troubleshooting
 Samza's system metrics: only shows obvious problems. In the end we rely mostly on jstack
-
-Problem to be solved: job's memory consumption too high on YARN cluster.
-
 Can include some basic performance numbers

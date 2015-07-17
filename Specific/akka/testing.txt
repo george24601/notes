@@ -1,0 +1,18 @@
+TestActorRef: 
+obtaining a reference to the underlying actor instance
+invoking or querying the actor's behavior
+
+recommended: use behavioural testing instead of actorRef whenever possible, i.e., using messagin th ask the Actor to reply with the state you want to run assertions against
+
+TestActorRef is synchronous, so it will not work with support traits that rquires async behaviours
+
+TAR supports all operations valid on normal ActorRef. Messages sent to the actor are processed synchronously on the current thread and answers may be sent back as usual
+
+common use case: setup the actor into a specific internal state before sending the test message
+another is to verify correct internal state transitions after ahving sent the test message
+
+--------
+Verifying expected exceptions can not be done direclty: replace normal event handler with TestEventListener
+
+-----
+use of TestProbe to expect message
