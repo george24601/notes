@@ -28,8 +28,8 @@ to use *apply on the expression
 
 B.When we are evaluating the expression, we will break down the expression
 list as eval process, so when we reach level where the expression is only an
-atom, the atom maybe
-simple number, simple #t #f, atom?, system defined functions such as null?, eq?, con,
+atom, the atom may be simple number, simple #t #f, atom?, 
+system defined functions such as null?, eq?, con,
 car, cdr, and number?, or an identifier
 
 In all but last case, we will apply the *const operation on the expression,

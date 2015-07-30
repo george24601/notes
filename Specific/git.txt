@@ -57,4 +57,5 @@ git fetch upstream
 #merge the synced content with master
 git merge upstream/master
 
-#git alias for short commands
+#show branch history
+git log

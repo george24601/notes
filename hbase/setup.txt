@@ -5,8 +5,8 @@
 
 2.
 wget http://www.gtlib.gatech.edu/pub/apache/hbase/1.1.0.1/hbase-1.1.0.1-bin.tar.gz
-tar xzvf hbase-1.1.0.1-bin.tar.gz
-cd hbase-1.1.0.1
+tar xzvf hbase-1.1.1-bin.tar.gz
+cd hbase-1.1.1
 
 3.Edit conf/hbase-env.sh
 
