@@ -4,7 +4,7 @@
 127.0.0.1 ubuntu.ubuntu-domain ubuntu
 
 2.
-wget http://www.gtlib.gatech.edu/pub/apache/hbase/1.1.0.1/hbase-1.1.0.1-bin.tar.gz
+wget http://www.gtlib.gatech.edu/pub/apache/hbase/1.1.1/hbase-1.1.1-bin.tar.gz
 tar xzvf hbase-1.1.1-bin.tar.gz
 cd hbase-1.1.1
 
@@ -17,7 +17,8 @@ export HBASE_MANAGES_ZK=false #if you want to use existing zk cluster. default i
 
   	<property>
                 <name>hbase.rootdir</name>
-                <value>file:///home/testuser/hbase</value> <!--will be an hdfs:// address if deployed on cluster-->
+                <value>file:///home/testuser/hbase</value> 
+                <!-- <value>hdfs://hdfsmaster:8020/hbase</value> -->
         </property>
 
         <property>
@@ -37,7 +38,7 @@ export HBASE_MANAGES_ZK=false #if you want to use existing zk cluster. default i
 
 <property>
       <name>hbase.zookeeper.quorum</name>
-      <value>wirthmaster</value> <!--comma separated , default localhost-->
+      <value>zookeeperHost</value> <!--comma separated , default localhost-->
 </property>
 
 
@@ -47,8 +48,9 @@ list of region servers, format same to slave file
 
 6. conf/backup-masters
 
---------
-sample commands
+7. copy conf folder to other slaves/backup masters
+
+scp -r hbase-1.1.1/conf hdp@spmyarn3.spm-thompson.com:~/hbase-1.1.1
 
 may need to force HDFS out of safe mode
 
@@ -57,10 +59,15 @@ bin/hadoop dfsadmin -safemode leave
 
 ./bin/start-hbase.sh
 
+./bin/hbase-daemon.sh --config conf start master 
+
+./bin/hbase-daemon.sh --config conf start regionserver 
+
 ./bin/hbase shell
 
+------
 
-
+sample commands
 create 'table_name', 'col_family'
 
 list 'table_name'
@@ -74,6 +81,8 @@ get 'table_name', 'row1'
 disable 'table_name'
 
 drop 'table_name'
+
+---------
 
 5.
 check hdfs folder

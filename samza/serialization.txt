@@ -1,0 +1,23 @@
+places to serialize:
+1. library for publishign to kakfa and consuming from kafka
+2. inside process method
+3. between 1 and 2, samza's serialization layer
+
+Each serde is defined with a factory class => implement your own SerdeFactory interface
+
+example:  hello-samza
+
+serializers.registry.json.class=org.apache.samza.serializers.JsonSerdeFactory
+systems.kafka.samza.msg.serde=json
+
+Concrete type: Map<String, Object>, where Object is String or Int
+
+i.e., use json to serialize it.
+-----
+
+How is implemented in samza
+
+SerdeFactory -> JsonSerde -> SamzaObjectMapper to get ObjectMapper, and ObjectMapper to writeValue/readValue
+
+ObjectMapper addSerializer
+SimpleModule to add Serializer/Deserializer
