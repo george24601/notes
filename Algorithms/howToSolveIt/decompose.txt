@@ -3,6 +3,9 @@ examine datum by itself, to separate various parts of condiiton
 may need to go back to definition to introduce new elements
 
 may recombine elements of the problem which we use as an auxiliary problem
+1: keep the unknown and change data and condition
+2. keep the data and change unknown and condition
+3. change both unknown and data
 
 recall a familiar problem having similar unknown. If not, invent one: think of other data appropriate to determine the unknown
 
@@ -13,7 +16,7 @@ the decisive idea often consits in carving out some more accesible but essential
 
 interesting way of changing unknown and data is interchanging the unknown with one of the data
 
-after we drop condition to restrict less on unknown. How far is the unknwon then determined, how can it vary?
+after we drop condition to restrict less on unknown. How far is the unknown then determined, how can it vary?
 
 start from a statment of problem with terms and arrived at a restatment free of those terms
 
