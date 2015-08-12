@@ -1,0 +1,5 @@
+git flow setup
+
+1. A central truth repo - origin
+origin/master: production-ready code
+origin/develop: integration branch + nightly build. latest delivered dev changes for the next release
