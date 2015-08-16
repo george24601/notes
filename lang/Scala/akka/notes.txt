@@ -1,0 +1,17 @@
+source code of the project inside activator, then ./activator run
+
+Common use cases:
+1.regular JAR on the classpath, most likely if you are build web app
+2.stand alone appl by instantiating ActorSystem in a mainclass or using the Microkernel
+
+Production cases:
+1.Transaction processing
+2.Service REST etc as message hub /integration layer
+3.Concurrency/parallelism
+4.Simulation: master/worker, MapReduce
+5.Camel integration to hook up with batch data source divide and conquer the workloads
+6.Communications hub
+7.Event stream processing
+
+
+
