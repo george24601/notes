@@ -1,0 +1,23 @@
+ActorRef: suppoert seding messages to the actor it represents. Each actor has
+access to itself through self
+
+Purely local actor references: will not function if sent across a network
+connection to a remote JVm
+
+Local actor references when remoting is enable are used by actor systems which
+support netowrking functions for those reference which represent acots within
+the same JVM. Also include protocol and remote addressing info
+
+actors mixing in the Router: sending a message to them dispatchs to one of
+their children directly
+
+Actor -> ActorCell -> ActorRef -> ActorPath
+
+speical types of actor reference:
+PromiseActorRef, DeadLetterActorRef, EmptyLocalActorRef, DeadLetterActorRef
+
+Actor path represents a name which may or may not be inhabited by an actor adn
+the path itself does not ahve a lifecycle. Messages  sent to the old actor
+reference will not be delivered to the new incarnation even though they have
+the same path
+
