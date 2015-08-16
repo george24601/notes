@@ -1,0 +1,55 @@
+at-most-once delivery
+mesage ordering per sender-receiver pair: messages sent direclty form the frist to the seocnd will not be received out-of-order
+
+Fiaulre of a child of an actor is communciated by speical system messea that are not ordered relative or ordinary user messages
+
+Akka Persistence moduel for at-least-once delivery
+
+deadLette3rs main use is for debugging => try not to sendng to deadLetters where possible i.e. run application with suitable dead letter logger
+
+actor can subscrib DeadLetter on the event stream. Dead letters are not propagated over the network, you end subscribe and forwad them manually.
+
+Eveyr tiem an actor does not termiante by its own, chances are soem messages which it sends to itself are lost. This is ususally benign
+
+---------
+
+Configuration part skipped
+
+---
+akka.actor.UndahelndMEssage will be published to ActorSystem's EventStream
+
+Props config class to sepecify options for the creation of actorks
+
+val props = Props(new MyActor) //BAD! because it encourssages to close over the enclose scope, and Props is non-serializable
+val probps1 = Props[MyActor]
+val probps2 = Props(classOf[ActorWithArgs], "arg")
+
+Declareing one actor witin another is dangerous. Never pass an actor's this into Props!
+
+Good practice:
+
+1.provide factory methods ont he companion object of each Actor. This keeps the creation of Props and avoids Props.apply, since within a companion object the given code block will not ratain a reference to is enclosing scope
+
+object DecoActor{
+
+def props(num: Int): Props = Props(new DemoActor(num))
+}
+
+class DecomActor(num :Int) extends Actor{
+def receive = ...
+}
+
+class OtherActor extends Actor{
+	context.actorOf(DocmoAcotr.props(42), "demo")
+}
+
+2. Declare what msgs an Actor can receive in the companion object of the Actor
+
+3. ActorSystem is a heavy object, create only one per application. Use ActorSystem to create top-lvel actors, using an actor's context creates a child actor
+
+4. name you actors, since that is used in log messages and for identifying actors => duplciate name triggers InvalidActorNameException
+
+------
+Use Akka with Dependency Injection
+
+----
