@@ -53,3 +53,83 @@ class OtherActor extends Actor{
 Use Akka with Dependency Injection
 
 ----
+
+Writing code outside of actors which shall communicate with actors, can use the ask pattern. But to receive multiple replies and watch other actor's lifecycle => use Inbox class
+
+Restart and resume of an actor is within the same incarnation, but stop will bring another incarnation
+
+class WatchActor extends Actor {
+	val child = context.actorOf(Props.empty, "child")
+	context.watch(child) //register for DeathWatch
+	var lastSender = system.deadLetters
+
+	def receive = {
+		case "kill" => 
+			context.stop(child)
+			lastSender = sender
+		case Terminated('child') => lastSender ! "finished"
+
+	}
+
+}
+----
+preStart hook
+preRestart/postRestart hook
+postStop hook
+--------
+
+Always preferable to communicate wiht other Actors using ActorRef instead of relying upon ActorSelection, exceptions: 
+using at-least-once delivery facility
+initiating first contact with a remote system
+
+Get ActorRef for an ActorSelection: use of Identify message
+
+!: send a message asynchly and retur immediately
+?: sends a emsage async and restusn a Future repesenting a possible reply
+
+implicit val timeout = Timeout(5 seconds) //needed for ?
+
+val f = 
+for {
+	x <- actorA ? Request.mapTo[Int]
+	s <- actorBG ? Request.mapTo[String]
+	d <- (actorC ? Request).mapTo[Double]
+} yield Result(x,s,d)
+
+f pipeTo actorID  //To complet eh fure witha n exeption you need send a Fialure message to the sender. This is NOT done automatically when actor 
+
+try{
+
+}catch {
+	case e: Execption =>
+		sender ! akka.actor.Status.Failure(e)
+		throw e
+
+}
+
+onComplete, onSuccess, onFailure can used to register callback => but avoid closing over the containing actor's reference! do call method or access mutable stqate on the actor from within
+
+forward message
+
+gracefulStop to wait for termination or compose ordered termination of actors
+
+-------
+
+become taks a ParitialFunction[Any, Unit]. The hotswapped code is kept in a Stack which can be pushed and popped. Actor will revert to its original behavior whne restared by its Supervisor
+
+Stash trait to temparily stash away mesags that can not or should not be handled using the actor's current behavior
+
+Kill vs PoisonPill
+
+If an exception is thrown while msg is being processed, this message will be lost, you need to catch and try yourself => or use PeekMailbox pattern
+
+Extending Actos with PartialFunction chaining or else's partial funcitonf9!)
+
+trait B
+trait A { this: B => }
+
+A cannot be mixed into a concrete class that does not also extend B
+
+Init via constructor: construct is invoked for eveyr incarnation of the actor, but when you want to avoid reinitalize internals on restart?e.g., preserve child actors
+
+Initilziatoin via prestart
