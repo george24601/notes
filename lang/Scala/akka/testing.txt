@@ -6,18 +6,20 @@ val actorRef = TestActorRef[MyActor]
 val actor = actorRef.underlyingActor
 
 val future = actoreRef ? Say42
-val Success(result:Int) = futuren.value.get
-result shoudl be(42)
+val Success(result:Int) = future.value.get
+result should be(42)
 
-inercept[IllegalArgumentExeption] { actorRef.receive("hello") }
+intercept[IllegalArgumentExeption] { actorRef.receive("hello") }
 
 common cases:
 1. setting up the actor into a specific internal state before seting the test message
-2. verify correct internal staet transition after having sent hte test message
+2. verify correct internal state transition after having sent hte test message
 
 ------------
 
 Async integration testing with TestKit
+
+Any message from TestProbe to another actor which runs on the CallingThreadDispatcher has the risk of dead-lock, if that other acto might also send to this problme. Also dangrous to try watching TestActorRef rom a TestProbe
 
 
 --------

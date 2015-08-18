@@ -13,22 +13,19 @@ need a receptionist to handle that given URL
 
 need a controller to aggregate result, ensure no duplication
 
-need a getter to do actual heavy lifting
+need a getter to do actual heavylifting
 
 Now design messages
 Get(url) to reception
 check (url, depth) to controller
 get(url) to getter, getter will give back all urls, and a done in the end to controller
-
-note that we choose to include state in message as well
 Result(url) from controller to reception
-
 */
 
 object WebClient{
   val client = new AsyncHttpClient
 
-  //a reactive application is non-blickign & event-driven top to bottom
+  //a reactive application is non-blocking & event-driven from top to bottom
   def get(url: String) (implicit exec : Executor) = {
     val f = client.prepareGet(url).execute() 
     val p = Promise[String]()
@@ -62,13 +59,13 @@ class Getter (url: String, depth : Int) extends Actor {
     
   }
 
-  //actors run by dispatchor
+  //actors run by dispatcher
   def receive = {
     case body: String =>
       for (link <- findLinks(body))
-        context.parent ! Controller.Check(link depth) //parent is the creator of this actor
-        stop()_
-        case _: Status>Failure => stop()
+        context.parent ! Controller.Check(link, depth) //parent is the creator of this actor
+        stop()
+        case _: Status.Failure => stop()
         case Abort => stop()
   }
   
@@ -83,7 +80,7 @@ class Controller extends Actor {
   var cache = Set.empty[String] //notice we use var on immutable datat structure, because we need to share it with other actors
   var chilren = Set.empty[ActorRef]
   
-  context.setReceiveTimeout(10.seconds) //or we can use scheudler, e.g., scheduleronce, thus we will impose an overall 10 sec restriction
+  context.setReceiveTimeout(10.seconds) //or we can use scheduler, e.g., scheduleronce, thus we will impose an overall 10 sec restriction
   
   def receive = {
     case Check(url, depth) =>
@@ -97,7 +94,6 @@ class Controller extends Actor {
     
     case ReceiveTimeout => children foreach (_ ! Getter.abort)
   }
-  
   
 }
 

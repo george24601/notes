@@ -12,7 +12,7 @@ recall a familiar problem having similar unknown. If not, invent one: think of o
 Can you solve a part of the problem?
 common method: keep unknown and keep only part of the condition and do not introduce new clause or datum
 
-the decisive idea often consits in carving out some more accesible but essential part from the problem
+the decisive idea often consists in carving out some more accesible but essential part from the problem
 
 interesting way of changing unknown and data is interchanging the unknown with one of the data
 
