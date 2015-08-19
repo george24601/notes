@@ -1,0 +1,11 @@
+HTTP persistent connections
+HTTP pipelining
+HTTP streaming/ "chunked" transfer encoding
+
+All non-core features of typical HTTP servers (like request routing, file serving, compression, etc.) are left to the next-higher layer in the application stack, e.g., spray-routing
+
+To explicitly stop the server, send an Http.Unbind command to the HttpListener instance (the ActorRef for this instance is available as the sender of the Http.Bound confirmation event from when the server was started).
+
+When a new connection has been accepted the application-level listener, which was registered with the Http.Bind command, receives an Http.Connected event message from the connection actor. The application must reply to it with an Http.Register command within the configured registration-timeout period, otherwise the connection will be closed.
+
+ACKed sends
