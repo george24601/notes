@@ -22,8 +22,3 @@ Async integration testing with TestKit
 Any message from TestProbe to another actor which runs on the CallingThreadDispatcher has the risk of dead-lock, if that other acto might also send to this problme. Also dangrous to try watching TestActorRef rom a TestProbe
 
 
---------
-Verifying expected exceptions can not be done direclty: replace normal event handler with TestEventListener
-
------
-use of TestProbe to expect message

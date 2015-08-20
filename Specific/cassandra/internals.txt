@@ -1,0 +1,1 @@
+storage structure similar to a Log-Structured Merge Tree, unlink B-Tree, Read-before-wirte in large distributed system can produce stalls in read performance and problems,e.g., 
