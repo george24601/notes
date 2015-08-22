@@ -1,0 +1,19 @@
+ All MessageDispatcher implementations are also an ExecutionContext, which means that they can be used to execute arbitrary code, for instance Futures.
+
+If an ActorSystem is created with an ExecutionContext passed in, this ExecutionContext will be used as the default executor for all dispatchers in this ActorSystem.
+
+// for use with Futures, Scheduler, etc.
+implicit val executionContext = system.dispatchers.lookup("my-dispatcher")
+
+To give Actor a different dispatcher: 1. configure teh dispatcher 2.define the dispatcher in the deployment configuration or define it in code
+.
+
+PinnedDispatcher: dedicates a unique thread for each actor using it. No
+sharebility 
+
+BalancingDispatcher:executor based event driven dispatcher that will try to redistribute work from busy actors to idle actors.
+All the actors share a single Mailbox that they get their messages from
+It is assumed that all actors using the same instance of this dispatcher can process all messages that have been sent to one of the actors;
+Shared by  Actors of the same type only
+
+
