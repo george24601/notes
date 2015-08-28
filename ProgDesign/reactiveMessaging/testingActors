@@ -1,0 +1,12 @@
+import akka.testkit.TestActorRef
+
+val riskManagerRef = TestActorRef[RiskManager]
+val riskManager = actorRef.underlyingActor
+
+
+One benefit of the TestActorRef is that messages you send through it will be delivered directly to the receive partial function
+
+  test("Must have risks when told to calculate.") {
+    riskManagerRef ! CalculateRisk(Risk(...))
+    assert(!riskManager.risksToCalculate.isEmpty)
+  }

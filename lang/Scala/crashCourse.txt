@@ -22,3 +22,27 @@ Type inference:
 local parameter type, function return type
 
 invariance, covariance, and contravariance
+
+------
+
+//notice the var and potentially val used in ctor, a field will be generated and access that way
+class ShoppingCart(var maximumItems:Int) extends ItemContainer {
+  ...
+  maximumItems = if (maximumItems < 10) 10 else maximumItems
+}
+
+return statement usage is discouraged
+
+:+ operator for var of immutables
+
+The Scala compiler looks to see whether there is, within the current code context, a declaration of an implicit val someName: ActorRef. 
+
+You don’t even have to use the new keyword to create a new instance of a case class. 
+
+val evenNumbers =
+ for {
+  number <- numbers
+  if number % 2 == 0
+ } yield number
+
+

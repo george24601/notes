@@ -44,3 +44,6 @@ class ConcurrentPool[K, V] {
 9. partial functions
 
 10. JVM GC performance
+
+------
+
