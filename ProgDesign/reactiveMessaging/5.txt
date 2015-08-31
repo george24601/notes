@@ -1,0 +1,29 @@
+f the local actor that used actorOf() sends a message to the remote actor identified by the RemoteActorRef, the message is guaranteed to be
+delivered after the remote actor has been created. However, if any other actor on the local ActorSystem, or an actor on a third node, sends
+a message via the RemoteActorRef, there is no guarantee that the remote actor’s creation will have completed by that point in time. 
+
+he creator of the remote actor may endow other actors with the RemoteActorRef only after it knows that the remote actor is fully created. T
+
+EventBus
+
+DistributedPubSubMediator
+
+Use Datatype Channels when a receiver application must know the datatype of the incoming message without examining the message content.
+Create a different actor type corresponding to each separate datatype.
+
+A Dead Letter Channel (172) is generally used by the messaging system as a way to route messages that cannot be delivered to the intended
+receiver, whereas an Invalid Message Channel is used to route messages that are not understood by the receiver.
+
+how does an Akka-based application know that messages have been delivered to deadLetters? You can simply register an actor as a listener by
+way of the EventStream of the local ActorSystem.
+
+t is intended more as a debugging tool, giving developers the ability to watch for the arrival of Dead Letter messages that would indicate a
+problem with the implementation of some messaging design strategy being used by an application.
+
+o accomplish this, sent Messages (130) will be journaled in a Message Store (402), and then delivery will be attempted periodically until
+there is a confirmation of receipt, which is also saved in the Message Store (402). Unless special effort is made to delete any one message,
+all Messages (130) are journaled permanently. -- akka persistance to the rescue
+
+Your actor must be a PersistentActor to support AtLeastOnceDelivery. 
+
+Persistance + guaranteed delivery examples

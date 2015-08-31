@@ -1,0 +1,130 @@
+Use active names for operations with side effects
+user.activate() not user.setActive()
+
+Use descriptive names for methods that return values
+src.isDefined not src.defined
+
+Don't prefix getters with get
+As per the previous rule, it's redundant: site.count not site.getCount
+
+When using collections, qualify names by importing scala.collection.immutable and/or scala.collection.mutable
+
+
+-----
+list map { item =>
+  item match {
+    case Some(x) => x
+    case None => default
+  }
+}
+
+to
+
+list map {
+    case Some(x) => x
+    case None => default
+}
+
+-----
+
+Use return type annotaion for public methods
+
+Immutable collections should be covariant. Mutable collections should be invariant. 
+
+-----
+type aliases
+
+class ConcurrentPool[K, V] {
+  type Queue = ConcurrentLinkedQueue[V]
+  type Map   = ConcurrentHashMap[K, Queue]
+  ...
+}
+
+-----
+Cases to use implicit
+
+Extending or adding a Scala-style collection
+Adapting or extending an object (“pimp my library” pattern)
+Use to enhance type safety by providing constraint evidence
+To provide type evidence (typeclassing)
+For Manifests
+
+-----
+
+If your method needs a sequence, use Seq[T], not List[T]. 
+
+Do not operate without data; profile[1] your application before proceeding,e.g., use YourKits
+
+Use scala.collection.JavaConverters to interoperate with Java collections.
+
+import scala.collection.JavaConverters._
+
+val list: java.util.List[Int] = Seq(1,2,3,4).asJava
+val buffer: scala.collection.mutable.Buffer[Int] = list.asScala
+
+----
+future
+
+Do not throw your own exceptions in methods that return Futures. Futures represent both successful and failed computations. Therefore, it’s
+important that errors involved in that computation are properly encapsulated in the returned Future. Concretely, return Future.exception
+instead of throwing that exception:
+
+def divide(x: Int, y: Int): Future[Result] = {
+  if (y == 0)
+    return Future.exception(new IllegalArgumentException("Divisor is 0"))
+
+  Future.value(x/y)
+}
+
+----
+return inside closure is implemented as catch/throwing pair - performance implication
+
+----
+ assert: invariants that the code assumes
+require: API contracts 
+
+Declaring the type sealed allows the compiler to do exhaustivity analysis since constructors cannot be added outside the source file.
+
+t provides a safe alternative to the use of null, and should be used instead of null whenever possible
+
+write
+
+opt foreach { value =>
+  operate(value)
+}
+
+operate(opt getOrElse defaultValue)
+----
+partial functions
+
+val pf: PartialFunction[Int, String] = {
+  case i if i%2 == 0 => "even"
+}
+and they may be composed with orElse
+
+val tf: (Int => String) = pf orElse { case _ => "odd"}
+
+or in situations that might otherwise call for returning an Option:
+
+----
+Destruction binding
+
+val tweet = Tweet("just tweeting", Time.now)
+val Tweet(text, timestamp) = tweet
+
+-----
+A class member marked private,
+
+private val x: Int = ...
+is visible to all instances of that class (but not their subclasses). In most cases, you want private[this].
+
+private[this] val x: Int = 
+----
+
+
+
+
+----
+ JVM GC performance
+
+
