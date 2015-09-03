@@ -1,0 +1,10 @@
+Pig for ETL, where unstructured data is reformatted so that it is easier to define a structure to it
+Hive when query data that has a certain known structure to it
+
+Hive queries are not meant to execute in real time
+
+The data in Hive is read only. New partitions can be inserted, but not individual rows
+
+The files for a Hive table can be stored in a folder anywhere in HDFS by LOCATION clause
+
+
