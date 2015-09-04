@@ -1,0 +1,4 @@
+#scala shell
+bin/spark-shell
+
+port 4040: SparkUI

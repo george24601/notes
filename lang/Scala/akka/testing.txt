@@ -1,4 +1,4 @@
-Synchrounous(!) unit testing with TestActorRef: it doesnt work with traits taht requires async behaviors
+Synchrounous(!) unit testing with TestActorRef: it doesnt work with traits that requires async behaviors
 
 use behavioural testing instead of TestActorRef whenever possible, i.e., using messaging to ask the Actor to reply with the state you want to run assertions against
 
