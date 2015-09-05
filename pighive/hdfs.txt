@@ -3,7 +3,7 @@ sentiment, clickstream, sensor/machine, Geo, server logs, text such as web pages
 
 hadoop is designed to solve the problem of disk IO, i.e., problems where bottleneck is waiting to read data from the disk
 
-To avoid the need for any sharing of a single system, HDFS is write once and fiels are immutable
+To avoid the need for any sharing of a single system, HDFS is write once and files are immutable
 
 DataNodes do not know what file a block belongs to
 
@@ -15,23 +15,21 @@ data types: structured /Multi and unstructured
 
 i.e., use your RDBMS for relational, transactional data
 
-Ambari: op tool taht allows you to provision, manage, and monitor hadoop cluster
+Ambari: op tool that allows you to provision, manage, and monitor hadoop cluster
 
 because you do not need to apply a schema to the data, it is best to keep it in its raw format and try not to force a structure on the data
 
-Use pig to explore and transform raw data into a structure more suitable for a use case
-
-Use Hive to query structured data
+Use pig to explore and transform raw data into a structure more suitable for a use case. Use Hive to query structured data
 
 Hadoop assumes that ops will require a significant amount of data off disk. To avoid seeks, Hadoop just reads the entire file
 
-A NameNode represents a single namespace.o
+A NameNode represents a single namespace.
 
 Putting a file into HDFS:
 1. client sends request to NameNode
-2. NameNode determins how the data is broken down into blocks and which DataNodes will be used to store these blcoks
+2. NameNode determines how the data is broken down into blocks and which DataNodes will be used to store these blcoks
 3. client uses info from 2) to write to DN directly
-4. DN replicate newly created blocks based on instructions from NN
+4. DN replicates newly created blocks based on instructions from NN
 
 NN maintains 2 files:
 fsimage_N: entire fs namespace, including mapping of blocks to files and fs properties
@@ -39,11 +37,11 @@ edits_N: log that records every change that occurs to fs metadata
 
 when NN starts up, it enters safemode, merge fsimage_N and edits_N, and flushes result to fsimage_N+1
 
-NN periodically receivers a Heartbeat and a Blockreport from dns. Heartbeat means DN is functioning, Blockreport contains a list of all blocks on a DN
+NN periodically receivers a Heartbeat and a Blockreport from DNs. Heartbeat means DN is functioning, Blockreport contains a list of all blocks on a DN
 
-dn stores each block in a separate file
+DN stores each block in a separate file
 
-If DN fails to send Heartbeat to NN, then DN is labeled as dead, its blocs are replicated to live DNs
+If DN fails to send Heartbeat to NN, then DN is labeled as dead, its blocks are replicated to live DNs
 
 webhdfs 
 ----

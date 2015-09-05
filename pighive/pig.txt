@@ -1,0 +1,91 @@
+The steps in the logical plan do not execute until a DUP or STORE
+
+Complex types: Tuple: Tuple (), Bag{} , Map [#]
+
+GROUP: generate tuples with 2 fields: field "group", same type as group key. Second is name of the original relation , type bag
+
+GROUP ALL:
+
+FOREACH {}  GENERATE {}: 
+.. for open-ended range
+Generated tuple field name can be inferred, but not always => use AS to force generated name
+
+COUNT, MAX
+
+FILTER {} BY {}: use == for comparison
+
+LIMIT {} {}: Itself has no guarantee which tuples will be returned
+
+ORDER {} BY field [ASC | DESC] , field [ASC | DESC]: note that any op except LIMIT after ORDER will not keep the order
+
+CASE 
+  WHEN {} THEN {}
+  WHEN {} THEN {}
+END AS alias
+
+$ for parameter: To use, pig -p param=value script.pig. 
+Or pig -param_file stock.params myscript.pig
+inside the params, the format is similar to java properties file
+
+DISTINCT alias;
+
+PARALLEL n: # of reducers in the MR job
+
+FLATTERN(relation): flattern bag: a cross-product of EVERY record in the bag, with all of the other expr
+falttern tuple: removes nesting so each field in the tuple is at the top level
+
+----
+Nested FOREACH: must end with a GENERATE statement
+
+FOREACH nested_alias {
+alias = nested_op;
+alias = nested_op;
+GENREATE expr;
+};
+
+nest ORDER BY in FOREACH
+
+----
+JOIN alias1 BY key1, alias2 BY key2;
+
+Note that it will keep both key1 and key2 fields. use :: to distinguish same fields across rels
+
+-----
+JOIN alias1 BY key1 [LEFT|RIGHT|FULL] OUTER, alias2 BY key2;
+
+JOIN ... USING 'replicated': force map-side join, need to list the smaller data set LAST in the BY clause. If data set doesnt fit in memory,
+MR will give error
+
+---
+COGROUP a1 BY c1, a2 BY c2;
+
+For each input => a record with a key and one bag, which has tuples of rows matched with the key, and then joined together
+
+---
+UDF
+
+1.Write class taht extends EvalFunc
+2.Deploy the class in a JAR
+3. REGISTER JAR
+4. DEFINE alias for your UDF
+
+....
+---
+Performance tips
+1. Filter early and often
+2. Project early and often,i.e., use FOREACH to remove unused fields
+3. Drop nulls before join
+4. Use replicated joins whenever possible
+5. Proper PARALLEL value
+6. Compression (?)
+7. Use the right data type
+
+use .pigbootup file to config properties, register JAR, define UDFs....
+---
+DataFu lib for pig UDFs : register datafu-1.2.0.jar;
+
+Example: calcualte Quintile
+
+
+
+
