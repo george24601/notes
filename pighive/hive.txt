@@ -7,4 +7,99 @@ The data in Hive is read only. New partitions can be inserted, but not individua
 
 The files for a Hive table can be stored in a folder anywhere in HDFS by LOCATION clause
 
+Datatypes do not line up with traditional SQL types
 
+hive -f myquery.hive
+
+beeline -u url -n user -p pw
+
+CREATE (EXTERNAL) TABLE table (..) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' {LOCATION '/user/train/salaries''} ;
+
+EXTERNAL: when the table is dropped, files are not deleted in /appa/hive/warehouse/{table name}, which is the default location
+
+LOAD DATA LOCAL INPATH '/tmp/customers.csv' OVERWRITE INTO TABLE customers; //LOCAL marks local path instead of HDFS path
+
+LEFT OUTER JOIN
+
+Partitioned table:
+create table employees (id int, name string, salary double) partitioned by (dept string);o
+This will cause folder structure such as apps/hive/warehouse/employees/dept=hr/
+
+Bucketed table:
+create table employees (id int, name string, salary double) clustered by (id) into 16 buckets;
+
+Skewed table:
+CREATE TABLE Customers ( id int,
+username string,
+zip int )
+SKEWED BY (zip) ON (57701, 57702) STORED as DIRECTORIES;
+
+skewed entires will be stroed in separate files
+
+ORDER BY: complete ordering, SORT BY: per reducer sort
+
+hive.optimize.sampling.orderby=true #turn on paralle totoal ordering, otherwise, it would be done by only 1 reducer
+
+all rows with the same distribute by columns will go to the same reducer, typically used with an insert, but this does NOT mean clustering.
+You need to use SORT BY after DISTRIBUTE BY
+
+set mapreduce.job.reduces=2; insert overwrite table mytable
+select gender, age, salary from salaries distribute by age;
+
+INSERT OVERWRITE DIRECTORY '/user/train/ca_or_sd/' select name, state from names where state = 'CA' or state = 'SD'; //use LOCAL DIRECTORY
+to download locally
+
+MR properties for Hive
+
+Joins
+1: shuffle join/reduce side join
+2. map join: all but one table must be small enought to fit into memory
+3. sort-merge join: colocation utilities, but tables must be buckets in the same way
+
+Register and run UDFs
+
+ngrams and context-ngrams
+
+----
+HCatalog
+
+metadata and table management for hadoop
+
+exposes hive metadata to other tools
+
+emp_relation = LOAD 'employees' USING org.apache.hcatalog.pig.HCatLoader(); //Notice you dont specify schema here
+------
+Views
+
+CREATE VIEW 2010_visitors AS
+DROP VIEW
+
+view appears in "show tables;" as well
+
+Use custom mapper and reducer with TRANSFORM
+
+----
+Window function
+OVER (PARTITION BY {})
+
+￼SELECT cid, sum(price) OVER (PARTITION BY cid ORDER BY price ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) FROM orders; //can replace CURRENT ROW with 3 FOLLOWING, can use UNBOUNDED in the place of number
+---
+
+Hive file format,i.e., STORED AS when you create table:
+1.text file
+2. sequence file: serialized k-v
+3.RCFile
+4. ORC File
+
+ANALYZE table command
+
+---
+Performance tips:
+1. Divide data among different files that can be used by partitions, buckets, and skews
+2.use ORC file format
+3. sort and bucket common join cols
+4. use map joins
+5. increase rep factor of hot data
+6. Tez incorporation
+---
+Use .hiverc for configs
