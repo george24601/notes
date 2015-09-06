@@ -1,4 +1,29 @@
-#scala shell
-bin/spark-shell
+scala shell: bin/spark-shell
+
+conf/log4j.properties
 
 port 4040: SparkUI
+
+Driver programs access Spark through a SparkContext object, which represents a connection to a computing cluster. 
+
+driver programs typically manage a number of nodes called executors. 
+----
+
+//form spark-core package
+import org.apache.spark.SparkConf
+import org.apache.spark.SparkContext
+import org.apache.spark.SparkContext._
+
+val conf = new SparkConf().setMaster("local").setAppName("My App")//setMaster expects cluster URL
+val sc = new SparkContext(conf)
+val input =  sc.textFile(inputFile)
+val words = input.flatMap(line => line.split(" "))
+val counts = words.map(word => (word, 1)).reduceByKey{case (x, y) => x + y}
+counts.saveAsTextFile(outputFile)
+
+----
+sbt package
+
+use spark-submit to run
+
+

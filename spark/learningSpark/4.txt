@@ -1,0 +1,66 @@
+Sometimes working with pairs can be awkward if we want to access only the value part of our pair RDD. Since this is a common pattern, Spark
+provides the mapValues(func) function
+
+reduceByKey() and foldByKey() will automatically perform combining locally on each machine before computing global totals for each key. The
+user does not need to specify a combiner. The more general combineByKey() interface allows you to customize combining behavior.
+
+ As combineByKey() goes through the elements in a partition, each element either has a key it hasn’t seen before or has the same key as a
+previous element.
+
+If it’s a new element, combineByKey() uses a function we provide, called createCombiner(), to create the initial value for the accumulator
+on that key. It’s important to note that this happens the first time a key is found in each partition, rather than only the first time the
+key is found in the RDD.
+
+If it is a value we have seen before while processing that partition, it will instead use the provided function, mergeValue(),
+
+When we are merging the results from each partition, if two or more partitions have an accumulator for the same key we merge the
+accumulators using the user-supplied mergeCombiners() function.
+
+We can disable map-side aggregation in combineByKey() if we know that our data won’t benefit from it.
+
+val result = input.combineByKey(
+  (v) => (v, 1),
+  (acc: (Int, Int), v) => (acc._1 + v, acc._2 + 1),
+  (acc1: (Int, Int), acc2: (Int, Int)) => (acc1._1 + acc2._1, acc1._2 + acc2._2)
+  ).map{ case (key, value) => (key, value._1 / value._2.toFloat) }
+  result.collectAsMap().map(println(_))
+
+Every RDD has a fixed number of partitions that determine the degree of parallelism to use when executing operations on the RDD.
+
+To know whether you can safely call coalesce(), you can check the size of the RDD using rdd.partitions.size()
+
+If you find yourself writing code where you groupByKey() and then use a reduce() or fold() on the values, you can probably achieve the same
+result more efficiently by using one of the per-key aggregation functions. 
+
+we can group data sharing the same key from multiple RDDs using a function called cogroup(). cogroup() over two RDDs sharing the same key
+type, K, with the respective value types V and W gives us back RDD[(K, (Iterable[V], Iterable[W]))]. If one of the RDDs doesn’t have
+elements for a given key that is present in the other RDD, the corresponding Iterable is simply empty. 
+
+When there are multiple values for the same key in one of the inputs, the resulting pair RDD will have an entry for every possible pair of
+values with that key from the two input RDDs
+
+Because we called partitionBy() when building userData, Spark will now know that it is hash-partitioned, and calls to join() on it will take
+advantage of this information. In particular, when we call userData.join(events), Spark will shuffle only the events RDD, sending events
+with each particular UserID to the machine that contains the corresponding hash partition of userData
+
+that partitionBy() is a transformation, so it always returns a new RDD—it does not change the original RDD in place. RDDs can never be
+modified once created. Therefore it is important to persist and save as userData the result of partitionBy(), not the original
+sequenceFile().
+
+For example, sortByKey() and groupByKey() will result in range-partitioned and hash-partitioned RDDs, respectively. On the other hand,
+operations like map() cause the new RDD to forget the parent’s partitioning information, because such operations could theoretically modify
+the key of each record. 
+
+For binary operations, such as cogroup() and join(), pre-partitioning will cause at least one of the RDDs (the one with the known
+partitioner) to not be shuffled.
+
+for transformations that cannot be guaranteed to produce a known partitioning, the output RDD will not have a partitioner set.
+mapValues() and flatMapValues(), which guarantee that each tuple’s key remains the same.
+----
+
+PageRank code(!)
+
+----
+Custom partitoner
+
+

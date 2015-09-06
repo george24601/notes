@@ -1,0 +1,58 @@
+-rt inputs in the form of a directory containing all of the parts can be handled in two ways. We can just use the same textFile method and
+pass it a directory and it will load all of the parts into our RDD. 
+
+. If our files are small enough, then we can use the SparkContext.wholeTextFiles() method and get back a pair RDD where the key is the name
+of the input file.
+
+----
+val input = sc.wholeTextFiles("file://home/holden/salesFiles")
+val result = input.mapValues{y =>
+  val nums = y.split(" ").map(x => x.toDouble)
+  nums.sum / nums.size.toDouble
+}
+----
+
+The method saveAsTextFile(), demonstrated in Example 5-5, takes a path and will output the contents of the RDD to that file. The path is
+treated as a directory and Spark will output multiple files underneath that directory.
+
+Loading the data as a text file and then parsing the JSON data is an approach that we can use in all of the supported languages. This works
+assuming that you have one JSON record per row; 
+
+ If you do choose to skip incorrectly formatted data, you may wish to look at using accumulators to keep track of the number of errors.
+
+result.filter(p => P.lovesPandas).map(mapper.writeValueAsString(_)).saveAsTextFile(outputFile)
+
+If there are embedded newlines in fields, we will need to load each file in full and parse the entire segment,
+
+If there are only a few input files, and you need to use the wholeFile() method, you may want to repartition your input to allow Spark to
+effectively parallelize your future operations.
+
+ if some of the field names are determined at runtime from user input, we need to take a different approach. The simplest approach is going
+over all of our data and extracting the distinct keys and then taking another pass for output.
+
+Hadoop’s RecordReader reuses the same object for each record, so directly calling cache on an RDD you read in like this can fail; instead,
+add a simple map() operation and cache its result. Furthermore, many Hadoop Writable classes do not implement java.io.Serializable, so for
+them to work in RDDs we need to convert them with a map() anyway.
+
+val data = sc.sequenceFile(inFile, classOf[Text], classOf[IntWritable]).
+  map{case (x, y) => (x.toString, y.get())}
+
+In Scala there is a convenience function that can automatically convert Writables to their corresponding Scala type. Instead of specifying
+the keyClass and valueClass, we can call sequenceFile[Key, Value](path, minPartitions) and get back an RDD of native Scala types.
+
+Work with object files
+
+Protocol buffer example(!)
+
+-------
+
+To connect Spark SQL to an existing Hive installation, you need to provide a Hive configuration. You do so by copying your hive-site.xml
+file to Spark’s ./conf/ directory. Once you have done this, you create a HiveContext object, which is the entry point to Spark SQL, and you
+can write Hive Query Language (HQL) queries against your tables to get data back as RDDs of rows. 
+
+Use with consistent JSON format 
+
+when using JdbcRDD, make sure that your database can handle the load of parallel reads from Spark. If you’d like to query the data offline
+rather than the live database, you can always use your database’s export feature to export a text file.
+
+Use spark SQL with cassandra, HBase, ES

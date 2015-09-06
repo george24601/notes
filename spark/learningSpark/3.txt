@@ -1,0 +1,46 @@
+An RDD in Spark is simply an immutable distributed collection of objects. Each RDD is split into multiple partitions, which may be computed
+on different nodes of the cluster
+
+Once created, RDDs offer two types of operations: transformations and actions. Transformations construct a new RDD from a previous one. 
+Actions, on the other hand, compute a result based on an RDD, and either return it to the driver program or save it to an external storage
+system (e.g., HDFS).
+transformations return RDDs, whereas actions return some other data type.
+
+Spark’s RDDs are by default recomputed each time you run an action on them. If you would like to reuse an RDD in multiple actions, you can
+ask Spark to persist it using RDD.persist(). We can ask Spark to persist our data in a number of different places, 
+
+ your entire dataset must fit in memory on a single machine to use collect() on it
+
+If NotSerializableException occurs in Scala, a reference to a method or field in a nonserializable class is usually the problem.
+
+Note that distinct() is expensive, however, as it requires shuffling all the data over the network to ensure that we receive only one copy
+of each element.
+
+intersection() also removes all duplicates (including duplicates from a single RDD) while running. 
+
+subtract(other) function takes in another RDD and returns an RDD that has only values present in the first RDD and not the second RDD. Like
+intersection(), it performs a shuffle
+
+Similar to reduce() is fold(), which also takes a function with the same signature as needed for reduce(), but in addition takes a “zero
+value” to be used for the initial call on each partition. The zero value you provide should be the identity element for your operation; that
+is, applying it multiple times with your function should not change the value 
+
+Both fold() and reduce() require that the return type of our result be the same type as that of the elements in the RDD we are operating
+over. 
+
+With aggregate(), like fold(), we supply an initial zero value of the type we want to return. We then supply a function to combine the
+elements from our RDD with the accumulator. Finally, we need to supply a second function to merge two accumulators, given that each node
+accumulates its own results locally. => can avoid map() before fold() this way
+
+ collect() is commonly used in unit tests where the entire contents of the RDD are expected to fit in memory, 
+
+take() vs top()
+
+foreach(): perform an action on all of the elements in the RDD, but without returning any result to the driver program
+
+e need to add import org.apache.spark.SparkContext._ for these conversions to work. 
+
+The call manages to succeed because of implicit conversions between RDD[Double] and DoubleRDDFunctions. When searching for functions on your
+RDD in Scaladoc, make sure to look at functions that are available in these wrapper classes.
+
+ we called persist() on the RDD before the first action. The persist() call on its own doesn’t force evaluation.
