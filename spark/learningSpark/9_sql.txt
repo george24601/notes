@@ -1,0 +1,21 @@
+It is best to build Spark SQL with Hive support to access these features.
+
+The recommended entry point is the HiveContext to provide access to HiveQL and other Hive-dependent functionality. The more basic SQLContext
+provides a subset of the Spark SQL support that does not depend on Hive. 
+
+to connect Spark SQL to an existing Hive installation, you must copy your hive-site.xml file to Spark’s configuration directory
+($SPARK_HOME/conf)
+
+Note that if you don’t have an existing Hive installation, Spark SQL will create its own Hive metastore (metadata DB) in your program’s work
+directory, called metastore_db. In addition, if you attempt to create tables using HiveQL’s CREATE TABLE statement (not CREATE EXTERNAL
+TABLE), they will be placed in the /user/hive/warehouse directory on your default filesystem (either your local filesystem, or HDFS if you
+have a hdfs-site.xml on your classpath)
+
+To make sure that we cache using the memory efficient representation, rather than the full objects, we should use the special
+hiveCtx.cacheTable("tableName") method. 
+
+you can also convert regular RDDs in your program to SchemaRDDs by assigning them a schema.
+
+...
+
+Performance tuning

@@ -1,0 +1,46 @@
+to use MLlib for a text classification task:
+1.Start with an RDD of strings representing your messages.
+2.Run one of MLlib’s feature extraction algorithms to convert text into numerical features (suitable for learning algorithms); this will give
+back an RDD of vectors.
+3.Call a classification algorithm (e.g., logistic regression) on the RDD of vectors; this will give back a model object that can be used to
+classify new points.
+4.Evaluate the model on a test dataset using one of MLlib’s evaluation functions.
+
+Evaluate the model on a test dataset using one of MLlib’s evaluation functions.
+
+
+In many cases, defining the right features is the most challenging part of using machine learning
+
+often an important step is feature extraction and transformation to produce these feature vectors
+
+At the end, the algorithm will return a model representing the learning decision
+
+example: logistic regression with spams
+
+Sparse vectors are usually preferable (both in terms of memory use and speed) if at most 10% of elements are nonzero.
+
+Feature Extractoin: TF-IDF, Scaling, normalization, ... 
+
+Classification and regression are two common forms of supervised learning, where algorithms attempt to predict a variable from features of
+objects using labeled training data (i.e., examples where we know the answer). The difference between them is the type of variable
+predicted: 
+
+Linear regression is one of the most common methods for regression, predicting the output variable as a linear combination of the features.
+
+Logistic regression is a binary classification method that identifies a linear separating plane between positive and negative examples.
+
+Naive Bayes is a multiclass classification algorithm that scores how well each point belongs in each class based on a linear function of the
+features. It is commonly used in text classification with TF-IDF features, 
+
+Clustering is the unsupervised learning task that involves grouping objects into clusters of high similarity. clustering can be used to make
+sense of unlabeled data.
+
+...
+------
+
+Scale your input features
+Featurize text correctly. 
+Label classes correctly. 
+
+Most algorithms in MLlib are iterative, going over the data multiple times. Thus, it is important to cache() your input datasets before
+passing them to MLlib.

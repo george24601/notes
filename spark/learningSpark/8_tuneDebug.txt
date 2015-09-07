@@ -1,0 +1,37 @@
+use SparkConf to config
+
+The SparkConf associated with a given application is immutable once it is passed to the SparkContext constructor. That means that all
+configuration decisions must be made before a SparkContext is instantiated.
+
+Speical case: To set the local storage directories for Spark to use for shuffle data (necessary for standalone and Mesos modes) => SPARK_LOCAL_DIRS
+-----
+
+toDebugString()
+
+the scheduler outputs a computation stage for each RDD in this graph where the stage has tasks for each partition in that RDD. Those stages
+are then executed in reverse order to compute the final required RDD.
+
+RDDs that exist at the same level of indentation as their parents will be pipelined during physical execution. 
+
+in the case of the YARN cluster mode, where the application driver runs inside the cluster, you should access the UI through the YARN
+ResourceManager, which proxies requests directly to the driver
+
+look through the stages that make up a job and see whether some are particularly slow or vary significantly in response time across multiple
+runs of the same job. 
+
+A good first step when debugging issues is to scan this page, since a misconfiguration resulting in fewer executors than expected can, for
+obvious reasons, affect performance. It can also be useful to look for executors with anomalous behaviors, such as a very large ratio of
+failed to successful tasks. An executor with a high failure rate could indicate a misconfiguration or failure on the physical host in
+question. Simply removing that host from the cluster can improve performance.
+
+Performance tips:
+1. control degree of parallelism
+When Spark schedules and runs tasks, it creates a single task for data stored in one partition, and that task will require, by default, a
+single core in the cluster to execute.HDFS input RDDs have one partition for each block of the underlying HDFS file. RDDs that are derived
+from shuffling other RDDs will have parallelism set based on the size of their parent RDDs.
+2.When Spark is transferring data over the network or spilling data to disk, it needs to serialize objects into a binary format. This comes
+into play during shuffle operations, where potentially large amounts of data are transferred.  - use Kryo serilziatioan
+-Dsun.io.serialization.extended DebugInfo=true to help debug not serializable exception
+3. tweak caching behavior
+
+Hardware provisioning
