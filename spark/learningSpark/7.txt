@@ -1,0 +1,15 @@
+Spark’s documentation consistently uses the terms driver and executor when describing the processes that execute each Spark application. The
+terms master and worker are used to describe the centralized and distributed portions of the cluster manager.
+
+spark-submit options
+
+When you are bundling an application, you should never include Spark itself in the list of submitted dependencies.
+
+Instead, it’s common practice to rely on a build tool to produce a single large JAR containing the entire transitive dependency graph of an
+application. This is often called an uber JAR or an assembly JAR, 
+
+sbt example for spark package jars
+
+handle dependency conflict
+
+

@@ -1,0 +1,33 @@
+
+rmally pass functions to Spark, such as a map() function or a condition for filter(), they can use variables defined outside them in the
+driver program, but each task running on the cluster gets a new copy of each variable, and updates from these copies are not propagated back
+to the driver. Spark’s shared variables, accumulators and broadcast variables, relax this restriction for two common types of communication
+patterns: aggregation of results and broadcasts.
+
+...
+
+Spark has per-partition versions of map and foreach to help reduce the cost of these operations by letting you run code only once for each
+partition of an RDD.
+
+val contactsContactLists = validSigns.distinct().mapPartitions{
+  signs =>
+  val mapper = createMapper()
+  val client = new HttpClient()
+  client.start()
+  // create http request
+     signs.map {sign =>
+         createExchangeForSign(sign)
+          // fetch responses
+            }.map{ case (sign, exchange) =>
+                  (sign, readExchangeCallLog(mapper, exchange))
+                    }.filter(x => x._2 != null) // Remove empty CallLogs
+                    }
+
+
+In addition to avoiding setup work, we can sometimes use mapPartitions() to avoid object creation overhead. Sometimes we need to make an
+object for aggregating the result that is of a different type.(example)
+-----
+
+Piping to external programs
+
+Numeric ops with RDD, example: removing outliner

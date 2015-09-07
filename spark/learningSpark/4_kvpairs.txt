@@ -57,8 +57,47 @@ partitioner) to not be shuffled.
 for transformations that cannot be guaranteed to produce a known partitioning, the output RDD will not have a partitioner set.
 mapValues() and flatMapValues(), which guarantee that each tuple’s key remains the same.
 ----
+val sc = new SparkContext(...)
+val userData = sc.sequenceFile[UserID, UserInfo]("hdfs://...")
+                 .partitionBy(new HashPartitioner(100))   // Create 100 partitions, make this at least as loarge as # of cores in cluster
+                 .persist()//if we dont persist, every reuse will cause a reparatition over network
 
-PageRank code(!)
+
+ssNewLogs(logFileName: String) {
+  val events = sc.sequenceFile[UserID, LinkInfo](logFileName)
+  val joined = userData.join(events)// RDD of (UserID, (UserInfo, LinkInfo)) pairs
+  val offTopicVisits = joined.filter {
+    case (userId, (userInfo, linkInfo)) => // Expand the tuple into its components
+      !userInfo.topics.contains(linkInfo.topic)
+  }.count()
+  println("Number of visits to non-subscribed topics: " + offTopicVisits)
+}
+----
+PageRank example
+
+1.Initialze each to 1.0
+2.send rank(p)/numNeighbors(p) to its neighbors
+3.Set each page's rank to 0.15+0.85 * contributionsReceived
+
+val links = sc.objectFile[(String, Seq[String])]("links")
+              .partitionBy(new HashPartitioner(100))
+              .persist()
+
+var ranks = links.mapValues(v => 1.0) //mapValues will preserve partitioning, but not map()
+
+for (i <- 0 until 10) {
+  val contributions = links.join(ranks).flatMap {
+    case (pageId, (links, rank)) =>
+      links.map(dest => (dest, rank / links.size))
+  }
+  ranks = contributions.reduceByKey((x, y) => x + y).mapValues(v => 0.15 + 0.85*v)
+}
+
+// Write out the final ranks
+ranks.saveAsTextFile("ranks")
+
+---
+you should use mapValues() or flatMapValues() whenever you are not changing an element’s key.
 
 ----
 Custom partitoner

@@ -1,7 +1,6 @@
--rt inputs in the form of a directory containing all of the parts can be handled in two ways. We can just use the same textFile method and
-pass it a directory and it will load all of the parts into our RDD. 
-
-. If our files are small enough, then we can use the SparkContext.wholeTextFiles() method and get back a pair RDD where the key is the name
+inputs in the form of a directory containing all of the parts:
+1.We can just use the same textFile method and pass it a directory and it will load all of the parts into our RDD. 
+2.If our files are small enough, then we can use the SparkContext.wholeTextFiles() method and get back a pair RDD where the key is the name
 of the input file.
 
 ----
@@ -12,22 +11,16 @@ val result = input.mapValues{y =>
 }
 ----
 
-The method saveAsTextFile(), demonstrated in Example 5-5, takes a path and will output the contents of the RDD to that file. The path is
-treated as a directory and Spark will output multiple files underneath that directory.
+saveAsTextFile() takes a path and will output the contents of the RDD to that file. The path is treated as a directory and Spark will output multiple files underneath that directory.
 
-Loading the data as a text file and then parsing the JSON data is an approach that we can use in all of the supported languages. This works
-assuming that you have one JSON record per row; 
-
- If you do choose to skip incorrectly formatted data, you may wish to look at using accumulators to keep track of the number of errors.
-
-result.filter(p => P.lovesPandas).map(mapper.writeValueAsString(_)).saveAsTextFile(outputFile)
+If you do choose to skip incorrectly formatted data, you may wish to look at using accumulators to keep track of the number of errors.
 
 If there are embedded newlines in fields, we will need to load each file in full and parse the entire segment,
 
 If there are only a few input files, and you need to use the wholeFile() method, you may want to repartition your input to allow Spark to
 effectively parallelize your future operations.
 
- if some of the field names are determined at runtime from user input, we need to take a different approach. The simplest approach is going
+if some of the field names are determined at runtime from user input, we need to take a different approach. The simplest approach is going
 over all of our data and extracting the distinct keys and then taking another pass for output.
 
 Hadoop’s RecordReader reuses the same object for each record, so directly calling cache on an RDD you read in like this can fail; instead,
@@ -43,8 +36,6 @@ the keyClass and valueClass, we can call sequenceFile[Key, Value](path, minParti
 Work with object files
 
 Protocol buffer example(!)
-
--------
 
 To connect Spark SQL to an existing Hive installation, you need to provide a Hive configuration. You do so by copying your hive-site.xml
 file to Spark’s ./conf/ directory. Once you have done this, you create a HiveContext object, which is the entry point to Spark SQL, and you
