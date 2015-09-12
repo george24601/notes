@@ -1,0 +1,24 @@
+ta cleansing is the first step in any data science project, and often the most important. 
+
+ Many new data scientists tend to rush past it to get their data into a minimally acceptable state, only to discover that the data has major
+quality issues after they apply their (potentially computationally intensive) algorithm and get a nonsense answer as output.
+
+getting reasonable-looking answers from a reasonable-looking data set that has major (but not obvious at first glance) quality issues. 
+
+Problem: we have a large collection of records from one or more source systems, and it is likely that some of the records refer to the same
+underlying entity
+
+UC Irvine Machine Learning Repository
+
+scala implicit type conversion
+
+countByValue, RDD[Double].stats
+
+object NAStatCounter extends Serializable {
+  def apply(x: Double) = new NAStatCounter().add(x)
+}
+
+
+A good feature has two properties: it tends to have significantly different values for matches and nonmatches (so the difference between the
+means will be large) and it occurs often enough in the data that we can rely on it to be regularly available for any pair of records. 
+

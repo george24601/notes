@@ -1,0 +1,14 @@
+
+f work that goes into conducting successful analyses lies in preprocessing data.  can require computational methods to even discover what
+preprocessing steps are required. a typical data pipeline requires spending far more time in feature engineering and selection than in
+choosing and writing algorithms.o
+
+Modeling and analysis typically require multiple passes over the same data.
+
+When data scientists are initially investigating and trying to get a feel for a data set, usually the results of a query inform the next
+query that should run. When building models, data scientists do not try to get it right in one try. Choosing the right features, picking the
+right algorithms, running the right significance tests, and finding the right hyperparameters all require experimentation.
+
+biggest bottleneck in building data applications is not CPU, disk, or network, but analyst productivity. 
+
+
