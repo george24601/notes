@@ -1,0 +1,48 @@
+implicit feedback
+
+aritist_data, artiist_alias: maps IDs to canonical ID of that artist
+
+latent-factor model: explain observed interactions between large numbers of users and products through a relatively small number of
+unobserved, underlying reasons.
+
+A: user-product data => factor A as product product of two smaller amtrices with k columns,i.e., k latent factors. mtherefore the model is
+only an approximation to A. It is a model in the sense that it produces (“completes”) a value for even the many entries that are missing
+(that is, 0) in the original A.
+
+product of a user-feature and feature-artist matrix that yields a complete estimation of the entire, dense user-artist interaction matrix =>
+use ALS to compute X and Y
+
+randomly init Y, compute each row of X and as a function of Y and row of A, and minimize the computed and observed => another then compute Y
+from X,i.e., alternating => eventually, X and Y converget to decent solutiosn
+
+detail: get P from A, and use values of A as weights in the future
+
+-----
+
+ALS implementaitn: users and items with nonneg 32 bit integer ID
+
+By default, the RDD will contain one partition for each HDFS block, since ALS is intensive, should probably reparittion into more.
+
+1. use stats to make sure IDs are in range
+
+2. use RDD flatMap to handle invalid inputs(?)
+
+3. collectAsMap for small set of mapping
+
+4. convert artist IDs to canodical ID, use broadcast variable to holde one copy for each executor in the cluster, otherwise, it will be
+copied automtially with every task, i.e., many tasks need acces to the same immutable data. Dont forget to cache the train data as well
+
+5.ALS.trainImplicit => userFeatures , use mkString to show in delimited form
+
+To evaluate recommendation: use of training set, cross-validation, and test set,i.e., put original data into 2 groups
+
+----
+Computing AUC
+
+----
+
+unknown artist name:  It is not useful information and we should discard it from the input before starting again.
+
+Precomputing and storing recommendations in a NoSQL store, as mentioned previously, is a reasonable way to make recommendations available at
+scale. One disadvantage of this approach is that it requires precomputing recommendations for all users who might need recommendations soon,
+which is potentially any of them. 

@@ -1,0 +1,50 @@
+regression to the mean.
+
+regression refers to predicting a numeric quantity like size or income or temperature, while classification refers to predicting a label or
+category, like “spam” or “picture of a cat.”
+
+It’s not uncommon to simply include the target as another feature in the feature vector.
+
+the family of algorithms known as decision trees can naturally handle both categorical and numeric features.
+
+The Spark MLlib abstraction for a feature vector is known as a LabeledPoint,
+
+Be careful when encoding a categorical feature as a single numeric feature. The original categorical values have no ordering, but when
+encoded as a number, they appear to. Treating the encoded feature as numeric leads to meaningless results because the algorithm is
+effectively pretending that rainy is somehow greater than, and two times larger than, cloudy. => i.e. use each category as a feature
+
+init returns all but last value; target is last column
+
+val Array(trainData, cvData, testData) =
+  data.randomSplit(Array(0.8, 0.1, 0.1)) //need to cache these 3
+
+the training and CV sets are used to choose a good setting of these hyperparameters for this data set. Here, the third set, the test set, is
+then used to produce an unbiased evaluation of the expected accuracy of a model built with those hyperparameters. The accuracy of the model
+on just the cross-validation set tends to be biased and slightly too optimistic.
+
+use of trainClassifier instead of trainRegressor suggests that the target value within each LabeledPoint should be treated as a distinct
+category number, not a numeric feature value.
+
+About 70% of examples were classified correctly. This is commonly called accuracy, and is called precision in Spark’s MulticlassMetrics. 
+
+Recall: the fraction of all examples that are actually positive that the classifier marked positive
+
+Although 70% accuracy sounds decent, it’s not immediately clear whether it is outstanding or poor. How well would a simplistic approach do,
+to establish a baseline? 
+
+Gini impurity and entropy
+
+ If the purpose of the CV set was to evaluate parameters fit to the training set, then the purpose of the test set is to evaluate
+hyperparameters that were “fit” to the CV set. That is, the test set ensures an unbiased estimate of the accuracy of the final, chosen model
+and its hyperparameters.
+
+ Accuracy can just as easily be evaluated over the same data that the model was trained on, trainData.union(cvData). 
+
+Handling category values
+
+It would be great to have not one tree, but many trees, each producing reasonable but different and independent estimations of the right
+target value. Their collective average prediction should fall close to the true answer, more than any individual tree’s does. 
+
+Checking only a few features is of course faster, and speed is helpful now that so many more trees are being constructed.
+
+However, it also makes the individual trees’ decisions more independent, and makes the forest as a whole less prone to overfitting
