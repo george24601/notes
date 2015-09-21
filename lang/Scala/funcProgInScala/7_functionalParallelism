@@ -1,0 +1,88 @@
+Goal: design a map function that executes in parallel
+i.e.
+parMap(collection)(f) 
+
+Sequence exeution, e.g., a fold/loop based solutions wont work => Need to use DnC to enable parallelism
+
+Consider a simpler problem: instead of combining collections, we fold returns into a single value, e.g., colleciton sum
+
+sum(seq: Seq[Int]) : Int = {
+	if (seq.size <= 0)
+		seq.headOptions getOrElse 0
+	else{
+		val (l,r) = seq.splitAt(size/2)
+		sum(l) + sum(r)
+}
+}
+
+We need a type that marks the parallel processing, and this type needs to return the concrete value,i.e.,
+
+Par(sum(l)).get + Par(sum(r)).get
+
+Note if Par evals immediately, sum(r) will not run before sum(l), because get means we will wait until execution is complete => we can not call get here, we need new construct to abstract/hide the fact of get,i.e., instead of get, we use Par[Int] to represent the fact
+
+The whole thing becomes
+
+sum(seq: Seq[Int]) : Par[Int] = {
+        if (seq.size <= 1)
+                Par.unit[Int](seq.headOptions getOrElse 0) //Notice we change the return type here
+        else{
+                val (l,r) = seq.splitAt(size/2)
+		val leftPar = sum(l) //Notice since the return type changes, we no longer wrap the sum with Par
+		val rightPar = sum(r)
+		Par.map2(leftPar, rightPar) (_ +_)
+}
+}
+
+If map2 evals immediately, then we will construct all left side before the right side => so map2's eval should be lazy, and execution of its params should be parallel
+
+Insight: we should make parallelism explicit, since 1. we dont need that for single element, 2. we can make parallel execution easier to implement, because we mark them explicity, i.e., the last line becomes
+
+
+Par.map2(Par.fork(leftPar), Par.fork(rightPar)) (_ +_)
+
+We also need lazyUnit(a: => A) =fork(unit(a)) 
+
+Now, should fork trigger parallel evalulation or get? If fork triggers, then it must know something about the underlying threadpool/executors, i.e., more sense for get to trigger runs,i.e., we rename it to run: Par[A] => A
+
+for implementation, run needs to know ExecutorService, will allows submit:Callable[A] => Future[A]
+
+and Par[A] becomes ES => Future, run becomes Par[A] => Future[A]
+
+Basic implementation
+
+object Par {
+	def unit[A](a:A) : Par[A] = es => UnitFuture(a)
+
+	def map2(first:Par[A], second:Par[B]) (f:(A,B) => C) : Par[C] = es => UnitFuture(f(first(es).get, second(es).get))
+
+	def fork(a : => Par[A]):Par[A] = es => es.submit(new Callable[A] { def call = a(es).get})
+
+}
+
+using lazyUnit, write a function to convert any function A => B to one that evaluates its result asynchronously.
+
+def asyncF[A,B](f: A => B): A => Par[B] = a => lazyUnit(f(a))
+
+def sortPar(parList: Par[List[Int]]): Par[List[Int]] = map2(first, unit()) ( (a,b) => first.sorted)
+
+def map[A,B](pa: Par[A])(f: A => B): Par[B] = map2(pa, unit()) ((a,b) => f(a))
+
+so sortPar becomes
+
+def sortPar(parList: Par[List[Int]]): Par[List[Int]] = map(parList) (list => list.sorted)
+
+def parMap(ps: List[A])(f: A=>B): Par[List[B]] = fork {
+val fbs = ps.map(asyncF(_))
+sequence(fbs) //convert a List[Par] to a Par[List]
+}
+
+
+def parFilter[A](as: List[A])(f: A => Boolean): Par[List[A]] = map2(as, Unit()) ((as,_) => as.filter(f))
+
+def parSum (as: List[Int]): Par[Int]
+
+def map3(first:Par[A], second:Par[B], third:Par[C]) (f:(A,B, C) => D) : Par[D] = //implement with map2(!!)
+
+potential deadlock problem with current implementation of fork
+
