@@ -86,3 +86,14 @@ def map3(first:Par[A], second:Par[B], third:Par[C]) (f:(A,B, C) => D) : Par[D] =
 
 potential deadlock problem with current implementation of fork
 
+def choice[A](cond: Par[Boolean])(t: Par[A], f: Par[A]): Par[A]
+
+def choiceN[A](n: Par[Int])(choices: List[Par[A]]): Par[A]
+
+def choiceN[A](n: Par[Int])(choices: List[Par[A]]): Par[A] = es => choices(n(es).get)(es)
+
+def chooser[A,B](pa: Par[A])(choices: A => Par[B]): Par[B]
+
+def chooser[A,B](pa: Par[A])(choices: A => Par[B]): Par[B] ...turns out to be flatmap!
+
+def join[A](a: Par[Par[A]]): Par[A]

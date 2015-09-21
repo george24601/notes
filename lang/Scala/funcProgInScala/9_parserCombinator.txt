@@ -1,0 +1,15 @@
+we can just invent a combinator for the task, char
+
+trait Parsers [ParseError, Parser[+_]] {
+
+def char(c: Char): Parser[Char]
+
+def run[A](p: Parser[A])(input: String): Either[ParseError,A]
+
+def string(s: String): Parser[String]
+
+def or[A](s1: Parser[A], s2: Parser[A]): Parser[A]
+
+def listOfN[A](n: Int, p: Parser[A]): Parser[List[A]]
+}
+

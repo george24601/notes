@@ -1,0 +1,33 @@
+def listOf[A](a: Gen[A]): Gen[List[A]]
+
+def forAll[A](a: Gen[A])(f: A => Boolean): Prop
+
+trait Prop { def &&(p: Prop): Prop }
+
+object Prop {
+  type FailedCase = String
+  type SuccessCount = Int
+}
+trait Prop {
+  def check: Either[(FailedCase, SuccessCount), SuccessCount]
+}
+
+case class State[S,A](run: S => (A,S))
+
+case class Gen[A](sample: State[RNG,A])
+
+def choose(start: Int, stopExclusive: Int): Gen[Int] = Gen[Int](RNG => (Int, RNG))
+
+def unit[A] (a :=> A) : Gen(A) = Gen(RNG => (a, RNG))
+def boolean: Gen[Boolean] = Gen(RNG =>(bool, RNG))
+def listOfN(n : Int, g: Gen[A]): Gen[List[A]] = Gen(RNG => (List[A], RNG))
+
+def flatMap[B](f: A => Gen[B]): Gen[B] = RNG => (f(sample.run(RNG)._1)).sample.run(RNG)
+
+def listOfN(size: Gen[Int]): Gen[List[A]] = size.flatMap (n => listOfN(n, Gen[Int]))
+
+def union[A](g1: Gen[A], g2: Gen[A]): Gen[A] = boolean.flatMap (first => if (first) g1 else g2)
+
+def weighted[A](g1: (Gen[A],Double), g2: (Gen[A],Double)): Gen[A]
+
+
