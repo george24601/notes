@@ -1,0 +1,12 @@
+Appliacative functor: map2 and unit are primitive
+
+def map2[A,B,C] (fa:F[A], fb: F[B])(f:(A,B) =>C) : F[C]
+
+because map can be implemented by map2, applicative itself is a functor
+
+another primitive can be apply instead of map2, hence the name, and monad is applicative functor as well
+
+th Applicative, the structure of our computation is fixed; with Monad, the results of previous computations may influence what computations
+to run next.
+
+
