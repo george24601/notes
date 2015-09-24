@@ -1,0 +1,43 @@
+Known:
+Client calling will mostly in node.js
+Client will read from one of the MySQL db: marketplace, OAuth, and potentially payment gatement/wallet?
+
+Condition:
+Writes to Kafka, in Avro format
+
+Unknown:
+design of SDK used by the client
+
+From known:
+SDK will mostly in node.js
+since node works mostly with JSON, it is SDK's job to translate JSON to Avro (explicit or implicitly)
+In Any avro solutions, a schema registry is something we will need eventually, might try to solve a more general problem by drooping
+conditions, i.e., kicking off the whole process of integrating confluence.io into our ingestion pipeline
+
+A new sub-problem: how to integrate confluent.io?
+schema registry can be added incrementally, i.e., might as well do it 
+
+Insights:
+1.the end goal for the SDK project is the producer to kafka part is completely through confluent.io
+2.our sdk will be in node.js 
+
+New sub problems from 1):
+1. schema registery: how does it work, espeically fault tolerance and schema versions. Note that Avro schema versions require specific
+upgrade steps to ensure forward/backward compatibility
+
+From 2) new sub problems:
+1.we know our SDK will be an NPM package, do we have a private npm registry?
+2.How to test it? sub-problems by dropping conditions:
+  1. how to do unit/integration testing in node in general
+  2. how to do integration testing in node in conjuction with kafka
+  3. how to do testing in node and confluence.io
+
+=> We have to dive into details now to gain more insights
+
+Even at this stage we can do interface design now
+Solve related problems:
+1. interface of vanilla node.js kafka producer?
+2. interface of vanillla node REST request sender?
+However, know that our code is an SDK => Do we have any node code on github now?
+
+
