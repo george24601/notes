@@ -11,7 +11,7 @@ trait Applicative[F[_]] {
 
   def map[A, B](fa : F[A])(f: A => B): F[B] = map2(fa, unit())( (a, _) => f(a))
 
-  def traverse[A, B](as : List[A]) (f: A => F[B]): F[List[B]]
+  //def traverse[A, B](as : List[A]) (f: A => F[B]): F[List[B]]
 
   def sequence[A](fas: List[F[A]]): F[List[A]] = fas match {
     case Nil => unit(Nil)
@@ -30,4 +30,17 @@ trait Applicative[F[_]] {
 
   def product[A,B](fa: F[A], fb: F[B]): F[(A,B)] = map2(fa, fb) ((a,b) => (a,b))
 
+  val streamApplicative = new Applicative[Stream] {
+    def unit[A] (a : => A): Stream[A] = Stream.continually(a)
+    def map2[A, B, C](fa: Stream[A], fb: Stream[B]) (f :(A,B) => C): Stream[C] = fa.zip(fb).map(f.tupled)
+
+  }
+
+  sealed trait Validation[+E, +A]
+
+  case class Failure[E](head: E, tail: Vector[E] = Vector()) extends Validation[E, Nothing]
+
+  case class Success[A](a: A) extends Validation[Nothing, A]
+
+  //applicative instance goes here
 }
