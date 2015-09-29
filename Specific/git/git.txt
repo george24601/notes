@@ -60,3 +60,8 @@ git merge upstream/master
 #show branch history
 git log
 
+#port code into a new git repo. 1. clone into a temp local repo 2. push local repo to remote 3. now you can clone from remote again
+git clone --bare
+git add remote
+git push --all
+git push --tags

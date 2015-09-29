@@ -7,3 +7,25 @@ th Applicative, the structure of our computation is fixed; with Monad, the resul
 to run next.
 
 type constructors =effect: augment regular values with extra capabilities
+
+functor laws
+map(v)(id) == v
+map(map(v)(g))(f) == map(v)(f compose g)
+
+associativity laws for monoids and monads
+op(a, op(b, c)) == op(op(a, b), c)
+compose(f, op(g, h)) == compose(compose(f, g), h)
+
+Neutrality law
+map2(a,b)(productF(f,g)) == product(map(a)(f), map(b)(g))
+
+def productF[I,O,I2,O2](f: I => O, g: I2 => O2): (I,I2) => (O,O2) =
+  (i,i2) => (f(i), g(i2))
+
+Using a State action to traverse a collection, we can implement complex traversals that keep some kind of internal state.
+
+But if G also happens to have a Traverse instance, we can sequence to turn G[F[_]] into F[G[_]], leading to F[F[G[G[A]]]]. Then we can join
+the adjacent F layers as well as the adjacent G layers using their respective Monad instances.
+
+The issue of composing monads is often addressed with a custom-written version of each monad that’s specifically constructed for
+composition. This kind of thing is called a monad transformer. 

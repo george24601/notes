@@ -1,0 +1,10 @@
+a key technique for dealing with external effects—using pure functions to compute a description of an effectful computation, which is then
+executed by a separate interpreter that actually performs those effects.
+
+It is always possible to factor an impure procedure into a pure “core” function and two procedures with side effects: one that supplies the
+pure function’s input and one that does something with the pure function’s output. 
+
+Note how the side effect, println, is now only in the outermost layer of the program, and what’s inside the call to println is a pure
+expression.
+
+ inside every function with side effects is a pure function waiting to get out.

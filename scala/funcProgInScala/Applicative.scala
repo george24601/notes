@@ -36,6 +36,8 @@ trait Applicative[F[_]] {
 
   }
 
+  def product[A,B](fa: F[A], fb: F[B]): F[(A,B)] =  map2(fa, fb)((_,_))
+
   sealed trait Validation[+E, +A]
 
   case class Failure[E](head: E, tail: Vector[E] = Vector()) extends Validation[E, Nothing]

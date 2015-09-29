@@ -1,6 +1,6 @@
 Formal Model:
-C= set of Customers
-S=set of Items
+C = set of Customers
+S = set of Items
 Utility funciton U:C *S -> R(atings)
 problem: U is sparse. Cold start problem
 ------
@@ -59,7 +59,7 @@ Global: overall deivation of users/movies
 Facotrization: regional effects
 Collborative filter: local patterns
 
-Global: mean rating + movie diff with averate + user's avg diff
+Global: mean rating + movie diff with average + user's avg diff
 Local nieghborhodd (Collaborative filtering/NN) => final estimate
 
 problem: similarity measures arbitary

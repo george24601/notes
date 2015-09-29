@@ -11,7 +11,7 @@ design of SDK used by the client
 From known:
 SDK will mostly in node.js
 since node works mostly with JSON, it is SDK's job to translate JSON to Avro (explicit or implicitly)
-In Any avro solutions, a schema registry is something we will need eventually, might try to solve a more general problem by drooping
+In Any avro solutions, a schema registry is something we will need eventually, might try to solve a more general problem by droping
 conditions, i.e., kicking off the whole process of integrating confluence.io into our ingestion pipeline
 
 A new sub-problem: how to integrate confluent.io?
