@@ -8,3 +8,5 @@ Note how the side effect, println, is now only in the outermost layer of the pro
 expression.
 
  inside every function with side effects is a pure function waiting to get out.
+
+Trampolining: a general solution to stack overflow

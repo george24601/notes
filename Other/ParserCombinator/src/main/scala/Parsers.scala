@@ -3,24 +3,13 @@ import scala.util.matching.Regex
 
 trait Parsers[Parser[+_]] {
 
+  def char(s :Char) : Parser[Char] //constant value parser
   def string(s :String) : Parser[String] //constant value parser
   def succeed[A](a: A): Parser[A] //unit for monad
-
-  //offset, char index in the input string
-  case class Location(input: String, offset: Int = 0) {
-    lazy val line = input.slice(0,offset+1).count(_ == '\n') + 1
-    lazy val col = input.slice(0,offset+1).lastIndexOf('\n') match {
-      case -1 => offset + 1
-      case lineStart => offset - lineStart
-    }
-  }
-
-  case class ParseError(stack: List[(Location,String)])
 
   def run[A](p: Parser[A])(input: String): Either[ParseError, A] //separate description and execution
 
   def or[A](s1: Parser[A], s2: =>Parser[A]): Parser[A] //since OR is left-biased, we will make s2 call by name
-
 
   def flatMap[A,B](p: Parser[A])(f: A => Parser[B]): Parser[B] //context-sensitive parsing
 
@@ -44,6 +33,11 @@ trait Parsers[Parser[+_]] {
 
   def regex(r: Regex): Parser[String]
 
+  ///ERROR REPORT PART STARTS HERE
   //if p fails, its ParseError will somehow incorporate msg.
   def label[A](msg: String)(p: Parser[A]): Parser[A]
+
+  //adds additional information in the event that p fails.
+  def scope[A](msg: String)(p: Parser[A]): Parser[A]
+
 }

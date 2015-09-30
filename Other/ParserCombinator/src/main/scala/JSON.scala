@@ -14,8 +14,19 @@ object JSON {
   case class JObject(get: Map[String, JSON]) extends JSON
 
   def jsonParser[Parser[+_]](P: Parsers[Parser]):Unit = {
-    import P._
 
+    def nullP:Parser[JSON] = P.map(P.string("null"))(s => JNull)
+    def bool = P.map(
+      P.or(P.string("true"), P.string("false"))
+    )(s => JBool(s == "true"))
 
+    def DQ = P.char('"')
+    def LB = P.char('[')
+    def RB = P.char(']')
+
+    //TODO: get the parsing string literal part
+    def noQStringP = P.string("\"") //should be a regex
+
+    def QStringP = P.product(DQ, P.product(noQStringP, DQ))
   }
 }
