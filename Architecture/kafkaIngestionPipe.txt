@@ -40,4 +40,31 @@ Solve related problems:
 2. interface of vanillla node REST request sender?
 However, know that our code is an SDK => Do we have any node code on github now?
 
+---------
 
+Confluent
+
+The Schema Registry enables safe, zero downtime evolution of schemas by centralizing the management of schemas written for the Avro
+serialization system. It tracks all versions of schemas used for every topic in Kafka and only allows evolution of schemas according to
+user-defined compatibility settings
+
+The Schema Registry also includes plugins for Kafka clients that handle schema storage and retrieval for Kafka messages that are sent in the
+Avro format.
+
+An existing cluster can be upgraded easily by performing a rolling restart of Kafka brokers.
+
+Start by adding the Schema Registry and updating your applications to use the Avro serializer. Next, add the REST Proxy to support
+applications that may not have access to good Kafka clients or Avro libraries. Finally, run periodic Camus jobs to automatically load data
+from Kafka into HDFS.
+
+
+ formats like JSON lack a strictly defined format, which has two drawbacks. First, they are verbose because field names and type information
+have to be explicitly represented in the serialized format. Second, the lack of structure makes consuming data in these formats more
+challenging because fields can be arbitrarily added or removed.
+
+t not only requires a schema during data serialization, but also during data deserialization. Because the schema is provided at decoding
+time, metadata such as the field names don’t have to be explicitly encoded in the data
+
+data encoded with the old schema can be read with the newer schema. 
+data encoded with the new schema can be read with the old schema. When projecting data written with the new schema to the old one, the new
+field is simply dropped.  
