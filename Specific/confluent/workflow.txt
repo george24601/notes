@@ -1,0 +1,74 @@
+1.use Kakfa rest proxy to push avro message, and similarly, read
+for produce:
+1. specify value schema and records. the schema will be registered with SR
+for consume
+1. create a consumer with an id, returns instance id and base_uri
+2. use the base uri as handle to consume
+
+since on read, the schema is fetched from schema registry, the schema associated with each topic must be backward-compatible (default
+setting)
+
+
+Deployment design(need to consult deployment guide for KR and SR)
+1. Kafka-rest knows SR, instances of Kafka-rest are organized by by id(confirm?)
+Q: what ips should user know about SR?
+A: probalby nothing, let Kafka-rest handle it
+
+2. SR is master-slave. It knows the underlying kafka cluster
+Q:How is kafka-rest organized
+A: ids on different boxes, user needs to know only 1 of them => service discovery?
+
+We will start with 1 instance to facilitate API design
+
+
+API design
+
+Producer: immutable by default
+Data:
+kafka topic
+KR address
+Schema
+
+-----
+Producer
+
+//no need to create topic, because kafak creates topic by default on first message
+//no need to destroy topic, too dangerous
+//no need to produce one message
+
+createProducer(KRAddr, topic, schema) 
+producer.produce(records, cbOnProduced)
+
+----
+Consumer =>need that for testing purposes 
+//what is the API for kafka node.js consumer?
+
+processData(res, cb)
+{
+  cb(res)
+}
+
+processCb(res, cb){
+  GET with res, processData(cb)`
+
+}
+
+consume(KRAddr, id, offset, cb) => this one returns a function/closure that actually consumes
+{
+    createConsumer(,, processCb(cb))
+}
+
+
+
+---
+need to publish it to npm
+
+in package.json
+scripts? - nodetest?
+repository??
+
+should use env var to control KRAddr
+
+
+
+

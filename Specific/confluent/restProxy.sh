@@ -13,3 +13,5 @@ curl -X POST -H "Content-Type: application/vnd.kafka.avro.v1+json" \
 
 bin/kafka-rest-start
 
+java io.confluent.kafkarest.Main [server.properties]
+
