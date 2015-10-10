@@ -28,5 +28,7 @@ object JSON {
     def noQStringP = P.string("\"") //should be a regex
 
     def QStringP = P.product(DQ, P.product(noQStringP, DQ))
+
+    //returns the final rule
   }
 }

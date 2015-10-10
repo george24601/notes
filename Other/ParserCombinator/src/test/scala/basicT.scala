@@ -1,4 +1,5 @@
 
+//TODO: get scalatest in here(not necessarily scala check)
 /*
  object Laws {
     def equal[A](p1: Parser[A], p2: Parser[A])(in: Gen[String]): Prop =
