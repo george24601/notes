@@ -70,5 +70,8 @@ repository??
 should use env var to control KRAddr
 
 
+----
+How is kafka-node done?
+
 
 

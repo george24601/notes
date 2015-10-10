@@ -1,0 +1,9 @@
+how is producer.on('ready', cb) registered?
+
+when to use new to create object with information?
+
+it creates a client, and then pass the client to producer/consumer
+
+ So if you call require('./foo'), both a 'foo.js' file as well as an 'foo/index.js' file will be considered
+
+ always use capital letter for objects that are supposed to be instantiated by the new keyword.
