@@ -23,3 +23,8 @@ start from a statment of problem with terms and arrived at a restatment free of 
 We cannot know we need to use the notion or theorem about it. But we have to use one or the other. But which definition we use matters!
 
 Dont let suspicous, guess, or conjecture grow without examination till it beocmes interadicable
+
+-----
+first understand the problem: unkown, data, condition,and then go into details, going further until we reach an idea, consider condition in
+its various parts, each part by itself, to separate parts of conditions, can you write them down? => set up equations, helps clarify the nature
+of ceratin difficulties

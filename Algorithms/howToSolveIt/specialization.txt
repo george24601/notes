@@ -6,6 +6,8 @@ Could you reuse this problem, probably with auxiliary element introduced? => red
 
 Speiclaization also useful in testing solution
 
+"Prospective excpetions test the rule"
+
 (
 A "corner case" may or may not be gracely handled by the general case. 
 

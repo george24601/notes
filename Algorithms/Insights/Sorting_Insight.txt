@@ -20,3 +20,6 @@ while(todelete > 0) //to delete is similar to search size in classic version, ha
 }
 
 5.Notice if a < b => f(a) > f(b) or f(a) < f(b),i.e., relative order is preserved, we can bsearch the answer
+
+
+2. inversion index: how many swaps it needs to sort an array => relation to merge sort and proof

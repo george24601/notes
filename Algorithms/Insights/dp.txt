@@ -1,5 +1,7 @@
 1.the most important thing: build an acyclic graph between states. This means
-A. identify the subproblem (node in graph)
+A. identify the subproblem/state (node in graph)
+Capture state as if you are debugging, from this step to next, what states you think are interesting and want to captures
+
 B. relationships (edge in graph)
 
 2. In a lot of problems, espeically optimization problems
@@ -14,5 +16,5 @@ node: max sum subarray ending at index
 O(nlogn) => LIS
 O(n^2) => Edit distance
 
-6. When defining the subproblem, the actual solution may or may not "anchor" our index. 
+6. When defining the subproblem, the actual solution may or may not "anchor" our index,e.g., subsequence vs subsequenct ending at index. 
 This design option shares the same principle in recursion design: solving a more general recursion might be easier than the current problem 

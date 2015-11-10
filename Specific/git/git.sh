@@ -65,3 +65,9 @@ git clone --bare
 git add remote
 git push --all
 git push --tags
+
+
+##
+git tag -a v1.4 -m 'my version 1.4'
+git push origin [tagname]
+git checkout -b version2 v2.0.0

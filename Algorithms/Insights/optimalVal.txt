@@ -1,0 +1,4 @@
+One way to prove is the show we can improve the step by changing the solution in the direction of our step, i.e., similar to the replacement
+proof in greedy. A concrete example will be gradient descent
+
+In DP/state like cases, we will need to compare all potential candidates to find the best

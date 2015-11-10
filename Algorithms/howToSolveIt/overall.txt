@@ -30,7 +30,7 @@ Make sure grasp secure, both big steps and small steps
 Consider solution from various sides and seek contacts with formerly acquired knowledge
 Simplify details, shorten parts of solutions
 See the whole solution at a glance
-Make it intuitative, fit it into formerly acuired knowlege as naturally as possible
+Make it intuitative, fit it into formerly acquired knowledge as naturally as possible
 Scrutinize the method that led you to the solution, and try to use it for other problems
 Scrutinize the result and use it for other problems
 
