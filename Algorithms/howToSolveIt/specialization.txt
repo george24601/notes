@@ -1,0 +1,13 @@
+specializaiton: often useful in the solution of problems
+
+Could you imagine a more accessible related problem? A more special problem? => This specialized auxilary problem is much less ambitious
+
+Could you reuse this problem, probably with auxiliary element introduced? => reduction into this less ambitious auxilary problem
+
+Speiclaization also useful in testing solution
+
+(
+A "corner case" may or may not be gracely handled by the general case. 
+
+Sometimes, it may be the base case of the recursion,i.e., we keep reusing the insight we gained from the special case by reducing each step into our special form
+)

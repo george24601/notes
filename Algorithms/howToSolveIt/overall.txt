@@ -7,7 +7,7 @@ To overall goal is to
 
 2.
 Isolate the principal parts of the problem and go through them:
-hypothesis conclusion /unknow, data, and the conditions
+hypothesis conclusion/unknow, data, and the conditions
 Goal: prepare and clarify details. Memory is responsive
 
 3.
@@ -35,4 +35,4 @@ Scrutinize the method that led you to the solution, and try to use it for other 
 Scrutinize the result and use it for other problems
 
 Goal:
-Get into habit of surveying and scrutinizing your solutions, you will acquire knowlege well ordered and read to use, and develop problem solving skills
+Get into habit of surveying and scrutinizing your solutions, you will acquire knowlege well ordered and ready to use, and develop problem solving skills

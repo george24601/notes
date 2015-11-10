@@ -3,12 +3,4 @@ Another use of that is dealing with small double multipllications, this can avoi
 
 2. inversion index: how many swaps it needs to sort an array => relation to merge sort and proof
 
-3. A "corner case" may or may not be gracely handled by the general case. Sometimes, it may be the base case of the recursion.
-Need to analyze it on a case-by-case basis
-
 4. base number is about representation. It doesnt affect the arithmetic properties
-
-5. curIndex - length you want to skip = start index of that subarray you want to skip
-similarly start of index + length = start index of the new subarray
-
-9. mid point index of array = length/2

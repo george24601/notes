@@ -1,0 +1,4 @@
+curIndex - length you want to skip = start index of that subarray you want to skip
+similarly start of index + length = start index of the new subarray
+
+mid point index of array = length/2
