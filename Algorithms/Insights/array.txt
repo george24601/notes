@@ -2,3 +2,6 @@ curIndex - length you want to skip = start index of that subarray you want to sk
 similarly start of index + length = start index of the new subarray
 
 mid point index of array = length/2
+
+array (1-d or 2-d) is often used in table-driven design, i.e., find matching conditions by pre-populating a table, then computation can be
+done as , perhaps repeated, table lookup

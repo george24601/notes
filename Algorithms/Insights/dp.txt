@@ -17,4 +17,5 @@ O(nlogn) => LIS
 O(n^2) => Edit distance
 
 6. When defining the subproblem, the actual solution may or may not "anchor" our index,e.g., subsequence vs subsequenct ending at index. 
-This design option shares the same principle in recursion design: solving a more general recursion might be easier than the current problem 
+This design option shares the same principle in recursion design: solving a more general recursion might be easier than the current problem.
+Coding-wise, this means at each step, you need to populate the field, even just carry over from previous state
