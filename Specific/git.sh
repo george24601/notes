@@ -13,21 +13,13 @@ git reset -- <file>.
 #tag important revisions
 git tag
 
-#switch to branch, -b to create branch at the same time
-git checkout testing
-
-#remove branch, --merged, --no-merged opition to show branches that are
-merged/not yet merged into your current branch
+#remove branch, --merged, --no-merged opition to show branches that are merged/not yet merged into your current branch
 git branch -d testing
 
 #show history of commits
 git log --oneline --decorate --graph --all
 
-#merge brnach
-git merge branchName
-
-#get data from remote project: update your local db and move (remote)/(branch)
-pointer
+#get data from remote project: update your local db and move (remote)/(branch) pointer
 git fetch [remote-name]
 
 #push my branch to a certain remote
@@ -43,7 +35,7 @@ git checkout --track {remote/branch}
 #set a local branch to remote branch
 git branch -u origin/serverfix
 
-#rebase local changes you’ve made but haven’t shared yet before you push them in order to clean up your story, but never rebase anything you’ve pushed somewhere
+#rebase local changes you made but haven shared yet before you push them in order to clean up your story, but never rebase anything you've pushed somewhere
 
 #change remote to forked repository
 git remote set-url origin $FORKED_URLt
@@ -67,7 +59,7 @@ git push --all
 git push --tags
 
 
-##
+##tagging example
 git tag -a v1.4 -m 'my version 1.4'
 git push origin [tagname]
 git checkout -b version2 v2.0.0
