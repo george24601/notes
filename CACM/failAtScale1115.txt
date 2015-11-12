@@ -1,20 +1,20 @@
 Common pattern for failures:
-individual machine failure: use automation => cmobining known fialure pattens with a search for symptons of an unkonw problem, and then
+1. individual machine failure: use automation => combining known failure pattens with a search for symptons of an unkonw problem, and then
 develop beter tools to detect and fix future problems
 
-workload changes: load testing including "dark launches". Stats gathered during such events often provide perspective on system's design
+2.workload changes: load testing including "dark launches". Stats gathered during such events often provide perspective on system's design
 
-human error
+3.human error
 -----
 3 ways to cause incident
 
-1. Rapidly depoyled config changes: rapid failure when bad configs are deployed
+1. Rapidly deployed config changes: rapid failure when bad configs are deployed
 To prevent:
-A. everybody use a common config system, so that procedures and tools apply to all types of config
+A. everybody uses a common config system, so that procedures and tools apply to all types of config
 B.Statically validate config changes
 C.Run a carary. multiple A/B tests can be run concurrently => before test goes to 1% of users, we first deploy the test to 1% of the users
 that hit a small # of servers. Monitor them to ensure they have no higly visible problems
-D. Hold on to good configurations: reatin odl configs when receive updated configs that are invalid  and raise alrets to the sys admin the config failed to
+D. Hold on to good configurations: retain old configs when receive updated configs that are invalid  and raise alrets to the sys admin the config failed to
 update
 E. Easy to revert. Config system backed by VCS
 
@@ -32,16 +32,16 @@ if (queue.lastEmptyTime() < (now - N ms))
 else
   timeout = N ms
 
-This prevents a standing queue while allowing short burts of queuing. A short timeout ensures the server accepts just a bit more work than it
+This prevents a standing queue while allowing short bursts of queuing. A short timeout ensures the server accepts just a bit more work than it
 can acutally handle so it never goes idle=> when server is under load, they will be discared instead of builidng up the queue
 
 Note M and N tend not to need tuning, limiting # of items in the queue or setting a timeout for the queue normally requires tuning on a
 per-service basis. FB uses M = 5ms and N = 100ms
 
-B.Adaption LIFO: during periods of high queuning, first-in request has often been sitting around for so long the suer may have aborted the
-action. Durning normal conditions, FIFO, when a quene is starting to form, LIFO
+B.Adaption LIFO: during periods of high queuing, first-in request has often been sitting around for so long the suer may have aborted the
+action. Durning normal conditions, FIFO, when a queue is starting to form, LIFO
 
-C.client keeps track of # of outstanding outboudn requests on a per-service basis. immedately mark request as error if too many outstanding
+C.client keeps track of # of outstanding outbound requests on a per-service basis. immedately mark request as error if too many outstanding
 requests to that service
 
 ----
@@ -55,6 +55,6 @@ Review Process:
 1.Detection: how was the issue detected?
 2.Escalation: could right people brought in by alarms instead of manually?
 3.Remediation: can we automate the fix steps?
-4.Prevention: How could you have failed gracefuly, or failed faster to reduce the import
+4.Prevention: How could you have failed gracefuly, or failed faster to reduce the impact
 
 

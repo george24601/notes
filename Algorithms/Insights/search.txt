@@ -1,0 +1,5 @@
+search direction matters a lot, even 2 sides of the equation, decide look from which side can greatly affect insight and implementation
+difficulty. Have to try both before settling on one
+
+similarly, if we have a list of variables, we can impose an order of them so the search space will be limited by the extreme values =>
+because other variables will be infered, one by one, perhaps recursively
