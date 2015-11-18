@@ -1,6 +1,6 @@
-1. log: quickly compute large power or hard to compute power, especially if we dont need precise number.
+log: quickly compute large power or hard to compute power, especially if we dont need precise number.
 Another use of that is dealing with small double multipllications, this can avoid a lot of underflow problems, espeically important in probability calculations
 
-4. base number is about representation. It doesnt affect the arithmetic properties
+base number is about representation. It doesnt affect the arithmetic properties
 
 pattern: a group of homogeous types, what can we infer from them, collectively?
