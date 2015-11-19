@@ -1,0 +1,19 @@
+node client and transport client over port 9300
+
+REST API on 9200
+
+document belongs to a type, and types live inside an index
+
+HEAD verb to check whether the doucment exists
+
+GET /megacorp/employee/_search?q=last_name:Smith
+
+or pass DSL json to _search
+
+documents are immutable, version number based, marked for deletion and then recycled
+
+optimistic concurrency control
+
+common setup is to use other db as primary,a dn ES to make data searchable
+
+Q: field collapsing
