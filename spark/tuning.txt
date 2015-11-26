@@ -1,4 +1,4 @@
- prefer arrays of objects, and primitive types, instead of the standard Java or Scala collection classes 
+prefer arrays of objects, and primitive types, instead of the standard Java or Scala collection classes 
 Avoid nested structures with a lot of small objects and pointers when possible.
 Consider using numeric IDs or enumeration objects instead of strings for keys.
 If you have less than 32 GB of RAM, set the JVM flag -XX:+UseCompressedOops to make pointers be four bytes instead of eight
@@ -10,13 +10,14 @@ Combined with the use of serialized caching, using a smaller cache should be suf
 
 The goal of GC tuning in Spark is to ensure that only long-lived RDDs are stored in the Old generation and that the Young generation is sufficiently sized to store short-lived objects.
 
-If a full GC is invoked multiple times for before a task completes, it means that there isn’t enough memory available for executing tasks.
+If a full GC is invoked multiple times for before a task completes, it means that there isn't enough memory available for executing tasks.
 
 In the GC stats that are printed, if the OldGen is close to being full, reduce the amount of memory used for caching. 
 
 f there are too many minor collections but not many major GCs, allocating more memory for Eden would help.
 
 -----
-spark.executor.memory: memory to use per executor process, default 512m. Executor memory must fit spark worker memory
 
-SPARK_WORKER_MEMORY: total amount of memory allocated to the standalone cluster
+Kryo serialization
+
+-----

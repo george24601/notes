@@ -17,3 +17,42 @@ print(): first ten elements of every batch of data
 saveAsTextFiles|ObjectFiles|HadoopFiles
 
 foreachRDD: push the data in each RDD to a external system => problems and patterns
+-------
+can convert to DataFrame when inside foreachRDD, and use dataframe ops
+
+---
+metadata checkpointing: savng straming computation def into HDFS: to recover from failure of the node running the driver
+
+data checkpointing: save generated rdds. Necessary in stateful transformation the combine data acoross multiple batches.
+
+enable it by setting a direction if HDFS to which the checkpoint info will be saved:  streamingContext.checkpoint(checkpointDirectory): this
+means
+1. When the program is being started for the first time, it will create a new StreamingContext, set up all the streams and then call start()
+2.When the program is being restarted after failure, it will re-create a StreamingContext from the checkpoint data in the checkpoint
+directory 
+
+=> use StreamingCOntext.getOrCreate
+
+Deployment need to ensure that driver process gets restarted automatically on failure
+
+Interval of checkpointsin needs to be set carefully, start iwth checpoit interval of 5-10 sliding intervals.
+
+----
+For tuning:
+1. reducing procesing time of each batch of data
+2. setting the right batch size s.t. the batches of data can be procesed as fast as they are received
+
+degress of parallelism for receiver
+# of blocks in each btach determines # of task that will be used to process the reived data in a map-like tranformation
+repartition data into different # of partitions
+degree of parallelism in data processing
+
+Use Kry serialization can reduce CPU and memory overheads
+case data to be retained is not large
+
+
+if # tasks launced per sec is high (50 per second), need to reduce that overhead
+
+Check value of the end-to-end delay in "Total delay" in Spark driver log4j, delay should be less than batch size
+
+-----

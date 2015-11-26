@@ -7,6 +7,6 @@ The key of expanding is that finding the continuous subproblem, i.e., the slibli
 
 4. Heap is a special form of tree => it is packed so can be reprsented as an array
 
-5. common tactics: start from root, start from leaves
+5. common tactics: start from root, start from leaves (See try both search directions before commiting on one)
 
 every time you see only 1 incoming or outgoing edge. This suggests a tree

@@ -1,0 +1,56 @@
+distributed collection of data organized into named columns
+
+# Constructs a DataFrame from the users table in Hive.
+users = context.table("users")
+  
+# from JSON files in S3
+logs = context.load("s3n://path/to/data.json", "json")
+
+# Create a new DataFrame that contains “young users” only
+young = users.filter(users.age < 21)
+
+young.select(young.name, young.age + 1)
+
+young.groupBy("gender").count()
+
+young.join(logs, logs.userId == users.userId, "left_outer")
+
+users = context.jdbc("jdbc:postgresql:production", "users")
+logs = context.load("/path/to/traffic.log")
+logs.join(users, logs.userId == users.userId, "left_outer") \
+  .groupBy("userId").agg({"*": "count"})
+
+applications can also apply arbitrarily complex functions on a DataFrame, which can also be manipulated using Spark’s existing RDD API. 
+
+broadcast joins and shuffle joins(?)
+
+However, the main difference from these projects is that DataFrames go through the Catalyst optimizer, enabling optimized execution similar
+to that of Spark SQL queries. 
+
+reduceByKey: It is a very common mistake in Spark for common aggregation tasks to use the groupBy then mapValues or map transformation which
+can be dangerous in a production environment and produce OutOfMemory errors on workers.
+
+When you’re using Dataframe, you’re not defining directly a DAG (Directed Acyclic Graph) anymore, you’re actually creating an AST (Abstract
+Syntax Tree) that the Catalyst engin
+
+ if you want to use Dataframe’s User Defined Functions, you can write them in Java/Scala or Python and this will impact your computation
+performance – but if you manage to stay in a pure Dataframe computation – then nothing will get between you and the best computation
+performance you can possibly get.
+
+ df = sqlCtx.createDataFrame([(1, 4), (2, 5), (3, 6)], ["A", "B"])
+ 
+df.withColumn('C', F.lit(0))
+
+df.withColumn('C', df.B > 0).show()
+
+df.select((df.B > 0).alias("is_positive")).show()
+
+pdf[(pdf.B > 0) & (pdf.A < 2)]
+
+df.groupBy("A").avg("B").show()
+df.groupBy("A").agg(F.avg("B"), F.min("B"), F.max("B")).show()
+
+#window functions!
+window_over_A = Window.partitionBy("A").orderBy("B")
+ 
+In [109]: df.withColumn("diff", F.lead("B").over(window_over_A) - df.B).show()

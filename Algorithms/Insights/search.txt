@@ -1,5 +1,11 @@
 search direction matters a lot, even 2 sides of the equation, decide look from which side can greatly affect insight and implementation
-difficulty. Have to try both before settling on one
+difficulty. Have to try both before settling on one(!!!),e.g., beginning of action/end of action, LHS/RHS.  This change of search direction is
+often useful in solving problem differently, similar to "swap unknown with part of data" idea.
 
+------
 similarly, if we have a list of variables, we can impose an order of them so the search space will be limited by the extreme values =>
 because other variables will be infered, one by one, perhaps recursively
+
+--------
+When search space is small enough, instead of finding a closed form, we can just brute force search. This is a common step as part of
+problem

@@ -3,4 +3,3 @@ Another use of that is dealing with small double multipllications, this can avoi
 
 base number is about representation. It doesnt affect the arithmetic properties
 
-pattern: a group of homogeous types, what can we infer from them, collectively?

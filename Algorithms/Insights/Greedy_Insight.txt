@@ -7,3 +7,6 @@ The tricky part, therefore, is what is the step/state information we need to cap
 3. Because heap has a property of "currently best option", it is often used in greedy algorithm,e.g., MST and Dijkstra
 
 4. by nature, greedy problems are decomposable, but need to define "step" carefully, i.e., step is the dual of "locally optimally solution"
+
+5.One way to prove greedy is that each change toward the greedy solution only improves the final score, until we converge to the greedy
+version we claim. This "gradual" improvement pattern can be seen in a lot non-greedy problems as well
