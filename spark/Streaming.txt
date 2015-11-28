@@ -56,3 +56,11 @@ if # tasks launced per sec is high (50 per second), need to reduce that overhead
 Check value of the end-to-end delay in "Total delay" in Spark driver log4j, delay should be less than batch size
 
 -----
+
+updateStateByKey: seems API is changed already. a new State object is introduced => trackStateByKey
+
+transform Ops to do stream joins => base rdd joins??
+
+sliding windows: window length and sliding length
+
+

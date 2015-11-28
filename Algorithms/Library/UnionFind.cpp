@@ -10,9 +10,9 @@ using namespace std;
 
 #define MaxSize 30000;
 int parent[MaxSize];
-int size[MaxSize];
 
 int Find(int a) {
+  //assumption: parent[a] is set a itself on init
 	if (parent[a] != a)
 		parent[a] = Find(parent[a]);
 
@@ -27,6 +27,5 @@ void Union(int a, int b) {
 	if (aP == bP)
 		return;
 
-	parent[Max(aP, bP)] = Min(aP, bP);
-	size[Min(aP, bP)] = size[aP] + size[bP];
+	parent[max(aP, bP)] = min(aP, bP);
 }
