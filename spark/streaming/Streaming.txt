@@ -63,4 +63,9 @@ transform Ops to do stream joins => base rdd joins??
 
 sliding windows: window length and sliding length
 
+Checkpointing
+------
+metadata checkpointing: recover from driver failure. But need to use StreamingContext.getOrCreate(checkpointDir,  functionToCreateContext _)
+pattern so stream will be recreated from checkpoint data
 
+Data checkpointing: required stateful ops

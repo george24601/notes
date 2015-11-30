@@ -1,0 +1,8 @@
+1. need. enable checkpointing on the streaming context. In local testing mode, it is a local directory, but it should be an HDFS address in
+cluster mode
+
+2. updateStateByKey takes a reducer function, which accept a current value and an iterator of values,i.e, current value is the current
+state, iterator is the list of new data from the new batch grouped by the key(hence it might be a list instead of a single one)
+
+3. updateStateKey and itself just returns another Stream of k-v pairs. Key is the "byKey", and value "state". This "byKey" requirement also
+means the source stream should be a k-v stream as well
