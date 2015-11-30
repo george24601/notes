@@ -7,3 +7,5 @@ Stream to dataset
 use stream.transform
 
 arbitrary RDD-to-RDD functions, e.g., join every batch in a data stream with another dataset, i.e., do rdd to rdd join(?)
+
+Note that in traditional RDD sense, ByKey ops will trigger a shuffle, which is generally expensive

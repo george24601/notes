@@ -1,0 +1,12 @@
+silding window options: 1. window length, 2. sliding interval
+
+all window ops take these 2 parameters
+
+reduceByWindow's function should be associately, returns a single element stream
+
+reduceByKeyAndWindow: accepts reduce function. Unlike updateStateByKey, this reduce is between elements only, instead of between previous
+state and new colleciton of elements. This also implies the reduce funtion itself is associative AND invertible
+
+with checkpointing enabled, we can further improve the efficiency by adding an inverse reduce function as elments leaving the slide window
+
+
