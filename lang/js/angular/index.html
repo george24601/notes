@@ -1,0 +1,33 @@
+<!--app/index.html-->
+
+<html ng-app="phonecatApp">
+	<head>
+		<script src="bower_components/angular/angular.js"></script> <!--include angular.js script -->
+		<script src="js/controllers.js"></script> <!--js that contains controllers-->
+		<!--and all other module's js,required by controller-->
+	</head>
+	<body ng-controller="PhoneListCtrl">
+		<div class="col-md-2">
+			<!--Sidebar content-->
+
+			Search: <input ng-model="query"> <!--can test query binding as well!-->
+
+			Sort by:
+			<select ng-model="orderProp">
+				  <option value="name">Alphabetical</option>
+				    <option value="age">Newest</option>
+			  </select>
+
+		</div>
+
+		<div class="col-md-10">
+			<ul>
+				<li ng-repeat="phone in phones"> <!--can pipe into a filter:query | orderBy:orderProp-->
+				<span>{{phone.name}}</span> <!--{{}} is binding -->
+				<p>{{phone.snippet}}</p>
+				</li>
+			</ul>
+		</div>
+
+	</body>
+</html>

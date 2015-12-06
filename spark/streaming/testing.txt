@@ -1,0 +1,38 @@
+Spark streaming has a pull request to have Kafka real unit test: PR 1751
+
+spawn spark context and streaming context inside local, no problem
+
+use queue stream to dstream
+
+for spark non-streaming, use collect() to get all data and calculate
+
+Need full control of clock to test spark streaming
+
+NOTE: queueStream doesnt not work with checkpoints in 1.4.1+
+
+----
+Another approach:
+Setup vagrant to set up kafka and ZK as local virtual machine, spark cluster run in local mode
+
+for unit testing,
+1. sbt assembly
+2. create config with spark.jar and spark.master
+3.store local spark directory path for spark context creation
+4. create spark context with 2 and 3, in beofre lock
+5. sc.stop() sc=null in after block
+
+code coverage with socverage
+enable fork = true
+-----
+makeRDD to turn Scala sequence into an RDD
+
+ConstantInputDStream that returns same RDD at each batch interval
+
+can foreach rdd, append each elemnt ofthe output stream to a mutable list with RDD.collect()
+
+-----
+
+sscheck, and spark-testing-base
+
+-----
+testOperation to test streaming

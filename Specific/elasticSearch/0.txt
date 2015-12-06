@@ -17,3 +17,9 @@ optimistic concurrency control
 common setup is to use other db as primary,a dn ES to make data searchable
 
 Q: field collapsing
+
+----
+
+Type represents a class of similar documents, with a name and a mapping, which describs fiels/properits that docuemnt of taht type may have
+
+when index  docu in lucne, the value s for each field are adde do the inverted index for the assoicated field

@@ -1,0 +1,22 @@
+Document: top-level root object that is serialized into JSON and stored in ES under a unique ID
+
+curl -XPUT http://localhost:9200/index/type/_mapping -d
+
+{
+  type : {
+ "properties"  : {
+
+field : { "type" : "string"} //what types are supported in ES?
+....
+//suports {"type" : "geo_point"}, which is s"$lat, $lon"
+
+}
+
+}
+
+}
+
+When saving to a ES, essentialy you save a map (i.e., JSON)
+
+----
+Nested type?
