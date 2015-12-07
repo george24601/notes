@@ -1,0 +1,22 @@
+{
+	"query": {
+		"filtered": {
+			"filter": { "term": { "name": "iphone1" }}
+		}
+	},
+		"aggs": {
+			"group_by_state": {
+				"terms": {
+					"field": "name"
+				},
+				"aggs": {
+					"total": {
+						"sum": {
+							"field": "count"
+						}
+					}
+				}
+			}
+		}
+
+}
