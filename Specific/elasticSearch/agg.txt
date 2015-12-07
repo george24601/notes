@@ -1,0 +1,24 @@
+bucketing: each bucket is a kevy-document criterion => list of buckets, each one with a set of documents that "belong" to it
+
+metric: keep track and compute metris over a set of documents
+
+pipeline: aggregate output of other aggregations and their metrics
+
+single and multi-value aggregation when used as sub-aggregations of some bucket
+---
+sum agg example
+
+{
+    "query" : {
+        "constant_score" : {
+            "filter" : {
+                "range" : { "timestamp" : { "from" : "now/1d+9.5h", "to" : "now/1d+16h" }}
+            }
+        }
+    },
+    "aggs" : {
+        "YOUR_AGG_NAME" : { "sum" : { "field" : "FIELD_TO_EXTRACT" } }
+    }
+}
+
+--
