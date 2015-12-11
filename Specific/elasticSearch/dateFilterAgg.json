@@ -1,29 +1,28 @@
 {
-	"query": {
-		"filtered": {
-			"filter":{
-				"range" : {
-					"dateInserted" : {
-						"gte" : "now-7d/d",
-							"lt" :  "now/d"
-					}
-				}
-			}
-		}
-
-	},
-		"aggs": {
-			"group_by_state": {
-				"terms": {
-					"field": "name"
-				},
-				"aggs": {
-					"total": {
-						"sum": {
-							"field": "count"
-						}
-					}
-				}
-			}
-		}
+  "query": {
+    "filtered": {
+      "filter":{
+        "range" : {
+          "dateInserted" : {
+            "gte" : "now-7d/d",
+              "lt" :  "now/d"
+          }
+        }
+      }
+    }
+  },
+    "aggs": {
+      "group_by_state": {
+        "terms": {
+          "field": "name"
+        },
+        "aggs": {
+          "total": {
+            "sum": {
+              "field": "count"
+            }
+          }
+        }
+      }
+    }
 }

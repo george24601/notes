@@ -1,0 +1,41 @@
+Window aggregation
+e.g., # of views for each user per hour
+
+usage: ranking and relevant, trending topics, and reporting and monitoring
+
+problem: in-momeory state lost, how to handle it? at least, we need to write state to db and the end of each window
+
+repartition with user ID, when the window is complete, job iterates over the contes of the store and emits the aggreages to an output stream
+
+---
+table-table join
+keeps lastest staet of each table in a local k-v store, whenver data in one table changesocan join with latest data for the same key in the
+other table, and output the joined result
+
+example: import feeds merchanizes, normalize them by product, and present with all the associate merchans and pricing information
+
+ table of web page contents and joins on attributes such as click through and pagerank
+
+fees user-entered text and need to normalize out entitites such as comapnis, schools, and skills
+
+complex data normaliztion => a matrailized view over many input tables
+
+when a new key arrives, looks up the current value in its store, update teh feilds, and writes back the new joined record
+
+--
+stream-table join
+
+joinign side-information to a real-time feed, advertising, relevance ranking, fraud detection and other
+
+table as in dimension tables, activy events normally include small # of attributes, such IDs, but note detailed attributes
+
+-----
+stream-stream join
+join ad click to a stream of ad impression, when the ad was shown to the information when it was clicked
+
+good for nearly aligned streams, related events on several input streams, and combine them into a single output event, can set max period of
+timeo ver which you allow the events to be spread out
+
+very similar to table-table join, except that
+1. need to hold one side value until it meets the other side
+2. periodically do a full table scan to remove all obsolete entries

@@ -23,3 +23,6 @@ Q: field collapsing
 Type represents a class of similar documents, with a name and a mapping, which describs fiels/properits that docuemnt of taht type may have
 
 when index  docu in lucne, the value s for each field are adde do the inverted index for the assoicated field
+
+-----
+use bool filter to combine filters

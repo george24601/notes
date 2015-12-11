@@ -25,38 +25,17 @@ metadata checkpointing: savng straming computation def into HDFS: to recover fro
 
 data checkpointing: save generated rdds. Necessary in stateful transformation the combine data acoross multiple batches.
 
-enable it by setting a direction if HDFS to which the checkpoint info will be saved:  streamingContext.checkpoint(checkpointDirectory): this
+enable it by setting a dir of HDFS to which the checkpoint info will be saved:  streamingContext.checkpoint(checkpointDirectory): this
 means
 1. When the program is being started for the first time, it will create a new StreamingContext, set up all the streams and then call start()
 2.When the program is being restarted after failure, it will re-create a StreamingContext from the checkpoint data in the checkpoint
 directory 
 
-=> use StreamingCOntext.getOrCreate
+=> use StreamingContext.getOrCreate
 
 Deployment need to ensure that driver process gets restarted automatically on failure
 
 Interval of checkpointsin needs to be set carefully, start iwth checpoit interval of 5-10 sliding intervals.
-
-----
-For tuning:
-1. reducing procesing time of each batch of data
-2. setting the right batch size s.t. the batches of data can be procesed as fast as they are received
-
-degress of parallelism for receiver
-# of blocks in each btach determines # of task that will be used to process the reived data in a map-like tranformation
-repartition data into different # of partitions
-degree of parallelism in data processing
-
-Use Kry serialization can reduce CPU and memory overheads
-case data to be retained is not large
-
-
-if # tasks launced per sec is high (50 per second), need to reduce that overhead
-
-Check value of the end-to-end delay in "Total delay" in Spark driver log4j, delay should be less than batch size
-
------
-
 updateStateByKey: seems API is changed already. a new State object is introduced => trackStateByKey
 
 transform Ops to do stream joins => base rdd joins??
@@ -69,3 +48,14 @@ metadata checkpointing: recover from driver failure. But need to use StreamingCo
 pattern so stream will be recreated from checkpoint data
 
 Data checkpointing: required stateful ops
+
+------
+traditional model; continous operators model, process the data one record at a time
+potential problems:
+failure recovery
+load balancing
+unification of streaming, batch and interactive workload
+
+in table-stream join, use DStream.transform
+
+streaming rdd to DF

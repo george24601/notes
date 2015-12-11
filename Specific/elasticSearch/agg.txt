@@ -22,3 +22,10 @@ sum agg example
 }
 
 --
+term aggregation
+sum_other_doc_count: sum of the doc counts for all buckets that are not part of the response
+buckets: list of the top buckets
+by default: terms returns the buckets for the top ten terms order by the doc_count, need to change size param
+Note: document counts are approximate
+
+Document count error(!)

@@ -1,0 +1,22 @@
+
+----
+For tuning:
+1. reducing procesing time of each batch of data
+2. setting the right batch size s.t. the batches of data can be procesed as fast as they are received
+
+degress of parallelism for receiver
+# of blocks in each btach determines # of task that will be used to process the reived data in a map-like tranformation
+repartition data into different # of partitions
+degree of parallelism in data processing
+
+Use Kry serialization can reduce CPU and memory overheads
+case data to be retained is not large
+
+
+if # tasks launced per sec is high (50 per second), need to reduce that overhead
+
+Check value of the end-to-end delay in "Total delay" in Spark driver log4j, delay should be less than batch size
+
+-----
+
+
