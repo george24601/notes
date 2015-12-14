@@ -1,0 +1,5 @@
+steps are common associated with inducitons. This means, each of your step should aim to preserve the inductive properties. This suggests
+
+1. when you have an initial state (known), you can infer the properties of the initial state, and design your step to preserve it. Note as with induction, key is how strong/general the inductive step is
+
+2.Note to preseve the steps, you often have to devise your steps based on the given step, i,e, the additional, combined part will manifest in your code
