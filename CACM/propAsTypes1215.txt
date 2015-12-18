@@ -1,0 +1,47 @@
+Curry-Howard Isomorphism
+1.for each propsotiion in the logic there is a corresponding type in the programming lnaguage and vice versa
+2.each proof of a given proposition there is a program of the corresponding type and vice versa
+3.For each way to simplify a proof there is a corresponding way to eval a program and vice versa
+
+efficetivly calculabe: lambda calculus (lambda-definabiity), recursive functions, turing machines
+
+lambda calculus: notions for functions, vars, fucntion abstraction,a nd function application
+all forms of bound varaible could be subsumed to lambda binding
+
+represent number: a fucntion that accepts a functionf and a value x, and applies the fucniton to the value n times.
+
+introduce type to lambda calc to avoid Russell's paradox: the syatem allowed a predicate to act on itself.i.e., untyped allows
+self-aplication, to non-terminating computation, yet, simple typed lambd guarantess a computation that halts
+
+natural deduciton and sequent calculus. how to normalize proofs to ensure they were not roundabout. Inisght proof rules should come in
+pair
+
+Subformula Principle
+
+Every type of a function A -> B could be read as a propersition A > B, type of any given funciton <=> provalbe proposition.
+
+Proof reuls come in intorduction and elimination pairs, so do typing rules, induciton ,=> define or construct a value of the given type, and
+elimiantion rules to ways to use or deconstruct values of the givne type
+
+A & B <=> Caretisan product A X B, or a pair
+
+A V B ,+> a varaiant with two alternatives, disjoint sum A + B
+
+A > B <=> A -> B
+
+for all and exist corresponds to dependent types
+
+Peirce's law provides a type for the call/cc operation in Scheme. double-negation translation coresponds to the continuation-passing styoel
+transformation
+
+Introduction rule: under what ocnditions we say the connetive holds, how to define the connective, 
+elimilnation rule, what we may conclude when the connective holds, how to use the connective
+
+A proof is complete only when every assumption in it has been discharged by a corresponding use of >-Io
+
+proofs in normal form satify the subformula principle: every formula of such proof must be a subformula of one o f its unduischarged
+assumptions or of its conclutions
+
+simplificaiotn of proffs coresponds exactly to evalution of programs
+
+
