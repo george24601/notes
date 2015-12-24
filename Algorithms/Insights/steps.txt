@@ -3,3 +3,10 @@ steps are common associated with inducitons. This means, each of your step shoul
 1. when you have an initial state (known), you can infer the properties of the initial state, and design your step to preserve it. Note as with induction, key is how strong/general the inductive step is
 
 2.Note to preseve the steps, you often have to devise your steps based on the given step, i,e, the additional, combined part will manifest in your code
+
+------
+If you keep repeating the same steps onto the result of the previous group, either you end up with identity or extreme values, or in a cycle. 
+
+------
+steps is a common way to decompose the problem, by exploiting the duality of state and changes. Almost always worth a try, even for the
+completeness of the argument

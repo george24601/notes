@@ -1,13 +1,3 @@
-#include <iostream>
-#include <sstream>
-#include <stdio.h>
-#include <math.h>
-#include <algorithm>
-#include <vector>
-#include <iomanip>
-#include <map>
-using namespace std;
-
 #define MaxSize 30000;
 int parent[MaxSize];
 
