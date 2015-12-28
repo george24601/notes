@@ -1,9 +1,0 @@
-Typed actors: bridige betwwen actor systems and no-actor actor => They have their niche, use them sparingly
-
-If the strategy is declared inside the supervisng actor, its decider has ccess to all internal stae of the actor in a thread-safe fashion, incluidng obtaining a refernce to the currently faile child,i.e., sender of the failure msg
-
-routing
-
-FSM mixin
-
-Persistence model
