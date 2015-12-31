@@ -1,0 +1,4 @@
+Because heap has a property of "currently best option", it is often used in greedy algorithm,e.g., MST and Dijkstra
+
+If you care only about extreme value at each step, then heap is a good fit. It has added benefit of allowing quick in place update, where
+sorting in general will mess up order

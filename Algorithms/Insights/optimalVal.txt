@@ -4,6 +4,8 @@ proof in greedy. A concrete example will be gradient descent
 similarly, we can do step-wise, gradient descent-like optimization, i.e., each step will only be better, will never get worse (start from
 potentially worst possible state). total # of steps will be bounded by the dimension of data.=> even a while loop would do
 
+Formally, this is iterative methods that converge to a solution
+
 
 ---
 In DP/state like cases, we will need to compare all potential candidates to find the best

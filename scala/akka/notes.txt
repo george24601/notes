@@ -148,11 +148,3 @@ of children has such tight dependency. Stopping a child will NOT termnicate
 other children => implement by watch children lifecycle
 
 problem of creaign one-off actors from an all-for-one supervisor
-
-
-
-
-
-
-
-
