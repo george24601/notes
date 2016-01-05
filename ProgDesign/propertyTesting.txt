@@ -31,22 +31,34 @@ To prove: each bad node carries one credit, which must be supplied when it is cr
 
 credit approach for bad nodes
 
-introduce cost_insert and cost_dedlete
+introduce cost_insert and cost_delete
 
 claim: on avg each insertion or deletion travers only log2n nodes, and cretes euqually many new, possibly bad nodes
 
 properties for cost_insert and cost_deleteMin
+------
+formal verficiation very expensive to the point of impractical
 
 -----
 Fulfill a spec
-Model for PQ, need a function mappingn each skew heap to its model
-Gievne function f on model, and model g on original, can define a property that f corectly models g on original h,i.e.,
+Model for PQ, need a function mapping each skew heap to its model
+Given function f on model, and model g on original, can define a property that f corectly models g on original h,i.e.,
 f (model h) == model (g h)
 
 f is your function, g is the property-tested function 
 
 ---
 
+----------
+Patterns
+1. Inversible operation
+2. Two different ops on the same model gives the same result
+3. Invariants: something must stay same
+4. Idempotency
+
+Use scalaz with scalacheck
+
+Generator with frequency
 
 
 

@@ -1,0 +1,24 @@
+def foldingFunction(list: List[Double], next: String): List[Double] = (list, next) match {
+         case (x :: y :: ys, "*") => (y * x) :: ys
+         case (x :: y :: ys, "+") => (y + x) :: ys
+         case (x :: y :: ys, "-") => (y - x) :: ys
+         case (xs, numString) => numString.toInt :: xs
+       }
+
+def solveRPN(s: String): Double =
+         (s.split(' ').toList.foldLeft(Nil: List[Double]) {foldingFunction}).head
+
+//add option for error handling
+def foldingFunction(list: List[Double], next: String): Option[List[Double]] = (list, next) match {
+         case (x :: y :: ys, "*") => ((y * x) :: ys).point[Option]
+         case (x :: y :: ys, "+") => ((y + x) :: ys).point[Option]
+         case (x :: y :: ys, "-") => ((y - x) :: ys).point[Option]
+         case (xs, numString) => numString.parseInt.toOption map {_ :: xs}
+       }
+
+def solveRPN(s: String): Option[Double] = for {
+         List(x) <- s.split(' ').toList.foldLeftM(Nil: List[Double]) {foldingFunction}
+       } yield x
+
+------
+Reader as a special case of Kleisli

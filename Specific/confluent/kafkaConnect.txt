@@ -1,0 +1,29 @@
+most likely need to execute on a Kafka COnnect cluster.
+
+ The default unit of work should be an entire database
+
+Support copying to and from both streaming and batch-oriented systems.
+
+ Kafka Connect manages the Tasks; the Connector is only responsible for generating the set of Tasks and indicating to the framework when
+they need to be updated.
+
+A Kafka Connect cluster consists of a set of Worker processes that are containers that execute Connectors and Tasks
+
+, Kafka Connect performs broad copying by default by having users define jobs at the level of Connectors which then break the job into
+smaller Tasks. 
+
+The REST interface for managing and monitoring jobs makes it easy to run Kafka Connect as an organization-wide service that runs jobs for
+many users. 
+
+In distributed mode, you start many worker processes using the same group.id and they automatically coordinate to schedule execution of
+connectors and tasks across all available workers. 
+
+interaction with a distributed-mode cluster is via the REST API. To create a connector, you start the workers and then make a REST request
+to create a connector 
+
+Need to set: 
+1.group.id
+2.config.storage.topic: Kafka topic to store connector and task config state
+3.offset.storage.topic: the Kafka topic to store connector offset state in. Should have large # of partitons (25 or 50)
+
+To introduce new parameter, add it to $CLASSPATH
