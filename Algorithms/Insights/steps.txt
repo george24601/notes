@@ -1,10 +1,7 @@
-steps are common associated with inducitons. This means, each of your step should aim to preserve the inductive properties. This suggests
+steps are common associated with inducitons. This means, each of your step should aim to preserve the inductive properties
 
-1. when you have an initial state (known), you can infer the properties of the initial state, and design your step to preserve it. Note as
-with induction, key is how strong/general the inductive step is. 
-
-2.Note to preserve the pattern of states, you often have to devise your steps to convert post step state into a new state with our inductive
-pattern, i,e, consciously doing reduction into our known patterns
+even iterative steps can be tackled with inductive approach,i.e., if you find you need to repeat some steps, sign that you ve reached
+another step in the inductive process
 
 ------
 If you keep repeating the same steps onto the result of the previous group, either you end up with identity or extreme values, or in a cycle. 
@@ -17,13 +14,6 @@ Floyd-cycle finding
 
 ------
 steps is a common way to decompose the problem, by exploiting the duality of state and changes. Almost always worth a try, even for the completeness of the argument
-
-----
-To help recognize patterns, each step should be as SMALL as possible, so that we can break down to fine-grained states,i.e., instead of
-trying to dive deeper, at each step, we can/should pause to try to designate a newly state first.
-
-The drawback of this approach is, of course, we will end up with a lot of distinct states, even though some of them may share even deeper
-connection and can be simplified.
 
 ----
 At each step, our step design is around what state should be carries over to the next step. At the same time, which part of current state can be discarded

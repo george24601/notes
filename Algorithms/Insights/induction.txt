@@ -1,0 +1,15 @@
+focus on the initial state and perhaps the 2nd step, infer as much insight as you can, and try to fit the 3rd steps into patterns of the initial state/2nd step. 
+
+Bottomline is try NOT to tackle the middle state at the beginning
+----
+Try to express the state recursively, instead of jumping in and break down the steps => you may be attacking multiple steps at the same time in fact!
+
+----
+To help recognize patterns, one way is to try make each step as SMALL as possible,i.e., at each step, we pause to try to designate a newly
+state first, because you dont want to attack many steps at a time during induction!
+
+AT THE SAME TIME, the inventor's paradox, that is, you could have solve it more easily with a more general, complex recursive pattern, a more ambitious plan, beyond those immediately present
+
+As a result, need to try both direction
+----
+inductive equality, i.e., the separation is "contained" instead of going outward,e.g., the golden ratio

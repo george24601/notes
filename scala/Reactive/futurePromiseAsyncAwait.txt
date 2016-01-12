@@ -6,8 +6,7 @@ val packet : Future[Array[Byte]] = socket.readFromMemory()
 
 val confirmation : Future [Array[Byte]] = packet.flatMap ( p => socket.sendToEurope(p))
 
-def sendToEurope(packet: Array[Byte]) : Fture [Array[Byte]] =
-Http(URL, Request(packet))
+def sendToEurope(packet: Array[Byte]) : Future [Array[Byte]] = Http(URL, Request(packet))
 .filter(response => response.isOK) //will throw exception if it doesnt satisfy. Future will capture this in a try
 .map(response => response.toByteArray) 
 
@@ -62,7 +61,7 @@ def retry (noTimes: Int) (block: => Future[T]): Future[T] = {
 val ns = (1 to noTimes).toList
 val attempts = ns.map(_ => () => block) //need this thunk for lazy eval!
 val failed = Future.failed(new Exception("boom"))
-val result = attemps.foldLeft(failed) 
+val result = attempts.foldLeft(failed) 
  ((a, block) => a recoverWith { block()}
 
 result
@@ -81,7 +80,7 @@ def retry (noTimes: Int) (block: => Future[T]): Future[T] = {
 async {
 var i = 0
 
-var reuslt : Try[T] = Failure(new Exception())
+var result : Try[T] = Failure(new Exception())
 while (result.isFaiulre && i < noTimes) {
 	result = await (Try{block)}
 	i += 1
