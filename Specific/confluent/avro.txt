@@ -1,0 +1,16 @@
+encoding: length + byte array
+additional union branch field in front for union types
+array has a size field at the beginning as well
+
+It encodes 1 feidl after naother, in the order they appear in the schema. No optional type(why?), so use union with null
+
+if you want to add a type to union, you have to update the schema reader is using, otherwise, it doesnt know how to handle the new union
+branch
+
+Avro matches the fields by name, so order doesnt matter
+
+adding a field, need a default value, so new schema can read old data
+old schema reading new data is fine, just skip it
+
+removing a field with a default value is ok, so old schema can read new data
+new schema reading old data is fine, just skip it

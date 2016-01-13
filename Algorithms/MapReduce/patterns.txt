@@ -1,0 +1,21 @@
+partiton function and combiner
+
+Tools for sync:
+Bring parital result together
+Sort order of intermediate keys
+partitioner
+preserving state in mappers and reducers, but dont forget to emit data on close, i.e., keep the preserve state across k-v pairs. Map/reduce
+methods need to consult with the state. basically doing what combiner does by hand. although watch out for memory management and
+order-dependent bug
+
+Avoid object creation
+Avoid bufferring: limited heap size, won't scale for large dataset
+
+Reduce intermediate data via local aggregation. Can also use combiner
+
+Example: term co-occurence maxtrx for text collction
+
+approach 1: pair apporach: each mapper takes a sentance
+approach 2: strips: each mapper takes a sentence
+
+

@@ -1,0 +1,52 @@
+RDD: 
+set of partitions 
+list of dependencis on parent RDDs 
+function to compute a partition given its parents 
+partitioner
+preferred locations for each partition
+
+e.g. HDFS RDD
+Filtered RDD
+Join RDD
+
+Dependency type: Narrow/pipeline-able
+Wide/shuffle
+
+Application:
+program -> driver (RDD grpah, scheudler, block tracker, shuffle tracker) <-> culster manager <-> executor with task threads and block
+managers
+
+Scheduling:
+Build DAG => scheduler split graph into stages of tasks, and submit each stage as ready -> execturos execute task, store and serve blocks
+
+Scheduler optimization
+
+pipelines operataions wihtin a stage
+pick joins algorims based on partitioning to minimize shuffles
+resue prevoiusly cached data
+
+Task: unit of work in an execturo thread
+NO map vs reduce task, each task either patitions output for shuffle, or send the output back to the driver
+
+Shuffle write intermediate files to disk
+fetched by the next stage of tasks
+-----
+Performance debugging: check port 4040 or executor logs(spark/work)
+
+Find slow stage
+Find straggler (Max Duration of a task) => Check aggregatedmetrics by executor, which node is slow?
+One way to avoid it is to turn on speculation, i.e., identifies slow tasks and re-lanucnshc on other nodes, of course it doesnt help against data skew
+
+Could it be GC?
+spark.executor.extraJavaOptions=-XX:-PrintGCDetails -XX:+PrintGCTimeStamps
+check spark/work/app../[n]/stdout on executoers
+
+jmap -histo [pid]
+Gets a histogram of objects in the JVM heap
+
+jmap -histo:live [pid]
+Gets a histogram of objects in the heap after GC
+
+Use mapPartitions and reuse objects to reduce GC impact
+
+local debugging => run in local mode and use debugger with sample dataset
