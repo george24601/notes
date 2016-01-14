@@ -13,9 +13,38 @@ Avoid bufferring: limited heap size, won't scale for large dataset
 
 Reduce intermediate data via local aggregation. Can also use combiner
 
+----
 Example: term co-occurence maxtrx for text collction
 
-approach 1: pair apporach: each mapper takes a sentance
-approach 2: strips: each mapper takes a sentence
+# of times i and j co-occur in some context
 
+approach 1: pair apporach: each mapper takes a sentance, emit (a,b) -> count
+approach 2: strips: each mapper takes a sentence, emit a ->(b: count, c:count, d: count)
 
+-----
+Example: Relative frequencies f(B|A) 
+
+emit extra(a for every b in mapper,
+makesure (a, *) comes first
+
+over inversion:  get the marginal counts to arrive at the reducer forxe the join counts
+
+-----
+Pair sync: sort keys into correct order, hold state in recuder acorss multiple k-v pairs
+Strpe appraoch: each reducer recieve all the data it needs
+
+seconardy sorting: put secondary sorted value into the key
+
+-----------
+
+Distributed task execution: problem taht can be divided into multiple parts and reuslt sform all parts can be comibined togetehr to obtain a
+fail resulet => each mapper calculates a part, reducer does the combination
+
+Sorting by MR vs sorted at insertion time already
+
+Graph processing: MR iterates, each iterations is a MR job, pretty much bellman-ford
+example: BFS to calculate # of hops, PageRank
+
+Set of records with fields F and G, count # of UNIQUE values of filled F grouped by G
+
+Relational: select, projection, union, intersection(!), difference(!), group by and aggregation, joins(many approaches)
