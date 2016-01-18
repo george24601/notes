@@ -1,0 +1,49 @@
+traditional: NN
+
+Content based filtering: user profile and item profile
+
+collaborative: domain free, some elusive part not covered by content-based. But need to address cold start problem => use content based in
+this case
+
+Two major schools: latent factor model and neighborhood methods
+
+item-based: user's previous rating on neighboring items,i.e. other products that tend to get rated similarly by the same user
+user-based: like-minded users that can complement each othero
+
+latent-factor:characterize both item and user on factors inferred from rating patterns, each factor measures how much user likes item that
+scores high on this factor
+
+i.e., score will be the dot product of user's factors and movies factors(what does dot product mean?),i.e., both item and user are mapped to
+the same latent factor space
+
+implicit feedback:a densely filled array, often representing absence or not of an event
+
+main problem: how to compute user-to-latent, and item-to-latent factors => SVD, but SVD doesnt work when matrix is incomplete, and watch out
+for overfitting problem => directly observed ratings only, use regularization to handle overfitting => penalize learned parameters
+magnitudes. => use lambda to control regulaizration effect, use cross validation to control value
+
+=> GOAL: minimize regularized square error on the known ratings
+
+Idea1: stochastic gradiadent descent
+for each rating in the training set, predict and calculate error, the modify p, q by a mag proportional to delta in the opposite direction
+of the gradient (how to get the beta value?)
+
+
+Idea2: Alternate least square
+fixing ps and fixing qs alternatively and compute least square problem => good for paralllization, or densely populated data, e.g., implicit
+factor, since SGD has to go through all ratings
+
+calculate bias: overall + item bias + user bias, and then add bias to the dot product as final ratings
+=> need to update our target formula as well, both the error part and the regulariation part => they need b(i) and b(u) as well!
+
+Given user's implicit preference, can characterize user with sum of item factors of the implicitly favored items , and normalization
+
+do similar thing to user attributes. These two will be atted to user-factor P(u), because each of them is a vector in the latent factor
+space
+
+temporal effect: introduce t to user bias, item bias, and user preference p, and thus, rating becomes a function of t as well!
+
+introduce a confidence factor on the difference between rating and prediction for each (u,i)
+
+
+
