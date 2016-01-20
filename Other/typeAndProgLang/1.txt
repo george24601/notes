@@ -1,0 +1,69 @@
+type systems calculates static approximation of the runtime status of terms
+
+In dynamic type language, type tags are used to label types in the heap. Thus, it is more proper to call it dynamically checked vs
+statically checked
+
+Type system proves the absense of the error, but NOT the presence, i.e., if run time may be fine, but will get rejected, because static check can not prove it
+
+A safe language is one that protects its own abstraction, but this is != type safe,or, prevents untrapped erros at run time
+
+Run-time safety not noramly achiveable by static typing alone, e.g., dynamic array bound checking
+
+language design should go hand-in-hand with type system design => without type sytesm, tend of offer features or encourgae idions that make
+typechecking difficult or infeasible
+-------
+
+countable: one-to-one correspondence witht he natural numbers
+
+n-place relation on a colleciton of sets S(1) to S(n): set R of tuples of elements from S(1) to S(n) => related by R
+
+one-place relation/predicate on S: P(s) mapping elemnets of S to truth values
+
+two-palce relation R on S and T: binary relation, when S and T are the same set U, R is a binary relation on U
+
+R is a binary relation on S, and P a predicate on S, P is preserved by R if s R s' and P(s), we have P(s')
+
+preorder on S: reflexive and transitive. preorder that is anti-symmetric is partial order. Partial order that is either t<=s or s<=t is
+total order
+
+j is join or least upper bound of S and T => s <= j, t <= j, for all k >= s and k>=t, k >= j
+similar defintion for meet, greatest upper bound
+
+equivalent relationship: refletive, transitive, and symmetric
+
+reflective closure: smallest reflextive relation that contains R, similar goes to reflective closure
+
+---
+2.2.6
+R` is a reflextive relation: by construction. Suppose there is a smaller one, then there exists(s1, s1) in R' but not in R2, contradicts
+reflective defintion
+
+2.2.7
+by definiteion, R' contains R.
+Claim R' is trainsitive, i.e., when s R' t and t R' u. by construction, we can find R(j), such that, s R(j) t and t R(j) u, so R(j+1)
+satifies transitivitity
+suppose smallest # of s R' t and t R' u is i, i.e., s R(i-1) t and t R(i-1) u, but NOT s R(i-1) u.
+induction on i,claim, that any transitive closure R'' must include (s, u)
+i = 0, by definition, since  R'' is transitive, (s, u) in R''
+case i, we know (s,t) and (t,u) are in R'', by definition, since R'' is transitionve, (s,t) and (t,u) are in R'', (s,u) is R''
+i.e. size(R') <= transitive closure -> R' is min size
+
+2.2.8
+R*: smallest reflective and transitive that contains R, R itself preserve P on S,i.e., if s R s', and P(s), we have P(s')
+proof: if s R* s', and P(s), we have P(s'). 
+Note that by previous 2 questions, R* must contain all elements in the previous 2 constructions,i.e., we can form a chain s, s1, s2....,
+s', where each s(i), s(i+1) in R, and if P(s), so such P(s1),P(s2)....P(s')
+
+-------
+
+decreasing chain: sequence of s(1), s(2), s(3)..s.t. s(i+1) < s(i) for every i, <= is well founded if it contain no inifite decreasing
+chains
+
+lexicographic induction: given P(m',n') for all(m',n') < (m,n), we can show {(m, n), then P(m,n) holds for all m.n
+
+
+
+
+
+
+
