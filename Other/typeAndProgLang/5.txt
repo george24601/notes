@@ -1,0 +1,79 @@
+In lambda-calculus everyting is a function: arguemnts accpeted by functions are themselves functions and thr esult returned is another
+function
+
+t = x  (variable)
+lambda(x).t (abstraction)
+ t t (application)
+
+transofmration from concrete to abstract syntax -> lexer +  parser
+
+s t u same as (s t) u <=> application associates to the left
+bodies of abstactions are taken to extend as far to the right
+
+occurence of variable x is bound when it occurs in t of lambda(x).t, we can say lambda(x) is binder whose scope is t.
+free if ocurence of x is not bound by an enclosing abstraction on x
+
+term with no free variables: closed. combinators
+
+Each step is rewriting whose left-hand is abstraction, by substituting the right-hand component for the bound variable in the abstraction's
+body,i.e.,
+(lambda(x).x(lamba(x).x))(u r) -> ?
+
+redex: reducialbe expression. rewriting redex is beta-reduction
+
+full beta-reduction: any redex may be reduced at any time.
+normal order: leftmost, outermost redex first,i.e., each term eavls in one step to at msot one term t'
+call by name: no reductions inside abstraction.
+call by value: outermost redexs are reduced and where a reduced only when its right-hand side has already been reduced to a value, easiest
+to enrich with features s.a. excpetions and references
+
+------
+
+multiple-argument into higher-order function: currying
+f=lambda(x).lambda(y).s (s is a term with free varaibles x and y)
+
+tru = lambda(t).labmda(f).t
+fls = lambda(t).lambda(f).f
+
+So the if conditional is essentially the combinator, in the form of test b v w, where b is the boolean defined above
+test = lambda(l).lambda(m).lambda(n). l m n
+
+excercise: reduce steps with test and booleans
+
+and = lambda(b).lambda(c). b c fls
+or = lambda(b).lambda(c). b tru c
+not = lambda(b) b fls tru
+
+-----
+pair = lambda(f).lambda(s).lambda(b). b f s
+fst = lambba(p). p tru;
+snd = lambda(p). p fls
+
+fst(pair v w) ->* v
+
+----
+church numeral. notice that c(0) and false are essentially the same
+c(0) = lambda(s).lambda(z).z;
+c(1) = lambda(s).lambda(z).s z
+c(2) = lambda(s).lambda(z). s (s z)
+
+scc = lambda(n).lambda(s).lambda(z). s (n s z)
+
+alternatively?
+l(n).l(s).l(z). s (n (c(1) s z))
+
+plus = l(m).l(n).l(s).l(z). m s (n s z)
+
+So (plus n) gives funciton that n to whatever argument it is given
+
+times = l(m).l(n). m (plus n) c(0)
+power= l(m).l(n). m (times n) c(1)
+
+-----
+To test if a church numerical is 0
+
+apply numeral to zz and ss s.t. appplying ss to zz one
+
+
+
+

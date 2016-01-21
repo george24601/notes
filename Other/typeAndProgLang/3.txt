@@ -1,0 +1,53 @@
+set of terms T definition: inductively
+terms T defintion by inference rules
+terms S concretely, by set notation => show how to actually construct the set as the limit of a sequence
+
+3.2.4
+|S(3)| = 3 + 3 * |S(2)| + |S(2)|
+
+3.2.5
+induction on i. i = 0, trivial
+consider i = n case, in s(n+1), since s(n-1) <= s(n), we can construct each clause directly from s(n-1), skipping the s(n) steps, i.e., by
+definition, all expression in s(n) can be construction in s(n+1)
+
+Claim and proof: T = S
+
+inductive definitons of functions over the set of terms/inductiove proofs of properties of terms
+
+Lemma |Consts(t)| <= size(t)
+proof: induciton on the depth of t
+
+Principles of inductions on terms: on depth, on size, and on structure
+
+instance of inference rule: replacing each metavarible by the same term in the rule's conclusion and all its premises
+rule is satisifed by a relation if, for each instance of the rule, either the conclusion is in the relation or one of the premises is not
+
+one-step evalutaiotn relation: smallest binary relation on terms satifsy terms. When (t, t') is in the eval relation, the statment t->t' is
+derivalbe.
+Deriable iff it is justified by the rules, i.e., n a derivation tree, leaves are leabled with instance of axions, internalnodes are labbeld
+with conjugation rule
+
+Induction on derivations: based on the idea of derivation tree
+3.5.4
+Determinacy of one-step evaluation: If t -> t' and t -> t'', then t' = t''
+
+t is normal form if no eval rule applies to it, i.e., every value is in normal form
+
+3.5.8
+Theorem: if t is in normal form, then t is a value
+
+Multi-step evalutation is the relrexibe, transitve closre of one-step evalutation
+
+3.5.11
+if t->* u and t ->* u', where u and u' are boht normal forms, then u = u'
+
+Termination proof: choose well-founded set S and give a function f mapping machine staea into S, and whenver t -> we ahve f(t') < f(t)
+
+3.5.12
+For every term t theres is some normal form t' such that t->* t'
+
+3.5.13
+
+3.5.14
+
+A closed term is stuck if it is innormal form but not a value, i.e., run-time error
