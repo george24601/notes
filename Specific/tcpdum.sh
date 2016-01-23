@@ -6,7 +6,7 @@ sudo tcpdump -nn
 #-i any : Listen on all interfaces just to see if you’re seeing any traffic
 
 #look for traffic based on IP address
-tcpdump host $HOST_IP
+sudo tcpdump host $HOST_IP
 
 #look for traffic from/to with src/dst
 
@@ -14,6 +14,10 @@ tcpdump host $HOST_IP
 #-w $target_fiile : dump content to a text file
 sudo tcpdump -nn -w d1
 
+sudo tcpdump -nn -XX -w d1 host 172.16.100.64
+
 #-r $target_fiile : load the file written by -w
-sudo tcpdump -nn -r d1 > readable
+sudo tcpdump -nn -XX -r d1
+
+sudo tcpdump -nn -r d1
 

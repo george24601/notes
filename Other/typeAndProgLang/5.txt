@@ -72,8 +72,89 @@ power= l(m).l(n). m (times n) c(1)
 -----
 To test if a church numerical is 0
 
-apply numeral to zz and ss s.t. appplying ss to zz one
+apply numeral to pair of terms zz and ss s.t. appplying ss to zz one or more times gives fls, while not applying it at all yields true
+i.e., zz should be true
 
+iszero = l(m). m (l(x). fls) tru;
 
+zz = pair c(0) c(0)
+ss = l(p). pair (snd p) (plus c(1) (snd p))
+prd = l(m). fst (m ss zz)
 
+sub = l(m).l(n).l(s).l(z) n prd (m s z)
 
+5.2.6
+Q: how many eval steps to calc prd C(n)
+
+equal = l(m).l(n).iszero (sub m n)
+
+---------
+realbool = l(b). b true false
+churchbool = l(b). if b then tru else fls
+
+realq =l(m).l(n). (equal m n) true false
+realnat = l(m) m (l(x). succ x) 0
+
+Note we can not apply m to succ directly!
+
+similarly scc C(1) does not eval to C(2) directly under call-by-value rule, need that parameter pass in to kick it off! Converting it to the
+realnat will supply the extra arguments
+
+------
+omega = (l(x).x x) (l(x). x x), itself is not in normal form, but reducing it further gives the same thing! we call it it diverge
+
+fixed-point combinator
+
+fix - l(f). (l(x). f (l(y). x x y)) (l(x). f (l(y). x x y))
+
+approach: g = l(f). (body containing f), and then h = fix g
+
+g = l(fct). l(n). if realeq n c(0) then c1 else (times n (fct (prd n)))
+fatorial = fix g
+
+note that fct n ->* g fct n. fct supplies itself and n as arugments to g when appliced to an argument
+
+5.2.8
+
+with Church booleans
+g = l(fct). l(n). test (n c(0)) c1 (times n (fct (prd n)))
+
+g = l(cn).l(n) if cn = 0 then c(0) else scc (cn (n-1))
+churchnat = fix g
+
+5.2.11
+-----------
+
+Let V be a countable set of variable names, set of terms is the smallest set T s.t.
+x in T for every x in V
+if t in T and x in V, then l(x).t in T
+if t(1) in T and t(2) in T, then t1 t2 in T
+
+set of free variable of a term t
+FV(x) = {x}
+FV(l(x).t1) = FV(t1) - {x}
+FV(t1 t2) = FV(t1) U FV(t2)
+
+5.3.3
+|FV(t)| <= size(t)
+
+----
+capture-avoiding substitution + renaming convention to form substitution definition
+
+Operational sematics
+
+t = x
+l(x).t
+t t
+
+v = l(x).t
+
+3 eval rules: E-App1, E-App2, E-AppAbs
+
+By inference E-App1 applies to t(1) that are NOT values(why?), and E-app2 can not fire until LHS is a value, thus,an order of evaluation is determined.
+
+5.3.6. 
+the example is call-by-val, try full beta-reduction, normal-order, and lazy eval eval rules
+full beta-reduction: any redex can be reduce at any time
+normal order: left most, outer most first
+lazy eval: normal order + no reduciton inside abstraction

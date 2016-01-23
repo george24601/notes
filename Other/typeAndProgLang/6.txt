@@ -1,0 +1,23 @@
+represent term by making varaible occurences point directly to their binders, rather than referring to them by name=> de brujin
+terms/nameless terms, static distnaces in compiler
+
+T(n): elements with at most n free variables, n-terms
+
+naming context to assign indices to free variables: indices = actual dist + context indices
+from right to left, same as the way we count BI
+
+problem: need to shift bindings inside the RHS of substibution, because the free variables now has c number of binders in front of them in the substituted one
+
+definition: d-place shift of a term t with cutoff c
+
+^(k, d, c)
+^(l.t, d, c)
+^(t t)
+
+beta-reduciton: substitube for the last variable, i.e. j = 0
+
+[j->s] k = s if j = k, otherwise k
+[j->s] (l.t) = l.[j + 1 -> S(1, 0, s)] t
+[j->s] (t1, t2) = ([j->s] t1, [j->s] t2)
+
+quasiquotation
