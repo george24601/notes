@@ -1,0 +1,110 @@
+User specifies directed computation graphs, and code on each node, framework manages persistant state, flow of records, and
+fault-tolerance
+
+notion of logical time makes time-based aggregation easier
+
+Model-based streaming systems, depends on the prediction generated from weeks of data, and the model must be updated on the fly
+
+API handles each record operation in idempotent way. Checkpoint progress fine grained, so no buffering pending data between checkpoints
+
+Use case: bucket records into 1-sec interval, compare actual traffic for each bucket with the predicted. If the number differs a lot over a
+# of buckets, then we know query is dipping or surging, in parallel, update the model
+
+Spike from short term storage, long-term storage handles model
+
+give a low watermark for incoming data at each stage => all data upto the low-watermark has been received => can also handle out-of-order
+case
+
+Exactly-once is required for many revenue-processing customers
+
+Persitent state abstraction should be available to user code and integrated into overall model
+
+System should compute ever-increasing TS. 
+
+input/output as key, value, TS triples. context in which user runs is scoped to a specific key. MillWheel calculate the LW by the TS, which
+can be assigned to by the user,e.g., window-sum on # of queries, then TS will be the time query occurs
+
+each computation has its own k-v, and updates in response to records, inside computation, access a per-key, per-computation persistance
+store, which allows for powerful-per key aggregation: records delivered exactly once, checkpoint happens atomically
+
+-------
+
+definiteion of a node in topology. input streams, out stream, key extractor, output format
+
+computation code is written to operate in the context of a single key. for every record, consumer specifies key extraction function, can
+access state only for that key, i.e., only one record can be processed for a given key at a time
+
+persitant state is a byte string that is managed per-key. User needs to ser/der routines. state backed by HA data store, common uses of
+state is countered aggregated over windows and buffered data for a join
+
+----
+recusive definition of LW => min of upsterm LW and oldest work of current computation
+
+LW is seeded by injectors, which sends data from external system, possible SOME records violates LW => dropping such data or correct
+aggregate retroactivly, but watermark must be monotonic!
+
+-----
+Timers: hook that triggers at wall clock time or LW value, journaled in persistant state and can survive process restart
+e.g., set LW timers to the end of a bucket
+
+class Computation {
+  // Hooks called by the system.
+  void ProcessRecord(Record data);//to be override by timer
+  void ProcessTimer(Timer timer);//to be override by timer
+  // Accessors for other abstractions.
+  void SetTimer(string tag, int64 time);
+  void ProduceRecord(
+      Record data, string stream);
+  StateType MutablePersistentState();
+};
+
+each computation calculates low watermarks. persistat state can be assigned a timestamp, and rolled up automatically by the system => user
+manipulating LW by assigning TS to records
+
+------
+exactly-once delivary:
+record is checked against dedup data from previous deliveries
+pending changes checkpointed into backing store (why checkpoint before sending downstream)
+sender ACK
+send pending downstream productions
+
+can batch check for optimizaiton
+
+System assigns unique id to all records at production time, this ID is atomically checkpointed along with state change => use bloom filter
+to fast track check
+
+record ids are GCed after system guarantees are internal tools have done retrying, may need slack value for late deliveries, but normally
+within minutes. 
+check points are done with blindwrite, NOT read/mondify/write, i.e. like append log
+replay check points on restart, and they are deleted once production is successful
+
+if broadcast before checkpoing, problem with weak produciton, which is useful for naturally idempotent ops
+
+------
+do not lose data
+State op must be exactly once
+persisted data must be consistent
+LW must refect all pending states of the system
+Timers must fire in-order for a given key
+=>
+all per-key updates in a single atomic operation
+
+problem: zombin writer and network remnants doing stale writes
+------
+streams are delivered via RPC, use bigtable for atomic single-row updates, timers, pending produciton, and persistant state are all stored
+in the same row
+
+how to recover from machine failure
+
+---
+low watermark as a central authority
+
+95th percentile = 30 ms => 100 sec with strong productions and exactly-once
+
+watermark lag problem => current problem
+
+----
+significant amount of checkpointing=> lots of traffics to storage layer
+
+
+
