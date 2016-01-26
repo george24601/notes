@@ -7,4 +7,22 @@ typable/well-typed if there is some T s.t. t: T
 
 inversion of the typing relation
 
+statements are formal assertions about the typing of programs. Typing rules are implications between statements, and derivations are
+decutions based on tping rules
 
+Uniquess of types
+proof: structural induciton on derivation trees, just as propertis of the evaluation relations are typically proved by inductions on
+evaluation derivations
+
+If, for each term s, given P(r) for all immediate subterms r of s, we can show P(s), then P(s) holds for all s
+------
+
+safety = progress + preservation
+progress = a well-typed term is not stuck, either a value or it can take a step according to the eval rules
+preservation = takes a step of evaluation, then the result term is also well-tyed
+
+progress: Suppose t is a well-typed term, then either t is a value or else there is some t' with t -> t'
+proof: induction on a derviation of t: T
+
+preservation: if t : T and t -> t', then t': T
+proof: induction on a derivation of t:T, or evaluation derivation

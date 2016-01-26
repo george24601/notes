@@ -1,0 +1,27 @@
+Since pure l-calculus is turing complete, can not given exact type analysis, e.g., have to run some tricky computation to determin the type
+returned in a if, but the computation may diverage
+
+Give every l-abstraciton the type T(1) -> T(2)
+
+The set of simple types over Bool is T : = Bool | T -> T
+
+-> is right associative, i.e., T(1) -> T(2) -> T(3) = T(1) -> (T(2) -> T(3))
+
+explicitly typed: type annotations in terms tohelp guide the typechecker
+
+Because terms may contain nested l-abstraction, typing relation becomes 3 place => need assumption of the types of the free varaibles in t
+on top of t: T: gamma |- t: T
+
+typing context/environment gamma is a sequence of variables and their types. 
+
+T-ABS: Gamma, x: T(1) |- t2 t2: T(2) => gamma |- l(x):T(1).t2 : T(1)-> T(2)
+
+T-VAR: x: T in gamma => gamma |- x: T
+
+T-APP: 
+1. gamma |- t(1) : T(11) -> T(12)  
+2. gamma |- t(2): T(11)
+
+1 + 2 => gamma |- t1 t2 : T(12)
+
+
