@@ -1,0 +1,10 @@
+arithmetic syntax: either eval to a value or stuck at some stage, which means meaningless or erroneous programs
+
+a term t has type T: we can reason STATICALLY that t evals to a val of appropriate form
+
+example typing rules: the typing relation is the smallest binary relation between terms and types satisfyng all isntances of the rules. t is
+typable/well-typed if there is some T s.t. t: T
+
+inversion of the typing relation
+
+
