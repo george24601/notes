@@ -14,7 +14,7 @@ on top of t: T: gamma |- t: T
 
 typing context/environment gamma is a sequence of variables and their types. 
 
-T-ABS: Gamma, x: T(1) |- t2 t2: T(2) => gamma |- l(x):T(1).t2 : T(1)-> T(2)
+T-ABS: Gamma, x: T(1) |- t2: T(2) => gamma |- l(x):T(1).t2 : T(1)-> T(2)
 
 T-VAR: x: T in gamma => gamma |- x: T
 
@@ -23,5 +23,37 @@ T-APP:
 2. gamma |- t(2): T(11)
 
 1 + 2 => gamma |- t1 t2 : T(12)
+
+practice: derivation tree with simply typed l-calculus
+(l(x): Bool.x) true => has type Bool 
+
+Under what context f x y has type Bool?
+
+Inversion of the typing relation
+
+Is there gamma and T s.t. gamma |- x x : T?
+
+In a given typing context gamma, a term t with free var all in the domain of gamma has at most one type
+
+canonical forms lemma
+
+Progress: Suppose t is a closed, well-typed term, then either t is a value or else there is some t' with t-> t'
+Proof: induction on typing derivation
+
+Permutation: if gamma |- t: T, the perm(gamma) |- t:T
+Proof: induction on typing derivations
+
+Weakinging: If gamma |- t : T and x not in domain(gamma), then gamma, x: S |- t : T, the latter derivation has the same depth as the former
+Proof: induction on typing derivations
+
+The substitution lemma: If gamma, x:S |- t: T, gamma |- s: S, then gamma |- [x -> s] t: T
+Proof: induction on typing derivations, cases by final typing rule used in the proof
+(!)
+
+
+Preservation: If gamma |- t: T and t -> t', then gamma |- t': T
+Proof:(!)
+
+9.3.10
 
 
