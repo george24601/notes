@@ -1,5 +1,26 @@
 unit type rules, mostly used for side effects
 
+t1;t2 sequencing <=> (l(x:Unit).t2) t1
+
+------
+let x = t1 in t2 => (l(x: T1). t2) t1 , notice T1 info doesnt exist on LHS, and thus needs to be provided by the typechecker
+
+, need to enrich the context with a binding of this type
+
+E-LET and T-LET rule
+
+different derived form: instead of T-LET
+G|- t1:T1 
+G, t1:T1 |- t2:T2 =>
+G |- let x = t1 in t2:T2
+
+it becomes one with T-ABS and T-APP => check chapter 22, this also means let is not a DERIVED form but must be part of the language
+
+----
+
+
+
 11.6 pairs
+
 
 evaluation order

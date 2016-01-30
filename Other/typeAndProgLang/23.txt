@@ -1,0 +1,77 @@
+polymorphism systems: multple types can use a single piece of code
+
+Parametric polymorphism: uniform, all instances have the same
+=> impredicative/first-calss polymorphism, restricts polymorphism to top-level let-bindings, disallowing functions taht take polymorphic
+values as arguments, and objetain in return a convenient and natural form of automatic type reconstruction
+
+Ad-hoc polymorphism: overloading=> mult-method dispatch=> intensional polymorphism: restricted computation over types at run time. =>
+typecase primiteive: permits arbitrary pattern-maching on type information at run time
+
+subtype polymorphism
+
+system F/second-order lambda-calculus <=> polymorphic lambda-calculus : quantificaiton not only over individuals but also voer predicates
+
+based on simply typed lambda-calculus: 
+type abstraction l(X).t 
+type application t[T]
+
+(l(X).t(12))[T(2)] -> [X -> T(2)] t(12)
+
+id = l(X).l(x:X) . x;
+type of id becomes ForAll(X).X->X
+
+(T-TAbs)
+gamma, X |- t(2): T(2) =>
+gamma |- l(X).t2: ForAll(X). T(2)
+
+(T-TApp)
+gamma |- t(1) : ForAll(X).T(12) =>
+gamma | t(1)[T2] : [X -> T(2)] T(12)
+
+Extended syntax , evaluation, and typing rules of system F, on top of simply typed-lambda calculus
+-----------
+
+double:
+l(X).l(f:X -> X).l(a:X). f (f a);
+type is ForAll(X).(X->X)-> X -> X 
+
+Can not type l(x). x x in simply lambda calculus
+but consider
+l(x: ForAll(X).X->X). x [ForAll(X).X->X] x
+
+e.g. quadrupale with double self replication
+
+quadruple = l(X).double[X->X] (double[X])
+type is ForAll(X).(X -> X) -> X -> X
+
+-------
+type for CBool
+
+ForAll(X).X->X->X
+
+tru = l(X).l(t:X).l(f:X).t
+
+not = l(b: CBool).l(X).l(f:X).l(t:X). b [X] f t
+
+and = l(a: CBool).l(b:CBool).l(X).l(f:X).l(t:X).(b (a t f) f)
+
+recall numerical encodling and their type
+CNat: ForAll(X).(X->X)-> X -> X
+
+P349-350
+
+-----
+list encoding, given starting value v and ANY function f, calculation (f y (f x(f z v)))
+
+List X = ForAll(R).(X->R->R)->R->R
+
+nil = l(X).(l(R).l(c: X->R->R).l(n: R). n) 
+
+...
+----
+
+Preservation + Safety proof
+
+Well-typed system F terms are normalizing. 
+
+

@@ -1,0 +1,43 @@
+simply lambda calculus
+
+type rules for: var, abs, and app
+
+progress
+proof: structural induciton
+term and abstraction case: obvious
+application case : construct the next step progress
+
+presevation: types of terms are preserved during reduction steps
+proof:
+------
+Given any type environemnt A, the set of well-typed terms in the typed lambda-calculus is strongly normalizing => i.e. it is NOT turing
+complete
+
+intution: check (l(x). x x) (l(x). x x), what is the type you should give to x?
+
+----
+note we dont consider dynamic typing as polymorphic
+
+ad hoc polymorphism: consturcitn multipe implementaion of the entity being coded, each work with data of a specific type
+=>overlaoding(function with same name) and coercion(converted to another type, although if it is explicit, generally not considered
+polymorphism)
+
+universal polymorphsim: singel ipmentation taht is generalized over types in some way, i.e., unbound # of types
+=> parametric vs subtyping
+
+----
+System F: syntax for abstraciton and application over types
+t-abs rule => abstracted alpha has to be bound by A, the context, why is it?
+t-app rule
+
+mimic self-application(not true one) in simply-typed lambda calculus
+and true self-applicaiton in system F => how to make l(x).x x typecheck in system F?
+------
+
+natrual numbers:
+l(f).l(x).x
+l(f).l(x). f x  => but what is the system F types? notice they will be different!
+
+plus
+multilication
+exponent

@@ -1,0 +1,15 @@
+uninterpreted base types: no ops for introducing/eliminating terms => treat them as type variables
+
+type substitution: mapping sigma from type variable to type
+apply the mapping to a type T to obtain sigma(T)
+
+variable capture possible?
+
+type substition is extended pointwise to the context
+
+if sigma is type substitution and gamma |-t :T, then sigma(gamma) |- sigma(t): sigma(T)
+
+parametric polymorphism: for every sigma, is sigma(gamma) |- sigma(t): T for some T, ie., all sustitution instances well typed?
+
+type reconstruction/type inference write the syntax in the untyped lambda calculus
+
