@@ -3,6 +3,9 @@ docker run {image name}:{version}
 
 docker run -p 5432:5432 dcce0da1c311
 
+#remove container
+docker rm $CID_OR_NAME
+
 #conversely
 docker stop 68f1898493dd
 

@@ -22,7 +22,7 @@ ad hoc polymorphism: consturcitn multipe implementaion of the entity being coded
 =>overlaoding(function with same name) and coercion(converted to another type, although if it is explicit, generally not considered
 polymorphism)
 
-universal polymorphsim: singel ipmentation taht is generalized over types in some way, i.e., unbound # of types
+universal polymorphsim: single implementation that is generalized over types in some way, i.e., unbound # of types
 => parametric vs subtyping
 
 ----
@@ -36,8 +36,115 @@ and true self-applicaiton in system F => how to make l(x).x x typecheck in syste
 
 natrual numbers:
 l(f).l(x).x
-l(f).l(x). f x  => but what is the system F types? notice they will be different!
+l(f).l(x). f x  => but what is the system F types for f and x? notice they will be different!
 
-plus
-multilication
-exponent
+But in the encoding, we will have the system F type for natural encoding
+ForAll(A). (A -> A) -> A -> A
+
+Intuition given a # -> # function and a #, i can give you another #
+
+plus: m f (n f x): apply f n times to x, and then m times to the result of it
+multiplication: subtlty: compare that with plus!
+
+exponent: unlike + and *, this one relies feature on system F, why is that? what is the expression
+
+----
+Pairs in untyped
+cons := l(h).l(t).l(s).s h t
+
+what is the type?
+
+give me a fucntio that capabile of working iwth both of my components, i will aply that funciton to my comoponetns and hand back the result
+type of car, cdr
+
+subtraction: go through it again
+-----
+Lists: Why our approach in untyped lambda calculus does not work?
+
+The representation of a list l is as a funciton that would fold a a given function and default value across the list
+=>list type: Forall(A).(g -> A -> A) -> A -> A
+Nil
+
+cons: takes an item of an list, and produces a list that aplies a funcniton f to the item x and the reuslt of flolding f across the list l
+what is its expr and type?
+
+car: folding function that returns head, and a second argument to have a default value
+
+cdr: replace each f in the list's folding with a fresh abstraciton(!!!)
+
+-----
+Erasure in system F
+for a E of the untypeld l-calculus, polymorphic type inference is to find a well-tyed term E' in system F, s.t., erase(E')=E
+=> can solve only a subset of it!
+
+----
+(H-M) polymorphic l-calculus: quantifier may only be applied to an entier type expression,i.e. only leftmost in any type expression
+
+Speicalization:
+A |- E : ForAll(alpha).sigma => A |- E: sigma[gamma/alpha]
+
+Generalization:
+A |- E: sigma => A |- E: ForAll(alpha).sigma (alpha not free in A)
+
+syntax-directness in formal semantic system
+
+in polymorphic l-calculus, for a given E, we can apply possibly 3 rules: based on the syntatic strucure of E, along with specializiation and
+generalization
+----
+
+uses type variables to accumulate incomplete type info about the immediate subsexpresions, treat such infos as a set of equations to be
+solved
+
+substitution:
+sigma(S(1) *S(2)) = (sigma S(2)) *S(1)
+
+Gieven types g(1) and g(2), a unifier of g(1) and g(2) is a susbtition S s.t. g(1)S = g(2)S
+
+Most general unifier: for every unifier S', there exist a substitution S'' s.t. S' = S'' * S
+
+Unification:
+U(t, t) = []
+U(t(1), t(2)) = error
+U(t, g(1) -> g(2)) = error
+U(g(1) -> g(2), g(3) -> g(4)) = let S(1) = U(g(1), g(3)), S(2) = U(r(2)S(1), r(4)S(1)) in S2 * S1
+U(alpha,sigma) = if(alpha exists in sigma) error else [sigma/alpha] (replace alpha with sigma)
+and U(sigma, alpha): 
+
+------
+Algo W:
+input: a type enviroment  and an expression, 
+returns: type expression and a subtitution
+
+W(A, x) = ([], sigmar) where sigmar = A(x) (look up in the environment)
+
+W(A, (l(x).E)) = let (S, sigmar) = W((x, alpha) + A, E)
+in
+(S, alpha * S -> sigmar)
+                                
+W(A, E1 E2) = let 
+  (S(1), sig(1)) = W(A, E(1))
+  (S(2), sig(2)) = W(A *S(1), E(2))
+  S(3) = U(sig(1) * S(2), sig(2) -> alpha)
+in
+ (S(3) * S(2) * S(1), alpha * S(3))
+
+----------
+Extension:
+Type bool & if
+
+W(A, (if E1 E2 E3)) = let
+(S1, tau1) = W(A, E1)
+S2 = U(bool, tau1)
+(S3, t3) = W(A (S2 * S1), E2)
+(S4, t4) = W(A (S3 * S2 * S1), E3)
+S5 = U(t3 * S4, t4)
+in
+(S5 * S4 * S3 * S2 * S1, t4 S5)
+
+recursion: strongly normalizing, need speical utilities for  recursive functions
+
+W(A (fix f x))
+
+
+
+
