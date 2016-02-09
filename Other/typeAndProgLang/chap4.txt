@@ -54,7 +54,8 @@ cons := l(h).l(t).l(s).s h t
 
 what is the type?
 
-give me a fucntio that capabile of working iwth both of my components, i will aply that funciton to my comoponetns and hand back the result
+give me a function that capabile of working with both of my components, i will apply that funciton to my comoponents and hand back the result
+
 type of car, cdr
 
 subtraction: go through it again
@@ -88,8 +89,7 @@ A |- E: sigma => A |- E: ForAll(alpha).sigma (alpha not free in A)
 
 syntax-directness in formal semantic system
 
-in polymorphic l-calculus, for a given E, we can apply possibly 3 rules: based on the syntatic strucure of E, along with specializiation and
-generalization
+in polymorphic l-calculus, for a given E, we can apply possibly 3 rules: based on the syntatic strucure of E, along with specializiation and generalization
 ----
 
 uses type variables to accumulate incomplete type info about the immediate subsexpresions, treat such infos as a set of equations to be
@@ -143,8 +143,18 @@ in
 
 recursion: strongly normalizing, need speical utilities for  recursive functions
 
-W(A (fix f x))
+W(A, (fix x E)) = ?
 
 
 
+Let x = E1 in E2 : 
+(S1, tau1) = W(A, E1)
+(S2,tau2) = W((X, tau1')A * S1, E2)
+tau1' = tau1 with all variables not in (A S1) quantified
+in
+(S2 * S1, tau2)
 
+----------
+example:
+1. composite funciton l(f).l(g).l(x).f(g x)
+2. instance where we need to tag the quantifier: let f = l(x).x in (if (f true)  (f 1) 0)
