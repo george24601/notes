@@ -5,16 +5,7 @@ git commit --amend
 git reset HEAD <file>
 
 #discard changes in unstaged files
-git checkout -- <file>.
-
-#unstage delete, reset then checkout
-git reset -- <file>.
-
-#tag important revisions
-git tag
-
-#remove branch, --merged, --no-merged opition to show branches that are merged/not yet merged into your current branch
-git branch -d testing
+git checkout -- <paths>
 
 #show history of commits
 git log --oneline --decorate --graph --all
@@ -35,8 +26,6 @@ git checkout --track {remote/branch}
 #set a local branch to remote branch
 git branch -u origin/serverfix
 
-#rebase local changes you made but haven shared yet before you push them in order to clean up your story, but never rebase anything you've pushed somewhere
-
 #change remote to forked repository
 git remote set-url origin $FORKED_URLt
 
@@ -49,9 +38,6 @@ git fetch upstream
 #merge the synced content with master
 git merge upstream/master
 
-#show branch history
-git log
-
 #port code into a new git repo. 1. clone into a temp local repo 2. push local repo to remote 3. now you can clone from remote again
 git clone --bare
 git add remote
@@ -63,3 +49,9 @@ git push --tags
 git tag -a v1.4 -m 'my version 1.4'
 git push origin [tagname]
 git checkout -b version2 v2.0.0
+
+#rebase local changes you made but haven shared yet before you push them in order to clean up your story, but never rebase anything you've pushed somewhere
+#DO NOT SQUASH AGINST PUSHED CHANGES, AS REWRITING HISTROY IS NICE SOURCE OF CONFLICT
+git rebase -i HEAD~4
+#add pick/squash/edit to the beginning of each line
+#handle conflicts
