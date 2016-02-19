@@ -10,4 +10,12 @@ Formally, this is iterative methods that converge to a solution
 ---
 In DP/state like cases, we will need to compare all potential candidates to find the best
 
+---
+For existence proof, we can just show that the extreme value works, and all general cases can be reduced to extreme cases with additional
+(non-intefering) parameters, basically we use extreme case as a subproblem to introduce additioal conditions, since too hard to see patterns
+in general problem
 
+----
+build the optimal solution by substracting: fill the whole space, and substracting, we can prove it is optimal if each step can not lower
+the space more/less, i.e., greedy solution => at least provides an approach worth trying,i.e., i
+problem solving, NEED TO TRY BOTH so as to discover insight, one way is often easier than another!

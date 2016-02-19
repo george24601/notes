@@ -8,4 +8,3 @@ The tricky part, therefore, is what is the step/state information we need to cap
 
 5.One way to prove greedy is that each change toward the greedy solution only improves the final score, until we converge to the greedy
 version we claim. This "gradual" improvement pattern can be seen in a lot non-greedy problems as well,i.e., iterative methods
-
