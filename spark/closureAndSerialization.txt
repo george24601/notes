@@ -37,3 +37,14 @@ Working with unserializable class, but need that in RDD
 The only place you can access rdd is the driver
 
 example: Kafka Spark producer optimization and patterns
+
+----
+when a class member value is in a closeure that is defined inside the class body, the entire instance is included inthe closure
+but object is fine!
+=> so extends class with serializable
+=> or pass deired values as parameters to a shim function whose job is to assemble the closre will prevent the parent isntance from being
+pulled into the closure
+
+def closureFunction[E,D,R](enclosed: E)(gen: E => (D => R)) = gen(enclosed)
+
+so that parent instance will not be pulled into closures

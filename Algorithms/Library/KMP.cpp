@@ -38,7 +38,7 @@ void BuildT() {
 	int i = 2;
 	int tI = 0;
 
-	while (i < wLen) {
+	while (i < wLen) { //i = wLen: longest suffix that is also a prefix
 		//if(i >= 6)
 		//	printf("%d %d %d\n", i, tI, T[tI]);
 
