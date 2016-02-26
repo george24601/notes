@@ -1,0 +1,59 @@
+Conditional properties: ==> /suchThat
+
+forAll { n: Int =>
+  (n >= 0 && n < 10000) ==> (List.fill(n)("").length == n)
+}
+
+------
+Combining Properties
+
+val p1 = forAll(...)
+
+val p2 = forAll(...)
+
+val p6 = all(p1, p2) // same as p1 && p2
+
+val p7 = atLeastOne(p1, p2) // same as p1 || p2
+----
+Grouping properties
+
+labeling properties
+
+frequency combinator
+
+!!!example: generate a tree class, with case class and case object extend the tree
+
+sized generators => Gen.sized
+
+
+!!!Generate containers by adding implicit Buildable instances, see Buildable.scala
+
+-------
+Custom arbitarary:
+
+implicit lazy val arbBool: Arbitrary[Boolean] = Arbitrary(oneOf(true, false)) =>
+Takes one pram of type Gen[T] and returns an instance of Arbitrary[T]
+
+implicit def arbTree[T](implicit a: Arbitrary[T]): Arbitrary[Tree[T]] =
+Arbitrary {
+  val genLeaf = for(e <- Arbitrary.arbitrary[T]) yield Leaf(e)
+
+  def genInternal(sz: Int): Gen[Tree[T]] = for {
+    n <- Gen.choose(sz/3, sz/2)
+    c <- Gen.listOfN(n, sizedTree(sz/2))
+  } yield Internal(c)
+
+  def sizedTree(sz: Int) =
+    if(sz <= 0) genLeaf
+    else Gen.frequency((1, genLeaf), (3, genInternal(sz)))
+
+  Gen.sized(sz => sizedTree(sz))
+}
+
+------
+
+Shrinking, done wiht property and forAll
+
+use Commands for modelling commands and conditions
+---
+

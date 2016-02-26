@@ -1,8 +1,8 @@
 To pass functions, so that RDD can use it on a cluster
 1. anonymous function
-2. state methods in a global singlen object
+2. state methods in a global singleton object
 
-if pass a referenct ot a method in a class instance of object, this means whole object will be serialized and sent.
+if pass a reference to a method in a class instance of object, this means whole object will be serialized and sent.
 One way to avoid it is to copy the this into a local closure
 
 Use Accumulator to update varaible when execution is split up across worker nodes
@@ -42,7 +42,7 @@ example: Kafka Spark producer optimization and patterns
 when a class member value is in a closeure that is defined inside the class body, the entire instance is included inthe closure
 but object is fine!
 => so extends class with serializable
-=> or pass deired values as parameters to a shim function whose job is to assemble the closre will prevent the parent isntance from being
+=> or pass desired values as parameters to a shim function whose job is to assemble the closure => this will prevent the parent isntance from being
 pulled into the closure
 
 def closureFunction[E,D,R](enclosed: E)(gen: E => (D => R)) = gen(enclosed)
