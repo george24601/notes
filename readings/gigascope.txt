@@ -1,0 +1,6 @@
+instead of binding stage to the sliding window, bind state to the operator
+
+join must contain ordered attributes
+group key must contain at least 1 ordered attributes
+
+inject ordering update tokens to solve non-blocking operator problem
