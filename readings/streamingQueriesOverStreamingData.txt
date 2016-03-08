@@ -1,0 +1,14 @@
+requirement: processing of data that arrives prior to query submission or during a period of disconneciton.
+able to apply old query to new data, and new query to old data
+
+continouously delivery may be not feasible: e.g., data recharging, monitoring
+
+both data and queries are streaming, and they are duals of each other. multiquery procesing is viewed as a join of query and data streams
+
+snapshot: constant BEGIN, constant END
+landmark: constant BEGIN, variable END
+sliding: variable BEGIN, variable END
+=> current acceptable windows are limited by the size of memory
+
+Have seperate Data and State Module probe each other. Results of the probles are materialized ina Results Structure 
+results of the probles are materizlied in a result structure

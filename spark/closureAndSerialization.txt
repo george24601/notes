@@ -7,6 +7,9 @@ One way to avoid it is to copy the this into a local closure
 
 Use Accumulator to update varaible when execution is split up across worker nodes
 => closures should not be used to mutate some global state
+=> varaibles and associate operation
+=> Inside action, eash task's update ot the accumulator wil only be applied once, i.e., restarted tasks will not update the value.
+In transfomrations, each tasks' update may be paplied more than once in case of re-execution
 
 similarly rdd.foreach(println) will use the stdout closure avaialbe at executer, so driver is not able to see this!
 will have to use collect(), if the whole dataset can fit into memeory
@@ -15,11 +18,6 @@ because of shuffle operations, such as reduce or sort, need to override equals a
 
 creating braodcast variable is only useful when task across multiple stages need the same data or when caching the data in deserialized form
 is importatnt,e.g., joining a large and small RDD, use medium RDD's keys to try to filter large RDDs where there is no matching key
-
-accumulators: varaibles and associate operation
-
-Inside action, eash tak's update ot the accumulator wil only be applied once, i.e., restarted tasks will not update the lvaue.
-In transfomrations, each tasks' update may be paplied more than once in case of re-execution
 
 --------
 if lazy val is uninited, lazy val will be recalculated after de-serialization

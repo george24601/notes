@@ -19,3 +19,6 @@ in general problem
 build the optimal solution by substracting: fill the whole space, and substracting, we can prove it is optimal if each step can not lower
 the space more/less, i.e., greedy solution => at least provides an approach worth trying,i.e., i
 problem solving, NEED TO TRY BOTH so as to discover insight, one way is often easier than another!
+
+=> this is one technique i failed repeated to use, to max a value, we can min (Ceil - counter action), to min a value, we can max(Ceil -
+reverse operation), pretty much same spirit as proof by contradiction
