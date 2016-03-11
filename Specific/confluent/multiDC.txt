@@ -1,7 +1,0 @@
-one deployment as master, and all others as slaves. Upon failure, maunally designate the new master
-
-Bot scheam registry clusters link to master DC
-
-Kafka-zk cluster is mirrormakered from DB A to DC B
-
-Need special settings for SR!!

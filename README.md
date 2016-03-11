@@ -1,14 +1,18 @@
 ### Algorithms ###
-How To Solve It notes and practices
+"How To Solve It" notes
 
 MapReduce related
 
-Stream processing algorithms
+"Mining Massive Datasets" notes
+
+Algorithm library, mostly in C++
 
 ### Architecture ###
 Reflections on architecture problems
 
-### CACM ###
+### Readings ###
+Papers
+
 Communications of the ACM reading notes
 
 ### Program Design ###
@@ -26,6 +30,10 @@ Scheme
 Scala
 
 ### Specific tools/frameworks ###
-Apache Kafka
+Kafka
 
-Apache Samza
+Spark
+
+HDFS
+
+Samza
