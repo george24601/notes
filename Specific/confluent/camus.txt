@@ -1,6 +1,6 @@
-Camus assumes that the timestamp of when the mesage was generated is stored together with themessage in a predefined field.
+Camus assumes that the timestamp of when the mesage was generated is stored together with the message in a predefined field.
 
-If the timestamp isn't set, Camus creates a new timestamp at the time the messageis consumed
+If the timestamp isn't set, Camus creates a new timestamp at the time the message is consumed
 
 kafka.max.pull.minutes.per.task : task will not run longer than this!
 
@@ -11,16 +11,20 @@ Note that kafka.max.pull.hrs is designed more to safeguard # of parallel written
 
 default is -1 means no limit
 
-If you shortedn exectution of a camus map task, then some ldefover messages from the previous time-window might not be consumed yet, Camus
+If you shortedn exectution of a camus map task, then some leftover messages from the previous time-window might not be consumed yet, Camus
 will old messages and write them to exisiting HFDS directores that might have been already processed by ETL jobs
 
-Note that Camus partions data by hour, so if kafka.max.pull.hrs is too high, each map task may write too many files at onece. = # of hours
+Note that Camus partitions data by hour, so if kafka.max.pull.hrs is too high, each map task may write too many files at onece. = # of hours
 to consume * # of topics * num of partitions for each hour
 =>
 Should limit parallel writes < 30.
 
 At LinkedIn, we run Camus every 10 minutes and we have set kafka.max.pull.hrs to 8 hours.
 
-Kafka.max.historical.days : Any record having timestamp less than (currentTime - valueOfKafkaMaxHistoricalDays) will be skipped. This can be
-seen as "skippedRecords" in the job counter.
+Kafka.max.historical.days : Any record having timestamp less than (currentTime - valueOfKafkaMaxHistoricalDays) will be skipped. This can be seen as "skippedRecords" in the job counter.
 We have set this value to 3.
+
+etl.execution.base.path => offsets, error logs, and count files
+
+etl.fail.on.erros: default is catches exceptions when decoing data nd write them to the error file associated with the camus job
+------
