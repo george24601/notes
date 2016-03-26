@@ -20,3 +20,4 @@ bin/connect-distributed worker.properties
 #distributed mode: create a connector 
 curl -X POST -H "Content-Type: application/json" --data '{"name": "local-console-source", "config": {"connector.class":"org.apache.kafka.connect.file.FileStreamSourceConnector", "tasks.max":"1", "topic":"connect-test" }}' http://localhost:8083/connectors
 
+#note if you run more than one worker per host, need to set rest.port differently for each of them

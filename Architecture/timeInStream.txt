@@ -17,6 +17,7 @@ correct answers => MillWHeel and Spark Streaming papers
 
 notions of completeness being a convenienct optimziation rather than a semantic necessity
 
+windowing is required by aggregation over unbounded data
 
 ----
 session: periods of activity terminated by a gap of inactivity: timeout
@@ -68,6 +69,17 @@ timing early, on-time, late =>
 early, processing time period
 on-time: watermark
 late => element count 1 => this forms a sequence
+but how long the state will be kept for each window? => introduce lateness, any data that arrive after this horizon is dropped
+
+note that as long as # of keys remain low, no need to worry about limiting the lifetime of windows
+accumulate and retract: re-grouping data by a different dimension, sessions/dynamic windows where values may be replacing more than 1
+windows
+
+from fixed windowing in event time to fixed windowing in processing time
+
+----------
+
+
 
 
 
