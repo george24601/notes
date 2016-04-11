@@ -9,10 +9,6 @@ The files for a Hive table can be stored in a folder anywhere in HDFS by LOCATIO
 
 Datatypes do not line up with traditional SQL types
 
-hive -f myquery.hive
-
-beeline -u url -n user -p pw
-
 CREATE (EXTERNAL) TABLE table (..) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' {LOCATION '/user/train/salaries''} ;
 
 EXTERNAL: when the table is dropped, files are not deleted in /appa/hive/warehouse/{table name}, which is the default location

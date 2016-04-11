@@ -1,0 +1,13 @@
+index pattern: string with optinal wildcards that can match multiple indices
+
+search takes query syntax for custom search
+
+account_number:<100 AND balance:>47500
+
+status:200
+
+status:[400 TO 499]
+
+status:[400 TO 499] AND extension:PHP
+
+use Lucene query syntax or JSON based ES query DSL

@@ -2,41 +2,45 @@ Common pattern for failures:
 1. individual machine failure: use automation => combining known failure pattens with a search for symptons of an unkonw problem, and then
 develop beter tools to detect and fix future problems
 
-2.workload changes: load testing including "dark launches". Stats gathered during such events often provide perspective on system's design
+2. workload changes: load testing including "dark launches". Stats gathered during such events often provide perspective on system's design
 
-3.human error
+3. human error
 -----
 3 ways to cause incident
 
 1. Rapidly deployed config changes: rapid failure when bad configs are deployed
 To prevent:
 A. everybody uses a common config system, so that procedures and tools apply to all types of config
-B.Statically validate config changes
-C.Run a carary. multiple A/B tests can be run concurrently => before test goes to 1% of users, we first deploy the test to 1% of the users
+B. Statically validate config changes
+C. Run a carary. multiple A/B tests can be run concurrently => before test goes to 1% of users, we first deploy the test to 1% of the users
 that hit a small # of servers. Monitor them to ensure they have no higly visible problems
 D. Hold on to good configurations: retain old configs when receive updated configs that are invalid  and raise alrets to the sys admin the config failed to
 update
 E. Easy to revert. Config system backed by VCS
 
 2. Hard dependences on core services
-A. cache data from core services. Hard dependencies are often not necessary. can cache them in a way that allows for the majority of servics
-to continue operating during a brief outage of core services
+A. cache data from core services. Hard dependencies are often not necessary. can cache them in a way that allows for the majority of services to continue operating during a brief outage of core services
 B. provide harded APIs to use core services. libs might provide good APIs for managing the cache or good failure handling
 C. Run fire drills. from fault injection to a single server to manually triggered outages of entire data centers
 
 3.Increased latency and resource exhaustion
-A.controlled delay: 
-
+A.controlled delay:  reduce # of items sitting in queues awating processing
+-----
 if (queue.lastEmptyTime() < (now - N ms))
-  timeout = M ms
+  timeout = M ms //if last flush happens at least N ms before, set timeout to something short, 
+//so the item will not sit on the queue for too long , FB uses M = 5ms
 else
-  timeout = N ms
+  timeout = N ms //we know item will not sit on the queue for more than N ms
+//FB uses N = 100ms
 
-This prevents a standing queue while allowing short bursts of queuing. A short timeout ensures the server accepts just a bit more work than it
-can acutally handle so it never goes idle=> when server is under load, they will be discared instead of builidng up the queue
+queue.enqueue(req.timeout)
 
-Note M and N tend not to need tuning, limiting # of items in the queue or setting a timeout for the queue normally requires tuning on a
-per-service basis. FB uses M = 5ms and N = 100ms
+----
+A short timeout ensures the server accepts just a bit more work than it can acutally handle so it never goes idle
+=> when server is under load, they will be discared instead of builidng up the queue
+
+Note M and N tend NOT to need tuning, limiting # of items in the queue or setting a timeout for the queue normally requires tuning on a
+PER-SERVICE BASIS. 
 
 B.Adaption LIFO: during periods of high queuing, first-in request has often been sitting around for so long the suer may have aborted the
 action. Durning normal conditions, FIFO, when a queue is starting to form, LIFO
@@ -47,7 +51,7 @@ requests to that service
 ----
 Tools that help diagnosis:
 1. High-density dashboards
-2.what just changed? from config changes to deploy of new software. But need to corelate failures with relevant changes: output config
+2. What just changed? from config changes to deploy of new software. But need to corelate failures with relevant changes: output config
 settings read by that request that have had their values changed recently
 
 -----
@@ -57,4 +61,8 @@ Review Process:
 3.Remediation: can we automate the fix steps?
 4.Prevention: How could you have failed gracefuly, or failed faster to reduce the impact
 
+---------
+From the related CoDel paper
 
+queue length is not a good predicator of congestion
+correct buffer sizing is not an easy problem
