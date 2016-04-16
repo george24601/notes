@@ -1,27 +1,13 @@
-#include <iostream>
-#include <sstream>
-#include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include <algorithm>
-#include <vector>
-#include <iomanip>
-#include <set>
-#include <map>
-#include <stack>
-#include <queue>
 using namespace std;
 
 typedef unsigned long long L;
 typedef long long LL;
 #define LP(i, a, b) for (int i = int(a); i < int(b); i++)
 #define LPE(i, a, b) for (int i = int(a); i <= int(b); i++)
-typedef pair<int, int> PII;
-typedef vector<vector<PII> > WAL;
-typedef vector<vector<int> > SAL;
-typedef pair<int, int> FT;
 #define Ep 1e-9
 
 int const MaxSize = 100000;
@@ -33,31 +19,31 @@ int sLen;
 
 void BuildT() {
 	T[0] = -1; //special case
-	T[1] = 0; //0 because we have no suffix right now
+	T[1] = 0; //0 because we have no suffix right now, which starts at index 1
 
 	int i = 2;
-	int tI = 0;
+	int prefixIToMatch = 0;
 
 	while (i < wLen) { //i = wLen: longest suffix that is also a prefix
-		//if(i >= 6)
-		//	printf("%d %d %d\n", i, tI, T[tI]);
 
-		if (W[i - 1] == W[tI]) {
+		if (W[i - 1] == W[prefixIToMatch]) {
 			//i - 1 can extend an existing suffix which is also a prefix
-			T[i] = tI + 1;
+			T[i] = prefixIToMatch + 1;
 			i += 1;
-			tI = tI + 1;
-		} else if (tI > 0) {
-			//so the suffix ending at i-1 will not work for current starting point, can we try a shorter suffix?
-			//notice the suffix ending at i-2 has T[tI] matches already, so we will try that match's starting point,i.e, that matching's length
-			tI = T[tI];
+			prefixIToMatch = prefixIToMatch + 1;
+		} else if (prefixIToMatch > 0) {
+			//so the suffix ending at i-1 will not work for current prefix index
+			//notice that to reach this step, the suffix ending at i-2 already matches 0...prefixToIToMatch - 1
+			//To try a shorter prefix, we use T[prefixIToMatch], which is the suffix ending at prefixToMatch -1, which is also a prefix
+			//because suffix ending at i-2 matches 0...prefixToMatch -1 already, suffix ending at i -2 will match the new prefix
+			prefixIToMatch = T[prefixIToMatch];
 		} else {
-			//tI== 0, i.e., first character doesnt match
+			//prefixToMatch == 0 and doesn't match
+			//i.e.,even first character doesn't match
 			T[i] = 0;
 			i += 1;
 		}
 	}
-
 }
 
 bool KMP()

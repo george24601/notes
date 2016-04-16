@@ -1,0 +1,73 @@
+Used for fault-tolerance and recovery
+
+Keep a SEPERATE on-disk log of all ops. The log exists beside the primary copy of the database!
+
+=> disk writes of sinle pages/blocks are atomic, but disk writes across pages may not be
+a transcation's ops are provisional until commit is logged to disk
+
+begin/commit/abort records=> log sequence number(LSN), LSN of previous record, XID, op type => can throw checkpoint in
+update records: all info to undo and redo the update => prevLS, xID, opType, update location, old value, new value => so operations can be undone and redone
+
+non-log pages may remain in memory, but upon commit, need to flush the log to disk, which is separate
+
+On recoery: redo all operations, even the loser transactions, and undo uncommitted transactions
+
+improvement: 
+store LSN of last write on each data page, so we can avoid unnecessary redos
+log checkpoing records: => start analysis with last checkpoint, table of active transcations, table of dirty pages in memory, and the earliest LSN that might have affected them
+
+ordered/metadata-only logging: avoids needs to save old-value of files
+
+log itself needs to be mirrored to prevent failure
+Semantics of updating very complicated : consensus, consistency...., and hard to chieve transparency
+
+--------
+Log is non-volatile storage, log writes go to disk
+DB is non-volatile storage, db writes go to disk
+Pages are the in-memory representation of DB disk block(s)
+Updates are made to the in-memory copy of the database
+
+log only grows, nothing is delete, if you want to undo an update, place an equivalent undo forward in the log
+
+To truncate logs: we need to remove transcation that are resolved from the head of the log
+=>apply all outstanding updates (in memory) to the database image (disk)
+=>truncate the log from the head up to the first update record for an unresolved transaction
+-------
+
+Redo logging/Defered modification
+<TID, Disk Block, New>
+Updates are written to the log only, updates MUST be deffered until commit time
+On commit => commit record is written to DB, all pages used int transaction can be written to DB
+aborts => all pages used in transaction are discarded in favor of the on-disk, pre-transaction versions
+Note this implies a page needs to be written to disk after a transaction prior to the next transaction that uses the page
+
+
+-----
+Undo logging/Immediate modification
+<TID, Disk Block, Old>
+Updates are written to the log and database
+On Commit: all updates must be written to disk at commit time
+aborts: all work must be undone
+all updates must be on disk before commit the transaction
+
+=> steal: writting an uncommited update to disk
+=> force: all pages dirtied by a transation are on disk when that transaction commits
+
+-----
+Redo-undo logging: steal/no-force
+=> recovery phase has analysis pass, redo pass, undo pass
+
+For what applications you need undo vs redo?
+
+-------
+Recovery in 2PC
+1. TC prepared => can commit?
+2. TP prepared (persistence) => yes
+3. TP becomes uncertain state
+3. TC commited => do commit
+4. TP commited => haveCommited
+5. TC done
+
+Recovery in 2PC: just log the state-changes, note messages are idempotent, in recovery, resend whatever message was next
+=> if corrdinator and uncommited: abort
+-----
