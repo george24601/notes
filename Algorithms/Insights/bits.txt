@@ -1,0 +1,7 @@
+last bit = 1 or 0 => even or odd, i.e., a possible way to breakdown # of into steps
+----
+
+# of all numbers with k bits, with 0 aligned => 2^k
+# of all numbers with less than k bits, with 0 aligned = 2^(k+1) - 1
+
+# of all numbers with k bits, without 0 aligned => 2^(k-1)

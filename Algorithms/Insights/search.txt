@@ -9,3 +9,6 @@ because other variables will be infered, one by one, perhaps recursively
 --------
 When search space is small enough, instead of finding a closed form, we can just brute force search. This is a common step as part of
 problem
+
+----
+Since we are searching for unknown, almost always worth a try to look at unknowns, and try to infer some traits/properties of unknowns

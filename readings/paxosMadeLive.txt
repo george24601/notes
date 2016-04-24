@@ -1,0 +1,66 @@
+The master replica servers all chubby requests, the replicas replies with master's network address. New master is elected in the presence of
+ailure
+
+fault tolerant replicated-log. On top of that =>
+fault tolerant replicated db: snapshot + replay log.new db ops submitted to the replicated log
+
+submit a value to the log, once a submitted value enters the FT log, system invokes to client app at each replica and pass the submitted
+value
+
+When a replica wants to become coordinator, it generates a unique sequence # higher than any it has seen, and send a propose message to all
+replicas, with that # higher than all they have seen
+
+Optimization
+reduce # of messages by chaining together multiple Paxos instances
+Skip propose if coordinator doesn't change
+
+handle disk corruption: store checksum of content inside file. Let replica let a marker in GFS. If it is ever detected empty disk, we know
+it is corruputed. It will wait for the extra instance of Paxos to make sure it doesn't renege a promise
+
+read ops can not be served out of the master's copy of the data structure => use master leases to avoid serializing via paxos
+
+ all replicas implicitly grant a lease to the master of the previous Paxos instance
+and refuse to process Paxos messages from any other replica while the lease is held. The master maintains
+a shorter timeout for the lease than the replicas – this protects the system against clock drift. The master
+periodically submits a dummy “heartbeat” value to Paxos to refresh its lease.
+
+In our implementation the master periodically boosts its sequence number by running a full round of the
+Paxos algorithm, including sending propose messages4
+. Boosting with the right frequency avoids this type
+of master churn in most cases.
+
+We solved this problem by introducing a global epoch number with the following semantics. Two requests
+for the epoch number at the master replica receive the same value iff that replica was master continuously
+for the time interval between the two requests. The epoch number is stored as an entry in the database, and
+all database operations are made conditional on the value of the epoch number
+
+Thus the application must
+be responsible for taking snapshots. Our framework provides a mechanism that allows client applications, e.g.
+our fault-tolerant database, to inform the framework that a snapshot was taken; the client application is free
+to take a snapshot at any point
+
+The snapshot and log need to be mutually consistent. Each snapshot needs to have information about
+its contents relative to the fault-tolerant log.
+ When creating a snapshot (which is under control of the application) the
+corresponding snapshot handle (provided by the framework) needs to be stored by the application as
+well.
+the handle is really a snapshot of the Paxos state itself. In our system, it contains the Paxos
+instance number corresponding to the (log) snapshot and the group membership at that point.
+
+Finally, when the snapshot has been
+taken, the client application informs the framework about the snapshot and passes the corresponding
+snapshot handle. The framework then truncates the log appropriately.
+
+-----
+MultiOp
+
+coding the core algorithm as two explicit state machines. For that purpose,
+we designed a simple state machine specification language and built a compiler to translate such specifications
+into C++. The language was designed to be terse so that a full algorithm can be rendered on a single screen.
+As an additional benefit, the state machine compiler also automatically generates code to log state transitions
+and measure code coverage to assist in debugging and testing
+
+Our tests start in safety mode and inject random failures into the system. After running for a predetermined
+period of time, we stop injecting failures and give the system time to fully recover. Then we switch
+the test to liveness mode. The purpose for the liveness test is to verify that the system does not deadlock
+after a sequence of failures.
