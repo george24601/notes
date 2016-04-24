@@ -24,18 +24,14 @@ and refuse to process Paxos messages from any other replica while the lease is h
 a shorter timeout for the lease than the replicas – this protects the system against clock drift. The master
 periodically submits a dummy “heartbeat” value to Paxos to refresh its lease.
 
-In our implementation the master periodically boosts its sequence number by running a full round of the
-Paxos algorithm, including sending propose messages4
-. Boosting with the right frequency avoids this type
-of master churn in most cases.
+Master churn: a dead master come back alive and may try replacing existing master, by keeps issuing higher numbered proposals. Therefore,
+master himself must boosts its own # by running a full round of Paxos to boost its sequence #.
 
-We solved this problem by introducing a global epoch number with the following semantics. Two requests
-for the epoch number at the master replica receive the same value iff that replica was master continuously
+Two requests for the epoch number at the master replica receive the same value iff that replica was master continuously
 for the time interval between the two requests. The epoch number is stored as an entry in the database, and
 all database operations are made conditional on the value of the epoch number
 
-Thus the application must
-be responsible for taking snapshots. Our framework provides a mechanism that allows client applications, e.g.
+Thus the application must be responsible for taking snapshots. Our framework provides a mechanism that allows client applications, e.g.
 our fault-tolerant database, to inform the framework that a snapshot was taken; the client application is free
 to take a snapshot at any point
 

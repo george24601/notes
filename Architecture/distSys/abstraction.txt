@@ -1,0 +1,14 @@
+CAP against 2PC, Paxos, and Gossip
+
+CA: e.g. full strict quorum protocl. Does not distinguish node failures and network failures.
+CP: e.g., majority quorum protocols. Preents divergence by forcing asynmmetric behavior on the two sides of the partitiona.
+Have to give up avaialblility during network partition(i.e., both sides of the partition still accept writes)
+
+AP, e.g., protocols with conflict resolution
+
+-----
+Reading list
+
+CAP Twelve Years Later: How the "Rules" Have Changed 
+If you have too much data, then 'good enough' is good enough 
+Building on Quicksand

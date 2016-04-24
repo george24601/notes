@@ -1,0 +1,5 @@
+EC with probalistic guarantees: Dynamo
+
+EC with strong guarantees: CRDT, although data types that can be implemented as CRDT are limited
+
+CALM:  something is logically monotonic, then it is also safe to run without coordination
