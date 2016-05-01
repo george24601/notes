@@ -1,0 +1,66 @@
+FLP: concesus is not fully solvable in asynchronous systems
+
+Coordinator failure:
+Let a node observing the coordinator timeout to act as new coordinator, and try to finish the 2PC protocol. However, if one more participant
+fails,it is impossible to know all the voting results, and we can neither abort or commit.
+
+This also suggests if coordinator itself is also a participant, knocking out the coordinator will mean the whole transaction is blocked! 
+
+To migitate the problem, the coordinator will log the results of any protocol
+
+--------
+
+The subordinate receives a PREPARE message from the coordinator
+
+If the subordinate is willing to commit the transaction then
+  It force-writes a prepare log record
+  Sends a YES VOTE to the coordinator
+  Enters the prepared state and waits for the final decision from the coordinator
+
+If the subordinate wants to abort the transaction then
+  It force-writes an abort log record
+  Sends a NO VOTE to the coordinator
+  Aborts the transaction locally, releases all locks, and ‘forgets’ it.
+
+If coordinator decides to abort
+  The coordinator force-writes an abort record
+  The coordinator sends ABORT messages to all subordinates that are in the prepared state or from which the coordinator has not yet heard a respond to the PREPARE.
+  The coordinator waits to receive an ACK from every participant sent a message in step 2.
+  The coordinator writes an end record and ‘forgets’ the transaction
+
+If coordinator decides to commit
+  The coordinator force-writes a commit record. The transaction has now reached its commit-point and the user can be told that the transaction has committed.
+  The coordinator sends COMMIT messages to all subordinates.
+  The coordinator waits to receive an ACK from every participant sent a message in step 2.
+  The coordinator writes an end record and ‘forgets’ the transaction
+
+If a subordinate receives a COMMIT message:
+  Force-writes a commit record. Note that we don't need to ask the coordinator result anymore from this point on
+  Sends an ACK message to the coordinator
+  Commits the transaction and ‘forgets’ it
+
+At the time of failure, possible cases:
+There are no 2PC protocol records of any kind, or
+The transaction is in either a commiting or aborting state, or
+The transaction is in the prepared state (waiting for an outcome decision)
+
+If the recovery process finds a transaction that was executing at the time of the transaction but for which there are no 2PC protocol log
+records -> ???
+
+finds a transaction in the commiting or aborting (at the coordinator), it periodically tries to send COMMIT (ABORT) messages to all the
+subordinates that have not acknowledged and awaits their ACKs. 
+
+When the recovery process finds that it is in the prepared state for a particular transaction, it periodically tries to contact the
+coordinator site to find out how the transaction should be resolved. When the coordinator site resolves a transaction and lets this site
+know the final outcome,
+
+If a coordinator process notices the failure of a subordinate while waiting for it to send a vote, then the coordinator follows the abort
+transactions steps. 
+If the failure occurs while the coordinator is waiting for an ACK, then the coordinator hands the transaction over to the recovery process
+
+If a subordinate notices the failure of the coordinator before the it has sent its YES VOTE (if it was going to vote NO it can proceed
+unilaterally anyway) then it aborts the transaction (unilateral abort). 
+If the failure is detected after the subordinate has moved into the
+prepared state, then the subordinate hands the transaction over to the recovery process.
+
+If a prepared process noticed coordinator failed, it has to wait until it can reestablish communication

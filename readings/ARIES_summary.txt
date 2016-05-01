@@ -1,0 +1,66 @@
+force: write log records upto a certain LSN to disk during commit. Can not commit until all pages modified are written to the permanent
+version of the DB => only redo, no undo
+
+steal: during rollback, might have to undo some on the non-volatile storage version of the DB
+
+log records must alrady be on stable storage before the changed data is allowed to replace the previous version of that data on non-volatile
+storage => every page has the  LSN that describs the most recent update performed on that page
+
+undo-redo log: record contains what steps we need to take the undo/redo changes made by transaction => data before/after or action to take
+to undo/redo,e.g.,increament/decrement operations vs. storing the absolute before/after
+
+Compensation log record: log the action of rolling back a change => redo-only
+
+no transcation can be considered complete until its commited status and all its log data are safely recored on stable staorge by forcing the
+log up to the transaction's CLR's LSN
+
+3 types of failures:
+1. Failure of a transaction => update needs to be undone
+2. DBMS failure => non-volatile storage down
+3. Contents of just ath media are lost, and the lost data must be recovered using an image copy version of the lost data plus the log
+
+On per-affected page basis, besides logging update activivies during forward processing of transactions, also logs with CLR, udpates
+performed during partial or totla rollbacks of transcations during processing
+=> bounded around of logging is ensured during rollbacks, even during repelasted fauilres of nested rollbacks
+
+Whenver a page is updated and a log record is written, the LSN of the log record is placed in the page _LSN field of the updated page => so we can track state of the page with respect ot logged updates for that page
+
+checkpoints that identify the active transcations, states, and LSNs of their most recetly writen log records as well as the dirty data in
+the buffer pools
+
+Whether or not the rollback and end records are sync written will depend on the type of the 2PC
+
+----
+Analysis Pass
+1. Determine the starting point of the redo pass
+2. list of transactions in the undo pass
+3. The LSN of most recently written log record for each in-progress transcation
+4. write end reords for transactions that had totally rolled back before sys failure, but for whom end records are missing
+
+Redo Pass - retore the DB to the state of failure
+1. repeats history with respect to those updates logged on stable storage, but hose effects on the database pages did not get reflected on
+non-volatile staorge. This is done for ALL, includtion tranctions neither commited nor reache the in-doubt state of two-phase commit by the
+time of the system failure
+
+A log record's update will be redone if the affected page's LSN is less than the log record's LSN
+
+Undo Pass
+take the max of LSNs of the next log record to be processed for each of the yet-to-be-completely-undone loser transcations, until no
+transcation remains to be undone
+The next record to process for that transcation is detemrined by "Previous LSN" field of that non-CLR
+
+--------
+fuzzy checkpoints: taken asynchly while transaction processing is still going on
+begin checkpoint record in log -> 
+Once end checkpoint record is constructed, it is written to the log. Once that info reaches stable storage, the LSN of the begin checkpoint
+record is stored in the master record which is kept in a well-knwon place on stable storage.
+
+Dirty pages is not forced to nonvolatile storage during a checkpoint, because of the assumption buffer manager is continously writeing out
+dirty pages in the background
+-----
+fuzzy image copy/archive dump : might contain some uncommitted updates
+
+The begin checkpoint record LSN for the most recent complete checkpoint is noted when the fuzzy iamge copy starts. The image -copied veriosn
+of the entity should be atleast as up to date as of that point int he log => media recovery redo point
+
+

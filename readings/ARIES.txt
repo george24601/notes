@@ -1,0 +1,112 @@
+##########
+repeating history: redo all missing updates before performing the rollback of loser transctions during restart after a system failure
+
+Use LSN in each page to correlate the state of the page with respect to logged updates of that page. Even updates during rollbacks are logged 
+
+chaining logs written during rollbacks to those written during forward, a bounded abmoutn is ensured during rollbacks even in the face of repeated
+failure 
+
+If more than one log is used for storing the log records relating to different pieces of data, then a form of 2PC must be used.
+
+maintain disk stability by maintaining synchly two identical copis of the log on different devices.
+
+In WAL-based system, updated page is written back to the same nonvolatile storage location
+
+can not write an updated page to the nonvolatile stroage until at least the undo protions of the log have been written to stable storage
+
+all the log records written by a transcation are linked via the PrevLSN field
+
+
+recovery methods which always perform value or state logging, cannot support operation loggin
+=> need to track exact state of a page with respect to the logged action
+
+compensation log records: logging updates performed during a rollback
+Why is CLR needed?
+1. the undo or redo should not be performed without knowing the original update is there or not
+2.need to how the page is affected during rollback, and how much each of the rollbacks hd been accomplished
+
+operation logging let us perform logical logging. Not everything changed needs to be logged
+
+Recovery independence: peform media recovery or restart recovery at some level other than entire DB
+
+logical undo: during undo, affect a page that is different from the one modified during forward processing. 
+
+#####
+CLR logs updates performed during partial or total rollbacks of transcations, since CLR handles only undo, it is redo only 
+
+How to make sure rollback has bounded amount?
+
+CLR points the predecessor of the just undone log record. Note that all including LSN has PrevLSN pointer, i.e., this pointer keeps the
+process of rollback
+
+------
+What is in the checkpoint?
+active transations, their states, and latest LSN, dirty data in the pool => decide where the redo pass should start its processing,
+
+A log record's update is redone if page's _LSN is less than log record's LSN. logging is not done during redo pass
+
+Undo: continuouslyy take the max LSN of each transaction until no more transaction is undone
+Does NOT compare _LSN of affected page with the LSN of the LOG to decide if undo or not
+
+When a CLR is encountered during undo, just use that to determine next log to process, UndoNxtLSN
+
+transations already rolling back at the point of failure, will rollback only those actions that had not already been undone
+
+------
+What is the in the log record:
+LSN, Type, TransID, PrevLSN, PageID
+UndoNxtLSN
+Data: update can be logged in a logical fashion. Easily derived changes need not be logged. can log only changed field. For increment or
+decrement types of ops, before and after-images of the field are not needed => just op is enough
+
+Updates are applied immediately and direclty to the buffer version of the page containing the object
+
+-------
+If a checkpoint is taken during restart recoverty, then the contents of the table wil be included in the checkpoint repords
+TransID
+State: Commit state of the transcation: prepared or unprepared/in-doubt
+LastLSN
+UndoNxtLSN: if the most recod is an undaoble non-CLR, then this value is LastLSN, otherwise, it is a CLR, and will be UndoNxtLSN
+
+------
+Dirty_pages table: pageID and RecLSN
+When a nondirty page is being fixed in the buffers with intention to modify, the buffer maageer reocrds in the buffer pool dirty_pages
+table, as RecLSN, the current end-of-log LSN : LSN of the next log record to be written. RecLSN from what point int he point there may be
+updates which are not yet in the nonvaltile storage.
+Whenver pages are written back to nonvaltile storage, the coresponding entries in the BP dirty_pages table are removed
+
+5.2 total or parital rollbacks
+
+------
+Transaction termination
+Assume: 2PC is used to termniate transactions and that prepare record which is sync written to the log
+
+Once transaction is in-doubt, it is commited by writing an end record and releasing its locks.
+
+assume OSfile_return log does not take place while checkpointing is in place
+-------
+
+Checkpoints can be taken asyncly while transaction processing is going on
+such a fuzzy checkpoint is inited by writing a begin_checkpoint record, then the end_checkpoint is constructed
+
+This is because, in computing the restart redo point, besides
+taking into account the minimum of the RecLSNs of the dirty pages included
+in the end_chkpt record, ARIES also takes into account the log records that
+were written by transactions since the beginning of the checkpoint. T
+
+BM can batch writes and write multiple pages in a singel I/O op
+
+--------
+6.3 restart processing
+
+----
+11. Other WAL based records
+
+----
+
+12. ATTRIBUTES OF ARIES
+No constraints on data to guarantee idempotence of redo or undo of logged actions. 
+
+
+
+

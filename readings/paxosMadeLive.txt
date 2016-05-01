@@ -8,16 +8,19 @@ submit a value to the log, once a submitted value enters the FT log, system invo
 value
 
 When a replica wants to become coordinator, it generates a unique sequence # higher than any it has seen, and send a propose message to all
-replicas, with that # higher than all they have seen
+replicas, with that # higher than all they have seen. It will become a coordinator if majority replies they have not seen a higher #
 
 Optimization
 reduce # of messages by chaining together multiple Paxos instances
 Skip propose if coordinator doesn't change
 
-handle disk corruption: store checksum of content inside file. Let replica let a marker in GFS. If it is ever detected empty disk, we know
-it is corruputed. It will wait for the extra instance of Paxos to make sure it doesn't renege a promise
+handle disk corruption: store checksum of content inside file. Let replica leave a marker in GFS. If it is ever detected empty disk, we know
+it is corruputed. 
+The replica will wait for the extra instance of Paxos that happened since it restarts to make sure it doesn't renege a promise
 
-read ops can not be served out of the master's copy of the data structure => use master leases to avoid serializing via paxos
+Read ops requires executing another instance of Paxos to serialize with relative to updates. read ops can not be served out of the master's copy of the data structure to avoid the case where others have elected a master and didn't
+tell the master
+ => use master leases to avoid serializing via paxos
 
  all replicas implicitly grant a lease to the master of the previous Paxos instance
 and refuse to process Paxos messages from any other replica while the lease is held. The master maintains

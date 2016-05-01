@@ -1,6 +1,3 @@
-User specifies directed computation graphs, and code on each node, framework manages persistant state, flow of records, and
-fault-tolerance
-
 notion of logical time makes time-based aggregation easier
 
 Model-based streaming systems, depends on the prediction generated from weeks of data, and the model must be updated on the fly
