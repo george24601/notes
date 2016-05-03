@@ -21,12 +21,9 @@ log up to the transaction's CLR's LSN
 
 On per-affected page basis, besides logging update activivies during forward processing of transactions, also logs with CLR, udpates
 performed during partial or totla rollbacks of transcations during processing
-=> bounded around of logging is ensured during rollbacks, even during repelasted fauilres of nested rollbacks
 
 Whenver a page is updated and a log record is written, the LSN of the log record is placed in the page _LSN field of the updated page => so we can track state of the page with respect ot logged updates for that page
 
-checkpoints that identify the active transcations, states, and LSNs of their most recetly writen log records as well as the dirty data in
-the buffer pools
 
 Whether or not the rollback and end records are sync written will depend on the type of the 2PC
 

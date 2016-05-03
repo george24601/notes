@@ -1,0 +1,22 @@
+augmenting path and backflow
+
+max flow/min-cut
+
+remove a min-weighted set of edges in such a way that a given node is unreachable from another given node
+
+implementation with BFS, DFS, and PFS
+
+O(N^3) run time
+
+techinques: super-source and super-sink
+
+in-vertex and out-vertex
+
+given the in and out degress of the vertices of a directed graph. Find the edges
+
+Have min-cut with min # of edges
+
+Given an undirected grpah, what is the min # of edgs that should be removed to disconnect the graph?
+What is the min # of vertices that should be remoed to disconnect the graph?
+
+Maximum Bipartitite Matching

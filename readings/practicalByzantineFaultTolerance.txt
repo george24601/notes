@@ -1,0 +1,125 @@
+Security perimeter around an undefended centre is broken. So Byznaintine models whicl offers defneces against malicious attackes with inside
+access sound like good direction
+
+serious is only as good as yoru eakeat link
+
+non-Byzantine consensus => 2f+1 processes
+Byznatine modle => 3f +  1
+
+three-phase: pre-prepare, prepare, and commit
+
+can allow systems to continue to work correctly even when there are software errors, can mask erros that occur independently at different
+replicas, including non-deterministic sofware errors
+
+########
+Assume independent node failures
+
+use signature and MAC adn prevent spoofing, replays, and corruption. Signing a digest of a message and appending it to the plaintext
+
+assume adversay cannot dely corect nodes indefinitely
+
+Clients issue requests to the replicaed service to invoke operations and lbock watiign for a reply. The replicated servie is implmented by n replicas
+
+floor(n-1/3) linearizaiblity guarantee: it behaves liek a centralized implementaiton that executes ops atomically one at a time
+
+The algorithm does not rely on synchrony to provide safety, it must rely on synchrony to provide liveness, otherwise it could be used to
+implement consensus in an async system, which is not possible
+liveness means delay(t) does not grow faster than t indefinitely
+
+Why n > 3f?
+
+Why not feasible to offer fault-tolerant privacy in the general case?
+
+----------
+replicas move through a succession of congif called views. In a view one replica is the primary and the others are backups
+
+1. Client sends a request to invoken a servie op to the primary
+2. the primary multicasts the op to the backups
+3. Replicas execute the request and reply to the client
+4. the client waits for f+1 replies from different replicas with the same result
+
+c sends (REQUEST, o, t, c), t is used to ensure exactly-once semantics
+message sent by the replicas includes the current view number
+primary atomically multcasts the request to all the backups 
+reply has the form <REPLY, v,t, c,i, r>
+
+If client does not recieve replies soon enought, it broadcasts teh request to all replicas
+if the relica is not the primary, and has not been process, relays to the primary
+
+-------
+state of each replica: state of the service, message log containing message the replica has accepted, and an integer detoting the replica's current view
+
+3-phase multicast:
+pre-prepare, prepare, commit
+first 2: totally order requests send in the same view even when the primary is fault
+last 2: ensure that request that commit are totally ordered across views
+
+pre-prepare:
+primary assigns sequence # n to the request, mutlicasts with m piggybacked to all the backups, and appends the message to its log
+((pre-prepare, v, n, d), m) => m is the client's request, and d is m's digest
+
+A backup accepts a pre-prepare message if: 
+d is the digest for m, and sig correct
+it is in view v
+has not accepted a pre-pare fore v and n with differnet digest
+sequence # is betwenn low WM and a high WM
+=> mutlicasting <prepare, v,n, d, i> to all other replicas and ads both mesages to its log
+
+prepare(m,v,n, i) true iff i has inserted in its log:
+m
+pre-prepare for m
+2f prepares from different backs that match the pre-prepare
+
+why is it enough to show they agree on a total order?
+
+Replica i multicasts a (commit, v, n, D(m), i) to other replicas when prepared becomes true
+
+commited(m, v, n): prepared(m,v,n,i) is true for all i in some set of f+1 non-fualt replicats
+
+commited-local(m,v,n,i): prepared(m,v,n,i) and i has accepted 2f+1 commits that match the pre-prepare for m
+
+if commited-local(m,v,n,i) is true for some non-faulty i => commited(m,v,n) is true
+=> non-faulty replicas agree on the sequence nmbers of request that commit locally even if they commit in differnt views at each replica.
+
+Each replica i executes the operaiton requested by m after commited-local(m,v,n,i) is true and i's state reflects the sequential execution
+of all requests with lower seq numbers
+----------
+mesages must be ketp in a replica's log until it knows that the request they conern have benn executed by at least f+1 non-fault replicas
+and it can prove this to others in view changes
+
+checkpoints with a proof: stable checkpoint
+
+replica matins last stable checkpoint, zoer or more checkpoint that are not sable, and a curent state
+
+A checpoint with a proff becomes stable and the replica discrads all msgs with sequenc # <=n; it also discards all earlier checkpoints and
+checkpoint messages => checkpoint can also be used to calculate watermark, H = h +k, where k is big enough so that replicas do not stall
+wating for a checkpoint to become stable
+------
+View-change
+
+View-change provies liveness, triggered by timeouts
+
+If the timer of backup i expires in view v, the backup starts a view change to move to v+1 =>
+stops acceptingmesages and multcasts a view-cahnge message to all replicas
+(view-change, v+1, n, C, P, i):
+n: sequence # of the last stable checkpoint s known to i
+C set of 2f+1 valid checkpoitn messages proving the correctness of s
+P : set containg Pm for each m that preapred at i with sequen # higher than n
+....
+
+-----
+Non-Determinism
+
+State machine replicas must be deterministic. Client cannot slect hte value because it does not have neough info, the primary needs to
+select the value either independently or based on values provided by the backups
+When primary selects value independtly, it concateotes the value with teh associate request and exeucte the three phase protolc to ensured
+
+----------
+Optimization
+1. client request designes a repica to send the results, others just send digest
+2. Replicas execute a request tentativley as soon as the prepared predicate hodls for the request
+3. multicas read-only request to all replicas. Replicas exeute the request immediately in their tentative state after checking that reqeust
+is authenticated, client has access, and the request is read-only
+
+----------
+

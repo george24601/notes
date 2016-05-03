@@ -75,7 +75,7 @@ table, as RecLSN, the current end-of-log LSN : LSN of the next log record to be 
 updates which are not yet in the nonvaltile storage.
 Whenver pages are written back to nonvaltile storage, the coresponding entries in the BP dirty_pages table are removed
 
-5.2 total or parital rollbacks
+CLR allows undo not to be exactly inverse of the orignal actions, the undo action could affect a page which is not invloved in the orignal action
 
 ------
 Transaction termination
@@ -97,14 +97,36 @@ were written by transactions since the beginning of the checkpoint. T
 BM can batch writes and write multiple pages in a singel I/O op
 
 --------
-6.3 restart processing
+restart processing
 
-----
-11. Other WAL based records
+Input: LSN of the master record which contains pointer to the begin_checkpoint record of the last complete checkpoint taken before site
+shutdown or failure
 
-----
+At the end of recovery a checkpoint is taken
 
-12. ATTRIBUTES OF ARIES
+Analysis Pass =>
+list of transactions in-doubt or prepared.
+RedoLSN: location on the log from which the redo pass
+May write end records for transactions that had totally rolled back before failure, but end record is missing. No log writting otherwise
+If a log record is enouter for a page whose identiy does not already appear in the dirty_pages table, then an entry is made in the table
+with the current log record's LSN as the page's RecLSN
+
+Redo Pass=>
+Takes RedoLSN and dirty_pages 
+Does not write logs. 
+RecLSN helps limit number of pages which have to be examines
+Only the pages listed in the dirt_pages table will be read and examined during this pass.
+
+Undo Pass=>
+since history is repeated before the undo pass is initiated, the LSN on the page is not consulted 
+taking the max of LSNs of the next log record to be processed for each of the yet-to-be-completely-undone loser transactions
+rolling back writes CLRs
+Each transaction is dealth with completely by a single process because of the UndoNxtLSN chaining in the CLRs
+
+6.3 restart recovery example
+
+--------
+ATTRIBUTES OF ARIES
 No constraints on data to guarantee idempotence of redo or undo of logged actions. 
 
 
