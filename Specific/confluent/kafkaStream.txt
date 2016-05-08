@@ -1,0 +1,22 @@
+Kafka Streams is not a RM, but a lib that "runs" anywhere its stream processing app runs
+
+each data record in Kafka Streams is associated with a timestamp
+
+Kafka Streams’ default timestamp extractor will read the timestamp field embedded in the new Kafka message protocol
+
+-------
+num.standby.replicas: active-passive
+num.stream.threads:
+replication.factor: internal topics that KS creates when local stes are used or a stream is repartitioned for aggregateion
+timestamp.extractor:
+
+The default extractor is WallclockTimestampExtractor. This extractor does not actually “extract” a timestamp from the consumed record but
+rather returns the current time in milliseconds from the system clock, which effectively means Streams will operate on the basis of the
+so-called processing time of events.
+
+If you want your data to be processed based on event time, then you must provide your own implementation of the TimestampExtractor interface
+to extract the time(stamp) information embedded in your data records.
+
+
+
+--------

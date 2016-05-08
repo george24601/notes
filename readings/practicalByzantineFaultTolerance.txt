@@ -18,7 +18,7 @@ use signature and MAC adn prevent spoofing, replays, and corruption. Signing a d
 
 assume adversay cannot dely corect nodes indefinitely
 
-Clients issue requests to the replicaed service to invoke operations and lbock watiign for a reply. The replicated servie is implmented by n replicas
+Clients issue requests to the replicaed service to invoke operations and block watiign for a reply. The replicated servie is implmented by n replicas
 
 floor(n-1/3) linearizaiblity guarantee: it behaves liek a centralized implementaiton that executes ops atomically one at a time
 
@@ -43,8 +43,8 @@ message sent by the replicas includes the current view number
 primary atomically multcasts the request to all the backups 
 reply has the form <REPLY, v,t, c,i, r>
 
-If client does not recieve replies soon enought, it broadcasts teh request to all replicas
-if the relica is not the primary, and has not been process, relays to the primary
+If client does not recieve replies soon enought, it broadcasts the request to all replicas
+if the replica is not the primary, and has not processed the request, relays to the primary
 
 -------
 state of each replica: state of the service, message log containing message the replica has accepted, and an integer detoting the replica's current view
@@ -116,9 +116,9 @@ When primary selects value independtly, it concateotes the value with teh associ
 
 ----------
 Optimization
-1. client request designes a repica to send the results, others just send digest
-2. Replicas execute a request tentativley as soon as the prepared predicate hodls for the request
-3. multicas read-only request to all replicas. Replicas exeute the request immediately in their tentative state after checking that reqeust
+1. client request designates a repica to send the results, others just send digest
+2. Replicas execute a request tentativley as soon as the prepared predicate holds for the request
+3. multicast read-only request to all replicas. Replicas exeute the request immediately in their tentative state after checking that reqeust
 is authenticated, client has access, and the request is read-only
 
 ----------
