@@ -17,6 +17,18 @@ so-called processing time of events.
 If you want your data to be processed based on event time, then you must provide your own implementation of the TimestampExtractor interface
 to extract the time(stamp) information embedded in your data records.
 
-
-
 --------
+guide does not cover low-level API yet
+
+can join a KStream object with another KStream or Ktabel
+can join a KTable with another KTable
+
+KStream-KStream joins are windowed joins
+
+KTable-KTable joins: changelog streams are materialized into local state stores to represent the latest snapshot of their dual data tables
+
+KStream-KTable joins: table lookup
+
+-------
+Kafka stream creates a fixed # of tasks based on the input stream partions for the application, the assignment of paritions to taks never
+changes so that each task is a fixed unit of parallelism

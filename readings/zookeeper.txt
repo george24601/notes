@@ -102,9 +102,3 @@ client calles sync followed by read => why this would work?
 if a client has a higher zxid, the server does not estabilihs connection until it catches up
 
 heatbeat every s/3, switch to new server if client doesn't hear from current one in s *(2/3)
-
-
-
-
-
-

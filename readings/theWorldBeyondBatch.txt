@@ -1,0 +1,60 @@
+low-latency, approximate, and speculative results => not really for streaming
+
+strong consistency is required for exactly once processing
+
+checkout millwheel and spark streaming papers
+
+windowing by event time alone is not enough, why? => notion of completeness being optimization rather than necessary
+
+How does batch system handle unbounded data? what are the potential problems?
+
+for distributed input sources, data are highly unordered w.r.t. event time, and can not assume you see the complete/most of data given an
+epsilon
+
+what is the problem with outer join?
+
+approximation top-N, streaming K-means...what are potential problems with them?
+
+sessions-unaligned windows
+
+when would you use a processing time window? when would you not?
+
+problems with event time windowing? what are solutions/workarounds?
+
+To handle completeness problem
+1. accurate heuristic estimate
+2. pipeline builder speicfiies when to materialize, and how to refine data over time => use trigger
+----------
+accumulation: relationship between multiple results for the same window. refinement of results: discarding/accumulating/accumulating and
+retracting
+
+watermark: mapping from processing time to event time
+
+can not get low latency and correctness out of a system based purely on completeness
+
+trigger: GC if window outlives/processing time progress/element counts/punctuation/data-dependent
+Repitiion, AND, OR, sequence of child triggers
+
+How do they handle too slow/too fast cases with trigger?
+repeated-early | on-time | repeated-late => they normalize perfect and heuristic WM output patterns
+
+Any real-world, out-of-order system need to bound the lifetime of windows => horizon: how late a data can be, untill watermark exceeds
+horizon of that window
+
+when would you use discarding accumulation?
+when would you use accumulation and retraction? regroup by a different key, sessionizatioan/dynamics
+
+----
+possible to tag session data with a common ID => becomes group by key
+
+insight for session: merge single event windows
+
+walk throught the session example!
+
+the dataflow model paper
+
+
+
+
+
+
