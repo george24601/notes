@@ -52,9 +52,3 @@ insight for session: merge single event windows
 walk throught the session example!
 
 the dataflow model paper
-
-
-
-
-
-

@@ -1,0 +1,17 @@
+windowing primitives
+1. assign datum to windows
+2. merge windows
+
+why do we need (k,v, even_time, window) tuple, espeically the additional 2 fields?
+
+How is groupByKeyAndWindow implemented?
+
+------
+example: log joining pipelines in MillWheel. Customer stops trusting weak consistency model
+session is one of the the core use cases
+
+billing pipeline had problem with watermarks
+
+aggregate stats: no need to be 100%, but need to process majority of data quickly
+
+anomaly detection: data-driven trigger, composition trigger

@@ -1,0 +1,51 @@
+Let's consider implementing an undo/redo stack. This demostrates the difference between FP and OOP
+
+FP
+
+Op: State => State
+
+Perform(Op, State, URDoer){
+  URDoer.addOP(Op)
+  Op(State)
+}
+
+Undo(State, URDoer){
+  op = URDoer.undo
+  op(State)
+}
+
+Redo(State, URDoer){
+  op = URDoer.redo
+  op(State)
+}
+
+//Now we need to wrap URDoer in a closure
+
+URDoer = init
+
+assemble(URDoer)(core: URDoer => (Op,State)) {
+  core(URDoer)
+}
+
+Now consider the implementation of URDoer
+Need to maintain 2 stacks for history
+
+Stack<Op> toUndo
+Stack<Op> toRedo
+
+addOp(Op)
+  toRedo.clear
+  toUndo.add(Op)
+
+Undo(Op)
+  toReturn = toUndo.pop
+  toRedo.push(toReturn)
+
+Redo(Op)
+  toReturn = toRedo.pop
+  toUndo.push(toReturn)
+
+----------
+Now to do that in OOP...
+
+

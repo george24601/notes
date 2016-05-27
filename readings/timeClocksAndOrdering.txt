@@ -1,0 +1,55 @@
+->
+1) if a and b are on the same process and a happens before b, than a -> b
+2) if a is a send, b is receive , a -> b
+3) if a -> b, and b-> c, then a -> c
+
+i.e., a can casually affect b
+
+entirity of clock C(b) = C(i, b) if b is in process i
+
+if a -> b, then C(a) < C(b)
+
+why converse condition is not true?
+
+sending a message contains C(i,a), upon receiving, the process sets it to max(C(i,a) +1, C(j,b))
+
+--------
+a runs on i, b runs on j
+
+a => b iff
+C(i, a) < C(j, b) or
+C(i, a) = C(j, b) && P(i) < P(j)
+
+unlike partial order, total ordering is not determined by the system of events. Why?
+
+-----
+Distributed sync problem, why a central scheduling process alone is not enough?
+
+What is the assumption of the algorithm?
+
+Acquire
+1. send (T(m), P(i)) request to all other processes
+2. all other processes put this message on its own queue and send ACK
+
+Release
+1. P(i) remove the acquire request, and send release to all other processes
+2. Other remove the queued acquire
+
+The process acquires when it has the acquire request and it is  => of all other requests, and have received all other requests with ts => T(m)
+
+How does this one handle failure? Why need physical time to detect failure?
+
+----
+anomalnous behavior, what is it? how to work around it?
+
+To get back to physical time
+C(i,t): continuous, differientiable function of t, so dC(i,t)/dt is the rate of clock at time t
+
+1. for a constant kappa << 1, |dC(i,t)/dt - 1| < kappa for all t
+2. for all i, j, |C(i,t) - C(j, t)| < epsilon 
+
+C(i, t+ mu) - C(j, t) > 0, mu less than min transmission time
+
+why we only set forward the lock?
+
+the anomality imposiblility condition with mu, kappa, and epsilon

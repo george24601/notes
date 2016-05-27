@@ -1,4 +1,5 @@
 window the stream by time ususally needed for join and aggregation ops => can specifiy a retention period for the window, so to retain old
+
 window buckets for a period of time in order to wait for the late arrival of records whose timestamps fall within the window interval
 
 join over record streams usually nees to be performed on a windowing basis, because otherwise the # of records that must be maintained for
@@ -6,84 +7,9 @@ performaing the jon may grow too big
 
 aggregation over record streams usually is on windowing basis => update an aggregate value upon late arrival of further records
 
+windowing is required by aggregation over unbounded data
+
 stream tasks determin the next assigned partiton to process among all its streams based on the ts of records => to enforce strice execution
 ordering
 => either watiuntil system gets all the records form all streams
 or to inject additonal information about ts boundary ro heuristice estimates
-
------
-strong consistency is required for exactly-once processing, don't require ou to verify ahead of time if they are capably of producing
-correct answers => MillWHeel and Spark Streaming papers
-
-notions of completeness being a convenienct optimziation rather than a semantic necessity
-
-windowing is required by aggregation over unbounded data
-
-----
-session: periods of activity terminated by a gap of inactivity: timeout
-
-Incoming data=>
-data highly unordered with respect to event times: need time-based shuffle in your pipeline to analyze the data in the context in which they
-occured
-can NOT assume you will se most of the data for a given event time X within some constant epsilon
-
-=> time-agonstic(e.g., stream inner joins), but outer join means you need to introduce timeout of partial data => essentially windowsing
-
-=>approximateion: approximate top-N, streaming K-means, but these algos do have some element of time in their design, element of time  is
-usually processing-time based, and a lot of error bounds are predicated on data arriving in order 
-
-=>windowing by procesing time,infer information about the source as it is observed.e.g., tracing # of requests/sec send to a web service , calcualte reate of
-these requests 
-
-=>windowisng by event time
-can create dynamically sized windows, such as seeesions, witouth the arbitrary splits observed when generating session over fixed windows
-completeness: system give a reasonably accurate heuristic estimate of window completion via watermarks
-provide a way for the pipeline builder to express when they want results for windows to be materialized, and how those results hsould be
-refined over time
-
-triggers: when output for a window should be materialzied relative to some external singal, => when outputs should be emitted, observe the
-output for a window multiple times as it evolves, refining reuslts over time
-
-when in processing time are results materialized: watermarks and triggers=> triggers allows specification of early reuslts, and late results
-how do refinement of results relate: discarding, accumulatings, accumulating and retracting
-
-accumulation mode: relationship between multiple results in a same window, discarding, accumulating, or accumluating AND retracting
-
-perfect watermark: no such thing as late data,all data are early or on time => but for distributed input sources, perfect knowledge of the
-input data is impractical
-=> use heuristic watermarks => but will have late data => cue the trigger
-=> problem: too slow : if it is delayed correctly => delays in output if advance of the watermark is the only thing you depend on to
-stimulate results
-=> those windows refine over-time as the inputs evolve and eventually complete
-but with heuristic watermark, can't use it alone to materialize output if we care about correctness
-=> answer: use trigger to decide when to materialize output
-
------
-signals for triggers:
-1.watermark progress => materialize output, gc old windows
-2.processing time progress
-3.element counts: some finite elements have been observed in a window
-4.punctuations or other data dependent triggers
-
-timing early, on-time, late =>
-early, processing time period
-on-time: watermark
-late => element count 1 => this forms a sequence
-but how long the state will be kept for each window? => introduce lateness, any data that arrive after this horizon is dropped
-
-note that as long as # of keys remain low, no need to worry about limiting the lifetime of windows
-accumulate and retract: re-grouping data by a different dimension, sessions/dynamic windows where values may be replacing more than 1
-windows
-
-from fixed windowing in event time to fixed windowing in processing time
-
-----------
-
-
-
-
-
-
-
-
-
