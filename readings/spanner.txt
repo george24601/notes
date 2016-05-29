@@ -1,0 +1,114 @@
+multi-version,sync-replicated, externally-consistent distributed transactions
+
+shard data across set of Paxos state machines. auto failover, auto resharding/rebalancing
+
+BigTable can't handle complex/evoling schemas well, or consistency across datacenters=> people are even willing to tolerate poor write
+throughput
+
+data is schematized and semi-relational, versioned with commit time
+
+externally consistent read and write. Globally consistent read at a timestamp
+
+each transaction has a globally meaningful TS. the order of time satisfies linearizability,i.e., if T1 commits before T2, then t1 < t2
+
+=> relies on the truetime API, spanner has to wait until it passed uncertainty (< 10 ms)
+
+-----
+3 deployments
+test playground / dev-production/ prod only
+
+zone: unit of deployment and physical isolation
+
+each zone has 1 zonmaster with hundreds to thousands spanserver, zonmaster assigns data, spanserver serves data to client
+location proxies used by clients to location spanserver
+
+singleton: universe master and placement master
+
+---
+each spanserver manages 100-1000 tablets, which is a bag of <k:string, ts:Long> -> string.
+the tablet state is stored on a B-tree like files and WAL, backed by successor to GFS
+
+each tablet is a paxos state machine,which stores that tablet's metadata and logs, leader is handles by lease which defaults to 10s. Writes
+are applied by Paxos in order
+
+writes intis request at Paxus reader, reader request can be servered from tablent directly if it is sufficiently up-to-date
+
+each leader's spanserver  implements a lock table for concurrency control
+
+more on the lock table..
+
+leader's span server handles 2PC for transcations involves multiple Paxos groups
+
+-----
+
+directionry/bucket: continous key sharing same prefix => unit of data movement. 
+Each tablet encapsulates a few (not one as in BigTable) continous row groups.
+
+Movedir
+
+seprate data replication config responsibility
+
+-------
+lack of cross-row transaction in BigTable. 
+rather not always code-around lack of transaction
+support proto buff type
+
+each row in the directory table with all descendant table start with K in lexi order forms a directory => naturally formed locality
+
+-----
+TrueTime API: GPS and atomic cross-referencing
+...
+
+-----
+Reads in a read-only transcation executes at a system-chosen timestamp without locking, so incoming writes are not blocked => it can run on
+any replica that is sufficiently up-to-date
+
+snapshot read: read in the past
+
+leader leases and lease votes
+for each paxos group, the lease intervals is disjoint for every other leader's
+abdiction
+
+-------
+RW transaction
+between when all locks acquired, and before any are released => use the ts of paxos write that represents commit
+within each paxos group, assign monotonitcally increasing ts on writes, evne across writes
+=> recall that disjoint ts interval requirement between leaders
+
+writes in a tranx buffered in client, so the read in tran does not see the write effect
+use woundwait to avoid deadlock
+
+client inits and handles 2PC when it finishes all reads and buffers up all writes
+....
+
+-------
+RO transaction
+
+read at timestamp => t(Safe) = min(t(paxos, safe) , t(TM, safe))
+RO: assign s(read), and then do a snapshot read at s(read) => what is the problem
+Need to worry about scope: single and multiple Paxos group case
+
+--------
+Schema change op
+BigTable supports schema change in one DC, but it is blocking
+1. assign a future ts
+2. block all tranx with ts >= t
+
+4.2.4 skipped
+
+-----
+F1
+
+Tries mySQL sharing: resharing too difficulty, introducing BigTable introduces transactional problems and cross center data processing
+
+why they use 2PC instead of purely paxos-based commit protocol?
+
+
+------
+
+
+
+
+
+
+
