@@ -1,0 +1,42 @@
+can be used for shortest path of all edges are unit length
+
+-------
+pseudo code, version 1
+
+curDist
+//populate all seeds
+
+LP(dist, 0, max)
+{
+	nextDist
+	for each seed in curDist
+	{
+		if seed is target
+			return dist
+		
+		Try expand seed //mark visited inside
+		insert expanded into nextDist
+	}
+
+	replace curDist with nextDist
+}
+
+-------
+
+pseudo code version 2, this version is espeically useful if graph has no cycles
+
+q = {root}
+
+while(!q.isempty){
+  head = q.pop
+
+  if(visited[head])
+    continue;
+  else
+    visited[head] = true
+
+  foreach neighbor of head //replace it with your generation logic
+    q.push(neighbor);
+}
+
+-----

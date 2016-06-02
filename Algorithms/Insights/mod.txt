@@ -9,3 +9,6 @@ when you want all your numbers to be processed to be at [1, n] range insteand of
 (num - 1) % mod //reduce to [0, n-1] range
 num++; //convert back to [1, n] range
 
+----
+(a * b) % c = (a %c * b % c) %c => this means for counting problems, you order/pos of mod does not matter, on condition that it does not
+cause overflow

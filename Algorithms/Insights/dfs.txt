@@ -1,0 +1,11 @@
+DFS can be used to find cycles, but if we know each node has only one out edge,e.g., 
+tree in reverse direction, flyod's cycle finding algorithm is better
+
+topological sort, which leads to strongly connected graphs algorithm
+
+For graph traversal, the key is to identify potential max number of nodes to decide if it is feasible to apply DFS.
+
+if graph may have cycles, need to have a visited DS. Otherwise, if graph is a tree, we don't need it
+
+The nature of DFS suggests that it is useful for generation of answers, i.e., the generation direction <-> edge in graph (maybe
+bidirectional though)

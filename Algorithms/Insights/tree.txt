@@ -1,20 +1,21 @@
-1. often need to reconstruct the tree from the string rep first
+often need to reconstruct the tree from the string rep first
 
-2. when inspecting the problem, a BFS might give more insight than DFS. 
+when inspecting the problem, a BFS might give more insight than DFS. 
 The key of expanding is that finding the continuous subproblem, i.e., the slibling wont affect the part of solution. So that we can start applying recursion
 
-3. adding any edge to a connected tree will yield a cycle
+adding any edge to a connected tree will yield a cycle
 
-4. Heap is a special form of tree => it is packed so can be reprsented as an array
+Heap is a special form of tree => it is packed so can be reprsented as an array
 
-5. common tactics: start from root, start from leaves (See try both search directions before commiting on one)
+common tactics: start from root, start from leaves (See try both search directions before commiting on one)
 
 every time you see only 1 incoming or outgoing edge. This suggests a tree
 
-6.One challenge of vanilla BST is that insertion/deletion requires rebalancing, the idea of segment tree is that it doesnt update the node
+One challenge of vanilla BST is that insertion/deletion requires rebalancing, the idea of segment tree is that it doesnt update the node
 positions itself, since ranges are static, but just updating the the information attached to the node. which can be done in a logn way (all
 the way from root to leave)
 
-7.variant of segment tree is to handle counting queries, i.e., instead of reporting segments, report # of segments, this means in each node,
+variant of segment tree is to handle counting queries, i.e., instead of reporting segments, report # of segments, this means in each node,
 instead of storing the intervals in the subets, it can just store # of them
 
+tree <=> each node has only 1 out edge (which is to the  parent)
