@@ -56,7 +56,7 @@ Even if the master loses communication with a primary, it can safely grant a new
 
 sequence of actions for writes
 
-In case of errors, the write may have succeeded at the primary and an arbitrary subset of the secondary repli- cas. (If it had failed at the
+In case of errors, the write may have succeeded at the primary and an arbitrary subset of the secondary replicas. (If it had failed at the
 primary, it would not have been assigned a serial number and forwarded.) The client request is considered to have failed, and the modified
 region is left in an inconsistent state. Our client code handles such errors by retrying the failed mutation.
 
@@ -68,14 +68,14 @@ for the operation to report success, the data must have been written at the same
 
 ---------
 After the leases have been revoked or have expired, the master logs the operation to disk. It then applies this log record to its in-memory
-state by duplicating the metadata for the source file or directory tree. The newly created snap- shot files point to the same chunks as the
+state by duplicating the metadata for the source file or directory tree. The newly created snapshot files point to the same chunks as the
 source files.
 
 --------
-Whenever the master grants a new lease on a chunk, it increases the chunk version number and informs the up-to- date replicas. The master
+Whenever the master grants a new lease on a chunk, it increases the chunk version number and informs the up-to-date replicas. The master
 and these replicas all record the new version number in their persistent state.
 
-If the master sees a version number greater than the one in its records, the mas- ter assumes that it failed when granting the lease and so
+If the master sees a version number greater than the one in its records, the master assumes that it failed when granting the lease and so
 takes the higher version to be up-to-date.
 
 --------

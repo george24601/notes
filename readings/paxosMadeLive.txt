@@ -22,7 +22,7 @@ Read ops requires executing another instance of Paxos to serialize with relative
 tell the master
  => use master leases to avoid serializing via paxos
 
- all replicas implicitly grant a lease to the master of the previous Paxos instance
+all replicas implicitly grant a lease to the master of the previous Paxos instance
 and refuse to process Paxos messages from any other replica while the lease is held. The master maintains
 a shorter timeout for the lease than the replicas – this protects the system against clock drift. The master
 periodically submits a dummy “heartbeat” value to Paxos to refresh its lease.

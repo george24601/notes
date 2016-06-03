@@ -65,7 +65,7 @@ why chubby's lock approach is not sufficient?
 how to solve this problem with ZK? and why would that work?
 =>ordering guarantee: if client is watching for a change, it will be notified before being able to read any of new updates
 
-problem with locall-hanlded read request, and how to solve them?
+problem with local-handled read request, and how to solve them?
 
 liveness guarantee: majority
 durability: change perists any # of failures as long as quorums of servers able to recover
