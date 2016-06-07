@@ -3,3 +3,6 @@ Another use of that is dealing with small double multipllications, this can avoi
 
 base number is about representation. It doesnt affect the arithmetic properties
 
+when assertion, if something, organize code so that variables involved in that statement is immediately changed ->  to avoid double-couting
+and infinite loop
+

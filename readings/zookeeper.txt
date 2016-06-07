@@ -11,8 +11,6 @@ individual's async client are guaranteed FIFO order
 
 if you pass a sequenctial flag, a monotonically increasing # will be included in file name, to guarantee ordering and uniqueness
 
-Zookeeper recipes and solutions
-
 -----
 Patterns:
 
@@ -43,8 +41,7 @@ FIFO client ordering means client can do async + linearizable wirtes
 
 server processes read locally, do not use zab to process them
 
-ZK uses watch to enable client cache, Chubby manages client cache directly => blocks all updates to invalidate caches on all clients, and
-use lease to bound the effect of slow/faulty clients
+ZK uses watch to enable client cache, Chubby manages client cache directly => blocks all updates to invalidate caches on all clients, and use lease to bound the effect of slow/faulty clients
 
 watches are unregisterd once notified or session is closed
 
@@ -80,8 +77,6 @@ Double barriers
 Compare YMB ZK usage with kafka's
 
 ------
-fail-recover model
-
 each znode stores max 1MB by default, force writes to disk before taking snapshots
 
 why request processor has to calculate future state?
