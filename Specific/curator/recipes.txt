@@ -1,27 +1,26 @@
 -----
 Leader Latch
 
-create LeaderLatch
 leaderLatch.start()
 hasLeaderShip()
-await()
+await() //cauus the current thread to wait until this instance acquires leadership
+await(long timeout, TimeUnit unit) //alternatively
 
-Once through LeaderLatch instance, close(). removes the instance from the leader electio and releases leadership if the isntance has it
+Once through LeaderLatch instance, close(). removes the instance from the leader election and releases leadership if the isntance has it
 
 
 Error handling:
 
-1. if connection that is leader suspended or lost, there will be no leader until connection is re-established, and LeaderLatch reports that
-it is no longer the leader. 
+1. if connection that is leader suspended or lost, there will be no leader until connection is re-established, and LeaderLatch reports that it is no longer the leader. 
 
-2. Upon leader re-connection, it will delete previous ZNOde and create a new node
+2. Upon leader re-connection, it will delete previous znode and create a new node
 
 3. make sure register a ConnectionStateListener to handle that connection issues can cause leadership to be lost
 
 ---
 leader election
 
-once started, takeLeadershp() of your listener will be called when you have leadership. Your teakLeadership() should retun only when
+once started, takeLeadershp() of your listener will be called when you have leadership. Your takeLeadership() should retun only when
 leadership is being relinquished
 
 Error handlding:
@@ -31,14 +30,24 @@ Upon suspended or lost, throw CancelLeadershpException => extend LeaderSelectorL
 Shared reentrant lock
 
 acquire() is blocking, EACH call to acquire must be balanced by a call to release()
-
 Re-use a single instance instead of creating new one
+release() can work only if the calling thread is the same thread that acquired it. If the thread had made multile calls to acquire, the
+mutex wil still be held when this method returns.
 
 supports coop revoking => another process can force release the lock
 
 Error handling:
+MAKE SURE add a ConnectionStateListener and watch for SUSPENED and LOST state changes.
 if a SUSPENDED state is reported, you can not be sure if you still holde the lock unless you receive a reconected state
 
 if a lost state is reported it is crertain that you no longer hold the lock
+
+------
+Revocable Shared Locks
+
+Note that this protocol requires the lock holder to consent to releasing the lock. Such consent is important, especially if the lock holder
+needs to do some processing before releasing the lock. Of course you can always implement Revocable Shared Locks with Freaking Laser Beams
+by stipulating in your protocol that the revoker is allowed to delete the lock node if after some length of time the lock isn't deleted by
+the lock holder.
 
 ------

@@ -1,0 +1,9 @@
+Framework op will manage connection loss and/or session expiration per retry policy
+
+SUSPENED: loss of conection, leaders, locks should suspend until the conneciton is re-established
+RECONNECTED: A suspended or lost conneciton has been re-established
+
+LOST: Curator THINKS ZK session has expired
+
+session timeout elapses during a network partiton. possible to get a reconnected state after this, but should sitll consider locks as
+dirty/unstable
