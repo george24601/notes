@@ -1,4 +1,0 @@
-Google app engine: PaaS
-Blob storge => proprietory APIs
-Older Servlet API
-unique scaling model
