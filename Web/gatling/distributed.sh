@@ -43,8 +43,14 @@ do
   ssh -n -f $USER_NAME@$HOST "sh -c 'nohup $GATLING_RUNNER -nr -s $SIMULATION_NAME > /gatling/run.log 2>&1 &'"
 done
 
-echo "Gathering result file from localhost"
-ls -t $GATLING_REPORT_DIR | head -n 1 | xargs -I {} mv ${GATLING_REPORT_DIR}{} ${GATLING_REPORT_DIR}report
-cp ${GATLING_REPORT_DIR}report/simulation.log $GATHER_REPORTS_DIR
+for HOST in "${HOSTS[@]}"
+do
+  echo "Gathering result file from host: $HOST"
+  ssh -n -f $USER_NAME@$HOST "sh -c 'ls -t $GATLING_REPORT_DIR | head -n 1 | xargs -I {} mv ${GATLING_REPORT_DIR}{}
+  ${GATLING_REPORT_DIR}report'"
+  scp $USER_NAME@$HOST:${GATLING_REPORT_DIR}report/simulation.log ${GATHER_REPORTS_DIR}simulation-$HOST.log
+done
 
-#.....
+mv $GATHER_REPORTS_DIR $GATLING_REPORT_DIR
+echo "Aggregating simulations"
+$GATLING_RUNNER -ro reports

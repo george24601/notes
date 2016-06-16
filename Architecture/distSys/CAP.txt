@@ -1,0 +1,33 @@
+Note that CAP in the theorem means very specific things, not the intuitive defintion!
+C: as if exeuting on a single node
+A: every request to ANY NON-FAILED node must return a response: so node failure is outside the scope of CAP! 
+P: network is allowed to lose any messages from one node to another. Note this does not mean packet loss, in the proof they use a TCP-ish
+protocol already.
+However, from a node's perspective you can not distinguish between a failed node and partitioned node
+
+trivial CP system: ignore all requests, return "no result"
+=> Not being available at all is enough to be CP
+
+trivial AP system: return v0 to all requests
+
+Atomic in CAP means atomic consistency, and is not same in ACID: it doesn't mean all-or-nothing, just order of operations
+
+If we want to implement any consistency, the only option is to kill paritioned nodes
+
+A pure asych system uses no local clock, and can not declare timeout
+
+Note in the CAP proof, msgs are resent if not acked within time limit, i.e., the TCP model,  we can guarantee the initial request will be sent and received
+
+with EC, it is possible it is none of CP, AP, or CA!
+
+Heuristic decision in 2PC
+=> CP? not consistent
+=> AP? not available, because we can not do any multi-node action
+=> not even CA in this sense(what if master failed? the view is not consistent!), but without HD, it becomes CP (CA doesn't work because when master failed and prepared, all slaves are locked)
+
+Paxos
+=> AP, no when the link to the leader is cut
+=> CA, no, because it is async model, so liveness can not be guaranteed 
+=> CP
+--------
+
