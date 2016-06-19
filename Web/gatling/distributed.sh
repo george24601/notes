@@ -37,6 +37,11 @@ do
   scp -r $GATLING_SIMULATIONS_DIR/* $USER_NAME@$HOST:$GATLING_SIMULATIONS_DIR
 done
 
+<<COMMENT
+ssh -n -f $HOST "sh -c 'export JAVA_OPTS=\"-Dnum.user=$NUM_USER -Dtest.duration=$TEST_DURATION -Dendpoint=$ENDPOINT \" &&  nohup
+$GATLING_RUNNER -nr -s $SIMULATION_NAME > $RUN_LOG_DIR/run.log 2>&1 &'"
+COMMENT
+
 for HOST in "${HOSTS[@]}"
 do
   echo "Running simulation on host: $HOST"

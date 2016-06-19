@@ -30,4 +30,31 @@ Paxos
 => CA, no, because it is async model, so liveness can not be guaranteed 
 => CP
 --------
+network partitions are too likely to happen, so CA is useless in practice
+
+consistency that is both instanneous and global is impossible
+
+If a system chooses to provide Consistency over Availability in the presence of partitions (again, read: failures), it will preserve the
+guarantees of its atomic reads and writes by refusing to respond to some requests. It may decide to shut down entirely (like the clients of
+a single-node data store), refuse writes (like Two-Phase Commit), or only respond to reads and writes for pieces of data whose “master” node
+is inside the partition component (like Membase).
+
+is the fact that most real distributed systems do not require atomic consistency or perfect availability and will never be called upon to
+perform on a network suffering from arbitrary message loss. 
+
+We assume that clients make queries to servers, in which case there are at least two metrics for correct behavior: yield, which is the
+probability of completing a request, and harvest, which measures the fraction of the data reflected in the response, i.e. the completeness
+of the answer to the query.
+
+Despite your best efforts, your system will experience enough faults that it will have to make a choice between reducing yield (i.e., stop
+answering requests) and reducing harvest (i.e., giving answers based on incomplete data). This decision should be based on business
+requirements.
+
+As is obvious in the real world, it is possible to achieve both C and A in this failure mode. You simply failover to a replica in a
+transactionally consistent way. Notably, at least Tandem and Vertica have been doing exactly this for years. Therefore, considering a node
+failure as a partition results in an obviously inappropriate CAP theorem conclusion.
+
+a dead (or wholly partitioned) node can receive no requests, and so the other nodes can easily compensate without compromising consistency
+or availability here. 
+
 
