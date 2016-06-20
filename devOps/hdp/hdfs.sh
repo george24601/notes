@@ -12,4 +12,3 @@ hadoop fs -getmerge test /tmp/merged.txt
 
 #read from stdin
 hadoop fs -put - myinput.txt
-

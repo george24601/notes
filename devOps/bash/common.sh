@@ -20,3 +20,5 @@ ssh -i $CERT $HOST
 unzip $FROM -d $TARGET_DIR
 
 host $FIND_IP_OF_HOST
+
+# > vs >>

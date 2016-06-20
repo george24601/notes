@@ -1,0 +1,6 @@
+Data volume: speicially-designated dir within containers that bypass teh UFS => persist data independent of the container's life cycle
+inited when container is created
+data volumns can be shared and reused among containers 
+Data volumns persist even if the container is deleted
+
+Data volume container to share between containers, then mount the data from it

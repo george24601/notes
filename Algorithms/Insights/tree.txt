@@ -19,3 +19,5 @@ variant of segment tree is to handle counting queries, i.e., instead of reportin
 instead of storing the intervals in the subets, it can just store # of them
 
 tree <=> each node has only 1 out edge (which is to the  parent)
+
+when looking at 2 nodes, often need to find LCA of the 2 nodes, to find a nice, self-contained tree
