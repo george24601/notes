@@ -22,3 +22,14 @@ unzip $FROM -d $TARGET_DIR
 host $FIND_IP_OF_HOST
 
 # > vs >>
+
+SLEEP_DURATION=$((TEST_DURATION + 10))
+echo "Sleep for $SLEEP_DURATION"
+
+######
+
+#ctrl-a + d to detach from screen
+
+#ctrl-c + d to detach from screen
+#back to the same terminal
+screen -r
