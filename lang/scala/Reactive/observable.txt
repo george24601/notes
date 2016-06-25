@@ -27,19 +27,6 @@ trait Observer[T] = {
 
 and introduce trait Observable[T]
 subscribe returns a Subscribtion => you can send unsubscribe to Subscribtion
--------
-
-Operators
-flatMap: sequence problem
-flatten vs concat
-Obserable from future
-groupBy
--------
-
-cold vs hot observable
-composite subscription
-multassignment subscription
-serialsubscription
 
 -------
 

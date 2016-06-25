@@ -1,7 +1,3 @@
-blocking sync introduces dead-locks
-blocking is bad for CPU utilization
-sync ommunication couples sender and receiver
-----
 every actor knows its own address
 creating an actor returns its address
 addresses can be sent within messages
@@ -13,12 +9,6 @@ processing one message is the atomic unit of execution(!!!)
 
 JVM flags to do akka logging
 -Dakka.loglevel=DEBUG -Dakka.actor.debug.receive=on
-
-
-3 messages delivery guarantees: 
-at-most-once: just send, no state
-at-least-once: rsend until ack is recieved, sender needs to buffer
-and exactly-once: only the first received in processed, sender needs to buffer, receiver needs to know which have been done
 
 good thing for messages: all messages can be persisted
 can include unique correlation IDs => enables exactly once

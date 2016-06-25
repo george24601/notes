@@ -1,35 +1,27 @@
-Use active names for operations with side effects
-user.activate() not user.setActive()
+Nested functions:
+compare with various let operators in ML
 
-Use descriptive names for methods that return values
-src.isDefined not src.defined
+currying
+What is the type of curried/parital applied function
 
-Don't prefix getters with get
-As per the previous rule, it's redundant: site.count not site.getCount
+lambda and higher-order functions
 
+invariance, covariance, and contravariance
+Immutable collections should be covariant. Mutable collections should be invariant. 
 When using collections, qualify names by importing scala.collection.immutable and/or scala.collection.mutable
+If your method needs a sequence, use Seq[T], not List[T]. 
 
 
------
-list map { item =>
-  item match {
-    case Some(x) => x
-    case None => default
-  }
-}
+You don’t even have to use the new keyword to create a new instance of a case class. 
 
-to
+val evenNumbers =
+ for {
+  number <- numbers
+  if number % 2 == 0
+ } yield number
 
-list map {
-    case Some(x) => x
-    case None => default
-}
-
------
 
 Use return type annotaion for public methods
-
-Immutable collections should be covariant. Mutable collections should be invariant. 
 
 -----
 type aliases
@@ -44,23 +36,16 @@ class ConcurrentPool[K, V] {
 Cases to use implicit
 
 Extending or adding a Scala-style collection
+
 Adapting or extending an object (“pimp my library” pattern)
+
 Use to enhance type safety by providing constraint evidence
 To provide type evidence (typeclassing)
+
 For Manifests
 
 -----
 
-If your method needs a sequence, use Seq[T], not List[T]. 
-
-Do not operate without data; profile[1] your application before proceeding,e.g., use YourKits
-
-Use scala.collection.JavaConverters to interoperate with Java collections.
-
-import scala.collection.JavaConverters._
-
-val list: java.util.List[Int] = Seq(1,2,3,4).asJava
-val buffer: scala.collection.mutable.Buffer[Int] = list.asScala
 
 ----
 future
@@ -80,14 +65,10 @@ def divide(x: Int, y: Int): Future[Result] = {
 return inside closure is implemented as catch/throwing pair - performance implication
 
 ----
- assert: invariants that the code assumes
+assert: invariants that the code assumes
 require: API contracts 
 
 Declaring the type sealed allows the compiler to do exhaustivity analysis since constructors cannot be added outside the source file.
-
-t provides a safe alternative to the use of null, and should be used instead of null whenever possible
-
-write
 
 opt foreach { value =>
   operate(value)
@@ -119,12 +100,31 @@ private val x: Int = ...
 is visible to all instances of that class (but not their subclasses). In most cases, you want private[this].
 
 private[this] val x: Int = 
-----
-
-
-
 
 ----
- JVM GC performance
+case classes: preferred way to define complex data
+e.g.
+
+abstract class JSON
+case class JSeq(elems: List[JSON]) extends JSON
+case class JObj (bindings: Map[String, JSON]) extends JSON
+case class JStr(num: String) extends JSON
+case object JNull extends JSON
 
 
+-------
+e1.map(x=>e2)
+for  (x <- e1) yield e2
+
+for(x<-e1 if f; s) yield e2
+for (x<- e1.withfilter(x=>f); s) yield e2
+
+for(x<-e1; y<-e2; s) yield e3
+e1.flatMap(x => for (y<-e2; s) yield e3)
+
+x<- expr withFilter {
+	case pat => true
+	case _ => false
+} map {
+ case pat => x
+}
