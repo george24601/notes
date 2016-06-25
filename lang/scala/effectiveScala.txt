@@ -1,11 +1,3 @@
-Nested functions:
-compare with various let operators in ML
-
-currying
-What is the type of curried/parital applied function
-
-lambda and higher-order functions
-
 invariance, covariance, and contravariance
 Immutable collections should be covariant. Mutable collections should be invariant. 
 When using collections, qualify names by importing scala.collection.immutable and/or scala.collection.mutable
@@ -19,7 +11,6 @@ val evenNumbers =
   number <- numbers
   if number % 2 == 0
  } yield number
-
 
 Use return type annotaion for public methods
 
@@ -36,16 +27,11 @@ class ConcurrentPool[K, V] {
 Cases to use implicit
 
 Extending or adding a Scala-style collection
-
 Adapting or extending an object (“pimp my library” pattern)
-
 Use to enhance type safety by providing constraint evidence
 To provide type evidence (typeclassing)
 
 For Manifests
-
------
-
 
 ----
 future
@@ -128,3 +114,16 @@ x<- expr withFilter {
 } map {
  case pat => x
 }
+------
+Note that try and some are monads
+
+val adventure = new Adventure()
+val t1: Try[Int] = adventure.collect().flatMap(coins => { adventure.buy(coins) })
+
+//this is equvalent to
+val t2: Try[Int] = for {
+  coins <- adventure.collect()
+  treasure <- adventure.buy(coins)
+} yield treasure
+
+-------

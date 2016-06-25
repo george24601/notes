@@ -52,11 +52,6 @@ def retry (noTimes: Int) (block: => Future[T]): Future[T] = {
 		}
 }
 
-recursion is GOTO of functional programming!
-use foldLeft and foldRight
-List(a,b,c).foldLeft(e)(f) = f( f(f(e, a), b), c)
-List(a,b,c).foldRight(e)(f) = f(a, f(b, f(c,e)))
-
 def retry (noTimes: Int) (block: => Future[T]): Future[T] = {
 val ns = (1 to noTimes).toList
 val attempts = ns.map(_ => () => block) //need this thunk for lazy eval!

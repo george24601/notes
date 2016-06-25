@@ -1,4 +1,4 @@
-  The thread stacks, application code, NIO buffers are all off heap
+The thread stacks, application code, NIO buffers are all off heap
 
 Scalability to large memory sizes e.g. over 1 TB and larger than main memory.
 Notional impact on GC pause times.
@@ -10,5 +10,5 @@ performance, but determinism.
 By storing all your input events and data off heap in a persisted way you can turn your critical systems into a series of complex state
 machines. (Or in simple cases, just one state machine)
 
- The biggest issue with off heap is your data structures become less natural.  You either need a simple data structure which can be mapped
+The biggest issue with off heap is your data structures become less natural.  You either need a simple data structure which can be mapped
 directly to off heap, or you have a complex data structure which serializes and deserializes to put it off heap.
