@@ -11,10 +11,8 @@ git checkout -- <paths>
 git log --oneline --decorate --graph --all
 
 #get data from remote project: update your local db and move (remote)/(branch) pointer
+#sync forked with upstream
 git fetch [remote-name]
-
-#push my branch to a certain remote
-git push (remote) (branch)
 
 #set up credential cache
 git config --global credential.helper cache
@@ -32,12 +30,6 @@ git remote set-url origin $FORKED_URLt
 #set up upstream repo
 git remote add upstream $Repo_synced_with_the_fork
 
-#sync forked with upstream
-git fetch upstream
-
-#merge the synced content with master
-git merge upstream/master
-
 #port code into a new git repo. 1. clone into a temp local repo 2. push local repo to remote 3. now you can clone from remote again
 git clone --bare
 git add remote
@@ -54,4 +46,6 @@ git checkout -b version2 v2.0.0
 #DO NOT SQUASH AGINST PUSHED CHANGES, AS REWRITING HISTROY IS NICE SOURCE OF CONFLICT
 git rebase -i HEAD~4
 #add pick/squash/edit to the beginning of each line
-#handle conflicts
+
+#compare commit f7b5's parent with f7b5
+git diff f7b5^ f7b5

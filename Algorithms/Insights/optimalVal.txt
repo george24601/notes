@@ -1,24 +1,19 @@
 One way to prove is the show we can improve the step by changing the solution in the direction of our step, i.e., similar to the replacement
 proof in greedy. A concrete example will be gradient descent
+=> somewhat similar to relaxation, except that relaxation has a context focus,i.e., moving to a new state enables new information available,
 
-similarly, we can do step-wise, gradient descent-like optimization, i.e., each step will only be better, will never get worse (start from
-potentially worst possible state). total # of steps will be bounded by the dimension of data.=> even a while loop would do
+total # of steps will be bounded by the dimension of data.=> even a while loop would do
 
-Formally, this is iterative methods that converge to a solution
-
-
----
-In DP/state like cases, we will need to compare all potential candidates to find the best
+"as good as any other solution"
 
 ---
 For existence proof, we can just show that the extreme value works, and all general cases can be reduced to extreme cases with additional
-(non-intefering) parameters, basically we use extreme case as a subproblem to introduce additioal conditions, since too hard to see patterns
-in general problem
+(non-intefering) parameters, basically we use extreme case as a subproblem to introduce additioal conditions, since too hard to see patterns in general problem
+
+-----
+
+one pattern of generation vs filtering:  max(sums)  = Max possible value - MIN(sum of filtered outs)
 
 ----
-build the optimal solution by substracting: fill the whole space, and substracting, we can prove it is optimal if each step can not lower
-the space more/less, i.e., greedy solution => at least provides an approach worth trying,i.e., i
-problem solving, NEED TO TRY BOTH so as to discover insight, one way is often easier than another!
-
-=> this is one technique i failed repeated to use, to max a value, we can min (Ceil - counter action), to min a value, we can max(Ceil -
-reverse operation), pretty much same spirit as proof by contradiction
+extreme value problem can be reduced to search problems: search all possible states. this helps decompose the problem -> we just need to
+focus on the new unkown: how can we find all possible states, what can we infer from the unknown/condition?

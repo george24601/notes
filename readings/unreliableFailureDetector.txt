@@ -1,0 +1,13 @@
+solves async consensus with crash failures
+consensus can be solved with UFD with infinite # of mistakes, some can solve despite any # of crashes, some requires majority
+consensus and atomic broadcast can be reduced to each other in async system with crash failures
+
+because we can not decide if a process has crashed or "very slow", we can not deterministically solve consense in an async system with even
+a single crash failure
+
+completeness and accuracy: eventually suspects all failed processes + restricts mistake a FD can make
+
+
+
+
+
