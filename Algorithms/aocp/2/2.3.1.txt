@@ -1,0 +1,128 @@
+Inorder traverse
+
+Stack A empty, P = T
+
+while(true)
+{
+if P = lambda
+	if A empty 
+		break
+	else
+		P <= A
+
+	Visit NODE(P)
+	P = RLINKE(P)
+else
+	A <= P
+	P = LLINK(P)
+}
+-----
+proof that this indeed traverses the whole tree:
+A different, more general  form:
+
+At the P <= lambda step, with P pointing to a BT and stack A containing A[1]...A[m], procedure will traverse P in in order, and then arrive at P<= lambda step with original value A[1]...A[m]. 
+Induction on the size of the tree P
+
+----
+silight more difficult to do postorder, not as import as pre/in order
+
+P*: successor in preorder
+P$: successor in inorder
+P#: successor in postorder
+
+--------
+
+Threaded tree representation:
+1.For each empty link field
+	LTAG(P) =1 LLINK(P) = $P
+	RTAG(P) = 1 RLINK(P) = P$
+2. Otherwise, if node has a child, same as normal BT with LTAG/RTAG = 0 
+3. Leftmost and rightmost special, see below
+
+-----
+Inorder successor in a threaded BT:
+Q = RLINK(P)
+if RTAG(P) = 1
+    by definition, Q is already P$
+else
+    while (LTAG(Q) = 0)
+	Q = LLINK(Q)
+
+
+Introduce a special "list head" to handle empty tree case
+LLINK = root
+RLINK = self
+leftmost and rightmost point to the list head
+
+----
+Insert Q as right subtree of NODE(P)
+
+RLINK(Q) = RLINK(P)
+RTAG(Q) = RTAG(P)
+RLINK(P) = Q
+RTAG(P) = 0
+LLINK(Q) = P
+LTAG(Q) = 1
+if RTAG(Q) = 0
+	LLINK(Q$) = Q
+
+By reversing the roles of left and right, we insert to the left in a similar
+way
+
+in practice, one-side threaded, espeically right-threaded tree
+---------
+
+Similar and equivalent trees
+Theorem:
+T and T' are similar iff n = n' and for 1 <= j <= n, both trees' nodes in preorder
+l(u(j)) = l(u'(j))
+r(u(j)) = r(u'(j))
+
+l(u) = 1 if u has a left substree, otherwise 0
+
+lemma: let nodes of a non-empty BT in preorder, let f(u) = l(u) + r(u) - 1
+
+sum of all n f(u)s = -1
+and sum of all k f(u)s >= 0, 1 <= k < n
+=> induction on size of tree
+
+induction on size of tree for theorem => need to prove n(l) = n'(l), s.t.,
+2...n(l) + 1 is the left subtree of T and T'
+n(l) + 2 ... n is the right subtree of T and T'
+
+(i.e., size of left subtrees for n and n' are same)
+
+if l(u(1)) = 0, then n(l) = 0 = n'(l)
+if l(u(1)) =1, r(u(1)) = 0, then n(l) = n -1 = n'(l)
+lf l(u(1)) = r(u(1)) = 1. By lemma we can find the least k > 0 s.t.
+sum f(u(i)) = 0  i = 1 to k
+n(l) = k - 1 = n'(l)
+
+------
+Copy a BT
+HEAD: list head of T
+NODE(U):node with empty left subtree
+make a copy of T and make it left child of NODE(U)
+
+P = HEAD
+Q = U
+
+do
+{
+if NODE(P) has non-empty left subtree
+  R <= AVAIL
+  LEFT(NODE(Q)) = NODE(R)
+
+P = P*
+Q = Q*
+
+if P != HEAD
+    if NODE(P) has non-empty right subtree
+      R <= AVAIL
+      RIGHT(NODE(Q)) = NODE(R)
+
+    INFO(Q) = INFO(P)
+
+else (i.e., Q = RLINK(U))
+    break;
+} while(true)

@@ -1,0 +1,14 @@
+tree vs BT
+1. tree always has order
+2. tree can have many chilren, with no sense of direction
+
+convert a forest of trees to a SINGLE BT
+
+preorder:
+root of the first tree, subtrees of the first tree, remainng trees
+postorder:
+subtrees of the first tree, root, remainng trees , notice this is INORDER of binary version
+
+postfix, prefix polish notation corresponds to the postfix/prefix traversal of the tree!
+
+Differientiation algo

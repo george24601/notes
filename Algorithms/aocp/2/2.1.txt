@@ -1,0 +1,51 @@
+pace a new card face up on top of the pile
+
+NEXT EQU 4:5
+TAG EQU 1: 1
+LD1 NEWCARD
+LDA TOP
+STA 0, 1(NEXT)
+ST1 TOP  //top=newCard
+STZ 0,1(TAG) //face(newCard)=up
+
+----------
+
+page 251
+
+1. a) 4 b) end of list symbol
+
+2.
+content(loc(content(v))) = content(v) => all the time
+V is a linke varaible whose value is not lambda
+
+3.
+newCard = top
+top = next(top)
+face(top) = up
+
+4.
+if top = lambda
+	top = newCard
+if next(top) = lamba
+	next(top) = newCard
+set top (or new varaible) to next(top) , go back to step 1
+
+5.
+if top = lamdba
+	do nothing
+if next(top) = lambda
+	top = lamdba
+if next(next(top)) = lambda
+	next(top) = lamdba
+	
+set top to next(top), go back to step1
+	
+6.
+b, d, but not a, because in the context, a is not a link
+
+7. 
+TOP itself is a link variable, a) only loads the next field the address,
+b) loads the addr into r1
+
+
+

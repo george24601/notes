@@ -1,0 +1,177 @@
+LOC(X[j+1]) = LOC(X[j]) + c
+
+LOC(X[j]) = L(0) + c * j
+
+Representation of queue: with F and R point => F and R cant just keep increasing with enqueue and dequeue
+
+circumvent the problem: X[1] to X[M] in a circular way, similar to I/O buffering
+
+underflow: remove a nonexisitent item, usally  a meaning condition that can be used to govern the lfow of a program
+
+overflow: usually an error. No way to store 3 or mroe var-sized sequential lists in memory so that OVERFLOW will occur only when the toal size of all ists exceeds the total space. and each list has a fixed location for "bottom" element
+
+When overflow occurs to stakc i:
+
+a) smallest k for whick i < k <= n and Top[K] < BASE[k+1], if any k exits, move things up one notic
+CONTENTS(L+1) = CONTENTS(L) for TOP[k] >= L > base[i+1] //notice the move order, from high to low
+b) no k can be found as in a),  but exiets  1 <= k < i, similar op, but from low to high to avoid similar problems
+c) otherwise, give up
+
+-----
+Relocate sequtantial tables
+When overflow occurs, based on the change in size of each stack since the last repacking
+
+sum = inf - L(0), inc = 0 //sum is total amount of memory left, inc is the total amount of increases in table sizes since last allocation
+
+for 1 <= j <= n
+	sum = sum - (top[j] - base[j])
+	if (top[j] > oldtop[j])
+		d[j] = top[j]- oldtop[j]
+		inc += d[j]
+	else
+		d[j] = 0
+
+if sum < 0, STOP, can not proceed
+
+alpha = 0.1 * sum /n 
+beta = 0.9 * sum/inc 
+newbase[1] = base[1]
+delta = 0
+
+
+(!!!)
+for j = 2...n
+	r = delta + alpha + d[j-1] * beta
+	
+	//new base address is previous stack's new base + previous stack's size + 10% of free memory + 90% of free memory divided according to size changes since last allocation
+	newbase[j] = newBase[j-1] + top[j-1] - base[j-1] + floor(r) - floor(delta)
+
+	delta = r
+
+top[i] = top[i] - 1 //true size of ith list
+Run algorithm R to repack
+top[i] = top[i] + 1
+
+for 1 <= j <= n
+	oldtop[j] = top[j]
+
+-------
+j = 1
+
+for j = 2 ...n //move downs
+ 	if newbase[j] < base[j]
+		delta = base[j] - newbase[j]
+
+		for L = base[j] + 1 to top[j]
+			contents(L-delta) = contents(l)
+
+		base[j] = newbase[j]
+		top[j] = top[j] - delta
+
+for j = n ... 2 //move ups
+	if newbase[j] > newbase[j]
+		delta = newbase[j] - base[j]
+		for L = top[j] to base[j] + 1
+			contents[L + delta] = contents[L]
+
+		base[j] = newbase[j]
+		top[j] = top[j] + delta, go to R4
+
+------
+
+Since stack 1 never moved, we should put larget stack first
+oldtop[j] = D[j] = newBase[j+1], because values are never needed at conflicting times
+when memory is only half loaded, need very little rearranging of the tables with G
+
+--------
+1.
+M nodes
+
+2.
+delete from rear
+if R = F, then underflow
+if R = 1, then R = M, othersie R = R - 1
+Y = X[R]
+
+insert at the front
+if F = 1, then F = M, otherwise, F = F-1
+if F = R, then overflow
+X[F] = Y
+
+3.
+a)
+LD1 I
+LDA BASE,7:1
+
+b)
+LDA BASE,2:7
+
+c)
+X,7 = addr, 0:0 stored at x => r4 has addr field value stored at X
+
+4.
+a)
+1000 has 1001,7
+1001 has 1000,7
+
+then 1000,7 = 1001,7 = 1000,7 = ...  
+
+b)
+value of link variable x => LDA X
+
+LINK(x) => (0:2) of location x => LDA X, 7
+
+if X (3:3) is 7
+	X, 7 = x, 7 = addr stored at x => LDA X, 7, will do 
+
+i.e., LDA X,7:7
+
+c)
+
+I got trolled
+
+d)
+location r1 +r2
+LDA 0, 1:2
+
+r1 + r2 + r3
+
+location r1: need to have address v(r1), 2: 7
+location r1 + r2 ... v(r1 + r2), 3 : 7
+....
+
+e)
+double value of rI6: LD6 0, 6:6
+
+triple
+
+1000: NOP 0, 6:6
+LD6 1000, 7:6 => maybe use incr instead of load?
+
+
+
+6.
+a,b fine. C overflow, d underflow
+
+7.
+no, because we know a stack overflow happened after last time G is run
+
+8.
+
+9.
+
+10.
+
+12.
+
+16.
+No. consider the boths cases where the queue is headed
+
+19
+
+
+
+
+
+
+

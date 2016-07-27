@@ -1,0 +1,81 @@
+put circular list onto the avail stack: avail <-> link(PTR)
+
+merge disjoin circular list L1 and L2
+
+LINK (PTR1) <-> LINK(PTR2)
+PTR1 = PTR2, PTR2 = labmda
+
+addition of polynomial: maintain a pointer follower the head pointer around
+the list. Common in list processing algorithms
+
+P = LINK(P)
+Q1 = Q
+Q = LINK(Q)
+
+
+while ABC(P) < ABC(Q)
+	Q1 = Q
+	Q = LINK(Q)
+
+while {
+
+If ABC(P) = ABC(Q)
+	ABC(P) < 0, algorithm termniates
+	COEF(Q) = COEF(Q) + COEF(P)
+	if  COEF(Q) = 0
+		Q2 = Q
+		Q = LINK(Q)
+		LINK(Q1) = Q
+		AVAIL <= Q2
+	else
+		P = LINK(P)
+		Q1 = Q
+		Q = LINK(Q)
+	
+if ABC(P) > ABC(Q)
+	Q2 <= avail
+	COEF(Q2) = COEF(P)
+	ABC(Q2) = ABC(P)
+	LINK(Q2) = Q
+	LINK(Q1) = Q2
+	Q1 = Q2
+	P = LINK(P)
+}
+
+multiplication of polynomial
+
+
+---------
+
+1. insertion no, because LINK(P) will be set to PTR, which should be itself
+3.
+List itself is partitioned into 2 parts
+5.
+create a new list, then add to right one by one while iterate from left to
+right
+7.
+So fields with same power will appear together in two lists
+8.
+deletion 0 node: Q detects the node to be removed, Q1 just accept the result
+introduction new node:
+inserting new node: the previous node can link to the new node due to the
+existence of Q1
+9.
+Yes for addition
+
+11.
+
+13.
+algorithm will be similar to circular list merge example
+
+14.
+
+15.
+
+17.
+quick erase and merge of polys
+
+18.
+use exlusive or, i.e. only know their different, but we also include base
+address to help compute, basically, invertible operations to extract
+squeezed data

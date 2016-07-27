@@ -1,0 +1,11 @@
+decrease then test less than 0 in loop
+
+keep current and next for linked list traverse
+
+"linked" 1 to n array => simulate of permutation, can use that as either stack or queue
+
+use of 0 index to handle base case, where index is 1 to n
+
+use invertible op to store 2 values inside one field, with base value inferred or provided
+
+use NEXT array to condense linked list into continuous array

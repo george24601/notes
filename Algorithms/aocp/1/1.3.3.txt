@@ -1,0 +1,152 @@
+permutation's cycle notation
+
+proof: for perm, cycle notaiton is always possible
+1. for x cycle, x(n+1) must equal to x(1)
+2. for y cycle, ys can not equal to any of xs
+
+multiplication of permutations is not commutative
+
+algo:
+1. tag all (s, replaces )s by a tagged copy of the element that follows its matching (
+
+2. search for the first untagged element of the input, set it as START, output a (, ouput the element, and tag it
+
+3.current = next element of the formula
+
+4. proceed to the right until either the end or 
+finding an element equal to current, tag it, and go back to 3
+
+5. if current != start, output current, go to 4 at the left of the formula
+
+6. print ), go to 2
+
+tagging is done by using sign of a word,i.e., mark sign as negative as read
+
+(page 168 for code)
+
+run time analysis with Kirchhoff's first law
+
+--------
+algorithm B: multiplying permutations in one pass
+
+start with the identity permutation on the right and from right to left. The column below letter x differs from the column to its right(previous status) only in row x, the new value in row x in the one that disappeared in the preceding change
+
+1. T[k] = k, i.e., identify permutation
+2. check next element right to left, if the input has exhausted, algo terminates, 
+	if element is ), Z = 0, repeat 2, 
+	if element is (, T[j] = Z, go to 2
+	otherwise, element is x(i), exchange z with T[i], if T[i] = 0, then j= i, go to 2
+
+
+//r2  words of input are in PERM
+1H INC2 15
+ENT3 1 
+RIGHT ENTX 0 //Z = 0
+
+SCAN DEC2 1  //scan for next element
+LDA PERM,2
+JAZ CYCLE //skip blank
+CMPA RPREN
+JE RIGHT
+CMPA LPREN
+JE LEFT
+ENT4 1,3
+STA X
+
+2H DEC4 1 //check names table
+COMPA X,4
+JNE 2B
+J4P FOUND
+INC3 1 //new symbol found, increase the table size
+STA X,3
+ST3 T,3 //T[n] = n,i.e., identity
+ENT4 0,3 //i = n
+
+FOUND LDA T,4 //change T[i]
+STX T,4 //Store Z
+SRC 5 //Sset Z
+JANZ SCAN
+ENT1 0,4 
+JMP SCAN
+
+LEFT STX T,1 //change T[j]
+CYCLE J2P SCAN 
+
+
+
+
+-----
+compute inverse of a permutation
+
+simple method: 2n memory cells
+
+inverse in place by using the cycle structure :
+
+First:  inversion of succesive cycles, tagging the inverted elements by making them negative, afterwards restoring the correct sign
+
+m: next to replace
+j: new value for m
+i: old value for m
+
+1. m =n, j = -1
+2. next element
+ i = X[m], if i < 0, then element has been processed, go to 5
+
+3. invert one, and update states, i.e., the value you replaced becomes the next candidate, due to the inverse nature, its value should be (tagged version of) index
+x[m] = j, j = -m, m = i, i = x[m]
+
+4. end of cycle?
+if i > 0, go to 3, otherwise i = j
+
+5. store final value
+x[m] = -i
+
+6. loop on m 
+m--, if m > 0, go to 2. Otherwise the algo ends
+
+
+INVERT ENT1 N  //r1 stored m
+ENT3 -1 //r3 stores j
+
+2H LD2N X,1 //r2 stores i
+J2P 5F //i < 0, has been processed
+
+3H ST3 X,1
+ENN3 0,1
+ENN1 0,2
+LD2N X,1
+
+4H J2N 3B
+ENN2 0,3
+
+5H ST2 X, 1
+
+6H DEC1 1
+J1P 2B
+
+------
+second
+
+each inversion inverts 2, but one sign is left as tagged
+
+1. reverse x[k] for k in [1, n], set m = n
+
+2. j = m
+
+3. Find negative entry
+i = x[j], if i > 0, j = i, and repeat
+
+4. invert
+x[j] = x[-i], x[-i] = m
+
+5. m--, if m > 0, go to 2. Otherwise, algo terminates
+
+
+
+------
+(page 178 for 3rd way)
+
+
+
+
+permutation canonical form

@@ -1,0 +1,135 @@
+Excercises on page 140. Answer on page 507
+1. 64 values, need 3^4
+2. 64^4 = 16 mil, so need 5
+3. (0:2)(3:3)(4:4)(5:5)
+4. M = rI4 - 2000
+5. DIV -80,3(0:5) or DIV -80,3
+6. A: -(5,1,200,15)
+I2: -200
+X: +,0,0,5,1,?)
+I6: Index register has only 2 bytes, but here we try to load all 5 bytes
+X: - 00000
+7. 
+8. rA: + 0, 617,0,1
+rX: - 0,0,0,1,1
+9.add, mult, div, inc, dec, JOV, JNOV
+10. all comp based op
+11. all that could affect A and X, excluding arithmetic ones, can affect rIs
+12. INC3 0,3
+13. Yes, JNOV toggles on instead of off. 
+JOV 1000, in the end, will have same effect as JOV 1001, because it will turn off toggle and execute 1001
+What is the problem with JNOV 1000?
+14.
+15. Each byte a char, a word has 5 bytes
+16. 
+a)
+STZ 0
+ENT1 1
+MOVE 0(63)
+MOVE 0(36)
+
+b) batch based, what is the batch size? suppose we know the batch size, extreme case batch size=1
+=> 99 STA 0,1 
+	INC1 1 commands
+=> i.e. 100 STZ
+
+17.
+a)
+STZ 0,2
+DEC2 1
+J2NN 3000
+
+(notice because the nature of intruction jump and compare 0 is silightly easier than comparing to a known variable)
+(can you reuse the result?)
+
+b)
+STZ 0
+ENT1 1
+JMP 3004
+MOVE 0(63)
+DEC2 63 
+J2P 3003
+INC2 63
+ST2 3008(4:4)
+MOVE 0
+
+(can you reuse the method?)
+
+18.
+(overflow occurs at ADD?)
+V(1) = 0
+rX = -0
+V(1) = -0
+rX unchanged, rA(4:5) = 1
+rA= -1
+rX = 1
+r1 =1
+rA = - 1000 rx = 1000
+no effect as V(1) = 0
+r1 = 2
+V(1) = 0
+comp flag set to >
+v(2) =  0, r1 set to 3
+
+
+20. 
+ENT1 0
+MOVE 3995
+MOVE 0(43)
+JMP 3993
+HLT 0
+
+(can you reuse the method?)
+
+21. a) no because when we jump to 0, rJ will be changed to 1
+b) becuase of a, we use 0 as special address, since we want to avoid the fact that address N may be in conflict with the instruction
+to set J to N, we need to do a JUMP from N-1 => we need to store and load content(n-1)
+In memory format:
+
+LDA -1,4
+LDX 3004
+STX -1,4
+JMP -1, 4
+JMP 3005
+STA -1,4
+
+(can you reuse the method?)
+
+22, min time: 
+insight: x^2 can exist in a single byte
+calc x^2
+calc x^4
+form x^4 + x
+form x^8 + x^5
+
+condition implies |x| <= 5, so we can precompute, store results in memory
+
+min space:
+ENT4 12
+LDA 2000
+MUL 2000
+SLAX 5
+DEC4 1
+J4P 3002
+HLT 0
+
+23, can not use partial fields at all, i.e., may need to pass the part of the field as a whole value
+idea: 1. shift left and right to get a single digit
+2. interpret bytes into number, and use the proprties of value
+
+ENT1 4
+LDA 200
+SRA 0,1
+SRAX 1
+DEC1
+J1NN 3001
+SLAX 5
+HLT 0
+
+24.
+a) No extra memory? then interpret value
+DIV 3500 , where 3500 stores 10000
+b) Do that with only shifts
+SRC 4
+SRA 1
+SLC 5

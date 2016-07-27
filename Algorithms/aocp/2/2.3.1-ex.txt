@@ -1,0 +1,98 @@
+Review:
+1. iterative inorder traverse with stack
+2. proof of 1 is indeed in-order
+3. thread-tree constrution with speical empty tree case
+4.proof that two trees are similar, the technique
+5. copy a tree, notice the use of preorder , and position of copying left/right trees
+
+---
+3. If A is to the left of B, consider their lowest common ancester, the left subtree will be printed out before the right substree
+
+4. It is the reverse of post-order
+
+6. can obtain a perm from 123..n iff no indiices i < j < k s.t. p(j) < p(k) < p(i)
+
+if i < j < k in pre order => k can not be the parent of i or j
+if p(j) < p(k) => k is an ancestor of K 
+
+so any perm generate by stack represent an inorder of tree traversal
+
+7. yes, as long as we locate the root, then we know the size of each subtree, and go recursively
+
+8.
+preorder and inorder: no left tree
+preorder and postorder: single node
+inorder and postorder: no right tree
+
+10.the height of the tree
+
+12. move visit part from T5 to T2
+
+13.
+option 1, swap the location of LLINK and RLINK in T, and reverse the output
+
+option 2,
+use 2 stacks, one used to store processed root node, another stores things being processed
+
+B <= P
+A <= RLINK(P)
+P = LLINK(P)
+
+14.
+if shape doest matter, consider an extreme shape => list, we can find pattern and induction on it
+
+15.
+a node pointing below for each of the two children
+a node receiving link from below for each P$ =>i.e. right most node of the left subtree, and left most of the right subtree => 2 * # of child + 1 from parent + 1 or 2 from missing child
+
+16. root of right subtree
+
+17.
+if LTAG(P) == 0
+  by def, LLINK(P) is P*
+else if RTAG(P) == 0
+  by def, RLINK(P) is P*
+else
+  Q = RLINK(P)
+  if RTAG(Q) == 0
+    by def, Q is P*
+  else
+    Q is HEAD
+
+18.
+T:
+A <= P
+visit(P)
+P = LLINK(P)
+
+if (P is end)
+  P <= A
+  visit NODE(P)
+  P = RLINK(P)
+ 
+S:
+degree = 1 case:
+if LTAG(P) = 0
+  done
+else 
+  self
+
+degree = 2 case
+If RTAG(P) = 0
+  done
+else
+  P$
+
+19.a)
+
+if leaf:
+  if left, then LEFT(P$) = P
+  if right => parent to get parent, P$, left, then all the way right
+  if left
+    if RTAG(parent) = 0 P$
+    else parent
+else if parent, same as leaf! since it is the last anyway!
+
+
+
+b)

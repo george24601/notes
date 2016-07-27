@@ -1,0 +1,29 @@
+subroutine linkage:
+
+when # of parameters is mall, often desirable to transmit them to a subroutine by having them in registers, or by storing them in fixed meory cells
+
+or list them after the JMP instruction, the subroutine can refer to params because it knows j register setting
+
+multiple exits
+
+No subroutine may call on any other subroutien that is calling on it..why?
+
+------
+
+step 0. decide vaguely opon the general plan of attack
+
+step 1. breaking the whole program into a small # of pieces => turns out our sketch is most likely incorrect
+
+step 2: First working program. opposite direcction, from lowest level subroutines and do the main program last. 
+
+step 3. reverse the direction again, studying for each subroutine all of the calls made on it
+
+=> often a good idea to scrap everything and start over again at step 1
+
+good start towards effective debugging is often the preparation of appropriate test data
+the most effective debugging techinques seem to be those that are designed and built into the program itself => devote nealry half of their programs to facilitatin the debugging proces in the other half)
+another good practice is to keep a record of every mistake made
+
+
+
+MAX100 STJ EXIT => EXIT JMP * in program

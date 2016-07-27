@@ -1,0 +1,93 @@
+pseudo ops: about symbolic program, not instruction of programs itself
+
+Analysis: get max num in an array
+
+X EQU 1000
+ORIG 3000
+STJ EXIT //store the next instruction addr at the line EXIT, which itself will be a jump 
+ENT3 0,1 // number to process = size of array
+JMP CHANGEM //
+LOOP CMPA X,3 //compare current max with previous one
+JGE *+3 //* means current line
+CHANGEM ENT2 0,3 //j = k
+LDA X,3 //m <- X[k]
+DEC3 1  //k--
+J3P LOOP //something left, continue
+EXIT JMP *
+
+CMPA X,3 //compare with previous one
+JGE *+3 //previous one is not bigger, check the previous previous one
+//ENT2 redundant?
+LDA X,3  //replace the current one
+DEC3 1
+J3P LOOP //is there a previous one?
+
+X EQU 1000 => equivalent of a symbol
+
+to use the program
+
+ENT1 100
+JMP MAXIMUM
+STA MAX
+
+----------
+Analysis: find top 500 primes in table format
+
+L EQU 500
+PRINTER EQU 18
+PRIME  EQU -1
+BUF0 EQU 2000
+BUF1 EQU BUF0+25
+START IOC 0(PRINTER)
+
+LD1 =1-L= //start table
+LD2 =3=
+
+2H INC1 1  //N is prime
+ST2 PRIME+L, 1
+
+J1Z 2F //found all already
+
+4H INC2 2 //advance N
+ENT3 2 
+
+6H ENTA 0 //PRIME[K]\N
+ENTX 0,2
+DIV PRIME,3
+JXZ 4B //can not be prime, try next number
+CMPA PRIME, 3 //see if prime[k] is too large, namely, root
+INC3 1 //potentially, more known prime to test
+JG 6B  //
+JMP 2B //N is prime
+
+//now prints these 500 primes
+2H OUT TITLE(PRINTER) //print title
+ENT4 BUF1+10 //B=1
+ENT5 -50 //M = 0
+2H INC5 L+1
+
+4H LDA PRIME,5 //
+CHAR
+STX 0,4(1:4)
+DEC4 1
+DEC5 50 
+J5P 4B //more line to print
+
+OUT 0,4(PRINTER) //print line
+LD4 24,4 //swtich buffers
+J5N 2B //still negative, means more to do, print next line
+HLT
+
+//followed by contents of tables and buffers
+
+
+
+CON 2: constant => set the content of that line
+CON BUF1 + 10
+
+constant may be enclosed in equal signs
+
+2H, 2B: closest previous location 2H, 2F: closest following locaiton 2H
+F and B should never be used in the locaiton field, H shoudl never be used in the address field
+
+ALF: 5-byte constant in alphameric character code

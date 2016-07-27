@@ -1,0 +1,57 @@
+1.ENTA 1000
+STA X
+2. STJ modifies the addr field
+3.
+consider a sorted array
+
+load to 1001  (to 1100)
+
+r1 = 100
+rX = v(1100)
+v(1100) = rA
+v(1100) = rX = old v(1100)
+r1 = 99
+rX = v(1099)
+v(1099) = rA
+v(1099) = rX = old v(1099)
+....
+i.e., no effect
+
+consider a reversely sorted array
+r1 = 100
+rX = v(1100)
+v(1100) = rA = 400
+v(1001) = rX = old v(1100) = 301
+r1 = 99
+rX = v(1099)
+v(1099) = rA = 399
+v(1002) = 302
+
+i.e., set the biggest = tail
+swap the tail with the one to be swapped out,i.e., bigges
+so sorts in place
+
+5. use of 2 buffers
+6. proof by contradiction. By definition of prime, this becomes a iff relatioship
+7. line 29. when we find N is prime, we will not store it to PRIME or increase our count => i.e., try to find all primes
+8.
+
+r1 = 1
+r2 = 0
+rX = 4F
+
+r3 = 1
+
+v[BUF + r2] = 0
+r2++
+r3--
+repeat this block if r3 > 0
+
+v[BUF+r2] = rX
+r2++
+r1++
+if r1 > 75
+
+
+
+

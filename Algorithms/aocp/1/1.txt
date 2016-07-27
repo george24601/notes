@@ -1,0 +1,127 @@
+prove that Euclid's algo indeed gives GCD
+
+Computation method (Q,I, Omega, f) = (state of algorithm, input, output, rule)
+Q: set containing subsets I and Omega
+f: function from Q into itself, f(q) = q for all q of Omega
+
+Each x in I defineds a computational sequence => if x(k) in Omega, then we know the sequence terminates in k steps
+
+Redefinte eculid algorithm with new definition
+-----
+Excercises
+
+1.t <- a, a <-b, b <- c, c <-d, d <- a
+
+2.After the first step, n is within mod m
+
+3-5 trivial
+
+6. In this special case just try m= 1...5 and average sum, because after the first iteration, value of m must be less than n
+
+7. If I swap m and n, that will be T(m). Definition: translate unknown into known. Reuse the previous methods
+When m > n, 
+N(m, 1) = N (1, m) - 1
+N(m, 2) = N(2, m) - 1
+N(m,3) = N(3, m) - 1
+N(m, 4) = N(4, m) - 1
+When m < n
+N(m, n) = 1 + N(n, m)
+
+i.e, around T(m) + 1
+
+8-9 skipped
+
+------
+Extended GCD, and prove it works: induction on n but not m
+
+general method: proving for each box in the flow chart, that if any one of the assetions is true before the ops in the box, 
+then all of the assertions on the arrow leading away from the box are true after the operation
+
+and then by induciton on the steps of operations, we know the general correctness of algorithm. 
+
+This general method also mirrors the way we understand an algorithm
+
+Operation can be formulated as a logical rule that tells what assertions can be proved after the operation based on what assertions are true before hand
+reverse direction and work backwards to help discover new algorithms: from assertion should hold after op to weakest precondition that must hold before op is done
+
+-------
+Excercises
+
+1. Trivial
+2. a^(n-1)-1 is not 1
+3. base case is n = 2 not n =1
+4.
+(1 + root(5))/2
+F(n+1) = F(n) + F(n-1) >= t^(n-2) + t^(n-3) = t^(n-3) (3 + root(5))/2. What is theta^2? 
+Notice this is how we get Fib's closed form
+5-6. trivial
+7. notice the pattern, it is the sum of area of every other rings, starting from outmost
+8-10. trivial
+11-14. skipped, need to understand extended euclid
+15. a) -inf in set => no
+b) so < with absolute value will do
+c) set infinitely close to 0
+d) when we sort, we can already reduce to comparsions into a set containing a subset of x, i.e., we can find min based on x's well-orderness
+e)first part is same as d, the second part, we can treat "emptyness" as special symbol and everything still holds
+f) if always exists a finite sequence => must exist one min value => holds
+g) Generalized induction
+find a sequence with all y < x, i.e., x is the terminating min value, and and induction on the sorted order, i.e., induction on all y < x
+
+lexico order + part g = n-tuple induction for proving statements about n positive integers
+if we can map each state x of computation into a element into a well-ordered set, s.t., new state f(y) < f(x), then we know the program must terminate
+----------
+
+Use b^x equation in reverse to find log
+
+lg(x) = log(2,x)
+
+compute log(10,x) in binary format
+
+------
+Sums: distribution law, change of varaible, interchanging order of sums => powerful interchange
+
+Derive geometric/arithmetic closed form with only sum manipulation
+
+Bracket notation => derive rule 2 this way
+Composite sum => 2 new derivation examples
+
+-------
+
+4 basic mod laws, fermat's theorem
+-----
+To generate permutation: standard pick 1 of n position and insert n
+alternatively, pick a k in [1, n], to each a(j) in (n-1) permutation whose value > k, + 1, and attach k in the end
+
+10! = 3.6 mil
+
+n! is around root(n) * (n/e) ^n
+
+prime p is a divisor of n! with multiplicipty => the powered approach (can you reuse the methods/invent similar problems?)
+
+-------
+generation of binomial formula: moving in and out of parenthesis
+
+additional formula, summation
+
+binomial theorem
+
+neg upper index, products, sum of products
+
+-----
+
+Hamonic number and its lower bound
+sum over H and proff
+powerful technique: summation by parts each
+------
+Generating function: addition, shifting, multiplicatin
+change of z , differentiation and integration
+
+---------
+max, max, avg, std deviation in algorithm analysis
+-----
+view o-notation as set of functions
+
+
+
+
+

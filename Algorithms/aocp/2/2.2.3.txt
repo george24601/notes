@@ -1,0 +1,190 @@
+information in a node does not take up a whole word anyway, so there is already space for a link field preseent
+
+possible in many applications to combine serval items into one node so that there is only one link for serveral items of information
+
+implicit gain in storage since tables can overlap, sharing common parts
+
+usefulness of linked memory is predicted on the fact that in the large majority of applications we want to walk thorugh lists sequentially, not randomly
+
+list of available space, the set of all nodes not current in use is linked together in a list
+
+sequential table of variable size that wants to coexist in memory with the linked tables 
+
+avail = lambda
+poolmax = l(0)
+
+To give avail to x:
+	if avail != lambda, x = avail, avail = link(avail)
+	else x = poolmax, poolmax = X + c, will overflow if poolMax > seqMin , this will also happen when seqmin is decreased
+
+
+To release x back to avail:
+	link(x) = avail; avail = x
+
+-----
+Linked stack insertion
+
+LD1 AVAIL //p = avail
+J1Z OVERFLOW //overflow if avail is lambda
+LDA 0,1(LINK)
+STA AVAIL //avail = link(p)
+
+LDA Y //information
+STA 0,1(INFO)
+LDA T //update top of stack's link
+STA 0,1(LINK)
+ST1 T
+
+Linked stack deletion
+
+LD1 T
+J1Z UNDERFLOW //T = lambda?
+LDA 0,1(LINK)
+STA T  
+LDA 0,1 (INFO)
+STA Y
+
+LDA AVAIL
+STA 0,1(LINK)
+ST1 AVAIL
+
+the permutation cycle of AVAIL, T, and LINK(p) for insertion and removel, notice relative position same, but reversed direction
+
+why empty queue is represened by F = labmda and R= LOC(F)?
+
+queue deletion on boundary condition
+
+People aren't generally motivated to study abstractions of a problem until they've seen enough special instances of the problem to around their interest
+--------
+
+topological sorting is of potential use whenever it invloves partial ordering (<=),i.e.
+1. transitivity : x <= y and y <= z, then x <= z
+2. antisymmetry: x <= y and y <= x, then x= y
+3. reflexivity: x  <= x
+
+topological soritng: embed the partial order in a linear order: whenver a(j) < a(k), we have j < k
+
+for 1 <= k <= n
+	count[k] = 0
+	top[k] = lambda
+
+N = n
+
+while input has relation j < k
+	P <= avail
+	SUC(P) = k
+	NEXT(P) = TOP[j]
+	TOP[j] = P	
+
+R = 0
+QLINK[0] = 0
+
+for 1 <= k <= n
+	if COUNT[k] == 0
+		QLINK[R] = k
+		R = k
+
+F = QLINK[0]
+
+while F != 0
+	N = N -1 
+	P = TOP[F]
+
+	while P != lambda
+		COUNT[SUC(P)]--
+
+		if COUNT[SUC(P)] = 0
+			QLINK[R] = SUC(P)
+			R = SUC(P)
+		
+
+		P = NEXT(P)
+		
+	F = QLINK[F]
+
+---------
+Program T: efficient use of index register for linked access
+--------
+
+1.
+P <= AVAIL handles it
+
+2.
+
+3.
+
+4.
+
+5.
+
+6.
+
+7.
+
+Q = lambda
+WHILE P != lambda
+	LINK(P) = Q
+	Q = P
+	P = LINK(p)
+
+P = Q
+
+9.
+a) yes b) yes c) no, because 0. d) yes e) no, x + y is even => y +x is even => y = x?? f) yes, since recursion is not allowed
+
+10.
+1. x <=y and y<=z
+x = y or x < y and y=z or y < z
+2.x < y and y < x
+3. x <= x
+x = x or x < x
+
+11.
+
+12.
+ordered by the size of element
+ordered by the smallest element
+
+14.
+if <= is a linear ordering
+
+consider a different topo sort order, there must be at least one pair that relative order is different => direct contradiciton of definiteion
+
+if S topo sort has only one possible output
+given x and y, we can use the sorted order and transitiviy rule to get the final comparison. If such path doesnt exist, then we can organize the pair in either wway => no longer a unique output
+
+15.
+generate the relationship by listing all partial orders, and reduce by transitivity rule
+
+if there is a second set exists, consider a pair that is different, by how we generate the rule, it must be reducible by transitivy rule, i.e., redundant.
+
+Our approach can't work for infinite set,i.e., need a different approach
+
+16. a (j, i) = 1 instead of a (i,j)
+
+17.
+
+18.
+going through the list by next value gives topologically sorted list, or, QLINK holds values to outputed next
+
+19.
+When there is no F avaialbe, will skip potentially the new link introuced at T6,i.e., will terminate early
+
+20.
+A stack is fine in the place of queue, because only the order of the output will change, this also means the order is in a DFS way
+
+21.
+if same input appears many times, it is fine, because they will appear many times in count and succeosr list anyway, but j < j will not work, because it lacks a way to remove itself from the list
+
+22.
+23.
+anti-symmetry means there can be no loops (combine this with transitivity rule)
+Just take one entry of success, and keep traverse the top list, you will run into the start node itself eventually
+
+26.
+29.
+With only first given, we have to put them onto AVAIL one by one
+With head and tail given: just link R to AVAIL, and set AVAIL = F
+30.
+insert into rear of queue:
+P <= AVAIL, INFO(P) = Y, LINK(P) = lambda, LINK(R) = P, R=P. For boundary case to work: R = LOC(F), and F links to itself

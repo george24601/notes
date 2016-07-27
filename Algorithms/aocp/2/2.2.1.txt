@@ -1,0 +1,81 @@
+An emphsis on function as well as form is basic to design problems in general
+
+We have "stacks" in our minds when we are solivng problems: one proble leads to another, we stackup problems and subproblems and remove them as they are sovled => particualry useful for the processing of languages iwth a nested  structure. Most frequestly in conneciton with explicitly or implicitly recursive algorithms
+
+-------
+1. yes
+2. first yes, second no. 
+
+3. at any given time # of S < # of X so far
+consider 2 sequences, where first action is different,i.e., one is S, one is X, obious the S one can not output current head as the next output
+
+5.
+p(j) < p(k) < p(i) for no i < j < k
+=> 
+Induction on n, n = 1..2 base case trivial
+
+only if =>
+
+if i < j < k
+Consider i where p(i) = n + 1
+then we know p(k) < p(j) for all j < k
+
+if exists j < k and p(j) < p(k), both j,k must be in stack when n+1 entered, otherwise n +1 wouldnt be appear before j and k => contradiciton
+
+if => 
+what is the algorithm to use, why is it correct?
+
+
+6. just identity
+
+7. 
+output restricted only: wrapped effect, outer > central, so 4213 can be done as output restrict, but not input restricted
+input restricted only: store all then try both ways: 4132, this one violates wrapped effect as well
+deque only: 4231
+
+8.
+(!)
+
+9.
+mirror: input = output action
+output from direction = input from direction, in reverse order, 
+
+in reserve order:
+input from left = output from right
+input from out = input from left
+input diretion = output from the other direction
+
+and we from a map where the permutation is exactly same, 
+
+claim: we can form a "mirror of permutations" buy applying map, 1 to 1, bidirectional
+
+"reverse of the inverse of the reverse"
+
+10.
+shortest sequence of actions that achieve the same result, with the first being insert into the left
+swap unknown and know, what actions can reduce to an admissible sequence?
+What does shortest mean?
+1. final # element remains same
+2. #(S) + #(Q) <= #(x) , (can it be equal?), if equal, next must be S
+3. X and S can not be neighbors
+
+suppose we have 2 admissilbe sequence, how to proof they leave to different result or same result?
+
+consider the first different letter
+S vs Q, they will lead to same if 
+1. dequeue is empty
+2. S is followed by a X, followed by a Q
+
+S vs X
+for A, the next can not be X, i.e, either S or Q
+or B, the next have to be X or Q, i.e., position of n +1 has to be different
+
+Q vs X
+to be same, the next one after X can not be S, has to a Q => i.e., they dont have to be exactly, location of X may not matter
+
+
+14.
+one top acts as head, one top acts as tail, need to pump when head is empty
+
+
+
