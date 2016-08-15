@@ -1,0 +1,57 @@
+Each job runs in one Borg cell, which lives in a single cluster, which in turn lives in a single DC building
+
+Most long-running server jobs are prod; most batch jobs are non-prod. Prod jobs takes 70% of CPU with 60% total CPU usage and 55% of total memory with 85% of total memory usage
+
+Each task maps to a set of LInux processes running in a container on a machine => most workload does not run inside VMs, because of the cost
+of virtulization, and limited hardward virtualization support at the time of its design
+
+Borg programs are statically linked to reduce dependencies on thier runtimee nvironment, and structured as packages of binaries and data files.
+
+GCL provides lambda fucntions to allow calculateions, used by apps to adjust their config to the environments
+
+Can change the properteis of some/all teska in a runing job by pushing a new job config to Borg, and then instruct Borg to update the tasks,
+a non-atomic ransction that can be undone until it is closed => some task updates may require it restarted or no longer fit on the machine
+
+Tasks can ask to be notified via SIGTERM before SIGKILL, so that they can clean up and finish any currently-executing requests, declining
+new ones, and save state.  In practice, a notice is delivered about 80% of the time
+
+Multipe tasks running inside one alloc share its resources, if an alloc must be relocated to another machine, its tasks are rescheduled with
+it.
+
+prod priority band can not preempty one another
+
+Quota allication is handled outside of Borg, managed by physical capacity planning
+
+BNS name for each task including cell name, job name, and task number. Task's hotname and port into a consitent, HA file in Chubby with this
+name, also forms the part of the DNS name. Job size and task health are also written into Chubby to help LB. 
+
+Every task publishs health info and metrics. Borg monitors the health-check URL and restart tasks that do not respond promptly or return an
+HTTP error code . Logs are rotated and kept after a while due to volume.
+
+All job submissions and task events and deteaild per-task resource usage info are in a scalable read-only data sore with an interactive
+SQL-like interface
+
+---------
+Problems:
+
+1. no first-calss way to manage an enire multi-job service as a single entity, or to refer to related instances of a service. Can not refer
+to a subsets of a job. 
+Solution: orginzae scheduling units using labels, and then identify targest by means of a label query.
+
+2. One IP per machine means scheduling port => every pod and service gets its own IP address
+
+----
+Good parts:
+
+1.alloc: logsaver patten, a simple data-lader task periodically updates the data used by a web server. Allcs and package allow such helper
+services to be developed by separate teams. pod is Kubernetes
+
+2. naming and load balancing using the service abstraction: a service has a name and a dynamic set of pods defined by a label selector. Any
+container in the cluster can connect to the service using the service name.
+
+3. The master is the kernal of a distributed system => API server at its core that only processes request and manipulating the underlying
+state objects. the cluster management logic is build as small, composable micro-services that are clients of this API server, e.g., replication controller, node controller
+
+
+
+

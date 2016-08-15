@@ -1,0 +1,61 @@
+millions of events per min with an average end-to-end latency of less than 10 secs
+
+1. sends ads along with the search result, and stores the info about the event to log-DCs where the data is stored in GFS, every query event
+is assigned a unique query_id
+
+2. the clicking ad event is logged and stored in multiple logs_DC, the event is assigned a unique click_id, and the logged data includes the
+query_id and info about the ad clicked
+
+3. Photo reads form log files on GFS and writes joined events to a new log files on GFS across multiple data centers
+
+a) at-most-once sematnics at any point of time
+b) near-exact semantics in real-time
+c) exactly-once semantics eventually
+
+To tolerate loss of an entire data center. This is done by running PHoton instances in parallel in multiple DCs. works must coordinate their
+output to guarantee that each input event is joined at-most-once
+
+processed clicks are in a synchrousnouly replicated Paxos-based k-v store called IDRegistry. Any event older than N days must be thrown away
+
+Since it is synchronous, commits are batched together into a bigger batch. Rebalancing must avoid any risk of duplicate events during key
+movement. TrueTime server allowas a ts-based approach.
+
+-------
+
+1. A dispatcher consumes click events from the logs, and looks up the even id in the IdRegistry. If the id is found, the event has been
+processed and is skipped
+
+2. Dispatcher sends the click to joiner, if the joiner can not join the client, dispatcher will try with exponential backoff
+
+3. joiner extacts the query id from the click, looks it up in the EventStore to find the corresponding query.
+
+4. if the query is not found, the joiner sneds failure response to the dispatcher so that it can retry
+
+5. If the joiner is able to register the clicked-id into the IdRegistry, the joiner writes the joined event tot he joined click logs. If the
+joiner still fails to join a click after a certain number of retries, and the click is older than a threshould, the joiner will mark the
+click as unjoinable and return success to the dispatcher. In practice, very small fraction
+
+If there are too many requests in flight, joiner will reject the event and the dispatcher will have to retry it later.
+
+-----
+
+If joiner registered IdRegistry, but IdRegistry's response is lost, or joiner times out, we will never write that joined result, because
+other joiner will not try it!
+
+assign a globally unique token to every click_id it processes. This is sent to the IdRegistry along with the click id, if IdRegistry receive
+another request with both same id and token, it returns success, so that joiner can write but still protects duplicate processby by other
+joiners 
+
+The EventStore is a 2-level store with an in-memory cache and on-disk log eventStore, in-memory cache serves about 90% of all lookups
+
+---
+Lessons
+1. Keeps the critical state managed by Paxos as small as possible
+
+2. dynamic re-sharding is a first-class design
+
+3. communicate via RPC rather than using disk, need throttling to avoid overloading
+
+4. carefullying consider batching
+
+

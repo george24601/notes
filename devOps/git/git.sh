@@ -10,6 +10,9 @@ git checkout -- <paths>
 #show history of commits
 git log --oneline --decorate --graph --all
 
+#show changes master doesn't have but the develop branch has
+git log master..develop
+
 #get data from remote project: update your local db and move (remote)/(branch) pointer
 #sync forked with upstream
 git fetch [remote-name]

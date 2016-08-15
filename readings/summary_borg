@@ -1,0 +1,66 @@
+Controller that submits a master job and one or more worker jobs, controller and master similar to YARN
+
+-----
+perspective: warehouse-scale computer OS
+
+A DC site has multiple builds, inside a sbuilding is a cluster , i.e., one large Borg cell, on average about 10k machines
+
+50% of machines run 9 more taskes, 90% percentailbe runs 25 tasks with 4500 threads => use Linux chroot jail as isolation. All Borg taks run
+inside a Linux cgroup-based reosurce container
+
+Each machine int he cell runs the BOrg agenet. The Borgmster coordinates all activity in the cell and is implemented as a five-machine paxos
+group. The borgmaster coordinates with a scheduler. A single borgmaster manages many thousands of machines in a cell, several cells have arrival retes above 10k per min.
+
+replication for machine failures, admision control to avoid overlaod, deploying instances using simple, low-level tool to minimize external
+dependencies.
+
+Each cell is independent of the others to avoid correlated eror and failure propagation
+
+To improve utilization:
+1. mixing prodution and non-production worklaods in a single cell, otherwise woudl require 20-30% more mahcine in the median cell
+2. cells shared by thousands of users => moving larger users to dedicated cell requires 2x-16x # of cells, and 20% more machines
+3. create large cells
+4. find-graind resource requests rather than limiting choices to -re-determined sizes or bukets
+5. reclaim over-provisined reosurces to allocate over-provisioned reousrce to non-prod worklaods
+
+Note Borg does not support data locality, maybe because the cluster network is good enough
+
+------
+Perspective: user
+
+Users submit work to Borg in the form of jobs, each of which has one or more taks that all run the same program. 
+
+Each task maps to a set of Linux processes running in a container on a mahcine. Borg programs are statically linked which reduces
+dependencies on the run time.
+
+running tasks can be updated by pushing a new config to Borg and request an update. Tasks can ask for a SIGTERM nottification before they
+are pre-empties by a SIGKILL
+
+Quota-checking for admission control: which jobs to admit for scheduling.
+A high-priority can obtain resources at the expense of a lower-priority one, even if that involves pre-emptying/killing the latter =>
+non-overallping priority bands for different uses: monitoring(!), prod, batch, and best efort/testing/free
+
+Each task is given its own Name Servie stable name and entry in Chubby, and a unique DNS name based on this. 
+
+Every task under Bord contains a built-in HTTP server that publishes info about the health and metrics of the metrics. Borg monitors the
+health-check URL and restarts tasks that do not respond prompty or return an HTTP error code. Other data is tracked by monitoring tools for
+dashboards and alerts on service level objective(SLO) violations
+
+-------
+Kubernetes
+
+1. use labels instead of job names
+
+2. one IP per pod and service, relaxing Borg's IP-per-macine policy, port management easier
+
+3. Borg's alloc inspired Kubernete's pods
+
+4. applications runs on Borg benefit from load balancing and naming => Kubernetes supports a service abstraction
+
+5. debugging info needs to be surfaced to all users: cAdviser for resource monitoring, ES/Kibana/Flueted for log aggregationa. The master
+can be queries for a snapshot of its object's state
+
+6. Borg evolves into the kernel of an ecosycle of services that coordinate to manage user jobs.
+API server for procesing requests and manipulating the underlying state objects.
+The cluster management logic is builts as small, composable micro-servcies that are clients of this API server,e.g., replciation controllers and node controller
+-------
