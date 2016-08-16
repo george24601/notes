@@ -1,0 +1,108 @@
+Copies all details form the query event into a new joined click event
+
+Reads input streams from log fils on GFS in differneet DCs and writes joined events to new output log files
+
+It is inseasible to include all the reqired info in the click event, because URL length limit, increased latency, increased exposure to critical data
+
+In case of transient hiccups, it is difficult to decide whether to initiate the expensive effort of migrating the system to another DC, or
+just ride out the outage. Even GFS and Bigtable are not designed to handle larg-scale DC-level outages => high FT with no manual operations
+and no impact on system availability
+
+because clicks can be arbitarily delayed relative to the quereis, this makes it hard to apply windowed join
+
+LB auto redirect each user request to the closest runnning server. 
+
+-------
+
+workers in multiple DCs will attempt to join the same input event, but workers must coordinate their output to guarantee each input event is
+joined at-most-once.
+
+IdRegistry guarantee that once an event_id is written to it, subsequent requests to write the same id will fail: IdRegistry is sync
+replicated to multiple DCs so that its service is always avialble even when there is an outage in one or more DCs
+Woekrs can do conditional commits,e.g., writing an click_id in the IdRegistry only if it does not exist in the IdRegistry yet.
+
+1. deply the smae pipeline in multiple DCs
+2. each pipeline processes all the clicks in the closet logs datacenter
+3. each pipeline keeps retryining until the event is joined = written to the IdRegistry
+4. because the global list of already joined events is stored in the IdRegistry, the Photon pipelines in multiple DCs can work independently
+without direct communication
+
+-------
+
+IdRegistry is implemented by a consistently-replicated across DCs k-v store using Paxos. If the click_id already exists, we fail the
+worker,otherwise, we use read-modify-wirte transaction
+
+PaxosDB: exes consensu algo for every incoming value to guarantee that each replica has access to the saem sequence of submitted values. at
+most one of the group members will be the master at any time. If the master dies, PaxosDB elects a new master. A background thread dequees
+requests, performas transactions on PaxosDB, and executes RPC cbs which send response to the client(!)
+
+but cross-DC replication has very low throughput: to solve this: server-side batching to handle 100ms latency. The single backgrond thread
+dequeues multiple requests and batches them into a single PaxosDB transaction, within the same batch, the registry thread need to resolve
+application-level conflict resolution => use multo-row transcations in paxosDB to implemnt this => has thousands of RPC request into a single PaxosDB transaction
+Plus, IdRegistry are shared by click_ids
+--------
+
+Problem: Dynamically changing # of shards
+The mapping mechanims must support backward compatibility (!)
+use a timstamp-based sharding configuration => # of shards to use at any givne instance of time
+assoicate a ts with an click_id, and require the clock skew of two ts is bounded by S secs.
+If current time is t1, we choose a future time t2 > t1 +S and timestample less than t2 should use hash(click_id) % # of shards before
+increasing, if ts >= t2, use hash(click_id) % # of shards after
+we store(stard, end, # shards) config inside PaxosDB
+
+--------
+Since each event_id is timestamped, the IdRegistry can delete ids older than N days. Each IdRegistry server periodically scans the old keys,
+but it runs only at the master IdRegistry replica. To guard against time difference intrudced by the  master change, we store the GC boundary ts in the IdRegistry servers,
+one ts for each IdRegistry server shard. This  bound ts is periodically updated by another thread using TrueTime, and we make sure it never goes back
+
+If a client tries to isnert or look up a click older than the boundary, IdREgistry sends failure response with speical error code, and the client skips processing the event
+
+------
+If the click_id does not exist in the IdRegistry, the dispatcher sneds the click to the joiner asyncly and waits for the response, retries
+if join failes
+
+Joiner tries to register the click_id into the IdRegistry, If the click_id already exists, the joiner assumes that the click has been
+joined. If register is successful, the joiner stores info form the query in the click and writes the event to the joined click logs
+
+
+Independent generation of event_ids is a preprequisite to satisfy quick generation of ids over thousands of servers => (serverIP, processID, ts). Note that ts is synced by TrueTime API periodically to mitigate clock skew
+
+dispatcher periodically scans the dir where log files are located to identify new files and check the growth of existing ones, and stores
+per-file state in the local GFS cell, including files encounters and byte offsets in the local GFS cell. All the concurrent works share the
+persistent file state locally so that they can work on difernt parts of log files without stepping onto each other
+
+if failed to join, it saves the click in local GFS and retries it later with exponential backoff
+
+in the rare case where the dispatcher file state cannot be recovered after DC outage, we could manulay intialize it to ignore the backlog
+and immediately start processing latest events from the current time.
+
+when a joiner receives an event from the dispatcher, it first checks if there are already too many requests in flight(!). 
+
+the query and the click are passed to the adapter library, where application-specific business logic for filtering, or skiiping the clock
+-------
+
+Because there is no atomicity, between IdRegistry and writing output, we introduce a globally unique token (joiner server address, joiner
+process id, ts) along with the click id. If the joiner does not recieve response from IdRegistry within a ceratin timeout interval, it
+retries the request with the exact same token. 
+
+We enforce an upper limit on the # of outstanding RPCs from any joiner to the IdRegistry, so that after joiner restarts, we lose only that many messages
+
+common loss scenarios
+
+a) the joiner crashes or restars after writing to the IdRegistry
+b) logs storage loses data
+c) a bug in the code manifests itself after committing to the IdRegistry
+
+----
+
+verification system: takes each event in the input and checks its presense in the output. If an event in the IR is not present in the output
+log, we read the server addr and process id from the token in the IdReg and identify the jointer. If the joiner had crashed or restarted, we
+can delete the missing event form the IdRegistry, and re-inject the vent back into the dispatcher
+
+--------
+The IdRegistry replicas are deployed in 5 DCs in 3 regions. All other componetns in the pipeline are deployed in 2 distant regsions, but they have close proximity with log datacenters
+
+
+
+
+

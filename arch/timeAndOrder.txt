@@ -17,8 +17,3 @@ if counter(a) < count(b), either a happens before b, or a, b are not comparable
 
 vector lock: maintains array of N logical clocks. each node increment its own clock by 1 for each internal event
 similar to lamport clock, upon recieving a message, update local to max, AND THEN increase its own clock by 1 more
-
-Reading list
--------
-Time, Clocks and Ordering of Events in a Distributed System 
-Unreliable failure detectors and reliable distributed systems

@@ -1,0 +1,9 @@
+Design a kafka producer like module to produce to web service
+
+Requirement:
+
+  1. threadsafe
+  2. support configurable number of in-flight connections
+  3. flush buffer based on # of messages and flush intervals
+
+---------
