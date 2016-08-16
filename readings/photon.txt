@@ -51,8 +51,9 @@ increasing, if ts >= t2, use hash(click_id) % # of shards after
 we store(stard, end, # shards) config inside PaxosDB
 
 --------
-Since each event_id is timestamped, the IdRegistry can delete ids older than N days. Each IdRegistry server periodically scans the old keys,
-but it runs only at the master IdRegistry replica. To guard against time difference intrudced by the  master change, we store the GC boundary ts in the IdRegistry servers,
+Since each event_id is timestamped, the IdRegistry can delete ids older than N days. Each IdRegistry server periodically scans the old keys, the GC thread runs only at the master IdRegistry replica. 
+
+To guard against time difference intrudced by the master change, we store the GC boundary ts in the IdRegistry servers,
 one ts for each IdRegistry server shard. This  bound ts is periodically updated by another thread using TrueTime, and we make sure it never goes back
 
 If a client tries to isnert or look up a click older than the boundary, IdREgistry sends failure response with speical error code, and the client skips processing the event
@@ -66,6 +67,8 @@ joined. If register is successful, the joiner stores info form the query in the 
 
 
 Independent generation of event_ids is a preprequisite to satisfy quick generation of ids over thousands of servers => (serverIP, processID, ts). Note that ts is synced by TrueTime API periodically to mitigate clock skew
+
+----------
 
 dispatcher periodically scans the dir where log files are located to identify new files and check the growth of existing ones, and stores
 per-file state in the local GFS cell, including files encounters and byte offsets in the local GFS cell. All the concurrent works share the

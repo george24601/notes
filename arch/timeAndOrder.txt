@@ -1,7 +1,9 @@
 Cassandra => asumes clocks are synchronized, uses timestamps to revole conflicts between writes
 alternative=> use vector clocks
 
-Spanner: TrueTime: synch tiem but also estimates worst-case clock drift
+Spanner: TrueTime: synch time but also estimates worst-case clock drift
+
+Photon: rely on TrueTime heavily to generate id, and define time boundaries
 
 partial order: anti-symmetry, transitivity, and reflexivity, but NOT totality
 local clock order: partial order

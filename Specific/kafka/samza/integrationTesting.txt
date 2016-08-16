@@ -1,6 +1,0 @@
-open ports via ufw, since we will be creating dummy kafka and zookeeper on localhost
-sudo ufw allow 1:65535/tcp
-sudo ufw allow 1:65535/udp
-
------
-Test with local storage
