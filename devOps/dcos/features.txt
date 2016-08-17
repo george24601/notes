@@ -1,0 +1,45 @@
+Deciding where to run proccesses to best utilize cluster resources is NP-hard
+
+Mesos manages CPU, memory, disk, and GPU resources. Task palcement is deletgated to higher level schedulers.
+
+Mesos containerrizer instead of just docker
+
+local ephermeral storage for stateless or semi-stateless 12-factor and cluod native apps
+
+local persistent volumns: if service is replicating data already
+
+transport (L4) layer virtual IP proxying for internal communication
+application layer (L7) LB for external-facing services
+
+-------
+view running ds/os service at /etc/systemd/system/dcos.target.wants/
+
+Admin Router Service
+
+Cluster ID Service: Generate UUID for each cluster with ZK
+
+Consmos Service: dcos package install
+
+Erlang Port Mapper Daemon Service
+
+Exhibitor: manage and automate the deployment of ZK
+
+Marathon: distributed init system for the DC/OS cluster
+
+Mesos-DNS: internal DNS service for SD within the cluster
+e.g. can login with mesos master with ssh leader.mesos
+
+Diagonstic Service
+
+Signal Service
+
+Distributed DNS Proxy: internal DC/OS dispatcher
+------
+
+Framework: a Mesos scheuler and an optonal custom executor. It receives resource offers, and allocates them for discrete tasks that can be launched on agent nodes. 
+
+private agent node: accible only form the admin zone or through the edgerouter
+
+public agent node: run DC/OS apps and services in publicly accessible network
+
+---------

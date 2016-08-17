@@ -1,0 +1,54 @@
+generally use leader/follower pattern
+
+mesos: 3 or 5 masters
+marathon: at least 2
+ZK:
+Fault domain isolation: systems must be distributed across fault domains. Masters across racks, but not across DCs or regions. Agents may be
+distributed across regions/DCs (better tag their location as well)
+Sync service such as ZK should remain within the same region/DC
+
+Running multiple ZK clusters for separate services: check exhibitor
+
+services should expose health check endpoints, which can be used by services like marathon
+
+fast failover: HA load balancer for internal layer 4 LB, avoid storing client state on the server between requests
+---------
+In the order of Mesosphere preference: VIP => Mesos-DNS => Marathon-LB
+
+
+------
+mesos-DNS: 
+used mainly for SD, runs on each of the DC/OS masters. client knows each master. DNS proxy dual-dispatching DNS queries to multiple masters and returning the first result
+Learns its info from Exhibitor
+Domain spartan for Distributed DNS availability at ready.spartan
+
+Mesos-DNS pulls masters every 30 seconds to retrive the state of all running tasks for all running services
+
+Applications launched by Maration are assigned {appname}.marathon.mesos. One IP for each container.
+
+If an agent node makes a DNS request for a hostname that is outside your DC/OS cluster, Mesos-DNS queries an external nameserver
+
+GET /v1/hosts/{host}: Lists in JSON format the IP addresses that correspond to a hostname. It is the equivalent of a DNS A record lookup.
+
+-----
+Marathon-LB
+
+Problem with Mesos-DNS for DS:
+1. does not identify ports, unless with SRV record
+2. does not have fast failover
+3. TTL means potential stale record
+4. no health data
+5. rely on client to handle multiple A-records
+
+1. edge LB and DS mechanism, run it on public-facing nodes
+2. internal LB and SD, with a separate HA LB for routing public traffic in, e.g., an external F5 LB on premise or an ELB on AWS
+
+-------
+
+
+
+
+
+
+
+
