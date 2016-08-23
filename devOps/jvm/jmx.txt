@@ -1,0 +1,6 @@
+3 levels
+
+Probe/intrumentation: MBeas instrumenting the resources
+Agent/MBeanServer
+Remote Management: remote applicaitons to access MBeanServer via connectors and adaptors, which connect an agent with a remote JMX-enabled
+management application

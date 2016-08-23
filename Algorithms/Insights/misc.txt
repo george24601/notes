@@ -3,6 +3,8 @@ Another use of that is dealing with small double multipllications, this can avoi
 
 base number is about representation. It doesnt affect the arithmetic properties
 
-when assertion, if something, organize code so that variables involved in that statement is immediately changed ->  to avoid double-couting
-and infinite loop
+when assertion, if something, organize code so that variables involved in that statement is immediately changed ->  to avoid double-counting and infinite loop
 
+the sliding window generally works when everything is triggered by
+moving your end pointer, and front pointer merely follows. If moving the head pointer also has to trigger calculating some other state, the
+sliding window often is not applicable 

@@ -1,19 +1,17 @@
-generally use leader/follower pattern
-
-mesos: 3 or 5 masters
-marathon: at least 2
-ZK:
-Fault domain isolation: systems must be distributed across fault domains. Masters across racks, but not across DCs or regions. Agents may be
-distributed across regions/DCs (better tag their location as well)
-Sync service such as ZK should remain within the same region/DC
-
-Running multiple ZK clusters for separate services: check exhibitor
-
-services should expose health check endpoints, which can be used by services like marathon
-
-fast failover: HA load balancer for internal layer 4 LB, avoid storing client state on the server between requests
----------
 In the order of Mesosphere preference: VIP => Mesos-DNS => Marathon-LB
+
+VIPs are name-based, i.e., client uses service address instead of IP address
+
+TCP Layer 4 LB: Once create tasks with a VIP, they will automatically become available to all nodes in the cluster, including the masters
+
+When use VIPS, you need long-running, peristent connections, otherwise, TCP socket table is filled up easily.even 200 cons/sec will exhaust
+the port range
+
+Notice health check is tricky
+
+The failure detector maintains a fully connected sparse graph of connections amongest the nodes in the cluster
+each node maintains an adjacency table, which is gopisible to every other node in the cluster
+
 
 
 ------
@@ -42,6 +40,8 @@ Problem with Mesos-DNS for DS:
 
 1. edge LB and DS mechanism, run it on public-facing nodes
 2. internal LB and SD, with a separate HA LB for routing public traffic in, e.g., an external F5 LB on premise or an ELB on AWS
+
+Virtual hosts: route http traffic fro multiple hots and route requests to the correct endpoint
 
 -------
 

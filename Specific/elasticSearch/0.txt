@@ -1,28 +1,131 @@
-node client and transport client over port 9300
-
-REST API on 9200
-
-document belongs to a type, and types live inside an index
+documents belongs to a type, and types live inside an index (just like a DB in RDBMS)
 
 HEAD verb to check whether the doucment exists
 
-GET /megacorp/employee/_search?q=last_name:Smith
+PUT /$INDEX/$TYPE/$ID
+See the _index, _type, _id in the retrived doc
 
-or pass DSL json to _search
+
+GET /megacorp/employee/_search?q=last_name:Smith
+This is query string search, or
+
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "match" : {
+            "last_name" : "Smith"
+        }
+    }
+
+,
+    "highlight": {
+        "fields" : {
+            "about" : {}
+        }
+    }
+}
+Notice match returns all RELEVANT results, not necessarily exactly matches. use match_phrase for exact match. However, it could still just be a substring. 
+Highlight is optional, just to help show the returned results
+
+
+GET /megacorp/employee/_search
+{
+    "query" : {
+        "filtered" : {
+            "filter" : {
+                "range" : {
+                    "age" : { "gt" : 30 } 
+                }
+            },
+            "query" : {
+                "match" : {
+                    "last_name" : "smith" 
+                }
+            }
+        }
+    }
+}
+
+filter first and then aggregate!
+GET /megacorp/employee/_search
+{
+  "query": {
+    "match": {
+      "last_name": "smith"
+    }
+  },
+  "aggs": {
+    "all_interests": {
+      "terms": {
+        "field": "interests"
+      }
+    }
+  }
+}
+
+avg of employees sharing a particular interest
+{
+    "aggs" : {
+        "all_interests" : {
+            "terms" : { "field" : "interests" },
+            "aggs" : {
+                "avg_age" : {
+                    "avg" : { "field" : "age" }
+                }
+            }
+        }
+    }
+}
+
 
 documents are immutable, version number based, marked for deletion and then recycled
 
 optimistic concurrency control
 
-common setup is to use other db as primary,a dn ES to make data searchable
+common setup is to use other db as primary, and ES to make data searchable
 
-Q: field collapsing
+all data in every field is indexed by default
 
-----
+HEAD request to decide if a doc returns
+curl -i -XHEAD http://localhost:9200/website/blog/123
 
-Type represents a class of similar documents, with a name and a mapping, which describs fiels/properits that docuemnt of taht type may have
+PUT vs POST, upsert vs insert
 
-when index  docu in lucne, the value s for each field are adde do the inverted index for the assoicated field
+/_search 
+Search all types in all indices
 
------
-use bool filter to combine filters
+/gb/_search
+Search all types in the gb index
+
+/gb,us/_search
+Search all types in the gb and us indices
+
+/gb,us/user,tweet/_search
+Search types user and tweet in the gb and us indices
+
++name:(mary john) +date:>2014-09-10 +(aggregations geo)
+in URL, this translates to 
+?q=%2Bname%3A(mary+john)+%2Bdate%3A%3E2014-09-10+%2B(aggregations+geo)
+
+inverted index for fast full-txt searches 
+
+GET /gb/_mapping/tweet
+
+{
+    "bool": {
+        "must": { "match":   { "email": "business opportunity" }},
+        "should": [
+            { "match":       { "starred": true }},
+            { "bool": {
+                "must":      { "match": { "folder": "inbox" }},
+                "must_not":  { "match": { "spam": true }}
+            }}
+        ],
+        "minimum_should_match": 1
+    }
+}
+
+
+The goal of filtering is to reduce the number of documents that have to be examined by the scoring queries.
+
+If you use it on a field containing an exact value, such as a number, a date, a Boolean, or a not_analyzed string field, then it will search for that exact value
