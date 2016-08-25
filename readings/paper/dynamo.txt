@@ -1,0 +1,34 @@
+generally SLA is measured at 99.9 pecentile
+
+why do they resolve conflicts at the read step? and who resolves it?
+
+notice that dynamo focuses on symmery and decentralization
+
+GFS's master stored all the metadata, chunk server location, and which chuck goes to which server. Note that GFS does not handle network
+partitioning well (??)
+
+multihop routing increases variance in response times
+
+get(key) and put(key, context, object), context encodes system metadata
+
+Use consistent hashing to handle add/removal nodes at the run time; use virtual node instead of single physical node to address different node performance
+
+Each key k is assigned to a coordinator node, stores 1 copy locally, and replicate in the next N-1 clockwise successor nodes
+
+use vector lock to capture causality,i.e.,every version of every object has a vector lock associated with it
+
+potential issue with vector clock size
+
+use quorum system such that R + W > N, R: # of good reads to consider read good, W # of good writes to consider write successful
+
+data are replicated acorss DCs, i.e., nodes on the pref node list are speard acorss DCs
+
+Replica replication
+
+gossip-based protocol to establish eventually consistent view of membership
+
+to avoid logical parititon, use seed nodes to help discvoery
+
+typically SLA is 99.9% within 300MS
+
+99.94% requests saw only one version

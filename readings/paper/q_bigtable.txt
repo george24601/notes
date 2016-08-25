@@ -1,0 +1,21 @@
+
+1. How does master discover the tablet server? How does client discover the tablet server?
+Compare and contrast the solution with similar problems in GFS
+
+2. How does bigtable detect master health? What will happen if IT THINKS the master has failed? Compare this failure detection and recovery
+with GFS's design on its master and primary chuck server
+
+3. How does master detects tablet server's health? What happens when the master thinks the tablet server has failed? Compare this
+interaction with GFS's between its master and chunk server
+
+4. How can master learn the the newly split tablet? How does GFS master learn the newly created chuck?
+
+5. The commit log is in GFS. What did they do in case GFS is experiencing latency? How would recovery work in this case?
+
+6. SSTables are in GFS already, why do we still need that commit log?
+
+7. Sequence of actions on read? compare this with GFS's sequence of reading
+
+8. Sequence of actions on write? compare this with GFS's sequence of writing
+
+9. What kinds of info/metrics they monitor, and how did they do that? Compare their collections with GFS's.

@@ -11,8 +11,13 @@ ${PATH}subfolder
 #check if port is open and accessible, -z means sending no data, just scanning the daemon
 nc -z $HOST $PORT
 
-#delete the folder if it exists, note that the spaces around -d predicate matter! Also this does not work with wildcards!
+#delete the folder if it exists, note that the spaces around -d predicate matter! 
 [ -d $FOLDER ] && rm -r $FOLDER
+
+#But -d does not work with wildcards!
+if ls /path/to/your/files* 1> /dev/null 2>&1; then
+      echo "files do exist"
+
 
 #log into ssh with identity file, which stores private key for RSA or DSA
 ssh -i $CERT $HOST

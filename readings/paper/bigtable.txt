@@ -1,0 +1,55 @@
+Data model: (row, column, ts) -> string
+
+row range dynamically partitioned into tablets
+
+column keys form column families, of form (CF name: qualifier), all data stored in that column family is of the same type
+
+# of distict CF small, and rarely change in operation, but may have unbound # of columns
+
+applications that wants to avoid collisons but generate ts themselves, and GC to keep only the last few days or last few versions
+
+apply performs atomic mutation-single row transaction required for read-modify-write
+
+Chuby service: 5 active replicas with one active master
+Usage: 1. one active master
+2. discover tablet server
+3. bootstrap location
+4. schema info
+5. ACL
+
+master:
+1. assigning tablets to tablet servers
+2. detect additon and expiration of tablet servers
+3. balancing the tablet-server load
+4. GC files in GFS
+5. handles schema changes and CF creation
+
+clients do not rely on master for tablent server locations - That's chubby service's job
+
+Client caches tablet location:
+if the client cache is empty: 3 network calls to locate the tablet
+if the client cache is stale: up to 6 network calls
+Prefetch tablet location to avoid 
+
+Upon starting, tablet servers acquries an exclusive lock on a uniquely named file in a  directory on Chubby, and master watches this directory to discover new tablet
+servers.
+
+When a tablet server lost that exclusive lock, it can not server anymore, moreerver, it will try to reaqcuire the lock. If the file is gone
+on Chubby, the tablet server kills itself. It also tries to release the lock whenever the server ends
+
+master is responsible to check health, if the tablet server is unable to report that it can hold lock, the master tries to acquire the lock
+and delete the file. If the master itself's chubby session expired, the mater kills itself.
+
+how does master discover the tablet location upon starting
+
+tablet server inits split, and notifies master, if the commit notification is lost ...
+
+seqence of actions during write
+
+group multiple CFs into a locality group
+
+apply the muttaions from multiple tablets from the same server into the same commit log. How to speed up recovery?
+
+To reduce contention on memtable, copy-on-write and allows read and write in parallel
+
+To protect mutations from GFS spike, use 2 threads to log, each with its own logging file, only one of these 2 threads are active at a time

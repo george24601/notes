@@ -1,0 +1,7 @@
+1) In the BigTable paper, what was the network bandwidth used per node when all 500 nodes were doing random reads, in figure 6? What about
+when all of them were doing random writes? (To answer this, also discuss how much network bandwidth one random write should use).
+
+2) The Dynamo paper mentions that most of the reads that required reconciliation (i.e. returned more than one version) happened due to
+concurrent writes. How can concurrent writes lead to multiple versions in Dynamo?
+
+3) Compare BigTable, Dynamo along the following three dimensions: data model, consistency guarantees, and availability.
