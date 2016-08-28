@@ -1,8 +1,6 @@
 ### Algorithms ###
 "How To Solve It" notes
 
-MapReduce related
-
 "Mining Massive Datasets" notes
 
 Algorithm library, mostly in C++
@@ -11,25 +9,17 @@ Algorithm library, mostly in C++
 Reflections on architecture problems
 
 ### Readings ###
-Papers
-
-Communications of the ACM reading notes
+Papers with summaries and study questions/answers
 
 ### Program Design ###
 Code-level design
 
 Patterns
 
-### Languages ###
-Javascript
+### Web Services ###
+Akka-http
 
-ML
-
-Scheme
-
-Scala
-
-### Specific tools/frameworks ###
+### Streaming ###
 Kafka
 
 Spark

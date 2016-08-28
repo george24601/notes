@@ -1,0 +1,31 @@
+1. 
+BigTable: When master starts, it reads the root tablet from Chubby and learns existing tablet server's locations
+When master is running, it watches the chubby directory for newly registered tablet server
+GFS: Chuck server registers itself on master
+
+2. Bigtable: 3-level name-resolution backed by chubby
+GFS: client gets info from master
+
+3. 
+Bigtable: If the chubby session expires for the master, the master just kills itself. (since its data is unreliable at that moment, and another master will acquire the session anyway)
+GFS: outside monitoring detects it if the master can not restart, and then restart a new master with the replicated log. The master is visible to user only via DNS name
+
+4. 
+Bigtable: polls tablet server on whether if it still holds the lock
+GFS: use heartbeat between master, which reports which chucks haven been deleted,  and chuck server, which reports a subset of chucks the server .
+
+5.
+Bigtable: tablet server splits  on its own, and will write to the METADATA table, and will try to notify the chuck when this split tablet is accessed
+GFS: chuck is fix-sized, so master is the one initiates chuck creation
+
+6. Use 2 threads, each writing to a separate log, but only one thread can be active at a time.
+
+7. 
+Bigtable: client resolves the tablet location based on key with the location discovery discussed and then reads off the tablent server
+GFS: Get chunk location from master and reads it from the chuck server
+
+8.
+Bigtable: similar to a WAL-backed datasore
+GFS
+
+9.
