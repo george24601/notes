@@ -1,7 +1,7 @@
 #list images pulled
 docker images
 
-#remove an image
+#remove an image, rm removes the container
 docker rmi -f $IMAGE_ID_OR_NAME
 
 #after making changes to the image

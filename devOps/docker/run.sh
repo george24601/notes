@@ -26,4 +26,4 @@ docker top
 docker inspect nostalgic_morse
 
 #go into containers with bash
-sudo docker exec -it $CONTAINER_ID_OR_NAME bash
+docker exec -it $CONTAINER_ID_OR_NAME bash

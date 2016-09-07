@@ -1,0 +1,25 @@
+when to use which HttpEntity subtype?
+
+When you receive a non-strict message from a connection....
+
+max-content-length against DOS
+
+Speical case for HEAD request
+
+consuming or discarding incoming entity is required, or akka will assume backpressure is needed
+
+framing the incoming chunks, parse them line by line, and then connect the flow into dest sink
+
+Marshaller [A, B] = A => Future[List[Marshalling[B]]]
+
+Marshalling: allows for querying media type and HttpCharSet before actual Marshalling triggered
+
+sealed trait Marshalling[+A] {
+  def map[B](f: A ⇒ B): Marshalling[B]
+}
+
+check the implementation of marshalling! implementation will be optional, wrapping marshaller
+
+why unmarshalling does not need that additional negotiation of marshaller?
+
+type Route = RequestContext ⇒ Future[RouteResult]

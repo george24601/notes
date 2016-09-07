@@ -4,11 +4,17 @@ Scalability to large memory sizes e.g. over 1 TB and larger than main memory.
 Notional impact on GC pause times.
 Sharing between processes, reducing duplication between JVMs, and making it easier to split JVMs.
 Persistence for faster restarts or replying of production data in test.
-The use of off heap memory gives you more options in terms of how you design your system.  The most important improvement is not
-performance, but determinism.
+The use of off heap memory gives you more options in terms of how you design your system.  The most important improvement is not performance, but determinism.
 
 By storing all your input events and data off heap in a persisted way you can turn your critical systems into a series of complex state
 machines. (Or in simple cases, just one state machine)
 
 The biggest issue with off heap is your data structures become less natural.  You either need a simple data structure which can be mapped
 directly to off heap, or you have a complex data structure which serializes and deserializes to put it off heap.
+
+sample use cases
+1. session cache in the server app: inactive sessions stored on offheap
+
+2. medium to long lived mutable objects
+
+3. stores keys on heap and values off heap

@@ -40,3 +40,5 @@ while(!q.isempty){
 }
 
 -----
+
+Normally dfs and its variants does not return result, instead, states are mutated via state vraiables 
