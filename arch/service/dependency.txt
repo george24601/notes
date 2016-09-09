@@ -1,0 +1,15 @@
+matters such as how to combine is provided by higher layers, i.e., avoid inter-dependency, it is often the sign they should be in the same
+unit
+
+cross-cutting concerns: MS should not deal with them outside their scope, e.g., authenticaiton, authorization, LB, FT, SD  should be done by upper
+layers, e.g. API gateway
+
+need to handle internal updates and transaction between dbs
+
+use a separate service manager that manages all other services. For simple service, can use self registration.
+
+client-side discovery vs server-side discovery (basically systemd)
+
+pub-sub vs data-pump
+
+have multiple versions running, and client should be able to fallback to previous good version. Of course, this implies compatible states
