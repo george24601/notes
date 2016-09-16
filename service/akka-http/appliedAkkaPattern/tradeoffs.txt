@@ -1,0 +1,47 @@
+Is message a command or event?
+
+How does sending actor know the receiver: 
+1. dependency injection
+
+val peopleActor: ActorRef = ... 
+val projectsActor: ActorRef = system.actorOf(ProjectsActor.props(peopleActor)
+
+2. actorselect via path
+
+3. use Event Stream instead of P2P
+-------
+
+To make it testable, to separate the logic into a trait (or more than one), and have the actor class itself mix in this trait.
+
+You can test the message-handling nature of the actor with the logic stubbed out, so you have full control of the routing of messages. For
+this part of the test, the Akka test kit comes into play, and test probes can be subtituted for any actors the one under test depends on.
+
+delegate the creation of child actors to a factory method - in this way, the factory method can be overridden when the actor is under test,
+so the children can be swapped for easily testable test probes.
+
+------
+Retrieving data between actors
+
+personActor ! Assign(projectId)
+
+projectsActor ! WrapWithProject(assign)
+
+sender ! WithProject(project, assign)
+
+we might well send a modified project value back to the Projects actor, reflecting the fact that this person has now been added to the
+people on the specified project.
+
+---------
+//projects need to send to the people actor
+def props(peopleActor: ActorRef, displayActor: ActorRef) = Props(classOf[ProjectsActor], peopleActor)
+
+=> but this one does not work if there is a curcular reference between the two!
+
+Instead, we can use Akka’s event mechanism to publish these references, wrapping them in a specific type. For instance, in the constructor
+of the Projects actor we can:
+
+context.system.eventStream.publish(ProjectActorDiscovery(self))
+
+We can use become to indicate that the Person actor is in a state where it does not yet have this reference - and stash messages until the
+reference is received.
+

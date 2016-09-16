@@ -1,0 +1,25 @@
+requestFuture onSuccess 
+
+requestFuture onFailure
+
+   val responseHttpEntityEither = marshal(response)
+    responseHttpEntityEither match {
+      case Right(actualHttpResponseEntity) =>
+        senderActorRef ! HttpResponse(status = StatusCodes.OK, entity = actualHttpResponseEntity)
+      case Left(errorMessage) =>
+        senderActorRef ! HttpResponse(status = StatusCodes.NotImplemented, entity = errorMessage.getMessage)
+    }
+
+make sure to instanctice all independent futures before the for compression, to allow them to run in parallel
+
+for blocking IO, probably create an ExecutionContext in scope, in the DB layer
+
+vital to NOT change state inside future (violats error kernel pattern), thus, we need to keep track of sender, and then repipe back to self,
+and handle it purely within actor
+
+similarly, sender has to be copied before entering future, because it will change!
+
+use future.recover to gracefully translate error returned from child
+
+Note that recovery strategy applies to parent-child relationship, but for collaborators, need to use deathwatch=>Terminated(deadActor)
+

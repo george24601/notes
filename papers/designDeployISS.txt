@@ -1,0 +1,34 @@
+=====Summary starts======
+
+80% of operations problems have root in design/development, so fix them there!
+
+is the operations team willing and able to bring down any server in the service at any time without draining the workload first?
+
+We’ve been surprised at how frequently “unusual” combinations of events take place when the cluster is big enough
+
+Versions n and n+1 of all components need to coexist peacefully, but strive to have only 1 version of the service
+
+Keep configuration and code as a unit throughout the lifecycle.
+
+Handle failure at service level instead of recovery at lower software layer
+
+Dependencies do make sense when: (1) the components being depended upon are substantial in sive or complexity, or (2) the service being
+depended upon gains its value in being a single, central instance
+
+We instead recommend taking new service releases through standard unit, functional, and production test lab testing and then going into
+limited production as the final test phase, but this requires
+1. prod can quickly recover for catastrophic failure
+2. data corruption/state-realted failured have to be EXTREMELY unlikely (functiona testing important!)
+3. error must be detected + monitoring node in test
+4. quick rollback, and this rollback should be tested and proven
+
+Everyone needs to focus on getting the most out of the volumes of data in a production environment.
+
+For test and development, make it easy to deploy the entire service on a single system. Where this is impossible for some component, write
+an emulator. Otherwise, unit testing becomes discouraged
+
+Automate the procedure to move state off of damaged systems if the worst happens
+
+it’s vital that each service have a fine-grained knob to slowly ramp up usage when coming back on line or recovering from a catastrophic
+failure
+==========Summary ends========

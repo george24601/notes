@@ -1,9 +1,5 @@
-#monitoring new file
-tail -f file
-
-<<COMMENT1
-here goes the comment
-COMMENT1
+#symlink
+ln -s $FILE_PATH $LINK_PATH
 
 #{} to mark the current variable to expand
 ${PATH}subfolder
