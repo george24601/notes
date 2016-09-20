@@ -1,0 +1,19 @@
+Ideas
+have different status code associate with different failures
+need to avoid false positives 
+
+use error code 503
+health check should be private, i.e. only within company, but could be public if returned message is generic enough
+ 
+should external service monitores independently? probably..
+------
+sample endpoint 
+
+/v1/health/node/<node> 
+
+/v1/health/service/<service>
+
+-----
+probably implement healthcheck from user story perspective
+
+also, the status/health check can be a health check that got mixed into main API

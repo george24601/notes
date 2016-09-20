@@ -1,0 +1,2 @@
+Dual dispatch, as in DNS
+Send request to multiple masters, return the first sucessful one, disregard the remaining ones

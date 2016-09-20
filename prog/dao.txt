@@ -1,0 +1,9 @@
+Components
+
+1. a Database type representing DB, this is often manages the connection/session pool and thus, needs to be thread safe
+
+2. a Dao itself, which accepts the DB instance, this layer handles data serialization/deserialization, the interface exposed will be of
+domain type
+
+3. a repository may have multiple Daos, which is responsible for translates the complex domain objects into Daos. Note this repository is in
+the sense of DDD

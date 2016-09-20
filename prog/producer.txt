@@ -6,7 +6,4 @@ Requirement:
   2. support configurable number of in-flight connections
   3. flush buffer based on # of messages and flush intervals
 
----------
 
-Dual dispatch, as in DNS
-Send request to multiple masters, return the first sucessful one, disregard the remaining ones
