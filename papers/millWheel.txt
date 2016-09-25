@@ -60,10 +60,12 @@ manipulating LW by assigning TS to records
 
 ------
 exactly-once delivary:
-record is checked against dedup data from previous deliveries
-pending changes checkpointed into backing store (why checkpoint before sending downstream)
-sender ACK
-send pending downstream productions
+1. record is checked against dedup data from previous deliveries
+2. pending changes checkpointed into backing store 
+Comment: when changes are checkpointed before sending ACK, because if ACK is lost, sender will retry, and we will just process it again!
+
+3. sender ACK
+4. send pending downstream productions
 
 can batch check for optimizaiton
 

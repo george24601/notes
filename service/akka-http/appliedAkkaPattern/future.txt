@@ -23,3 +23,54 @@ use future.recover to gracefully translate error returned from child
 
 Note that recovery strategy applies to parent-child relationship, but for collaborators, need to use deathwatch=>Terminated(deadActor)
 
+-------
+Another example: note the concurrent future and if filtering, also, filter is same as withFilter
+
+also, collect anf filter relationship
+foreach is same as onSuccess
+
+val usdQuote = Future { connection.getCurrentValue(USD) }
+val chfQuote = Future { connection.getCurrentValue(CHF) }
+val purchase = for {
+  usd <- usdQuote
+  chf <- chfQuote
+  if isProfitable(usd, chf)
+} yield connection.buy(amount, chf)
+purchase onSuccess {
+  case _ => println("Purchased " + amount + " CHF")
+}
+
+recoverWith to recover, similar to flatMap to map
+
+----------
+Notice how fallbackTo is used
+
+val usdQuote = Future {
+  connection.getCurrentValue(USD)
+} map {
+  usd => "Value: " + usd + "$"
+}
+val chfQuote = Future {
+  connection.getCurrentValue(CHF)
+} map {
+  chf => "Value: " + chf + "CHF"
+}
+val anyQuote = usdQuote fallbackTo chfQuote
+anyQuote onSuccess { println(_) }
+
+-------
+andThen: side effects 
+returns a new future with exactly same result as the current future
+
+val allposts = mutable.Set[String]()
+Future {
+  session.getRecentPosts
+} andThen {
+  posts => allposts ++= posts
+} andThen {
+  posts =>
+  clearAll()
+  for (post <- allposts) render(post)
+}
+------
+

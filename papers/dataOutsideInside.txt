@@ -1,0 +1,37 @@
+for MSs, services should be able to act independently, there should be no 2PC between services, they are connected solely through messages.
+These messages have a well-defined schema/format and business semantics
+
+simultanesity exists only within a service/within a single transaction!
+
+message operands represents past if it contains unlocked information, future if it represents value that hopefully can be used. However,
+operator lives in future => it is application logic's job to reconcile "now" and "then"
+
+versioned data are immutable, i.e., we may return "no present" data => we need to convert version independent data into version dependent
+data
+=> due to need to retrie, best to ensure each message is identifiable
+
+rely on stable data, i.e., its interpretation remains same across time and space, this suggests, 1. don't reuse ID, 2. often involves
+version/timestamping
+
+Similar to message, the schema itself should be stable, i.e., sould use a version dependable ID for the definition
+
+Reference data: managed by a service, and published for other services to use => itself is using version independent IDs + multiple versions
+=> note that we should assume version is always increasing (just like time!)
+
+Three main use cases: 
+1. operands 
+2. historical artifacts, requires trust between services as it is easy to lead to privacy breach 
+3. shared collections (note we should have a custodian service for that, so we can control multiple updaters)
+
+------
+After the DDL, the transcation must operate on the THIS schema version
+
+incoming message often kept for auditing and non-repulidateion, and intenal data converts it into a convenient format => most service still
+want to immtuably retain the data
+
+extensibility fights shredding => regular schema information is shredded into relational information, and extra information is kept without
+shredding
+
+SQL, XML, being defined with shcemas is ANTI-encapsulation. However, object representations favors composition and encapsulation =>
+conclusion, final storage form for inside and outside data will be inside SQL
+
