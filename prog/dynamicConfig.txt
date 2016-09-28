@@ -1,0 +1,2 @@
+The producers have flexible topic routing and sink configuration which are driven via dynamic configuration that can be changed at runtime
+without having to restart the application process

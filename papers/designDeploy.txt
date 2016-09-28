@@ -1,0 +1,91 @@
+80% of op problems are from design and development, and can not be bolted on near the end 
+version n and n+1 need to coexisit peacefully
+
+latency and through MAY have to be sacrified for easier automation
+
+handle failures and errors at the serivce level instead of lower software levels.
+
+No true staging environment exists since it is internet scale, just need to go limited production release
+
+can deploy the whole service on a single system, write an emulator if can not do that. Otherwise unit-testing is often by-passed
+
+automate the procedure to move state off damaged systems => ops people SHOULD be able to their job 8-5
+
+vital each service to slowly ramp up usage when come back online or recovered
+
+Can the service survive failure without human administrative interaction?
+
+Are failure paths frequently tested?
+
+Does our design tolerate these failure modes? And if not, have we undertaken a risk assessment to determine the risk is acceptable?
+
+ Can we support geo-distribution / multiple data center deployments?
+
+Are configuration and code delivered by development in a single unit?
+
+Is there an audit log mechanism to capture all changes made in production?
+
+Have we eliminated any dependency on local storage for non-recoverable information?
+
+Are all retries reported, and have we bounded the number of retries?
+
+Do we have circuit breakers in place to prevent cascading failures? Do they 'fail fast'? =>
+The architecture of the site must prevent cascading failures. Always ‘‘fail fast.’’
+When dependent services fail, mark them as down and stop using them to prevent threads
+from being tied up waiting on failed components.
+
+Are we collecting the actual numbers rather than just summary reports? Raw data will always be needed for diagnosis.
+
+Minimize false positives. People stop paying attention very quickly when the data is
+incorrect. It’s important to not over-alert or operations staff will learn to ignore them.
+This is so important that hiding real problems as collateral damage is often acceptable.
+
+ Can we support version roll-back? Is this tested and proven?
+
+Do we support both forward and backward compatibility on every change? Retire old format only when there no way we are going back to it
+
+Do we have an environment that lets us test at scale, with the same data collection and mining techniques using in production?
+
+Have we abstracted the network and naming? (For service discovery)
+
+Do we always do soft deletes so that we can recover accidentally deleted data? For the one with backup,soft-delete record can be kept only
+until the last check saved checkpoints
+
+Are we tracking the alerts:trouble-ticket ratio (goal is near 1:1)?
+ Are we tracking the number of systems health issues that don't have corresponding alerts? (goal is near zero)
+
+ Do we have automated testing that takes a customer view of the service?
+
+Is every operation audited?
+
+ Are we tracking all fault-tolerant mechanisms to expose failures they may be hiding?
+
+Track every time a retry happens, or a piece of data is copied from one place to another, or a machine is rebooted or a service restarted. Know when fault tolerance is hiding
+little failures so they can be tracked down before they become big failure
+
+Support configurable logging that can optionally be turned on or off as
+needed to debug issues. Having to deploy new builds with extra monitoring during a failure is very dangerous.
+
+Can we snapshot system status outside production?
+
+If it’s possible to continue to operate the transaction
+system while disabling advance querying, that’s
+also a good candidate. The key thing is determining
+what is minimally required if the system
+is in trouble, and implementing and testing the
+option to shut off the non-essential services
+when that happens. Note that a correct big red
+switch is reversible. Resetting the switch should
+be tested to ensure that the full service returns to
+operation, including all batch jobs and other previously
+halted non-critical work.
+
+
+This allows
+the client to continue to operate on local data if
+applicable, and getting the client to back-off
+and not pound the service can make it easier to
+get the service back on line. This also gives an
+opportunity for the service owners to communicate
+directly with the user (see below) and control
+their expectations.
