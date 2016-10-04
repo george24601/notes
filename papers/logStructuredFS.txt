@@ -1,0 +1,17 @@
+the whole file will be in memory
+
+with a large buffer, many blocks can be written in one seek, but in case of crash, it will lose a few secons of work
+
+mostly random IO, file creation/deletion bottleneck is updating metadata?
+
+BFS: inodes are in a fixed location on disk
+LFS: a fixed checkpoint region keeps are inode map location, which in turn contains the address to the actual inode location. inode and
+inode maps are written sequentially to the log
+
+1.read segments into memory
+2. identify live blocks, write them back to a small number of segments
+3. mark all read segments as clean
+
+current 30 secs for CP intervals
+
+
