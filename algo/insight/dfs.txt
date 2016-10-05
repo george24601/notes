@@ -5,16 +5,14 @@ topological sort, which leads to strongly connected graphs algorithm
 
 For graph traversal, the key is to identify potential max number of nodes to decide if it is feasible to apply DFS.
 
-if graph may have cycles, need to have a visited DS. Otherwise, if graph is a tree, we don't need it. But code wise, need to pass the parent
-along the traversal so that DFS can skip the parent
+if graph may have cycles, need to have a visited DS. Otherwise, if graph is a tree, we don't need it. But code wise, need to pass the parent along the traversal so that DFS can skip the parent
 
 pre, post time is used mainly to quickly decide if a node is a parent of other, and as a result, if during traversal we see 
 
 ----
 dfs-style is useful for generating answers in steps, and during the generated-full-answer stage, we can apply filtering step
 this means
-1. each step we only APPEND to existing parital answer, as part of pre action. Note that in general insert into the middle is expensive,
-therefore, we need to generate AND filter during branching
+1. each step we only APPEND to existing parital answer, as part of pre action. Note that in general insert into the middle is expensive, therefore, we need to generate AND filter during branching
 
 2. as part of post action, need to revert the pre-action steps, so that we can try different branchs with state remains clean
 
@@ -23,7 +21,6 @@ global variables
 
 4. For immutable objects, e.g., primitive types, we can also pass the modified as part of parameter, thus we can reduce dependency on
 outside closure
-
-5.similar to visited[] in dfs, at the beginning, we decide if we generate the complete picutre, if it is complete, we can examine the answer
-
 -----
+
+Note that if the graph can be traversed with 1 branch, DFS will find it, as long as we start with deg(v) = 1

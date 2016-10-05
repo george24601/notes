@@ -22,4 +22,7 @@
 
 12. Why LFS does not support fuzzy checkpoints, unlike ARIES and its WAL?
 
+13. Why LFS wants a bimodal distribution of segment utilization? 
+
+14. explain the cost-benefit policy and why it helps achieve the bimodal distribution of utilization?
 

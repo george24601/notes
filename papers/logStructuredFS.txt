@@ -12,6 +12,8 @@ inode maps are written sequentially to the log
 2. identify live blocks, write them back to a small number of segments
 3. mark all read segments as clean
 
+once a block's identify is knowm, check the file's inode or indirect block to see if the block pointer sitll refers to this block
+
+segment usage table recordes # of live blocks and most recent modfied time of any block in the segment. blocks of SUT is in the log, its address stored in the checkpoint region
+
 current 30 secs for CP intervals
-
-

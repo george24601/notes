@@ -4,9 +4,6 @@ git commit --amend
 #unstage
 git reset HEAD <file>
 
-#discard changes in unstaged files
-git checkout -- <paths>
-
 #show history of commits
 git log --oneline --decorate --graph --all
 
@@ -38,17 +35,6 @@ git clone --bare
 git add remote
 git push --all
 git push --tags
-
-
-##tagging example
-git tag -a v1.4 -m 'my version 1.4'
-git push origin [tagname]
-git checkout -b version2 v2.0.0
-
-#rebase local changes you made but haven shared yet before you push them in order to clean up your story, but never rebase anything you've pushed somewhere
-#DO NOT SQUASH AGINST PUSHED CHANGES, AS REWRITING HISTROY IS NICE SOURCE OF CONFLICT
-git rebase -i HEAD~4
-#add pick/squash/edit to the beginning of each line
 
 #compare commit f7b5's parent with f7b5
 git diff f7b5^ f7b5
