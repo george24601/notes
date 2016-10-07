@@ -1,10 +1,11 @@
-1.the most valuable part of F-W is its recurrence relationship
+the most valuable part of F-W is its recurrence relationship
 
 P[i][j][k] points to two states
 1.P[i][j][k - 1]
 2.p[i][k][k -1] and p[j][k][k -1]
 
-2.To retrieve path
+------
+To retrieve path
 
 last[i][j] = the last node before j on the shortest path from i to j
 
@@ -17,3 +18,8 @@ Retrive(end)
 }
 
 3.can consider F-W for all questions related to all node pair problems
+
+------
+Note that FW can be done only with n^2 space, the reason is that
+
+p[i][k][k-1] = p[i][k][k]

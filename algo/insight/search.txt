@@ -16,3 +16,6 @@ could try  to generate-filter all 2 steps combinations, and see if our generatio
 ----
 Since we are searching for unknown, almost always worth a try to look at unknowns, and try to infer some traits/properties of unknowns.
 Often, you can inverse it and find that the condition is actually if and only if, or if and only if under some additional constraints
+
+----
+search is closed related to the generation-filtering pattern, which is often DFS/partial result based
