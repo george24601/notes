@@ -9,7 +9,7 @@ care of its children
 -------
 Repositories: abstraction lay over storage/infrastructure, e.g., read-modify-write review Often a trait in Scala- but this violates "Tell,
 No Ask" !.Instead,  tell the repo to give a
-mesage to that Aggregate, i.e., repo is like a "manager", which locates and fowards the messaage
+mesage to that Aggregate, i.e., repo is like a "manager", which locates and fowards the messaage, a parent of a certain set of Actors, 
 
 object PersonRepository {
   case class Send(userId: UUID, message: Any)

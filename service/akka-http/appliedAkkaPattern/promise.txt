@@ -1,3 +1,0 @@
-Create future, either with the Future{} block or Promises
-
-Promise is one to conform the "tell, don't ask pattern" 

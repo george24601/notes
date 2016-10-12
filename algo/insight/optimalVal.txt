@@ -7,7 +7,7 @@ total # of steps will be bounded by the dimension of data.=> even a while loop w
 "as good as any other solution"
 
 ---
-For existence proof, we can just show that the extreme value works, and all general cases can be reduced to extreme cases with additional
+For existence proof, i.e., "any", "one", "exits" types of problems,  we can just show that the extreme value works, and all general cases can be reduced to extreme cases with additional
 (non-intefering) parameters, basically we use extreme case as a subproblem to introduce additioal conditions, since too hard to see patterns in general problem
 
 One common problem is inequality constraints, such constraint can possibly satisfied <=> optimal values satify it!

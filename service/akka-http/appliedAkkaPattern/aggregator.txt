@@ -1,0 +1,6 @@
+Init an aggregator actor with collection of actors to ask. It'll be responsible for gathering responses for a particular request.
+Propagate request to all actors through an aggregator.
+When a reply arrives, remove the sender from the list of actors remaining to answer.
+Apply receive timeout for safety (so we don't wait for response infinitely).
+Once all actors have responded or timeout occurred, send aggregated replies back to the original sender and stop aggregator actor.
+

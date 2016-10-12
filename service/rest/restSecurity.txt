@@ -8,7 +8,7 @@ Defend against replay attack, espeically you have state blob send as part of tra
 
 No techinical method of preventing being farmed against
 
-Make sure the incoming HTTP method is valud for the session token/API key and association resource, action, and record,e.g., everyone can view, but probably not everyone can delete
+Make sure the incoming HTTP method is valid for the session token/API key and association resource, action, and record,e.g., everyone can view, but probably not everyone can delete
 
 Always check Content-Type header. An empty or unexpected one should give 406 Not Acceptable
 
