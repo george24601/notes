@@ -8,24 +8,13 @@
 /video/1/duration => a part of a video
 
 
-So PUT/DELETE are ideompotent,while POST is not
----
-versioning API
-version in URL or custom accept header
+So PUT/DELETE are ideompotent,while POST is not, but PUT does NOT partially update, use PATCH for partial update semantics
 
-----
-Authentication: 
-1. http basics over SSL, in header
-Authorization: Basic {username: password in base 64}
+use 202 for async ops
 
-2.HMAC, in header
-Authentication: hmac username:nonce:{salted hash of secret}
-Date: {current time}
+use 207 for multiple independent operations
 
-Server side can reconstruct the salted hash, and replay attack wont work, because the salted hash will become invalid once it is outside the range of the date field, although this also means if a genuine client sents wrong time, server will reject it.
-nonce also ensures that salted hash is valid for each request only once,i.e., if I send 2 requests within same second, nonce will be different
-
-3.OAuth(2)
+Patch suggests that operation is atomic
 
 -------
 For pagination, dont use direct paginiation, use resource identifier and potentially order filter

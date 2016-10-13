@@ -1,0 +1,99 @@
+bulk API in ES
+in ES:
+
+POST /_bulk
+{ "delete": { "_index": "website", "_type": "blog", "_id": "123" }} 
+{ "create": { "_index": "website", "_type": "blog", "_id": "123" }}
+
+
+{
+   "took": 4,
+   "errors": false, 
+   "items": [
+      {  "delete": {
+            "_index":   "website",
+            "_type":    "blog",
+            "_id":      "123",
+            "_version": 2,
+            "status":   200,
+            "found":    true
+      }},
+      {  "create": {
+            "_index":   "website",
+            "_type":    "blog",
+            "_id":      "123",
+            "_version": 3,
+            "status":   201
+      }}
+]
+}
+
+------
+need to implmenet a machsimn to support serveral isnertions on a same POST method => content based or action identifier based,e.g, custom header
+
+The status code of the response will always be 200 and errors, if any, described in the response payload, as shown below:
+
+------
+From google drive API:
+
+You're limited to 100 calls in a single batch request
+
+A batch request is a single standard HTTP request containing multiple Drive API calls, using the multipart/mixed content type. Within that
+main HTTP request, each of the parts contains a nested HTTP request.
+
+The server's response is a single standard HTTP response with a multipart/mixed content type; each part is the response to one of the
+requests in the batched request, in the same order as the requests.
+--------
+POST /batch HTTP/1.1
+Host: www.googleapis.com
+Content-length: 592
+Content-type: multipart/mixed; boundary=batch_0123456789
+Authorization: Bearer authorization_token
+
+--batch_0123456789
+Content-Type: application/http
+Content-ID: <item1:user@example.com>
+Content-Transfer-Encoding: binary
+
+
+POST /drive/v2/files/fileId/permissions
+Content-Type: application/json
+Content-Length: 71
+
+
+{
+  "role": "reader",
+  "type": "user",
+  "value": "user@example.com"
+}
+
+
+--batch_0123456789
+Content-Type: application/http
+Content-ID: <item2:user@example.com>
+Content-Transfer-Encoding: binary
+....
+
+-------
+From FB graph API:
+
+curl \
+    -F ‘access_token=…’ \
+    -F ‘batch=[{“method”:”GET”, “relative_url”:”me”},{“method”:”GET”, “relative_url”:”me/friends?limit=50”}]’ \
+    https://graph.facebook.com
+
+[
+    { “code”: 200, 
+      “headers”:[
+          { “name”: ”Content-Type”, 
+            “value”: ”text/javascript; charset=UTF-8” }
+      ],
+      “body”: ”{\”id\”:\”…\”}”},
+    { “code”: 200,
+      “headers”:[
+          { “name”:”Content-Type”, 
+            “value”:”text/javascript; charset=UTF-8”}
+      ],
+      “body”:”{\”data\”: [{…}]}}
+]
+

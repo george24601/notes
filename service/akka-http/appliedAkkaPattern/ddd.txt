@@ -2,7 +2,7 @@ Entities: uniquely identifiable by a key or composite key, but itself mutable =>
 
 value object: no identifiable outside the attributes, IMMUTABLE => directly maps to message. Can be the state of actor 
 
-Aggregate: aggregates other objects inthe system, NO reference to anything inside aggreagte: you have to go through Aggregate, generally the
+Aggregate: aggregates other objects in the system, NO reference to anything inside aggreagte: you have to go through Aggregate, generally the
 top level pieces => think about deletion: if i delete this entity, will other entities be deleted => mapped to top level actors that takes
 care of its children
 
