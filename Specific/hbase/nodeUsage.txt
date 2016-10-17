@@ -1,5 +1,0 @@
-1. often, ZK is shared among services. But ZK needs good throughput, which means ideally it sits on a dedicated small host/cluster
-
-2. RegionServer is co-located with an HDFS DataNode
-
-3. A table is disable and re-enabled=> regions are randomly assigned

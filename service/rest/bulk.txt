@@ -44,6 +44,8 @@ main HTTP request, each of the parts contains a nested HTTP request.
 The server's response is a single standard HTTP response with a multipart/mixed content type; each part is the response to one of the
 requests in the batched request, in the same order as the requests.
 --------
+Google Drive's bulk API: Request
+
 POST /batch HTTP/1.1
 Host: www.googleapis.com
 Content-length: 592
@@ -73,6 +75,9 @@ Content-Type: application/http
 Content-ID: <item2:user@example.com>
 Content-Transfer-Encoding: binary
 ....
+
+Response:
+
 
 -------
 From FB graph API:

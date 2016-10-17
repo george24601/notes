@@ -1,8 +1,0 @@
- mutating the state in place, we’re not really passing it from one action to the next. What we’ll pass instead is a kind of token marked with the type S. A function called with the token then has the authority to mutate data that’s tagged with the same type S
-
-We want our code to not compile if it violates these invariants:
-
-If we hold a reference to a mutable object, then nothing can observe us mutating it.
-A mutable object can never be observed outside of the scope in which it was created.
-
-It’s different from the State monad in that its run method is protected, but otherwise its structure is exactly the same.
