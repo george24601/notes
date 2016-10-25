@@ -1,21 +1,21 @@
-1.the most important thing: build an acyclic graph between states. This means
-A. identify the subproblem/state (node in graph)
+the most important thing: build an acyclic graph between states. This means
+ identify the subproblem/state (node in graph)
 Capture state as if you are debugging, from this step to next, what states you think are interesting and want to captures
 
-B. relationships (edge in graph)
+ relationships (edge in graph)
 
-2. In a lot of problems, espeically optimization problems
+In a lot of problems, espeically optimization problems
 we need to inspect all neighbors and generate the best solution based on the results from ALL potential neighbors
 
-3. when choosing a subproblem, we need to include easy to store info as state, e.g., int, simple string. 
+when choosing a subproblem, we need to include easy to store info as state, e.g., int, simple string. 
 This may alos mean we need to state needs additional inforation (concretely, dimension of your array)
 
-4. Common recurrence relationship
-O(n) => 1-D max subarray SUM
-node: max sum subarray ending at index
-O(nlogn) => LIS
-O(n^2) => Edit distance
-
-6. When defining the subproblem, the actual solution may or may not "anchor" our index,e.g., subsequence vs subsequenct ending at index. 
+When defining the subproblem, the actual solution may or may not "anchor" our index,e.g., subsequence vs subsequenct ending at index. 
 This design option shares the same principle in recursion design: solving a more general recursion might be easier than the current problem.
 Coding-wise, this means at each step, you need to populate the field, even just carry over from previous state
+
+For the base/invalid case, the common pattern is for each dimension, you have a base case. Moreover, the base case/invalid case, the check
+should happen BEFORE triggered the cache check (would bottom up be better in this case than top down?)
+
+To reduce space complexity and sometimes runtime complexity, we often look "up" and "left" at the same time, instead of only looking "left", which is often more expensive
+

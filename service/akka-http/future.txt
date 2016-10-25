@@ -7,6 +7,11 @@ and handle it purely within actor
 
 similarly, sender has to be copied before entering future, because it will change!
 
+Because scala future does not timeout, you need to fulfil your promises! However, the catch is that it will still fail with
+AskTimeOutException, which shows no useful stacktrace at all
+1. throw a customException instead of default one
+2. use kamon.akka.ask-pattern-timout-warning
+
 -------
 use future.recover to gracefully translate error returned from child
 
