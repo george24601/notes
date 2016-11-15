@@ -1,0 +1,14 @@
+chains of commands: hard to remove a component because output of its predecessor is not compatible with the input requirement of successor
+
+More powerful mechanism could have been build separately from, simpler mecahnism
+
+nothing works until everything works => suggests not a DAG in its dependency
+
+For better structure:
+1. try to location MVP
+2. even the presence or absense of a component should be hidden from other components
+3. but independent parts will lead to duplication of code
+
+Use sandwiching to resolve dependency on each other
+
+no correspondency between modules and levels: one module may have many levels, one level may be divided across modules
