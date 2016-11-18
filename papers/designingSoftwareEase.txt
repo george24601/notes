@@ -1,14 +1,62 @@
-chains of commands: hard to remove a component because output of its predecessor is not compatible with the input requirement of successor
+Mathematcians pursue a more general theorem, but software engineer not necessarily so
 
-More powerful mechanism could have been build separately from, simpler mecahnism
+Common cause of problems
+1. excessive information distribution: if many programed written with the assumption that a given feature is present or not present
+2. chain of data transforming components. output of its predecessor is not compatible with the input the successor, i.e., that component can
+not be removed
+3.components that perform more than one function, e.g., two simple fuctions into one componenta=> more powerful mechanism could have been
+built separately from but using simpler mechanisms
+4. loop in the dependency graph, one does not work until everything else works,e.g., OS scheduler use the file system to store its data
+rather than use its own disk routines, but how aobut users needs OS subset without FS, such subset is useful during development and testing
 
-nothing works until everything works => suggests not a DAG in its dependency
+identification of the possible substes is PART of identifying the requirements => easy avilability of certain subsets as an operational requirement
+problems => 
+1. tend to overstate requirement
+2.will not characterize the set of subsets that mgiht be wanted in the future.
+=> find a minimal subsets that might peforman a userful service and then searches for a set of minimal increments to the system => not
+ususally a program that anyone would ask for
 
-For better structure:
-1. try to location MVP
-2. even the presence or absense of a component should be hidden from other components
-3. but independent parts will lead to duplication of code
+often need to tailor his product to the situation actually at hand.
 
-Use sandwiching to resolve dependency on each other
+stop thinking of systems in terms of components that correspond to steps in the processing => a virtual machine approach
 
-no correspondency between modules and levels: one module may have many levels, one level may be divided across modules
+hardware resources tht are used in implementing the extended instruction set must be unavialble to the user of the virtual machine. The
+designer has traded these resources for the new data elements and intructions, this isolation violation will invalidate the concept of
+virtual machine and lead to complications
+
+Note that VM are built in steps, i.e., list of small steps => modeled by "use" relation
+
+uses different from invokes!
+1. certain invocations may be be isntances of uses, e.g., A has fulfilled its pecification when it has generated a correct call to B, if the
+spec says so
+2. A may use B even though it never invokes it, e.g., interrupt handling
+
+Some duplication of effort seems perferable to a system in which nothing runs unless everything runs, problem of highly interdependent
+parts,i.e. no subsets of the system that can be used before the whole system is complete
+e.g., in many large OS FS, VM managet, spooling are perform their own backup store operations
+
+Use sandwiching to resolve dependency on each other: one of the programs is slided into two parts in a way.Often we need to split both sides anyway
+
+--------
+Discussion of an example goes here
+
+
+-------
+
+kernel: some disirable subsets cannot be obtained w/o major surgery. Nuclous must be every system family member,e.g.,
+1. inability to separate synchronization from message passing => users bypass the kernel to perform teletype handlign functions
+2. type-chekcing was so intrinsic to the call that it appeared impssobile to disable it when it is not needed or affordable
+
+Flexibility cannot be an afterthought, subsetability is needed, not just to meet a variety of customer's needs
+
+Remove a jamor box from a flowchart and there is often a need to "fill the hole" with conversion programs
+
+general: if it can be used without change in a variety of situations
+flexible: easily changed to be used in a variety of situations=> one shoudl incur the design-time cost only if one expects to recover it
+when changes are made
+
+no correspondence between modules and levels => module offers abstraction, level focuses on hierarchy, so "level of abtraction" is an abuse of language
+
+
+
+

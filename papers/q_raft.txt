@@ -1,0 +1,5 @@
+1. Why does raft use randomized timout values?
+
+2. "GFS and HFDS use a seprate replicated stat machine to manage leader election and store configuration", what does the author mean? Give concrete examples.
+
+3. What is the max # of servers that can fail while raft is still avaiable? what is the min # of servers that can fail while raft becomes unavailable?

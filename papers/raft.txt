@@ -1,0 +1,3 @@
+faulty clocks and extreme message delays can at worst, cause availabilty problems, but not consistency problems
+
+Paxos uses a symmetric P2P appraoch and a weak form of leadership as performance optimization

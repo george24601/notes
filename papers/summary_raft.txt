@@ -1,0 +1,82 @@
+consensus algorithm for managing a replicated log => similar to multi-paxos
+
+strong leadership in which log entries only ever flow from the leader to other servers
+Randomized timers during leader election
+join consensus approach for managing membership changes
+
+First electing a distinguished leader, then giving the leader complete responsibilty for manage the replicated log, it replicates them on
+other servers, and tells servers when it is safe to apply log entries to their state machines
+
+1. at most 1 leader can be elected in a given term
+2. a leader never oerwrites or delets entries in its log, only appends
+3. if two logs contain an entry with the same index and term, the the logs are idential up to that index 
+4. if a log entry is commited in a gvien term, then that entry will be commited in the logs of the leaders for all higher-number terms
+5. if a server has applied a log entry at a given index to its statement, no other server will ever aply a different log entry for the same
+index
+
+Each term beginning with an election, if a candidate wins the election, they stay as leader for the rest of the term, if an electionr esults
+in a split vote, then the term ends with no leader and a new term begins, term number increase monotocially over time, and are exchanged in
+every communication.
+
+servers can be: leader, follower, or candidate, if a leader or candidate determins that their own term is behind, it will immediately revert
+to follower
+
+RequestVote messages are initiaed by candidates during elections
+ApendEntries messages are initiated by leaders to transfer log entries, and as heartbeat
+InstallSnapshot: transferring snapshots between servers
+
+----------
+Leader election:
+1.Server start as followers, and remain so long as they receive periodic AppendEntries, either RPC or just as heartbeat. 
+
+2. No heartbeat within timeout period, the follower itself begins a new election
+a. increment current term, transiciton to CANDIDATE stuts, and sends RequestVote RPC to each of other servers, if it receives votes from a
+majority of the servers for the same term, it becomes leader, and send it to all other servers for authority
+b. if receives RequestVote while as candidate, if the term is less than the server's own, the message is rejected, Otherwise the candidate
+becomes a follower
+c. if the candidate neither wins or loses, it times out and starts another round of RequestVote
+d. for a leader or follower, if the term of vote is less than its own, reject, if the server has not already voted for someone else in this
+term, and the candidate's log is at least as upt o date as its own, it grants the vote
+
+Election timeouts are randomized to ensure that split votes are rare, each candidate resets its election timeout to a random value
+(150-300ms), and the start of each election
+
+Raft RPC takes 0.5 - 20 ms (including persist), so a election timeout is likely to be 100ms-500ms
+
+----------
+When the leader receives a client request
+1. to its own log
+2. AppendEntries to replicate the entry to all servers
+3. Once it gets ACK from a majority of servers, change the state mahcine and reply to client
+4. AppendEntreis is retired indefinitely until all followers store all log entries, each of which has a state machine command with term
+number when the entry waas received by the leader
+
+=> if 2 entries in differnt lgos have the same index and term, then
+a. they store the same command
+b. logs are identical in all preceding entries
+
+------
+when sending AppendEntries, the leader includes the index and term of the entry in its log that immediately preceds the new entreis, if the
+folower does not find a matching entry, it refues the new entreies => consitency check
+
+recovery inconsistency: => when consistency check fielas
+1. leader finds the latest entry where leader and follower agrees
+2. follower deletes all entries after that
+3. leader sends folloer all entries after that point
+=> Note that LEADER APPEND-ONLY, but follower can delete!
+
+What if a leader creashes before commiting an entry?
+Never commits log enries from previous terms by counting replicas
+------
+
+for the config change to be safe, need to maintain a single leader for the same term, but we are not able to switch all of theservs at
+once, this leads to split cluster and independency majorities
+
+join consense to apply config changes:
+1. log entreis replicated to all serves int heunion
+2. any server from either config can serve as leader
+3. aggrement requires sepearte majorites from both the old and the new configuration
+4. once the join consensus has been commited, the leader can create a log entry describing the new congs and replicate it to the cluster
+(subtle details to come!)
+
+how to ensure linearizable reads?
