@@ -3,3 +3,38 @@
 2. "GFS and HFDS use a seprate replicated stat machine to manage leader election and store configuration", what does the author mean? Give concrete examples.
 
 3. What is the max # of servers that can fail while raft is still avaiable? what is the min # of servers that can fail while raft becomes unavailable?
+
+4. How does a candidate handle an incoming AppendEntries call?
+
+5. How can a candidate discover current leader or a new term? Why it becomes a follower upon such discovery?
+
+6. During election, it is possible that no one is elected, how can that happened? How does raft deal with that?
+
+7. consider the cases of leader/follower crashes, where can these scenarios happen?
+	a. follower may have missing entries
+	b. follower may have extra uncommited entries
+	c. follower may have both missing entries and extra entries
+
+8. When and how will raft fix the inconsitences in 7)?
+
+9. Why we need to ensure that any elected leader for an given has ALL of commited entries from the previous term? Why this property is satisfied in raft?
+
+10. Describe a scenario
+	a.replicated on majority of servers but not commited entry 
+	b.such entry in a) got overwritten
+
+11. What if broadCastTime << electionTimeout is violated? what if electionTimeout !<< mean time between failures?
+
+12. describe the disjoint majorities problem, how they can be triggered during membership changes, when each server just swtich directly
+
+13. What happened when cluster leader itself is not included in the new membership?
+
+14. Give a scenario where removed cluster memebers can trick the new leaders into a follower, if without the remedy done by the raft. 
+
+15. What kind of metadata should snapshot include?
+
+16. Writing/transferring snapshot might be expensive, how does raft mediate this?
+
+17. If the leader commited the change, but failed to respond to the client, the client will retry the same request again, how does raft avoid this second execution?
+
+18. Even though all requests go through leader, a read request may still return stale data. How can that happen? What did raft do to prevent it?

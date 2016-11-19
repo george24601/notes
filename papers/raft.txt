@@ -1,3 +1,52 @@
 faulty clocks and extreme message delays can at worst, cause availabilty problems, but not consistency problems
 
 Paxos uses a symmetric P2P appraoch and a weak form of leadership as performance optimization
+
+The leader handles all client request, if a client contacts a follower, the follower redirects it to the leader, 
+
+A candidate neither wins nor loses the election, if many followers become candidates at the same time => each candidate will time out and
+start a new election
+
+leader applying a log entry => commmitment
+
+the RequestVote includes info about the candidate's log, and the voter denies its vote if its own log is more up-to-date than that of the
+candidate, by comparing index and term of the last entreis in the logs
+
+to defend against replicated but uncommited entries, only log entries from the leader's current term are commited by couting replicatesa,
+once an entry from the current term has been commited in this way, all prior entreis are commited indirectly because of the Log Matching
+Properties, note that log enries retain their original term numbers when a leader replicates their original term numbers whena  leader
+replicates entries from previous terms
+
+5.4.3 Safety argument!!!
+
+On follower/candidate failure, RequestVote and AppendEntries will be retried indefinitely,both RPCs are idempotent
+
+--------
+In general, safe config changes are done with two-phase apporoach.In raft, reach join consensus and transition to the new config .
+
+1. leader receives request to change config, it stores config for JC as log entry and replicates that entry to BOTH old and new
+2. a server always uses the latest config in its log, regardless of wheter the entry is commited
+3. once the JC entry is commited, only servers with the JC entry can be elected as leader, now it is safe for the leader to create a log
+entry describing the new cluster and replicate it to the cluster
+
+The key is that there is no time when old and new cluster can both make unilateral decisions
+
+Before C(old, new) is commited, C(new) alone can not proceed, after C(old, new) is commited, C(old) OR C(new) alone can not proceed
+
+Additional problems
+1. new server initally does not have any log entries
+2. cluster leader is not part of the new config
+3. removed servers will try to elect new leader, but their RequestVote will be ignored if it arrives within the timeout window
+
+log compaction: log cleaning, LSM tree
+
+clients of raft sends all its requests to the leader
+
+To ensure lineariable read, i.e., no stale read
+1. need to know which entries are commited, so it commits a no-op entry at the beginning of its term, and thus all previous entries are
+commited
+2. need to make sure it is still the leader (due to network partition), so either
+  a. contact a majority of servers before reply
+  b. each heartbeat provides sort of lease (provided bounded clock skew)
+
+
