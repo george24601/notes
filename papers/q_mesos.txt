@@ -1,0 +1,7 @@
+1. What are the benefits of short tasks in computing framework schedulers
+
+2. Why a centraliezed scheduling solution is not adopted?
+
+3. Why mesos delegates reject to the framework scheduler?
+
+4. How is master HA implemented?

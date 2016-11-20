@@ -1,0 +1,17 @@
+mesos decides how many resources to offer to each framework, and each framework decides which resources to accept. 
+=> also allows running different versions of the same framework at the same time, good way to isolate workload and rollout new versions of
+FW
+
+master process runs slave daemons on on each cluster node, and frameworks run on each slave
+
+for each framework, it needs
+1.scheduler that registers with the master to be offered resoruces
+2.executer that runs on the slave to run the framework's task
+
+isolate CPU, memory, network, and I/O of a process tree via container
+
+master only maintains active slaves, active frameworks, and task running, use ZK for leader election, and after the active master failes,
+slaves and scheuldes will connect to the new master so it can repopulate the state
+
+delay scheduling to achieve data locality
+
