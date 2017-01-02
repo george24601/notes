@@ -1,0 +1,34 @@
+Scalability simply by adding resources. No manual sharding and resharding.
+
+Consistency – full ACID transactions and no need for app devs to ever deal with inconsistencies
+
+Hierarchical Schema, Table colums can contain structured data types, in particular, Protocol Buffers.
+
+Putting protocol buffers in the schema removes this impedance mismatch and gives users a universal data structure they can use both in the database and in application code
+
+
+All child table rows corre- sponding to a root row are clustered together with that root row in a single Spanner directory, meaning that cluster is normally stored on a single Spanner server. Child rows are stored under their parent row ordered by primary key
+
+Because each root row and all of its descen- dant rows are stored in a single Spanner directory, trans- actions restricted to a single root will usually avoid 2PC and the associated latency penalty, so most applications try to use single-root transactions as much as possible.
+
+Many tables in an F1 schema consist of just a single Protocol Buffer column
+
+Using fewer columns generally improves performance in Spanner where there can be high per-column overhead.
+
+Index keys can be either scalar columns or fields extracted from Protocol Buffers (including repeated fields).
+
+ Like child tables, local indexes are stored in the same Spanner directory as the root row. Consequently, the index entries of local indexes are stored on the same Spanner server as the rows they index, and local index updates add little additional cost to any transaction
+
+Writing a single row that updates a global index requires adding a single extra participant to a transaction, which means the transaction must use 2PC, but that is a reasonable cost to pay for consistent global indexes.
+
+---------
+Enforcing that across all F1 servers, at most two dif- ferent schemas are active. Each server uses either the current or next schema. We grant leases on the schema and ensure that no server uses a schema after lease ex- piry.
+
+Subdividing each schema change into multiple phases where consecutive pairs of phases are mutually com- patible and cannot cause anomalies.
+
+--------
+These ChangeBatches are written into normal F1 tables that exist as children of each root table. The primary key of the ChangeBatch table includes the associated root table key and the transaction commit timestamp. 
+
+When a transac- tion updates data under multiple root rows, possibly from different root table hierarchies, one ChangeBatch is writ- ten for each distinct root row (and these ChangeBatches in- clude pointers to each other so the full transaction can be re- assembled if necessary).
+
+ Distributed queries al- ways use snapshot transactions.

@@ -10,7 +10,7 @@ common tactics: start from root, start from leaves (See try both search directio
 
 tree <=> each node has only 1 out edge (which is to the parent)
 
-when looking at 2 nodes, often need to find LCA of the 2 nodes, to find a nice, self-contained tree
+when looking at 2 nodes, often need to find LCA of the 2 nodes, to find a nice, self-contained tree, instead of looking at the root of the whole tree!
 
 A tree with |V| nodes always has |V| - 1 edges. Moreover, we can pick any node as the root of traversal
 

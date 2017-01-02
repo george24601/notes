@@ -1,0 +1,16 @@
+when looking for the minimal viable value
+
+	ll l = 0, r = INF;
+	while(r - l > 1)
+	{
+		ll x = (l + r) / 2;
+		if (solve(x) >= m)
+			r = x;
+		else
+			l = x;
+	}
+
+Then check if r is good value
+
+------
+Note that when we find min/max possible answer with bsearch, we need to check mid and its neighbor if mid is good enough, to avoid the case where a band of values give the same expected answer
