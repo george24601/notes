@@ -1,0 +1,35 @@
+Why does F1 support Protocal Buffer as table column?
+
+2. Why schema change in F1 is non-blocking?
+
+3. Give use cases for lock column feature
+
+4. Why F1 decides to move change history to its owm level?
+
+5. What is the role of Spanner in F1?
+
+6. Why perssimistic transactions requires stateful F1 server?
+
+7. Why the user should always try to use single-root transcation
+
+8. When we design schemas, when we use repeated fields in protocol buffer, and when to use child table?
+
+9. What is the cost of using global index, what is the usage practice, and why is that?
+
+10. why it is not practical to update schema atomically across all servers?
+
+11. F1 applies schema change asyncly, how does it handle/prevent conflicting changes?
+
+12. What is the difference between Snapshot, Pessimistic, and Optimistic transcations?
+
+13. What is the insertion phantom problem?
+
+14. How is the change history inside F1 implemented?
+
+15. Why disk latency is not a huge problem for F1 queries, unlike traditional DBs?
+
+16. What are pros and cons of streaming result immediately?
+
+17. In deploymnet, why do we need read-only replicas?
+
+18. Multi-region replicas means higher latency, how do they mitigate it?
