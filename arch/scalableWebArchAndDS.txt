@@ -1,0 +1,26 @@
+SOA and microservices, and how to share data between them
+
+Why separate read and write servers? CQRS, similarly, high priority - low priority services, and microservies again
+
+Redundancy: concensus problem, version number /timestamp based problem, checksum
+
+concensus protocal, performance slow
+
+horizontal scaling should be planned at first, very hard, if not possible to bolt on later
+
+sharding: need a consistent way to do find out which way goes to which shard, metadata often goes to a concensus protocl-backed state store
+=> see her blog for more on FT and monitoring
+
+database layer and supporting services: almost always to bottle neck, share nothing state is easily scalable => nature of disk I/O vs memory I/O
+
+what is local cache's problem -> use global cache and distributed cache instead, either know both or cache in front of the access layer, when to use when, basically delegate who knows the bottle neck
+
+cachiing at Facebook,e.g., memcached, 
+cache invalidate problem
+
+collapse requests for same data/spatially close data
+
+why put proxies in front of the cache?
+
+not uncommon to be routed to multiple load balancer => but how do handle user session data?
+cookies and/or separate service,e.g., oauth
