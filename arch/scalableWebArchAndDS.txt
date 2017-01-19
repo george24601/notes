@@ -1,26 +1,53 @@
-SOA and microservices, and how to share data between them
+Services
+----------
+How to share data between services? Common challenges
+Sharing data and microservices
 
-Why separate read and write servers? CQRS, similarly, high priority - low priority services, and microservies again
+Why separate read and write services?
+CQRS, high priority/low priority services, e.g., admin task vs actual business logic
+Does this violate the microservice architecture?
 
-Redundancy: concensus problem, version number /timestamp based problem, checksum
+Redundancy 
+----------
+concensus problem, version number/timestamp based solution
+checksum for physical layer against corrption
+But consensus protocols are slow, and needs to be in different availability zones 
+=> how to use it?
 
-concensus protocal, performance slow
-
+Partitions
+-----------
 horizontal scaling should be planned at first, very hard, if not possible to bolt on later
 
 sharding: need a consistent way to do find out which way goes to which shard, metadata often goes to a concensus protocl-backed state store
-=> see her blog for more on FT and monitoring
+see linked blog for more on fault tolerate and monitoring
 
-database layer and supporting services: almost always to bottle neck, share nothing state is easily scalable => nature of disk I/O vs memory I/O
+Caches
+--------
+database layer and its supporting services: almost always to bottle neck
+share nothing state is easily scalable 
+=> nature of disk I/O vs memory I/O 
 
-what is local cache's problem -> use global cache and distributed cache instead, either know both or cache in front of the access layer, when to use when, basically delegate who knows the bottle neck
-
-cachiing at Facebook,e.g., memcached, 
+what is local cache's problem 
+=> use global cache and distributed cache instead, 
+service knows both cache or the access layer,  or cache in front of the access layer? 
+=> delegate to whoever knows the bottle neck
 cache invalidate problem
 
+Proxy
+-------
 collapse requests for same data/spatially close data
+why put proxies in front of the proxy?
 
-why put proxies in front of the cache?
+Load Balancing
+----------
+not uncommon to be routed to multiple load balancer
+external LB and internal LB, and their usage
 
-not uncommon to be routed to multiple load balancer => but how do handle user session data?
-cookies and/or separate service,e.g., oauth
+Session management
+--------
+How do handle user session data?
+cookies and/or separate service, why not sticky session
+
+why achieving performance and avaiability requires buildng async into the system? 
+=> scheduling and resource allocation is actually a hard problem
+client keeps a ack as a refrence for the results
