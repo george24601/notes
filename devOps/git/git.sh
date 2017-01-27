@@ -46,3 +46,6 @@ git commit -m "$COMMIT_MESSAGE"
 #pull master again to ensure there is no conflict between current master and your commit
 git pull --rebase 
 git push origin master
+
+#find file by name in the repo
+git ls-tree -r HEAD | grep parameterService
