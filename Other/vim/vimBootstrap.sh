@@ -17,3 +17,7 @@ git clone https://github.com/moll/vim-node.git ~/.vim/bundle/node
 #install vim-gradle
 mkdir -p ~/.vim/bundle/vim-gradle
 git clone https://github.com/tfnico/vim-gradle  ~/.vim/bundle/vim-gradle 
+
+#install vim-syntastic
+cd ~/.vim/bundle && \
+  git clone --depth=1 https://github.com/vim-syntastic/syntastic.git

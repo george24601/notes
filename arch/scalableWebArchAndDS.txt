@@ -1,0 +1,53 @@
+Services
+----------
+How to share data between services? Common challenges
+Sharing data and microservices
+
+Why separate read and write services?
+CQRS, high priority/low priority services, e.g., admin task vs actual business logic
+Does this violate the microservice architecture?
+
+Redundancy 
+----------
+concensus problem, version number/timestamp based solution
+checksum for physical layer against corrption
+But consensus protocols are slow, and needs to be in different availability zones 
+=> how to use it?
+
+Partitions
+-----------
+horizontal scaling should be planned at first, very hard, if not possible to bolt on later
+
+sharding: need a consistent way to do find out which way goes to which shard, metadata often goes to a concensus protocl-backed state store
+see linked blog for more on fault tolerate and monitoring
+
+Caches
+--------
+database layer and its supporting services: almost always to bottle neck
+share nothing state is easily scalable 
+=> nature of disk I/O vs memory I/O 
+
+what is local cache's problem 
+=> use global cache and distributed cache instead, 
+service knows both cache or the access layer,  or cache in front of the access layer? 
+=> delegate to whoever knows the bottle neck
+cache invalidate problem
+
+Proxy
+-------
+collapse requests for same data/spatially close data
+why put proxies in front of the proxy?
+
+Load Balancing
+----------
+not uncommon to be routed to multiple load balancer
+external LB and internal LB, and their usage
+
+Session management
+--------
+How do handle user session data?
+cookies and/or separate service, why not sticky session
+
+why achieving performance and avaiability requires buildng async into the system? 
+=> scheduling and resource allocation is actually a hard problem
+client keeps a ack as a refrence for the results
