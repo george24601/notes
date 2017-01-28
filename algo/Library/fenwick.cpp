@@ -1,28 +1,20 @@
-#define LSB(i) ((i) & -(i))
+int const MaxSize = 100010;
 
-int fenSum(int *a, int i) {
-  int sum = 0.0;
-  i++;
-  while (i > 0) {
-    sum += a[i - 1];
-    i -= LSB(i);
-  }
-  return sum;
+int fenw[MaxSize];
+int n;
+
+void addDelta(int x, int v) {
+	while (x <= n) {
+		fenw[x] += v;
+		x = (x | (x - 1)) + 1;
+	}
 }
 
-void fenAdd(int *a, int size, int delta, int i) {
-  i++;
-  size++;
-  while (i < size) {
-    a[i - 1] += delta;
-    i += LSB(i);
-  }
-}
-
-int fenGet(int *a, int i) {
-  return fenSum(a, i) - fenSum(a, i - 1);
-}
-
-void fenSet(int *a, int size, int value, int i) {
-  fenAdd(a, size, value - fenGet(a, i), i);
+int preSum(int x) {
+	int v = 0;
+	while (x > 0) {
+		v += fenw[x];
+		x &= x - 1;
+	}
+	return v;
 }

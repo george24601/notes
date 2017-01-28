@@ -1,0 +1,45 @@
+//create the db if it does not exist yet
+use myNewDB
+
+//NOTE: can turn on document validation
+db.myNewCollection1.insert( { x: 1 } )
+
+//_id field is reserved to the PK , maybe any type other than array
+var mydoc = {
+	_id: ObjectId("5099803df3f4948bd2f98391"),
+	name: { first: "Alan", last: "Turing" },
+	birth: new Date('Jun 23, 1912'),
+	death: new Date('Jun 07, 1954'),
+	contribs: [ "Turing machine", "Turing test", "Turingery" ],
+	views : NumberLong(1250000)
+}
+
+ //If an inserted document omits the _id field, the MongoDB driver automatically generates an ObjectId for the _id field.
+
+//query restriction
+{
+	  <field1>: <value1>,
+	  <field2>: { <operator>: <value> },
+	  ...
+}
+
+
+//update constraints
+{
+	  <operator1>: { <field1>: <value1>, ... },
+		  <operator2>: { <field2>: <value2>, ... },
+		  ...
+}
+
+//how object ID is generated
+ObjectId’s creation, specifically:
+
+a 4-byte value representing the seconds since the Unix epoch,
+a 3-byte machine identifier,
+a 2-byte process id, and
+a 3-byte counter, starting with a random value.
+
+The comparison treats a non-existent field as it would an empty BSON Object. As such, a sort on the a field in documents { } and { a: null } would treat the documents as equivalent in sort order.
+
+db.myCollection.find().pretty()
+
