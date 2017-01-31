@@ -16,9 +16,19 @@ var Books = Backbone.Collection.extend({
   }
 });
 
-//extend
+//extend: create custom view class
+var DocumentRow = Backbone.View.extend({
 
+  //called when the view is first created, alternatively, can be new View([options])
+    initialize: function() {
+          this.listenTo(this.model, "change", this.render);
+        },
 
-//template
+//template: when rendering your view, you can access instance data
+  template: function(){
+  },
 
-//templateHelpers
+  //render defaults to no-op
+
+});
+
