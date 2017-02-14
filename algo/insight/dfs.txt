@@ -23,4 +23,6 @@ global variables
 outside closure
 -----
 
-Note that if the graph can be traversed with 1 branch, DFS will find it, as long as we start with deg(v) = 1
+Even though DFS is covering all the graph, at ANY given moment, it is stack trace is a single path.with cycle potentially just discovered.
+Therefore, we can find the final path (ends at the given destination) or cycle (ends at a visiting/visited destination)
+
