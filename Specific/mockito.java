@@ -15,5 +15,7 @@ class Sample{
     //verify number of interactions with mock
     mockedList.size();
     verify(mockedList, times(1)).size();
+
+    //use spy to mock only those methods of a real object that we want to
   }
 }
