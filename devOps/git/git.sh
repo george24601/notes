@@ -36,9 +36,6 @@ git add remote
 git push --all
 git push --tags
 
-#compare commit f7b5's parent with f7b5
-git diff f7b5^ f7b5
-
 #From the feature branch, push a single commit on top of the master with no merge commit
 #on master
 git merge --squash $FEATURE_BRANCH

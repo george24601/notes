@@ -1,0 +1,12 @@
+assisted injetion: auto-generating Factory implementations from simple interfaces
+
+e.g. some of ctor params from injector, and others form the caller
+
+annotate the implementation class's ctor and fields that aren't know by the inector
+Then bind a Provicer<Factory> in the Guice module
+
+AssitedInject maps the create() method's params tot he corresponding @AssistedParams in the implementatins class's ctor, For the other
+construtoer arguemnts, it asks the regular injector to provide values
+
+
+---------

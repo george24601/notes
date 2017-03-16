@@ -1,0 +1,12 @@
+Type introspection: code to inspect other code in the same system or even itself
+Reflection: make modifications at runtime by making use of introspection => note introspection may not mean reflection is supported 
+
+
+Method method = foo.getClass().getMethod("doSomething", null);
+
+method.invoke(foo, null);
+
+JUnit uses reflection to look through class tagged with @Test annotation, and will then call them when runnig the unit test
+
+Often used by other OR mappers toinstantiate objects from databases without knowning in advance what objects they're going to use.
+
