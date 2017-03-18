@@ -1,0 +1,18 @@
+1.JUnit uses reflection to look through class tagged with @Test annotation, and will then call them when runnig the unit test
+
+2. Often used by other OR mappers toinstantiate objects from databases without knowning in advance what objects they're going to use.
+
+3.Dependency injection often has a long list of params, we just provide just a sub list of params, and then use reflection to match on types, and finally give null to fields that are not provided
+
+4.Similar to 3, during testing we often want a dummy object with non-null values, we can use reflection to inspect the class and poplate the dummy value based on the field type, and then use Field.set to populate value
+
+5. iterate all field in te object and make sure the values are equal on the copied object
+
+6.specify the class to use in a config file, and use Class.forName to instantiate it at run time, and then 
+	a.Injector.getInstance(class), 
+	b.clazz.newInstance()
+	c.Constructor.newInstance(Array<Object> args), 
+
+7. Introduce our custom annotation, and then find it via method.isAnnotationPresent(OurAnnotaiton.class), and then method.invoke(ourObject, Array<Object> args)
+
+
