@@ -40,3 +40,6 @@ CURRENT_BASH_DIR=$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P )
 
 #search only files with certain extensions
 grep -r --include=*.scala 'spray' ./ | less
+
+#find all .c file starting at the current dir, note find can be chained to other commands too!
+find . -name \*.c -print

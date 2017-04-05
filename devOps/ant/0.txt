@@ -1,0 +1,29 @@
+Each buildfile contains one project and at least one (default) target. Targets contain task elements. Each task element of the buildfile
+can have an id attribute and can later be referred to by the value supplied to this. The value has to be unique
+
+project.default: the default target to use when no target is supplied
+project.basedir: base directory from which all path calcs are done, if the attribute is overrriden, it must be omiited in the project tag. 
+Default is the parent dir of the builfile. Relative path is resolved relative to the directory containing the build file
+
+Tasks
+<name attribute1="value1" attribute2="value2" ... />
+
+Tasks have a common structure:
+<name attribute1="value1" attribute2="value2" ... />
+e.g.
+<taskname id="taskID" ... />
+
+ Properties may be used in the value of task attributes or in the nested text of tasks that support them. This is done by placing the
+property name between "${" and "}" in the attribute value. For example, if there is a "builddir" property with the value "build", then this
+could be used in an attribute like this: ${builddir}/classes. This is resolved at run-time as build/classes.
+
+Path-like Structures???
+
+Any project element can be assigned an identifier using its id attribute. In most cases the element can subsequently be referenced by
+specifying the refid attribute on an element of the same type. 
+
+Use of external tasks???
+
+ single star (*) matches zero or more characters within a path name
+a double star (**) matches zero or more characters across directory levels
+a question mark (?) matches exactly one character within a path name

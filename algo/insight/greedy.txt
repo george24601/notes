@@ -8,3 +8,12 @@ The tricky part, therefore, is what is the step/state information we need to cap
 
 5.One way to prove greedy is that each change toward the greedy solution only improves the final score, until we converge to the greedy
 version we claim. This "gradual" improvement pattern can be seen in a lot non-greedy problems as well,i.e., iterative methods
+
+---------
+
+O*: optimal solution => unknown at this moment
+G: greedy solution
+
+and then proof by contradiction, may be in many different steps => at least probing the optimal solution properties gives SOME properties,
+even if greedy itself is not enough, => if the optimal solution is different, it can't be optimal, in each case => may get a solution as
+same cost as the greedy solution
