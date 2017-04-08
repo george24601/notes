@@ -46,3 +46,8 @@ git push origin master
 
 #find file by name in the repo
 git ls-tree -r HEAD | grep parameterService
+
+#revert change to a single file
+git log -p path/to/file
+git checkout <commit> path/to/file
+git commit

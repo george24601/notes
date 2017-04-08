@@ -1,0 +1,31 @@
+authentication cookies
+
+tracking cookies: to compile long-term reords of individuals' browsing histories
+
+session cookie: deleted when the user closes the browers, no expiration date
+
+persistent cookie: expires at a specific date, before which the information will be transmitted to the server every time the user visits the
+website => also known as tracking cookies, because when user views a resource belonging to that website from another website
+
+secure cookie: can only be transmitted over HTTPS
+
+HttpOnly cookie: can not be acessed by client-side APIs
+
+usage: 
+store session id
+auto-fill: encodes preferences in acooke and sends the cookie back tot he browser
+
+set a cookie: 
+set-cookie header in response, may have may set-cookie headers, e.g., session cookie in its own set-cookie header
+Later on when browser will put the content of the cookie in Cookie header in request
+
+-----------
+browser sends only cookie's name and value, but not cookie attributes!
+Domain and Path : what website the cookie belongs to
+
+Potential problem:
+1. can't accurately identify a user : e.g. multiple browers
+
+2. client state may become inconsistent: e.g., back button
+
+

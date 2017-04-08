@@ -1,0 +1,46 @@
+A survey on how to work with cross dc with different framework/techs
+-----------
+Kafka's schema registry: backup SR points to master DC's ZK and kafka, with it master set to false. Master DC is MMed to into the back up DC
+In case DC A failed, we switch that SR to DC B, with master set to true. Note schema is immutable, and identified with only (name, version)
+
+(To defend against failure/error, need parallel processing of all data too, and know how to hard switch)
+
+Pattern 1: streched cluster: 
+1. deploy zk and broker across 3 AZs
+2. intra-cluster replication to replicate data across DCs
+3. On failure, consumer/producer fail over to new DCs
+BUT THIS IS NOT RECOMMENDED across regions : bad case for assymmetric network partitioning, and longer network latency
+
+pattern 2: active-passive
+1.producer in active DC, consumer in either active or passive DC
+2. offset not identical across clusters! soure and target may not have smae # of partiitions, and retries for failed writes
+3.and when primary comes back, need to reverse mirroring => hard problem again!
+
+Note hot standby may have window of data loss at failures, e.g., mysql binlog, i.e., stronger consistency, higher latency
+
+pattern 3: active-active
+1. each DC has both local and aggregate cluster, and local to each aggregate cluster's MM
+2. producer only write to local clusters. Producer/consumer in both DCs
+
+active-active only means we can accept writes in multi-dc, and resolve conflicts, e.g., vector clock, 2PC, Paxos....
+
+
+Alternative: aavoid aggregate clusters
+1. prefix topic names with DC tag
+2. config MM to mirror remote topic only
+3. consumer need to sub to topics with both DC tags
+
+Challenge: need to make sure multi-dc stragetgy is consistent with other data stores
+Problem: need to make computed data avaialbe in all DCs
+Ideas
+1. active-active: no failover required
+2. stretched db across DCs, only run one consumer per DC at any given point of time
+
+Other consideration
+1. enable SSL in MM, to safely transfer data cross DC
+2. Run MM close to target cluster
+
+--------
+CDN
+
+
