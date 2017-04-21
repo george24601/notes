@@ -11,6 +11,8 @@ For existence proof, i.e., "any", "one", "exits" types of problems,  we can just
 (non-intefering) parameters, basically we use extreme case as a subproblem to introduce additioal conditions, since too hard to see patterns in general problem
 
 One common problem is inequality constraints, such constraint can possibly satisfied <=> optimal values satify it!
+When we have many optimal solutions with the same value, we can focus on the "optimal on a second dimension" of these optimal solutions.
+This way we can greatly limit the number of alternative solutions we have to consider at each step.
 
 -----
 

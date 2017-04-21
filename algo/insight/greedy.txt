@@ -9,11 +9,9 @@ The tricky part, therefore, is what is the step/state information we need to cap
 5.One way to prove greedy is that each change toward the greedy solution only improves the final score, until we converge to the greedy
 version we claim. This "gradual" improvement pattern can be seen in a lot non-greedy problems as well,i.e., iterative methods
 
----------
+6.Since greedy solution, by nature, is "optimal" and closely associated withe extreme value, we can even add more extreme values, i.e., the
+extreme case of all optimal solutions. The intention is that the addition of this extreme case, introduces additional condictions which
+makes proof and code easier by limiting all possible options to only 1
 
-O*: optimal solution => unknown at this moment
-G: greedy solution
-
-and then proof by contradiction, may be in many different steps => at least probing the optimal solution properties gives SOME properties,
-even if greedy itself is not enough, => if the optimal solution is different, it can't be optimal, in each case => may get a solution as
-same cost as the greedy solution
+7. Another common insight is to preserve the flexibility , pick the one least flexible in terms of interacting with future steps if such
+interaction can ever happen, otherwise, we just need to show current interactive already gives us the best

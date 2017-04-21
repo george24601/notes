@@ -79,7 +79,7 @@ Content-Transfer-Encoding: binary
 Response:
 
 
--------
+-------------
 From FB graph API:
 
 curl \
@@ -102,3 +102,4 @@ curl \
       “body”:”{\”data\”: [{…}]}}
 ]
 
+-------------

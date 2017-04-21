@@ -15,9 +15,6 @@ if ls /path/to/your/files* 1> /dev/null 2>&1; then
       echo "files do exist"
 
 
-#log into ssh with identity file, which stores private key for RSA or DSA
-ssh -i $CERT $HOST
-
 unzip $FROM -d $TARGET_DIR
 
 host $FIND_IP_OF_HOST
