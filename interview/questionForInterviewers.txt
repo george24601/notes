@@ -1,0 +1,13 @@
+Here are problems I ran into during my job, and I have to come up with a solution. These are genuine problems that I don't think I have a good answer. 
+
+1. How do you test your fault-tolerance code?
+The common approach seems to do that during system testing, e.g., chaos monkey. But how to "detect" anomaly when something went wrong?
+Any effort/attempt to do something in unit/integration testing?
+
+2. How do you test the correctness of your stream processing code?
+
+3. What is the ideal test coverage in your opinion?
+
+4. Any cross-DC consensus tool used? What is the performance?
+
+5. Could you give me a case when switching from MVP to real product, when the MVP's design is no longer enough, and yet you have tight time constraint?

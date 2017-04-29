@@ -1,0 +1,84 @@
+--------
+Migrating our core product's calculation engine from RDBMS to data warehouse
+1. Most Challenging
+Lead a project on a product that no one knows how to use it, while racing against clock to satify a big client 
+
+2. What You Learned
+Need to keep technical debt of code base low. It is ok to sacrifice code quality to address immediate business need, but need to remember to fix them later 
+One of the best ways to convince others is to use data and evidence. The process of getting those data and evidence helps you understand the problem too.
+Even under huge pressure, try not to let your negative emotion to affect others. It will bring down others' productivities
+Enforce cross-checks on works when it could affect other people's decisions.
+
+3.Most Interesting
+Add various small tools to help reshard the data warehouse to eliminate query skews, and devised a way to force query plan executed in a certain order.
+
+4.Hardest Bug
+Deep down in the 3000+ node dependency tree, there is a rarely-called legacy code that has the order of operand's filpped. Therefore, the final result 1 million dollar off during end-to-end testing. 
+I had to write a small tool to compare and contrast the results in the 3000+ node dependency tree to do the RCA, and reverse engineer the row that is off.
+
+5.Enjoyed Most
+Sense of ownership. From archtectural design, to implementation, to testing and roll out, I am the only developer that is involved in all
+
+6.Conflicts with Teammates
+Architechtrual disagreement. I have to convince manager to allow me to performance testing to prove the orignal architecture is not going to work.
+
+7.Challenging interaction
+During my feasibility report, I underestimated the workload by a factor of 3. I have to face our angry VP privately, apologize and decide if my old conclusion is still feasible - more performance tests.
+
+8.Failure
+Yelled at a teammate who made a careless mistake and cost me a night of sleep. This shows at that stage I still lack emotional control.
+
+9.Success
+Able to satisfy SLA. Production run is stable with only minimal amount of human interaction, mostly to address the sharding key issue. 
+
+------------
+Build real time ingestion and stream joins capabilties from scratch
+
+1. Most Challenging
+Use technology no one has prod experience with, yet our result will be displayed on all items against the whole traffic of india.
+
+2.What You Learned
+Hand-on HA, DR, distriuted system, and monitoring experience
+
+3.Most Interesting
+Implement a 4-way stream join with no existing examples. Have to design it based on my understanding of the technology
+
+4.Hardest Bug
+Scenario:
+The client agent I wrote flushes data every 150 ms, and when we start bunch of agents in parallel, it quickly overwhelms the memory of schema server
+Action:
+ I am unable to reproduce it in our dev environment, but that server needs to be HA. Read the source code the schema server and see the potential issue, but it is fixed in a giant PR. 
+Result: 
+Set up monitoring rule so that when the client side does mass rollout, we will jsut do a rolling restart on the schema servers
+
+5.Enjoyed Most
+Full stack ownership on features affects our whole Indian use base.
+
+6.Conflicts with Teammates
+Scenario: 
+Decide Technology to use. 
+Action:
+Doing a design competition to see each alternative's pros and cons
+Result: 
+we end up with a hybrid approach - different technoloy for different parts
+
+7.Challenging interaction
+Scenario: 
+For the client agent I opt for a MVP design, trade flexibility for stability. Our CTO is not happy about that decision
+Action:
+1.Explain that I don't want the implementation the first step of ingestion to become bottleneck
+2.Plan to introduce the flexible design in v2.
+Result:
+MVP approach is stable, and never had chance to implement v2.
+
+8.Failure
+Scenario:
+MVP approach is stable, and never had chance to implement v2, but we have more feature requests on the client agent
+Action:
+As a result we keep building on the MVP
+Result:
+User has to update the jar if they want to get the new schemas, and they have knowledge to other team's schema too.
+
+9.Success
+Stable run of the streaming pipeline for 3 months with result seen by every single user of main website
+
