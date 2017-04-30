@@ -13,3 +13,11 @@ Any effort/attempt to do something in unit/integration testing?
 5. Could you give me a case when switching from MVP to real product, when the MVP's design is no longer enough, and yet you have tight time constraint?
 
 6. When do you pay for your techinical debt, espeically seems there is ever coming business request?
+
+7. Do you do roll-back/downgrade on prod? How is that process?
+
+8. Any sev1 happened before, and how do you solve them? Espeically the part where the cookbook couldn't handle it?
+
+9. How do you debug prod issues? Any examples? 
+
+10. How does contributing to open sources align with your OKR?

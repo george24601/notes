@@ -9,13 +9,11 @@
 5. Knowing rules of the game doesn't mean you can cheat. In fact, human beings are really good at detecting fake emotions, unless you are a great actor. The overall goal is to present yourself in an efficent way. Conversely, an interviewer needs to  understand what tricks the candidate might pull off.
 
 ### What is covered here ###
-```
-1. Mostly my answer to behavioral questions and analysis. It is most likely not appropriate to share other people's answers
+1. Mostly my answer to behavioral questions and analysis, because it is not appropriate to share other people's answers
 
-2. For coding questions, I just use competititve programming to do timed, pressured practice
+2. For coding questions, I just use competititve programming to do timed, pressured practice. 
 
 3. For design questions, see my notes on architectures.  
-```
 
 ### Sources ###
 Cracking the Coding Interview

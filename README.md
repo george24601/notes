@@ -3,27 +3,24 @@
 
 "Mining Massive Datasets" notes
 
-Algorithm library, mostly in C++
-
 ### Architecture ###
 Reflections on architecture problems
 
 ### Readings ###
 Papers with summaries and study questions/answers
 
+Book reading notes
+
 ### Program Design ###
 Code-level design
 
 Patterns
 
-### Web Services ###
-Akka-http
+### DevOps ###
+Notes and scripts
 
-### Streaming ###
-Kafka
+### Service ###
+Notes and thought on web services
 
-Spark
-
-HDFS
-
-Samza
+### Interview ###
+Reflections on interviews
