@@ -11,3 +11,5 @@ Any effort/attempt to do something in unit/integration testing?
 4. Any cross-DC consensus tool used? What is the performance?
 
 5. Could you give me a case when switching from MVP to real product, when the MVP's design is no longer enough, and yet you have tight time constraint?
+
+6. When do you pay for your techinical debt, espeically seems there is ever coming business request?
