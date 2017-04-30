@@ -1,31 +1,82 @@
 1.What is your greatest weekness?
+Scenario: the flip side of being passionate about my work is that I may get emotionally affected by my work
+Action:
+Every time I feel I am being negatively emotionally affected. I force myself to leave my desk and think in the opposite direction
+When meet failure, think that is a new case I discovered, my mind gets streched
+When meet success, I force myself to reflect and see if I could do again what would I do differently
+The overall goal is avoid my negative emotion affecting others
+Result:
+Most of my communications at work is only about facts or conclusions supported by facts. The only emotional part I communicate is when I praise others.
 
 2.Give me a case where you trade technical debt for business goals
+See past project on the SDK design
 
 3.Give me a case where you trade business goals for technical debts
-
-4.Tell me about yourself
+Generally we don't sacrifice business goals. Very hard for me to recall.
 
 5.What is your long-range objective?
+Scenario:
+I want to become an architect that could design and be responsible for performance-sensitive, mission-critical components.
+Action:
+1. Coding skill: weekly competitive programming practics to stay sharp
+2. Architecture skill: daily reader of the morning paper and take notes
+3. People skill: constant touch base with previous managers to get feedback and advice from them
 
 6.What kinds of people do you have difficulties working with?
+Some people may have strong preference on how to solve problems, and generally not open to a different solution 
+Scenario:
+When there is scope creep, one coworker perfers to put the scope screep code in the same PR, and demands others to do the same thing. This means PR is often > 500 lines
+Action:
+Request to allow me to open new ticket and address the creeped scope separately got refused, since that teammate has the authority to overrule me.
+Then I at least make sure I rebase my code frequently so that each layer of the scope is in a separate commit, so that others can just click on that specific commit, instead of the whole diff 
+Result:
+A compromise, but I respect my epic lead's authority, and I don't really have hard data to prove that my approach is easier to review than the other way.
 
 7.Describe a situation you observed or were a part of where you feel communication was handled particularly well by
 someone else. What did they do? Why do you think it was effective?
+Scenario:
+The stressful data warehouse projects, the communication from my VP 
+Action:
+1. gives us recongization through private email and public award
+2. close the door and tell me what I did wrong and the serious consequence of that
+3. Shield us from the big client's manager who makes fun of us during conference calls
+Result:
+I became much less emotionally affect by the progress of the project, which is critical to the energy conservation in a long project.
 
 8.Tell me about one of the toughest groups you have had to get cooperation from. Did you have formal authority?
 What did you do?
+Scenario:
+I have to lead a team of developers from another IBM department which is shutting down.
+Action:
+1. Through code review, and discuss design decisions with them, so that we can understand each other better
+2. Ask for what they recommend for reading and recommend readings to them
+Result:
+Mixed result: both of them quit within 3 months and switched to a completely different career, citing the company is not a good fit.
 
 9.Tell me about a decision you made in the past that later proved to be a wrong decision. Why was it wrong? What
 would you do differently now, if anything, in making that decision?
+See past project, my biggest mistake
 
 10.When dealing with individuals or groups, how do you determine when you are pushing too hard?
+Scenario:
+During our data warehouse project, one of my teammates start saying "whatever you say", and another one start taking long smoking breaks.
+Action:
+I realize they are buring out, so I took them to the best steak house in Toronto, out of my own pocket.
+Result:
+Still talk to them privately today
 
 11.Tell me about a team where you were the leader. How did you promote the effectiveness of your team? What
 were the results?
+Action:
+Through code review, always encourage alternate solutions even though the current one would work
+Ask for feedback from them
+(Should have done), ask for their short term career goals, and conciously coach them for it
+Result:
+Both of them left company and found better job, because we were imposing raise freeze at that moment.
 
 12.Describe some situations where you wished you had acted differently with someone at work/school. What did you
 do? What happened?
+See the DW project.
 
 13.Is there a particular experience that stands out as one you never want to repeat because you did not meet your
 normal standards of performance? What, and why?
@@ -33,10 +84,26 @@ normal standards of performance? What, and why?
 14.Tell me about yourself,a.k.a., why are you the best candiate for the job
 
 15.Tell me a case where you accept a decision you disagree
+See people you find hard to work with.
 
 16.Tell me about a time when you tried and failed?
+Scenario:
+Train hard to qualify for round 2 of google code jam, but still unable to beat it
+Action:
+To prepare: regular programming contest competitors
+Seeing the result: accept that I am not good enough in this context, but also appreciate that compared with myself, I made a lot of correct decisions during contest.
+Result:
+Still training and will compete in more rounds/contests 
 
 17.Would you rather work with information or with people? 
+It is means of solving problem, see the "most challenging" part of my past projects, which often involved with working with info and people heavily.
 
 18.Tell me a case you spend too much time researching
+Scenario:
+Debugging a client escalation on memory leak, found one leak, but wasn't sure if that is all. But client issue is gone away already
+Action:
+Asked for extra time from the manager, he doesn't agree with me but sitll approved
+Spend an extra week researching and debugging the leak, so conclusiton
 
+Result:
+Why I did wrong? given we have other tasks at hand, and the client's issue has gone away already. This ticket has lost its priority, and that means I should switch prioritiy at that time.
