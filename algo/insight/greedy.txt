@@ -1,17 +1,14 @@
-1. makes locally optimal choice at each step
-=> the "each step" part strongly resembles DP. In fact, greedy is a viable option at each state of DP. However, it is also easy to ignore the fact that "globally optimal" doesnt not lead to "locally optimal": greedy is the other way around! 
-The tricky part, therefore, is what is the step/state information we need to capture?
+makes locally optimal choice at each step
+=> the "each step" part strongly resembles DP. In fact, a lot of "greedy" solution should be solved in DP and vice versa!. 
 
-2. Often used as part of solution
+=> if we find a decompositon that locally optimal => globally optimal, then probably we can force a greedy approach by proving that we can find a solution s.t. all locally optimal points can be reached at the SAME time in our solution => here we see a level of "independence" among greedy decomposed steps
 
-4. by nature, greedy problems are decomposable, but need to define "step" carefully, i.e., step is the dual of "locally optimally solution"
-
-5.One way to prove greedy is that each change toward the greedy solution only improves the final score, until we converge to the greedy
+One way to prove greedy is that each change toward the greedy solution only improves the final score, until we converge to the greedy
 version we claim. This "gradual" improvement pattern can be seen in a lot non-greedy problems as well,i.e., iterative methods
 
-6.Since greedy solution, by nature, is "optimal" and closely associated withe extreme value, we can even add more extreme values, i.e., the
-extreme case of all optimal solutions. The intention is that the addition of this extreme case, introduces additional condictions which
+Since greedy solution, by nature, is "optimal" and closely associated withe extreme value, we can even add more extreme values, e.g., the
+extreme case of all optimal solutions, or locally optimal instead of global optimal. The intention is that the addition of this extreme case, introduces additional condictions which
 makes proof and code easier by limiting all possible options to only 1
 
-7. Another common insight is to preserve the flexibility , pick the one least flexible in terms of interacting with future steps if such
+Another common insight is to preserve the flexibility , pick the one least flexible in terms of interacting with future steps if such
 interaction can ever happen, otherwise, we just need to show current interactive already gives us the best

@@ -97,13 +97,16 @@ Still training and will compete in more rounds/contests
 
 17.Would you rather work with information or with people? 
 It is means of solving problem, see the "most challenging" part of my past projects, which often involved with working with info and people heavily.
+If by working with people you mean delegation, then I will do that as soon as we find it is too hard for me.
+In general, it is very vague to answer, definitely need more context 
 
 18.Tell me a case you spend too much time researching
+In general, I ask for help when I got stuck for more than 20 mins, and if it is not progressing after a day, I let my manager know and we will timebox it. So even if we yield result, the damage is very controlled.
+ 
 Scenario:
 Debugging a client escalation on memory leak, found one leak, but wasn't sure if that is all. But client issue is gone away already
 Action:
 Asked for extra time from the manager, he doesn't agree with me but sitll approved
 Spend an extra week researching and debugging the leak, so conclusiton
-
 Result:
 Why I did wrong? given we have other tasks at hand, and the client's issue has gone away already. This ticket has lost its priority, and that means I should switch prioritiy at that time.
