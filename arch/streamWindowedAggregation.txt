@@ -1,0 +1,5 @@
+Design a system such that we display for each item, we show on its page number of that item bought in the last 24 hours. 
+We need to update the count as soon as a user purchanged something
+
+-------------------
+Updated version: we show most popular items among all items in the last 24 hours

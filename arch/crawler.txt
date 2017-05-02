@@ -1,0 +1,5 @@
+Design a Web Crawler, how would you avoid getting into in nite loops?
+
+You have a billion urls, where each is a huge page How do you detect the duplicate documents?
+
+
