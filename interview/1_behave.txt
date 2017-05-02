@@ -1,39 +1,57 @@
 1.
 Tell me about a time when the ability to communicate effectively was critical to the success of a task or project.
-How did you handle it?
+Architectural arguments example
 
 2.
-Describe a situation where initiative on the part of you or someone else was critical. Why was it important? How
-was it handled?
+Describe a situation where initiative on the part of you or someone else was critical. 
+Same as 1
 
 3.
 Describe an example of a time when you had to approach several people for support or cooperation, whom you
-considered quite different from one another. What did you have to do differently with each person? How did you
-know what to do differently?
+considered quite different from one another. 
+SCENARIO: new team, one new grad plus an experience hire
+Action: for new grad, promote his ideas, ask for alternatives all the time, through code review. More experienced hires, just let it go
+freely, only check for code reviews and major architectural design, and leave everything to her discretion.
+Praise them in front of the managers, espeically when they are present.
+Result: Both quit within a money. They cite the work being uninteresting and they are bored
+What I should have done: 
+have a talk with them asking for what they want to do. Do they prefer breath or depth. 
+Have a monthly touch-base with them
+
 
 4.
-Describe a situation in which your first attempt to sell an idea failed. How did you react to this? What other
-approaches did you try?
+Describe a situation in which your first attempt to sell an idea failed. 
+Important thing is the follow up, do you try again or just give up.
+Architecture change argument
 
 5.
 Tell me about one of the toughest groups you have had to get cooperation from. Did you have formal authority?
-What did you do?
+Same as 3.
 
-6.
-Of the people you have encountered or know about in public positions of leadership, who do you look to as a model
-and why?
-
-7.Tell me about a situation you observed or were a part of where there were time and/or resource constraints. What
-happened? Why?
+7.Tell me about a situation you observed or were a part of where there were time and/or resource constraints.
+Senario: operate under the gun of the client
+Action: 
+Externally, try to seqeeze as much performance as out of current produciton so that we can to buy time for us.
+Internally, we don't tell any of the frontline workers how serious the issue is, because we are already pushing them 9 hours a day at
+coding.
 
 8.
 Describe a situation where a prompt and accurate decision on your part was critical. What did you consider in
 reaching your decision?
+Very hard for me to make snap decisions, because I have to think twice before I can communicate with the supriors. In fact, often I force
+myself to keep my mouth shut, go back to my desk, and write out and formulate my ideas first, before I cam present it to the lead.
 
 9.
-Describe two examples of good decisions you have made in the last six months. What were the alternatives? Why
-were they good decisions?
+Describe two examples of good decisions you have made in the last six months. 
+Scenario: 
+huge turnover at my last job
+Action: 
+move on from my last job, and go to US for bigger pond
+Alternative: 
+Can interview for more alternatives, but I get much less interview in Toronto, as compared to in NYC
+Stay on the current job is not a good idea either - Our CTO left only 1 month after me.
 
 10.
 Tell me about a team where you were the leader. How did you promote the effectiveness of your team? What
 were the results?
+Almost same as 3, although need to stress what to work on
