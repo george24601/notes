@@ -1,0 +1,52 @@
+Design a system such that every time we bought an item, we show on the item page number of that item bought in the last 24 hours. 
+
+Q: how soon you want to see the result materialized?
+We need to update the count as soon as a user purchased something
+
+Q:
+Workload: 10k per second purchases, 200k per second visits
+
+Q:
+Since we are using windowed aggregation, what is the sliding window?
+Answer: we slide it by hour
+
+Basic idea:
+for each purchase, we generate a (itemID, hour of purchase, number purchase, metadata, message), and in DB we keep (itemID, date) -> count mappings, upon receiving a new event, we update the corresponding entry
+
+For every page hit, we can do a range search based on (itemID, minHour) ->(itemId, maxHour), and calculate the result in memory, since i assume most dbs accept such sorted range queries efficiently
+
+alternatively, upon receiving the event, we can update all 24 hours result in the future. The main benefit is that upon read, it will be a k-v look up instead of sorted range scan. However, since the scan range is ordered, it should be efficient anyway, and producer doesn't need to understand consumer's requirements -> nicely decoupled
+
+Note the trade off here: we spend more space to save SOME processing time, and if an item is not very frequently used, we end up wasting all the space!
+
+Consider mutli-DC case
+Standard: aggregate cluster problem, either active acitve or active passive
+active - active: each cluster has an aggregate cluster, and service points only to those processer/states within the same DC. Note that if my queue is active-active, my db needs to active-active too, so that we can benefit from the independence of AA 
+
+active-passive:
+The problem with AA is that we don't want to have an aggregate cluster on every single one. So we just mark a few of the DC as master DC, and host aggregate clusters only on those DCs.
+
+We broad cast to potential master DCs all the time, but only one updates state at any time. The db state will be CLC ed to all other DCs so consumers can use
+
+From HA perspective, when the master is down and up again, we need to repopulate lost data to old master from the new master
+
+
+-------------------
+version 1: what if we want to show most popular items among all items in the last 24 hours
+
+Every now and then, we can do a full table scan to calucate 
+1. total number of a single item sold in the last 24 hours
+2. max of those #s sold 
+
+the data volume would be 24 * 3600 * 10k = 40 M rows =>  scatter it into 10 processors, each has noly 4M rows, and populate it into a serving data store. 
+
+----------
+version 2: On top of version 1, the result update should be instant
+
+Upon seeing a new record, the processor needs to do the recalculation
+1. get all items sold in the last 24 hours
+2. compute their sums
+3. find the new order
+4. populate the serving data store, so that we don't have to do live recomputation on the ready query, we do it on the write!
+
+Moreover, if the process should run at least once an hour, to make sure our serving db has up to date result   

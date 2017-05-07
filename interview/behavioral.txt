@@ -110,3 +110,11 @@ Asked for extra time from the manager, he doesn't agree with me but sitll approv
 Spend an extra week researching and debugging the leak, so conclusiton
 Result:
 Why I did wrong? given we have other tasks at hand, and the client's issue has gone away already. This ticket has lost its priority, and that means I should switch prioritiy at that time.
+
+
+19.
+In many interviews, you will need to tell the reason you are applying for this company. And for some company, this question is a must-have. Although there’s no standard answer here, some answers are clearly bad and it’s almost for sure that the candidate will fail.
+
+Some candidates may say that they want to join here because they didn’t have much chance to learn in their old companies or there’s no room to grow. This seems even worse if they came from some large corporations. If you are working at a company with 100+ employees, how could you say that you have few chance to learn any more?
+
+What the interviewer really want to hear is why you really want to join us instead of why you want to leave your previous company. Companies are always seeking people who are great fit. If you don’t really believe in the value of the company and you don’t fit into its culture well, you are unlikely to get hired. That’s exactly why this question is very important.

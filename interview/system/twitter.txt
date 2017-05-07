@@ -1,0 +1,14 @@
+How to design twitter?
+http://blog.gainlo.co/index.php/2016/02/17/system-design-interview-question-how-to-design-twitter-part-1/
+
+MVP:  allow people follow each other and view others feeds
+
+
+-------
+extension 1: trending topics
+
+
+extension 2: who to follow?
+
+extesion 3: search
+

@@ -1,0 +1,9 @@
+If you can’t make a prototype within one or two weeks, I might ask you to simplify it.
+
+Good candidates are able to tell you what assumptions are made and how this design is compared to others. To make it even clearer, ask yourself what are alternative solutions and why you make the system in this way instead of others.
+
+Although system design questions don’t have any standard answers, you can still search for how these products/features are implemented. Compare it with your own designs and understand the difference. High Scalability is highly recommended, but don’t spend too much time on the particular tools 
+
+As an interviewer, candidates that I would give strong hire usually make the whole interview process very comfortable. It’s completely a discussion process and it’s like we are working on the problem together. They won’t pretend to know everything. Instead, they will always tell me what they are stuck with and how they are approaching the problem.
+
+A good practice is to think about what alternative approaches are and why the approach you picked is better. Usually, the reason it’s better is due to some constraints and assumptions. So it’s important to validate those assumptions. Changing your mind during the interview is completely okay. In fact, it’s a good sign that you are considering all scenarios.

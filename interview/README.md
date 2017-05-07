@@ -13,7 +13,7 @@
 
 2. For coding questions, I just use competititve programming to do timed, pressured practice. 
 
-3. For design questions, see my notes on architectures.  
+3. For system design questions, see system/ folder
 
 ### Sources ###
 Cracking the Coding Interview
