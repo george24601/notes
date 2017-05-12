@@ -1,0 +1,18 @@
+For every tax calculation done before a sale is complete, you should use DocType SalesOrder. This will not create a record of the
+calculation in AvaTax, so you won't have to do any cleanup for abandoned carts.
+
+When you recognize the sale, make another call to AvaTax with DocType SalesInvoice to record the transaction for reporting. You can commit
+the document at this time, or later, depending on your business process. i.e,
+1. issue charge on CC
+2. issue GetTax with DocType = salesInvoice
+3. issue GetTax with Commit = true (??)
+
+The VAT decision process utilizes the BusinessIdentificationNo field of the GetTaxRequest or Line object, which is where you will send the
+buyer’s VAT registration ID.
+
+------------
+For the majority of cases, however, we recommend that you stub out the AvaTax API calls. This will save you on both the time it takes to run
+your unit and integration tests (and non-tax functional tests), and the number of transactions you consume.
+
+In tests where a live tax calculation is required (for example, to check if the service is available or if your credentials are correct),
+there is no replacement for an actual call to the API
