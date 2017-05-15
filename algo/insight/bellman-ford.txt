@@ -1,5 +1,0 @@
-DP + relaxation techinque: when you have weight on edges, unlike BFS which handles unit weights
-
-find negative cycle
-
-dynamically changed edge conditions - change relaxation

@@ -1,0 +1,64 @@
+##########
+BFS
+can be used for shortest path of all edges are unit length
+
+pseudo code
+
+q = {root}
+
+while(!q.isempty){
+  head = q.pop
+
+  if(visited[head])
+    continue;
+  else
+    visited[head] = true
+
+  foreach neighbor of head //replace it with your generation logic
+    q.push(neighbor);
+}
+
+Normally dfs and bfs does not return result, instead, states are mutated via state vraiables 
+
+Note that spider-growth works with multiple start point too, just imagine we have a unit length from a fiction start point to all the
+current expanding points
+
+
+###########
+Bellman-Ford
+DP + relaxation techinque: when you have weight on edges, unlike BFS which handles unit weights
+
+find negative cycle
+
+dynamically changed edge conditions - change relaxation
+the most valuable part of F-W is its recurrence relationship
+
+
+############
+Floyd-Warshall
+
+P[i][j][k] points to two states
+1.P[i][j][k - 1]
+2.p[i][k][k -1] and p[j][k][k -1]
+
+------
+
+
+To retrieve path
+
+last[i][j] = the last node before j on the shortest path from i to j
+
+Retrive(end)
+{
+	if(end == start) return;
+	lastNode = last[start][end]
+	Retrieve(last[start][lastNode])
+	append lastNode to toReturn list
+}
+
+3.can consider F-W for all questions related to all node pair problems
+
+------
+Note that FW can be done only with n^2 space, the reason is that
+
+p[i][k][k-1] = p[i][k][k]
