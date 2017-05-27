@@ -1,0 +1,17 @@
+1. Why the trace system needs to be ubiquitious?
+
+2. Why the trace system needs to be continuous/always turned on?
+
+3. Why developer should not be aware of the trace system? How does Dapper achieve this transparency?
+
+4. Why only 0.01% sampling rate?
+
+5. Why Dapper chose an annotation-based model?
+
+6. Describle the span and trace tree structure. Draw a sample tree
+
+7. Given that two-server span is common, how does Dapper handle clock skew in the two servers included in the span?
+
+8. How does dapper track asynch control paths?
+
+9. How does dapper trace rpc calls?

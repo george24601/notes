@@ -1,0 +1,55 @@
+the overall system structure has to be inferred – under constant deployments it doesn’t make sense to talk about a central master configuration file
+
+comprehensive instrumentation, sampling (to cope with the volume of data), centralised storage for information, and an API with tools built on top for exploring the results.
+
+by instrumenting these building blocks Dapper is able to automatically generate a lot of useful trace information without any application involvement. Dapper provides a trace context associated with a thread, and tracks the context across async callbacks and RPCs.
+
+Traces are sampled using an adaptive sampling rate (storing everything would require too much storage and network traffic, as well as introducting too much application overhead)
+
+Traces are stored in BigTable, with one row in a trace table dedicated to each trace (correlation) id.
+
+Understanding system behavior in this context requires observing related activities across many different programs and machines
+
+ a performance artifact may be due to the behavior of another application
+
+A tracing infrastructure that relies on active collaboration from application-level developers in order to function becomes extremely fragile, and is often broken due to instrumentation bugs or omissions, therefore violating the ubiquity requirement.
+
+A Dapper trace represents a tree of activity across multiple services. Each trace is identified by a probabilistically unique 64-bit integer known as its trace id. Nodes in the trace tree are called spans, and represent the basic unit of work.
+
+. Nodes in the trace tree are called spans, and represent the basic unit of work. Edges between spans indicated causality. Spans have a human-readable span name as well as a span id and a parent ido
+In order to protect Dapper users from accidental overzealous logging, individual trace spans have a configurable upper-bound on their total annotation volume. 
+
+Span data is written to local log files, and then pulled from there by Dapper daemons, sent over a collection infrastructure, and finally ends up being written into BigTable. “A trace is laid out as a single Bigtable row, with each column corresponding to a span.
+
+The median latency for trace data collection – that is, the time it takes data to propagate from instrumented application binaries to the central repository – is less than 15 seconds
+
+the most expensive thing Dapper does is writing trace entries to disk. This overhead is kept to a minimum by batching writes and executing asynchronously.
+
+Key to keeping the overhead low is collecting only a sample of traces
+
+for high-throughput services, aggressive sampling does not hinder most important analyses. If a notable execution pattern surfaces once in such systems, it will surface thousands of times. Services with lower volume – perhaps dozens rather than tens of thousands of requests per second – can afford to trace every request; this is what motivated our decision to move towards adaptive sampling rates.
+
+Dapper users would like trace data to remain available for at least two weeks after it was initially logged from a production process. The benefits of increased trace data density must then be weighed against the cost of machines and disk storage for the Dapper repositories. Sampling a high fraction of requests also brings the Dapper collectors uncomfortably close to the write throughput limit for the Dapper Bigtable repository.
+
+For each span seen in the collection system, we hash the associated trace id as a scalar z, where 0 ≤ z ≤ 1. If z is less than our collection sampling coefficient, we keep the span and write it to the Bigtable. Otherwise, we discard it. By depending on the trace id for our sampling decision, we either sample or discard entire traces rather than individual spans within traces.
+
+we find that the jobs in one computing cluster often depend on jobs in other clusters. Because dependencies between jobs change dynamically, it is not possible to infer all inter-service dependencies through configuration information alone. Still, various processes within the company require accurate service dependency information in order to identify bottlenecks and plan service moves among other things. 
+
+If these exceptions occurred in the context of a sampled Dapper trace, the appropriate trace and span ids are included as metadata in the exception report. The frontend to the exception monitoring service then provides links from specific exception reports to their respective distributed traces.
+-------------
+
+A front-end ser- vice may distribute a web query to many hundreds of query servers, each searching within its own piece of the index. The query may also be sent to a number of other sub-systems that may process advertisements, check spelling, or look for specialized results, includ- ing images, videos, news, and so on. Results from all of these services are selectively combined in the results page; we call this model “universal search”
+
+Although a trace analysis system operating on hours-old data is still quite valuable, the availability of fresh information enables faster reaction to production anomalies.
+
+Two classes of solutions have been proposed to ag- gregate this information so that one can associate all record entries with a given initiator (e.g., RequestX in Figure 1), black-box and annotation-based monitoring schemes.
+
+Dapper records a human-readable span name for each span, as well as a span id and parent id, in order to reconstruct the causal relationships between the individual spans in a single distributed trace. Spans created without a parent id are known as root spans. All spans associated with a specific trace also share a com- mon trace id 
+
+In a typical Dapper trace we expect to find a single span for each RPC, and each additional tier of infrastructure adds an additional level of depth to the trace tree.
+
+a span can contain informa- tion from multiple hosts; in fact, every RPC span con- tains annotations from both the client and server pro- cesses, making two-host spans the most common ones
+
+ When a thread handles a traced control path, Dap- per attaches a trace context to thread-local storage. A trace context is a small and easily copyable con- tainer of span attributes such as trace and span ids.
+
+When computation is deferred or made asyn- chronous, most Google developers use a com- mon control flow library to construct callbacks and schedule them in a thread pool or other executor. Dapper ensures that all such callbacks store the trace context of their creator, and this trace con- text is associated with the appropriate thread when the callback is invoked. 
