@@ -53,3 +53,44 @@ a span can contain informa- tion from multiple hosts; in fact, every RPC span co
  When a thread handles a traced control path, Dap- per attaches a trace context to thread-local storage. A trace context is a small and easily copyable con- tainer of span attributes such as trace and span ids.
 
 When computation is deferred or made asyn- chronous, most Google developers use a com- mon control flow library to construct callbacks and schedule them in a thread pool or other executor. Dapper ensures that all such callbacks store the trace context of their creator, and this trace con- text is associated with the appropriate thread when the callback is invoked. 
+
+In addition to simple textual annotations, Dapper also supports a map of key-value annotations that give devel- opers more tracing power, such as maintaining counters, logging binary messages, and transporting arbitrary user- defined data along with a traced request within a pro- cess.
+
+span data is written (1) to local log files. It is then pulled (2) from all production hosts by Dapper daemons and collection in- frastructure and finally written (3) to a cell in one of sev- eral regional Dapper Bigtable [8] repositories
+
+A trace is laid out as a single Bigtable row, with each column corresponding to a span, i.e., sparse table
+
+First, an in-band collection scheme – where trace data is sent back within RPC response headers – can affect application network dynamics. In many of the larger systems at Google, it is not uncommon to find traces with thousands of spans. However, RPC responses – even near the root of such large distributed traces – can still be comparatively small: often less than ten kilobytes. In cases like these, the in- band Dapper trace data would dwarf the application data and bias the results of subsequent analyses. Secondly, in-band collection schemes assume that all RPCs are per- fectly nested.
+
+We find that there are many middleware systems which return a result to their caller before all of their own backends have returned a final result. An in-band collection system is unable to account for such non-nested distributed execution patterns.
+
+The most important sources of trace generation overhead in the Dapper runtime libraries are creating and destroy- ing spans and annotations, and logging them to local disk for subsequent collection. Root span creation and de- struction takes 204 nanoseconds on average, while the same operation for non-root spans takes 176 nanosec- onds. The difference is the added cost of allocating a globally unique trace id for root spans.
+
+Writes to local disk are the most expensive operation in Dapper’s runtime library, but their visible overhead is much reduced since each disk write coalesces multi- ple log file write operations and executes asynchronously with respect to the traced application.
+
+In practice, we have found that there is still an adequate amount of trace data for high-volume services when using a sampling rate as low as 1/1024. 
+
+Using a lower sampling frequency has the added benefit of allowing data to persist longer on the local disks of host machines before being garbage-collected, which gives more flexi- bility to the collection infrastructure.
+
+We have chosen a runtime sampling rate which yields slightly more data than we can write to our repositories, and we throttle that write rate with the secondary sampling coefficient in the collection system. 
+
+Use cases:
+Access by trace id: The DAPI can load any trace on demand given its globally unique trace id.
+Bulk access: The DAPI can leverage MapReduce to pro- vide access to billions of Dapper traces in parallel. The user overrides a virtual function which accepts a Dapper trace as its only argument, and the framework will in- voke that function once for every collected trace within a user-specified time window
+
+Indexed access: The Dapper repositories support a sin- gle index which has been chosen to match our com- mon access patterns. This index maps from commonly- requested trace features (described below) to distinct dapper traces. Since trace ids are allocated pseudo- randomly, this is the best way to quickly access traces associated with a specific service or host machine.
+
+The com- pressed storage required for an index into the trace data is only 26% less than for the actual trace data itself!
+
+so we eventu- ally combined the two into a composite index which al- lows for efficient lookup by service name, host machine, and timestamp, in that order.
+
+Momentary degradation in network performance along the critical path does not affect system throughput, but it can have a profound effect on out- lier latency.
+
+There were many problematic and expensive query patterns which resulted from unintended interac- tions between services. Once identified they were often corrected for easily, but identification itself was difficult before Dapper.
+
+Common queries were harvested from a secure logs repository outside of Dapper, and, using Dapper’s unique trace ids, joined with the Dapper reposito- ries. This mapping was then used to build lists of example queries which were slow for each individ- ual sub-system within universal search.
+
+all Bigtable operations are tagged with the name of the affected table
+
+By communicating directly with the Dapper daemons, fresh data about specific high-latency traces can be gathered without difficulty. During catas- trophic failures, it is usually not necessary to look at ag- gregate statistics to determine root causes and example traces are sufficient.
+

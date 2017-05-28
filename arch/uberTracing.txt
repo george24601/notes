@@ -15,3 +15,6 @@ Merckx lacked any concept of distributed context propagation. It recorded SQL qu
 
 how important it was to have a solid story for keeping request state around and propagating it correctly, without relying on global variables or global state.
 ---------
+Toward that goal, the TChannel protocol specification defined tracing fields as part of the binary format.
+
+spanid:8 parentid:8 traceid:8 traceflags:1

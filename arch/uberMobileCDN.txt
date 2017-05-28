@@ -1,0 +1,3 @@
+ A content delivery system like Uber’s does not exist in isolation and is heavily influenced by content creation and ingestion mechanisms. 
+
+content delivery system has more similarities with an an advertising content delivery platform than it does with a social network because the interactions are one-sided and may require or prompt a response from the user. This difference, in turn, affects the way content must be ingested and selected by the feed ecosystem.

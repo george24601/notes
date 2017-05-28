@@ -15,3 +15,20 @@
 8. How does dapper track asynch control paths?
 
 9. How does dapper trace rpc calls?
+
+10. How does dapper defend against over-ambitious logging from application developer
+
+11. Describe the trace colleciton pipeline
+
+12. Why trace collection is out-of-band?
+
+13. Why use sample rate as low as 1/1024
+
+14. Why adaptive sampling rate?
+
+15. How sampling works to reduce write load to BigTable
+
+16. What is the index Dapper chose on the stored trace, besides the unique trace id
+
+17. In Google's context, why can't infer service dependency from config file alone?
+

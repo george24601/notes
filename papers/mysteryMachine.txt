@@ -1,0 +1,23 @@
+Facebook relies on a minimum of common content for log messages: a request identifier, a host identifier, a host-local timestamp, and a unique event label. The output from all logs is aggregated into a UberTrace service.
+
+UberTrace consistently samples a small fraction of requests for end to end tracing. Trace data is written to Scribe, Facebook’s distributed logging service, and the logs are stored in tables in a data-warehousing infrastructure called Hive.
+
+The Mystery Machine (TMM) pre-processes log records to turn them into segments – the execution interval between two separate log records for the same task. Then TMM begins the process of identifying causal relationships. It starts by assuming that everything causes everything, by generating all possible hypotheses for casaul relationships among segments. Then it works through the corpus of traces and rejects a hypothesis if it finds a counterexample in any trace.
+
+There are three types of relationship that TMM infers:
+
+Happens-before – if the start time of segment B is after the start time of segment A in all requests. (I.e., we can reject a happens-before hypothesis the moment we see a single overlapping pair of trace segments).
+Mutual exclusion – segments A and B never overlap. (In contrast to happens-before, which only allows the ordering [A,B], mutual exclusion allows both [A,B] and [B,A]).
+Pipeline – two tasks t1 and t2 have a pipeline dependency such that if t1 processes data elements in the order d1,d2,d3, then so does t2, and for each pair the processing of the data item in t1 happens-before the processing of the same data item in t2.
+
+Since all log timestamps are in relation to local clocks, UberTrace translates them to estimated global clock values by compensating for clock skew.
+
+It took about 2 hours on a Hadoop cluster to analyse 1.3M requests sampled over a 30 day period. This allows the inferred causal dependencies to evolve alongside the deployed system.
+
+The critical path is defined to be the set of segments for which a differential increase in segment execution time would result in the same differential increase in end-to-end latency. 
+
+We define slack to be the amount by which the duration of a segment may increase without increasing the end-to-end latency of the request,
+
+ outliers are defined to be requests that are in the top 5% of end-to-end latency. 
+
+In fact, the server and other client processing segments are frequently critical, and the overall critical path is relatively balanced across server, client, and network.
