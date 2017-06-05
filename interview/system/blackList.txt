@@ -1,0 +1,1 @@
+Consider we have an online game client, and design a system to update versions before the game starts

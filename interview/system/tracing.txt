@@ -1,0 +1,4 @@
+Design a dapper-like system for tracing and monitoring
+1. Have the ability to drill down a certain request and see its sequence of actions 
+
+2. Have the ability to run analytical queries to see average latency, tail latency, latency by the machine/cluster etc
