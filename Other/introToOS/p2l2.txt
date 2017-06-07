@@ -1,0 +1,53 @@
+regs and stack are per thread, code data and files are per processo
+
+Thread Type: thread DS
+fork(proc, args) : this is not UNIX fork call!
+
+PC = proc, stack = args
+-----
+
+CV: mutex + waiting threads
+
+release mutex
+go on the wait queue
+..wait
+remove from the queue
+re-acquire mutex
+exit the waito
+
+Note that why we use while?
+
+lock (m) {
+	while(list.not_full)
+		wait(m, list_full)
+	remove from list
+}
+
+consider the mutliple consumer case, when we got signalled, another consumer might come in and change the state already, basically consider failed to re-acquire mutex case in the implementation above
+
+mutliple -Reader-single writer example, move actual file io outside critical section
+
+lock(counter_mutex)
+{
+	while(resource_counter == -1)
+		wait(counter_mutex,read_phase)
+	resource_counter++;
+}
+
+..read
+
+lock(counter_mutex){
+	resource_counter--;
+	if(readers  == 0)
+		singal(write_phase)
+
+}
+
+
+
+...writer
+lock(counter_mutex){
+	resource_counter = 0;
+	broadcast(read_phase)
+	signal(write_phase);
+}

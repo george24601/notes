@@ -1,0 +1,54 @@
+designed to maintain the same confidentiality guarantee as physically segregated ledgers but also to allow for the same data integrity assurances of typical blockchain solutions.
+
+the parties involved physically segregating and storing locally confidential contractual information, and sharing a globally replicated
+
+log of only fingerprints, or “hashes”, of the sensitive data and execution commitments.o
+
+Business Logic layer and Distributed Ledger layer are processed by the DA Platform, and the Application layer consists of custom software interfacing with the DA Platform and other systems
+
+ The Distributed Ledger in the DA Platform is comprised of two subcomponents: the Global Synchronization Log (“GSL”) and the Private Contract Store (“PCS”) .
+
+Each Participant has its own PCS, which contains all validated contracts to which the participant is a party. 
+
+The PCS is stored locally and only contains those contractual agreements that the participant is entitled to store and view. The PCS is a durable store of the codified contractual relations between parties. It does not process the executable business logic itself, which is performed at the Business Logic Layer.
+
+alsoS contains a historical record of all executable contracts (both active and inactive) pertaining to a participant, this segment of the Distributed Ledger cannot be constructed from the contents of the PCS alone. To do this, contracts within the PCS must be paired with corresponding active evidences in the GSL.
+
+The GSL is a log of commitments and notifications that guarantees the integrity and auditability of the distributed data stores to contract stakeholders. The GSL establishes a common and complete set of valid transactions that, when combined with the corresponding private contract data in the PCS, comprises the Distributed Ledger. The GSL is a communication layer designed to deliver network-wide integrity guarantees of transaction commitments and notifications.
+
+The GSL serves three primary functions:
+1. To serve as the arbiter of relative order between dependent transactions;
+2. To ensure uniqueness of mutually exclusive events and maintain the state of the ledger data. This state is derived from the stream of transactions; and
+3. To serve as an assured notification mechanism. Any stakeholder affected by a state change of data or contracts must be notified, o
+---------
+
+DAML Libraries, containing the business logic rules for distinct use cases or functions, and the DAML Execution Engine, for processing and verifying these rules.
+
+Given the requirements of financial markets noted above, Digital Asset takes the view that code used for automation must remain subservient to legal systems and dispute resolution, market rules and commonly understood legal prose.
+
+By having a clear separation between platform capabilities and modeling functionality, software deployments of the DA Platform are identical across all participants and markets. This makes it significantly easier to maintain, support and extend functionality.
+
+DAML assumes no centralized maintenance of state and has no mutable state, allowing for efficient and concurrent processing and analysis.. It has no locking mechanisms which would adversely impact performance and it does not assume the ability to query data of which one is not a stakeholder.
+
+DAML automatically identifies all stakeholders to complex financial workflows, including those that may be affected in the future. Because DAML can identify affected parties, it readily facilitates notification on a need-to-know only basis.
+
+
+When designing DAML and its tooling, we therefore drew upon the rich knowledge of the formal methods and theorem-proving community to create a domain specific language for financial markets. DAML offers an intentionally restricted toolset tailored specifically for unambiguously specifying the terms of financial agreements within a common legal framework. Deliberately not Turing Complete, DAML’s design enables three critical features:
+
+he property of analyzability allows participants to pre-authorize future choices or workflows with full confidence of what they are committing to. A subtle consequence of this, unlike other implementations, it is not required for every affected party to a transaction to approve each ledger update or acknowledge that they were notified, unless their consent is actually required
+
+The DAML Execution Engine (“DAMLe”) combines supplied parameters and market templates to create the corresponding contracts, thereby converting actions triggered at the Application layer into events at the Distributed Ledger layer. Every Network Participant operates a DAMLe and is able independently to re-execute and verify the contracts committed to the ledger. This ensures that the results of a command’s interpretation are consistent with the results of any other DAMLe executing or validating the same choice.
+
+--------
+
+Reading is the action of monitoring and receiving information from a ledger and re-executing the logic that produced the events in order to interpret and validate the information. Participants may be entitled to view all information (in the case of a regulator or market operator), or view partial information that pertains to them (in the case of a market participant). All participants perform reading and verify the integrity of the ledger through re-executing the DAML commands they are party to.
+
+
+Signing is the action of authenticating and authorizing transactions using private keys, requiring participants to maintain their own key security. In order to be a party that directly signs their own transactions, a participant must also perform the action of reading to verify the transaction or agreement they are authorizing.
+
+Writing is the action of committing evidences of data found in the PCS to the GSL. In scenarios with multiple distrusting Operators, a BFT Consensus Algorithm is required to reach a consistent state of the ledger for all parties.
+
+Operators codify and distribute the rules of the market. Only Operators can participate in Writing and there may be one or many Operators in the same network. Each Operator can run multiple Write Instances for added resiliency.
+
+Participants partake in Distributed Reading and Distributed Signing. Participants can see and validate their transactions evidenced on the GSL by verifying both the transaction outputs and their own signatures.
+

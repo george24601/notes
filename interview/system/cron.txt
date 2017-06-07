@@ -1,1 +1,21 @@
 Design a unix cron job-like utility
+
+How it is implemented in unix system.
+
+On startup, look for .crontab file in the home folder of all account holders
+
+For each crontab file found, determin the next time in the future each command should run
+
+place those commands in F-M event list with next time to run and "five field" time specifier
+
+In the main loop
+	look at the head of queue, and sleep for that period of time
+	sleep for tht period of time
+	after verifying the correct time, execute the task at the head of the queue (in background) with the privileges of the user who created it
+Determine the next time in the future to run this command and place it back on the event list at that time value.
+
+
+Variations:
+1. what if we want to keep track of status, and ensure only one instance is running
+
+2. what if the whole thing is distributed and you want HA?

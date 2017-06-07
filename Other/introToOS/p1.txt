@@ -1,0 +1,60 @@
+Abstraction
+process, thread, file, socket, memory page
+
+Mechanism
+create, schedule, open, write, allocate
+
+Policies
+-----
+Sepearation between mechanism and policy
+
+Need to understand workload pattern and load!
+
+two model: kernel and user mode, mode swtich is supported by the hardware
+=> trap instruction
+
+to make system call: write argument and data in well-defined location, and make the system call
+user/kernel transition involoces 50ns + invalidates cache of kernel needs data => not cheap op!
+
+send a signal to process - KILL system call
+
+microkernel: DB, FS, disk driver runs OUTSIDE the kernel => need to cross process communication as core interface
+
+------------
+
+process: state of a program when executing
+state of exeuction: PC, stack
+parts & temp holding data: data, register state, occupies state in memory
+
+process: (vmax) stack -> <-heap data text (v0)
+
+Note stack/heap may not be continous
+
+so virtual address space have the SAME VA range
+
+-------
+How does the OS know what a process is doing
+1. PC
+2. Stack pointer
+3. CPU register
+... => all in process control block (PCB)
+
+PCB is created when process is created
+
+---
+process states:
+new, ready, running, waiting (I/O or event wait), terminated. Scheduler dispatchs between running and ready state (and interrupt to start CS)
+
+process creation: 
+root processes => user process => a process tree: 
+fork: child continues execution at instruction at fork 
+exec: replace child image , load new program and start from first instr
+
+CPU scheduler decides which process will be dispatched
+-------
+
+IO for a process: I/O request => IO queue => I/O and then back to the ready queue
+
+
+
+
