@@ -3,12 +3,10 @@ should happen BEFORE triggered the cache check (would bottom up be better in thi
 
 To reduce space complexity and sometimes runtime complexity, we often look "up" and "left" at the same time, instead of only looking "left", which is often more expensive
 
------------
+No obvious way to identify the proper state to keep track of. In this case, we can use the following strategy:
+```
+1. we focus on actions, starting from base case, and see what states are changed during such actions during such actions.
 
-Bottom-up vs top-down
+2. For such hard problem, where we don't even know how to start. Don't worry about final run time constraint right now. Let's fix a solid state and solve it naively, and see if we can use any DS/insight to speed it up
+```
 
-top-down/memoization approach is easier to reason, however, compared to bottom-up, it has a few disadvantaged
-
-1. need to store a special value to mark "unvisited" stage. For bottom-up, as long we satifies the depdendeny, such thing is unneeded at all
-
-2. stack may overflow due to the recursion
