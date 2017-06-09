@@ -1,0 +1,41 @@
+Design copy-on-write string class 
+e.g. stringclass s("abc"); 
+stringclass s1 = s; // no copy 
+s = "bcd"; // copy
+
+------
+
+// Design and implement key value system
+//
+// string -> string
+// Insert a key-value pair or modify a value
+void put(string key, string value);
+
+// Delete a key-value pair
+void delete(string key);
+
+// Gets a value given a snapshot
+string get(string key, Snapshot snap);
+
+// Take a snapshot
+Snapshot takeSnapshot();
+
+// Delete a snapshot
+void deleteSnapshot(Snapshot snap);
+
+// put(k1,v1)
+// put(k2,v2)
+// put(k3,v3)
+// takeSnapshot -> snap1 { k1 -> v1, k2 -> v2, k3 -> v3 }
+// get(k1,snap1) -> v1
+// put(k1,v4)
+// delete(k3)
+// takeSnapshot -> snap2 { k1 -> v4, k2 -> v2 }
+// get(k1,snap2) -> v4
+// get(k1,snap1) -> v1
+// get(k3,snap2) -> XX
+// deleteSnapshot(snap1)
+// get(k1,snap1) -> XX
+
+// Space efficient is more important than time efficient, thus please use as small space as possible.
+
