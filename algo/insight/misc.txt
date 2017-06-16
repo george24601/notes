@@ -5,13 +5,11 @@ base number is about representation. It doesnt affect the arithmetic properties
 
 when assertion, if something, organize code so that variables involved in that statement is immediately changed ->  to avoid double-counting and infinite loop
 
-the sliding window generally works when everything is triggered by
-moving your end pointer, and front pointer merely follows. If moving the head pointer also has to trigger calculating some other state, the
-sliding window often is not applicable 
-
 calculate-while-update pattern: state keeps the up-to-date info right now, we calculate the required question, and then update the state
 based on the calculated result. This is useful when your current result based only on the previous results, and not the latter ones.
 Otherwise, we may have to calucate a complete picture and do calculate in a separate step. The benefit of this approach is that unlike the
 "calc-all" approach, you don't have to worry about the intrusion of the future states
 
 if the target value epsilon is at 1e-6, and our caluclation invoives value * value, then the target epison should be 1e-12 = (1e-6)^2
+
+To handle tiebreaker case, either we have to keep track of the current tie, or we need to define a second metric where we can sort the ties, e.g., leftmost entry, first to see...etc

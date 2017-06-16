@@ -16,3 +16,6 @@ Then check if r is good value
 Since bsearch is kind of search, a lot of search insight applies here, e.g., when it is hard to find an insight, we can use bsearch to
 introduce a variable and run simulation process. Of course the condition is that there must be a clear line separating good and bad regions
 , i.e., they can not mix. Often is the trick is at how to contruction such a condition on a related subproblem 
+
+----
+because mid < h, we can safely search for (l, mid) when we are looking for min value. However, when we are looking for the max value, we need to check that mid + 1 explicitly, otherwise, we may miss the case where mid happens to be max possible value => i.e., easier to reason with min value case

@@ -19,8 +19,8 @@ test playground / dev-production/ prod only
 
 zone: unit of deployment and physical isolation
 
-each zone has 1 zonmaster with hundreds to thousands spanserver, zonmaster assigns data, spanserver serves data to client
-location proxies used by clients to location spanserver
+each zone has 1 zone master with hundreds to thousands spanserver, zonemaster assigns data, spanserver serves data to client
+location proxies used by clients to locate spanserver
 
 singleton: universe master and placement master
 
@@ -31,9 +31,9 @@ the tablet state is stored on a B-tree like files and WAL, backed by successor t
 each tablet is a paxos state machine,which stores that tablet's metadata and logs, leader is handles by lease which defaults to 10s. Writes
 are applied by Paxos in order
 
-writes intis request at Paxus reader, reader request can be servered from tablent directly if it is sufficiently up-to-date
+writes inits request at Paxus reader(???), reader request can be servered from tablet directly if it is sufficiently up-to-date
 
-each leader's spanserver  implements a lock table for concurrency control
+each leader's spanserver implements a lock table for concurrency control
 
 more on the lock table..
 
@@ -96,15 +96,6 @@ BigTable supports schema change in one DC, but it is blocking
 
 4.2.4 skipped
 
------
-F1
-
-Tries mySQL sharing: resharing too difficulty, introducing BigTable introduces transactional problems and cross center data processing
-
-why they use 2PC instead of purely paxos-based commit protocol?
-
-
-------
 
 
 

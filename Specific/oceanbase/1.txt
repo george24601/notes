@@ -1,0 +1,58 @@
+Scenario: handle short time bursts. After 30 mins, the traffic falls off
+
+Data = base on SSD + delta in memory. This means
+
+1. write is in memory, with write log on disk
+
+2.no random disk write
+
+3. easy to cache base data
+
+4. memory enough to support normally 2 day's delta
+
+=> 1 billion transaction, each 1kb, about 1TB => 100 GB on each server
+
+But merging the delta into base will affect I/O performance => merge alternatively between zones
+
+during merge, no business traffic, only event log and paxos votes
+
+recommend 5 servers, each with 192 GB
+
+write log and replicated to quorums, means the write log is successful
+
+=> full text search:
+search past history based on keywoard
+
+if daily merge zone crashed: manually trigger the merge and release the memory
+
+normally log disk is different from the data disk
+
+synchronous replication - redolog done by paxos
+
+use two level LSM tree
+
+non-blocking 2PC
+
+native multi-tenancy
+
+logic id to physical address is stored in a table. Shard migration only need to update mapping
+
+updateserver on 32 cores easily reaches 300k TPS
+
+updateserver take turns to merge
+
+Oceanbase is a multi-active system, instead of active-passive, client will detect master change and connect to the new one
+
+such alternative also means you can swtich traffic easily for grey update
+
+each cluster has only 1 update server, redo log synced to updateServers quoroms between zones
+
+data mirror verification 
+1. all updateserver memtable should be consistent
+2. verification of memtable is in the redo log too
+
+
+
+
+
+

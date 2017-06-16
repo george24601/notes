@@ -32,3 +32,13 @@ These ChangeBatches are written into normal F1 tables that exist as children of 
 When a transac- tion updates data under multiple root rows, possibly from different root table hierarchies, one ChangeBatch is writ- ten for each distinct root row (and these ChangeBatches in- clude pointers to each other so the full transaction can be re- assembled if necessary).
 
  Distributed queries al- ways use snapshot transactions.
+
+-----
+
+Tries mySQL sharing: resharing too difficulty, introducing BigTable introduces transactional problems and cross center data processing
+
+why they use 2PC instead of purely paxos-based commit protocol?
+
+
+------
+
