@@ -1,0 +1,232 @@
+can you use union find to Detect Cycle in a Directed Graph? why or why not
+
+-------
+
+Given a Calendar class (there are three fields, year, month, day) and a number of N, 
+Implement a function that returns the calendar after N days, 
+For example, if the input is {2017, 3,20} and 12, then the return is {2017,4, 1}
+
+-----
+
+Giving a method intToEnglish that receives an int as a parameter, how do you return its representation in english words. The number can be of any size but no more than around 2 billion since the parameter is an int 2ˆ32
+
+-----
+
+Given a set of possibly overlapping rectangles in different levels (All of which are "not rotated", can be uniformly represented as (left-bottom,right-top) tuplets), return a minimal set of (non-rotated) non-overlapping rectangles, that occupy the same area. 
+The rectangle at lower level has more priority than at higher levels.
+
+-------
+
+Find the median of an unsorted array. 
+Have to do better than O(nlogn) time. 
+e.g. 
+Given [2, 6, 1] return 2 
+Given [2, 6, 1, 4] return 3 which is sum of the two elements in middle over 2
+
+-------
+
+/** 
+Given many coins of 3 different face values, print the combination sums of the coins up to 1000. Must be printed in order. 
+
+eg: coins(10, 15, 55) 
+print: 
+10 
+15 
+20 
+25 
+30 
+. 
+. 
+. 
+1000 
+*/
+
+--------
+
+Print first pair of mis-matching leaves (first pair as in in-order) given two pre-order traversal arrays of BSTs. 
+
+e.g.
+
+
+For
+                  5
+              4      8
+            2  4    6  9
+            Pre-order Sequence as [5,4,2,4,8,6,9]
+                &
+                  5
+              3     8
+            2  4   7  9
+            Pre-order Sequence2 as [5,3,2,4,8,7,9]
+            Print “4, 3”.
+
+What if they are binary tree instead of BST
+------
+
+Given a singly linked list: 1->2->3->4->5 
+Change it to 1->5->2->4->3 using O(1) space
+
+-----
+
+Define amazing number as: its value is less than or equal to its index. Given a circular array, find the starting position, such that the total number of amazing numbers in the array is maximized. 
+Example 1: 0, 1, 2, 3 
+Ouptut: 0. When starting point at position 0, all the elements in the array are equal to its index. So all the numbers are amazing number. 
+Example 2: 1, 0 , 0 
+Output: 1. When starting point at position 1, the array becomes 0, 0, 1. All the elements are amazing number. 
+If there are multiple positions, return the smallest one. 
+
+should get a solution with time complexity less than O(N^2)
+
+-----
+
+A museum was represented by a square matrix that was filled with O, G, and W where O represented open space G represented guards, and W represented walls. Write a function that accepts the square matrix and returns another square matrix where all of the O's in the matrix are replaced with the number of how many spaces they are away from a guard, without being able to go through any walls.
+
+-------
+
+Given the root of a binary tree containing integers, print the columns of the tree in order with the nodes in each column printed top-to-bottom.
+
+
+Input:
+      6
+     / \
+    3   4
+   / \   \
+  5   1   0
+ / \     /
+9   2   8
+     \
+      7
+
+Output:
+9 5 3 2 6 1 7 4 8 0
+
+Input:
+       1
+     /   \
+    2     3
+   / \   / \
+  4   5 6   7
+
+When two nodes share the same position (e.g. 5 and 6), they may be printed in either order:
+
+Output:
+4 2 1 5 6 3 7
+or:
+4 2 1 6 5 3 7
+
+-------
+
+Given a set of numbers {x1, x2, x3, x4, ..., xN} (N>=3) a set of its pairwise sums is {x1+x2, x1+x3, x1+x4, x2+x3,x2+x4,x3+x4, ...,}. (That is s_k = x_i + x_j where i != j) 
+Restore a set of numbers given a set of its pairwise sums. 
+Note: you don't know given some k, to which i and j it refers, (i.e. input is given in undefined order) 
+
+
+EDIT: couldn't comment, so here is clarification 
+
+Example:
+
+
+S = {1, 5, 10, 100} (n elements)
+P = {6, 11, 101, 15, 105, 110} (n * (n - 1) / 2 elements)
+Given P you have to restore S. 
+Note here means that if you knew which element in P corresponded to which pair of indices in S, you could just solve a simple linear equation
+
+
+x1+x2=a{k1} x2+x3 = a{k2}, ...., x{n-1} + x{n} = a{k{n-1}, x{n} + x1 = a{k{n}}
+
+------
+
+Task schedule: given a sequence of task like A B C(means 3 different tasks), and a coldtime, which means you need to wait for that much time to start next [same] task. Now---- 
+
+Input: string, n 
+Output: the best task-finishing sequence. 
+
+eg. input: AAABBB, 2 
+Output: AB_AB_AB 
+( "_" represents do nothing and wait)
+
+--------
+
+Given a decimal number, write a function that returns its negabinary (i.e. negative 2-base) representation as a string.
+
+assert solution(-15) ==	'110001'
+assert solution(2) == '110'
+assert solution(13) == '11101'
+
+-------
+
+Given an undirected graph and a node, modify the graph into a directed graph such that, any path leads to one particular node.
+
+
+
+------
+
+Given integer k and a subset S of set {0, 1, 2, ..., 2^k - 1} 
+Return the count of pairs (a, b) where a and b are from S and (a < b) and (a & b == a) 
+& here is bit-wise and. 
+Do it faster than O((2^k)^2), assume k <= 16 
+
+Example: 
+0b111 
+0b101 
+0b010 
+Answer: 2 
+
+0b110 
+0b011 
+0b101 
+Answer: 0
+
+------
+
+You are given a set of points on x axis (consumers) 
+Also you are given a set of points on a plane (producer) 
+
+For every consumer print the nearest producer. 
+Wanted something better than O(n^2) time. 
+
+Example: 
+consumers: 1 5 7 
+producers: (0, 3), (1,1), (3, 2), (8, 10), (9, 100) 
+
+Answer: 
+for 1 nearest producer is (1, 1), for 5 nearest is (3, 2), for 7 nearest is (3, 2)
+
+Follow-up question: now both sets are sorted by x coordinate. Could you come up with a linear algorithm?
+
+-------
+
+Given n, return 1 ^ 2 ^ 3 ^ ... ^ n 
+Where ^ is binary xor. 
+Note: n is a 64-bit number, and 1<<63 is a valid n for this problem. 
+
+Examples:
+
+
+>>> reduce(lambda a,b:a^b, [1,2,3])
+0
+>>> reduce(lambda a,b:a^b, [1,2,3,4])
+4
+>>> reduce(lambda a,b:a^b, [1,2,3,4,5,6,7])
+0
+>>> reduce(lambda a,b:a^b, [1,2,3,4,5,6,7,8,9])
+1
+
+--------
+
+You are given a permutation arr[N]. E.g. arr[3] = {2, 1, 0} or arr[5] = {0,1,2,4,3}; 
+Then you can prepare somehow and then start serving requests: request(a, b, k) = sorted(arr[a:b])[k], that is, k-th order statistic on slice [a:b] of arr. 
+E.g. if arr is [3,4,5,0,1,2] and a = 2 and b = 5, then arr[a:b] = [5,0,1] and let k = 2, so we sort it - get [0,1,5] and take k-th element, that is - 5. 
+
+Implement request(a, b, k) function. You can preprocess input data, that is, assume there will be only one array and many request() calls.
+
+
+
+
+
+
+
+
+
+
+

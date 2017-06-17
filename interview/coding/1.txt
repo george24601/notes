@@ -59,7 +59,7 @@ public List<Integer> findRepeat(int nums[]){
 
 ---------
 
-Given a Binary tree (Not binary Search Tree ), find the inorder suc­ces­sor of a node.
+Given a Binary tree (Not binary Search Tree ), find the inorder successor of a node.
 
 
 class TreeNode{
