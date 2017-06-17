@@ -20,24 +20,29 @@ test playground / dev-production/ prod only
 zone: unit of deployment and physical isolation
 
 each zone has 1 zone master with hundreds to thousands spanserver, zonemaster assigns data, spanserver serves data to client
-location proxies used by clients to locate spanserver
+per-zone location proxies used by clients to locate spanserver
 
-singleton: universe master and placement master
+singleton: universe master and placement master (not discussed in paper)
 
 ---
 each spanserver manages 100-1000 tablets, which is a bag of <k:string, ts:Long> -> string.
+
+Unlike Bigtable, Spanner assigns timestamps to data, which is an important way in which Spanner is more like a multi-version database than a key-value store.
+
 the tablet state is stored on a B-tree like files and WAL, backed by successor to GFS
 
-each tablet is a paxos state machine,which stores that tablet's metadata and logs, leader is handles by lease which defaults to 10s. Writes
-are applied by Paxos in order
+Each spanserver implements a single Paxos state machine on top of each tablet.
+Each state machine stores its metadata and log in its corresponding tablet.
 
-writes inits request at Paxus reader(???), reader request can be servered from tablet directly if it is sufficiently up-to-date
+Leader is handles by lease which defaults to 10s. Writes are applied by Paxos in order
 
 each leader's spanserver implements a lock table for concurrency control
 
-more on the lock table..
-
 leader's span server handles 2PC for transcations involves multiple Paxos groups
+
+ Writes must initiate the Paxos protocol at the leader; reads access state directly from the underlying tablet at any replica that is sufficiently up-to-date. The set of replicas is collectively a Paxos group.
+
+At every replica that is a leader, each spanserver also implements a transaction manager to support distributed transactions. The transaction manager is used to imple- ment a participant leader; the other replicas in the group will be referred to as participant slaves. If a transac- tion involves only one Paxos group (as is the case for most transactions), it can bypass the transaction manager, since the lock table and Paxos together provide transac- tionality. If a transaction involves more than one Paxos group, those groups’ leaders coordinate to perform two- phase commit. One of the participant groups is chosen as the coordinator: the participant leader of that group will be referred to as the coordinator leader, and the slaves of that group as coordinator slaves. The state of each trans- action manager is stored in the underlying Paxos group
 
 -----
 
@@ -59,6 +64,12 @@ each row in the directory table with all descendant table start with K in lexi o
 TrueTime API: GPS and atomic cross-referencing
 ...
 
+-----
+Bigtable only supports eventually-consistent replication across data- centers.
+
+We believe it is better to have application programmers deal with per- formance problems due to overuse of transactions as bot- tlenecks arise, rather than always coding around the lack of transactions. Running two-phase commit over Paxos mitigates the availability problems.
+
+ every table is re- quired to have an ordered set of one or more primary-key columns. This requirement is where Spanner still looks like a key-value store: the primary keys form the name for a row, and each table defines a mapping from the primary-key columns to the non-primary-key columns.
 -----
 Reads in a read-only transcation executes at a system-chosen timestamp without locking, so incoming writes are not blocked => it can run on
 any replica that is sufficiently up-to-date

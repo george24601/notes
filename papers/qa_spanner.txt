@@ -1,0 +1,7 @@
+1. compare and contrast bigtable's tablet and spanner's tablet
+
+2. How does spanner support distributed transaction between paxos groups? 
+
+3. What does INTERLEAVE IN PARENT do? 
+
+------

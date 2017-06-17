@@ -23,11 +23,25 @@ interaction with GFS's between its master and chunk server
 
 10. compare the 2 systems write guarantees, what does the difference mean to application developers
 
-11. SSTable is immutable, how does mutation happen?
+11. What happens when memtable becomes too huge? 
 
 12. Explain sequence of actions during a split-re-balancing
 
+13. During location resolution, the paper says a missing data requires 3 network calls, and stale data may need up to 6 network calls. Why? 
 
+14. Sequence of actions during the start up of the master
+
+15. During master startup, how does it discover the METADATA table?
+
+16. Why a read operation may read from multiple SSTables? What does BT do prevent it grows out of hand?
+
+17. Why mutations from the same tablet server are all mingled and how does BT handle recovery?
+
+18. How does BT handle potental GFS latency spikes for commit logs?
+
+19. Sequence of actions when moving tablet from one to another
+
+20. Explain the relationship between SSTable and tablet
 
 ---------
 
@@ -49,6 +63,7 @@ GFS: use heartbeat between master, which reports which chucks haven been deleted
 
 5.
 Bigtable: tablet server splits on its own, and will write to the METADATA table, and will try to notify the chuck when this split tablet is accessed
+If notification failed, then....
 GFS: chuck is fix-sized, so master is the one initiates chuck creation
 
 6. 

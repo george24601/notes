@@ -10,11 +10,21 @@ applications that wants to avoid collisons but generate ts themselves, and GC to
 
 apply performs atomic mutation-single row transaction required for read-modify-write
 
+----------------
+An SSTable provides a persistent, ordered immutable map from keys to values
+
+each SSTable contains a sequence of blocks 
+
+A block index (stored at the end of the SSTable) is used to locate blocks; the index is loaded into memory when the SSTable is opened. A lookup can be performed with a single disk seek: we first find the appropriate block by performing a binary search in the in-memory index, and then reading the appropriate block from disk. Optionally, an SSTable can be com- pletely mapped into memory, which allows us to perform lookups and scans without touching disk.
+
+---------
+
+
 Chuby service: 5 active replicas with one active master
 Usage: 1. one active master
 2. discover tablet server
-3. bootstrap location
-4. schema info
+3. bootstrap location of tablet data
+4. schema info - CF info for each table
 5. ACL
 
 master:
@@ -22,14 +32,20 @@ master:
 2. detect additon and expiration of tablet servers
 3. balancing the tablet-server load
 4. GC files in GFS
-5. handles schema changes and CF creation
+5. handles schema changes such as table/CF creation
 
-clients do not rely on master for tablet server locations - That's chubby service's job
+---------
+Location resolution
+1. clients do not rely on master for tablet server locations - That's chubby service's job
+2. The first level is a file stored in Chubby that contains the location of the root tablet
+3. The root tablet contains the location of all tablets in a special METADATA table. Each METADATA tablet contains the location of a set of user tablets.
+4. The root tablet is just the first tablet in the METADATA table, but is treated specially—it is never split—to ensure that the tablet location hierarchy has no more than three levels.
+5. METADATA table stores the location of a tablet under a row key that is an encoding of the tablet’s table and identifier and its end row.
 
-Client caches tablet location:
-if the client cache is empty: 3 network calls to locate the tablet
-if the client cache is stale: up to 6 network calls
-Prefetch tablet location to avoid 
+
+-------
+
+The master keeps track of the set of live tablet servers, and the current assignment of tablets to tablet servers, in- cluding which tablets are unassigned. When a tablet is unassigned, and a tablet server with sufficient room for the tablet is available, the master assigns the tablet by sending a tablet load request to the tablet server.
 
 Upon starting, tablet servers acquries an exclusive lock on a uniquely named file in a directory on Chubby, and master watches this directory to discover new tablet
 servers.
@@ -39,13 +55,82 @@ on Chubby, the tablet server kills itself. It also tries to release the lock whe
 
 master is responsible to check health, if the tablet server is unable to report that it can hold lock, the master tries to acquire the lock
 and delete the file. If the master itself's chubby session expired, the mater kills itself.
+Once a server’s file has been deleted, the master can move all the tablets that were pre- viously assigned to that server into the set of unassigned tablets.
+
+When a master is started by the cluster management system, it needs to discover the current tablet assign- ments before it can change them. The master executes the following steps at startup. (1) The master grabs a unique master lock in Chubby, which prevents con- current master instantiations. (2) The master scans the servers directory in Chubby to find the live servers. (3) The master communicates with every live tablet server to discover what tablets are already assigned to each server. (4) The master scans the METADATA table to learn the set of tablets. Whenever this scan encounters a tablet that is not already assigned, the master adds the tablet to the set of unassigned tablets, which makes the tablet eligible for tablet assignment.
+
+One complication is that the scan of the METADATA table cannot happen until the METADATA tablets have been assigned
+
 
 tablet server inits split, and notifies master, if the commit notification is lost ...
+ the master detects the new tablet when it asks a tablet server to load the tablet that has now split. The tablet server will notify the master of the split, because the tablet entry it finds in the METADATA table will specify only a portion of the tablet that the master asked it to load.
+
+------
+
+ Updates are committed to a commit log that stores redo records. Of these updates, the re- cently committed ones are stored in memory in a sorted buffer called a memtable; the older updates are stored in a sequence of SSTables.
+
+This meta- data contains the list of SSTables that comprise a tablet and a set of a redo points, which are pointers into any commit logs that may contain data for the tablet. The server reads the indices of the SSTables into memory and reconstructs the memtable by applying all of the updates that have committed since the redo points.
+
+
+When a write operation arrives at a tablet server, the server checks that it is well-formed, and that the sender is authorized to perform the mutation. Authorization is performed by reading the list of permitted writers from a Chubby file (which is almost always a hit in the Chubby client cache). A valid mutation is written to the commit log. Group commit is used to improve the throughput of lots of small mutations. After the write has been committed, its contents are inserted into the memtable.
+
+When a read operation arrives at a tablet server, it is similarly checked for well-formedness and proper authorization. A valid read operation is executed on a merged view of the sequence of SSTables and the memtable. Since the SSTables and the memtable are lexicographically sorted data structures, the merged view can be formed efficiently.
+
+read operations might need to merge updates from an arbitrary number of SSTables. Instead, we bound the number of such files by periodically executing a merging compaction in the background. A merging compaction reads the contents of a few SSTables and the memtable, and writes out a new SSTable. The input SSTables and memtable can be discarded as soon as the compaction has finished.
+
+A merging compaction that rewrites all SSTables into exactly one SSTable is called a major compaction. SSTables produced by non-major compactions can con- tain special deletion entries that suppress deleted data in older SSTables that are still live. A major compaction, on the other hand, produces an SSTable that contains no deletion information or deleted data. Bigtable cy- cles through all of its tablets and regularly applies major compactions to them
+
+
+------
 
 group multiple CFs into a locality group
 
+--------
+
 apply the mutaions from multiple tablets from the same server into the same commit log. How to speed up recovery???
+
+To parallelize the sorting, we partition the log file into 64 MB seg- ments, and sort each segment in parallel on different tablet servers. This sorting process is coordinated by the master and is initiated when a tablet server indicates that it needs to recover mutations from some commit log file.
 
 To reduce contention on memtable, copy-on-write and allows read and write in parallel
 
-To protect mutations from GFS spike, use 2 threads to log, each with its own logging file, only one of these 2 threads are active at a time
+To protect mutations from GFS latency spikes, each tablet server actually has two log writing threads, each writing to its own log file; only one of these two threads is actively in use at a time. If writes to the ac- tive log file are performing poorly, the log file writing is switched to the other thread, and mutations that are in the commit log queue are written by the newly active log writing thread. Log entries contain sequence numbers to allow the recovery process to elide duplicated entries resulting from this log switching process.
+
+--------
+If the master moves a tablet from one tablet server to another, the source tablet server first does a minor com- paction on that tablet. This compaction reduces recov- ery time by reducing the amount of uncompacted state in the tablet server’s commit log. After finishing this com- paction, the tablet server stops serving the tablet. Before it actually unloads the tablet, the tablet server does an- other (usually very fast) minor compaction to eliminate any remaining uncompacted state in the tablet server’s log that arrived while the first minor compaction was being performed. After this second minor compaction is complete, the tablet can be loaded on another tablet server without requiring any recovery of log entries.
+
+ince SSTables are immutable, the problem of perma- nently removing deleted data is transformed to garbage collecting obsolete SSTables. Each tablet’s SSTables are registered in the METADATA table. The master removes obsolete SSTables as a mark-and-sweep garbage collec- tion [25] over the set of SSTables, where the METADATA table contains the set of roots.
+Finally, the immutability of SSTables enables us to split tablets quickly. Instead of generating a new set of SSTables for each child tablet, we let the child tablets share the SSTables of the parent tablet.
+
+-------
+A table consists of a set of tablets: Section 5.3
+Each tablet stores a range of the table
+Each SSTable is stored in
+a GFS file
+Initially, a tablet has only
+one SSTable
+Updates add SSTables
+Major compaction puts
+everything back into one
+SSTable
+Each tablet comprises one or more SSTables
+
+SSTable is a sequence of blocks
+Last block is the index to locate other blocks
+Index is loaded into memory when SSTable is open
+Optionally, whole SSTable can be memory mapped 
+
+Metadata for a tablet contains list of SSTables
+
+------
+
+Loading Tablets
+To load a tablet, a tablet server does the following
+Finds location of tablet through its METADATA (Fig. 4)
+Metadata for tablet includes list of SSTables and set of redo points
+Read SSTables index blocks into memory
+Recall an SSTable consists of a set of blocks + 1 index block
+Read the commit log since redo point and reconstructs the
+memtable (the METADATA includes the redo point) 
+
+Bigtable only supports eventually-consistent replication across datacenters.
+

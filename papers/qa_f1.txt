@@ -1,4 +1,4 @@
-Why does F1 support Protocal Buffer as table column?
+1. Why does F1 support Protocal Buffer as table column?
 
 2. Why schema change in F1 is non-blocking?
 
