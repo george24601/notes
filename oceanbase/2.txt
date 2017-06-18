@@ -1,0 +1,48 @@
+strongly consistent, 
+read parallelized
+write is executed in centalized and serialized way, i.e., isolation level at serializable
+
+oceanbase's baseline data is similar to BT's distributed B+ tree approach
+inside each leaf there are mutliple blocks, with leaf maintaining a block index
+each block has an internal row index
+
+each leaf copy provides service at the same time
+no cell version at ts support
+
+focus on dense table instead of sparse table
+
+-------
+read: mergeserver/often co-located with chuck server, merge the delta from the update server and return the result to the client
+
+r/w all goes through merge server
+
+sequence of actions/interaction between merge server and update server
+
+---------
+sequence of actions for update server fault tolerance
+1. main updateServer prepare the write event
+2. main updateServer writes to commit log
+3. main updateServer writes commit log to slave updateServers
+4. slave updateServer writes to disk, and answer to main updateServer
+5. slave updateServer submit change atomically
+6. main updateServer submit change atomically and answer client
+
+(very surprised it is not paxos based here)
+
+error handling in each step
+
+root server normally is 1 active 1 passive, colocated with updateServer. 
+
+---------
+
+UpdateServer uses copy-on-write B-tree. 
+
+
+------
+When merging in progress, both are active serving the read question inside cluster
+old tablet + frozen memtable + new memtable
+new tablet + new memtable;
+
+------
+
+

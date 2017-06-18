@@ -1,17 +1,5 @@
 Scenario: handle short time bursts. After 30 mins, the traffic falls off
 
-Data = base on SSD + delta in memory. This means
-
-1. write is in memory, with write log on disk
-
-2.no random disk write
-
-3. easy to cache base data
-
-4. memory enough to support normally 2 day's delta
-
-=> 1 billion transaction, each 1kb, about 1TB => 100 GB on each server
-
 But merging the delta into base will affect I/O performance => merge alternatively between zones
 
 during merge, no business traffic, only event log and paxos votes

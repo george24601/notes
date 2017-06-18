@@ -1,0 +1,4 @@
+1. Explain how copy-on-write B tree works
+
+2. How does active updateServer keep in sync with standby updateServer
+
