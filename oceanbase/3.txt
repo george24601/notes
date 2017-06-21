@@ -1,0 +1,20 @@
+Non-partitioned table will fall into one server
+
+can be partitioned with either hash partition or key partition. This is defined during table creation time
+
+insert, replace, select, update, delete need to include partition list in their where clause
+
+support max 8192 paritions
+
+partition by range: we also define # of paritions in PARTITION BY RANGE clause
+later can use ALTER TABLE to add new paritions that is BEYOND currently defined ranges. Obviously parition columns can not be NULL
+
+partition by hash: 
+
+only read-commited isolation level is supported at the moment 
+
+----------
+
+
+
+

@@ -2,3 +2,37 @@
 
 2. How does active updateServer keep in sync with standby updateServer
 
+3. How does OB decide how many paritions it uses? Is it static or dynmaic? If it is dynamic, how do we ensure the consistency of partiitioned data?
+
+4. suppose we want to add more paritions to a table partitioned by hash, what do we do?
+
+5. Here we need to specify number of partitions explicitly
+
+6. RootTable used a virtual memory based approach, why switch it to a system table?
+
+7. Assume each tablet block is 256M, what is the theoratical size upper bound for each user table? How do you calculate it?
+
+8. Compare and contrast OB's location discovery with DNS model, compare and contrast it with location discovery with big table
+
+9. Sequence of actions of migration/replication tasks
+
+10.Consider the sequence of action when we create a new table, why do we do it that way?
+
+11. When we delete table, why deleting its data and data inside RT is async?
+
+12. why use ts instead of log ID when RS picks US? Any restriction/SLA on ts sync between servers?
+
+13. what is the sequence of action when backup US replays the log? why such sequence 
+
+14. Explain the file structure of SSTable
+
+15. Given sequence of actiions when doing a range scan read on a single table
+
+16. sequence of action when migrating a new tablet
+
+17. When we migrate a tablet into target chuck server, why do we need modify commit log?
+
+18. When we do the daily merge, why do we malloc memory size of TWO macro blocks?
+
+19. 
+
