@@ -88,18 +88,46 @@ When a backup US replays the log, it can only replay to the last file's commited
 
 ------
 
+SSTable structure:
 SuperBlock/SuperBlockBackup/Block1/Block2/Block3 .../BlockN
 
-Inside each SSTable block
+SuperBlock (SB) is the head of teh data file, a struct stores certain metadata, import ones
+1. total_macro_block_number
+2. used_macro_block_number
+3. first_macro_block_offset
+4. tablet_meta_entry_block_index
 
+
+Block1..BlockN are MacroBlocks (MacroB), head of the MacroB is a common MacroB Common Header to mark type and status of this MB
+
+MacroB storing metadata:
+1. Schema
+stored in one or more MacroB, starts at schema_entry_block_index defined in SB, multiple schmeas are linked together
+2. compressor
+Compressor name + zip library
+3. MacroB metadata
+this macro block's type and version 
+4. tablet metadata
+TableID, # of lines, size, SSTable # of macro, schema 
+
+
+MacroB storing SSTable data
 1. MacroBlockCommon Header
 2. SSTable MacroBlockHeader
-3. N microblocks
-4. Mincroblock index
-5. MicroBlock EndKey
+Block Index and block data position, size, and range
+3. N Microblocks (MicroB)
+stores row data
+4. MicroB index
+5. MicroB EndKey
+N+1 EndKeys
 
-In BT, SSTable is a sequence of blocks, with the last block being the index block. Index is of block ranges, not values. Each block is 64K
-
+MicroB
+1. BlockHeader
+shfit for row index array, line #
+2. Row data: PKS and other keys, separated by EOL char
+row_number rows
+3. row index
+row_num_+1 element array, stores shift for each row. Last element points to the end of the tail
 -------
 
 When migrating into a new tablet
@@ -127,6 +155,5 @@ When migrating into a new tablet
 ------
 
 reset macro blocks?
-
 
 

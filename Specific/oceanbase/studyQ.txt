@@ -4,8 +4,6 @@
 
 3. How does OB decide how many paritions it uses? Is it static or dynmaic? 
 
-4. suppose we want to add more paritions to a table partitioned by hash, what do we do?
-
 6. RootTable used a virtual memory based approach, why switch it to a system table?
 
 7. Assume each tablet block is 256M, what is the theoratical size upper bound for each user table? How do you calculate it?
@@ -26,13 +24,10 @@
 
 15. Given sequence of actiions when doing a range scan read on a single table
 
-16. sequence of action when migrating a new tablet
-
-17. When we migrate a tablet into target chunk server, why do we need modify commit log?
+17. When we migrate a tablet into target chunk server, what is TabletImage, why do we need modify commit log?
 
 18. When we do the daily merge, why do we malloc memory size of TWO macro blocks?
 
 19. For replication and rebalancing, the scanning of CS and monitoring is done by RS. Why is that? 
 
 20. Switching active US to backup US, why we can't do that automatically? what manual steps we need to perform?
-
