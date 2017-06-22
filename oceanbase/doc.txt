@@ -32,7 +32,7 @@ For each Tablet A reported, query the RT to get rows that intersects with A's ra
 
 --------
 RS has a special process just to rebalance Tablet replication and relocation, and add coreesponding rep/relocation task to relocation server's task list.
-RS has another special process to scan all chuck server, and execute migration tasks on each CS
+RS has another special process to scan all chuck server, and execute migration tasks on each CS. 
 
 -------
 
@@ -63,20 +63,20 @@ update Schema related system tables, and record it in schema
 Note interal tablet goes directly to FRT
 
 -------
-
--------
 client r/w requests go to active US, daily merge or version read goes to backup US
 
 active and backup US use Paxos to sync CommitLog. Sync request is async, but write to disk is sync
 
 Sequence of actions
-1. main US sends CL to backup US
+1. main US sends CL to backup US, asyncrously
 2. backup US stores commitLog to a circular buffer
-3. backup US acks an nsync, marks as in progress
-4. backup US chance its status to sync, and synchronously write log in buffer onto journal on disk
+3. backup US acks an nsync, marks as in progress. This ack also works as heartbeat
+4. backup US changes its status to sync, and synchronously write log in buffer onto journal on disk
 5. backup acks written transaction  to main US
+6. Once main US knows that a quorum of all USs have journaled the CL on the disk 
 
-if main US's sync req times out all the time, it sends itself as backup, and RS will pick a new update server
+
+if main US's sync req times out all the time, it sets itself as backup, and RS will pick a new update server
 
 -------
 RS will pick the US with highest log ts as main US
@@ -87,7 +87,7 @@ head of each commit file has the commited ID of the machine when this file is ge
 When a backup US replays the log, it can only replay to the last file's commited id, anything beyond that must be retriveved from the new active US, remaining log files needs to be renamed and logically deleted 
 
 ------
-MS generates logical query plan and physical query plan. MS itself is stateless. 
+
 SuperBlock/SuperBlockBackup/Block1/Block2/Block3 .../BlockN
 
 Inside each SSTable block
@@ -97,6 +97,8 @@ Inside each SSTable block
 3. N microblocks
 4. Mincroblock index
 5. MicroBlock EndKey
+
+In BT, SSTable is a sequence of blocks, with the last block being the index block. Index is of block ranges, not values. Each block is 64K
 
 -------
 

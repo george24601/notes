@@ -1,37 +1,17 @@
-Count number of 3 given n: given 30, return 4 {3, 13, 23, 30}
--------
-
-Remove any number containing 9, writing a number that returns nth number = 
-newNumber(1) = 1
-newNumber(8) = 8
-newNumber(9) = 10
---------
-
-Given a n*m size 2D array with integers from 1 to n * m -1, sort it with a movable block , by swapping with any neighbor, and eventually you want to movable block back. Think of an approach to print the path 
+Given a n*m size 2D array with integers from 1 to n * m -1, sort it with a movable block , by swapping with any neighbor, and eventually you want to movable block back. Think of an approach to print the path
 
 ---------
 
-Given a very large file of 10 GB containing product price, Sort the file of product if memory available is 1 GB
+Given a very large file of 10 GB containing product price, Sort the file of product if memory available is 1 GB 
+
+read the file into 10 chunks, sort them each file, and then maintain 10 pointers and do a merge, and write to a new file 
+
 
 ------
-
-given the preorder traversal of BST, print out the inorder traversal of the BST
-
-------
-
-
 There are N gas stations along a circular route, where the amount of gas at station i is gas[i]. 
 You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1). You can begin the journey with an empty tank at one of the gas stations. 
 Return ALL the starting gas station's index where you can travel around the circuit once 
 public List<Integer> canCompleteCircuit(int[] gas, int[] cost) { 
-}
-
-
-
----------
-maximum contiguous subarray sum with size (the number of the element in the subarray) <= k 
-a brute force method is very simple, can you do it better? 
-public int maxSum(int[] nums, int k){ 
 }
 
 
@@ -61,6 +41,12 @@ public List<Integer> findRepeat(int nums[]){
 
 Given a Binary tree (Not binary Search Tree ), find the inorder successor of a node.
 
+inorder: left, mid, right
+
+if current node has right child, then it will be left most leave of the right child
+otherwise, it will be the first right child of its parent
+
+
 
 class TreeNode{
     TreeNode left;
@@ -72,6 +58,7 @@ class TreeNode{
 }
 
 public TreeNode inOrderSuccessor(TreeNode root, TreeNode n) {
+}
 
 
 -------
@@ -80,8 +67,8 @@ Given a positive integer n, find the no of integers less than equal to n, whose 
 eg: 
 I/P : 4 
 O/P: 4 (0,1,2,4 Valid) 
-public int count(int n){ 
-}
+
+(!!!)
 
 
 -------
@@ -92,18 +79,6 @@ similarly: print all anagrams of a string
 
 -------
 
-Given an unsorted array, sort it in such a way that the first 
-element is the largest value, the second element is the smallest, 
-the third element is the second largest element and so on. 
-[2, 4, 3, 5, 1] -> [5, 1, 4, 2, 3] 
-can you do it without using extra space 
-public void sortAlternate(int[] nums){}
-
---------
-You have a string consisting of open and closed parentheses, but parentheses may be imbalanced. 
-Make the parentheses balanced and return the new string.
-
-------
 there is a bunch of tasks, each have different time to complete, task is independent, and then there are some workers, 
 How to allocate tasks to these workers to minimize the total time to complete all the task. The tasks can be randomly picked from the task list. 
 Example 
@@ -111,9 +86,4 @@ Task: 2,2,3,7, 1
 Worker: 2. 
 Return 8, because the first worker can work on the first three tasks : 2 + 2 + 3 = 7, and the second worker can work on the last two tasks : 7 + 1 = 8, so the total time to finish all the task is 8. 
 public int getMini(int[] tasks, int k)
-
-
-
-
-
 

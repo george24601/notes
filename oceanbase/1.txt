@@ -1,12 +1,9 @@
 Scenario: handle short time bursts. After 30 mins, the traffic falls off
 
 But merging the delta into base will affect I/O performance => merge alternatively between zones
-
 during merge, no business traffic, only event log and paxos votes
 
 recommend 5 servers, each with 192 GB
-
-write log and replicated to quorums, means the write log is successful
 
 => full text search:
 search past history based on keywoard
@@ -15,72 +12,25 @@ if daily merge zone crashed: manually trigger the merge and release the memory
 
 normally log disk is different from the data disk
 
-synchronous replication - redolog done by paxos
-
-use two level LSM tree
-
-non-blocking 2PC
-
-native multi-tenancy
-
-logic id to physical address is stored in a table. Shard migration only need to update mapping
-
 updateserver on 32 cores easily reaches 300k TPS
 
-updateserver take turns to merge
-
 Oceanbase is a multi-active system, instead of active-passive, client will detect master change and connect to the new one
-
 such alternative also means you can swtich traffic easily for grey update
-
-each cluster has only 1 update server, redo log synced to updateServers quoroms between zones
 
 data mirror verification 
 1. all updateserver memtable should be consistent
 2. verification of memtable is in the redo log too
 
-
-
 ########
-strongly consistent, 
-read parallelized
-write is executed in centalized and serialized way, i.e., isolation level at serializable
-
 oceanbase's baseline data is similar to BT's distributed B+ tree approach
 inside each leaf there are mutliple blocks, with leaf maintaining a block index
 each block has an internal row index
 
-each leaf copy provides service at the same time
 no cell version at ts support
 
 focus on dense table instead of sparse table
-
 -------
-read: mergeserver/often co-located with chuck server, merge the delta from the update server and return the result to the client
-
-r/w all goes through merge server
-
-sequence of actions/interaction between merge server and update server
-
----------
-sequence of actions for update server fault tolerance
-1. main updateServer prepare the write event
-2. main updateServer writes to commit log
-3. main updateServer writes commit log to slave updateServers
-4. slave updateServer writes to disk, and answer to main updateServer
-5. slave updateServer submit change atomically
-6. main updateServer submit change atomically and answer client
-
-(very surprised it is not paxos based here)
-
-error handling in each step
-
-root server normally is 1 active 1 passive, colocated with updateServer. 
-
----------
-
 UpdateServer uses copy-on-write B-tree. 
-
 
 ------
 When merging in progress, both are active serving the read question inside cluster
@@ -89,7 +39,19 @@ new tablet + new memtable;
 
 ------
 
+Non-partitioned table will fall into one server
 
+can be partitioned with either hash partition or key partition. This is defined during table creation time
 
+insert, replace, select, update, delete need to include partition list in their where clause
 
+support max 8192 paritions
 
+partition by range: we also define # of paritions in PARTITION BY RANGE clause
+later can use ALTER TABLE to add new paritions that is BEYOND currently defined ranges. Obviously parition columns can not be NULL
+
+partition by hash: 
+
+only read-commited isolation level is supported at the moment 
+
+----------

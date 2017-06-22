@@ -1,5 +1,3 @@
-Scalability simply by adding resources. No manual sharding and resharding.
-
 Consistency – full ACID transactions and no need for app devs to ever deal with inconsistencies
 
 Hierarchical Schema, Table colums can contain structured data types, in particular, Protocol Buffers.
@@ -13,10 +11,11 @@ Because each root row and all of its descendant rows are stored in a single Span
 Many tables in an F1 schema consist of just a single Protocol Buffer column
 
 Using fewer columns generally improves performance in Spanner where there can be high per-column overhead.
+------
 
 Index keys can be either scalar columns or fields extracted from Protocol Buffers (including repeated fields).
 
- Like child tables, local indexes are stored in the same Spanner directory as the root row. Consequently, the index entries of local indexes are stored on the same Spanner server as the rows they index, and local index updates add little additional cost to any transaction
+Like child tables, local indexes are stored in the same Spanner directory as the root row. Consequently, the index entries of local indexes are stored on the same Spanner server as the rows they index, and local index updates add little additional cost to any transaction
 
 Writing a single row that updates a global index requires adding a single extra participant to a transaction, which means the transaction must use 2PC, but that is a reasonable cost to pay for consistent global indexes.
 
@@ -32,12 +31,7 @@ When a transaction updates data under multiple root rows, possibly from differen
 
 Distributed queries always use snapshot transactions.
 
------
-
-Tries mySQL sharing: resharing too difficulty, introducing BigTable introduces transactional problems and cross center data processing
-
-why they use 2PC instead of purely paxos-based commit protocol?
-
-
 ------
+
+
 

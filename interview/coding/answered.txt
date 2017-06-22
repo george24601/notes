@@ -1,0 +1,67 @@
+Remove any number containing 9, writing a number that returns nth number = 
+newNumber(1) = 1
+newNumber(8) = 8
+newNumber(9) = 10
+
+n - num9(n) = t, then we are good, here t = 8
+
+notice this fx is non-decreasing
+
+9 - 1 = 8
+
+8 - 0 = 8
+
+int newNumber(int n)
+	return newNumber(n, int.max, n); 
+
+int num9 (int n) {
+	if(n < 10){
+return n >= 0? 1 : 0
+}else{
+
+int complete10s = num3(n / 10 - 1);
+
+if(hasDigit3(n))
+	return complete10s
+else
+	return complete10s + num3(n % 10);
+}
+}
+
+
+
+int newNumber(int l, int h, int t){
+	if(l == h)
+	{
+		if(has9(l)){
+return l -1;
+else
+return l;
+	}
+
+int mid = (l + h) /2
+
+int fx = n - num9(l)
+
+if(fx > t)
+	return newNumber(l, mid, t);
+else if(n - num9 < t)
+	return newNumber(mid + 1, h, t) 
+else
+	return newNumber(mid, mid, t);
+} 
+
+----------------
+can you use union find to Detect Cycle in a Directed Graph? why or why not
+
+Think about Kruskal's algorithm, when we are trying to add new edge, we need to detect if it is already within the same component. To do so, we use a union-find to maintain the component we have so far. But now consider the directed graph, the direction matters and there is no obvious way to tell the orientation of the edge
+
+------
+Find the median of an unsorted array. 
+Have to do better than O(nlogn) time. 
+e.g. 
+Given [2, 6, 1] return 2 
+Given [2, 6, 1, 4] return 3 which is sum of the two elements in middle over 2
+
+Use the randomized top k algorithm: implementation
+

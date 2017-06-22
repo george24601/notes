@@ -1,5 +1,3 @@
-can you use union find to Detect Cycle in a Directed Graph? why or why not
-
 -------
 
 Given a Calendar class (there are three fields, year, month, day) and a number of N, 
@@ -14,14 +12,6 @@ Giving a method intToEnglish that receives an int as a parameter, how do you ret
 
 Given a set of possibly overlapping rectangles in different levels (All of which are "not rotated", can be uniformly represented as (left-bottom,right-top) tuplets), return a minimal set of (non-rotated) non-overlapping rectangles, that occupy the same area. 
 The rectangle at lower level has more priority than at higher levels.
-
--------
-
-Find the median of an unsorted array. 
-Have to do better than O(nlogn) time. 
-e.g. 
-Given [2, 6, 1] return 2 
-Given [2, 6, 1, 4] return 3 which is sum of the two elements in middle over 2
 
 -------
 
@@ -157,7 +147,11 @@ assert solution(13) == '11101'
 
 Given an undirected graph and a node, modify the graph into a directed graph such that, any path leads to one particular node.
 
+void dfs(v, from){
 
+	
+
+}
 
 ------
 
