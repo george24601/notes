@@ -157,3 +157,32 @@ When migrating into a new tablet
 reset macro blocks?
 
 
+------
+internal table starts with __. Display them with SHOW ALL TABLES
+
+CREATE TABLE:  Special cases
+JOIN_INFO 
+EXPIRE_INFO
+
+new index will not be in effect until after a daily merge
+
+ALTER SYSTEM: 
+SWITCH ROOTSERVER
+SWITCH UPDATESERVER
+{START | STOP |DELETE} CLUSTER
+
+SELECT ... FOR UPDATE
+add write exclusive lock to the query result
+how about reading unsubmitted data?
+
+-------
+
+prepared statement:
+PREPARE
+EXECUTE
+DEALLOCATE
+
+hint:
+READ_CONSISTENCY
+FROZEN_VERSION
+INDEX
