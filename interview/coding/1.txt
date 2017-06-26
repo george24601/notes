@@ -5,108 +5,6 @@ eg:
 I/P : 4 
 O/P: 4 (0,1,2,4 Valid) 
 
-(!!!)
-
-
--------
-Give you an unsorted integer iterator 
-and a percentage that is expressed in double (for example, 0.4 for 40%), 
-and find the number of the sorted array at the percentage position. 
-Example: Enter [1 3 2 5 4 6 7 9 8 10], and 0.6, you will return 6 
-public int findNumber(Iterator<Integer> nums, double percent){ 
-}
-
--------
-
-There are 3 romms in which party is going on lets say room A, B, C. Guests are coming one by one and you have to tell the guest 
-which room to enter. At any point of time each room has to maintain a percentage Lets say the percentage that each room has to maintain is 
-A- 20% , B-30% , C- 50%. You can maintain total count of each room and keep on adding count to respective room as the new guest enters each room. 
-How would you go about it. What formula would you use. 
-Give a generalise formula so that it works if no. of rooms increase.
-
-------
-You are given a 2d rectangular array of positive integers representing the height map of a continent. The "Pacific ocean" touches the left and top edges of the array and the "Atlantic ocean" touches the right and bottom edges. 
-- Find the "continental divide". That is, the list of grid points where water can flow either to the Pacific or the Atlantic. 
-Water can only flow from a cell to another one with height equal or lower. 
-
-Example: 
-
-Pacific ~ ~ ~ ~ ~ |__ 
-~ 1 2 2 3 (5) ~ 
-~ 3 2 3 (4)(4) ~ 
-~ 2 4 (5) 3 1 ~ 
-~ (6)(7) 1 4 5 ~ 
-__ (5) 1 1 2 4 ~ 
-|~ ~ ~ ~ ~ Atlantic 
-
-The answer would be the list containing the coordinates of all circled cells: 
-[(4,0), (3,1), (4,1), (2,2), (0,3), (1,3), (0,4)]
-
---------
-
-Given an m x n matrix where each row element is sorted, but the columns do not appear in sorted order, write a function to print each matrix element in sorted order. 
-
-Example matrix: 
-matrix = [ 
-[20, 40, 80], 
-[5, 60, 90], 
-[45, 50, 55] 
-] 
-
-Your function should print 5, 20, 40, 45, 50, 55, 60, 80, 90. 
-
-Add on: Assume that we are space-constrained such that we can only hold one row in memory at a time. Optimize your function to work under such constraints as efficiently as possible.
-
----------
-
-Write a program that reverses a linked list without using more than O(1) storage.
-
--------
-
-Write a program that answers YES/NO search queries containing * placeholders. Example: if the data you have is (hazem, ahmed, moustafa, fizo), then you should answer as follows for: 
- ahmed: YES 
- m**stafa: YES 
- fizoo: NO 
- fizd: NO 
- *****: YES 
- ****: YES  
-**: NO 
- Your program should be able to answer each search query in O(1).
-
------
-
-Input: A string equation that contains numbers, '+' and '*' 
-Output: Result as int. 
-
-For example: 
-Input: 3*5+8 (as String) 
-Output: 23 (as int)
-
--------
-
-Given a class Range
-
-
-class Range {
-	public int begin;
-	public int end;
-	public Range(int begin, int end) {
-		this.begin = begin;
-		this.end = end;
-	}
-}
-The problem: 
-Intput: 
-1) list of Ranges that don't overlap (not sorted) 
-2) newRange that might overlap. 
-Output: 
-list of merged Ranges 
-
-For example: 
-Input: [1..5] [9..13] [17..22] 
-newRange: [4..10] 
-Output: [1..13] [17..22]
-
 --------
 
 Convert a binary tree into a In Order traversal circular list re-purposing the node's pointers Left & Right as Previous and Next respectively. 
@@ -116,32 +14,6 @@ Hint: A single node Left & Right points to itself.
 Note: This is not a binary search tree.
 
 --------
-
-First they did ask to find pattern of this
-
-
-'this is a test sentence' => [t, h, i, s, i, s, a, t, e, s, t, s, e, n, t, e, n, c, e]
-'thiis iss a teest seentennce' => [i, s, e, e, n]
-'thiiis iss aa teeest seentennnce' => [i, e, n]
-'thiiiis iss a teeest seeentennncccce' => [i, c]
-after i have to do body of function
-
-
-getLongestConsecutiveChar
-
-------
-
-You are given a set of unique characters and a string. 
-
-Find the smallest substring of the string containing all the characters in the set. 
-
-ex: 
-Set : [a, b, c] 
-String : "abbcbcba" 
-
-Result: "cba"
-
-------
 
 Inplace reverse a sentence 
 
@@ -162,15 +34,6 @@ output "Christmas merry a you wish I"
 Constrains: O(1) additional memory
 
 --------
-
-Given an array of integers, return true if there're 3 numbers adding up to zero (repetitions are allowed) 
-{10, -2, -1, 3} -> true 
-{10, -2, 1} -> true -2 + 1 +1 =0
-
--------
-Write a function to print the rows of a binary tree, terminating each row with a carriage return
-
-----
 There is a list of rectangles and a list of points in a 2d space. Note that the edge of each rectangle are aligned to XY axis. question is how to find rectangles with point or points inside
 
 --------
@@ -184,26 +47,6 @@ Result has to be a set {3, 7}.
 
 --------
 
-You are given an array of non-negative integers (0, 1, 2 etc). The value in each element represents the number of hops you may take to the next destination. Write a function that determines when you start from the first element whether you will be able to reach the last element of the array. 
-
-if a value is 3, you can take either 0, 1, 2 or 3 hops. 
-
-For eg: for the array with elements 1, 2, 0, 1, 0, 1, any route you take from the first element, you will not be able to reach the last element.
-
--------
-
-There's a new language which uses the latin alphabet. However, you don't know the order among letters. 
-
-It could be: 
-a b c d ... 
-
-as it could also be: 
-
-b e z a m i ... 
-
-You receive a list of words lexicographically sorted by the rules of this new language. From this list, derive one valid particular ordering of letters in this language.
-
------
 Write a program to find pattern. 
 
 0: 1 
@@ -290,49 +133,6 @@ Comment me if you are not clear with question.
 Edit: I know one can do it with naive approach or using segment tree. But they wanted more faster way to do it.
 
 -------
-
-Having a home-defined linked list with the following structure, where the next will point to the next node in the list and the random will point to a random node in the list (not null). 
-Create a copy of the structure (the data field in each node is not unique for different nodes): 
-
-/* 
-Example: 
-Having the list: 
-1 -> 2 -> 3 -> X 
-With random pointers to: 
-1: 3 
-2: 2 
-3: 1 
-
-Create the list: 
-1' -> 2' -> 3' -> X 
-1': 3' 
-2': 2' 
-3': 1' 
-*/ 
-
-class Node { 
-int data; 
-Node next; 
-Node random; 
-}
-
---------
-You're given an array of integers(eg [3,4,7,1,2,9,8]) Find the index of values that satisfy A+B = C + D, where A,B,C & D are integers values in the array. 
-
-Eg: Given [3,4,7,1,2,9,8] array 
-The following 
-3+7 = 1+ 9 satisfies A+B=C+D 
-so print (0,2,3,5)
-
-
-------
-
-Given a dictionary of words, return an array of the words whose match. (i.e. pattern "c.t" match with "cat", "cut", etc. because the dot notation stand for ANY character). 
-
-
-SUGGEST: use suffix tree, for(for()) is not a good solution.
-
------
 Given an array of positive integers that represents possible points a team could score in an individual play. Now there are two teams play against each other. Their final scores are S and S'. How would you compute the maximum number of times the team that leads could have changed? 
 For example, if S=10 and S'=6. The lead could have changed 4 times: 
 Team 1 scores 2, then Team 2 scores 3 (lead change); 
@@ -364,6 +164,104 @@ You don't have to return all the mappings, only the number of valid mappings.
 --------
 
 Let's say you have 10,000 servers, each with a billion integers. How do you find the median?
+
+------
+
+Q1. On a 1 meter walkroad, randomly generate rain. The raindrop is 1 centimeter wide. 
+Simulate how raindrops cover the 1 meter [0~1] road. How many drops does it take to fully cover the 1meter? 
+
+Q2. Find out the maximum number of isosceles triangles you can make from a plane of points(cannot reuse points) 
+
+Q3.Longest holiday - Every city has a different days of holidays every week. You may only travel to another city at the weekends. What is the max days of holiday you can get this year. 
+
+Q4. 
+Design merchandising product data storage service
+
+-------
+Create a class with a collection of integers. 
+Enable 3 APIs: 
+void append(int x), 
+int get(int idx), 
+void add_to_all(int x)，//add x to all numbers in collection 
+These methods should run in O(1) time. 
+
+
+Follow-up 
+In addition, implement 
+void multiply_to_all(int x) 
+The same required to run in O(1) time
+
+-------
+
+People enter and leave a room over the course of a day. Each person has a badge with a unique integer id, which is logged by the security system on enter/exit. Each log entry is an enter record (“E <id>”) or and leave record (“L <id>”) for the given badge id. 
+The room is empty at the beginning and ending of the day, and there are no other ways into or out of the room. 
+E: Enters the room 
+L: Leaves the room 
+
+Well formed log: 
+E 111 
+E 222 
+L 111 
+E 111 
+L 222 
+L 111 
+
+Question: You have a log and write a function to check is it the well formed log or not.
+
+-------
+
+* Definition for a binary tree node. 
+* public class TreeNode { 
+* int val; 
+* TreeNode left; 
+* TreeNode right; 
+* TreeNode(int x) { val = x; } 
+* } 
+Given an array of Binary Tree Node, check if all of these nodes can form a binary tree? 
+Public boolean canForm(TreeNode[] nodes){ 
+}
+
+-------
+
+In school a student gets rewarded if he has an attendance record without being absent for more than once or being late for 3 times continuously. 
+Given a student's attendance record represented by a string with 3 possible characters 'L'(Late), 'A'(Absent), 'O' (On time), 
+check whether the student qualifies for the reward. 
+
+e.g. 
+@INPUT (String) "OLLAOOOLLO" 
+@RETURN (Boolean) False 
+The student does not qualify for reward because "LLA" means he was late for 3 times in a row. 
+
+@INPUT (String) "OLLOAOLLO" 
+@RETURN (Boolean) True 
+
+Follow-up: 
+If known the length of the attendance string is n, how many possible ways there is to attend school and make sure you get the reward.
+
+-----
+
+Given an non-negative int array and target number, check if the target can be equal to the sum of non-negative multiples of the numbers in the array. 
+For example, I have three numbers 6,9,20. Ex: n = 47 then it can be determined that 47 = 9*3 + 20 
+n=23 then there are no combinations. 
+public boolean combinationSum(int[] nums, int target) { 
+
+}
+
+------
+
+Check if two given binary trees(expression trees with two characters 'a' and 'b' and obviously operators like +,-,*) are mathematically equivalent?
+
+
+------
+Find three non-overlap windows of size k in an int array, that together has a maximum sum 
+of the 3k entries. 
+example 
+int[] nums = [1,2,1,2,6,7,5,1] 
+k = 2 
+output 
+[1,2],[2,6],[7,5]
+
+-------
 
 
 

@@ -1,0 +1,99 @@
+1. 
+Given an undirected graph and a node, modify the graph into a directed graph such that, any path leads to one particular node.
+
+-------
+2. 
+Write a program that reverses a linked list without using more than O(1) storage.
+
+----
+3. 
+Write a program that answers YES/NO search queries containing * placeholders. Example: if the data you have is (hazem, ahmed, moustafa, fizo), then you should answer as follows for: 
+ ahmed: YES 
+ m**stafa: YES 
+ fizoo: NO 
+ fizd: NO 
+ *****: YES 
+ ****: YES  
+**: NO 
+ Your program should be able to answer each search query in O(1).
+
+-------
+4.
+Input: A string equation that contains numbers, '+' and '*' 
+Output: Result as int. 
+
+For example: 
+Input: 3*5+8 (as String) 
+Output: 23 (as int)
+
+--------
+5.
+You are given a set of unique characters and a string. 
+
+Find the smallest substring of the string containing all the characters in the set. 
+
+ex: 
+Set : [a, b, c] 
+String : "abbcbcba" 
+
+Result: "cba"
+
+--------
+6.
+Write a function to print the rows of a binary tree, terminating each row with a carriage return
+
+-------
+7.
+There's a new language which uses the latin alphabet. However, you don't know the order among letters. 
+
+It could be: 
+a b c d ... 
+
+as it could also be: 
+
+b e z a m i ... 
+
+You receive a list of words lexicographically sorted by the rules of this new language. From this list, derive one valid particular ordering of letters in this language.
+
+-------
+8.
+
+Given a dictionary of words, return an array of the words whose match. (i.e. pattern "c.t" match with "cat", "cut", etc. because the dot notation stand for ANY character). 
+
+SUGGEST: use suffix tree, for(for()) is not a good solution.
+
+-------
+9.
+You're given an array of integers(eg [3,4,7,1,2,9,8]) Find the index of values that satisfy A+B = C + D, where A,B,C & D are integers values in the array. 
+
+Eg: Given [3,4,7,1,2,9,8] array 
+The following 
+3+7 = 1+ 9 satisfies A+B=C+D 
+so print (0,2,3,5)
+
+-----
+10.
+Having a home-defined linked list with the following structure, where the next will point to the next node in the list and the random will point to a random node in the list (not null). 
+Create a copy of the structure (the data field in each node is not unique for different nodes): 
+
+/* 
+Example: 
+Having the list: 
+1 -> 2 -> 3 -> X 
+With random pointers to: 
+1: 3 
+2: 2 
+3: 1 
+
+Create the list: 
+1' -> 2' -> 3' -> X 
+1': 3' 
+2': 2' 
+3': 1' 
+*/ 
+
+class Node { 
+int data; 
+Node next; 
+Node random; 
+}

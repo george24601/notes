@@ -68,11 +68,6 @@ If there are multiple positions, return the smallest one.
 should get a solution with time complexity less than O(N^2)
 
 -----
-
-A museum was represented by a square matrix that was filled with O, G, and W where O represented open space G represented guards, and W represented walls. Write a function that accepts the square matrix and returns another square matrix where all of the O's in the matrix are replaced with the number of how many spaces they are away from a guard, without being able to go through any walls.
-
--------
-
 Given the root of a binary tree containing integers, print the columns of the tree in order with the nodes in each column printed top-to-bottom.
 
 
@@ -126,17 +121,6 @@ x1+x2=a{k1} x2+x3 = a{k2}, ...., x{n-1} + x{n} = a{k{n-1}, x{n} + x1 = a{k{n}}
 
 ------
 
-Task schedule: given a sequence of task like A B C(means 3 different tasks), and a coldtime, which means you need to wait for that much time to start next [same] task. Now---- 
-
-Input: string, n 
-Output: the best task-finishing sequence. 
-
-eg. input: AAABBB, 2 
-Output: AB_AB_AB 
-( "_" represents do nothing and wait)
-
---------
-
 Given a decimal number, write a function that returns its negabinary (i.e. negative 2-base) representation as a string.
 
 assert solution(-15) ==	'110001'
@@ -144,16 +128,6 @@ assert solution(2) == '110'
 assert solution(13) == '11101'
 
 -------
-
-Given an undirected graph and a node, modify the graph into a directed graph such that, any path leads to one particular node.
-
-void dfs(v, from){
-
-	
-
-}
-
-------
 
 Given integer k and a subset S of set {0, 1, 2, ..., 2^k - 1} 
 Return the count of pairs (a, b) where a and b are from S and (a < b) and (a & b == a) 
@@ -213,4 +187,62 @@ Then you can prepare somehow and then start serving requests: request(a, b, k) =
 E.g. if arr is [3,4,5,0,1,2] and a = 2 and b = 5, then arr[a:b] = [5,0,1] and let k = 2, so we sort it - get [0,1,5] and take k-th element, that is - 5. 
 
 Implement request(a, b, k) function. You can preprocess input data, that is, assume there will be only one array and many request() calls.
+
+------
+
+Given an int array without repeated elements and a target, count the total number of subset that can be generated from the array such that min (subset) + max (subset) < target 
+public int countSubSet(int[] nums, int target){ 
+
+}
+
+------
+
+Data structure design, N horse races, there are 10 checkpoints, whenever a horse through a check point will produce a (horse number, check point number) message, then design a data structure and algorithm to update the messages and then get the top 3 horse efficiently.
+
+-----
+
+how to find leaf node value from preorder sequence of BST without rebuilding the tree
+
+-------
+
+Say you have an array for which the ith element is the price of a given stock on day i. 
+
+Design an algorithm to find the maximum profit. You may complete as many transactions as you like (ie, buy one and sell one share of the stock multiple times). However, you may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again). 
+, but each time you sell you need to pay transaction fee, please calculate the maximum profit you can take. 
+
+public int maxProfit(int[] prices, int fee) { 
+
+}
+
+------
+
+for a binary tree, print the root to the leaf path, but add "_" to indicate the relative position. 
+example:
+
+
+A 
+       /   \  
+      B     C 
+     / \   / \
+    D  E   F  G
+
+output
+_ _ A
+_ B
+D
+
+_A
+B
+_E
+
+A
+_C
+F
+
+A
+_ C
+_ _ G
+
+------
+
 
