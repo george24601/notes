@@ -3,24 +3,30 @@
 
 "Mining Massive Datasets" notes
 
+Miscellaneous algorithm insights
+
 ### Architecture ###
 Reflections on architecture problems
 
-### Readings ###
-Papers with summaries and study questions/answers
+### Papers ###
+Papers summaries with study questions/answers
 
-Book reading notes
+### Readings ###
+Notes from Communications of the ACM
+
+Notes from Miscellaneous CS books
 
 ### Program Design ###
-Code-level design
-
-Patterns
+Code-level design and patterns
 
 ### DevOps ###
-Notes and scripts
+Bash scripts and notes
 
 ### Service ###
-Notes and thought on web services
+Notes and thoughts on web services
+
+### Specific ###
+Notes on specific tools/frameworks
 
 ### Interview ###
 Reflections on interviews

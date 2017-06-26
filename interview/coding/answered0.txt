@@ -1,0 +1,87 @@
+1. Remove any number containing 9, writing a number that returns nth number = 
+newNumber(1) = 1
+newNumber(8) = 8
+newNumber(9) = 10
+
+----------------
+2. can you use union find to Detect Cycle in a Directed Graph? why or why not
+
+------
+3. Find the median of an unsorted array. 
+Have to do better than O(nlogn) time. 
+e.g. 
+Given [2, 6, 1] return 2 
+Given [2, 6, 1, 4] return 3 which is sum of the two elements in middle over 2
+--------
+4. 
+There are N gas stations along a circular route, where the amount of gas at station i is gas[i]. 
+You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1). You can begin the journey with an empty tank at one of the gas stations. 
+Return ALL the starting gas station's index where you can travel around the circuit once 
+public List<Integer> canCompleteCircuit(int[] gas, int[] cost) { 
+}
+
+
+---------
+5.
+Given a task sequence tasks such as ABBABBC, and an integer k, which is the cool down time between two same tasks. Assume the execution for each individual task is 1 unit. 
+rearrange the task sequence such that the execution time is minimal. 
+Example: 
+S = AAABBBCCC, K = 3 
+Result: ABCABCABC (all 'A's are 3 distance apart, similarly with B's and C's), thus return 9 
+S = AAABC, K=2 
+Result: ABCA_ _A, thus return 7 
+S = AAADBBCC, K = 2: 
+Result: ABCABCDA, thus return 8 
+public int rearrangeTasks(String tasks, int cooldown){ 
+}
+
+---------
+6.
+Given an array of n elements which contains elements from 0 to n-1, with any of these numbers appearing any number of times. Find these repeating numbers in O(n) and using only constant memory space. 
+Try to do it in one pass 
+example 
+[4, 2, 0, 5, 2, 0, 1] return: 0, 2 
+[1, 2, 3, 0, 0, 1, 3, 6, 6,6] return 0, 1, 3, 6 
+public List<Integer> findRepeat(int nums[]){ 
+}
+
+------
+7.
+A "derangement" of a sequence is a permutation where no element appears in its original position. For example ECABD is a derangement of ABCDE, given a string, may contain duplicate char, please out put all the derangement 
+public List<char[]> getDerangement(char[]){}
+
+-------
+8.
+print all anagrams of a string
+
+---------
+9.
+Given a Binary tree (Not binary Search Tree ), find the inorder successor of a node.
+
+inorder: left, mid, right
+
+if current node has right child, then it will be left most leave of the right child
+otherwise, it will be the first right child of its parent
+
+
+
+class TreeNode{
+    TreeNode left;
+    TreeNode right;
+     int val;
+    public TreeNode(int val){
+        this.val = val;
+    }
+}
+
+public TreeNode inOrderSuccessor(TreeNode root, TreeNode n) {
+}
+------
+10.
+there is a bunch of tasks, each have different time to complete, task is independent, and then there are some workers, 
+How to allocate tasks to these workers to minimize the total time to complete all the task. The tasks can be randomly picked from the task list. 
+Example 
+Task: 2,2,3,7, 1 
+Worker: 2. 
+Return 8, because the first worker can work on the first three tasks : 2 + 2 + 3 = 7, and the second worker can work on the last two tasks : 7 + 1 = 8, so the total time to finish all the task is 8. 
+public int getMini(int[] tasks, int k)

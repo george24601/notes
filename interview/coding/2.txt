@@ -214,13 +214,3 @@ E.g. if arr is [3,4,5,0,1,2] and a = 2 and b = 5, then arr[a:b] = [5,0,1] and le
 
 Implement request(a, b, k) function. You can preprocess input data, that is, assume there will be only one array and many request() calls.
 
-
-
-
-
-
-
-
-
-
-
