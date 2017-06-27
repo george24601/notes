@@ -38,3 +38,7 @@
 17. If the leader commited the change, but failed to respond to the client, the client will retry the same request again, how does raft avoid this second execution?
 
 18. Even though all requests go through leader, a read request may still return stale data. How can that happen? What did raft do to prevent it?
+
+------
+Suppose we have the scenario shown in the Raft paper's Figure 7: a cluster of seven servers, with the log contents shown. The first server crashes (the one at the top of the figure), and cannot be contacted. A leader election ensues. For each of the servers marked (a), (d), and (f), could that server be elected? If yes, which servers would vote for it? If no, what specific Raft mechanism(s) would prevent it from being elected?
+

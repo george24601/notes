@@ -1,0 +1,5 @@
+1. How soon after it receives the first file of intermediate data can a reduce worker start calling the application's Reduce function? Explain your answer.
+
+
+-----
+1.
