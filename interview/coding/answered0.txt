@@ -1,11 +1,3 @@
-1. Remove any number containing 9, writing a number that returns nth number = 
-newNumber(1) = 1
-newNumber(8) = 8
-newNumber(9) = 10
-
-----------------
-2. can you use union find to Detect Cycle in a Directed Graph? why or why not
-
 ------
 3. Find the median of an unsorted array. 
 Have to do better than O(nlogn) time. 
@@ -36,16 +28,6 @@ public int rearrangeTasks(String tasks, int cooldown){
 }
 
 ---------
-6.
-Given an array of n elements which contains elements from 0 to n-1, with any of these numbers appearing any number of times. Find these repeating numbers in O(n) and using only constant memory space. 
-Try to do it in one pass 
-example 
-[4, 2, 0, 5, 2, 0, 1] return: 0, 2 
-[1, 2, 3, 0, 0, 1, 3, 6, 6,6] return 0, 1, 3, 6 
-public List<Integer> findRepeat(int nums[]){ 
-}
-
-------
 7.
 A "derangement" of a sequence is a permutation where no element appears in its original position. For example ECABD is a derangement of ABCDE, given a string, may contain duplicate char, please out put all the derangement 
 public List<char[]> getDerangement(char[]){}
