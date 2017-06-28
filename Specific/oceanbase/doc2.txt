@@ -1,0 +1,8 @@
+single instance multi-tenancy
+
+TableGroup?:
+partitions inside same tablegroup will be prioritied to get merged into the same node to reduce distributed transaction
+
+Resource Unit?
+
+Hierarchical Query?
