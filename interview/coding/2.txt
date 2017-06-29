@@ -245,4 +245,68 @@ _ _ G
 
 ------
 
+Given a string and dictionary of words, form a word by removing minimum number of characters. Characters can be removed in-order only.
+
+----
+Find longest consecutive path in a binary tree. 
+1. the path can be decreasing or increasing, i.e [1,2,3,4] and [4,3,2,1] are both valid 
+2. the path can be child-parent-child, not necessarily a parent-to-child path 
+
+similar to this question: http://www.geeksforgeeks.org/longest-consecutive-sequence-binary-tree/
+
+-----
+Implement delete operation for N-ary tree. Your function should return a list of roots after deletion operation. Notice that your delete function only delete one node instead of a subtree. The delete function takes a list of nodes to be deleted.
+
+
+private class TreeNode {
+   int val;
+   TreeNode[ ] child;
+}
+
+List<TreeNode> delete(TreeNode root, HashSet<TreeNode> set) { }
+------
+Return the length of longest possible chunked palindrome string. 
+
+Examples : 
+
+Input : VOLVO 
+Output : 3 
+Explanation : 
+(VO)L(VO) 
+
+
+Input : merchant 
+Output : 1 
+
+Explanation : No chunks possible. 
+
+Input : 
+
+ghiabcdefhelloadamhelloabcdefghi 
+
+Output : 7 
+
+Explanation : 
+
+(ghi)(abcdef)(hello)(adam)(hello)(abcdef)(ghi)
+
+-------
+
+Given a list of manager and employee information represented in hashMap entries {AAA->BBB,CCC,EEE},{CCC->DDD}. 
+Print company structure tree with proper indentations. BBB, CCC and EEE directly reports to AAA, so they have one white space before "-", DDD reports to CCC, it has two whitespace before "-". The input is map<String,List<String>>
+
+
+-AAA
+ -BBB
+ -CCC
+  -DDD
+ -EEE
+------
+
+Given a pattern and a string - find if the string follows the same pattern Eg: Pattern : [a b b a], String : cat dog dog cat
+
+----
+As an input, you have points on a 2D graph. You aim to find a straight line that can fit as my points as possible. Return, the maximum number of points you can fit.
+
+
 

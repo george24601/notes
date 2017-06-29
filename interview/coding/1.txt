@@ -263,7 +263,62 @@ output
 
 -------
 
+Given a string and an string dictionary, find the longest string in dictionary which can formed by deleting some characters of the giving string. 
+eg:S = abpcplea, Dict = {ale, apple, monkey, plea}, the return "apple" 
+
+Find all comments in the Java (it could be Python or any other language of your choice) codes that’s parsed in as a string. 
+You may assume the codes given is valid. 
+
+Input is a single string, e.g. 
+String codes = 
+“/* file created by aonecode.com\\n” + 
+“ welcome to the tech blog*/ \\n” + 
+“//main method\\n” + 
+“public static void main(String[] args) { \\n“ + 
+“ System.out.println(“//welcome”); //output\\n” + 
+“}” 
 
 
+Output is a list of strings 
 
+List<String> ret = 
+[ 
+“ file created by anecode.com\n welcome to the tech blog”, 
+“main method”, 
+“output” 
+]
+
+List all comments in the given segment of codes. It's pretty tricky since there is a lot of things to be considered, especially the escape characters.
+
+--------
+Random generate a NxN matrix with only four types of element: 1,2,3,4. 
+However, no column or row can have same type of element appears 3 times or above continuously (three same type of elements are connected) 
+
+ex: 
+
+valid: 
+1 2 1 1 
+3 1 4 2 
+1 2 4 2 
+3 1 2 3 
+
+invalid because the first column has element 1 appears three times and all 1s are connected to each other : 
+
+1 2 1 3 
+1 3 4 2 
+1 2 4 4 
+2 3 2 2
+
+-------
+An interesting question asked in Google’s phone interview : suppose a row of parking lot with n spots, one of them is empty and n-1 spots are occupied with cars. Only one operation is allowed: move one car from its position to the empty spot. Given a initial order of cars and a final order, output steps needed to convert initial order to final oder with that operation.
+
+Follow up: Minimize steps needed. 
+
+ex: 
+
+{1 2 3 -1 4 5} 
+move car 1 to empty spot(denoted as -1) will make it {-1,2,3,1,4,5} 
+push 1 to the output list because you move car 1 to the empty spot 
+
+suppose you have a initial order {1 2 3 -1 4 5} and a final order {5,1,-1,3,2,4}, you need to transfer {1 2 3 -1 4 5} to {5,1,-1,3,2,4}, push each car moved into a output list.
 

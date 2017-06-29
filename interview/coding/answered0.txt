@@ -1,10 +1,4 @@
 ------
-3. Find the median of an unsorted array. 
-Have to do better than O(nlogn) time. 
-e.g. 
-Given [2, 6, 1] return 2 
-Given [2, 6, 1, 4] return 3 which is sum of the two elements in middle over 2
---------
 4. 
 There are N gas stations along a circular route, where the amount of gas at station i is gas[i]. 
 You have a car with an unlimited gas tank and it costs cost[i] of gas to travel from station i to its next station (i+1). You can begin the journey with an empty tank at one of the gas stations. 
@@ -27,14 +21,8 @@ Result: ABCABCDA, thus return 8
 public int rearrangeTasks(String tasks, int cooldown){ 
 }
 
----------
-7.
-A "derangement" of a sequence is a permutation where no element appears in its original position. For example ECABD is a derangement of ABCDE, given a string, may contain duplicate char, please out put all the derangement 
-public List<char[]> getDerangement(char[]){}
-
--------
-8.
-print all anagrams of a string
+--------
+Print all anagrams of a string
 
 ---------
 9.
