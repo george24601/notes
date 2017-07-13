@@ -1,0 +1,5 @@
+HTTP authentication
+
+cross-origin resource sharing
+
+To make the API as explorable as possible, accounts have test mode and live mode API keys. There is no "switch" for changing between modes, just use the appropriate key to perform a live or test transaction. 

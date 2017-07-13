@@ -5,11 +5,6 @@ Implement a function that returns the calendar after N days,
 For example, if the input is {2017, 3,20} and 12, then the return is {2017,4, 1}
 
 -----
-
-Giving a method intToEnglish that receives an int as a parameter, how do you return its representation in english words. The number can be of any size but no more than around 2 billion since the parameter is an int 2ˆ32
-
------
-
 Given a set of possibly overlapping rectangles in different levels (All of which are "not rotated", can be uniformly represented as (left-bottom,right-top) tuplets), return a minimal set of (non-rotated) non-overlapping rectangles, that occupy the same area. 
 The rectangle at lower level has more priority than at higher levels.
 

@@ -1,10 +1,3 @@
--------
-
-Given a positive integer n, find the no of integers less than equal to n, whose binary representation doesn't contain consecutive 1s. 
-eg: 
-I/P : 4 
-O/P: 4 (0,1,2,4 Valid) 
-
 --------
 
 Convert a binary tree into a In Order traversal circular list re-purposing the node's pointers Left & Right as Previous and Next respectively. 

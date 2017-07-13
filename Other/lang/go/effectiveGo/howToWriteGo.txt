@@ -1,0 +1,14 @@
+Go programmers typically keep all their Go code in a single workspace.
+A workspace contains many version control repositories (managed by Git, for example).
+
+A workspace is a directory hierarchy with three directories at its root:
+
+src contains Go source files,
+pkg contains package objects, and
+bin contains executable commands.
+
+The tree above shows a workspace containing two repositories (example and image). The example repository contains two commands (hello and outyet) and one library (stringutil). The image repository contains the bmp package and several others.
+
+You write a test by creating a file with a name ending in _test.go that contains functions named TestXXX with signature func (t *testing.T). The test framework runs each such function; if the function calls a failure function such as t.Error or t.Fail, the test is considered to have failed.
+
+The imports in hello.go file use the same import path convention, so the go get command is able to locate and install the dependent package, too.
