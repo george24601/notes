@@ -2,4 +2,10 @@ HTTP authentication
 
 cross-origin resource sharing
 
-To make the API as explorable as possible, accounts have test mode and live mode API keys. There is no "switch" for changing between modes, just use the appropriate key to perform a live or test transaction. 
+Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step payment flow, where first you created a charge with the capture option set to false.
+Uncaptured payments expire exactly seven days after they are created. If they are not captured by that point in time, they will be marked as refunded and will no longer be capturable.
+
+Stripe tokens can only be used once, but that doesn't mean you have to request your customer's card details for every payment. Stripe provides a Customer object type that makes it easy to save this—and other—information for later use.
+Instead of charging the card immediately, create a new Customer, saving the token on the Customer in the process.
+
+fter creating a customer in Stripe with a stored payment method, be certain to store the customer ID on your side for later use. You can charge that customer by passing the customer ID—instead of a card representation—in the charge request.
