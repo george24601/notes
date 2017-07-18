@@ -7,18 +7,13 @@ similarly, if we have a list of variables, we can impose an order of them so the
 because other variables will be infered, one by one, perhaps recursively
 
 --------
-When search space is small enough, instead of finding a closed form, we can just brute force search. This is a common step as part ofj
-problem, and often easier to code
-
-E.g., we have a condition: "can finish a task in 2 steps?", instead of trying to look at the steps/tasks and infer more insights, we
-could try  to generate-filter all 2 steps combinations, and see if our generation can find an answer.
-
-----
 Since we are searching for unknown, almost always worth a try to look at unknowns, and try to infer some traits/properties of unknowns.
 Often, you can inverse it and find that the condition is actually if and only if, or if and only if under some additional constraints
 
 ------
 Similiarly, we can infer some properies from the unknowns, and complete search on that properties, and then filter out the results
+
+Similar idea is to "relax and then filter", i.e., try to relax the result to a small enough supersize that must contain all answers, and then verify the answers one by one
 
 ------
 Often the challenge is to decompose a composite conditon into 2+ independent conditons, and search on them one by one, i.e.,

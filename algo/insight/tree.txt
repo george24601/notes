@@ -12,6 +12,7 @@ tree <=> each node has only 1 out edge (which is to the parent)
 
 when looking at 2 nodes, often need to find LCA of the 2 nodes, to find a nice, self-contained tree, instead of looking at the root of the whole tree!
 
-A tree with |V| nodes always has |V| - 1 edges. Moreover, we can pick any node as the root of traversal
-
 when traverse the tree with BFS/DFS, we dont need to keep a visited list anymore, just need to record where the edge is from, and skip that during neighbor detection phase
+
+Note that traverse a tree is O(n), this gives a nice intuititon of master theorm:
+f(n) = 2 *f(n/2) + O(1), the total run time is still linear => it is dominated by log(a)/log(b)

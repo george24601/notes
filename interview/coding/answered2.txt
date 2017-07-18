@@ -1,6 +1,0 @@
-1.
-Given an array of integers, return true if there're 3 numbers adding up to zero (repetitions are allowed) 
-{10, -2, -1, 3} -> true 
-{10, -2, 1} -> true -2 + 1 +1 =0
-
-

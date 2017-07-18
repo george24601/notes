@@ -12,6 +12,23 @@ Few things what they are looking for -
 4. How pull model solves it? 
 5. When will you use push vs pull?
 
+---------
+Design an online poker game for multiplayer. Solve for persistence, concurrency, scale . Draw the ER diagram for this
 
+-----
+Design dropbox's architecture.
 
+-----
+Design a picture sharing website. How will you store thumbnails, photos? Usage of CDNS? caching at various layers etc.
 
+--------
+Search engine (generally asked with people who have some domain knowledge ) : basic crawling, collection, hashing etc. Dependes on your expertise on this topic
+
+-------
+A web application for chatting, eg whatsapp, facebook chat. Issues of each, scaling problems, status and availablility notification etc.
+
+------
+Design a system for collaberating over a document simulataneously (eg google docs)
+
+-----
+(very common:) top 'n' or most frequent items of a running stream of data
