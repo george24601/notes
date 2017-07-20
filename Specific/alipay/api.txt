@@ -1,0 +1,133 @@
+Common to all Request
+-------
+endpoint
+https://openapi.alipay.com/gateway.do
+
+notify_url
+app_auth_token(?)
+biz_content: app specifc payloads goes here,i.e., may be a complicated json
+
+Common to all response
+---------
+code:return code from gateway
+sub_code: return code from service
+sign
+
+----
+method: alipay.trade.pay
+
+Request:
+
+out_trade_no: merchant trade no
+product_code:
+buyer_id:
+seller_id:
+total_amount:	
+discountable_amount
+undiscountable_amount
+goods_detail
+operator_id
+store_id
+terminal_id
+
+Response:
+trade_no:
+out_trade_no
+buyer_logon_id
+total_amount
+receipt_amount
+buyer_pay_amount
+point_amount
+invoice_amount
+fund_bill_list
+buyer_user_id
+discount_goods_detail
+voucher_detail_list
+
+-------
+method: 	alipay.trade.query
+
+Request:
+out_trade_no
+trade_no
+
+Response:
+trade_no
+out_trade_no
+buyer_logon_id
+trade_status
+total_amount
+receipt_amount
+buyer_pay_amount
+point_amount
+invoice_amount
+send_pay_date
+.....very similar to pay response
+
+------
+method: alipay.trade.cancel
+
+Request:
+out_trade_no
+trade_no
+
+Response:
+trade_no
+out_trade_no
+retry_flag
+action
+
+-------
+method: alipay.trade.refund
+
+Request:
+out_trade_no
+trade_no
+refund_amount
+out_request_no
+
+Response:
+trade_no
+out_trade_no
+buyer_logon_id
+fund_change
+refund_fee
+gmt_refund_pay
+buyer_user_id
+
+--------
+method: alipay.trade.precreate
+
+Request:
+out_trade_no
+seller_id
+total_amount
+discountable_amount
+undiscountable_amount
+subject
+
+Response:
+out_trade_no
+qr_code
+
+--------
+method: monitor.heartbeat.syn
+
+Request:
+product
+type
+equipment_id
+time
+store_id
+network_type
+trade_info
+
+Response:
+monitor_heartbeat_syn_response": {
+"code": "40004",
+"sub_code":"ILLEGAL_SIGN",
+"msg":"接口调用异常",
+"sub_desc":"签名不正确"
+}
+}
+

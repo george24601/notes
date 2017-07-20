@@ -1,0 +1,19 @@
+Tokenization ensures that no sensitive card data ever needs to touch your server so your integration can operate in a PCI compliant way. If any card data were to pass through or be stored on your server, you would be responsible for any PCI DSS guidelines and audits that are required.
+
+Stripe will notify you of orders via webhooks. With webhooks, you’ll want to pay particular attention to order.payment_succeeded events, as they indicate further action is required on your part. With your 
+
+Once you’ve delivered the order, mark it as fulfilled in your Stripe account. You can do this on the order’s page in the Dashboard, or by making an update order API call.
+
+--------
+Sequence of actions
+1. Find products and SKUs
+2. Orders are created on the merchant’s Stripe account, using the merchant’s account ID in the request.
+3. Order creations are synchronous requests. You’ll get an Order object as the response, or an error if a problem occurred.
+4. Behind the scenes, Stripe will notify the seller of the order’s creation by email or webhook notification, 
+5. The final step for the app is to collect payment for the order. Orders are paid for similar to any other charge in Stripe, using either a credit card or an existing Customer object from a Stripe account (with a previously stored source).
+
+
+
+
+
+
