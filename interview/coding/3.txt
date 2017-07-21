@@ -1,18 +1,4 @@
 -------
-Find all the abbreviations of string: 
-eg 
-ABC 
-SOME Valid abbreviations are : 
-1BC 
-2C 
-3 
-A1C 
-AB1 
-A2 
-NOT VALID 
-11C(two numbers cannot occur continuously)
-
--------
 
 Given a vector/list of doubly linked list pointers (a pointer is the directed linkage of two nodes), count how many independent blocks of linked lists there are for the pointers given.
 

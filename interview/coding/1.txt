@@ -294,3 +294,63 @@ invalid because the first column has element 1 appears three times and all 1s ar
 2 3 2 2
 
 -------
+
+Card game rule: the hand is drawn from a pack of cards (no jokers). 
+Play cards ONLY when they are 
+1. 3 of a kind ('AAA' ) or 4 of a kind('AAAA’). 
+2. a straight flush of 3 or more cards('JQK' or 'A23456...' in the same suit). 
+Find out whether the player is able to play the whole hand given. 
+e.g. [Spade A, Spade K, Spade Q, Diamond Q, Heart Q] return false. 
+[Spade A, Spade K, Spade Q, Diamond Q, Heart Q, Club Q] return true.
+--------
+
+We have a maze with three types of spaces: 
+1. Walls 
+2. Offices 
+3. Hallway space 
+
+Given a maze, determine which non-wall space would minimize the sum of all distances between that space and every office. You can only move up, down, left, and right. 
+
+(Edit: ChrisK described the problem more clearly than I did: "find the field that minimizes the sum of the shortest path[s] from this field to each office space.") 
+
+Example:
+
+
+WWWWWWWW
+WWW O WW
+WWW   OW
+WWW WWWW
+WO  WWWW
+WWW WWWW
+WO     W
+WWWWWWWW
+O = office, W = wall, spaces are hallway spaces 
+
+You can represent the maze however you want. That is, you can use any data structures you want, and you don't necessarily have to use O for office, W for Wall, and spaces for hallways. 
+-------
+Give you an unsorted integer iterator 
+and a percentage that is expressed in double (for example, 0.4 for 40%), 
+and find the number of the sorted array at the percentage position. 
+Example: Enter [1 3 2 5 4 6 7 9 8 10], and 0.6, you will return 6 
+public int findNumber(Iterator<Integer> nums, double percent){ 
+-------
+Find the length of longest arithmetic progression in array. 
+
+For example, in the array {1, 6, 3, 5, 9, 7}, the longest arithmetic sequence is 1, 3, 5, and 7
+
+-----
+Given a matrix of characters where '_' represents an empty space, 'T' is a tree and 'H' is a house and a coordinate of that matrix, find the sum of the minimum distances from that coordinate to each house when considering that you can move through empty spaces and houses but not through trees.
+
+-------
+Given a String and dictionary of words, break the string in minimum space sentence. 
+Ex: 
+inputStr = "ilikefacebook" 
+dictionary = {"i","like","face","book","facebook"} 
+Possible Strings: 
+i like face book - 3 spaces 
+i like Facebook - 2 spaces - this is expected answer.
+
+-------
+two arrays, find the common elements of two sorted array. if one array is small, the other is very big.
+
+

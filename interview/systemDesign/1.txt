@@ -32,3 +32,20 @@ Design a system for collaberating over a document simulataneously (eg google doc
 
 -----
 (very common:) top 'n' or most frequent items of a running stream of data
+
+----
+Suppose that there exists a service to fetch Facebook posts through an interface defined by you, design the Facebook wall feed.
+
+------
+design fb inbox search --> just focus on the post
+
+------
+Design news feed.
+A user wrote a post with the basic user info, pictures and time etc (I even drafted a basic UI on whiteboard).
+How to obtain these information and store them.
+If a new feature with a button is added. How to maintain availability of old service to users who did not update the app.
+Did not dive further into scaling.
+
+-------
+User groups - If I made a certain post visible to a user group, how to store the post? how to push the post to the chosen group. If there are new friends who aren't assigned to any group just yet, how to treat them as if they were in the same 'unassigned' group?
+DB sharding is involveds
