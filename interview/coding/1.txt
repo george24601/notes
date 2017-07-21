@@ -156,10 +156,6 @@ You don't have to return all the mappings, only the number of valid mappings.
 
 --------
 
-Let's say you have 10,000 servers, each with a billion integers. How do you find the median?
-
-------
-
 Q1. On a 1 meter walkroad, randomly generate rain. The raindrop is 1 centimeter wide. 
 Simulate how raindrops cover the 1 meter [0~1] road. How many drops does it take to fully cover the 1meter? 
 
@@ -241,11 +237,6 @@ public boolean combinationSum(int[] nums, int target) {
 }
 
 ------
-
-Check if two given binary trees(expression trees with two characters 'a' and 'b' and obviously operators like +,-,*) are mathematically equivalent?
-
-
-------
 Find three non-overlap windows of size k in an int array, that together has a maximum sum 
 of the 3k entries. 
 example 
@@ -303,15 +294,3 @@ invalid because the first column has element 1 appears three times and all 1s ar
 2 3 2 2
 
 -------
-An interesting question asked in Google’s phone interview : suppose a row of parking lot with n spots, one of them is empty and n-1 spots are occupied with cars. Only one operation is allowed: move one car from its position to the empty spot. Given a initial order of cars and a final order, output steps needed to convert initial order to final oder with that operation.
-
-Follow up: Minimize steps needed. 
-
-ex: 
-
-{1 2 3 -1 4 5} 
-move car 1 to empty spot(denoted as -1) will make it {-1,2,3,1,4,5} 
-push 1 to the output list because you move car 1 to the empty spot 
-
-suppose you have a initial order {1 2 3 -1 4 5} and a final order {5,1,-1,3,2,4}, you need to transfer {1 2 3 -1 4 5} to {5,1,-1,3,2,4}, push each car moved into a output list.
-

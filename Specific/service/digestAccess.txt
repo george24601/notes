@@ -1,0 +1,37 @@
+The password is not used directly in the digest, but rather HA1 = MD5(username:realm:password).
+
+It is not, however, intended to replace strong authentication protocols, such as public-key or Kerberos authentication.
+----------
+
+The server responds with the 401 "Unauthorized" response code, providing the authentication realm and a randomly generated, single-use value called a nonce. the server only issues a new nonce for each "401" response
+
+HTTP/1.0 401 Unauthorized
+Server: HTTPd/0.9
+Date: Sun, 10 Apr 2014 20:26:47 GMT
+WWW-Authenticate: Digest realm="testrealm@host.com",
+                        qop="auth,auth-int",
+                        nonce="dcd98b7102dd2f0e8b11d0f600bfb0c093",
+                        opaque="5ccc069c403ebaf9f0171e9517f40e41"
+Content-Type: text/html
+Content-Length: 153
+
+------
+Once a username and password have been supplied, the client re-sends the same request but adds an authentication header that includes the response code.
+
+GET /dir/index.html HTTP/1.0
+Host: localhost
+Authorization: Digest username="Mufasa",
+                     realm="testrealm@host.com",
+                     nonce="dcd98b7102dd2f0e8b11d0f600bfb0c093",
+                     uri="/dir/index.html",
+                     qop=auth,
+                     nc=00000001,
+                     cnonce="0a4f113b",
+                     response="6629fae49393a05397450978507c4ef1",
+                     opaque="5ccc069c403ebaf9f0171e9517f40e41"
+
+The MD5 hash of the combined HA1 result, server nonce (nonce), request counter (nc), client nonce (cnonce), quality of protection code (qop) and HA2 result is calculated. The result is the "response" value provided by the client.
+
+For subsequent requests, the hexadecimal request counter (nc) must be greater than the last value it used – otherwise an attacker could simply "replay" an old request with the same credentials. It is up to the server to ensure that the counter increases for each of the nonce values that it has issued, rejecting any bad requests appropriately. Obviously changing the method, URI and/or counter value will result in a different response value.
+
+Server should remember nonce values that it has recently generated. It may also remember when each nonce value was issued, expiring them after a certain amount of time. If an expired value is used, the server should respond with the "401" status code and add stale=TRUE to the authentication header, indicating that the client should re-send with the new nonce provided, without prompting the user for another username and password.
