@@ -1,0 +1,35 @@
+Our solution for maintaining a consistent distributed schema cache and consistent table data embraces the concurrent use of multiple versions of the schema, allowing the rollout of a new schema while the older version is still in use. It backfills (or deletes) the underlying table data without holding locks. This solution is derived from the work done by the F1 team at Google
+---------
+Adding a new index follows these discrete stages explained later:
+
+For correctness, a new capability must be granted only after the entire cluster is using a schema containing all prior granted capabilities. The process therefore pauses before each stage, allowing prior granted capabilities to propagate to the entire cluster before the next one can be granted.
+
+1.Grant delete capability: Avoid spurious index entries =>
+DELETE is fully functional deleting the row along with the underlying index data.
+UPDATE deletes the old index entry, but limits itself to not write a new one.
+INSERT and SELECT ignore the index.
+
+When a schema change drops an index, the associated index data is purged only after the successful withdrawal of the write capability across the cluster; the entire cluster has only the delete capability allowing a safe purge.
+
+2.Grant write capability:Avoid missing index entries =>
+The index backfill runs only after the entire cluster is capable of writing. An INSERT command received on any node while a backfill is in progress creates a new row with a legitimate index entry, and doesn’t depend on the separate backfill process to create an index entry for the row. There will be no missing index entries after the backfill is complete.
+
+3.Backfill the index data.
+4.Grant read capability.
+
+------
+Fast schema rollout
+Before using a table schema for a SQL DML command, the node running the command obtains a read lease for the schema valid for a significant period of time (on the order of minutes). When an updated table schema version becomes active, it is broadcast across the cluster, alerting nodes to the new version and causing them to actively release their leases on the old version. If some nodes are unhealthy and do not actively release their leases, the rollout will wait for the leases to expire and will simply get delayed.
+
+The schema change strategy is kept simple by having the leases follow two rules:
+
+New leases are granted only on the latest schema version.
+Valid leases are only on the two latest schema versions.
+
+--------
+Reliable schema rollout
+
+The schema change is guided to completion by the node executing the schema change SQL command. Since schema change operations are potentially long-running, they need to be restartable when the node performing them dies. Every node runs a schema changer goroutine capable of running any incomplete schema change. Before executing a schema change, a schema changer goroutine first acquires an exclusive write lease on the table, giving it license to be the only one guiding the schema change.
+
+
+

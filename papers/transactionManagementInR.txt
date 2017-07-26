@@ -64,3 +64,5 @@ If the failure is detected after the subordinate has moved into the
 prepared state, then the subordinate hands the transaction over to the recovery process.
 
 If a prepared process noticed coordinator failed, it has to wait until it can reestablish communication
+
+---------

@@ -1,0 +1,13 @@
+Outages can be caused by a variety of factors that the CAP theorem doesn’t consider, such as single-node hardware failure, application bugs, or operator error. And when the system is considered as a whole, even network partitions can be handled in ways that increase availability without sacrificing consistency. Choosing CAP-Availability buys very little in effective availability, but the loss of consistency pushes a significant amount of complexity into the application code and has a high price in engineering effort.
+
+If the increase in availability in a CAP-Available system is small, then why choose one over a CAP-Consistent one? One reason is write latency: consistent systems must coordinate between different nodes during writes to provide that consistency (and depending on the system, consistent reads may also incur higher coordination costs). 
+
+For reads, one of those replicas is granted a lease, or temporary ownership of a range of data, that allows it to serve reads without communicating with the others for a few seconds. In the event that the leaseholder is partitioned away from the other replicas, it will be allowed to continue to serve reads (but not writes) until its lease expires (leases currently last 9 seconds by default) and then one of the other two replicas will get a new lease (after waiting for the first replica’s lease to expire). This ensures that the system recovers quickly from outages, maximizing availability even though it does not satisfy the CAP theorem’s all-or-nothing definition of availability.
+
+--------
+
+ In most systems that use Raft, such as etcd and Consul, the entire system is one Raft consensus group. In CockroachDB, however, the data is divided into ranges, each with its own consensus group. This means that each node may be participating in hundreds of thousands of consensus groups. This presents some unique challenges, which we have addressed by introducing a layer on top of Raft that we call MultiRaft.
+
+--------
+
+

@@ -1,0 +1,14 @@
+1.
+The first two paragraphs of Section 2.1 say that a subordinate force-writes its disk twice: once before replying to a PREPARE message, and once after receiving a COMMIT message. Why are both writes necessary? What could go wrong if a subordinate replied to the PREPARE without writing its disk, and only wrote its disk after receiving a COMMIT message?
+
+2.
+A/B timeout while waiting for commit/abort from TC.
+  So what if B voted "yes"?
+  Can B unilaterally decide to abort?
+
+3.
+What if B crashes and restarts?
+
+4.
+What if TC crashes and restarts?
+

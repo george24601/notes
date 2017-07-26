@@ -1,0 +1,15 @@
+1. buffer all update/delete on client side
+
+2. Prewrite primaryRow: 
+	a. lock the primaryRow with the start time of current transaction, if there is no other client locking the same primaryRow, and if there is any Write happened during (startTs +inf)
+	b. if we can not lock primaryRow, that means there is potental conflict - rollback a
+
+3. Prewrite secondaryRow, follows similar steps of primaryRow, except that the content of the lock is the one for primaryRow
+
+4. commit primary, write to W column new data: startTs at commitTs
+
+5. commit secondaries asychly
+
+During read in transaction:
+1. check if the row has L column in [0, startTs] => wait for its timeout or release
+2. read W column, in [0, startTs], convert to proper timestamp, and read the column at version timestamp
