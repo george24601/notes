@@ -1,14 +1,43 @@
+--------
+Transaction on KV
+
+Layers:
+Transaction -> MVCC -> Raft KV -> Rocks DB
+
+//return max version of the value <= version
+MVCCGet(key, version)
+MVCCScan(startKey, endKey, limit, version)
+
+//write k-v at version, user is responsible for ensure auto-increment of user
+MVCCPut(key, value, version)
+
+Inside RocksDB, it stores
+
+key -> all key version info
+key + version1 -> value at v1
+key + version2 -> value at v2
+
+Note we will split key with version value to avoid too huge updates
+--------
 1. buffer all update/delete on client side
 
 2. Prewrite primaryRow: 
 	a. lock the primaryRow with the start time of current transaction, if there is no other client locking the same primaryRow, and if there is any Write happened during (startTs +inf)
 	b. if we can not lock primaryRow, that means there is potental conflict - rollback a
+	c. add key+startTs -> new value
 
 3. Prewrite secondaryRow, follows similar steps of primaryRow, except that the content of the lock is the one for primaryRow
+
+4. commit primary: add a new vesion to meta, at commitTs, version startTs
+
+5. delete the lock in meta
+
 
 4. commit primary, write to W column new data: startTs at commitTs
 
 5. commit secondaries asychly
+
+
 
 During read in transaction:
 1. check if the row has L column in [0, startTs] => wait for its timeout or release

@@ -1,0 +1,9 @@
+TiDB: 8 core + 32G RAM
+TiKV: 16 core + 32G RAM (no more than 500G HD to avoid long recovery time)
+PD: 8 core + 32G RAM
+
+Test environment
+1 TiDB, 1 PD - colocated, 3 TiKV 
+
+
+

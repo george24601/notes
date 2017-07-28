@@ -1,0 +1,13 @@
+PD role:
+global id generation
+global timestamp generation
+tikv metadata
+routing client
+
+Use etcd for auto-failover, note that etcd is powered by raft too.
+
+All PD state is gathered passively by the heatbeat from TiKV. the coordination command are piggybacked on heatbeat messages to TiKV servers
+
+PD leader is different from the etcd leader!
+
+TSO:physical time + logical time
