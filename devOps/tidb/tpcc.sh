@@ -29,7 +29,7 @@ mysql  -h 127.0.0.1 -P 4000 -u root tpcc1000 < add_fkey_idx.sql
 
 ./tpcc_start -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -w 1 -c 1 -r 10 -l 20
 
-./tpcc_start -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -w 1 -c 1 -r 1 -l 20 \
+./tpcc_start -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -w 10 -c 1 -r 10 -l 40 \
        	-i 5 -f report.txt -t trx.txt
 
 
