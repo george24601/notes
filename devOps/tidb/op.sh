@@ -44,3 +44,14 @@ mysql -h 127.0.0.1 -P 4000 -u root -D test
 
 nc -v 127.0.0.1 4000
 
+######
+#use dd to check disk performance
+LANG='en_US.UTF-8' dd bs=4k count=250000 oflag=direct if=/dev/zero of=/home/ec2-user/deploy/io_test.txt 2>&1 | awk '/MB/{print $(NF-1)}'
+
+lsblk
+sudo dd if=/dev/xvda of=/dev/null bs=1M
+
+dd bs=4k count=250000 conv=fsync if=/dev/zero of=/home/ec2-user/deploy/io_test.txt
+
+LANG='en_US.UTF-8' dd bs=4k count=250000 oflag=direct if=/dev/zero of=/home/ec2-user/deploy/io_test.txt
+
