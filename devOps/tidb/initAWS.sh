@@ -18,12 +18,15 @@ yum install ansible
 
 NEEDPORT
 
+ansible-playbook local_prepare.yml
+
 ansible-playbook -vvv bootstrap.yml -K --private-key="tidbkey.pem" --key-file="tidbkey.pem" -K > bs.txt
 
-ansible-playbook deploy.yml --private-key="tidbkey.pem" --key-file="tidbkey.pem" -K > dep.txt
+ansible-playbook deploy.yml --private-key="tidbkey.pem" --key-file="tidbkey.pem" > dep.txt
 
-ansible-playbook -vvv start.yml  --private-key="tidbkey.pem" --key-file="tidbkey.pem" -K > start.txt
+ansible-playbook -vvv start.yml  --private-key="tidbkey.pem" --key-file="tidbkey.pem" > start.txt
 
+ansible-playbook -vvv stop.yml  --private-key="tidbkey.pem" --key-file="tidbkey.pem" > stop.txt
 
 #on each machine
 #install ntp
@@ -45,5 +48,16 @@ mkfs -t ext4 /dev/nvme0n1
 mkdir instanceStorage
 mount /dev/nvme0n1 /home/ec2-user/instanceStorage 
 
+#make sure you edit /etc/fstab
+#/dev/nvme0n1 /home/ec2-user/instanceStorage                      ext4     defaults        1 1
+
 #test instance storage speed
 dd bs=4k count=25000 oflag=direct if=/dev/zero of=/home/ec2-user/instanceStorage/io_test.txt
+
+#start ntp on centos/RHEL before proceed
+sudo su
+systemctl start ntpd
+systemctl status ntpd
+
+
+sudo chown ec2-user:ec2-user instanceStorage

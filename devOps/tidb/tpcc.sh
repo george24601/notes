@@ -16,20 +16,21 @@ cd src ; make
 
 mysql -h 127.0.0.1 -P 4000 -u root -D test
 #mysqladmin create tpcc1000
-mysqladmin -h 127.0.0.1 -P 4000 -u root create tpcc1000
 
 mysql  -h 127.0.0.1 -P 4000 -u root tpcc1000 < create_table.sql
 
+#may do that after poping data 
 mysql  -h 127.0.0.1 -P 4000 -u root tpcc1000 < add_fkey_idx.sql
 
 #./tpcc_load -h server_host -P port -d database_name -u mysql_user -p mysql_password -w warehouses -l part -m min_wh -n max_wh
 #* [part]: 1=ITEMS 2=WAREHOUSE 3=CUSTOMER 4=ORDERS
+#-r ramp_up_time -m measure time -c number connections
 
 ./tpcc_load -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -p "" -w 1
 
 ./tpcc_start -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -w 1 -c 1 -r 10 -l 20
 
-./tpcc_start -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -w 10 -c 1 -r 10 -l 40 \
+./tpcc_start -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -w 1 -c 5 -r 10 -l 40 \
        	-i 5 -f report.txt -t trx.txt
 
 

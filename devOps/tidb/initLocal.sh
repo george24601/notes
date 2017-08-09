@@ -26,18 +26,19 @@ docker exec -it centos bash
 #Binary deployment
 #start PD
 ./bin/pd-server --data-dir=pd \
-	                --log-file=pd.log
+	                --log-file=pd.log \
+			-L=debug
 
 #start TiKV
 ./bin/tikv-server --pd="127.0.0.1:2379" \
 	                  --data-dir=tikv \
-			                    --log-file=tikv.log
-
+			                    --log-file=tikv.log \
+			-L=debug
 #start TiDB
 ./bin/tidb-server --store=tikv \
 	                  --path="127.0.0.1:2379" \
-			                    --log-file=tidb.log
-
+			                    --log-file=tidb.log \
+			-L=debug
 
 #connect to TiDB
 mysql -h 127.0.0.1 -P 4000 -u root -D test
