@@ -10,6 +10,8 @@ yum install mysql-devel
 
 export PATH=$PATH:/usr/bin/mysql
 
+git clone https://github.com/pingcap/tidb-bench.git
+
 cd src ; make
 
 #########
@@ -26,23 +28,9 @@ mysql  -h 127.0.0.1 -P 4000 -u root tpcc1000 < add_fkey_idx.sql
 #* [part]: 1=ITEMS 2=WAREHOUSE 3=CUSTOMER 4=ORDERS
 #-r ramp_up_time -m measure time -c number connections
 
+./tpcc_start -h  127.0.0.1  -P 4000 -d tpcc1000 -u root -w 1 -c 1 -r 10 -l 400
+
 ./tpcc_load -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -p "" -w 1
 
-./tpcc_start -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -w 1 -c 1 -r 10 -l 20
-
-./tpcc_start -h 127.0.0.1 -P 4000 -d tpcc1000 -u root -w 1 -c 5 -r 10 -l 40 \
-       	-i 5 -f report.txt -t trx.txt
-
-
-mysql -h 127.0.0.1 -P 4000 -u root -D tpcc1000
-
-
-<<SAMPLEOUTPUT
-   5, trx: 0, 95%: 67.917, 99%: 67.917, max_rt: 67.910, 0|61.593, 0|22.044, 0|0.000, 0|275.463
-   errorno, sqlstate, error
-   1265, 01000, Data Truncated
-
-mysql  Ver 14.14 Distrib 5.7.19, for Linux (x86_64) using  EditLine wrapper
-SAMPLEOUTPUT
-
+./tpcc_start -h  127.0.0.1  -P 4000 -d tpcc1000 -u root -w 1 -c 1 -r 10 -l 40
 

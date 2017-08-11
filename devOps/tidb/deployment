@@ -1,6 +1,10 @@
-TiDB: 8 core + 32G RAM
-TiKV: 16 core + 32G RAM (no more than 500G HD to avoid long recovery time)
-PD: 8 core + 32G RAM
+Prod deployment
+TiDB: 32 core + 64G RAM
+TiKV: 32 core + 64G RAM 200 - 500 G SSD
+PD: 8 core + 16G RAM + 200 G+ SSD
+
+Candidate AWS instances:
+r3.2xlarge with instanceStore
 
 Test environment
 1 TiDB, 1 PD - colocated, 3 TiKV 

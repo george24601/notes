@@ -42,3 +42,19 @@ Note we will split key with version value to avoid too huge updates
 During read in transaction:
 1. check if the row has L column in [0, startTs] => wait for its timeout or release
 2. read W column, in [0, startTs], convert to proper timestamp, and read the column at version timestamp
+
+-------
+
+PD provide a timestamp oracle for increasing (not necessarily continous) timestampes, provided by PD
+
+physical time + logical time
+1. when PD becomes leader, will get last saved time from etcd, and hold until current time >= that value
+2. apply a lease to etcd, within this window PD will be the TSO
+3. client batchs n request and get TSs togehter from PD
+
+------
+To split region
+1. Leader peer sends request to PD
+2. PD creates new region ID and peer ID, and return to leader peer
+3. leader peer writes the split action into a raft log, and execute it at apply
+4. Tikv tells PD, PD updates cache and persist it to etcd
