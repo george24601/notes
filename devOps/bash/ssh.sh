@@ -6,3 +6,6 @@ ssh-add -l
 
 #add cerficicate to the agent
 ssh-add -K ~/.ssh/id_rsa
+
+#go directly to host wanted
+ssh -t $HOST "cd /directory_wanted ; bash"
