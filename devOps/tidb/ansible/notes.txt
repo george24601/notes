@@ -1,0 +1,1 @@
+by default, enable_binlog is turned off

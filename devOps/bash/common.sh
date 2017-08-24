@@ -21,3 +21,15 @@ find . -name \*.c -print
 
 #compress and decompress, -c compress, -x extract
 tar -czvf $TO.tar.gz $FROM
+
+#display error code of the last command,e.g., use it after a semicolon 
+ echo $?
+#similarly, !$ is the last argument of the previous command
+cd !$
+
+#use of CDPATH, probably what to edit your ~/.bashrc
+
+#automatically corrects small typos in directory names and jumps to the best guess of existing directories.
+shopt -s cdspell
+
+#pushd and popd for quick folder navigation

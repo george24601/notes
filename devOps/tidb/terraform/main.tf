@@ -28,10 +28,11 @@ resource "aws_security_group" "default" {
   }
 }
 
-
-
-#PD has no persistant state, so we use instance store
 resource "aws_instance" "pd" {
-  instance_type = "c3.large"
+  instance_type = "r3.large"
   ami           = "${lookup(var.aws_amis, var.region)}"
 }
+
+
+#TiKV is replicated, so we can use instance storage.
+#we also need instance storage because we need to write to disk synchronously
