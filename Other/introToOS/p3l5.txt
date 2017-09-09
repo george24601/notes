@@ -1,0 +1,27 @@
+OS represent devices as a special device file
+/dev tmpfs, devfs
+
+memory-mapped I/O
+
+registers: status, command, data
+
+PIO:e.g., write to network
+DMA: direct memory access,data goes to DMA controller instead of data register => in-memory address and size of disk buffero
+
+VFS: network, local devices...
+
+inode: persistent represent of a file index
+file descriptor: OS representation of file
+dentry: correspontry to single path component
+dentry cache:
+superblock: file system specific information regarding FS layout
+inode blcok, data flock, free block
+
+ext2: blcok groups
+=>super-block:
+
+fsync(): flush to disk
+journalling/loging: periodically apply updates to proper disk locations
+
+
+

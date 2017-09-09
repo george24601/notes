@@ -1,0 +1,8 @@
+IPC: message passing,e.g. sockets
+memory-based IPC:
+byte Pipes,msg queues,sockets, 
+shared memory:
+mem mapped files:physical pages mapped to the save VA, VA(P1) VA(P2) map to the same PA
+higher-level: semantics: files, RPC
+
+

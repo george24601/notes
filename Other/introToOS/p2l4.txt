@@ -1,0 +1,26 @@
+user level thread: ul thread ID,UL reg, stack,
+user maintains: thread_lib
+
+KLT: stacks and regs, no longer in PCB, which keeps track of virtual address mapping
+
+PCB: also wants to preserve, "hard prcoess state" and light process state, e.g., singal mask, 
+
+also need to maintain other associations
+
+ULT: threadID -> table of pointers -> ec, register, signal mask, priority, SP, thread local storage, stack => separate TLS with a redzone
+
+Process: list of KLT, user credentials, singal handlers
+LWP: user level rgs, system call args, resource usage info, singal mask, similar to UTL, but visible to kernel
+represents the virtual CPU that will schedule the user-level thread 
+
+KLT: kervel level regs, SP, scheduling info, pointers to associate LWP, process, and CPU structures, info needed when process is not running (have to be in mem all the time, i.e., not-swappable)
+
+CPU: curret thread, list of KLT, dispatching and handling info
+
+proc -> VM + LWP
+
+Instead of destroyig, reuse threads, put it on a deathbed and gc
+
+per-cpu interrupt mask, per-process CPU mask (UTL on top of KLT)
+
+

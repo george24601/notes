@@ -1,53 +1,16 @@
-regs and stack are per thread, code data and files are per processo
+regs and stack are per thread, code data and files, address space, and exeuction context  are per processo
+more complex process control block with part both shared between threads, and per-thread exec context
+=> part of reasion context switch thread time < context switch process time
 
-Thread Type: thread DS
-fork(proc, args) : this is not UNIX fork call!
+inter process communication => more expensive than within same process
 
-PC = proc, stack = args
------
+OS will prevent same physical address mapped to different processes , not so much with threads,i.e., shared in memory
 
-CV: mutex + waiting threads
+thread data structure: ID, PC, SP, registers, stack, other attributes
 
-release mutex
-go on the wait queue
-..wait
-remove from the queue
-re-acquire mutex
-exit the waito
+Mutex: locked?, list of blocked thread, current owner
 
-Note that why we use while?
+CV: list of waiting threads, mutex ref
 
-lock (m) {
-	while(list.not_full)
-		wait(m, list_full)
-	remove from list
-}
+boss-woker, pipeline, and layered patterns
 
-consider the mutliple consumer case, when we got signalled, another consumer might come in and change the state already, basically consider failed to re-acquire mutex case in the implementation above
-
-mutliple -Reader-single writer example, move actual file io outside critical section
-
-lock(counter_mutex)
-{
-	while(resource_counter == -1)
-		wait(counter_mutex,read_phase)
-	resource_counter++;
-}
-
-..read
-
-lock(counter_mutex){
-	resource_counter--;
-	if(readers  == 0)
-		singal(write_phase)
-
-}
-
-
-
-...writer
-lock(counter_mutex){
-	resource_counter = 0;
-	broadcast(read_phase)
-	signal(write_phase);
-}
