@@ -1,0 +1,14 @@
+4. Probably consider TiSpark
+
+6. Cistern? For TiDB binlog
+
+10. http://andremouche.github.io/tidb/transaction_in_tidb.html
+
+11. Note it does not support SP, View, trigger, UDF, FK 
+
+16.  http://t.cn/R9cNVfR
+
+----------
+
+
+

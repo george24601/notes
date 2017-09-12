@@ -1,0 +1,17 @@
+CoreOS added operator to K8s
+encapsulate domain ops into operator,and then inject Operator into K8s, operator calls native k8s API
+Operater to k8s is like bash to OS
+
+T-operator supports: create, rolling update, scale out, failover, backup/restore
+
+K8s no local storage because to them network disk is common and normal, e.g., if service is down, start a new container, and attach volumn to the new pod
+
+To elaborate: TiDB's patch to K8s => similar to DCOS's batch script
+
+------
+http://t.cn/RKqwDNu
+watch out for the case where index and shard data are not on the same shard : two cases where double scan won't be a problem! 
+
+for backup needs, use mydumper to take backup periodically, and use loader to restore
+
+can use chrony to support time sync => how to setup chrony??
