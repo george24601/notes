@@ -1,17 +1,7 @@
-BCP/BCM
-
 rolling upgrade? grey deployment?
-
-BCDR
 
 during down time, turn off primary, start secondary
 
-DRP
-
-need to understand SOA & SLP
-
 can not touch online system except repair, not even debug => take a dump and get it locally, upload config and let deployment happen
 
-RTO and RPO?
-
-
+update without downtime
