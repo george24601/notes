@@ -1,49 +1,14 @@
 MySQL Read Replica
 ------------
 
-Read replicas can also be promoted when needed to become standalone DB instances. (not replacing master?)
-
-For MySQL, MariaDB and PostgreSQL, Amazon RDS  uses those engines' native asynchronous replication to update the read replica whenever there is a change to the source DB instance. The read replica operates as a DB instance that allows only read-only connections; 
-
-=> so need to check MySQL's native asynch replication
-
-Because read replicas can be promoted to master status, they are useful as part of a sharding implementation. To shard your database, add a read replica and promote it to master status, then, from each of the resulting DB Instances, delete the data that belongs to the other shard.
-
-In Multi-AZ deployments for MySQL, MariaDB, Oracle, SQL Server, and PostgreSQL, the data in your primary DB Instance is synchronously replicated to to a standby instance in a different Availability Zone (AZ). Because of their synchronous replication, Multi-AZ deployments for these engines offer greater data durability benefits than do read replicas. (In all Amazon RDS for Aurora deployments, your data is automatically replicated across 3 Availability Zones.)
-
- When you provision a Multi-AZ DB Instance, Amazon RDS automatically creates a primary DB Instance and synchronously replicates the data to a standby instance in a different Availability Zone (AZ). 
-
- In case of an infrastructure failure, Amazon RDS performs an automatic failover to the standby (or to a read replica in the case of Amazon Aurora),
-Since the endpoint for your DB Instance remains the same after a failover, your application can resume database operation without the need for manual administrative intervention.
-
-If a storage volume on your primary instance fails in a Multi-AZ deployment, Amazon RDS automatically initiates a failover to the up-to-date standby (or to a replica in the case of Amazon Aurora). 
-
-Amazon Aurora employs a highly durable, SSD-backed virtualized storage layer purpose-built for database workloads. Amazon Aurora automatically replicates your volume six ways, across three Availability Zones. 
-
- In the case of system upgrades like OS patching or DB Instance scaling, these operations are applied first on the standby, prior to the automatic failover. As a result, your availability impact is, again, only the time required for automatic failover to complete.
-
-Unlike Single-AZ deployments, I/O activity is not suspended on your primary during backup for Multi-AZ deployments for the MySQL, MariaDB, Oracle, and PostgreSQL engines, because the backup is taken from the standby.
-
-6 copies locate in 3 AZs which are limited to 1 region. The latency between AZs in one region is small. So the latency of the quorum write will not be long. Aurora doesn't support cross region replicas now.
 
 
-mysql semisync vs binlog async
+Testing Amazon Aurora Using Fault Injection Queries
+--------------
+You can force a crash of an Amazon Aurora instance using the ALTER SYSTEM CRASH fault injection query.
 
-use quorum protocol for HA instead of raft or paxos
+For this fault injection query, a failover will not occur. If you want to test a failover, then you can choose the Failover instance action for your DB cluster in the RDS console, or use the failover-db-cluster AWS CLI command or the FailoverDBCluster RDS API action.
 
-aurora - share disk
-
-one writer -> many readers -> shared storage
-
-EACH WRITE goes directly to storage and it has to be acknowledged by 4 out of 6 copies (synchronous writes).
-
-
-log is DB, writes only redo log to storage layer
-
-=>delegate redo and backup to underlining distributed storage
-
-separate computation and storage, and reduce storage IO
-
-aurora uses timestamp as LSN
+test failover
 
 
