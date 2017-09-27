@@ -46,3 +46,27 @@ CIDR:
 ----------
 On AWS:
 When you create a VPC, it spans all AZs in the region, After creating a VPC, you can add one or more subnets in each Availability Zone. When you create a subnet, you specify the CIDR block for the subnet, which is a subset of the VPC CIDR block. Each subnet must reside entirely within one Availability Zone and cannot span zones
+
+Private Network
+----------
+The most common use of private addresses is in residential IPv4 networks, since most Internet service providers (ISPs) allocate only a single publicly routable IPv4 address to each residential customer, but many homes have more than one computer or other Internet connected device, such as smartphones. In this situation, a network address translator (NAT/PAT) gateway is usually used to provide Internet connectivity to multiple hosts.
+
+Private addresses are also commonly used in corporate networks, which for security reasons, are not connected directly to the Internet. Often a proxy, SOCKS gateway, or similar devices are used to provide restricted Internet access to network-internal users.
+
+IP packets addressed from them cannot be transmitted through the public Internet, and so if such a private network needs to connect to the Internet, it must do so via a network address translator (NAT) gateway, or a proxy server.
+
+Network address translation (NAT)
+-----------
+ remapping one IP address space into another by modifying network address information in Internet Protocol (IP) datagram packet headers while they are in transit across a traffic routing device
+
+IP masquerading is a technique that hides an entire IP address space, usually consisting of private IP addresses, behind a single IP address in another, usually public address space. The address that has to be hidden is changed into a single (public) IP address as "new" source address of the outgoing IP packet so it appears as originating not from the hidden host but from the routing device itself. Because of the popularity of this technique to conserve IPv4 address space, the term NAT has become virtually synonymous with IP masquerading
+
+ a local network uses one of the designated "private" IP address subnets (RFC 1918). A router on that network has a private address in that address space. The router is also connected to the Internet with a "public" address assigned by an Internet service provider. As traffic passes from the local network to the Internet, the source address in each packet is translated on the fly from a private address to the public address. The router tracks basic data about each active connection (particularly the destination address and port). When a reply returns to the router, it uses the connection tracking data it stored during the outbound phase to determine the private address on the internal network to which to forward the reply.
+
+ll IP packets have a source IP address and a destination IP address. Typically packets passing from the private network to the public network will have their source address modified while packets passing from the public network back to the private network will have their destination address modified.
+
+e protocols the port numbers are changed so that the combination of IP address and port information on the returned packet can be unambiguously mapped to the corresponding private network destination
+
+ RFC 2663 uses the term network address and port translation (NAPT) for this type of NAT. Other names include port address translation (PAT), IP masquerading, NAT overload and many-to-one NAT. This is the most common type of NAT and has become synonymous with the term NAT in common usage.
+
+Protocols not based on TCP and UDP require other translation techniques. Internet Control Message Protocol (ICMP) packets typically relate to an existing connection and need to be mapped using the same IP address and port mappings as established in that connection.
