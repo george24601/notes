@@ -70,3 +70,11 @@ e protocols the port numbers are changed so that the combination of IP address a
  RFC 2663 uses the term network address and port translation (NAPT) for this type of NAT. Other names include port address translation (PAT), IP masquerading, NAT overload and many-to-one NAT. This is the most common type of NAT and has become synonymous with the term NAT in common usage.
 
 Protocols not based on TCP and UDP require other translation techniques. Internet Control Message Protocol (ICMP) packets typically relate to an existing connection and need to be mapped using the same IP address and port mappings as established in that connection.
+
+Canonical Name record
+------
+CNAME record is a resource record in the Domain Name System (DNS) used to specify that a domain name is an alias for another domain (the 'canonical' domain).
+
+This can prove convenient when running multiple services (like an FTP server and a webserver; each running on different ports) from a single IP address. One can, for example, point ftp.example.com and www.example.com to the DNS entry for example.com, which in turn has an A record which points to the IP address. Then, if the IP address ever changes, one only has to record the change in one place within the network: in the DNS A record for example.com.
+
+CNAME records must always point to another domain name, never directly to an IP address.
