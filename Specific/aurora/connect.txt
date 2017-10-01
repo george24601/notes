@@ -1,8 +1,0 @@
-The Amazon RDS launch wizard has created a subnet in our VPC for each Availability Zone (AZ) in the
-current AWS region. Although an Aurora instance resides in a single AZ at any given time, it’s necessary
-to have a subnet in at least three AZs to achieve high availability. If the AZ containing your Aurora
-instance becomes unavailable, RDS will automatically provision a new instance in an available AZ that
-has a VPC subnet. If there is no VPC subnet for an AZ, RDS won’t provision Aurora instances in it.
-
-The Amazon RDS launch wizard also created a route table in our VPC and configured it to route nonlocal
-network traffic to the Internet gateway, as shown following.
