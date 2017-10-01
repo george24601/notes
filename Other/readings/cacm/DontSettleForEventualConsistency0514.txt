@@ -1,5 +1,0 @@
-impossible to guarantee low latency and provide storng consistency at the same time
-
-casual consisteny instead of eventual: limited forms of read-only and write-only transcations
-
-
