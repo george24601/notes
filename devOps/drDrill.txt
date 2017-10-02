@@ -1,7 +1,0 @@
-rolling upgrade? grey deployment?
-
-during down time, turn off primary, start secondary
-
-can not touch online system except repair, not even debug => take a dump and get it locally, upload config and let deployment happen
-
-update without downtime
