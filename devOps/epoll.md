@@ -26,3 +26,25 @@ Call epoll_wait to wait for updates about the list of files you’re interested 
 th poll( ) and select( ) (discussed in Chapter 2) require the full list of file descriptors to watch on each invocation. The kernel must then walk the list of each file descriptor to be monitored. When this list grows large—it may contain hundreds or even thousands of file descriptors—walking the list on each invocation becomes a scalability bottleneck.
 
 Epoll circumvents this problem by decoupling the monitor registration from the actual monitoring. One system call initializes an epoll context, another adds monitored file descriptors to or removes them from the context, and a third performs the actual event wait.
+
+A successful call to epoll_create( ) instantiates a new epoll instance, and returns a file descriptor associated with the instance. This file descriptor has no relationship to a real file; it is just a handle to be used with subsequent calls using the epoll facility. The size parameter is a hint to the kernel about the number of file descriptors that are going to be monitored; it is not the maximum number. Passing in a good approximation will result in better performance
+
+A successful call to epoll_ctl( ) controls the epoll instance associated with the file descriptor epfd. The parameter op specifies the operation to be taken against the file associated with fd. The event parameter further describes the behavior of the operation.
+
+struct epoll_event {
+        _  _u32 events;  /* events */
+        union {
+                void *ptr;
+                int fd;
+                _  _u32 u32;
+                _  _u64 u64;
+        } data;
+};
+
+A call to epoll_wait( ) waits up to timeout milliseconds for events on the files associated with the epoll instance epfd. Upon success, events points to memory containing epoll_event structures describing each event, up to a maximum of maxevents events. The return value is the number of events, or −1 on error, in which case errno is set to one of the following
+
+select uses a linear search through the list of watched file descriptors, which causes its O(n) behaviour, whereas epoll uses callbacks in the kernel file structure.
+
+nother fundamental difference of epoll is that it can be used in an edge-triggered, as opposed to level-triggered, fashion. This means that you receive “hints” when the kernel believes the file descriptor has become ready for I/O, as opposed to being told “I/O can be carried out on this file descriptor”
+
+It differs both from poll and select in such a way that it keeps the information about the currently monitored descriptors and associated events inside the kernel, and exports the API to add/remove/modify those.
