@@ -1,0 +1,12 @@
+#In src/main/resources/application.yml
+server.port=8761
+
+#since this is eureka server itself, we do not register
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+
+#turn off the complains that there are no replica nodes for the registry to connect to for local dev
+logging.level.com.netflix.eureka=OFF
+logging.level.com.netflix.discovery=OFF
+
+

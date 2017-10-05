@@ -58,3 +58,14 @@ Two important items in local port forwarding are the destination server, and two
 Some uses of local port forwarding:
 Using local port forwarding to Receive Mail
 Connect from a laptop to a website using an SSH tunnel.
+
+
+TXT record
+---------
+ Any fully qualified domain can potentially have several records.[2] Each record can have one or more character strings
+
+Value: This can be free form text data of any type. Each word is treated as a separate string unless one or more strings are enclosed in quotes. The maximum length of a string is 255 bytes, but any number of strings can be present in each record. With a total limit of 65535 bytes (which is actually less)
+
+The general syntax:
+
+<owner> <class> <ttl> TXT "<attribute name>=<attribute value>"

@@ -1,0 +1,76 @@
+//This is all you need to define a Java project
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '3.6.7.Final'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+The shortcut form for declaring external dependencies looks like “group:name:version”.
+
+multi-project builds?
+
+Setting up a consistent environment for your build is as simple as placing these settings into a gradle.properties file.
+
+The -D option of the gradle command has the same effect as the -D option of the java command
+
+task printProps {
+    doLast {
+        println commandLineProjectProp
+        println gradlePropertiesProp
+        println systemProjectProp
+        println envProjectProp
+        println System.properties['system']
+    }
+}
+
+//groovy code here!
+task upper {
+    doLast {
+        String someString = 'mY_nAmE'
+        println "Original: " + someString
+        println "Upper case: " + someString.toUpperCase()
+    }
+}
+
+//you can declare tasks that depend on other task
+task intro(dependsOn: hello) {
+    doLast {
+        println "I'm Gradle"
+    }
+}
+
+//define one or more default tasks that are executed if no other tasks are specified.
+defaultTasks 'clean', 'run'
+
+Java plugin. This plugin adds some tasks to your project which will compile and unit test your Java source code, and bundle it into a JAR file.
+
+/*
+applies the Java plugin to each subproject
+ This means the tasks and configuration properties we have seen in the previous section are available in each subproject. So, you can compile, test, and JAR all the projects by running gradle build from the root project directory.
+
+Also note that these plugins are only applied within the subprojects section, not at the root level, so the root build will not expect to find Java source files in the root project, only in the subprojects.
+*/
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse-wtp'
+
+    repositories {
+       mavenCentral()
+    }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+    }
+
+    version = '1.0'
+
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+}

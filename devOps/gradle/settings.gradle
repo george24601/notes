@@ -1,0 +1,6 @@
+/*
+To define a multi-project build, you need to create a settings file.The settings file lives in the root directory of the source tree, and specifies which projects to include in the build. It must be called settings.gradle. 
+*/
+
+
+include "shared", "api", "services:webservice", "services:shared"
