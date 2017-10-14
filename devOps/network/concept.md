@@ -69,3 +69,10 @@ Value: This can be free form text data of any type. Each word is treated as a se
 The general syntax:
 
 <owner> <class> <ttl> TXT "<attribute name>=<attribute value>"
+
+
+Fully qualified domain name
+---------
+A fully qualified domain name consists of a list of domain labels representing the hierarchy from the lowest relevant level in the DNS to the top-level domain (TLD). The domain labels are concatenated using the full stop (dot, period) character as separator between labels.
+
+The DNS root is unnamed, expressed as the empty label terminated by the dot.
