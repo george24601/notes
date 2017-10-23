@@ -3,11 +3,10 @@ Subnet
 Computers that belong to a subnet are addressed with a common, identical, most-significant bit-group in their IP address.
  This results in the logical division of an IP address into two fields, a network or routing prefix and the "rest" field or host identifier. The rest field is an identifier for a specific host or network interface.
 
-a network may also be characterized by its subnet mask, which is the bitmask that when applied by a bitwise AND operation to any IP address in the network, yields the routing prefix
+Traffic is exchanged (routed) between subnetworks with special gateways (routers) when the routing prefixes of the source address and the destination address differ. A router constitutes the logical or physical boundary between the subnets, e.g., inside a VPC, subsets are further division of VPC's CIDR block, and are non-intersecting between AZs, continous within a single AZ
 
-Traffic is exchanged (routed) between subnetworks with special gateways (routers) when the routing prefixes of the source address and the destination address differ. A router constitutes the logical or physical boundary between the subnets.
+Each subnet is served by a designated default router, but may consist internally of multiple physical Ethernet segments interconnected by network switches or network bridges.
 
- Each subnet is served by a designated default router, but may consist internally of multiple physical Ethernet segments interconnected by network switches or network bridges.
 
 Routing Table
 --------
