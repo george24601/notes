@@ -16,3 +16,6 @@ dig wikipedia.org
 dig only prints the final result of the recursive search. You can mimic the individual steps of a recursive search by sending a request to a particular DNS server and asking for no recursion, using the +norecurs flag. For example, to send a non-recursive query to one of the root servers:
 RECUR
 dig @a.ROOT-SERVERS.NET www.wikipedia.org +norecurs
+
+#txt record type is special => need to specify type explicitly
+dig -t txt YOUR_TXT_DNS_NAME
