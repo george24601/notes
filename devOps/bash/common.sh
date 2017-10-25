@@ -1,6 +1,3 @@
-#symlink
-ln -s $FILE_PATH $LINK_PATH
-
 #check if port is open and accessible, -z means sending no data, just scanning the daemon
 nc -z $HOST $PORT
 
@@ -23,7 +20,7 @@ find . -name \*.c -print
 tar -czvf $TO.tar.gz $FROM
 
 #display error code of the last command,e.g., use it after a semicolon 
- echo $?
+echo $?
 #similarly, !$ is the last argument of the previous command
 cd !$
 
@@ -32,4 +29,10 @@ cd !$
 #automatically corrects small typos in directory names and jumps to the best guess of existing directories.
 shopt -s cdspell
 
-#pushd and popd for quick folder navigation
+#pushd and popd for quick dir navigation
+
+#Press Control+R and type the keyword to search for command history
+
+#exeute 4th command from the history
+!4
+
