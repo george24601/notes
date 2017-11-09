@@ -65,4 +65,29 @@ your load could lead to 75 concurrent requests to the config server for the upda
 
 
 
+-------
+ust include Spring Security on the classpath (e.g. through spring-boot-starter-security). The default is a username of "user" and a randomly generated password, which isn’t going to be very useful in practice, so we recommend you configure the password (via security.user.password) and encrypt it (see below for instructions on how to do that).
+
+to use the encryption and decryption features you need the full-strength JCE installed in your JVM (it’s not there by default). You can download the "Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files" from Oracle, and follow instructions for installation (essentially replace the 2 policy files in the JRE lib/security directory with the ones that you downloaded).
+
+If the remote property sources contain encrypted content (values starting with {cipher}) they will be decrypted before sending to clients over HTTP. The main advantage of this set up is that the property values don’t have to be in plain text when they are "at rest" (e.g. in a git repository). If a value cannot be decrypted it is removed from the property source and an additional property is added with the same key, but prefixed with "invalid." and a value that means "not applicable" (usually "<n/a>"). This is largely to prevent cipher text being used as a password and accidentally leaking.
+
+Encrypted values in a .properties file must not be wrapped in quotes, otherwise the value will not be decrypted
+
+The server also exposes /encrypt and /decrypt endpoints
+
+Take the encrypted value and add the {cipher} prefix before you put it in the YAML or properties file, and before you commit and push it to a remote, potentially insecure store.
+
+The asymmetric choice is superior in terms of security, but it is often more convenient to use a symmetric key since it is just a single property value to configure in the bootstrap.properties.
+
+To configure a symmetric key you just need to set encrypt.key to a secret String (or use an enviroment variable ENCRYPT_KEY to keep it out of plain text configuration files).
+
+You can do that yourself. Just add @EnableScheduled and a @Bean that has a @Scheduled method that calls the RefreshEndpoint.refresh() method.
+
+JGitEnvironmentRepository.refresh 
+
+ The asymmetric choice is superior in terms of security, but it is often more convenient to use a symmetric key since it is just a single property value to configure in the bootstrap.properties
+
+To configure a symmetric key you just need to set encrypt.key to a secret String (or use an enviroment variable ENCRYPT_KEY to keep it out of plain text configuration files).
+
 

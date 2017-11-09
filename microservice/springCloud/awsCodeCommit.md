@@ -84,4 +84,8 @@ Account B administrator can then delegate permissions to assume the role to any 
 
 Principal – In identity-based policies (IAM policies), the only type of policies that AWS CodeCommit supports, the user that the policy is attached to is the implicit principal.
 
+Data sent or received is transmitted using the HTTPS or SSH encrypted network protocols.
 
+The first time you create an AWS CodeCommit repository in a new region in your AWS account, AWS CodeCommit creates an AWS-managed key in that same region in AWS Key Management Service (AWS KMS) that is used only by AWS CodeCommit (the aws/codecommit key). This key is created and stored in your AWS account. AWS CodeCommit uses this AWS-managed key to encrypt and decrypt the data in this and all other AWS CodeCommit repositories within that region in your AWS account.
+
+AWS CodeCommit performs the following AWS KMS actions against the default key aws/codecommit. An IAM user does not need explicit permissions for these actions, but the user must not have any attached policies that deny these actions for the aws/codecommit key
