@@ -17,11 +17,8 @@ go directly to host wanted
 ssh -t $HOST "cd /directory_wanted ; bash"
 ```
 
-In the SSH public key authentication use case, it is rather typical that the users create (i.e. provision) the key pair for themselves. SSH implementations include easily usable utilities for this (for more information see ssh-keygen and ssh-copy-id).
-
-Once an SSH server receives a public key from a user and considers the key trustworthy, the server marks the key as authorized in its authorized_keys file. Such keys are called authorized keys.
-
-no copies of the private key should be distributed. The private keys used for user authentication are called identity keys.
+Auth
+----------
 
 When a private key is needed the user is asked to supply the passphrase so that the private key can be decrypted. The handling of passphrases can be automated with an SSH agent.
 
@@ -40,3 +37,18 @@ Under standard security practices, every host should generate unique host keys f
 Manage this situation by ensuring that all node hosts have the same SSH host keys. You can either deploy all node hosts using the same base image that includes host keys, or duplicate the SSH host keys on a node host to all other node hosts.
 
 A host key is the server’s public key. The host key is used by the client to decrypt an authentication message sent from the server when connecting. 
+
+
+Port Forwarding
+---------
+Local forwarding is used to forward a port from the client machine to the server machine.
+Basically, the SSH client listens for connections on a configured port, and when it receives a connection, it tunnels the connection to an SSH server. The server connects to a configurated destination port, possibly on a different machine than the SSH server
+
+```
+ssh -L 80:intra.example.com:80 gw.example.com
+```
+This example opens a connection to the gw.example.com jump server, and forwards any connection to port 80 on the local machine to port 80 on intra.example.com.
+
+
+Agent Forwarding
+---------
