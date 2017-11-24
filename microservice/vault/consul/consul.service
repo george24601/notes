@@ -1,0 +1,14 @@
+#put it in /etc/systemd/system
+#sudo systemctl start consul
+[Unit]
+Description=consul
+
+#need AWS credential provider chain for retry-join
+[Service]
+Type=simple
+PIDFile=/var/run/consul.pid
+ExecStart=/home/ec2-user/consul agent -server -bootstrap-expect=3 \
+                    -data-dir=/home/ec2-user/data -node=agent-three -bind=172.31.16.31 \
+                    -retry-join "provider=aws tag_key=consul-vault tag_value=consul" \
+                                    -enable-script-checks=true -config-dir=/home/ec2-user/consul.d
+Restart=always
