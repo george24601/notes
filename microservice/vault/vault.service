@@ -1,0 +1,15 @@
+#put it in /etc/systemd/system
+#sudo systemctl start vault
+#sudo systemctl stop vault
+#sudo systemctl status vault
+#sudo vim /etc/systemd/system/vault.service
+[Unit]
+Description=vault
+
+#need AWS credential provider chain for retry-join
+[Service]
+Type=simple
+PIDFile=/var/run/vault.pid
+ExecStart=/home/ec2-user/vault server -config=/home/ec2-user/vault.hcl
+
+Restart=always

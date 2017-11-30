@@ -1,3 +1,5 @@
+sudo systemctl start consul
+
 #DONT USE DEV MODE FOR PROD
 consul agent -dev
 

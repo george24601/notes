@@ -28,3 +28,33 @@ The process of teaching Vault how to decrypt the data is known as unsealing the 
 Vault behaves a lot like a virtual filesystem. The read/write/delete operations are forwarded to the backend, and the backend can choose to react to these operations however it wishes. For example, the kv backend simply passes this through to the storage backend (after encrypting data first).
 
 However, the aws backend (which you'll see soon), will read/write IAM policies and access tokens. So, while you might do a vault read aws/deploy, this isn't reading from the physical path aws/deploy. Instead, the AWS backend is dynamically generating an access key based on the deploy policy.
+
+All data that flows between Vault and the Storage Backend passes through the barrier. The barrier ensures that only encrypted data is written out, and that data is verified and decrypted on the way in. Much like a bank vault, the barrier must be "unsealed" before anything inside can be accessed.
+
+Every request to Vault to Vault and response from Vault goes through the configured audit backends.
+
+Vault takes an authenticated user and returns a client token that can be used for future requests. As an example, the userpass backend uses a username and password to authenticate the user. Alternatively, the github backend allows users to authenticate via GitHub.
+
+Only the storage backend and the HTTP API are outside, all other components are inside the barrier.
+
+Once unsealed, Vault loads all of the configured audit, credential and secret backends.
+
+An authentication request flows through core and into a credential backend, which determines if the request is valid and returns a list of associated policies.
+
+Servers sharing a storage backend, only a single instance will be active at any time while all other instances are hot standbys.
+
+The encryption key is also stored with the data, but encrypted with another encryption key known as the master key. The master key isn't stored anywhere.
+
+Discussions online
+------------
+I'll just say that I've seen multiple setups of completely automated Vault and Consul clusters (except for the Vault unseal step), so it is possible! You're right that the peers needs IPs but with proper "failure" (graceful leave vs. just shutdown) this becomes a non-issue.
+
+running a 3 node consul with vault running on the same nodes. Since only one can be master at a time, only one is actually live in the ELB.
+
+Unsealing has been done manually by the security team who holds the tokens and the HA backend is S3
+
+Vault would need 3 security guys on the line in case it goes down. Its running in HA - the likelihood of it losing all 3 unsealed nodes over the weekend or at night is fairly low IMO. If it can hobble along until a business day where we spin up more node(s) and have security unseal, I think we're good. Also, waking people up at their homes isnt the end of the world either.
+
+One approach is putting the key in a hard to guess location before the application starts and wipe the key once it was read to memory. The time in which the key is available is shortened. The attack time-frame is reduced, but still the key was there. Wiping the key works only for one application startup. Containers and microservices in the Cloud are known to be restarted once they crashed. A restart of the application is no longer possible as the key is gone.
+
+Vault never stores a key in a persistent location. Starting/restarting Vault always requires one or more operators to unseal Vault.
