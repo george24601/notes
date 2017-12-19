@@ -1,14 +1,9 @@
-#check if port is open and accessible, -z means sending no data, just scanning the daemon
-nc -z $HOST $PORT
-
 #delete the folder if it exists, note that the spaces around -d predicate matter! 
 [ -d $FOLDER ] && rm -r $FOLDER
 
 #But -d does not work with wildcards!
 if ls /path/to/your/files* 1> /dev/null 2>&1; then
       echo "files do exist"
-
-host $FIND_IP_OF_HOST
 
 #search only files with certain extensions
 grep -r --include=*.scala 'spray' ./ | less
@@ -29,10 +24,21 @@ cd !$
 #automatically corrects small typos in directory names and jumps to the best guess of existing directories.
 shopt -s cdspell
 
+<<OTHER
 #pushd and popd for quick dir navigation
 
 #Press Control+R and type the keyword to search for command history
 
 #exeute 4th command from the history
 !4
+
+
+OTHER
+
+#the {} in ${} are useful if you want to expand the variable foo in the string, e.g.,
+${foo}bar
+
+#Usage of the $ like $(echo foo) means run whatever is inside the parentheses in a subshell and return that as the value, e.g.,
+gcclib=$(dirname $(dirname $(which gcc)))/lib 
+
 
