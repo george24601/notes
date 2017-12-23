@@ -30,8 +30,21 @@ mkdir -p /consul/data
 docker run -d --restart=always -p 8300:8300 -p 8301:8301 -p 8301:8301/udp \
 	-p 8302:8302 -p 8302:8302/udp -p 8500:8500 -p 8600:8600 -p 8600:8600/udp  \
 	-v /consul/data:/consul/data \
-	--name consul-server consul:1.0.2 \ 
+	--name consul-server consul \ 
         agent -server -bootstrap-expect=1 \
 	-retry-join "provider=aws tag_key=consul-ecs tag_value=consul" \ 
 	-client 0.0.0.0 \
 	-advertise $(curl -s http://169.254.169.254/latest/meta-data/local-ipv4) 
+
+docker run -d --restart=always -p 8300:8300 -p 8301:8301 -p 8301:8301/udp \
+	-p 8302:8302 -p 8302:8302/udp -p 8500:8500 -p 8600:8600 -p 8600:8600/udp  \
+	-v /consul/data:/consul/data \
+	--name consul-server consul \ 
+        agent -server -bootstrap-expect=3 \
+	-retry-join "provider=aws tag_key=consul-ecs tag_value=consul" \ 
+	-client 0.0.0.0 \
+	-advertise $(curl -s http://169.254.169.254/latest/meta-data/local-ipv4) 
+
+docker stop consul-server && docker rm consul-server && sudo rm -rf /consul
+
+

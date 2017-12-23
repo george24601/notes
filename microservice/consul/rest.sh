@@ -1,3 +1,10 @@
-curl 0.0.0.0:8500/v1/catalog/nodes
+sudo yum install jq
 
-curl 10.220.21.48:8500/v1/catalog/nodes
+curl 0.0.0.0:8500/v1/catalog/nodes | jq
+
+curl --request PUT \
+	--data 'testValue' \
+	0.0.0.0:8500/v1/kv/foo
+
+curl 0.0.0.0:8500/v1/kv/foo
+
