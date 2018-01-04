@@ -1,3 +1,12 @@
+<<OPERATOR
+-a file => file exists
+-d file => file exists and is a dir
+-f file => file exists and is a file
+-r file => file exists and is a readable
+-z string => length of string is zero
+-n string => length of string is non-zero
+OPERATOR
+
 #delete the folder if it exists, note that the spaces around -d predicate matter! 
 [ -d $FOLDER ] && rm -r $FOLDER
 
@@ -31,14 +40,10 @@ shopt -s cdspell
 
 #exeute 4th command from the history
 !4
-
-
 OTHER
 
 #the {} in ${} are useful if you want to expand the variable foo in the string, e.g.,
 ${foo}bar
 
-#Usage of the $ like $(echo foo) means run whatever is inside the parentheses in a subshell and return that as the value, e.g.,
-gcclib=$(dirname $(dirname $(which gcc)))/lib 
-
-
+#shell to exit if any subcommand or pipeline returns a non-zero status
+set -e

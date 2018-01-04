@@ -7,9 +7,6 @@ docker run ubuntu /bin/echo 'Hello world'
 #-t gives a terminal inside the container, -i allows an interactive connection
 docker run -it  ubuntu /bin/bash
 
-#conversely
-docker stop $CONTAINER_ID
-
 #get the ip of the host ip: localhost does not do!
 docker-machine ip my-docker-vm
 
@@ -18,8 +15,3 @@ docker port nostalgic_morse 5000
 docker top
 
 docker inspect nostalgic_morse
-
-#go into containers with bash
-docker exec -it $CONTAINER_ID_OR_NAME bash
-
-docker run -e"EUREKA_ENV=dev" enreka-stg -d

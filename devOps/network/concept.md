@@ -75,3 +75,11 @@ Fully qualified domain name
 A fully qualified domain name consists of a list of domain labels representing the hierarchy from the lowest relevant level in the DNS to the top-level domain (TLD). The domain labels are concatenated using the full stop (dot, period) character as separator between labels.
 
 The DNS root is unnamed, expressed as the empty label terminated by the dot.
+
+127.0.0.1 is the loopback address (also known as localhost)
+0.0.0.0 is a non-routable meta-address used to designate an invalid, unknown, or non-applicable target (a ‘no particular address’ place holder)
+In the context of a route entry, it usually means the default route.
+In the context of servers, 0.0.0.0 means all IPv4 addresses on the local machine. If a host has two IP addresses, 192.168.1.1 and 10.1.2.1, and a server running on the host listens on 0.0.0.0, it will be reachable at both of those IPs.
+
+The class A network number 127 is assigned the loopback function, that is, a datagram sent by a higher level protocol to a network 127 address should loop back inside the host. No datagram sent to a network 127 address should ever appear on any network anywhere.
+

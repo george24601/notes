@@ -47,4 +47,16 @@ docker run -d --restart=always -p 8300:8300 -p 8301:8301 -p 8301:8301/udp \
 
 docker stop consul-server && docker rm consul-server && sudo rm -rf /consul
 
+#Running Consul Agent in Client Mode
+#docker run -d --net=host -e 'CONSUL_LOCAL_CONFIG={"leave_on_terminate": true}' consul agent -bind=<external ip> -retry-join=<root agent ip>
+
+#Registrator check
+docker run -d \
+	    --name=registrator \
+	        --net=host \
+		    --volume=/var/run/docker.sock:/tmp/docker.sock \
+		        gliderlabs/registrator:latest \
+			      consul://localhost:8500
+
+docker logs registrator
 

@@ -1,8 +1,3 @@
-vault server -dev
-
-#The only step you need to take is to set the following environment variables:
-
-
 #the consul prefix specifies which backend to use
 vault write secret/hello value=world
 
@@ -32,5 +27,9 @@ curl \
 vault write consul/config/access \
 	    address=127.0.0.1:8500 \
 	        token=adf4238a-882b-9ddc-4a9d-5b6758e4159e
+
+
+#after start, need to init and then unseal
+vault init
 
 
