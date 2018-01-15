@@ -18,3 +18,7 @@ aws ecr delete-repository --repository-name $REPO_NAME --force
 #Repository names can support namespaces
 
 #In your ECS task definitions, make sure that you are using the full registry/repository:tag naming for your ECR images. For example, aws_account_id.dkr.ecr.region.amazonaws.com/my-web-app:latest
+
+#clean up diskspace - mostly because of overlay
+du -a / | sort -n -r | head -n 10
+docker system prune -a -f

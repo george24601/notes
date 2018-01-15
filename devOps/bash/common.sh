@@ -1,12 +1,3 @@
-<<OPERATOR
--a file => file exists
--d file => file exists and is a dir
--f file => file exists and is a file
--r file => file exists and is a readable
--z string => length of string is zero
--n string => length of string is non-zero
-OPERATOR
-
 #delete the folder if it exists, note that the spaces around -d predicate matter! 
 [ -d $FOLDER ] && rm -r $FOLDER
 
@@ -46,4 +37,4 @@ OTHER
 ${foo}bar
 
 #shell to exit if any subcommand or pipeline returns a non-zero status
-set -e
+#set -e
