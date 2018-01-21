@@ -36,13 +36,11 @@ In fact, languages often provide contructs exactly to prevent extensibility: ML 
 
 ----
 
-mixin:
-mixin methods calling methods that they assume are defined in all clasess that inluce the mixin, somewhere between multiple inheritance and interface
-
 interface:
 An interface is a type, can solve some problems with multiple inheritance
 fundamental to type checking, which is why they dont exist in ruby
 
+```ruby
 module Color
 	attr_acceotr:color
 	def darken
@@ -53,6 +51,7 @@ end
 class ColorPt < Pt
 	include Color
 end
+```
 
 often, mixins call other methods on self that are not defined by the mixin. Instead, the mixin assumes that all clases that include the mixin define this method
 

@@ -1,0 +1,44 @@
+yytext: string containing the matched text
+
+yylval:
+
+yywrap: called when lex reaches EOF
+
+$: end of line
+
+^ operator must appear as the first char after the left bracket
+
+?: optional ab?c => ac or bc
+
+(ab|cd+)? => ab or cdddd..
+
+ab/cd: match ab only if followed by cd
+
+| : action for this rule is also action for the next rule
+
+yyleng: # of chars matched
+
+yymore:next input expression recognized is to be tacked on to the end of this input, next input string would overwrite the current entry in yytex
+
+yyless:
+
+handle "abc\"def"
+
+```
+\"[^"]*   {
+                            if (yytext[yyleng-1] == '\\')
+                                 yymore();
+                            else
+                                 ... normal user processing
+                            }
+
+```
+
+'[^'\n]*'
+
+. does not include new line
+
+
+REJECT:
+
+
