@@ -5,10 +5,21 @@ sudo tcpdump -nn
 #-s $BYTES_TO_CAP , default 96
 #-i any : Listen on all interfaces just to see if you’re seeing any traffic
 
-#look for traffic based on IP address
-sudo tcpdump host $HOST_IP
+#look for traffic FROM $IP
+sudo tcpdump host $IP
 
-#look for traffic from/to with src/dst
+#look for traffic to destination
+sudo tcpdump dst $DESTINATION
+
+#find specific $PORT traffic
+sudo tcpdump dst port $PORT
+
+#-i any for any network interface
+sudo tcpdump -i any dst port 8500
+
+sudo tcpdump -i any dst port 8083
+
+sudo tcpdump -i any dst port 3000
 
 #-X: show the packet's contents
 #-w $target_fiile : dump content to a text file

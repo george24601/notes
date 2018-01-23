@@ -5,4 +5,11 @@ do
 done
 
 echo "Total files in array : ${#files[*]}"
-total=${#files[*]}
+#total=${#files[*]}
+
+while true
+do
+	sleep 1
+done
+
+

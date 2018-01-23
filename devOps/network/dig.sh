@@ -9,7 +9,8 @@ The AUTHORITY section contains records of type NS, indicating the names of DNS s
 
 The rd (recursion desired) flag indicates that dig requested a recursive lookup, and the ra (recursion available) flag indicates that the server permits recursive lookups (some do not).
 DATA
-dig wikipedia.org
+#trace will show all steps
+dig +trace wikipedia.org
 
 
 <<RECUR
@@ -19,3 +20,7 @@ dig @a.ROOT-SERVERS.NET www.wikipedia.org +norecurs
 
 #txt record type is special => need to specify type explicitly
 dig -t txt YOUR_TXT_DNS_NAME
+
+
+#check source of Authority with forward resolver
+dig SOA +multiline $DOMAIN_NAME 

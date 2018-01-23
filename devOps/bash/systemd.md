@@ -1,7 +1,4 @@
-To tell systemd to start services automatically at boot, you must enable them
-```
-sudo systemctl enable application
-```
+Note that in general systemd does not work from within docker, because it needs access to the underlying dprocess, unless you use specific systemd-enabled docker base images. 
 
 Important [Service] Section Options
 --------
@@ -36,10 +33,6 @@ WantedBy=multi-user.target
 
 why you should not run the service as root?
 
-#Execute as root
-```
-chmod 664 /etc/systemd/system/name.service
-```
 
 Watch out for 
 StartLimitBurst=5
