@@ -10,6 +10,7 @@ ssh-add -l
 
 add cerficicate to the agent
 ```
+chmod 400 ~/.ssh/id_rsa
 ssh-add -K ~/.ssh/id_rsa
 ```
 go directly to host wanted

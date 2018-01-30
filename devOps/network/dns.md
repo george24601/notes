@@ -17,5 +17,12 @@ Hosted zone
 --------
 A container for resource record sets, which include information about how you want to route traffic for a domain (such as example.com) and all of its subdomains.. A hosted zone has the same name as the corresponding domain.
 
+SRV record
+----------
+_service._proto.name. TTL class SRV priority weight port target.
+e.g.,
+```
+_sip._tcp.example.com. 86400 IN SRV 0 5 5060 sipserver.example.com.
+```
 
-
+the target in SRV records must point to hostname with an address record (A or AAAA record). Pointing to a hostname with a CNAME record is not a valid configuration.
