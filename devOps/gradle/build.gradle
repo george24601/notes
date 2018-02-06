@@ -74,3 +74,8 @@ subprojects {
         manifest.attributes provider: 'gradle'
     }
 }
+
+//capture the gradle project property (-P) and pass it to the java
+test {
+    systemProperty "cassandra.ip", project.getProperty("cassandra.ip")
+}

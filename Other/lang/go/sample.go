@@ -20,6 +20,10 @@ func pow(x, n, lim float64) float64 {
 	return lim
 }
 
+type Vertex struct {
+	X int
+	Y int
+}
 
 var m map[string]Vertex
 
@@ -30,6 +34,10 @@ func main() {
 	var i, j int = 1, 2
 	a, b := swap("hello", "world")
 	fmt.Println(a, b)
+
+	v := Vertex{1, 2}
+	v.X = 4
+	fmt.Println(v.X)
 
 	//slice literals
 	s := []struct {
@@ -52,13 +60,13 @@ func main() {
 		return math.Sqrt(x*x + y*y)
 	}
 
-	func (v Vertex) Abs() float64 {
-		return math.Sqrt(v.X*v.X + v.Y*v.Y)
-	}
-
+	/*
+		func (v Vertex) Abs() float64 {
+			return math.Sqrt(v.X*v.X + v.Y*v.Y)
+		}
+	*/
 
 }
-
 
 //A defer statement defers the execution of a function until the surrounding function returns.
 
@@ -91,8 +99,6 @@ if err != nil {
 	    fmt.Printf("couldn't convert number: %v\n", err)
 	        return
 	}
-	*/
+*/
 
 //A goroutine is a lightweight thread managed by the Go runtime.
-
-

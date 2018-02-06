@@ -1,24 +1,17 @@
-sudo yum install wget vim nc unzip screen
+sudo yum install wget vim nc unzip screen jq
 
-wget https://releases.hashicorp.com/consul/1.0.0/consul_1.0.0_linux_amd64.zip \
-	&& unzip consul_1.0.0_linux_amd64.zip && mkdir -p ~/consul.d && \
-wget https://releases.hashicorp.com/vault/0.9.0/vault_0.9.0_linux_amd64.zip && unzip vault_0.9.0_linux_amd64.zip 
+wget https://releases.hashicorp.com/vault/0.9.3/vault_0.9.3_linux_amd64.zip && unzip vault_0.9.3_linux_amd64.zip 
 
-mkdir  -p /home/ec2-user/data /home/ec2-user/consul.d
+vault -autocomplete-install
 
-#######
-./vault init
-
-./vault unseal
-
-./vault mount consul
-
-###start vault
+###start vault, note we use http here in script and hcl. Don't use it in prod!!!
 export VAULT_ADDR='http://127.0.0.1:8200'
 #still need to init it
-./vault server -config=vault.hcl
+sudo ./vault server -config=vault.hcl
 
-#init auth so that we can use the root token
-./vault auth
+#once per cluster, will give unseal keys and the root token
+vault operator init
+
+./vault operator unseal
 
 

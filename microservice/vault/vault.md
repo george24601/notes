@@ -1,16 +1,9 @@
-Vault can generate secrets on-demand for some systems, such as AWS or SQL databases. For example, when an application needs to access an S3 bucket, it asks Vault for credentials, and Vault will generate an AWS keypair with valid permissions on demand. After creating these dynamic secrets, Vault will also automatically revoke them after the lease is up
-
-Vault can encrypt and decrypt data without storing it. This allows security teams to define encryption parameters and developers to store encrypted data in a location such as SQL without having to design their own encryption methods.
-
 All secrets in Vault have a lease associated with them. At the end of the lease, Vault will automatically revoke that secret. Clients are able to renew leases via built-in renew APIs.
 
 The "dynamic secrets" feature of Vault is ideal for scripts: an AWS access key can be generated for the duration of a script, then revoked. The keypair will not exist before or after the script runs, and the creation of the keys are completely logged.
 This is an improvement over using something like Amazon IAM but still effectively hardcoding limited-access access tokens in various places.
-the aws backend generates AWS access keys dynamically, on demand.
 
 The Vault server is the only piece of the Vault architecture that interacts with the data storage and backends
-
-All data that flows between Vault and the Storage Backend passes through the barrier. The barrier ensures that only encrypted data is written out, and that data is verified and decrypted on the way in. Much like a bank vault, the barrier must be "unsealed" before anything inside can be accessed.
 
 Every request to Vault to Vault and response from Vault goes through the configured audit backends.
 
@@ -26,8 +19,8 @@ Servers sharing a storage backend, only a single instance will be active at any 
 
 The encryption key is also stored with the data, but encrypted with another encryption key known as the master key. The master key isn't stored anywhere.
 
-Discussions online
-------------
+Each key can be entered via multiple mechanisms on multiple computers and it will work. This allows each shard of the master key to be on a distinct machine for better security.
+
 completely automated Vault and Consul clusters (except for the Vault unseal step). The peers needs IPs but with proper "failure" (graceful leave vs. just shutdown) this becomes a non-issue?
 
 Unsealing has been done manually by the security team who holds the tokens and the HA backend is S3
@@ -41,3 +34,23 @@ export VAULT_TOKEN for authenticated access
 The trick there will be that both the
 ELB and the Vault instances must be accessible, since the standby nodes do a 307 redirect
 to the active instance.
+
+unsealing it is a very manual process. We have plans in the future to make it easier. For the time being, the best method is to manually unseal multiple Vault servers in HA mode. Use a tool such as Consul to make sure you only query Vault servers that are unsealed.
+
+You can tell if a data store supports high availability mode ("HA") by starting the server and seeing if "(HA available)" is output next to the data store information.
+
+---------
+When a secrets engine is disabled, all secrets are revoked and the corresponding Vault data and configuration is removed. Any requests to route data to the original path would result in an error, but another secrets engine could now be enabled at that path.
+
+seems that dymanic secrets works mostly with AWS?
+
+The root token is the initial access token to configure Vault. It has root privileges, so it can perform any operation within Vault.
+
+Just like secrets engines, auth methods default to their TYPE as the PATH
+
+Each auth method has different configuration options, so please see the documentation for the full details.
+
+init is the only time unsealed keys should be close togethear, e.g., use PGP, keybase.io instead
+
+
+
