@@ -1,3 +1,5 @@
+Client certificates are a SSL-specific feature. a SSL server who wants to make sure that it talks to a specific, named client.(rather rare in practice)
+
 log into ssh with identity file, which stores private key for RSA or DSA
 ```
 ssh -i $CERT $HOST
