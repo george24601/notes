@@ -12,20 +12,50 @@ jump from the use of a variable to its local declaration
 ```
 gd
 ``
-
-You can type "XpmCr", then hit CTRL-N and Vim will expand it to "XpmCreatePixmapFromData" for you (???)
-
-When you are typing a phrase or sentence multiple times, there is an even quicker approach. Vim has a mechanism to record a macro. You type qa to start recording into register 'a'. Then you type your commands as usual and finally hit q again to stop recording. When you want to repeat the recorded commands you type @a. There are 26 registers available for this.
-
-Very often you will make the same mistake again and again. Your fingers just don't do what you intended. This can be corrected with abbreviations. A few examples:
-```
-:abbr Lunix Linux
-:abbr accross across
-:abbr hte the
-```
-
 The same mechanism can be used to type a long word with just a few characters. Especially useful for words that you find hard to type, and it avoids that you type them wrong. Examples:
 ```
 :abbr pn penguin
-:abbr MS Mandrake Software
+:ab MS Mandrake Software
 ```
+
+H/M/L: cursor to high/middle/low part of the page
+
+Ctrl+R:	Redo the last undo.
+
+J	Joins two lines
+
+Ctrl+G	Tells where where you are, and what file you're editing
+
+Ctrl+F, Ctrl+B	The same as PgUp and PgDn. I often use F=forward, B=backward as mnemonic.
+
+C/D - change/delete rest of the line
+
+:%s/foo/bar(&)/g will look for foo, and surround the matched pattern with bar().
+
+To jump to the beginning of a C code block (while, switch, if etc), use the [{ command.
+
+To jump to the end of a C code block (while, switch, if etc), use the ]} command.
+
+[[ : sections backward or to the previous '{' in the first column.
+
+]] : sections forward or to the next '{' in the first column.
+
+select row(s)                            SHIFT + v                             
+select blocks (columns)                  CTRL  + v
+
+gi - switches to insertion mode placing the cursor at the same location it was previously
+
+g; - puts the cursor at the place an edit was made, g, goes to the front
+
+If you're editing a line that is wrapped because it's wider than your buffer, you can move up/down using gk and gj.
+
+Until [character] (t). Useful for any command which accepts a range. My favorite is ct; or ct) which deletes everything up to the trailing semicolon / closing parentheses and then places you in insert mode.
+
+Save the open session so that you can get back to your list of open files later
+```
+:mksession session_file_name.vim
+vim -S session_file_name.vim
+```
+
+
+

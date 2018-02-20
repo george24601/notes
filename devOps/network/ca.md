@@ -13,4 +13,24 @@ The root CA is only ever used to create one or more intermediate CAs, which are 
 
 This is best practice. It allows the root key to be kept offline and unused as much as possible, as any compromise of the root key is disastrous.
 
-When an application (eg, a web browser) tries to verify a certificate signed by the intermediate CA, it must also verify the intermediate certificate against the root certificate. To complete the chain of trust, create a CA certificate chain to present to the application.
+A CA will not grant a certificate that contains a non-public hostname.
+
+A CA acts as a trusted third party—trusted both by the subject (owner) of the certificate and by the party relying upon the certificate. The format of these certificates is specified by the X.509 standard.
+
+The Vault instances will then use certs from an internal CA that will have CN and SAN entries for localhost, vault.service.consul, and whatever pattern I decide on for the advertise_addr.
+
+HAproxy, for instance, can perform purely TCP-based proxying while still using SNI for routing.
+
+A single CA certificate may be shared among multiple CAs or their resellers
+
+a self-signed certificate is one signed with its own private key.
+
+A Subject Alternate Name (or SAN) certificate is a digital security certificate which allows multiple hostnames to be protected by a single certificate.
+
+---------------------
+
+TLS verification is falling because your self signed certificate has a common name which does not match what the host is. The TLS client is connecting to the server at "127.0.0.1:8200", but the CN of the certificate is some other hostname "foo.com". You can use the -tls-skip-verify to avoid this error, but for production you may want to generate a correctly signed cert!
+
+If you do not want to add the self-signed cert to your local system, you can skip TLS verification. However, this reduces security. I would recommend installing the cert onto your system instead.
+
+You can also use the -ca-cert flag for most CLI commands

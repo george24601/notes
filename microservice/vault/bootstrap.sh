@@ -4,11 +4,16 @@ wget https://releases.hashicorp.com/vault/0.9.3/vault_0.9.3_linux_amd64.zip && u
 
 vault -autocomplete-install
 
+#delete all old vault states
+curl --request DELETE \
+	0.0.0.0:8500/v1/kv/vault
+
 ###start vault, note we use http here in script and hcl. Don't use it in prod!!!
-#source env.sh
-export VAULT_ADDR='http://127.0.0.1:8200'
-#still need to init it
+#export VAULT_ADDR='http://127.0.0.1:8200'
+source env.sh
+#still need sudo to init it - uses mlock to prevent memory being swapped to disk
 sudo ./vault server -config=vault.hcl
+
 
 #once per cluster, will give unseal keys and the root token
 vault operator init
@@ -27,5 +32,5 @@ vault secrets enable consul
 docker run -d --restart=always -p 8200:8200 \
 	-v /vault/logs:/vault/logs \
 	-v /vault/file:/vault/file \
-	--name vault vault \ 
-
+	--name vault-consul 433726475936.dkr.ecr.us-west-2.amazonaws.com/vault-consul \ 
+	agent -server
