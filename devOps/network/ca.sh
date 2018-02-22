@@ -11,10 +11,28 @@ cp /etc/vault/ssl/certs/vault.crt /etc/pki/ca-trust/source/anchors/
 update-ca-trust extract
 vault status
 
-#Ubuntu 16.04
-sudo su
-mkdir /usr/share/ca-certificates/vault
-cp /home/ubuntu/vault-ca.crt /usr/share/ca-certificates/vault/vault-ca.crt
-echo "vault/vault-ca.crt" >> /etc/ca-certificates.conf
-update-ca-certificates
-vault status
+
+####add my own ca cert to openssl
+#showl tls cert address
+#on centos 7 OPENSSLDIR: "/etc/pki/tls"
+openssl version -d
+
+sudo cp ca.crt.pem /etc/pki/tls/certs/
+
+sudo ln -s ca.crt.pem `openssl x509 -hash -noout -in ca.crt.pem`.0
+
+#make sure ca cert is correctly imported
+openssl verify -CApath /etc/pki/tls/certs vault.crt.pem
+
+
+#####add my own ca cert to NSS
+sudo cp ca.crt.pem /etc/ssl/certs
+
+#.pki/nssdb is the default location of nssdb
+mkdir -p .pki/nssdb ; certutil -N -d sql:.pki/nssdb
+
+#DEV.LOCAL is the name
+certutil -d sql:.pki/nssdb -A -t "CT,c,c" -n DEV.LOCAL \
+-i /etc/ssl/certs/ca.pem
+
+

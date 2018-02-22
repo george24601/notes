@@ -21,3 +21,4 @@ curl \
 	        -X PUT \
 		    -d '{"Name": "sample", "Type": "management"}' \
 		        http://127.0.0.1:8500/v1/acl/create
+

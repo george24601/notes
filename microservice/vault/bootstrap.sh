@@ -34,3 +34,6 @@ docker run -d --restart=always -p 8200:8200 \
 	-v /vault/file:/vault/file \
 	--name vault-consul 433726475936.dkr.ecr.us-west-2.amazonaws.com/vault-consul \ 
 	agent -server
+
+
+sudo /etc/init.d/dnsmasq restart
