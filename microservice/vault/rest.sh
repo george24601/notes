@@ -1,3 +1,9 @@
+#configure Vault to know how to contact Consul
+vault write consul/config/access \
+	    address=127.0.0.1:8500 \
+	        token=$ROOT_TOKEN  \
+		testk=testv
+
 curl -v  http://0.0.0.0:8200/v1/sys/health
 
 #check which ssl curl is using. On centos it is most likely
@@ -26,10 +32,18 @@ curl -v -X POST  -H "Content-Type: application/json" \
     -d '{"test.token" : "tokenV2" }' 
 
 
-
 dig @127.0.0.1 -p 8600 vault.service.consul. ANY
 
-dig vault.service.consul
+dig @127.0.0.1 -p 8600 consul.service.inner-route.com. ANY
+
+dig @127.0.0.1 -p 8600 vault.service.inner-route.com. ANY
+
+dig @127.0.0.1 -p 8600 zuul.service.consul. ANY
+
+dig vault.service.inner-route.com
+
+dig consul.service.inner-route.com
 
 cp ca.crt.pem /etc/ssl/certs
 
+curl 0.0.0.0:8500/v1/catalog/service/vault | jq

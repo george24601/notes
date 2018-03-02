@@ -14,6 +14,8 @@ source env.sh
 #still need sudo to init it - uses mlock to prevent memory being swapped to disk
 sudo ./vault server -config=vault.hcl
 
+#clear vault related entries before we init
+consul kv delete -recurse vault/
 
 #once per cluster, will give unseal keys and the root token
 vault operator init

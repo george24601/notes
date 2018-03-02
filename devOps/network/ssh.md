@@ -1,28 +1,5 @@
 Client certificates are a SSL-specific feature. a SSL server who wants to make sure that it talks to a specific, named client.(rather rare in practice)
 
-log into ssh with identity file, which stores private key for RSA or DSA
-```
-ssh -i $CERT $HOST
-```
-
-list added certificates
-```
-ssh-add -l
-```
-
-add cerficicate to the agent
-```
-chmod 400 ~/.ssh/id_rsa
-ssh-add -K ~/.ssh/id_rsa
-```
-go directly to host wanted
-```
-ssh -t $HOST "cd /directory_wanted ; bash"
-```
-
-Auth
-----------
-
 When a private key is needed the user is asked to supply the passphrase so that the private key can be decrypted. The handling of passphrases can be automated with an SSH agent.
 
 In most automated use cases (scripts, applications, etc) the private keys are not protected and careful planning and key management practises need to be excercised 
@@ -55,3 +32,22 @@ This example opens a connection to the gw.example.com jump server, and forwards 
 
 Agent Forwarding
 ---------
+????
+
+CERTIFICATES
+---------
+ssh-keygen	supports signing of keys to produce certificates that may be
+     used for user or host authentication.  Certificates consist of a public
+     key, some identity	information, zero or more principal (user or host)
+     names and a set of	options	that are signed	by a Certification Authority
+     (CA) key.
+Clients	or servers may then trust only the CA key and verify
+     its signature on a	certificate rather than	trusting many user/host	keys.
+
+TrustedUserCAKeys: Specifies a file containing public keys of	certificate authori-
+	     ties that are trusted to sign user	certificates for authentica-
+	     tion. If a certificate is presented for authentication and has its signing
+	     CA	key listed in this file, then it may be	used for authentica-
+	     tion for any user listed in the certificate's principals list.
+
+

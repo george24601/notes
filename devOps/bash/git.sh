@@ -1,5 +1,3 @@
-#two projects, one of the projects maps to a subdirectory of the other, and then git figure out that one is subtree of the other
-
 #add Rack as remote ref in your own project
 git remote add rack_remote git@github.com:schacon/rack.git
 git fetch rack_remote
@@ -10,9 +8,6 @@ git checkout -b rack_branch rack_remote/master
 git checkout master
 git read-tree --prefix=rack/ -u rack_branch
 
-#fix/replace the most recent commit
-git commit --amend
-
 #unstage
 git reset HEAD <file>
 
@@ -21,10 +16,6 @@ git log --oneline --decorate --graph --all
 
 #show changes master doesn't have but the develop branch has
 git log master..develop
-
-#get data from remote project: update your local db and move (remote)/(branch) pointer
-#sync forked with upstream
-git fetch [remote-name]
 
 #set up credential cache
 git config --global credential.helper cache
@@ -48,14 +39,6 @@ git add remote
 git push --all
 git push --tags
 
-#From the feature branch, push a single commit on top of the master with no merge commit
-#on master
-git merge --squash $FEATURE_BRANCH
-git commit -m "$COMMIT_MESSAGE"
-#pull master again to ensure there is no conflict between current master and your commit
-git pull --rebase 
-git push origin master
-
 #find file by name in the repo
 git ls-tree -r HEAD | grep parameterService
 
@@ -63,3 +46,8 @@ git ls-tree -r HEAD | grep parameterService
 git log -p path/to/file
 git checkout <commit> path/to/file
 git commit
+
+#merge the last two commits
+#amend: fix/replace the most recent commit
+git reset --soft "HEAD^"
+git commit --amend

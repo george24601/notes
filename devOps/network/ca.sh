@@ -49,3 +49,17 @@ bin/keytool -import -trustcacerts -alias CADev -file ca.crt.pem -keystore lib/se
 openssl x509 -in ca.crt.pem -inform pem -out ca.crt.der -outform der
 
 keytool -v -printcert -file ca.crt.der
+
+######Let's encrypt/certbot, use --staging flag for dev
+sudo certbot certonly --manual  --preferred-challenges dns
+
+vault.service.inner-route.com
+
+<<COMMENT
+ Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/vault.service.inner-route.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/vault.service.inner-route.com/privkey.pem
+COMMENT
+
+cp  /etc/letsencrypt/live/vault.service.inner-route.com/fullchain.pem

@@ -1,13 +1,3 @@
-sudo systemctl start consul
-
-#DONT USE DEV MODE FOR PROD
-consul agent -dev
-
-./consul members
-
-/bin/consul members
-
-
 #Note that you have to make sure to point your DNS lookups to the Consul agent's DNS server which runs on port 8600 by default
 dig @127.0.0.1 -p 8600 Armons-MacBook-Air.node.consul
 
@@ -25,7 +15,6 @@ dig @127.0.0.1 -p 8600 Armons-MacBook-Air.node.consul
 -enable-script-checks=true -config-dir=/home/ec2-user/consul.d
 
 mkdir -p /consul/data 
-
 
 #run consul docker locally, in client mode
 docker run -d --restart=always -p 8300:8300 -p 8301:8301 -p 8301:8301/udp \
