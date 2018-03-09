@@ -11,3 +11,9 @@ For peers.json
 You must confirm that servers you do not include here have indeed failed and will not later rejoin the cluster. Ensure that this file is the same across all remaining server nodes.
 
 Need to rejoin the cluster manually - gracefully
+
+##restore
+These are atomic, point-in-time snapshots which include key/value entries, service catalog, prepared queries, sessions, and ACLs.
+Restores involve a potentially dangerous low-level Raft operation that is not designed to handle server failures during a restore. This command is primarily intended to be used when recovering from a disaster, restoring into a fresh cluster of Consul servers.
+
+If ACLs are enabled, a management token must be supplied in order to perform snapshot a snapshot save.

@@ -4,10 +4,6 @@ wget https://releases.hashicorp.com/vault/0.9.3/vault_0.9.3_linux_amd64.zip && u
 
 vault -autocomplete-install
 
-#delete all old vault states
-curl --request DELETE \
-	0.0.0.0:8500/v1/kv/vault
-
 ###start vault, note we use http here in script and hcl. Don't use it in prod!!!
 #export VAULT_ADDR='http://127.0.0.1:8200'
 source env.sh
@@ -37,5 +33,20 @@ docker run -d --restart=always -p 8200:8200 \
 	--name vault-consul 433726475936.dkr.ecr.us-west-2.amazonaws.com/vault-consul \ 
 	agent -server
 
+export VAULT_ADDR='https://vault.service.inner-route.com:8200'
+
+#add vault.service.inner-route.com to help bootstrap
+sudo vim /etc/hosts
+/etc/init.d/network restart
+dig vault.service.inner-route.com
+
 
 sudo /etc/init.d/dnsmasq restart
+
+sudo cp /etc/letsencrypt/live/vault.service.inner-route.com/fullchain.pem tls/vault.crt.pem
+
+sudo cp /etc/letsencrypt/live/vault.service.inner-route.com/fullchain.pem ~/dev_vault.crt.pem
+
+sudo cp /etc/letsencrypt/live/vault.service.inner-route.com/privkey.pem ~/dev_vault.key.pem
+
+"sudo /tmp/terraform-aws-vault/modules/update-certificate-store/update-certificate-store --cert-file-path /opt/vault/tls/ca.crt.pem"
