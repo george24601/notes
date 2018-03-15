@@ -1,3 +1,12 @@
+<<SHORTCUTS
+Ctrl + e – go to the end of the command line
+
+Ctrl + k – delete from cursor to the end of the command line
+
+Ctrl + u – delete from cursor to the start of the command line
+
+Ctrl + w – delete from cursor to start of word (i.e. delete backwards one word)
+SHORTCUTS
 #delete the folder if it exists, note that the spaces around -d predicate matter! 
 [ -d $FOLDER ] && rm -r $FOLDER
 

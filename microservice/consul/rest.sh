@@ -6,6 +6,8 @@ curl 0.0.0.0:8500/v1/catalog/services | jq
 
 curl 0.0.0.0:8500/v1/catalog/service/service-id | jq
 
+curl 0.0.0.0:8500/v1/catalog/service/cloudconfig | jq
+
 #1. run this on the node where the service runs
 #2. my-service-id is the "ServiceID" field returned in the get request, e.g., in the format of "service-environment-port"
 curl	    --request PUT \
