@@ -1,27 +1,42 @@
-###policies###
-<<POLICY_HCL
-path "secret/*" {
-  capabilities = ["read"]
-}
-POLICY_HCL
-
-vault read sys/policy/read-all
-
-vault write sys/policy/read-all policy=@read-all.hcl
-#Enable AWS authentication in Vault
+####bootstrap#####
 vault auth enable aws
 
-#Configure the credentials required to make AWS API calls
 vault write auth/aws/config/client secret_key=$AWS_SECRET_ACCESS_KEY access_key=$AWS_ACCESS_KEY_ID
 
-vault read auth/aws/role/ecs-vault-role 
-
-#Configure the policies on the role.
-vault write auth/aws/role/ecs-vault-role auth_type=iam \
-              bound_iam_principal_arn=$BOUND_IAM_PRINCIPAL_ARN policies=read-all
 
 #Configure a required X-Vault-AWS-IAM-Server-ID Header (recommended)
 vault write auth/aws/config/client iam_server_id_header_value=vault.example.com
+
+
+###IAM based###
+cat > read-all.hcl <<- EOF
+path "secret/link/*" {
+  capabilities = ["read"]
+}
+
+path "secret/link" {
+  capabilities = ["read"]
+}
+
+path "secret/application/$ENV" {
+  capabilities = ["read"]
+}
+
+path "secret/application" {
+  capabilities = ["read"]
+}
+EOF
+
+vault write sys/policy/read-all policy=@read-all.hcl
+vault read sys/policy/read-all
+
+vault write auth/aws/role/$IAM_ROLE auth_type=iam \
+              bound_iam_principal_arn=$BOUND_IAM_PRINCIPAL_ARN policies=read-all
+
+
+vault read auth/aws/role/$IAM_ROLE
+
+
 
 ########token based
 

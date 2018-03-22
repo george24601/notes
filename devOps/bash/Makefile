@@ -9,3 +9,8 @@
 #let's use the special macros $@ and $^, which are the left and right sides of the :, respectively, to make the overall compilation rule more general
 hellomake: $(OBJ)
 		gcc -o $@ $^ $(CFLAGS)
+
+
+#they are executed by invoking a new sub-shell for each line of the recipe, unless the .ONESHELL special target is in effect (see Using One Shell) (In practice, make may take shortcuts that do not affect the results.)
+
+#Please note: this implies that setting shell variables and invoking shell commands such as cd that set a context local to each process will not affect the following lines in the recipe.2 If you want to use cd to affect the next statement, put both statements in a single recipe line
