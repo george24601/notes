@@ -1,9 +1,0 @@
-Create future, either with the Future{} block or Promises
-
-Promise is one to conform the "tell, don't ask pattern" 
-
-ask timeouts are hard to debug, and can hide the asked actor's failure
-
-However, ask is useful for talking to external system, i.e., request/response, or
-when # of potentially participating actors may vary depending on msg parameters and can not be cached, and it is ahrd to set stop condition
-for aggregator pattern
