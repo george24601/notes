@@ -16,3 +16,14 @@ The RequestContext extends ConcurrentHashMap, so anything can be stored in the c
 Zuul secures your sensitive headers by blocking these headers downstream (microservice). Since the default settings for sensitive headers blocks the Authorization header, we have to open this setting and send these headers downstream. You can choose to set the sensitive header per route or globally.
 
 For the authorization, Spring Security provides us with authorities, extracted from the access token. The authorities are placed inside a Principal, which will be used throughout the existing security context of your application.
+
+Based on a token, your microservice needs to be able to create a principal object. This principal object needs to contain all the necessary info so the system can decide whether or not the request should be executed or not.
+
+--------
+
+1. add-host-header=true
+
+2. ignored-patterns to block access the backend endpoints 
+
+3. RequestContext.addZuulRequestHeader to add custom header 
+

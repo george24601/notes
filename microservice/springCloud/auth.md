@@ -3,14 +3,6 @@ Very important to consider the logout scenario! If revoking the permissions is n
 separate authen and authorization filter
 
 OAuth 2 client credentials grant is designed for communications between services. Authentication for client credentials grant typically involves passing a shared secret,
-
-Validation steps needed:
-
-Check that the JWT is well formed
-Check the signature
-Validate the standard claims
-Check the Client permissions (scopes)
-
 bearer token is normally some kind of secret value created by the authentication server. It isn't random; it is created based upon the user giving you access and the client your application getting access.
 
 Refresh tokens are stored in DB and will have long expiration (example: 1 month).
@@ -24,3 +16,11 @@ After the access_token expires, an active refresh_token can be used to get a new
 POST /login/refreshToken HTTP/1.1 - note that the refresh token returned will be different!
 
 The information is signed with either a secret (using an HMAC) or a public/private key-pair using RSA
+
+Authorization header is not a simple header, hence a pre-flight request would be required for all the requests to a particular URLs.
+
+But this happens if you are sending Content-Type: application/json for instance. So this is already happening for most applications.
+
+One small caveat, the OPTIONS request won't have the Authorization header itself, so your web framework should support treating OPTIONS and the subsequent requests differently
+
+
