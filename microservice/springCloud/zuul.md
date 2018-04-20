@@ -27,3 +27,7 @@ Based on a token, your microservice needs to be able to create a principal objec
 
 3. RequestContext.addZuulRequestHeader to add custom header 
 
+
+--------
+
+We are using Spring Session to replicate the session across all of our services that sit behind a Zuul Edge Server. Zuul will authenticate the user which populates the users credentials and inserts the authenticated user into the session. This is then replicated across all the services and each service is responsible for their own security rules and settings. So really, all Zuul is doing is looking the user up in spring security and the services on the backend are enforcing the security rules as they apply to their needs. This way, you can change each service independently making the Gateway just a dumb proxy.
