@@ -1,25 +1,46 @@
-commonly used as a way for Internet users to grant websites or applications access to their information on other websites but without giving them the passwords
+In the domain model associated with OIDC, an identity provider is a special type of OAuth 2.0 authorization server.
 
-OAuth essentially allows access tokens to be issued to third-party clients by an authorization server, with the approval of the resource owner. The third party then uses the access token to access the protected resources hosted by the resource server.[3]
+-----
+Common pitfalls for authentication using OAuth
+1. Access tokens as proof of authentication. 
+ This problem stems from the fact that the client is not the intended audience of the OAuth access token. Instead, it is the authorized presenter of that token, and the audience is in fact the protected resource. The protected resource is not generally going to be in a position to tell if the user is still present by the token alone, since by the very nature and design of the OAuth protocol the user will not be available on the connection between the client and protected resource. To counter this, there needs to be an artifact that is directed at the client itself. This could be done by dual-purposing the access token, defining a format that the client could parse and understand. However, since general OAuth does not define a specific format or structure for the access token itself, protocols like OpenID Connect's ID Token and Facebook Connect's Signed Response provide a secondary token along side the access token that communicates the authentication information directly to the client. This allows the primary access token to remain opaque to the client, just like in regular OAuth.
 
-OIDC is an authentication layer built on top of OAuth 2.0
+2. Access of a protected API as proof of authentication
 
-OAuth is an authorization protocol, rather than an authentication protocol. Using OAuth on its own as an authentication method may be referred to as pseudo-authentication:
-(OAuth only) The response includes an access token which the application can use to gain direct access to the identity provider's services on the user's behalf.
+Since the access token can be traded for a set of user attributes, it is tempting to think that posession of a valid access token is enough to prove that a user is authenticated. This assumption turns out to be true in some cases, where the token was freshly minted in the context of a user being authenticated at the authorization server. However, that's not the only way to get an access token in OAuth. Refresh tokens and assertions can be used to get access tokens without the user being present, and in some cases access grants can occur without the user having to authenticate at all.
+
+Furthermore, the access token will generally be usable long after the user is no longer present. Remember, since OAuth is a delegation protocol, this is fundamental to its design. This means that if a client wants to make sure that an authentication is still valid, it's not sufficient to simply trade the token for the user's attributes again because the OAuth protected resource, the identity API, often has no way of telling if the user is there or not.
+
+3. Injection of access tokens
+
+4. Lack of audience restriction
+
+5. Injection of invalid user information
+
+6. Different protocols for every potential identity provider
+
+----------
+
+The Authorization Code Flow goes through the following steps.
+
+Client prepares an Authentication Request containing the desired request parameters.
+Client sends the request to the Authorization Server.
+Authorization Server Authenticates the End-User.
+Authorization Server obtains End-User Consent/Authorization.
+Authorization Server sends the End-User back to the Client with an Authorization Code.
+Client requests a response using the Authorization Code at the Token Endpoint.
+Client receives a response that contains an ID Token and Access Token in the response body.
+Client validates the ID token and retrieves the End-User's Subject Identifier.
+
+
+-------
+In fact, much of the point of OAuth is about giving this delegated access for use in situations where the user is not present on the connection between the client and the resource being accessed. This is great for client authorization, but it's really bad for authentication where the whole point is figuring out if the user is there or not (and who they are).
+
 
 The crucial difference is that in the OpenID authentication use case, the response from the identity provider is an assertion of identity; while in the OAuth authorization use case, the identity provider is also an API provider, and the response from the identity provider is an access token that may grant the application ongoing access to some of the identity provider's APIs, on the user's behalf.
 
-Because the identity provider typically (but not always) authenticates the user as part of the process of granting an OAuth access token, it's tempting to view a successful OAuth access token request as an authentication method itself. However, because OAuth was not designed with this use case in mind, making this assumption can lead to major security flaws
-
-OpenID Connect is a simple identity layer on top of the OAuth 2.0 protocol, which allows computing clients to verify the identity of an end-user based on the authentication performed by an authorization server, as well as to obtain basic profile information about the end-user in an interoperable and REST-like manner. In technical terms, OpenID Connect specifies a RESTful HTTP API, using JSON as a data format. - just address the problem with pesudo-oauth
-
 ------
-In this case, even the worst happens, you only lose the copy of referral letter. The damage is not so different than the case of OpenID.
-
-This indeed is the basic idea behind “OpenID Connect.”
-
 The locker is called “UserInfo Endpoint.” This allows a site to verify the user’s identity information using OAuth 2.0. This is why OpenID Connect is often called “an identity layer on OAuth.”
-
 
 Thus, OpenID Connect also sends the letter containing “how and when” the authentication was performed, together with the UserInfo locker key. This letter is called “id token”. (Alternatively, you can ask ID Token endpoint to obtain it later.)
 
@@ -29,25 +50,9 @@ In a standard OAuth, the key is created by the each site. In OpenID Connect, the
 
 Scopes are what you see on the authorization screens when an app requests permissions. They’re bundles of permissions asked for by the client when requesting a token. These are coded by the application developer when writing the application.
 
-Resource Owner: owns the data in the resource server. For example, I’m the Resource Owner of my Facebook profile.
-
-Resource Server: The API which stores data the application wants to access
-Client: the application that wants to access your data
-Authorization Server: The main engine of OAuth
-
-Access tokens are the token the client uses to access the Resource Server (API). They’re meant to be short-lived. Think of them in hours and minutes, not days and month.
-
-The other token is the refresh token. This is much longer-lived; days, months, years. This can be used to get new tokens. To get a refresh token, applications typically require confidential clients with authentication.
-
-The Client application sends an access token request to the token endpoint on the Authorization Server with confidential client credentials and client id. This process exchanges an Authorization Code Grant for an Access Token and (optionally) a Refresh Token. Client accesses a protected resource with Access Token.
-
-Authorization Code Flow, aka 3 Legged,
-
 The front channel flow is used by the client application to obtain an authorization code grant. The back channel is used by the client application to exchange the authorization code grant for an access token (and optionally a refresh token). It assumes the Resource Owner and Client Application are on separate devices
 
-For server-to-server scenarios, you might want to use a Client Credential Flow. In this scenario, the client application is a confidential client that’s acting on its own, not on behalf of the user. It’s more of a service account type of scenario. All you need is the client’s credentials to do the whole flow. It’s a back channel only flow to obtain an access token using the client’s credentials. It supports shared secrets or assertions as client credentials signed with either symmetric or asymmetric keys.
-
------
+----
 Since you want to retrieve data from a resource server using OAuth2, you have to register as a client of the authorization server.
 
 Client registration
@@ -63,18 +68,6 @@ Client Secret: secret key that must be kept confidential
 grants (“methods”) for a client application to acquire an access token (which represents a user’s permission for the client to access their data) which can be used to authenticate a request to an API endpoint.
 
 -------
-OpenID Connect also uses the JSON Object Signing And Encryption (JOSE) suite of specifications for carrying signed and encrypted information around in different places. In fact, an OAuth 2.0 deployment with JOSE capabilities is already a long way to defining a fully compliant OpenID Connect system, and the delta between the two is relatively small. But that delta makes a big difference, and OpenID Connect manages to avoid many of the pitfalls discussed above by adding several key components to the OAuth base:
-
-1. The OpenID Connect ID Token is a signed JSON Web Token (JWT) that is given to the client application along side the regular OAuth access token
-
-2. Furthermore, it is issued in addition to (and not in lieu of) an access token, allowing the access token to remain opaque to the client as it is defined in regular OAuth.
-
-3. Finally, the token itself is signed by the identity provider's private key, adding an additional layer of protection to the claims inside of it in addition to the TLS transport protection that was used to get the token in the first place, preventing a class of impersonation attacks. By applying a few simple checks to this ID token, a client can protect itself from a large number of common attacks.
-
-4. Since the ID Token is signed by the authorization server, it also provides a location to add detached signatures over the authorization code (c_hash) and access token (at_hash). These hashes can be validated by the client while still keeping the authorization code and access token content opaque to the client, preventing a whole class of injection attacks.
-
-The other token is the refresh token. This is much longer-lived; days, months, years. This can be used to get new tokens. To get a refresh token, applications typically require confidential clients with authentication.
-
 Tokens are retrieved from endpoints on the authorization server. The two main endpoints are the authorize endpoint and the token endpoint. They’re separated for different use cases. The authorize endpoint is where you go to get consent and authorization from the user. This returns an authorization grant that says the user has consented to it. Then the authorization is passed to the token endpoint. The token endpoint processes the grant and says “great, here’s your refresh token and your access token”.oo
 
 The downside is this causes a lot of developer friction. One of the biggest pain points of OAuth for developers is you having to manage the refresh tokens. You push state management onto each client developer. You get the benefits of key rotation, but you’ve just created a lot of pain for developers. That’s why developers love API keys. They can just copy/paste them, slap them in a text file, and be done with them. API keys are very convenient for the developer, but very bad for security.

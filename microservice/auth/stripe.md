@@ -8,4 +8,11 @@ Calls made over plain HTTP will fail. API requests without authentication will a
 
 The first, preferred, authentication option is to use your—the platform account’s—secret key and pass a Stripe-Account header identifying the connected account for which the request is being mad
 
+Authentication to the API is performed via HTTP Basic Auth. 
 
+```bash
+
+curl https://api.stripe.com/v1/charges \
+   -u sk_test_iwnQbKpz0qQHowAuJAowMnJa:
+
+```
