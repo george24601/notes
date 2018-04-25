@@ -3,18 +3,23 @@ bin/standalone.sh
 
 http://localhost:8080/auth/realms/$REALM/account
 
-#H2 mode
-docker run -p 8080:8080 -e KEYCLOAK_USER=admin \ 
-	-e  KEYCLOAK_PASSWORD=admin jboss/keycloak
-
+docker network create keycloak-network   
 
 #start mysql
-docker run -p 3306:3306 --name mysql -e MYSQL_DATABASE=keycloak -e MYSQL_USER=keycloak -e MYSQL_PASSWORD=password \
-	-e MYSQL_ROOT_PASSWORD=root_password mysql
+docker run --name mysql -d --net keycloak-network -e MYSQL_DATABASE=keycloak -e MYSQL_USER=keycloak -e MYSQL_PASSWORD=password -e MYSQL_ROOT_PASSWORD=root_password mysql:5.7.22
 
-mysql -h 0.0.0.0 -P 3306 -u keycloak keycloak
+#Inside mysql container
+#login as root
+mysql -P 3306 -u root -p
 
-#keycloak with mysql persistance
-docker run -p 8080:8080 -e KEYCLOAK_USER=admin \ 
-	-e  KEYCLOAK_PASSWORD=admin  -e DB_VENDOR=mysql \
-	-e MYSQL_ADDR=0.0.0.0 jboss/keycloak
+#login as keycloak
+mysql -P 3306 -u keycloak -p
+
+docker run --name keycloak -p 8080:8080 --net keycloak-network \
+-e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin \
+	jboss/keycloak >> kk.log
+
+#create an account on an already running container by running:
+docker exec <CONTAINER> keycloak/bin/add-user-keycloak.sh -u <USERNAME> -p <PASSWORD>
+
+#####host network mode goes here###
