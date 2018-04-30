@@ -1,3 +1,6 @@
+#shows the heapsize
+java -XX:+PrintFlagsFinal -version | grep HeapSize
+
 #find jvm thread with highest cpu usage, can use jps to get java process id
 #you can also use jps if you know the process name
 top -H -p 63847

@@ -38,3 +38,8 @@ degradation over time, suddenly pops back to excellent, and start degrading agai
 JVM options: 
 Compaction ratio: compact percentage of the heap at each old collection
 Compact set limit: how many references there may be from objects outside the compaction area to objects within the compaction area
+
+-------
+I just checked on a linux machine with 5gb physical memory. Default max heap shows as 1.5gb
+
+
