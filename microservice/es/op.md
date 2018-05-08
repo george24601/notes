@@ -1,10 +1,5 @@
-documents belongs to a type, and types live inside an index (just like a DB in RDBMS)
-
-HEAD verb to check whether the doucment exists
-
 PUT /$INDEX/$TYPE/$ID
 See the _index, _type, _id in the retrived doc
-
 
 GET /megacorp/employee/_search?q=last_name:Smith
 This is query string search, or
@@ -78,19 +73,6 @@ avg of employees sharing a particular interest
 }
 
 
-documents are immutable, version number based, marked for deletion and then recycled
-
-optimistic concurrency control
-
-common setup is to use other db as primary, and ES to make data searchable
-
-all data in every field is indexed by default
-
-HEAD request to decide if a doc returns
-curl -i -XHEAD http://localhost:9200/website/blog/123
-
-PUT vs POST, upsert vs insert
-
 /_search 
 Search all types in all indices
 
@@ -126,6 +108,4 @@ GET /gb/_mapping/tweet
 }
 
 
-The goal of filtering is to reduce the number of documents that have to be examined by the scoring queries.
 
-If you use it on a field containing an exact value, such as a number, a date, a Boolean, or a not_analyzed string field, then it will search for that exact value
