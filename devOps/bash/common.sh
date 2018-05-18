@@ -44,17 +44,6 @@ cat file.txt|xargs
 
 #single to multilines
 cat single.txt | xargs -n 3
-
-#find all .c file starting at the current dir, note find can be chained to other commands too!
-#e.g., the dangerous -delete option!
-find . -name \*.c -print
-
-#find non txt files
-find . ! -name "*.txt" -print
-
-#print current dir's files
-find . -maxdepth 1 -type f
-
 #replace tab with space
 tr '\t' ' '
 
