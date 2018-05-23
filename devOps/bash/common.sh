@@ -1,14 +1,3 @@
-<<SHORTCUTS
-Ctrl + e – go to the end of the command line
-
-Ctrl + k – delete from cursor to the end of the command line
-
-Ctrl + u – delete from cursor to the start of the command line
-
-Ctrl + w – delete from cursor to start of word (i.e. delete backwards one word)
-
-#Press Control+R and type the keyword to search for command history
-SHORTCUTS
 #delete the folder if it exists, note that the spaces around -d predicate matter! 
 [ -d $FOLDER ] && rm -r $FOLDER
 
@@ -29,15 +18,9 @@ cd !$
 #automatically corrects small typos in directory names and jumps to the best guess of existing directories.
 shopt -s cdspell
 
-<<OTHER
-#pushd and popd for quick dir navigation
-
-
-OTHER
-
 
 #shell to exit if any subcommand or pipeline returns a non-zero status
-#set -e
+set -e
 
 #multiline to a single line
 cat file.txt|xargs
@@ -61,6 +44,3 @@ cut -f3 --complement file
 
 #search only files with certain extensions
 grep -r --include=*.scala 'spray' ./ | less
-
-
-

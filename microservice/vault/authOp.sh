@@ -3,7 +3,6 @@ vault auth enable aws
 
 vault write auth/aws/config/client secret_key=$AWS_SECRET_ACCESS_KEY access_key=$AWS_ACCESS_KEY_ID
 
-
 #Configure a required X-Vault-AWS-IAM-Server-ID Header (recommended)
 vault write auth/aws/config/client iam_server_id_header_value=vault.example.com
 
