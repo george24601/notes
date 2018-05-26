@@ -1,4 +1,15 @@
 #create index
+curl -X PUT https://search-prod-ek-g2yflstdow7bkz7pz7xdxdd2ou.us-west-2.es.amazonaws.com:443/prod -H 'Content-Type: application/json' -d'
+{
+    "settings" : {
+        "index" : {
+            "number_of_shards" : 3,
+            "number_of_replicas" : 2
+        }
+    }
+}
+'
+
 curl -X PUT https://$ES_HOST:443/test -H 'Content-Type: application/json' -d'
 {
     "settings" : {

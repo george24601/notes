@@ -46,3 +46,18 @@ Ensure that instances in your subnet have a globally unique IP address (public I
 Ensure that your network access control and security group rules allow the relevant traffic to flow to and from your instance.
 
 Your instance is only aware of the private (internal) IP address space defined within the VPC and subnet.
+
+
+LB
+-------
+1. can use dns to do LB -> but client side cache will still return the deleted ip
+
+2. A single request might come as multiple packets, need it to be stickly, i..e, we need to maintian the mapping! - 4 layer load balancing
+
+3. 7 layer-loadblaancing, change packet all the way to the http level - NAT mode
+
+4. Separate request and responding, the server behind respond directly => all servers will have the same VIP bound to their loopback -> use ARP to broacast VIP, and machine with such IP will reply its own MAC address, but only LB can respond to the ARP reqeust -> but LB will not change IP data header, that means server ports must match LB prots - DR mode
+
+5. actual LB instances need to have same VIP and (virtual) MAC address  via ARP request
+
+

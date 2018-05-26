@@ -38,21 +38,21 @@ curl -v -X POST  -H "Content-Type: application/json" \
 
 dig @127.0.0.1 -p 8600 vault.service.consul. ANY
 
-dig @127.0.0.1 -p 8600 consul.service.inner-route.com. ANY
-
-dig @127.0.0.1 -p 8600 vault.service.inner-route.com. ANY
-
 dig @127.0.0.1 -p 8600 zuul.service.consul. ANY
-
-dig vault.service.inner-route.com
 
 curl -v \
     --header "X-Vault-Token: $VAULT_TOKEN"   \
-    https://vault.service.inner-route.com:8200/v1/secret/zuul/development | jq
+    https://$VAULT_DOMAIN:8200/v1/secret/zuul/development | jq
 
 
 dig consul.service.inner-route.com
 
 cp ca.crt.pem /etc/ssl/certs
 
+#8500 is for consul
 curl 0.0.0.0:8500/v1/catalog/service/vault | jq
+
+#add curl on alpine
+apk add --no-cache curl
+
+curl https://vault.service.inner-route.com:8200/v1/secret/mockservice/development

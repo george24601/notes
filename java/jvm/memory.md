@@ -39,7 +39,50 @@ JVM options:
 Compaction ratio: compact percentage of the heap at each old collection
 Compact set limit: how many references there may be from objects outside the compaction area to objects within the compaction area
 
--------
 I just checked on a linux machine with 5gb physical memory. Default max heap shows as 1.5gb
+
+-------
+Heap - Java usable memory by devs
+non-heap - JVM itself
+
+method region, JIT memory, type and stuff are in the non-heap memory
+
+1. JVM's own memmory, including 3rd party lib, and memories allocated by the memory
+
+2. NIO DirectBuffer -> native memory
+
+class JVM's GC is in per gen, hard to GC
+
+thread stack
+ 
+method region- perm gen -> shared thread ram region
+runtime constant, part of method region
+
+local var table needed ram space is determned during compliation, when entering a method, the size of stack frame is fixed, so it won't change local var table's size
+
+program counter: current thread's bytecode's PC
+
+jmap -heap [pid]
+
+jstat -gcutil [pid]
+
+Memory model
+--------
+
+
+Heap - Method Area (including runtime constant pool) - VM Stack(includeing stack frames) - native method stack - program coutner register
+
+Sometime VM Stack and Method Stack are combined.
+
+Method Area: 
+
+	every type's struct info: RCP, String ,and method data, constructor,and normal method's string content
+	
+	type , instance,interface's special method required on init
+
+Direct memory: native method stack applied outside the hep, ei.g., DirectByteBuffer inside NIO
+
+
+
 
 
