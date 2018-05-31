@@ -44,18 +44,32 @@ cache for file system I/O
 also used as other deviced's cache, e..g, block device
 buffer cache is for block device IO -, also memmroy managed by block
 
-#process's memory usage
-/proc/[pid]/status
-
-VmRSS - physical memory size
-VmStk
-VmExe 
-VmLib - 
-
-RSZ: resident set size: process's actual physcial memory size
-
-for non-parallel systems, throughput and latency are in reverse
-
 # of online customers is more straightforward, # of concurent request is more accurate
 
 
+```bash
+
+#check memory, unit kb, buffter is buffer cache in memory, 
+free
+
+top -p pid_value
+
+top -u franshesco
+
+#sort by %CPU
+top -o %CPU
+
+pmap -x [pid]
+
+#common tools
+uptime
+dmesg
+vmstat
+iostat
+sar
+mpstat
+iptraf
+mpstate
+tcptrace
+
+```

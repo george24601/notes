@@ -44,3 +44,6 @@ cut -f3 --complement file
 
 #search only files with certain extensions
 grep -r --include=*.scala 'spray' ./ | less
+
+#record terminal output
+script my.terminal.seeesion

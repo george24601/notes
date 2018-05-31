@@ -1,4 +1,4 @@
-When executing a program from terminal, the terminal process use exec to load executalb einto memory, now code, data, bbs, stack, are mapped into the memory space via mmap, heap may map depending on if the you applied for the memory on the heap
+When executing a program from terminal, the terminal process use exec to load executable into memory, now code, data, bbs, stack, are mapped into the memory space via mmap, heap may map depending on if the you applied for the memory on the heap
 
 exec will pass the control of CPU to dynamic linker linker, which will load the dynamically linked libary into memeory, and then execution starts. For more details, use strace
 
@@ -11,8 +11,6 @@ If the user applies for big memory, use mmap to allocate directly, which will re
 brk returns virtual memory too, but they are assigned to physical memory already
 
 when the process uses free to release memory, if it is assigned mmap, use munmap directly. Otherwiser, the memory is returned to the memoery allocation, which will return to the system later.
-
-use /proc/<pid>/oom_adj to set how system choose which process to kill
 
 Physical memory has cache and normal physical memory - can check with free
 
