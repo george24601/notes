@@ -4,9 +4,6 @@ docker images
 #remove an image, rm removes the container
 docker rmi -f $IMAGE_ID_OR_NAME
 
-#after making changes to the image
-docker commit -m $COMMIT_MESSGAE -a $AUTHOR $CONTAINER_ID_FROM $USER/$CONTAINER_NAME:$TAG
-
 #verify that the image was created correctly
 docker images --filter reference=$TAG
 
@@ -32,6 +29,7 @@ docker-machine ip my-docker-vm
 
 docker port nostalgic_morse 5000
 
+#the standard unix top command doesn't work well here, although the best practice says you should run only 1 process inside the docker container
 docker top
 
 #inspect can show the actual value of your env vars. Be aware of the risk of leaking secrets

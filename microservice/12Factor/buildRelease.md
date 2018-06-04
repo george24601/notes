@@ -11,10 +11,10 @@ ability to rollback a release with deployment tools
 
 Releases are append-only ledger and immutable. Have to create a new release
 for changes
------------
 
-app processes are stateless and share-nothing. Persistant data has to go into
-backing service.
+Process
+-----------
+The twelve-factor app never assumes that anything cached in memory or on disk will be available on a future request or job – with many processes of each type running, chances are high that a future request will be served by a different process. Even when running only one process, a restart (triggered by code deploy, config change, or the execution environment relocating the process to a different physical location) will usually wipe out all local (e.g., memory and filesystem) state.
 
 Never assume thing in memory or on disk will be available on a future request
 to handle the case of multiple worker/process restart
@@ -22,17 +22,8 @@ to handle the case of multiple worker/process restart
 compile assets in build stage, instead of using filesystem as cache or JIT
 compiling
 
-sticky session is a direct violation. Use datastore with expiry feature to
-store them.
 
----------
-Discussion
-
-1. shared-nothing solution is the common solution to multi-instance problem.
-It also fits FP very well
-
-2. storing data in backing service vs. sending state info as payload of
-request => reling on either side too much will for sure introduce problems
+Sticky sessions are a violation of twelve-factor and should never be used or relied upon. Session state data is a good candidate for a datastore that offers time-expiration, such as Memcached or Redis.
 
 ---------------
 app is self-contained and does not rely on the existence of web server app on the host. The only contract it has is that it binds itself to ports

@@ -8,6 +8,8 @@ You can ignore the "class" field; this is nearly always IN for Internet.
 The AUTHORITY section contains records of type NS, indicating the names of DNS servers that have name records for a particular domain.
 
 The rd (recursion desired) flag indicates that dig requested a recursive lookup, and the ra (recursion available) flag indicates that the server permits recursive lookups (some do not).
+
+SERVER: 127.0.0.1#53 => default cache resolve, means your computer has DNS service, e.g., DNSmasq
 DATA
 #trace will show all steps
 dig +trace wikipedia.org

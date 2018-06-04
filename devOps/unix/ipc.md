@@ -47,7 +47,10 @@ Multiple processes are given access to the same block of memory which creates a 
 
 POSIX also provides the mmap API for mapping files into memory; a mapping can be shared, allowing the file's contents to be used as shared memory.
 
+With enough privileges, processes can request the kernel to map part of another process's memory space to its own, as is the case for debuggers.
+
 Memory-mapped file
 -------
 A file mapped to RAM and can be modified by changing memory addresses directly instead of outputting to a stream.
+
 

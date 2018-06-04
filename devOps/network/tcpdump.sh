@@ -1,9 +1,19 @@
-# -nn host or port name not resolved
-sudo tcpdump -nn
+<<COMMON
+
+-i : Select interface that the capture is to take place on, this will often be an ethernet card or wireless adapter but could also be a vlan or something more unusual. Not always required if there is only one network adapter. "any" means all interfaces
+
+-nn : A single (n) will not resolve hostnames. A double (nn) will not resolve hostnames or ports. This is handy for not only viewing the IP / port numbers but also when capturing a large amount of data, as the name resolution will slow down the capture.
+-s0 : Snap length, is the size of the packet to capture. -s0 will set the size to unlimited - use this if you want to capture all the traffic. Needed if you want to pull binaries / files from network traffic.
+-v : Verbose, using (-v) or (-vv) increases the amount of detail shown in the output, often showing more protocol specific information.
+port 80 : this is a common port filter to capture only traffic on port 80, that is of course usually HTTP.
+
+COMMON
+sudo tcpdump -i eth0 -nn -s0 -v port 80
+
+sudo tcpdump -A -s0 port 80
 
 #-S changes the display of sequence nubmers to absolute
 #-s $BYTES_TO_CAP , default 96
-#-i any : Listen on all interfaces just to see if you’re seeing any traffic
 
 #look for traffic FROM $IP
 sudo tcpdump host $IP
@@ -43,3 +53,5 @@ The above packet has a sequence number 1473:2921, indicating that it contains al
 
 In reality, the ACK reflects the next byte that the receiver expects. The above ACK indicates that maple has received all bytes from byte #0 to byte #2920. The next byte that maple expects is byte #2921. The time stamp 00:34:41.482047, denotes the time at which the ACK was received by willow.
 SAMPLE
+
+

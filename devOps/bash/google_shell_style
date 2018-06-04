@@ -1,0 +1,116 @@
+#!/bin/bash
+#
+
+<<STYLE
+Executables must start with `#!/bin/bash` and a minimum number of flags. Use set to set shell options so that calling your script as bash <script_name> does not break its functionality.
+
+
+It is not necessary to know what language a program is written in when executing it and shell doesn't require an extension so we prefer not to use one for executables.
+
+file name Lowercase, with underscores to separate words if desired
+STYLE
+
+# Constants and env var to the top of the file
+readonly PATH_TO_FILES='/some/path'
+
+# Both constant and environment
+declare -xr ORACLE_SID='PROD'
+
+#GOES HERE: Every file must have a top-level comment including a brief overview of its contents. A copyright notice and author information are optional. 
+
+# All error messages should go to STDERR. A function to print out error messages along with other status information is recommended.
+err() {
+  echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $@" >&2
+}
+
+#Put all functions together in the file just below constants. Don't hide executable code between functions.
+
+#function name: Lower-case, with underscores to separate words. Separate libraries with ::. Parentheses are required after the function name. The keyword function is optional, but must be used consistently throughout a project.
+
+#Ensure that local variables are only seen inside a function and its children by using local when declaring them.
+my_func2() {
+  local name="$1"
+
+  # Separate lines for declaration and assignment:
+  local my_var
+  my_var="$(my_func)" || return
+
+  # DO NOT do this: $? contains the exit code of 'local', not my_func
+  local my_var="$(my_func)"
+  [[ $? -eq 0 ]] || return
+
+  ...
+}
+
+
+
+if ! do_something; then
+  err "Unable to do_something"
+  exit "${E_DID_NOTHING}"
+fi
+
+#Use blank lines between blocks to improve readability. Indentation is two spaces. Whatever you do, don't use tabs. For existing files, stay faithful to the existing indentation.
+
+# Long commands
+command1 \
+  | command2 \
+  | command3 \
+  | command4
+
+# Braces necessary:
+echo "many parameters: ${10}"
+
+# Preferred style for other variables:
+echo "PATH=${PATH}, PWD=${PWD}, mine=${some_var}"
+while read f; do
+  echo "file=${f}"
+done < <(ls -l /tmp)
+
+#Always quote strings containing variables, command substitutions, spaces or shell meta characters, unless careful unquoted expansion is required.
+# 'Single' quotes indicate that no substitution is desired.
+# "Double" quotes indicate that substitution is required/tolerated.
+
+# Simple examples
+# "quote command substitutions"
+flag="$(some_command and its args "$@" 'quoted separately')"
+
+# "quote variables"
+echo "${flag}"
+
+# "command options or path names"
+# ($1 is assumed to contain a value here)
+grep -li Hugo /dev/null "$1"
+
+
+# This is preferred:
+var="$(command "$(command1)")"
+
+#[[ ... ]] is preferred over [, test and /usr/bin/[.
+
+# EXPLICIT -z (string length is zero) and -n (string length is not zero) are
+# preferred over testing for an empty string
+if [[ -z "${my_var}" ]]; then
+  do_something
+fi
+
+# Use this
+if [[ -n "${my_var}" ]]; then
+  do_something
+fi
+
+
+#Always check return values and give informative return values.
+if ! mv "${file_list}" "${dest_dir}/" ; then
+  echo "Unable to move ${file_list} to ${dest_dir}" >&2
+  exit "${E_BAD_MOVE}"
+fi
+
+# Or - $? is used to find the return value of the last executed command.
+mv "${file_list}" "${dest_dir}/"
+if [[ "$?" -ne 0 ]]; then
+  echo "Unable to move ${file_list} to ${dest_dir}" >&2
+  exit "${E_BAD_MOVE}"
+fi
+
+#In order to easily find the start of the program, put the main program in a function called main as the bottom most function. This provides consistency with the rest of the code base as well as allowing you to define more variables as local (which can't be done if the main code is not a function). The last non-comment line in the file should be a call to main:
+main "$@"

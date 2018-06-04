@@ -1,8 +1,13 @@
 CPU States
 --------
-us, user: it shows us that the processor is spending 1.8% of its time running user space processes. A user space program is any process that does not belong to the kernel.
+us, user: it shows us that the processor is spending 1.8% of its time running user space processes. A user space program is any process that does not belong to the kernel. note its nice v < 0
+
 
 id, idle: it tells us that the processor was idle just over 97% of the time during the last sampling period.
+
+wa: idle wait io
+
+ni: high nice value user space process
 
 Memory
 -------
@@ -71,5 +76,5 @@ mpstat
 iptraf
 mpstate
 tcptrace
-
+nmap
 ```

@@ -1,8 +1,1 @@
-Project Management
----------
-
-People Management
----------
-
-Product Management
----------
+# Notes on People, Product, and Project Management
