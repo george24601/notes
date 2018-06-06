@@ -6,7 +6,7 @@ Placing a short-term timeout-based lock on each resource that's required to comp
 
 Consider using retry logic that is more forgiving than usual to minimize failures that trigger a compensating transaction. If a step in an operation that implements eventual consistency fails, try handling the failure as a transient exception and repeat the step. Only stop the operation and initiate a compensating transaction if a step fails repeatedly or irrecoverably.
 
-Choreography
+Choreography - Peer to Peer
 -------
 
 1. The Order Service creates an Order in a pending state and publishes an OrderCreated event
@@ -20,7 +20,7 @@ Choreography
 5. Note that this workflow implies a cyclic dependency between services
 
 
-Orchestration
+Orchestration with Saga as Coordinator
 --------
 1. The Order Service creates an Order in a pending state and creates a CreateOrderSaga
 
@@ -48,5 +48,3 @@ Servicecomb
 The coordinator is stateless and thus can have multiple instances.
 
 All transaction events are stored in database permanently.
-
-
