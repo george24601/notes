@@ -22,3 +22,18 @@ Building relationship
 5. Can be a leader or follower regardless of current status and self-esteem
 
 6. Sacrifice short term interest, and move to a different position to avoid contraversy and power struggle
+
+
+Scenario
+---------
+Sudden bad news/crisis
+
+Options
+-------
+1. From competitors, find their weakness to exchange, or escalate that into a common/general problem to shift focus
+
+2. From public/users, transparent on all known
+
+3. Product, slient/fallback/stay low.
+
+Note often these things appear together. Need to identify which is the main one

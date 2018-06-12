@@ -57,6 +57,8 @@ command1 \
   | command3 \
   | command4
 
+#prefer "${var}" over "$var", Don't brace-quote single character shell specials / positional parameters, unless strictly necessary or avoiding deep confusion. 
+#Prefer brace-quoting all other variables.
 # Braces necessary:
 echo "many parameters: ${10}"
 
