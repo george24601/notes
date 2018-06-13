@@ -67,3 +67,4 @@ the probability of performing the early recomputation increases as we get closer
 
 The following implementation based on an exponential distribution has been shown to be optimal in terms of its effectiveness in preventing stampedes and how early recomputations can happen.
 
+Some caches enable you to specify the expiration period as an absolute value, or as a sliding value that causes the item to be removed from the cache if it is not accessed within the specified time.
