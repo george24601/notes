@@ -6,21 +6,21 @@ Placing a short-term timeout-based lock on each resource that's required to comp
 
 Consider using retry logic that is more forgiving than usual to minimize failures that trigger a compensating transaction. If a step in an operation that implements eventual consistency fails, try handling the failure as a transient exception and repeat the step. Only stop the operation and initiate a compensating transaction if a step fails repeatedly or irrecoverably.
 
-Choreography - Peer to Peer
+Choreography - Peer to Peer, distributed
 -------
 
-1. The Order Service creates an Order in a pending state and publishes an OrderCreated event
+1. The Order Service creates an Order in a PENDING state and publishes an OrderCreated event to Cutomser Service
 
-2. The Customer Service receives the event attempts to reserve credit for that Order. It publishes either a Credit Reserved event or a CreditLimitExceeded event.
+2. The Customer Service receives the event attempts to reserve credit for that Order. It publishes either a Credit Reserved event or a CreditLimitExceeded event to Order Service
 
 3. The Order Service receives the event and changes the state of the order to either approved or cancelled
 
-4. On rollback, the first failed service will send cancel request to the coordinator service and the upstream service
+5. Note that this workflow implies a cyclic dependency between services - how to decouple?
 
-5. Note that this workflow implies a cyclic dependency between services
+6. Watch out the death star effect, by that time we may need a centralized design
 
 
-Orchestration with Saga as Coordinator
+Orchestration with Saga as coordinator, centralized
 --------
 1. The Order Service creates an Order in a pending state and creates a CreateOrderSaga
 
@@ -32,7 +32,7 @@ Orchestration with Saga as Coordinator
 
 5. The Order Service changes the state of the order to either approved or cancelled
 
-6. In order to be reliable, a service must atomically update its database and publish an event. E.g., one of the patterns
+6. In order to be reliable, a service must atomically update its database AND publish an event. E.g., one of the patterns
 
 	a. Event sourcing
 
@@ -48,3 +48,20 @@ Servicecomb
 The coordinator is stateless and thus can have multiple instances.
 
 All transaction events are stored in database permanently.
+
+Saga doens't guarantee isolation:
+
+1. lost update problem 
+
+2. dirty read problem: read unsubmitted data 
+
+3. non-repetable read: read submitted data from another txn in between
+
+
+use a semantic lock to mark possible dirty read - but need timeout as deadlock prevention
+
+can also use commutatitve updates to compensate to defend the lost update problem
+
+pessimistic view to avoid compenstation - no dirty read
+
+re-read value before update
