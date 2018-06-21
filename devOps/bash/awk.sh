@@ -34,4 +34,8 @@ BEGIN { x=5 }
 #how to use them for splitting on a different delimiter.
 awk '{print $2}' logs.txt | awk 'BEGIN{FS=":"}{print $1}' | sed 's/\[//'
 
+awk 'BEGIN{FS=","}{print $1}' 0.csv > 1.csv
+
+awk 'BEGIN{FS="\"\""}{print "errCodeToMsg.put(\""$2"\",\""$4"\");" }' 1.csv  | tee 2.java
+
 

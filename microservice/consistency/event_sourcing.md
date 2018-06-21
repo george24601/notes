@@ -9,7 +9,7 @@ Workflow 1
 
 4. Service B receives the message from MQ, commit, and return to MQ that it is complete
 
-5. If A fails, need to let MQ know that it is fail instead of commit
+5. If txn in A fails, A needs to let MQ know that it is fail instead of commit
 
 6. Need to expose service endpoints to message broker to confirm system's status, so that MQ middleware can defend against timeout
 
@@ -40,6 +40,36 @@ Workflow 3
 4. This one suggests deeper coupling between services. In SAGA, such thing is coupled in SAGA system
 
 
+Workflow 4
+-----------
+
+1. A sends msg to MQ, marked as pending
+
+2. upon MQ receiving the MSG, persist locally, but do not send it
+
+3. Based on MQ's reply, A decides if need to commit 
+
+4. Upon txn A commit good, sends commit message to MQ. MQ will then deliver msg to downstream
+
+
+Workflow 5
+--------
+
+1. A sends pending info to centralized message service (CMS), before txn commits
+
+2. A sends cancel or sening to CMS, after txn commits
+
+3. CMS inquires timeouted messages
+
+4. CMS confirms that messages have been consumed by downstream
+
+5. CMS queries consumption timeout message.
+
+6. Need a CMS control panel
+
+
+
+
 need reliable MQ broker at sender and receiver end
 
 to recover msg to be acked over long time, need to talk to upstream service to either update the state of the message to sent, or delete the message
@@ -47,5 +77,7 @@ to recover msg to be acked over long time, need to talk to upstream service to e
 In practice, need human intervetion capabilities, and limit max retries, and publish it to the deadletter queue
 
 need a delay based queue, at the serivce entrance, start, at the end of execution flow, cancel it, if execution is not done, the delay job will go trough the process
+
+also, possible to let consumer to poll main side, useful in the case of non-time-sensitive txns, e.g., notification service
 
 

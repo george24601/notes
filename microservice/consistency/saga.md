@@ -58,10 +58,14 @@ Saga doens't guarantee isolation:
 3. non-repetable read: read submitted data from another txn in between
 
 
+Request: Idempotent, Can abort, Compensating request: Idempotent, Communtative, can not abort
+
 use a semantic lock to mark possible dirty read - but need timeout as deadlock prevention
 
-can also use commutatitve updates to compensate to defend the lost update problem
+can also use COMMUTATITVE updates to compensate to defend the lost update problem, does action and compensate have to be commutative
 
 pessimistic view to avoid compenstation - no dirty read
 
 re-read value before update
+
+Q: why the compenstating request has to be commutative?
