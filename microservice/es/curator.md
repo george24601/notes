@@ -1,4 +1,4 @@
-Curator has always been a command-line tool. This site provides the documentation for how to use Curator on the command-line.
+Curator has always been a command-line tool. 
 
 note that Curator only requires access to a client node in the Elasticsearch cluster to work. It does not need to be installed on one of the nodes in the cluster.
 

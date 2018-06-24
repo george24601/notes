@@ -33,3 +33,10 @@ curl 'http://localhost:9200/?pretty'
 
 #shutdown ES
 curl -XPOST 'http://localhost:9200/_shutdown'
+
+#If you plan on using Curator with AWS ES using IAM credentials, you must also install the requests_aws4auth python module:
+pip install requests_aws4auth
+
+#There is a way to install Curator into a path for just the current user, using the --user flag.
+pip install elasticsearch-curator
+
