@@ -23,3 +23,9 @@ mmap -> file mapping, and anyomnous mapping
 3. private anonymous mapping, bbs, stack, heap are anonymous mapping, because exetuable doesn't have correspoidng segment, and must be private
 
 4. shared anonymous mapping, apply memory from cache
+
+why do we need second-level VM mapping table?
+
+what does buffer and cache in free mean?
+
+

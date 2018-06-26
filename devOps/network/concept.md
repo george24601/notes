@@ -1,10 +1,6 @@
 Subnet
 --------
-Traffic is exchanged (routed) between subnetworks with special gateways (routers) when the routing prefixes of the source address and the destination address differ. A router constitutes the logical or physical boundary between the subnets, e.g., inside a VPC, subsets are further division of VPC's CIDR block, and are non-intersecting between AZs, continous within a single AZ
-
 Each subnet is served by a designated default router, but may consist internally of multiple physical Ethernet segments interconnected by network switches or network bridges.
-
-The instances in the public subnet can send outbound traffic directly to the Internet, whereas the instances in the private subnet can't. Instead, the instances in the private subnet can access the Internet by using a network address translation (NAT) gateway that resides in the public subnet. The database servers can connect to the Internet for software updates using the NAT gateway
 
 A public subnet is a subnet that's associated with a route table that has a route to an Internet gateway.By contrast, a private subnet is a subnet without such a route. Usually, the default route for a private subnet points to a NAT device, though it could point to a hardware VPN or Direct Connect connection.
 
@@ -61,3 +57,10 @@ LB
 5. actual LB instances need to have same VIP and (virtual) MAC address  via ARP request
 
 
+What does 3 handshakes in TCP do?
+
+What does keeplive in http do?
+
+Different between implementation of session and cookie?
+
+Use script to calculate current tcp connections, and group them by the state

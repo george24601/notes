@@ -42,12 +42,9 @@ Orchestration with Saga as coordinator, centralized
 
 	d. Transaction log tailing
 
+7. Note that even in centralized case, steps are performed IN ORDER instead of parallel
 
-Servicecomb 
-------------
-The coordinator is stateless and thus can have multiple instances.
 
-All transaction events are stored in database permanently.
 
 Saga doens't guarantee isolation:
 

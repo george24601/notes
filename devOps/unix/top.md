@@ -51,7 +51,6 @@ buffer cache is for block device IO -, also memmroy managed by block
 
 # of online customers is more straightforward, # of concurent request is more accurate
 
-
 ```bash
 
 #check memory, unit kb, buffter is buffer cache in memory, 
@@ -65,16 +64,6 @@ top -u franshesco
 top -o %CPU
 
 pmap -x [pid]
-
-#common tools
-uptime
-dmesg
-vmstat
-iostat
-sar
-mpstat
-iptraf
-mpstate
-tcptrace
-nmap
 ```
+
+
