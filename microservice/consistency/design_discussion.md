@@ -1,8 +1,8 @@
 1. Scope of cross service transaction
 
-	a. Use Saga/TCC for services on the crital path, and limit the critical path as much as you can.
+    a. Use Saga/TCC for services on the crital path, and limit the critical path as much as you can.
 
-	b. For example, for a payment to wallet transaction. Notification service and point services should be on the critial path. The account balance and wallet services should be on the critical path.
+    b. For example, for a payment to wallet transaction. Notification service and point services should be on the critial path. The account balance and wallet services should be on the critical path.
 
 2. TCC vs Saga vs Message-based. This actually not the crtical design decision, because TCC and Saga are similar, and both needs.
 
@@ -31,7 +31,6 @@ Design: decentralized saga
 7. Note that for canceled process, even if this service doesn't have the record, it should populate the downstream service, because we need to ensure that that cancel and try are commutative,i.e., if cancel arrives before try, the late coming try should be cancelled.
 
 
-
 Design: centralized saga
 ----------
 
@@ -44,4 +43,3 @@ Design: centralized saga
 4. After TC receives the success response from CC, TC sends Create or Reject back to the Payment 
 
 5. The cancel process is similar to the decentralized design
-
