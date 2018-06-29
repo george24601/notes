@@ -37,4 +37,49 @@ These files are often used by daemons that should only be run once on a system. 
 Please explain why both a PID file and a lock file would be used. It seems a PID file would be sufficient. If the PID file exists, the PID could be checked to see if the process is running, just takes less steps than check for a lockfile, checking for a PID file, and then verifying the existence of the process. 
 To avoid race conditions if nothing else. Some apps have uses for times when the still need the PID but can relinquish the lock. But at a more fundamental level if you overload one file for both operations you open the door to failures such as a crash leaving an inconsistent state on the system.
 
+exec
+----------
+
+the exec() system call is used to perform chain loading. The program image of the current process is replaced with an entirely new image, and the current thread begins execution of that image. The common data area comprises data such as the process' environment variables, which are preserved across the system call. This act is also referred to as an overlay
+the machine code, data, heap, and stack of the process are replaced by those of the new program. 
+
+A successful overlay destroys the previous memory address space of the process, and all its memory areas, that were not shared, are reclaimed by the operating system. Consequently, all its data that were not passed to the new program, or otherwise saved, become lost.
+
+
+fork
+---------
+
+the copy, called the "child process", calls the exec system call to overlay itself with the other program: it ceases execution of its former program in favor of the other.
+
+After the fork, both processes not only run the same program, but they resume execution as though both had called the system call. They can then inspect the call's return value to determine their status, child or parent, and act accordingly.
+
+The child process starts off with a copy of its parent's file descriptors. For interprocess communication, the parent process will often create a pipe or several pipes, and then after forking the processes will close the ends of the pipes that they don't need
+
+In the child process, the return value of the fork() appears as zero (which is an invalid process identifier). Similarly, why a while fork bomb has exponential growth in processes?
+
+Although all data are replaced, the file descriptors that were open in the parent are closed only if the program has explicitly marked them close-on-exec. This allows for the common practice of the parent creating a pipe prior to calling fork() and using it to communicate with the executed program.
+
+
+zombie process
+--------
+a process that has completed execution (via the exit system call) but still has an entry in the process table: it is a process in the "Terminated state". This occurs for child processes, where the entry is still needed to allow the parent process to read its child's exit status: once the exit status is read via the wait system call, the zombie's entry is removed from the process table and it is said to be "reaped".
+
+Also, unlike normal processes, the kill command has no effect on a zombie process.
+
+Zombie processes should not be confused with orphan processes: an orphan process is a process that is still executing, but whose parent has died. These do not remain as zombie processes; instead, (like all orphaned processes) they are adopted by init (process ID 1), which waits on its children. The result is that a process that is both a zombie and an orphan will be reaped automatically.
+
+After the zombie is removed, its process identifier (PID) and entry in the process table can then be reused
+
+Zombies can be identified in the output from the Unix ps command by the presence of a "Z" in the "STAT" column. Can also use pstree or ps -d
+
+To remove zombies from a system, the SIGCHLD signal can be sent to the parent manually, using the kill command. If the parent process still refuses to reap the zombie, and if it would be fine to terminate the parent process, the next step can be to remove the parent process. When a process loses its parent, init becomes its new parent. init periodically executes the wait system call to reap any zombies with init as parent.
+
+
+Orphan process
+-------
+
+In a Unix-like operating system any orphaned process will be immediately adopted by the special init system process: the kernel sets the parent to init. This operation is called re-parenting and occurs automatically.
+
+It is sometimes desirable to intentionally orphan a process, usually to allow a long-running job to complete without further user attention, or to start an indefinitely running service or agent; such processes (without an associated session) are known as daemons, particularly if they are indefinitely running. A low-level approach is to fork twice, running the desired process in the grandchild, and immediately terminating the child. The grandchild process is now orphaned, and is not adopted by its grandparent, but rather by init. Higher-level alternatives circumvent the shell's hangup handling, either telling the child process to ignore SIGHUP (by using nohup), or removing the job from the job table or telling the shell to not send SIGHUP on session end (by using disown in either case). In any event, the session id (process id of the session leader, the shell) does not change, and the process id of the session that has ended is still in use until all orphaned processes either terminate or change session id (by starting a new session via setsid(2)).
+
 

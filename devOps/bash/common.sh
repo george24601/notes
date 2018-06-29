@@ -47,3 +47,9 @@ grep -r --include=*.scala 'spray' ./ | less
 
 #record terminal output
 script my.terminal.seeesion
+
+#creating a new environment without any existing environment variables for a new shell
+env -i /bin/sh
+
+#Note that this use of env is often unnecessary since most shells support setting environment variables in front of a command
+env DISPLAY=foo.bar:1.0 xcalc

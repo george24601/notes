@@ -54,3 +54,4 @@ Memory-mapped file
 A file mapped to RAM and can be modified by changing memory addresses directly instead of outputting to a stream.
 
 
+a file descriptor (FD, less frequently fildes) is an abstract indicator (handle) used to access a file or other input/output resource, such as a pipe or network socket.Each Unix process (except perhaps a daemon) should expect to have three standard POSIX file descriptors, corresponding to the three standard streams, 0, 1, 2 - stdin stdout stderr

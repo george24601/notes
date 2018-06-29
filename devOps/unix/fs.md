@@ -45,3 +45,13 @@ The exact location in VFS that the newly-mounted medium got registered is called
 Normally, when the computer is shutting down, every mounted storage will undergo an unmounting process to ensure that all queued data got written, and to preserve integrity of file system structure on the media.
 
 A file system can be defined as user mountable in the /etc/fstab file by the root user.
+
+
+FD
+-------
+an abstract indicator (handle) used to access a file or other input/output resource, such as a pipe or network socke
+
+file descriptors index into a per-process file descriptor table maintained by the kernel, that in turn indexes into a system-wide table of files opened by all processes, called the file table. This table records the mode with which the file (or other resource) has been opened: for reading, writing, appending, and possibly other modes. It also indexes into a third table called the inode table that describes the actual underlying files.[3] To perform input or output, the process passes the file descriptor to the kernel through a system call, and the kernel will access the file on behalf of the process. The process does not have direct access to the file or inode tables.
+
+set of file descriptors open in a process can be accessed under the path /proc/PID/fd/, where PID is the process identifier.
+
