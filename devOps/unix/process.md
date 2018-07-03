@@ -83,3 +83,10 @@ In a Unix-like operating system any orphaned process will be immediately adopted
 It is sometimes desirable to intentionally orphan a process, usually to allow a long-running job to complete without further user attention, or to start an indefinitely running service or agent; such processes (without an associated session) are known as daemons, particularly if they are indefinitely running. A low-level approach is to fork twice, running the desired process in the grandchild, and immediately terminating the child. The grandchild process is now orphaned, and is not adopted by its grandparent, but rather by init. Higher-level alternatives circumvent the shell's hangup handling, either telling the child process to ignore SIGHUP (by using nohup), or removing the job from the job table or telling the shell to not send SIGHUP on session end (by using disown in either case). In any event, the session id (process id of the session leader, the shell) does not change, and the process id of the session that has ended is still in use until all orphaned processes either terminate or change session id (by starting a new session via setsid(2)).
 
 
+Daemon
+--------
+the parent process of a daemon is often, but not always, the init process. A daemon is usually either created by a process forking a child process and then immediately exiting, thus causing init to adopt the child process, or by the init process directly launching the daemon. In addition, a daemon launched by forking and exiting typically must perform other operations, such as dissociating the process from any controlling terminal
+
+Setting the root directory (/) as the current working directory so that the process does not keep any directory in use that may be on a mounted file system (allowing it to be unmounted).
+
+Using a logfile, the console, or /dev/null as stdin, stdout, and stderr

@@ -18,7 +18,6 @@ cd !$
 #automatically corrects small typos in directory names and jumps to the best guess of existing directories.
 shopt -s cdspell
 
-
 #shell to exit if any subcommand or pipeline returns a non-zero status
 set -e
 

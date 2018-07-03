@@ -28,4 +28,4 @@ why do we need second-level VM mapping table?
 
 what does buffer and cache in free mean?
 
-
+# segmentation of symbol table, source text, constant, parse tree, and call stack

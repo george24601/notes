@@ -64,3 +64,17 @@ What does keeplive in http do?
 Different between implementation of session and cookie?
 
 Use script to calculate current tcp connections, and group them by the state
+
+# MAC address
+
+# Handshakes in TCP
+
+why need the third handshake on start?
+
+why 4 handshakes near the end? Why need time wait
+
+#TCP congestion control
+
+#HTTP 2.0
+
+
