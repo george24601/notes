@@ -57,8 +57,6 @@ LB
 5. actual LB instances need to have same VIP and (virtual) MAC address  via ARP request
 
 
-What does 3 handshakes in TCP do?
-
 What does keeplive in http do?
 
 Different between implementation of session and cookie?

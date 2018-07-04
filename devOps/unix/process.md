@@ -1,7 +1,5 @@
 zombie process - child program terminate, the parent process hasn't read these data yet
 
-what is a daemon process, difference between daemon and normal process
-
 PID
 --------
 In Unix-like operating systems, new processes are created by the fork() system call. The PID is returned to the parent enabling it to refer to the child in further function calls. The parent may, for example, wait for the child to terminate with the waitpid() function, or terminate the process with kill().

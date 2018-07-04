@@ -29,3 +29,17 @@ why do we need second-level VM mapping table?
 what does buffer and cache in free mean?
 
 # segmentation of symbol table, source text, constant, parse tree, and call stack
+
+# Memory-mapping file
+
+in most operating systems the memory region mapped actually is the kernel's page cache (file cache), meaning that no copies need to be created in user space
+
+Persisted files are associated with a source file on a disk. The data is saved to the source file on the disk once the last process is finished. These memory-mapped files are suitable for working with extremely large source files
+
+Non-persisted files are not associated with a file on a disk. When the last process has finished working with the file, the data is lost. These files are suitable for creating shared memory for inter-process communications (IPC)
+
+Only hardware architectures with an MMU can support memory-mapped files
+
+Another common use for memory-mapped files is to share memory between multiple processes
+
+In some of those systems, it is common to dedicate an entire partition of a hard disk to swapping. These partitions are called swap partitions. Many systems have an entire hard drive dedicated to swapping, separate from the data drive(s), containing only a swap partition. A hard drive dedicated to swapping is called a "swap drive" or a "scratch drive" or a "scratch disk". Some of those systems only support swapping to a swap partition; others also support swapping to files.
