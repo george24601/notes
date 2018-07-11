@@ -30,23 +30,13 @@ Manage this situation by ensuring that all node hosts have the same SSH host key
 A host key is the server’s public key. The host key is used by the client to decrypt an authentication message sent from the server when connecting. 
 
 
-Port Forwarding
----------
+# Local Port Forwarding
 Local forwarding is used to forward a port from the client machine to the server machine.
 Basically, the SSH client listens for connections on a configured port, and when it receives a connection, it tunnels the connection to an SSH server. The server connects to a configurated destination port, possibly on a different machine than the SSH server
 
-```
-ssh -L 80:intra.example.com:80 gw.example.com
-```
-This example opens a connection to the gw.example.com jump server, and forwards any connection to port 80 on the local machine to port 80 on intra.example.com.
 
+# Agent Forwarding
 
-Agent Forwarding
----------
-????
-
-CERTIFICATES
----------
 ssh-keygen	supports signing of keys to produce certificates that may be
      used for user or host authentication.  Certificates consist of a public
      key, some identity	information, zero or more principal (user or host)
@@ -60,5 +50,4 @@ TrustedUserCAKeys: Specifies a file containing public keys of	certificate author
 	     tion. If a certificate is presented for authentication and has its signing
 	     CA	key listed in this file, then it may be	used for authentica-
 	     tion for any user listed in the certificate's principals list.
-
 

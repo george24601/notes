@@ -38,4 +38,17 @@ awk 'BEGIN{FS=","}{print $1}' 0.csv > 1.csv
 
 awk 'BEGIN{FS="\"\""}{print "errCodeToMsg.put(\""$2"\",\""$4"\");" }' 1.csv  | tee 2.java
 
+#Number lines in a file
+awk '{ print NR ": " $0 }' file
 
+#Count the number of words in a file
+awk '{ total = total + NF } END { print total }'
+
+#Print the last field of each line.
+awk '{ print $NF }'
+
+#Print every line with more than 4 fields.
+awk 'NF > 4'
+
+#Print every line where the value of the last field is greater than 4.
+awk '$NF > 4'

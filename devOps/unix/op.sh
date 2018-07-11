@@ -7,4 +7,9 @@ fuser -v -n tcp 80
 #view the port associated with a daemon
 lsof -i -n -P | grep sendmail
 
+#io writes - maybe use dstat?
+iostat
+
+#current port usage
+netstat -an
 

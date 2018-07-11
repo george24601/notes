@@ -106,3 +106,20 @@ crashes after committing the log entry but before respond- ing to the client, th
 
 
 However, with no additional mea- sures, this would run the risk of returning stale data, since the leader responding to the request might have been su- perseded by a newer leader of which it is unaware. Lin- earizable reads must not return stale data, and Raft needs two extra precautions to guarantee this without using the log. First, a leader must have the latest information on which entries are committed. The Leader Completeness Property guarantees that a leader has all committed en- tries, but at the start of its term, it may not know which those are. To find out, it needs to commit an entry from its term. Raft handles this by having each leader com- mit a blank no-op entry into the log at the start of its term. Second, a leader must check whether it has been de- posed before processing a read-only request (its informa- tion may be stale if a more recent leader has been elected). Raft handles this by having the leader exchange heart- beat messages with a majority of the cluster before re- sponding to read-only requests
+
+
+1.leader mains heartbeat which allows the followers to detect if the leader fails or beocmes partitioned
+2.when a node detects a leader has become no-responsive, go into candiate state, and increment the epoch value by 1
+3. a node recieve a majority of the votes becomes the new leader: vote as in first-come first-served. candidates themselves waits a random
+time before bids
+
+
+Practical considerations
+1. repeated leader election
+2. repeated propose messages
+3. followers and proposers do not lose items in stable storage/not corrupted
+4. cluster membership change. Majority rule does not hold if the membership change change arbitrarility
+5. bring replica up to date in a safe and efficient manner
+6. snapshoting and GCing data. required to guarantee satefy after some reasonable period
+
+

@@ -1,3 +1,5 @@
+/boot - bootstrap related - don't touch it!
+
 /var is a standard subdirectory that contains files to which the system writes data during the course of its operation.
 
 /usr, which is generally the largest directory (at least on a newly installed system) and is used to store application programs, should only contain static data.
@@ -22,16 +24,21 @@ The /dev directory contains the special device files for all the devices. The de
 
 /dev/random is a non-deterministic generator which means that the value of the next number cannot be guessed from the preceding ones. It uses the entropy of the system hardware to generate numbers. When it has no more entropy to use then it must wait until it has collected more before it will allow any more numbers to be read from it.
 
-tmpfs
---------
-tmpfs is a common name for a temporary file storage facility on many Unix-like operating systems. It is intended to appear as a mounted file system, but stored in volatile memory instead of a persistent storage device. A similar construction is a RAM disk, which appears as a virtual disk drive and hosts a disk file system.
+/opt is used to install 'self-contained' applications,or you compile from source code. Using /opt/my_app/etc/ for config files, /opt/my_app/log/ for logs - or put it in /opt/bin and /opt/lib
+
+/sbin - super user bin
+
+/srv - server data
+
+# procfs
+mapped to virtual memory
+
+# tmpfs
+use tmpfs by default for the /tmp branch of the file system or for shared memory.
+
+It is intended to appear as a mounted file system, but stored in volatile memory instead of a persistent storage device. A similar construction is a RAM disk, which appears as a virtual disk drive and hosts a disk file system.
 
 Everything stored in tmpfs is temporary in the sense that no files will be created on the hard drive; however, swap space is used as backing store in case of low memory situations.
-
-Many Unix distributions enable and use tmpfs by default for the /tmp branch of the file system or for shared memory.
-
-/opt is used to install 'self-contained' applications, so nothing wrong here. Using /opt/my_app/etc/ for config files, /opt/my_app/log/ for logs and so on - common practice for this kind of application.
-
 
 ?ln -s , mv, how do they affect inode and block?
 

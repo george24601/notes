@@ -29,5 +29,6 @@ how sudo works
 why everyone can write file and create dir to /tmp, but can only write and delete their own file or dir
 
 
+for dir, r reads ls, w makes create/delete files under the dir, x means can cd into dir
 
 

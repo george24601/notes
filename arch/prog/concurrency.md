@@ -93,7 +93,7 @@ void reader() {
     while(TRUE) {
         down(&count_mutex);
         count++;
-        if(count == 1) down(&data_mutex); // 第一个读者需要对数据进行加锁，防止写进程访问
+        if(count == 1) down(&data_mutex);  
         up(&count_mutex);
         read();
         down(&count_mutex);
@@ -119,13 +119,13 @@ void writer() {
 ```
 
 #define N 5
-#define LEFT (i + N - 1) % N // 左邻居
-#define RIGHT (i + 1) % N    // 右邻居
+#define LEFT (i + N - 1) % N
+#define RIGHT (i + 1) % N    
 #define THINKING 0
 #define HUNGRY   1
 #define EATING   2
 typedef int semaphore;
-int state[N];                // 跟踪每个哲学家的状态
+int state[N];                
 semaphore mutex = 1;         
 semaphore s[N];              
 

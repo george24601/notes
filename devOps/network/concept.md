@@ -4,8 +4,6 @@ Each subnet is served by a designated default router, but may consist internally
 
 A public subnet is a subnet that's associated with a route table that has a route to an Internet gateway.By contrast, a private subnet is a subnet without such a route. Usually, the default route for a private subnet points to a NAT device, though it could point to a hardware VPN or Direct Connect connection.
 
-
-
 Routing Table
 --------
 a data table stored in a router or a networked computer that lists the routes to particular network destinations

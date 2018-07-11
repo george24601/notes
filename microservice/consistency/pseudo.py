@@ -13,7 +13,7 @@ double check with your transaction level, most likely read-commited won't work! 
 """
     txn2 = begin_txn() 
 
-    front_status = get_status(request_id)
+    front_status = get_front_status(request_id)
 
     if front_state == PENDING:
         if next_status == 200:
@@ -21,7 +21,13 @@ double check with your transaction level, most likely read-commited won't work! 
             update_request_state(request_id, COMPLETED, txn2)
         else:
             rollback_pre_action(request_id)
-            update_request_state(request_id, CANCELLED, txn2)
+            #when we update, we need to do a WHERE on PENDING state, as our MVCC
+            num_rows_affected = update_request_state(request_id, CANCELLED, txn2)
+
+            if not num_rows_affected: 
+                rollback(txn2)
+                return
+                
 
     commit(txn2)
 
@@ -30,10 +36,12 @@ def comp_front(request_id):
 
     if middle_comp_state == 200:
         txn = begin_txn()
-        front_status = get_status(request_id) #TODO: check for existence
+        front_status = get_front_status(request_id) 
         if front_status == PENDING:
             rollback_pre_action(request_id)
             update_request_state(request_id, CANCELLED, txn2)
         commit(txn) 
     else 
         retry_and_to_dlq(request_id)
+
+

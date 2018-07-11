@@ -8,3 +8,20 @@ curl --cacert <file>
 
 #check domain owner info
 whois example.com
+
+#check network card, TCP/IP , IP address, subnet mask settings
+ping 127.0.0.1
+
+#check local config or installation
+ping $LOCAL_IP
+
+#arp to check corresponding IP address's MAC address - network card physical address
+
+#check accept queue
+netstat -s | egrep "listen"
+
+#see if server ignores the ACK from client,i.e., server thinks connection is NOT up yet, server will set a reset to server
+cat /proc/sys/net/ipv4/tcp_abort_on_overflow
+
+#Recv-Q: data in cache/buffer but not in process yet, also check the ss command
+netstate -t

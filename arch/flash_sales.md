@@ -1,3 +1,5 @@
+General workflow: check storage -> deduct storage ->  create order -> pay
+
 Dedup multiple request form the same user => 
 1. redis for consitency check, set 5 mins expire time
 
@@ -7,9 +9,6 @@ Dedup multiple request form the same user =>
 Cancel order: 
 
 1. MQ based solutions
-
-2. 
-
 
 
 

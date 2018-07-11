@@ -19,6 +19,24 @@ local symbols, used internally within the object file to facilitate relocation.
 
 #Object file
 
+relocatable format machine code that is usually not directly executable. may also work like a shared library.
+
 In order to be used, object code must either be placed in an executable file, a library file, or an object file.
 
 Object code is a portion of machine code that has not yet been linked into a complete program. It is the machine code for one particular library or module that will make up the completed product. It may also contain placeholders or offsets, not found in the machine code of a completed program, that the linker will use to connect everything together. Whereas machine code is binary code that can be executed directly by the CPU, object code has the jumps partially parameterized so that a linker can fill them in.
+
+Most object file formats are structured as separate sections of data, each section containing a certain type of data.
+
+Types of data supported by typical object file formats:
+
+Header (descriptive and control information)
+Code segment ("text segment", executable code)
+Data segment (initialized static variables)
+Read-only data segment (rodata, initialized static constants)
+BSS segment (uninitialized static data, both variables and constants)
+External definitions and references for linking
+Relocation information
+Dynamic linking information
+Debugging information
+
+
