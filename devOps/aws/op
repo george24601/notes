@@ -1,0 +1,7 @@
+#!/bin/bash
+#set which profile to use
+export AWS_PROFILE=user2
+
+#describe instances
+aws ec2 describe-instances --profile user2
+

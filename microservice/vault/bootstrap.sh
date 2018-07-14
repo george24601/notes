@@ -13,6 +13,8 @@ sudo ./vault server -config=vault.hcl
 #clear vault related entries before we init
 consul kv delete -recurse vault/
 
+export VAULT_ADDR='http://127.0.0.1:8200'
+
 #once per cluster, will give unseal keys and the root token
 vault operator init
 

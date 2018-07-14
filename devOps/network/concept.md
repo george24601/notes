@@ -63,6 +63,16 @@ Use script to calculate current tcp connections, and group them by the state
 
 # MAC address
 
+a unique identifier assigned to a network interface controller (NIC) for communications at the data link layer of a network segment.
+
+A network node may have multiple NICs and each NIC must have a unique MAC address. Sophisticated network equipment such as a multilayer switch or router may require one or more permanently assigned MAC addresses.
+
+he MAC address is expected to uniquely identify each node on that segment and allows frames to be marked for specific hosts. It thus forms the basis of most of the link layer (OSI Layer 2) networking upon which upper layer protocols rely to produce complex, functioning networks.
+
+Although intended to be a permanent and globally unique identification, it is possible to change the MAC address on most modern hardware. Changing MAC addresses is necessary in network virtualization. It can also be used in the process of exploiting security vulnerabilities. This is called MAC spoofing.
+
+
+
 # Handshakes in TCP
 
 why need the third handshake on start?

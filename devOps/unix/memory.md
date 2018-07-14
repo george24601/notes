@@ -34,6 +34,8 @@ what does buffer and cache in free mean?
 
 in most operating systems the memory region mapped actually is the kernel's page cache (file cache), meaning that no copies need to be created in user space
 
+The operating system keeps a page cache in otherwise unused portions of the main memory (RAM), resulting in quicker access to the contents of cached pages and overall performance improvements. A page cache is implemented in kernels with the paging memory management, and is mostly transparent to applications.
+
 Persisted files are associated with a source file on a disk. The data is saved to the source file on the disk once the last process is finished. These memory-mapped files are suitable for working with extremely large source files
 
 Non-persisted files are not associated with a file on a disk. When the last process has finished working with the file, the data is lost. These files are suitable for creating shared memory for inter-process communications (IPC)

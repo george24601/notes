@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #shows the heapsize
 java -XX:+PrintFlagsFinal -version | grep HeapSize
 
@@ -21,3 +23,6 @@ echo "obase=16; 3777" | bc
 #if you need one-off stack, kill -3 would show the dump as well
 kill  -3 63847
 
+jmap
+
+jstat

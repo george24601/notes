@@ -1,12 +1,12 @@
 Note that CAP in the theorem means very specific things, not the intuitive defintion!
-C: as if exeuting on a single node
-A: every request to ANY NON-FAILED node must return a response: so node failure is outside the scope of CAP! 
-P: network is allowed to lose any messages from one node to another. Note this does not mean packet loss, in the proof they use a TCP-ish
-protocol already.
-However, from a node's perspective you can not distinguish between a failed node and partitioned node
 
-trivial CP system: ignore all requests, return "no result"
-=> Not being available at all is enough to be CP
+C: as if exeuting on a single node
+
+A: every request to ANY NON-FAILED node must return a response: so node failure is outside the scope of CAP! 
+
+P: network is allowed to lose any messages from one node to another. Note this does not mean packet loss, in the proof they use a TCP-ish protocol already. However, from a node's perspective you can not distinguish between a failed node and partitioned node
+
+trivial CP system: ignore all requests, return "no result" => Not being available at all is enough to be CP
 
 trivial AP system: return v0 to all requests
 

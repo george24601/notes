@@ -65,4 +65,14 @@ set of file descriptors open in a process can be accessed under the path /proc/P
 
 In Unix-like systems, file descriptors can refer to any Unix file type named in a file system. As well as regular files, this includes directories, block and character devices (also called "special files"), Unix domain sockets, and named pipes. File descriptors can also refer to other objects that do not normally exist in the file system, such as anonymous pipes and network sockets.
 
+# inode
 
+Each inode stores the attributes and disk block location(s) of the object's data.[1] Filesystem object attributes may include metadata (times of last change,[2] access, modification), as well as owner and permission data.[3]
+
+Directories are lists of names assigned to inodes. A directory contains an entry for itself, its parent, and each of its children.
+
+On many types of file system implementations, the maximum number of inodes is fixed at file system creation, limiting the maximum number of files the file system can hold. A typical allocation heuristic for inodes in a file system is one percent of total size.
+
+The inode number indexes a table of inodes in a known location on the device
+
+A file's inode number can be found using the ls -i command. The ls -i command prints the i-node number in the first column of the report.

@@ -1,3 +1,5 @@
+Overall: avoid remote operations in transaction-lock etc!
+
 Scenario
 --------
 Update cache without timeouts
@@ -68,3 +70,15 @@ the probability of performing the early recomputation increases as we get closer
 The following implementation based on an exponential distribution has been shown to be optimal in terms of its effectiveness in preventing stampedes and how early recomputations can happen.
 
 Some caches enable you to specify the expiration period as an absolute value, or as a sliding value that causes the item to be removed from the cache if it is not accessed within the specified time.
+
+# Defend against stampede
+
+1. Real db should have enought capacity in case of cache failure
+
+2. HA cache, shareding, but additional cache on the caller side is very debatable
+
+# competing renew problem
+
+1. in case we need only one renewl (e.g., leased tokens), just use cron job in the backend instead of front end
+
+2. add a timestamp to token, so don't renew too frequently

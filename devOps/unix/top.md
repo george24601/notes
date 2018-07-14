@@ -49,21 +49,5 @@ cache for file system I/O
 also used as other deviced's cache, e..g, block device
 buffer cache is for block device IO -, also memmroy managed by block
 
-# of online customers is more straightforward, # of concurent request is more accurate
-
-```bash
-
-#check memory, unit kb, buffter is buffer cache in memory, 
-free
-
-top -p pid_value
-
-top -u franshesco
-
-#sort by %CPU
-top -o %CPU
-
-pmap -x [pid]
-```
-
+number of online customers is more straightforward, number of concurent request is more accurate
 

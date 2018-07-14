@@ -19,4 +19,11 @@ Avoid giving away too many orders:
 
 3. counter to drop traffic at DAO layer
 
+Limit traffic: General principle - reduce the traffic layer by layer
+
+1. token bucket
+
+2. leaky bucket
+
+
 
