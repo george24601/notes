@@ -12,9 +12,6 @@ lsof -i -n -P | grep sendmail
 #io writes - maybe use dstat?
 iostat
 
-#current port usage
-netstat -an
-
 #check memory, unit kb, buffter is buffer cache in memory, 
 free
 
@@ -27,3 +24,6 @@ top -o %CPU
 
 pmap -x [pid]
 
+#starts the program abcd in the background in such a way that the subsequent logout does not stop it.
+#nohup is often used in combination with the nice command to run processes on a lower priority
+nohup abcd &

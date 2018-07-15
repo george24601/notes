@@ -1,7 +1,9 @@
 zombie process - child program terminate, the parent process hasn't read these data yet
 
-PID
---------
+#PID
+
+check /proc/$PID for more info
+
 In Unix-like operating systems, new processes are created by the fork() system call. The PID is returned to the parent enabling it to refer to the child in further function calls. The parent may, for example, wait for the child to terminate with the waitpid() function, or terminate the process with kill().
 
 swapper or sched has process ID 0 and is responsible for paging, and is actually part of the kernel rather than a normal user-mode process. Process ID 1 is usually the init process primarily responsible for starting and shutting down the system.
@@ -73,18 +75,30 @@ Zombies can be identified in the output from the Unix ps command by the presence
 To remove zombies from a system, the SIGCHLD signal can be sent to the parent manually, using the kill command. If the parent process still refuses to reap the zombie, and if it would be fine to terminate the parent process, the next step can be to remove the parent process. When a process loses its parent, init becomes its new parent. init periodically executes the wait system call to reap any zombies with init as parent.
 
 
-Orphan process
--------
+# Orphan process
 
 In a Unix-like operating system any orphaned process will be immediately adopted by the special init system process: the kernel sets the parent to init. This operation is called re-parenting and occurs automatically.
 
 It is sometimes desirable to intentionally orphan a process, usually to allow a long-running job to complete without further user attention, or to start an indefinitely running service or agent; such processes (without an associated session) are known as daemons, particularly if they are indefinitely running. A low-level approach is to fork twice, running the desired process in the grandchild, and immediately terminating the child. The grandchild process is now orphaned, and is not adopted by its grandparent, but rather by init. Higher-level alternatives circumvent the shell's hangup handling, either telling the child process to ignore SIGHUP (by using nohup), or removing the job from the job table or telling the shell to not send SIGHUP on session end (by using disown in either case). In any event, the session id (process id of the session leader, the shell) does not change, and the process id of the session that has ended is still in use until all orphaned processes either terminate or change session id (by starting a new session via setsid(2)).
 
 
-Daemon
---------
+# Daemon
 the parent process of a daemon is often, but not always, the init process. A daemon is usually either created by a process forking a child process and then immediately exiting, thus causing init to adopt the child process, or by the init process directly launching the daemon. In addition, a daemon launched by forking and exiting typically must perform other operations, such as dissociating the process from any controlling terminal
 
 Setting the root directory (/) as the current working directory so that the process does not keep any directory in use that may be on a mounted file system (allowing it to be unmounted).
 
 Using a logfile, the console, or /dev/null as stdin, stdout, and stderr
+
+# Kill
+
+The default signal sent is SIGTERM. Programs that handle this signal can do useful cleanup operations (such as saving configuration information to a file) before quitting.
+
+All signals except for SIGKILL and SIGSTOP ("stop") can be "intercepted" by the process, meaning that a special function can be called when the program receives those signals. The two exceptions SIGKILL and SIGSTOP are only seen by the host system's kernel, providing reliable ways of controlling the execution of processes. SIGKILL kills the process, and SIGSTOP pauses it until a SIGCONT ("continue") is received
+
+Essentially, for a process to send a signal to another, the owner of the signaling process must be the same as the owner of the receiving process or be the superuser.
+
+SIGHUP ("signal hang up") is a signal sent to a process when its controlling terminal is closed
+
+If the process receiving SIGHUP is a Unix shell, then as part of job control it will often intercept the signal and ensure that all stopped processes are continued before sending the signal to child processes (more precisely, process groups, represented internally by the shell as a "job"), which by default terminates them
+
+Firstly, the Single UNIX Specification describes a shell utility called nohup, which can be used as a wrapper to start a program and make it ignore SIGHUP by default. Secondly, child process groups can be "disowned" by invoking disown with the job id, which removes the process group from the shell's job table (so they will not be sent SIGHUP), or (optionally) keeps them in the job table but prevents them from receiving SIGHUP on shell termination.

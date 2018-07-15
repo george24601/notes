@@ -1,8 +1,3 @@
-#check if port is open and accessible, -z means sending no data, just scanning the daemon
-nc -z $HOST $PORT
-
-host $FIND_IP_OF_HOST
-
 #(TLS) Tells curl to use the specified certificate file to verify the peer. The file may contain multiple CA certificates. The certificate(s) must be in PEM format. Normally curl is built to use a default file for this, so this option is typically used to alter that default file.
 curl --cacert <file>
 
@@ -17,11 +12,17 @@ ping $LOCAL_IP
 
 #arp to check corresponding IP address's MAC address - network card physical address
 
-#check accept queue
-netstat -s | egrep "listen"
-
 #see if server ignores the ACK from client,i.e., server thinks connection is NOT up yet, server will set a reset to server
 cat /proc/sys/net/ipv4/tcp_abort_on_overflow
 
-#Recv-Q: data in cache/buffer but not in process yet, also check the ss command
-netstate -t
+###SSH###
+#add cerficicate to the agent
+chmod 400 ~/.ssh/id_rsa
+#-l to show certs available
+ssh-add -K ~/.ssh/id_rsa
+
+#opens a connection to the gw.example.com jump server, and forwards any connection to port 80 on the local machine to port 80 on intra.example.com.
+ssh -L 80:intra.example.com:80 gw.example.com
+
+#jump via jump host, make sure ssh-add .pem first!
+ssh -tt -A ec2-user@$PUBLIC_JUMP ssh -tt ec2-user@$PRIVATE_JUMP

@@ -26,3 +26,6 @@ kill  -3 63847
 jmap
 
 jstat
+
+#java process pid
+jps

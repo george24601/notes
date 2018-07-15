@@ -71,16 +71,4 @@ he MAC address is expected to uniquely identify each node on that segment and al
 
 Although intended to be a permanent and globally unique identification, it is possible to change the MAC address on most modern hardware. Changing MAC addresses is necessary in network virtualization. It can also be used in the process of exploiting security vulnerabilities. This is called MAC spoofing.
 
-
-
-# Handshakes in TCP
-
-why need the third handshake on start?
-
-why 4 handshakes near the end? Why need time wait
-
-#TCP congestion control
-
 #HTTP 2.0
-
-

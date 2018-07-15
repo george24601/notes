@@ -1,3 +1,4 @@
+#!/bin/bash
 #list images pulled
 docker images
 
