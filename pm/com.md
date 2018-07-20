@@ -1,7 +1,7 @@
 Arms crossed => not open. Note where legs and feet are pointing -> crossed legs while standing mean interest! However, it is important to know baseline => look out for what is out of ordinary
 
 get rid of conversation filters, but not putting your hands in pockets, pause think, and then answer, be comforatble with silent
-=> slow dowm!
+=> slow down!
 
 lean forward during your communication, but AVOID extreme body languages -  make large hand movements or shake heads violently
 

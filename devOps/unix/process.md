@@ -102,3 +102,27 @@ SIGHUP ("signal hang up") is a signal sent to a process when its controlling ter
 If the process receiving SIGHUP is a Unix shell, then as part of job control it will often intercept the signal and ensure that all stopped processes are continued before sending the signal to child processes (more precisely, process groups, represented internally by the shell as a "job"), which by default terminates them
 
 Firstly, the Single UNIX Specification describes a shell utility called nohup, which can be used as a wrapper to start a program and make it ignore SIGHUP by default. Secondly, child process groups can be "disowned" by invoking disown with the job id, which removes the process group from the shell's job table (so they will not be sent SIGHUP), or (optionally) keeps them in the job table but prevents them from receiving SIGHUP on shell termination.
+
+# Job control
+
+when a signal is directed to a process group, the signal is delivered to each process that is a member of the group.
+
+, a session denotes a collection of one or more process groups. A process group is not permitted to migrate from one session to another, and a process may not create a process group that belongs to another session; furthermore, a process is not permitted to join a process group that is a member of another session—that is, a process is not permitted to migrate from one session to another.
+
+When a process replaces its image with a new image (by calling one of the exec functions), the new image is subjected to the same process group (and thus session) membership as the old image.
+
+A single process, the session leader, interacts with the controlling terminal in order to ensure that all programs are terminated when a user "hangs up" the terminal connection. (Where a session leader is absent, the processes in the terminal's foreground process group are expected to handle hangups.)
+
+a "job" is a shell's representation for a process group.
+
+Most tasks (directory listing, editing files, etc.) can easily be accomplished by letting the program take control of the terminal and returning control to the shell when the program exits – formally, by attaching to standard input and standard output to the shell, which reads or writes from the terminal, and catching signals sent from the keyboard, like the termination signal resulting from pressing Control+C.
+
+a single shell command may consist of a pipeline of multiple communicating processes.
+
+The jobs command will list the background jobs existing in the job table, along with their job number and job state (stopped or running)
+
+When a session ends when the user logs out (exits the shell, which terminates the session leader process), the shell process sends SIGHUP to all jobs, and waits for the process groups to end before terminating itself.
+
+In Bash, a program can be started as a background job by appending an ampersand (&) to the command line; its output is directed to the terminal (potentially interleaved with other programs' output), but it cannot read from the terminal input.
+
+the kill builtin (not /bin/kill) can signal jobs by job ID as well as by process group ID – sending a signal to a job sends it to the whole process group, and jobs specified by a job ID should be killed by prefixing "%".

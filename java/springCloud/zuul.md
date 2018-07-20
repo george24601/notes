@@ -15,11 +15,6 @@ The RequestContext extends ConcurrentHashMap, so anything can be stored in the c
 
 Zuul secures your sensitive headers by blocking these headers downstream (microservice). Since the default settings for sensitive headers blocks the Authorization header, we have to open this setting and send these headers downstream. You can choose to set the sensitive header per route or globally.
 
-For the authorization, Spring Security provides us with authorities, extracted from the access token. The authorities are placed inside a Principal, which will be used throughout the existing security context of your application.
-
-Based on a token, your microservice needs to be able to create a principal object. This principal object needs to contain all the necessary info so the system can decide whether or not the request should be executed or not.
-
---------
 
 1. add-host-header=true
 
@@ -28,6 +23,16 @@ Based on a token, your microservice needs to be able to create a principal objec
 3. RequestContext.addZuulRequestHeader to add custom header 
 
 
---------
+Don't forget Zuul is using Hystric underneath - so you may well have a Hystrix timeout instead (1000ms by default). You can either disable the timeout feature of Hystrix or increase its value:
 
-We are using Spring Session to replicate the session across all of our services that sit behind a Zuul Edge Server. Zuul will authenticate the user which populates the users credentials and inserts the authenticated user into the session. This is then replicated across all the services and each service is responsible for their own security rules and settings. So really, all Zuul is doing is looking the user up in spring security and the services on the backend are enforcing the security rules as they apply to their needs. This way, you can change each service independently making the Gateway just a dumb proxy.
+```
+# Disable Hystrix timeout globally (for all services)
+hystrix.command.default.execution.timeout.enabled: false
+
+# Increase the Hystrix timeout to 60s (globally)
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+```
+
+Be careful however with the last two properties as they apply to the THREAD isolation strategy. Although the Netflix documentation says it is the default, I noticed SpringCloud version of Zuul defaults to SEMAPHORE.
+
+The ReadTimeout is targeted at the the underlying RestClient that makes the actual call to the service. So, when does it take effect? Don't forget Ribbon is there to perform routing, failover and load balancing - so a single client request may lead to multiple attempts to contact a service. Stated differently, if you have two instances of a service and one is not reachable, you end up with two RestClient calls within a single Hystrix command.

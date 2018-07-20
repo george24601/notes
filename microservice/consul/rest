@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #check nodes
 curl 0.0.0.0:8500/v1/catalog/nodes | jq
 
@@ -6,12 +8,24 @@ curl 0.0.0.0:8500/v1/catalog/services | jq
 
 curl 0.0.0.0:8500/v1/catalog/service/service-id | jq
 
-curl 0.0.0.0:8500/v1/catalog/service/cloudconfig | jq
-
 #1. run this on the node where the service runs
 #2. my-service-id is the "ServiceID" field returned in the get request, e.g., in the format of "service-environment-port"
 curl	    --request PUT \
 	        0.0.0.0:8500/v1/agent/service/deregister/my-service-id
+
+#deregister does not work here?
+curl	    --request PUT \
+	        0.0.0.0:8500/v1/agent/service/deregister/mockservice-development-10000
+
+
+curl 0.0.0.0:8500/v1/catalog/service/mockservice | jq
+
+#It is usually preferable to instead use the agent endpoints for deregistration as they are simpler and perform anti-entropy.
+#note that you have to run this from the instance the actual service runs on!
+curl -v	    --request PUT \
+	        0.0.0.0:8500/v1/agent/service/deregister/mockservice-development-10000
+
+curl 0.0.0.0:8500/v1/health/service/mockservice?passing=true | jq
 
 
 curl --request PUT \
