@@ -72,3 +72,47 @@ he MAC address is expected to uniquely identify each node on that segment and al
 Although intended to be a permanent and globally unique identification, it is possible to change the MAC address on most modern hardware. Changing MAC addresses is necessary in network virtualization. It can also be used in the process of exploiting security vulnerabilities. This is called MAC spoofing.
 
 #HTTP 2.0
+
+#Routing
+
+$ ip route list table all
+default via 192.168.1.1 dev wlp3s0  proto static  metric 600 
+169.254.0.0/16 dev docker0  scope link  metric 1000 linkdown 
+172.17.0.0/16 dev docker0  proto kernel  scope link  src 172.17.0.1 linkdown 
+192.168.1.0/24 dev wlp3s0  proto kernel  scope link  src 192.168.1.170  metric 600 
+broadcast 127.0.0.0 dev lo  table local  proto kernel  scope link  src 127.0.0.1 
+local 127.0.0.0/8 dev lo  table local  proto kernel  scope host  src 127.0.0.1
+
+
+So 192.168.1.0/24 dev wlp3s0 means “send packets in the 192.168.1.0/24 range to the wlp3s0 network device. That’s not so complicated!
+
+It turns out that forcing packets destined for 169.254.169.254 to go somewhere else is totally possible! Here’s the iptables rule that they suggest using:
+
+```
+iptables \
+  --append PREROUTING \
+  --protocol tcp \
+  --destination 169.254.169.254 \
+  --dport 80 \
+  --in-interface docker0 \
+  --jump DNAT \
+  --table nat \
+  --to-destination $YOUR_IP_ADDRESS:8181
+```
+
+it only applies to tcp packets to 169.254.169.254 port 80 that came from the docker0 interface (--protocol tcp, --dport 80, --destination 169.254.168.254, --in-interface docker0)
+
+it happens at the PREROUTING stage (before the packet gets assigned a network interface)
+it (--jump DNAT, --table nat, --to-destination $YOUR_IP_ADDRESS:8181)
+
+Source NAT is like destination NAT, except instead of rewriting destination IP address, it rewrites source IP addresses!
+
+The place I’ve used source NAT before is also for container stuff – if you have a bunch of containers with weird virtual container IP addresses sending packets to the outside world, you can’t just let them use those IP addresses!! The outside world (like google) has no idea about your container IPs and will not be able to reply to those packets. So you need to pretend that they come from your host.
+
+If this is you, you probably want an iptables rule something like this on your host:
+
+```
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+```
+
+

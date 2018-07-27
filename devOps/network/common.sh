@@ -26,3 +26,18 @@ ssh -L 80:intra.example.com:80 gw.example.com
 
 #jump via jump host, make sure ssh-add .pem first!
 ssh -tt -A ec2-user@$PUBLIC_JUMP ssh -tt ec2-user@$PRIVATE_JUMP
+
+#The key here is -L which says we’re doing local port forwarding. Then it says we’re forwarding our local port 9000 to imgur.com:80
+ssh -L 9000:imgur.com:80 user@example.com
+
+#An example here is when you need to connect to a database console, which only allows local connection for security reasons. Let’s say you’re running PostgreSQL on your server, which by default listens on the port 5432.
+ssh -L 9000:localhost:5432 user@example.com
+
+#First you need to specify the port on which th remote server will listen, which in this case is 9000, and next follows localhost for your local machine, and the local port, which in this case is 3000
+#SSH doesn’t by default allow remote hosts to forwarded ports. To enable this open /etc/ssh/sshd_config
+#You might have noticed that every time we create a tunnel you also SSH into the server and get a shell. This isn’t usually necessary, as you’re just trying to create a tunnel. To avoid this we can run SSH with the -nNT
+ssh -R 9000:localhost:3000 user@example.com
+
+
+
+

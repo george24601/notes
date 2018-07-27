@@ -1,21 +1,17 @@
-Scenario
----------
-If you are in a position of authority and need to issue an unpopular decision from your supervisor  
+# Scenario:  You are in a position of authority and need to issue an unpopular decision from your supervisor  
 
 Options 
----------
+
 1. just issue the decision, espeicially ones applying to everyone and/or the decision is from your supervisor 
 
-2. Ask people to give feedback directly to the issuser, most likely your supervisor which will  
+2. Ask people to give feedback directly to the issuser, most likely your supervisor.
 
 
-Building relationship
----------
+# Building relationship
+
 1. Authority care most what you can contribute in the future
 
-2. To affect opinions of people, not only the person himself, but also whoever that can directly affect the said person too
-
-3. Build common interest between the people around the authority
+2. To affect opinions of people, not only the person himself, but also whoever that can directly affect the said person too. Build common interest between the people around the authority
 
 4. Easier to build new relationship than saving old relationship
 
@@ -24,12 +20,10 @@ Building relationship
 6. Sacrifice short term interest, and move to a different position to avoid contraversy and power struggle
 
 
-Scenario
----------
-Sudden bad news/crisis
+# Scenario: Sudden bad news/crisis
 
-Options
--------
+Options: 
+
 1. From competitors, find their weakness to exchange, or escalate that into a common/general problem to shift focus
 
 2. From public/users, transparent on all known
