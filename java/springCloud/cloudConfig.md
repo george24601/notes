@@ -2,11 +2,7 @@
 
 /{application}/{profile}[/{label}]
 
-Possible to use webhook, follow up => spring cloud message bus
-
 This repository implementation maps the {label} parameter of the HTTP resource to a git label (commit id, branch name or tag). If the git branch or tag name contains a slash ("/") then the label in the HTTP URL should be specified with the special string "(_)" instead (to avoid ambiguity with other URL paths). For example, if the label is foo/bar, replacing the slash would result in a label that looks like foo(_)bar.
-
-TODO: Placeholders in Git URI
 
 If you don’t use HTTPS and user credentials, SSH should also work out of the box when you store keys in the default directories (~/.ssh) and the uri points to an SSH location, e.g. "git@github.com:configuration/cloud-configuration"
 
@@ -31,8 +27,6 @@ every time it tries to fullfil a GET request for a GIT repository, it calls refr
 Nowadays the average response time is more than 1 second. And considering that health check of each Config Client do a GET to print the list of resources, it is an eternity. I disabled this health check in my clients and the response time of /health now is less than 20ms.
 
  If we could add caching to config server then the constant Git pull could be reduced. 
-
-monitor eliminates the pull totally but at the cost of an added dependency on a queue
 
 The Config Client supplies a Spring Boot Health Indicator that attempts to load configuration from Config Server. The response is also cached for performance reasons. The default cache time to live is 5 minutes.
 
@@ -59,11 +53,6 @@ don't use @Scheduled on beans that are @RefreshScope.
 
 I thought that calling RefreshEndpoint.refresh (on the client) would force the client to reload the properties from the server but I have the impression it does not work (I can provide a very simple example if it helps
 
-You could use @Scheduled from spring-framework to implement polling.
-
-your load could lead to 75 concurrent requests to the config server for the updated properties, and you won't have 75 threads able to process them on the server, so they will have to wait for each other.
-
-
 
 -------
 ust include Spring Security on the classpath (e.g. through spring-boot-starter-security). The default is a username of "user" and a randomly generated password, which isn’t going to be very useful in practice, so we recommend you configure the password (via security.user.password) and encrypt it (see below for instructions on how to do that).
@@ -89,5 +78,3 @@ JGitEnvironmentRepository.refresh
  The asymmetric choice is superior in terms of security, but it is often more convenient to use a symmetric key since it is just a single property value to configure in the bootstrap.properties
 
 To configure a symmetric key you just need to set encrypt.key to a secret String (or use an enviroment variable ENCRYPT_KEY to keep it out of plain text configuration files).
-
-

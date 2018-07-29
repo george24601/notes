@@ -1,18 +1,3 @@
-@Edible(true)
-Item item = new Carrot();
-
-public @interface Edible {
-	boolean value() default false;
-}
-
-@Author(first = "Oompah", last = "Loompah")
-Book book = new Book();
-
-public @interface Author {
-	String first();
-	String last();
-}
-
 //Annotations themselves may be annotated to indicate where and when they can be used:
 @Retention(RetentionPolicy.RUNTIME) // Make this annotation accessible at runtime via reflection.
 @Target({ElementType.METHOD})       // This annotation can only be applied to class methods.

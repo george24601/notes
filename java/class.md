@@ -1,6 +1,7 @@
 when class laoded by JVM, it will create an instanceKlass, and leave it the method region
 
-when new(), JVM will create instanceOopDec, which contains mark work, pointer to metadata, and istance data,
+when new(), JVM will create instanceOopDec, which contains mark work, pointer to metadata, and instance data,
+
 # Inside class file
 
 * Magic Number: 0xCAFEBABE
@@ -14,6 +15,7 @@ when new(), JVM will create instanceOopDec, which contains mark work, pointer to
 * This Class: The name of the current class
 
 * Super Class: The name of the super class
+
 * Interfaces: Any interfaces in the class
 
 * Fields: Any fields in the class
