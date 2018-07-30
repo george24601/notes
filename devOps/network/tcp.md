@@ -11,6 +11,9 @@ The listen() function basically sets a flag in the internal socket structure mar
 
 The accept() function asks a listening socket to accept the next incoming connection and return a socket descriptor for that connection. So, in a sense,  accept() does create a socket, just not the one you use to listen() for incoming connections on.
 
+TCP tahoe: double frames sent until we reach ssthresh, and after that we just send 1 more than before, to avoid the stampede effect. Once congestion is reached, we will halve the ssthresh.
+
+fast retry: receiving receing later frame, it will instead ack the last one it is expecting, so that sender can immediately resend isntead of waiting after it receives this same frame resp 3 times 
 
 #listening vs accepted
 

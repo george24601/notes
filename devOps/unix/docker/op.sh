@@ -13,6 +13,7 @@ aws ecr delete-repository --repository-name $REPO_NAME --force
 
 #clean up diskspace - mostly because of overlay
 docker system prune -a -f
+docker rmi $(docker images -a -q)
 
 #The ARG instruction lets Dockerfile authors define values that users can set at build-time using the --build-arg flag:
 #This flag allows you to pass the build-time variables that are accessed like regular environment variables in the RUN instruction of the Dockerfile. Also, these values don’t persist in the intermediate or final images like ENV values do.
@@ -35,3 +36,4 @@ docker top
 
 #inspect can show the actual value of your env vars. Be aware of the risk of leaking secrets
 docker inspect nostalgic_morse
+

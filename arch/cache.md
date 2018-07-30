@@ -73,12 +73,26 @@ Some caches enable you to specify the expiration period as an absolute value, or
 
 # Defend against stampede
 
-1. Real db should have enought capacity in case of cache failure
+0. happens when cache server restarts or many cache entries expire at the same time, so all traffics hit DB
 
-2. HA cache, shareding, but additional cache on the caller side is very debatable
+1. Real db should have enough capacity in case of cache failure
+
+2. HA cache, sharding, but additional cache on the caller side is very debatable
+
+3. stagger the cache time out,e.g., add a randomized slacks 
 
 # competing renew problem
 
-1. in case we need only one renewl (e.g., leased tokens), just use cron job in the backend instead of front end
+1. in case we need only one renewl (e.g., leased tokens, or 1 thread per node), just use cron job in the backend instead of front end
 
 2. add a timestamp to token, so don't renew too frequently
+
+3. service layer will extend the renew period, and itself will renew, while others still think it is safe to use the cache
+
+# cache penetration
+
+1. look for a non-exist key for a long time -> a lot of traffic goes to DB too
+
+2. need to cache empty results
+
+3. For a key that does not exist for sure, use bloomfilter to filter

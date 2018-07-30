@@ -31,3 +31,16 @@ Options:
 3. Product, slient/fallback/stay low.
 
 Note often these things appear together. Need to identify which is the main one
+
+# Scenario: authority issues a decision you deemed incorrect
+
+1. You may disagree, but have to commit. Otherwise, people may use the same reason to reject your decision
+
+2. However, you may do something at execution level,e.g., commit by doing small scale PoC and let facts speak.
+
+
+# Scenario: rejected by the authority in front of your subordinates
+
+1. Know that the authority often has a different context - thus, complaining only shows that you are narrow minded
+
+2. One way is to not talk about that, and let time dilute the effect
