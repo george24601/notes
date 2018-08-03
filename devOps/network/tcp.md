@@ -1,8 +1,11 @@
 # Handshakes in TCP
 
 why need the third handshake on start?
+server side need to ensure that client side received the ACK, i.e., client has been in ESTABLISHED already
 
 why 4 handshakes near the end? Why need time wait
+
+fin -> ack   -> fin -> ack -> (Timed wait). the ack and fin are not merged because server needs to send over all remaining data first, and then can fin and then ACK. Time wait is two 2 max segment lifetime (MSL). However, ack and fin may be merged too
 
 #TCP congestion control
 
