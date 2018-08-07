@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#takes at 5 mins to start!
-minikube start
+
+###################
 
 #Watch out for the correct kubectl context!
 kubectl run hello-minikube --image=k8s.gcr.io/echoserver:1.10 --port=8080

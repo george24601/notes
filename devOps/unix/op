@@ -27,3 +27,6 @@ pmap -x [pid]
 #starts the program abcd in the background in such a way that the subsequent logout does not stop it.
 #nohup is often used in combination with the nice command to run processes on a lower priority
 nohup abcd &
+
+#check context switch times, 10 times, once per second, see if cs >> in. Can use pidstat on top of it
+vmstat -1 -10

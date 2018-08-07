@@ -1,7 +1,5 @@
 injection is typically enabled by annotating with the @Value annotation (to inject into a single field) or the @ConfigurationProperties annotation (to inject into multiple properties on a Java bean class).
 
-
-
 The reload feature of Spring Cloud Kubernetes is able to trigger an application reload when a related ConfigMap or Secret change.
 
 only configuration beans annotated with @ConfigurationProperties or @RefreshScope are reloaded. This reload level leverages the refresh feature of Spring Cloud Context.
@@ -47,4 +45,15 @@ if you want to check the logs of a pod you can use the kubectl log
 
 Kubernetes services perform health checks on the default pod port and endpoint "/". If you don't have that endpoint mapped or if it's secured, you need to include livenessProbe and readinessProbe configuration
 
+# Spring cloud integration
+
+This discovery feature is also used by the Spring Cloud Kubernetes Ribbon or Zipkin projects to fetch respectively the list of the endpoints defined for an application to be load balanced or the Zipkin servers available to send the traces or spans.
+
+Some Spring Cloud components use the DiscoveryClient in order to obtain info about the local service instance. For this to work you need to align the service name with the spring.application.name property.
+
+The default behavior is to create a ConfigMapPropertySource based on a Kubernetes ConfigMap which has metadata.name of either the name of your Spring application (as defined by its spring.application.name property) or a custom name defined within the bootstrap.properties file under the following key spring.cloud.kubernetes.config.name.
+
+refresh (default): only configuration beans annotated with @ConfigurationProperties or @RefreshScope are reloaded. This reload level leverages the refresh feature of Spring Cloud Context.
+
+When the application runs as a pod inside Kubernetes a Spring profile named kubernetes will automatically get activated. This allows the developer to customize the configuration, to define beans that will be applied when the Spring Boot application is deployed within the Kubernetes platform (e.g. different dev and prod configuration).
 

@@ -19,3 +19,12 @@ Traefik for reverse proxy??
 Spinnaker by netflix? - integration & pipeline
 
 
+Master dev mode - double write, old and new version co-exist, feature flag and a/b test, java checkstyle 
+
+after story dev done, ask product and project manager to verify in UAT/stg environment 
+
+mvn flyway:validate
+
+mvn flyway:repair
+
+rollback if unable to fix CI failure in time

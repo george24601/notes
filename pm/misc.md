@@ -3,3 +3,6 @@ Companies do not act on the basis of the best evidence. They merge even though m
 Evidence shows work hours are negatively related to productivity, that giving people more autonomy leads to higher motivation, and that layoffs often harm performance, including profits. So in making employees sick, employers have created a lose-lose situation.
 
 We know that measurement affects behaviour. What gets measured gets managed. What gets measured improves; what isn’t measured is ignored and often gets worse. The single simplest and easiest thing to do is to measure the health effects of workplaces on people.
+
+
+#Arrow's impossibility theorem

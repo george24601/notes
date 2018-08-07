@@ -1,0 +1,15 @@
+#targets TCP port 9376 on any Pod with the "app=MyApp" label
+#By default the targetPort will be set to the same value as the port field.
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: MyApp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9376
+
+

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ######Let's encrypt/certbot, use --staging flag for dev
 sudo certbot certonly --manual  --preferred-challenges dns
 
@@ -6,15 +8,28 @@ $INPUT_YOUR_DOMAIN_HERE
 #ca.crt.pem => not required with internet access
 
 #vault.crt.pem => public cert, use the full chain here
-
-#vault.key.pem => private key
-
 sudo cp /etc/letsencrypt/live/$DOMAIN_NAME/fullchain.pem tls/vault.crt.pem
 
+#vault.key.pem => private key
 sudo cp /etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem tls/vault.key.pem
 
+cd tls
 
+#validate public cert and private key
 openssl x509 -in vault.crt.pem -text -noout
 
 openssl rsa -in vault.key.pem -check
+
+export TO_HOST=10.220.20.64
+export PEM_PATH=hero-root.pem
+export USER=ec2-user
+
+scp -i $PEM_PATH $PEM_PATH $USER@$TO_HOST:/home/$USER/$PEM_PATH
+
+scp -i $PEM_PATH tls/vault.crt.pem $USER@$TO_HOST:/home/$USER/tls/vault.crt.pem
+
+scp -i $PEM_PATH tls/vault.key.pem $USER@$TO_HOST:/home/$USER/tls/vault.key.pem
+
+sudo supervisorctl restart vault
+
 

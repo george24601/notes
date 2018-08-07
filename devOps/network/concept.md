@@ -20,6 +20,8 @@ NAT
 -----------
  remapping one IP address space into another by modifying network address information in Internet Protocol (IP) datagram packet headers while they are in transit across a traffic routing device
 
+For one-to-many NAT, a VIP address is advertised from the NAT device (often a router), and incoming data packets destined to that VIP address are routed to different actual IP addresses (with address translation).
+
 An implementation that only tracks ports can be quickly depleted by internal applications that use multiple simultaneous connections (such as an HTTP request for a web page with many embedded objects). This problem can be mitigated by tracking the destination IP address in addition to the port (thus sharing a single local port with many remote hosts), at the expense of implementation complexity and CPU/memory resources of the translation device.
 
 Because the internal addresses are all disguised behind one publicly accessible address, it is impossible for external hosts to initiate a connection to a particular internal host without special configuration on the firewall to forward connections to a particular port. Applications such as VOIP, videoconferencing, and other peer-to-peer applications must use NAT traversal techniques to function.
@@ -40,6 +42,8 @@ Ensure that instances in your subnet have a globally unique IP address (public I
 Ensure that your network access control and security group rules allow the relevant traffic to flow to and from your instance.
 
 Your instance is only aware of the private (internal) IP address space defined within the VPC and subnet.
+
+
 
 
 LB
