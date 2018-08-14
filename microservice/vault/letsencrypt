@@ -20,9 +20,9 @@ openssl x509 -in vault.crt.pem -text -noout
 
 openssl rsa -in vault.key.pem -check
 
-export TO_HOST=10.220.20.64
-export PEM_PATH=hero-root.pem
-export USER=ec2-user
+export TO_HOST=
+export PEM_PATH=
+export USER=
 
 scp -i $PEM_PATH $PEM_PATH $USER@$TO_HOST:/home/$USER/$PEM_PATH
 
@@ -30,6 +30,11 @@ scp -i $PEM_PATH tls/vault.crt.pem $USER@$TO_HOST:/home/$USER/tls/vault.crt.pem
 
 scp -i $PEM_PATH tls/vault.key.pem $USER@$TO_HOST:/home/$USER/tls/vault.key.pem
 
+export VAULT_ADDR=https://vault.service.inner-route.com
+
 sudo supervisorctl restart vault
+
+vault unseal
+
 
 

@@ -5,7 +5,7 @@ server side need to ensure that client side received the ACK, i.e., client has b
 
 why 4 handshakes near the end? Why need time wait
 
-fin -> ack   -> fin -> ack -> (Timed wait). the ack and fin are not merged because server needs to send over all remaining data first, and then can fin and then ACK. Time wait is two 2 max segment lifetime (MSL). However, ack and fin may be merged too
+fin -> ack   -> fin -> ack -> (Timed wait). the ack and fin are not merged because server needs to send over all remaining data first, and then can fin and then ACK. Time wait is two 2 max segment lifetime (MSL), so that client can repeat the ack on fin, and ignore remaining data on the network. However, ack and fin may be merged if the server knows no more data is sending to the client 
 
 #TCP congestion control
 
