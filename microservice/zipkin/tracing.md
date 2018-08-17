@@ -77,6 +77,14 @@ initialSpan.tag("UPPER_CASE",
 		ExtraFieldPropagation.get(initialSpan.context(), "UPPER_CASE"));
 ```
 
+Tags, on the contrary, are normally used for spans to tag them and are passed to Zipkin.
+
 Starting from Sleuth 2.0.0 you have to pass the baggage key names explicitly in your project configuration. Read more about that setup here
+
+you can tell also by hitting the /metrics endpoint and look at stats named collector
+
+As you may notice, some of the fields included in the trace data are not mapped correctly. You could make do with the existing mapping but if you want to analyze and visualize all available data properly, you will need to do some Elasticsearch mapping adjustments.
+
+Tags are attached to a specific span. In other words, they are presented only for that particular span. However, you can search by tag to find the trace, assuming a span having the searched tag value exists.
 
 

@@ -1,7 +1,0 @@
-{
-    "query": {
-        "filtered": {
-            "filter": { "term": { "name": "iphone1" }}
-        }
-    }
-}
