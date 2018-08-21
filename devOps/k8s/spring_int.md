@@ -23,7 +23,6 @@ Sets the paths where secrets are mounted. This property behaves as defined by Co
 spring.cloud.kubernetes.secrets.enableApi
 Enable/disable consuming secrets via APIs. Type is Boolean and default is false.
 
-Access to secrets via API may be restricted for security reasons — the preferred way is to mount a secret to the POD.
 
 spring.cloud.kubernetes.reload.enabled=true
 
@@ -40,12 +39,6 @@ public class MyBean {
     }
 }
 ```
-
-if you want to check the logs of a pod you can use the kubectl log
-
-Kubernetes services perform health checks on the default pod port and endpoint "/". If you don't have that endpoint mapped or if it's secured, you need to include livenessProbe and readinessProbe configuration
-
-# Spring cloud integration
 
 This discovery feature is also used by the Spring Cloud Kubernetes Ribbon or Zipkin projects to fetch respectively the list of the endpoints defined for an application to be load balanced or the Zipkin servers available to send the traces or spans.
 

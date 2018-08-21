@@ -84,3 +84,25 @@ Use cases:
 
 
 Eden, Survivor1, and survivor2
+
+#To locate OOM problem
+
+1. jmap -heap
+
+2. jmap -histo:live
+
+3. /proc/${PID}/fd, /proc/${PID}/task
+
+4. pstree、netstat - to check process creation and network connection #
+
+# where are the GC roots?
+
+GC root : referred by local variables in VM stackframe
+
+method area, referred by class static 
+
+method area, referred by constant
+
+local method stack, referred by JNI
+
+so gc root exists in method area, stack, and local method area - themselves will be not GCed!
