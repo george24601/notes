@@ -3,11 +3,7 @@ pod consists of one or more containers that are guaranteed to be co-located on t
 
 Each pod in Kubernetes is assigned a unique IP address within the cluster, which allows applications to use ports without the risk of conflict
 
-A pod can define a volume, such as a local disk directory or a network disk, and expose it to the containers in the pod.
-
 A Pod represents a running process on your cluster.
-
-A Pod encapsulates an application container (or, in some cases, multiple containers), storage resources, a unique network IP, and options that govern how the container(s) should run. A Pod represents a unit of deployment: a single instance of an application in Kubernetes, which might consist of either a single container or a small number of containers that are tightly coupled and that share resources.
 
 Containers inside a Pod can communicate with one another using localhost
 
@@ -17,15 +13,13 @@ while it is possible to use Pod directly, it’s far more common in Kubernetes t
 
 Subsequent changes to the template or even switching to a new template has no direct effect on the pods already created. Similarly, pods created by a replication controller may subsequently be updated directly.
 
+if you want to check the logs of a pod you can use the kubectl log
+
 # Controller
 
 A controller is a reconciliation loop that drives actual cluster state toward the desired cluster state
 
-One kind of controller is a replication controller, which handles replication and scaling by running a specified number of copies of a pod across the cluster. It also handles creating replacement pods if the underlying node fails.
-
-Other controllers that are part of the core Kubernetes system include a "DaemonSet Controller" for running exactly one pod on every machine (or some subset of machines), and a "Job Controller" for running pods that run to completion, e.g. as part of a batch job. The set of pods that a controller manages is determined by label selectors that are part of the controller’s definition
-
-The set of pods that constitute a service are defined by a label selector. Kubernetes provides service discovery and request routing by assigning a stable IP address and DNS name to the service, and load balances traffic in a round-robin manner to network connections of that IP address among the pods matching the selector (even as failures cause the pods to move from machine to machine). By default a service is exposed inside a cluster (e.g. back end pods might be grouped into a service, with requests from the front-end pods load-balanced among them), but a service can also be exposed outside a cluster (e.g. for clients to reach frontend pods).
+The set of pods that constitute a service are defined by a label selector. 
 
 Logically, each controller is a separate process, but to reduce complexity, they are all compiled into a single binary and run in a single process.
 
@@ -45,12 +39,28 @@ Deployment - An API object that manages a replicated application.
 You can run a stateful application by creating a Kubernetes Deployment and connecting it to an existing PersistentVolume using a PersistentVolumeClaim.
 
 # Service
-Service - An API object that describes how to access applications, such as a set of Pods, and can describe ports and load-balancers.  - By itself, a Deployment can’t receive traffic. Setting up a Service is one of the simplest ways to configure a Deployment to receive and loadbalance requests. Depending on the type of Service used, these requests can come from external client apps or be limited to apps within the same cluster. A Service is tied to a specific Deployment using label selection.
+
+Service - An API object that describes how to access applications, such as a set of Pods, and can describe ports and load-balancers.  - By itself, a Deployment can’t receive traffic.
+
+Kubernetes provides service discovery and request routing by assigning a stable IP address and DNS name to the service, and load balances traffic in a round-robin manner to network connections of that IP address among the pods matching the selector (even as failures cause the pods to move from machine to machine). By default a service is exposed inside a cluster (e.g. back end pods might be grouped into a service, with requests from the front-end pods load-balanced among them), but a service can also be exposed outside a cluster (e.g. for clients to reach frontend pods).
 
 Services generally abstract access to Kubernetes Pods, but they can also abstract other kinds of backends. For example:
 
 You want to have an external database cluster in production, but in test you use your own databases.
+
 You want to point your service to a service in another Namespace or on another cluster.
+
 You are migrating your workload to Kubernetes and some of your backends run outside of Kubernetes.
+
+For example, if you have a Service called "my-service" in Kubernetes Namespace "my-ns" a DNS record for "my-service.my-ns" is created. Pods which exist in the "my-ns" Namespace should be able to find it by simply doing a name lookup for "my-service". Pods which exist in other Namespaces must qualify the name as "my-service.my-ns". The result of these name lookups is the cluster IP.
+
+ClusterIP: Exposes the service on a cluster-internal IP. Choosing this value makes the service only reachable from within the cluster.
+
+Kubernetes services perform health checks on the default pod port and endpoint "/". If you don't have that endpoint mapped or if it's secured, you need to include livenessProbe and readinessProbe configuration
+
+#k8s DNS server
+
+The DNS server watches the Kubernetes API for new Services and creates a set of DNS records for each
+Kubernetes also supports DNS SRV (service) records for named ports. If the "my-service.my-ns" Service has a port named "http" with protocol TCP, you can do a DNS SRV query for "_http._tcp.my-service.my-ns" to discover the port number for "http"
 
 

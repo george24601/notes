@@ -20,5 +20,5 @@ ENVVAR
 
 mysql -uroot -Dzipkin < mysql.sql
 
-
-
+#mysql backend
+mysql -h $MYSQL_HOST -P 3306 -u root -p

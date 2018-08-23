@@ -87,8 +87,12 @@ As you may notice, some of the fields included in the trace data are not mapped 
 
 Tags are attached to a specific span. In other words, they are presented only for that particular span. However, you can search by tag to find the trace, assuming a span having the searched tag value exists.
 
-#zipkin-docker
+# zipkin-docker
 
 Those using ES_AWS_DOMAIN or Amazon endpoints in ES_HOSTS need to use a "zipkin-aws" distribution. If you are using Docker, you just switch your image from openzipkin/zipkin to openzipkin/zipkin-aws
 
 STORAGE_PORT_9200_TCP_ADDR -- An Elasticsearch node listening on port 9200. This environment variable is typically set by linking a container running zipkin-elasticsearch as "storage" when you start the container. This is ignored when ES_HOSTS or ES_AWS_DOMAIN are set.
+
+Spans are stored into daily indices, for example spans with a timestamp falling on 2016/03/19 will be stored in the index named 'zipkin:span-2016-03-19'. There is no support for TTL through this SpanStore. It is recommended instead to use Elastic Curator to remove indices older than the point you are interested in.
+
+
