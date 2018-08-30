@@ -1,5 +1,7 @@
 #!/bin/bash
 
+kops export kubecfg --name $CLUSTER_ADDR --state s3://$S3_BUCKET
+
 ####Pod######
 kubectl get pod
 
@@ -18,3 +20,6 @@ kubectl describe deployment nginx-deployment
 kubectl get services
 
 kubectl describe service mockservice
+
+#populate env var to the first column of the 2nd line
+export POD_NAME=$(kubectl get pods -l k8s-app=mockservice | sed -n 2p | awk '{ print $1 }')

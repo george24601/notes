@@ -1,5 +1,3 @@
-squares = [1, 4, 9, 16, 25] #note it is curly braces in cpp
-
 # replace some values
 letters[2:5] = ['C', 'D', 'E']
 
@@ -33,13 +31,6 @@ for w in words[:]:  # Loop over a slice copy of the entire list.
      if len(w) > 6:
         words.insert(0, w)
 
-range(0, 10, 3)
-
-a = ['Mary', 'had', 'a', 'little', 'lamb']
-for i in range(len(a)):
-    print(i, a[i])
-
-
 #A tuple consists of a number of values separated by commas
 t = 12345, 54321, 'hello!'
 
@@ -52,14 +43,43 @@ tel = {'jack': 4098, 'sape': 4139}
 
 'jack' not in tel
 
-
 del tel['sape']
 
-#formatting examples
-print('We are the {} who say "{}!"'.format('knights', 'Ni'))
+#swap values
+x, y = 1, 2
+x, y = y, x
 
-print('This {food} is {adjective}.'.format(food='spam', adjective='absolutely horrible'))
+#Combining a list of strings into a single one
+sentence_list = ["my", "name", "is", "George"]
+sentence_string = " ".join(sentence_list)
 
-import math
-print('The value of PI is approximately {0:.3f}.'.format(math.pi))
+#Merging dictionaries
+x = {'a': 1, 'b': 2}
+y = {'b': 3, 'c': 4}
+z = {**x, **y}
 
+#Returning multiple values from a function
+def get_a_string():
+    a = "George"
+    b = "is"
+    c = "cool"
+    return a, b, b
+sentence = get_a_string()
+(a, b, c) = sentence
+
+#Iterating over a dictionary
+m = {'a': 1, 'b': 2, 'c': 3, 'd': 4}
+for key, value in m.iteritems():
+    print('{0}: {1}'.format(key, value))
+
+#Iterating over list values while getting the index too
+m = ['a', 'b', 'c', 'd']
+for index, value in enumerate(m):
+    print('{0}: {1}'.format(index, value))
+
+
+#Initialising empty containers
+a_list = list()
+a_dict = dict()
+a_map = map()
+a_set = set()

@@ -13,8 +13,6 @@ while it is possible to use Pod directly, it’s far more common in Kubernetes t
 
 Subsequent changes to the template or even switching to a new template has no direct effect on the pods already created. Similarly, pods created by a replication controller may subsequently be updated directly.
 
-if you want to check the logs of a pod you can use the kubectl log
-
 # Controller
 
 A controller is a reconciliation loop that drives actual cluster state toward the desired cluster state
@@ -40,9 +38,9 @@ You can run a stateful application by creating a Kubernetes Deployment and conne
 
 # Service
 
-Service - An API object that describes how to access applications, such as a set of Pods, and can describe ports and load-balancers.  - By itself, a Deployment can’t receive traffic.
+By itself, a Deployment can’t receive traffic.
 
-Kubernetes provides service discovery and request routing by assigning a stable IP address and DNS name to the service, and load balances traffic in a round-robin manner to network connections of that IP address among the pods matching the selector (even as failures cause the pods to move from machine to machine). By default a service is exposed inside a cluster (e.g. back end pods might be grouped into a service, with requests from the front-end pods load-balanced among them), but a service can also be exposed outside a cluster (e.g. for clients to reach frontend pods).
+Kubernetes provides service discovery and request routing by assigning a stable IP address and DNS name to the service, and load balances traffic in a round-robin manner to network connections of that IP address among the pods matching the selector. By default a service is exposed inside a cluster, but a service can also be exposed outside a cluster.
 
 Services generally abstract access to Kubernetes Pods, but they can also abstract other kinds of backends. For example:
 
@@ -63,4 +61,11 @@ Kubernetes services perform health checks on the default pod port and endpoint "
 The DNS server watches the Kubernetes API for new Services and creates a set of DNS records for each
 Kubernetes also supports DNS SRV (service) records for named ports. If the "my-service.my-ns" Service has a port named "http" with protocol TCP, you can do a DNS SRV query for "_http._tcp.my-service.my-ns" to discover the port number for "http"
 
+When you create a Service, it creates a corresponding DNS entry. This entry is of the form <service-name>.<namespace-name>.svc.cluster.local, which means that if a container just uses <service-name>, it will resolve to the service which is local to a namespace.
+
+#Ingress
+
+An API object that manages external access to the services in a cluster, typically HTTP.
+
+Edge router: A router that enforces the firewall policy for your cluster. This could be a gateway managed by a cloud provider or a physical piece of hardware.
 
