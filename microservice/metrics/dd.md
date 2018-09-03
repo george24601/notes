@@ -44,3 +44,27 @@ Metric types:
 2. Rate: it’s the value variation of a metric on a defined time interval.Submit the sampled raw value of your counter. Don’t normalize the values to a rate, or calculate the deltas before submitting - the Agent does both for you. Should only be called once during a check.
 Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.
 Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter’s value between samples.
+
+```
+# Use "*" to expose all endpoints, or a comma-separated list to expose selected ones
+management.endpoints.web.exposure.include=health,info 
+management.endpoints.web.exposure.exclude=
+```
+
+expose all actuator endpoints by setting the property management.endpoints.web.exposure.include to * and check the output of http://localhost:8080/actuator page
+
+To get the details of an individual metric, you need to pass the metric name in the URL like this -
+
+http://localhost:8080/actuator/metrics/{MetricName}
+
+The loggers endpoint, which can be accessed at http://localhost:8080/actuator/loggers, displays a list of all the configured loggers in your application with their corresponding log levels.
+
+You can add properties under the key info in application.properties 
+```
+# INFO ENDPOINT CONFIGURATION
+info.app.name=@project.name@
+info.app.description=@project.description@
+info.app.version=@project.version@
+info.app.encoding=@project.build.sourceEncoding@
+info.app.java.version=@java.version@
+```

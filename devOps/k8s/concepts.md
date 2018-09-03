@@ -68,4 +68,3 @@ When you create a Service, it creates a corresponding DNS entry. This entry is o
 An API object that manages external access to the services in a cluster, typically HTTP.
 
 Edge router: A router that enforces the firewall policy for your cluster. This could be a gateway managed by a cloud provider or a physical piece of hardware.
-

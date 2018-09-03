@@ -35,3 +35,9 @@ dual parent loading - same class as java class name? different types of class lo
 gc - when, how, different gc strategy?
 
 memory - during object creation and destruction, what memory region is affected
+
+G1 vs CMS
+
+BIO vs NIO
+
+ConcurrentHashMap vs HashMap

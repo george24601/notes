@@ -83,3 +83,10 @@ a_list = list()
 a_dict = dict()
 a_map = map()
 a_set = set()
+
+#multiple assignment & with tuple
+a,b,c=3,4,5
+my_tuple=3,4,5
+x,y,z=my_tuple
+
+

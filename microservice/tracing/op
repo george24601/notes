@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export ES_HOST=
+
+#index in the format of zipkin:span-2018-08-23
+curl https://$ES_HOST/_cat/indices/
+
+export INDEX=zipkin:span-2018-08-30
+
+#list all docs, in the index. Defaults to 10
+curl http://$ES_HOST/$INDEX/_search?pretty=true&q=*:*
