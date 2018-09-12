@@ -9,32 +9,6 @@ A custom metric refers to a single, unique combination of a metric name, host, a
 
 Note that the ordering of tags does not matter
 
-
-The easiest way to get your custom application metrics into Datadog is to send them to DogStatsD, a metrics aggregation service bundled with the Datadog Agent.
-
-As it receives data, DogStatsD aggregates multiple data points for each unique metric into a single data point over a period of time called the flush interval. 
-
-
-1. edit your datadog.yaml file to uncomment the following lines
-
-```
-use_dogstatsd: yes
-dogstatsd_port: 8125
-
-```
-
-you could compare the performance of two algorithms by tagging a timer metric with the algorithm version
-
-```
-@statsd.timed('algorithm.run_time', tags=['algorithm:one'])
-def algorithm_one():
-    # Do fancy things here ...
-
-@statsd.timed('algorithm.run_time', tags=['algorithm:two'])
-def algorithm_two():
-    # Do fancy things (maybe faster?) here ...
-```
-
 The format for sending metrics is metric.name:value|type|@sample_rate|#tag1:value,tag2,
 
 Metric types: 
@@ -45,26 +19,31 @@ Metric types:
 Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.
 Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter’s value between samples.
 
-```
-# Use "*" to expose all endpoints, or a comma-separated list to expose selected ones
-management.endpoints.web.exposure.include=health,info 
-management.endpoints.web.exposure.exclude=
-```
+#spring cloud integration
 
-expose all actuator endpoints by setting the property management.endpoints.web.exposure.include to * and check the output of http://localhost:8080/actuator page
+Through, MeterRegistryCustomizer, you can customize the whole set of registries at once or individual implementations in particular. For example, a commonly requested setup is to (1) export metrics to both Prometheus and CloudWatch, (2) add a set of common tags to metrics flowing to both (for example, host and application identifying tags) and (3) whitelist only a small subset of metrics to CloudWatch.
 
-To get the details of an individual metric, you need to pass the metric name in the URL like this -
+#k8s
 
-http://localhost:8080/actuator/metrics/{MetricName}
+Now Kubernetes, which orchestrates your containers, also needs to be monitored in order to track your infrastructure at a high level. That makes 4 different components that now need to be monitored, each with their specificities and challenges:
 
-The loggers endpoint, which can be accessed at http://localhost:8080/actuator/loggers, displays a list of all the configured loggers in your application with their corresponding log levels.
+Your hosts, even if you don’t know which containers and applications they are actually running
+Your containers
+Your containerized applications
+Kubernetes itself
 
-You can add properties under the key info in application.properties 
-```
-# INFO ENDPOINT CONFIGURATION
-info.app.name=@project.name@
-info.app.description=@project.description@
-info.app.version=@project.version@
-info.app.encoding=@project.build.sourceEncoding@
-info.app.java.version=@java.version@
-```
+k8s-state-metrics is not focused on the health of the individual Kubernetes components, but rather on the health of the various objects inside, such as deployments, nodes and pods.
+
+The metrics are exported through the Prometheus golang client on the HTTP endpoint /metrics on the listening port (default 80). They are served either as plaintext or protobuf depending on the Accept header. They are designed to be consumed either by Prometheus itself or by a scraper that is compatible with scraping a Prometheus client endpoint. You can also open /metrics in a browser to see the raw metrics.
+
+We cannot talk about Kubernetes metrics without introducing Heapster: it is for now the go-to source for basic resource utilization metrics and events from your Kubernetes clusters. On each node, cAdvisor collects data about running containers that Heapster then queries through the kubelet of the node
+
+As mentioned above, Kubernetes relies on Heapster to report metrics instead of the cgroup file directly. And one of Heapster’s limitations is that it collects Kubernetes metrics at a different frequency (aka “housekeeping interval”) than cAdvisor, which makes the overall metric collection frequency for metrics reported by Heapster tricky to evaluate.
+
+That’s why you should really consider tracking metrics from your containers instead of from Kubernetes.
+
+monitoring the sum of requests (limits?) on the node and making sure it never exceeds your node’s capacity is much more important than monitoring simple CPU or memory usage.
+
+kube-state-metrics is a service that provides additional metrics that Heapster does not. Heapster exposes metrics about the resource utilization of components such as CPU, memory, or network. kube-state-metrics, on the other hand, listens to the Kubernetes API and generates metrics about the state of Kubernetes logical objects: node status, node capacity (CPU and memory), number of desired/available/unavailable/updated replicas per deployment, pod status (e.g. waiting, running, ready), and so on.
+
+Note that the way it works under the hood is different from Heapster, which is only an intermediary that reformats and exposes metrics already generated by Kubernetes, whereas kube-state-metrics generates the metrics itself.

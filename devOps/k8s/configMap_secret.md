@@ -1,8 +1,6 @@
-Property values in Secret objects are always base64 encoded (use the base64 command-line utility). When the Secret is mounted in a pod’s filesystem, the values are automatically decoded back into plain text.
-
 A secret can be used with a pod in two ways: as files in a volume mounted on one or more of its containers, or used by kubelet when pulling images for the pod.
 
-Using Secrets as Environment Variables
+Using Secrets as Environment Variables?
 
 In order to make piece of data ‘hidden’ (i.e., in a file whose name begins with a dot character), simply make that key begin with a dot. For example, when the following secret is mounted into a volume:
 

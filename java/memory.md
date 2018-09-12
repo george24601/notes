@@ -29,6 +29,21 @@ The postion of the compaction area changes at each GC, using one or two sliding 
 
 # Memory model
 
+Each thread running in the Java virtual machine has its own thread stack.
+The thread stack also contains all local variables for each method being executed (all methods on the call stack)
+
+All local variables of primitive types ( boolean, byte, short, char, int, long, float, double) are fully stored on the thread stack and are thus not visible to other threads.
+
+The heap contains all objects created in your Java application, regardless of what thread created the object.
+
+An object may contain methods and these methods may contain local variables. These local variables are also stored on the thread stack, even if the object the method belongs to is stored on the heap.
+
+An object's member variables are stored on the heap along with the object itself. That is true both when the member variable is of a primitive type, and if it is a reference to an object.
+
+Static class variables are also stored on the heap along with the class definition.
+
+
+
 methods, thread stacks, and native handles are allocated in memory separate from the heap
 
 Heap - Method Area (including runtime constant pool) - VM Stack(includeing stack frames) - native method stack - program coutner register

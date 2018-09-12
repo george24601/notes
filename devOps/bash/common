@@ -68,4 +68,5 @@ cat /proc/sys/fs/file-nr
 #check shared memory
 ipcs
 
-
+# -n to not append the extra newline, use --decode after base64 to decode
+echo -n ${DD_KEY} | base64 

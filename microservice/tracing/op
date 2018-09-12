@@ -1,11 +1,58 @@
 #!/bin/bash
 
-export ES_HOST=
+export ES_HOST=https://vpc-dev-baymax-jp-6keka7a2f4iponj4jbjdavosxe.ap-northeast-1.es.amazonaws.com
 
 #index in the format of zipkin:span-2018-08-23
-curl https://$ES_HOST/_cat/indices/
+curl $ES_HOST/_cat/indices/
 
-export INDEX=zipkin:span-2018-08-30
+export INDEX=zipkin:span-2018-09-08
 
 #list all docs, in the index. Defaults to 10
-curl http://$ES_HOST/$INDEX/_search?pretty=true&q=*:*
+curl $ES_HOST/$INDEX/_search?pretty=true&q=*:*
+
+#NOTE: need to create index myself?
+curl -X PUT $ES_HOST/zipkin:span-2018-09-08
+
+curl -X DELETE $ES_HOST/zipkin:span-2018-08-*
+
+curl -X DELETE $ES_HOST/dev-application-exceptions-logs-2018.08.*
+
+
+#read k8s log
+
+export POD_NAME=$(kubectl get pods -l k8s-app=zipkin | sed -n 2p | awk '{ print $1 }')
+
+echo $POD_NAME
+
+kubectl logs $POD_NAME -c zipkin > log_zipkin
+
+#rest api
+
+curl http://zipkin-service:9411/api/v2/services | jq
+
+curl http://zipkin-service:9411/api/v2/traces?serviceName=wallet
+
+curl -X PUT \
+https://vpc-dev-baymax-jp-6keka7a2f4iponj4jbjdavosxe.ap-northeast-1.es.amazonaws.com/*/_settings \
+  -d '{
+  "index": {
+      "blocks": {
+          "write": "false"
+    }
+  }
+}
+'
+
+curl https://vpc-dev-baymax-jp-6keka7a2f4iponj4jbjdavosxe.ap-northeast-1.es.amazonaws.com/*/_settings
+
+curl -X PUT \
+;https://vpc-dev-baymax-jp-6keka7a2f4iponj4jbjdavosxe.ap-northeast-1.es.amazonaws.com/*/_settings \
+/*/_settings' \
+  -d '{
+  "index": {
+      "blocks": {
+          "write": "false"
+    }
+  }
+}
+'
