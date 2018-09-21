@@ -9,6 +9,8 @@ COMMENT
 echo 'this is a test' | awk '{print $NF}'  // prints "test"
 awk '{print $1, $(NF-2) }' logs.txt
 
+ls *.yaml | awk '{print "tail -n1 wallet-main.yaml >> "$1}'
+
 
 #$8 eighth field of the input line
 BEGIN { print "File\tOwner"}

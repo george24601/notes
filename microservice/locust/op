@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+python3 -m pip install locustio
+
+#To run Locust with the above Locust file, if it was named locustfile.py and located in the current working directory, we could run:
+locust --host=http://example.com
+
+#To run Locust distributed across multiple processes we would start a master process by specifying --master:
+locust -f locust_files/my_locust_file.py --master --host=http://example.com
+
+#and then we would start an arbitrary number of slave processes:
+locust -f locust_files/my_locust_file.py --slave --host=http://example.com
+
+#-c specifies the number of Locust users to spawn, and -r specifies the hatch rate (number of users to spawn per second)
+#--run-time 1h30m
+locust -f locust_files/my_locust_file.py --no-web -c 1000 -r 100
+
+#The files will be named example_distribution.csv and example_requests.csv
+locust -f examples/basic.py --csv=example --no-web -t10m
