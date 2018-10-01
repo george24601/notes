@@ -1,35 +1,16 @@
-Tags are converted to lowercase.
+If you change Simple Alert to Multi Alert, you can set up a monitor on each separate timeseries in a group. For example, you could monitor the system.cpu.user metric for each host individually, rather than monitoring the average of that metric across all the hosts:
 
-For optimal functionality, we recommend constructing tags that use the key:value syntax.
+Monitoring a sparse metric?
 
-device, host, and source are reserved tag keys and cannot be specified in the standard way
-You can also enter tags: followed by a tag to see all the events that come from a host or integration with that tag. The example in the image is the tag role:cassandra. So the search text is tags:role:cassandra
-
-A custom metric refers to a single, unique combination of a metric name, host, and any tags.
+Heat maps are purpose-built to clearly render overlapping timeseries—one of their principal features is the use of shading to represent the number of entities reporting a metric in a specific range.
 
 Note that the ordering of tags does not matter
 
 The format for sending metrics is metric.name:value|type|@sample_rate|#tag1:value,tag2,
 
-Metric types: 
-
-1. Gauges:  value of a particular thing over time. If called multiple times during a check’s execution for a metric only the last sample is used.
-
-2. Rate: it’s the value variation of a metric on a defined time interval.Submit the sampled raw value of your counter. Don’t normalize the values to a rate, or calculate the deltas before submitting - the Agent does both for you. Should only be called once during a check.
+Rate metric: it’s the value variation of a metric on a defined time interval.Submit the sampled raw value of your counter. Don’t normalize the values to a rate, or calculate the deltas before submitting - the Agent does both for you. Should only be called once during a check.
 Throws away any value that is less than a previously submitted value. IE the counter should be monotonically increasing.
 Stored as a GAUGE type in the Datadog web application. Each value in the stored timeseries is a time-normalized delta of the counter’s value between samples.
-
-#work metrics
-
-When considering your work metrics, it’s often helpful to break them down into four subtypes:
-
-throughput is the amount of work the system is doing per unit time. Throughput is usually recorded as an absolute number. e.g.,requests per second
-
-success metrics represent the percentage of work that was executed successfully. e.g., percentage of responses that are 2xx since last measurement
-
-error metrics capture the number of erroneous results, usually expressed as a rate of errors per unit time or normalized by the throughput to yield errors per unit of work. Error metrics are often captured separately from success metrics when there are several potential sources of error, some of which are more serious or actionable than others.e.g., percentage of responses that are 5xx since last measurement
-
-performance metrics quantify how efficiently a component is doing its work. The most common performance metric is latency, which represents the time required to complete a unit of work. Latency can be expressed as an average or as a percentile, such as “99% of requests returned within 0.1s”. e.g., 90th percentile response time in seconds
 
 # Resource metrics
 
@@ -46,3 +27,11 @@ some monitoring systems can also capture events: discrete, infrequent occurrence
 Changes: Internal code releases, builds, and build failures
 Alerts: Internally generated alerts or third-party notifications
 Scaling events: Adding or subtracting hosts
+
+#monitors
+
+Keep in mind that anomalies uses the past to predict what is expected in the future, so using anomalies on a new metric, for which you have just started collecting data, may yield poor results.
+
+All of the seasonal algorithms (i.e., excluding basic) may use up to a couple of months of historical data when calculating a metric’s expected normal range of behavior. By using a significant amount of past data, the algorithms are able to avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
+
+

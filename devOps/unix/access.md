@@ -3,6 +3,7 @@ DAC: process has the same access as the user who excutes it
 /etc/passwd and /etc/group for user and group info. etc/shadow
 
 #File types
+Directory, Link, Socket, Char device, Pipe, - other, e.g., normal file 
 
 1. normal file : txt and binary, can be created by touch
 

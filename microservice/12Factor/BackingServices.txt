@@ -1,6 +1,0 @@
-Make no distinction between local and third party services => they are
-accessed via some sort of handles, e.g, URL/locator. The means app should be
-able to swap local with remote services without any change
-
-e.g. if a database is faulty, admin can start a new db and attach it to the
-app without changing code 

@@ -84,3 +84,21 @@ my_tuple=3,4,5
 x,y,z=my_tuple
 
 
+"""
+The *args and **kwargs is a common idiom to allow arbitrary number of arguments to functions as described in the section more on defining functions in the Python documentation.
+
+The *args will give you all function parameters as a tuple:
+
+The **kwargs will give you all keyword arguments except for those corresponding to a formal parameter as a dictionary.
+
+Another usage of the *l idiom is to unpack argument lists when calling a function.
+
+mylist = [1,2,3]
+foo(*mylist)
+
+mydict = {'x':1,'y':2,'z':3}
+foo(**mydict)
+
+"""
+
+

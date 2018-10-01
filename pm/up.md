@@ -44,3 +44,13 @@ Note often these things appear together. Need to identify which is the main one
 1. Know that the authority often has a different context - thus, complaining only shows that you are narrow minded
 
 2. One way is to not talk about that, and let time dilute the effect
+
+# Scenario: sudden incidents need to address
+
+1. Need to keep the main objectives in mind all the time - can put such accidents on low priority
+
+2. when handling such incidents, try reporting to your superior unless explicitly told so, unless it is REALLY special time. This also makes authority FEELS safe.
+
+3. If incidents from external, focus on that as it brings more impact. If it is internal, emphasize on it will give a (false) impression of internal disorganization
+
+

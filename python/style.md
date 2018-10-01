@@ -1,12 +1,6 @@
-Use 4-space indentation, and no tabs.
-
 Use docstrings.
 
 Name your classes and functions consistently; the convention is to use CamelCase for classes and lower_case_with_underscores for functions and methods. Always use self as the name for the first method argument
-
-Run pylint over your code.
-
-dict = 'something awful'  # Bad Idea... pylint: disable=redefined-builtin
 
 Use import x for importing packages and modules.
 
@@ -26,8 +20,8 @@ Often you have a function that uses lots of default values, but—rarely—you w
 
 Use the "implicit" false if at all possible. Python evaluates certain values as false when in a boolean context. A quick "rule of thumb" is that all "empty" values are considered false so 0, None, [], {}, '' all evaluate as false in a boolean context.
 
-Do not terminate your lines with semi-colons and do not use semi-colons to put two commands on the same line.
-
 Start the MAIN file of a program with #!/usr/bin/env python with an optional single digit 2 or 3 suffix.
 
-In Python, pydoc as well as unit tests require modules to be importable. Your code should always check if __name__ == '__main__' before executing your main program so that the main program is not executed when the module is imported.
+The main functionality should be in a main() function.
+
+In Python, pydoc as well as unit tests require modules to be importable. Your code should always check if __name__ == '__main__' before executing your main() so that the main program is not executed when the module is imported.
