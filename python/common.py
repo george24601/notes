@@ -1,4 +1,5 @@
 # replace some values
+# However, out of range slice indexes are handled gracefully when used for slicing
 letters[2:5] = ['C', 'D', 'E']
 
 letters[2:5] = []
@@ -24,7 +25,7 @@ words = ['cat', 'window', 'defenestrate']
 for w in words:
     print(w, len(w))
 
-
+#Tuples are immutable, and usually contain a heterogeneous sequence of elements that are accessed via unpacking (see later in this section) or indexing (or even by attribute in the case of namedtuples). Lists are mutable, and their elements are usually homogeneous and are accessed by iterating over the list.
 #A tuple consists of a number of values separated by commas
 t = 12345, 54321, 'hello!'
 
@@ -33,6 +34,7 @@ u = t, (1, 2, 3, 4, 5) #((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))
 
 tel = {'jack': 4098, 'sape': 4139}
 
+#The comparison operators in and not in check whether a value occurs (does not occur) in a sequence. The operators is and is not compare whether two objects are really the same object; this only matters for mutable objects like lists. All comparison operators have the same priority, which is lower than that of all numerical operators.
 'guido' in tel
 
 'jack' not in tel
@@ -63,7 +65,7 @@ sentence = get_a_string()
 
 #Iterating over a dictionary
 m = {'a': 1, 'b': 2, 'c': 3, 'd': 4}
-for key, value in m.iteritems():
+for key, value in m.items():
     print('{0}: {1}'.format(key, value))
 
 #Iterating over list values while getting the index too
@@ -76,6 +78,7 @@ for index, value in enumerate(m):
 a_list = list()
 a_dict = dict()
 a_map = map()
+#Curly braces or the set() function can be used to create sets. Note: to create an empty set you have to use set(), not {}; the latter creates an empty dictionary, a data structure that we discuss in the next section.
 a_set = set()
 
 #multiple assignment & with tuple
@@ -100,5 +103,14 @@ mydict = {'x':1,'y':2,'z':3}
 foo(**mydict)
 
 """
+
+
+# You can also add new items at the end of the list, by using the append() method
+
+#To loop over two or more sequences at the same time, the entries can be paired with the zip() function.
+
+#To loop over a sequence in reverse, first specify the sequence in a forward direction and then call the reversed() function.
+
+#To loop over a sequence in sorted order, use the sorted() function which returns a new sorted list while leaving the source unaltered.
 
 

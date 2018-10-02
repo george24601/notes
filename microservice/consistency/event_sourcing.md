@@ -68,8 +68,6 @@ Workflow 5
 6. Need a CMS control panel
 
 
-
-
 need reliable MQ broker at sender and receiver end
 
 to recover msg to be acked over long time, need to talk to upstream service to either update the state of the message to sent, or delete the message
