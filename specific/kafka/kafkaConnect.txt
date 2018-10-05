@@ -58,5 +58,11 @@ but dynamic shcemas are NORMAL espeically for DB connector
 SchemaProjetors to handle compatible schemas
 
 
+Need to set the following for distributed workers: 
+1.group.id
+2.config.storage.topic: Kafka topic to store connector and task config state. This topic should always have a single partition and be highly replicated (3x or more)!
+3.offset.storage.topic: the Kafka topic to store connector offset state in. Should have large # of partitons (25 or 50)!
 
- 
+Note this one specifies offset location, which should specific to each deployment
+
+note if you run more than one worker per host, need to set rest.port differently for each of them

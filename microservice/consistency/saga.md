@@ -1,6 +1,4 @@
-A saga is a sequence of local transactions. Each local transaction updates the database and publishes a message or event to trigger the next local transaction in the saga. If a local transaction fails because it violates a business rule then the saga executes a series of compensating transactions that undo the changes that were made by the preceding local transactions.
-
-You should define the steps in a compensating transaction as idempotent commands.
+You should define the steps in a compensating transaction as idempotent commands.  
 
 Placing a short-term timeout-based lock on each resource that's required to complete an operation, and obtaining these resources in advance, can help increase the likelihood that the overall activity will succeed. The work should be performed only after all the resources have been acquired. All actions must be finalized before the locks expire.
 
@@ -55,7 +53,19 @@ Saga doens't guarantee isolation:
 3. non-repetable read: read submitted data from another txn in between
 
 
-Request: Idempotent, Can abort, Compensating request: Idempotent, Communtative, can not abort
+Request: 
+
+1. Idempotent
+
+2. Can abort/fail 
+
+Compensating request
+
+1. Idempotent
+
+2. Communtative with Request - book and then cancel is same as cancel then book. This is the defend against the case where a later arrival of a request that has been cancelled
+
+3. can not abort (eventually)
 
 use a semantic lock to mark possible dirty read - but need timeout as deadlock prevention
 
@@ -66,3 +76,13 @@ pessimistic view to avoid compenstation - no dirty read
 re-read value before update
 
 Q: why the compenstating request has to be commutative?
+
+To address the complexity issue of the Saga pattern, it is quite normal to add a process manager as an orchestrator/execution coordinator. The process manager is responsible for listening to events and triggering endpoints.
+
+#2PC
+
+In the prepare phase, all microservices will be asked to prepare for some data change that could be done atomically. Once all microservices are prepared, the commit phase will ask all the microservices to make the actual changes.
+
+Once CustomerMicroservice is OK to perform the change, it will lock down the object from further changes and tell the Coordinator that it is prepared. The same thing happens while creating the order in the OrderMicroservice. Once the Coordinator has confirmed all microservices are ready to apply their changes, it will then ask them to apply their changes by requesting a commit with the transaction. At this point, all objects will be unlocked.
+
+2pc is synchronous (blocking). The protocol will need to lock the object that will be changed before the transaction completes.

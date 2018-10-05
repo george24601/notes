@@ -50,3 +50,5 @@ the more quantitative social indicator used for social decision-making is subjec
 it is naive to try to predict the effects of a change in economic policy entirely on the basis of relationships observed in historical data, especially highly aggregated historical data
 
 One of the first steps in solving a problem — data science or otherwise — is determining the right measure to gauge success. When we want to objectively find the best solution, we should recall the concept of Goodhart’s Law and realize that rather than using a single number, the best assessment is usually a set of measurements. By choosing multiple metrics, we can design a solution without the unintended consequences that occur when optimizing for a narrow objective.
+
+We know that measurement affects behaviour. What gets measured gets managed. What gets measured improves; what isn’t measured is ignored and often gets worse. The single simplest and easiest thing to do is to measure the health effects of workplaces on people.

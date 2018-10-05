@@ -34,4 +34,18 @@ Keep in mind that anomalies uses the past to predict what is expected in the fut
 
 All of the seasonal algorithms (i.e., excluding basic) may use up to a couple of months of historical data when calculating a metric’s expected normal range of behavior. By using a significant amount of past data, the algorithms are able to avoid giving too much weight to abnormal behavior that might have occurred in the recent past.
 
+#Anti-patterns
 
+One of the most common goals in monitoring is understanding the behavior of groups. Whether it’s a group of servers, containers, or devices, you want to monitor several entities doing the same job. Ideally, you want to see overall group performance in aggregate, while also keeping an eye on individual performance.
+
+At first glance, a stacked area graph like the one above seems perfect for this use case
+
+Use an aggregate timeseries graph for the big picture…
+A single series showing the sum of group behavior is a much cleaner and more responsive way of tracking aggregate behavior than a sumptuous-looking but ultimately messy phyllo graph.
+
+Plus a focused look at individual behavior
+To highlight individual behavior, you can then complement the aggregate graph with some combination of the following graphs:
+
+Use a heat map to reveal general group trends and help you spot outliers
+
+Use a host map to show what is happening across the group right now and to segment your group by any relevant attribute.
