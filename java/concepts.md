@@ -19,11 +19,14 @@ protential problem with bouldless blocking queue?
 
 Design: service's interfact implementation, load balance and route robin between 3 IPs (consider concurrency case)
 
-Generics, type erasing, < ? extends T>, <? super T>, and <?>,
+Generics, type erasing at compile time, so that run time has no type info
+
+< ? extends T>, <? super T>, and <?>,
 
 Design: use generics to implement LRU, hints: LinkedHashMap, removeEldestEntry()
 
 can you pass List<String> as List<Object> param? How about vice versa?  
+answer is no - contravariant and co-variant
 
 Example of type unchecked warning,e.g.,  List<String> rawList = new ArrayList()
 

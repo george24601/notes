@@ -1,5 +1,5 @@
 heap divided into 2 generations: 
-young space => for allocation of new objects, gc is collected by running a special young collection. When all objects that have lived long enough in the nersery are promoted to the old space
+young space => for allocation of new objects, gc is collected by running a special young collection. When all objects that have lived long enough in the nersery are promoted to the old space. New gen is devided further into Eden, from suvivor, to survivor
 old space => old collection is triggered when old collection is full
 
 small objects => thread local areas: free chunks reserved from the heap and given to a thread for exlcusive use
@@ -26,3 +26,14 @@ ompaction as possible
 The postion of the compaction area changes at each GC, using one or two sliding windows to determin the next position
 
 
+# where are the GC roots?
+
+GC root : referred by local variables in VM stackframe
+
+method area, referred by class static 
+
+method area, referred by constant
+
+local method stack, referred by JNI
+
+so gc root exists in method area, stack, and local method area - referenced by GC roots will not be GCed 

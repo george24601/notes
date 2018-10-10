@@ -23,3 +23,39 @@ when new(), JVM will create instanceOopDec, which contains mark work, pointer to
 * Methods: Any methods in the class
 
 * Attributes: Any attributes of the class (for example the name of the sourcefile, etc.)
+
+# creation
+
+1. class loader check - check in the constant pool if params are valid, check if the type has been loaded
+
+2. allocate memory
+	1. CAS + retry for thread safety
+
+	2. TLAB: allocate a small amount of memory in Eden region for EACH thread
+
+3. init defaults - that is why default constructor works
+
+4. set object header - type, where to find type metadata (pointer to the type's metadata, this is how type checking is done by JVM), object's hash, object's gc gen info
+
+5. run init method 
+
+#visit 
+
+1. handle: in heap has a handle pool, that has pointer to the object type data and pointer to object instance data.
+
+2. direct pointer, to the object instance data already AND pointer to the object type data
+
+A.
+String str1 = "abcd"  - in constant pool
+
+String str2 = new String("abcd") - in heap space
+
+B. how many objects does it create? 
+
+String s1 = new String("abc");
+
+How do you verify it?
+
+C.
+doube parent delegate model???
+Bootstrap classloader?

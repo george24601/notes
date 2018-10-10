@@ -1,11 +1,9 @@
-
-# GC
 # Memory model
 
 Each thread running in the Java virtual machine has its own thread stack.
 The thread stack also contains all local variables for each method being executed (all methods on the call stack)
 
-All local variables of primitive types ( boolean, byte, short, char, int, long, float, double) are fully stored on the thread stack and are thus not visible to other threads.
+All local variables of primitive types ( boolean, byte, short, char, int, long, float, double - no String) are fully stored on the thread stack and are thus not visible to other threads.
 
 The heap contains all objects created in your Java application, regardless of what thread created the object.
 
@@ -15,17 +13,25 @@ An object's member variables are stored on the heap along with the object itself
 
 Static class variables are also stored on the heap along with the class definition.
 
-
-
 methods, thread stacks, and native handles are allocated in memory separate from the heap
 
-Heap - Method Area (including runtime constant pool) - VM Stack(includeing stack frames) - native method stack - program coutner register
+1. Heap 
+
+2. Method Area, also known as perm gen. stores type, constant, staic var, JIT compiled code
+	
+	1.  runtime constant pool in NO LONGER in method area
+
+	2. 
+
+
+3. VM Stack(includeing stack frames) -thread local
+
+4. native method stack  -thread local. In Hotspot VM Stack and Method Stack are combined.)
+
+5. program coutner register  - thread local
+
 
 local var table needed ram space is determned during compliation, when entering a method, the size of stack frame is fixed, so it won't change local var table's size
-
-runtime constant, part of method region
-
-Sometime VM Stack and Method Stack are combined.
 
 Method Area: 
 
@@ -33,18 +39,21 @@ Method Area:
 	
 	type , instance,interface's special method required on init
 
+1. java memory regions?
+
+2. what happened when java creates an object?
+
+3. visit an object, handle and direct pointer?
+
+4. string type and constant pool
+
+# Offheap/Native/Direct memory
+
 Direct memory: is similar to native, but also implies that an underlying buffer within the hardware is being shared. For example buffer within the network adapter or graphics display. The goal here is to reduce the number of times the same bytes is being copied about in memory.
 
 Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it. That is, it will attempt to avoid copying the buffer's content to (or from) an intermediate buffer before (or after) each invocation of one of the underlying operating system's native I/O operations. 
 
 However, the application still uses an object on the Java heap to orchestrate I/O operations, but the buffer that holds the data is held in native memory, the Java heap object only contains a reference to the native heap buffer.
-
-
-# Offheap/Native memory
-
-NIO DirectBuffer -> native memory
-
-Native memory/Off-heap: is memory allocated within the processes address space that is not within the heap.
 
 The new I/O (NIO) classes introduced a new way of performing I/O based on channels and buffers. NIO added support for direct ByteBuffers, which can be passed directly to native memory rather than Java heap. Making them significantly faster in some scenarios because they can avoid copying data between Java heap and native heap.
 
@@ -76,21 +85,12 @@ Eden, Survivor1, and survivor2
 #To locate OOM problem
 
 1. jmap -heap
+check new and old jen size
 
 2. jmap -histo:live
+
+what is alive, is it too much?
 
 3. /proc/${PID}/fd, /proc/${PID}/task
 
 4. pstree、netstat - to check process creation and network connection #
-
-# where are the GC roots?
-
-GC root : referred by local variables in VM stackframe
-
-method area, referred by class static 
-
-method area, referred by constant
-
-local method stack, referred by JNI
-
-so gc root exists in method area, stack, and local method area - themselves will be not GCed!
