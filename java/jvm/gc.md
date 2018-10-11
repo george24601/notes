@@ -36,4 +36,11 @@ method area, referred by constant
 
 local method stack, referred by JNI
 
-so gc root exists in method area, stack, and local method area - referenced by GC roots will not be GCed 
+so gc root exists in method area, stack, and local method area - referenced by GC roots will not be GCed.  can GC root be on heap too?
+
+gc uses a daemon thread inside JVM
+
+
+if an implementation uses a mark and sweep algorithm, it must be able to mark an object as referenced or unreferenced. For each unreferenced object, it may also need to indicate whether or not the object's finalizer has been run. As with thread locks, this data may be kept separate from the object image.
+
+

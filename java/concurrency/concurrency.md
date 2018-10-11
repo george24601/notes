@@ -95,3 +95,5 @@ Another deadlock prevention mechanism is to put a timeout on lock attempts meani
 Every time a thread takes a lock it is noted in a data structure (map, graph etc.) of threads and locks. Additionally, whenever a thread requests a lock this is also noted in this data structure.
 
 A better option is to determine or assign a priority of the threads so that only one (or a few) thread backs up. The rest of the threads continue taking the locks they need as if no deadlock had occurred. If the priority assigned to the threads is fixed, the same threads will always be given higher priority. To avoid this you may assign the priority randomly whenever a deadlock is detected.
+
+When all non-daemon threads of a Java application terminate, the virtual machine instance will exit.

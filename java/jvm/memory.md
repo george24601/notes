@@ -14,32 +14,18 @@ An object's member variables are stored on the heap along with the object itself
 Static class variables are also stored on the heap along with the class definition.
 
 methods, thread stacks, and native handles are allocated in memory separate from the heap
-
-1. Heap 
-
-2. Method Area, also known as perm gen. stores type, constant, staic var, JIT compiled code
-	
-	1.  runtime constant pool in NO LONGER in method area
-
-	2. 
-
-
 3. VM Stack(includeing stack frames) -thread local
 
 4. native method stack  -thread local. In Hotspot VM Stack and Method Stack are combined.)
+	
+	* -> Native method interface -> native method libraries
+	
 
 5. program coutner register  - thread local
 
 
 local var table needed ram space is determned during compliation, when entering a method, the size of stack frame is fixed, so it won't change local var table's size
 
-Method Area: 
-
-	every type's struct info: RCP, String ,and method data, constructor,and normal method's string content
-	
-	type , instance,interface's special method required on init
-
-1. java memory regions?
 
 2. what happened when java creates an object?
 
@@ -79,7 +65,6 @@ Use cases:
 
 3. stores keys on heap and values off heap
 
-
 Eden, Survivor1, and survivor2
 
 #To locate OOM problem
@@ -94,3 +79,5 @@ what is alive, is it too much?
 3. /proc/${PID}/fd, /proc/${PID}/task
 
 4. pstree、netstat - to check process creation and network connection #
+
+
