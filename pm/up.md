@@ -53,4 +53,8 @@ Note often these things appear together. Need to identify which is the main one
 
 3. If incidents from external, focus on that as it brings more impact. If it is internal, emphasize on it will give a (false) impression of internal disorganization
 
+# Scenario: got blamed for things out of your scope
 
+1. explain that not within your scope
+
+2. offer your solution - put more emphasis on what you can do to help solve the problem.

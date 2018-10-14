@@ -2,59 +2,6 @@ when class laoded by JVM, it will create an instanceKlass, and leave it the meth
 
 when new(), JVM will create instanceOopDec, which contains mark work, pointer to metadata, and instance data,
 
-# Inside class file
-
-* Magic Number: 0xCAFEBABE
-
-* Version of Class File Format: the minor and major versions of the class file. This includes values such as numbers of all sorts, strings, identifier names, references to classes and methods, and type descriptors. All indexes, or references, to specific constants in the constant pool table are given by 16-bit (type u2) numbers, where index value 1 refers to the first constant in the table (index value 0 is invalid).
-
-* Constant Pool: Pool of constants for the class
-
-
-For each type it loads, a Java virtual machine must store a constant pool. A constant pool is an ordered set of constants used by the type, including literals (string, integer, and floating point constants) and symbolic references to types, fields, and methods. Entries in the constant pool are referenced by index, much like the elements of an array. 
-
-* Access Flags: for example whether the class is abstract, static, etc.
-
-* This Class: The name of the current class
-
-* Super Class: The name of the super class
-
-* Interfaces: Any interfaces in the class
-
-* Fields: Any fields in the class
-
-The field's name
-The field's type
-The field's modifiers (some subset of public, private, protected, static, final, volatile, transient)
-
-* Methods: Any methods in the class
-
-The method's name
-The method's return type (or void)
-The number and types (in order) of the method's parameters
-The method's modifiers (some subset of public, private, protected, static, final, synchronized, native, abstract)
-
-The method's bytecodes
-The sizes of the operand stack and local variables sections of the method's stack frame (these are described in a later section of this chapter)
-An exception table
-
-
-* Attributes: Any attributes of the class (for example the name of the sourcefile, etc.)
-
-
-For each type it loads, a Java virtual machine must store the following kinds of information in the method area:
-
-* The fully qualified name of the type
-
-* The fully qualified name of the type's direct superclass (unless the type is an interface or class java.lang.Object, neither of which have a superclass)
-
-* Whether or not the type is a class or an interface
-
-* The type's modifiers ( some subset of` public, abstract, final)
-
-* An ordered list of the fully qualified names of any direct superinterfaces
-
-
 # creation
 
 1. class loader check - check in the constant pool if params are valid, check if the type has been loaded
@@ -116,3 +63,40 @@ The two overloaded defineClass() methods accept a byte array, data[], as input. 
 The findSystemClass() method accepts a String representing a fully qualified name of a type. When a user-defined class loader invokes this method in version 1.0 and 1.1, it is requesting that the virtual machine attempt to load the named type via its bootstrap class loader. If the bootstrap class loader has already loaded or successfully loads the type, it returns a reference to the Class object representing the type. If it can't locate the binary data for the type, it throws ClassNotFoundException. In version 1.2, the findSystemClass() method attempts to load the requested type from the system class loader. Every Java virtual machine implementation must make sure the findSystemClass() method can invoke the bootstrap (if version 1.0 or 1.1) or system (if version 1.2 or later) class loader in this way.
 
 The resolveClass() method accepts a reference to a Class instance. This method causes the type represented by the Class instance to be linked (if it hasn't already been linked). The defineClass() method, described previous, only takes care of loading. (See the previous section, "Loading, Linking, and Initialization" for definitions of these terms.) When defineClass() returns a Class instance, the binary file for the type has definitely been located and imported into the method area, but not necessarily linked and initialized. Java virtual machine implementations make sure the resolveClass() method of class ClassLoader can cause the class loader subsystem to perform linking.
+
+#life cycle 
+
+Loading is the process of bringing a binary form for a type into the Java virtual machine. Linking is the process of incorporating the binary type data into the runtime state of the virtual machine. Linking is divided into three sub-steps: verification, preparation, and resolution. Verification ensures the type is properly formed and fit for use by the Java virtual machine. Preparation involves allocating memory needed by the type, such as memory for any class variables. Resolution is the process of transforming symbolic references in the constant pool into direct references.
+
+(1) loading, (2) linking, and (3) initialization must take place in that order. The only exception to this required ordering is the third phase of linking, resolution, which may optionally take place after initialization.
+
+To load a type, the Java virtual machine must:
+
+given the type's fully qualified name, produce a stream of binary data that represents the type
+parse the stream of binary data into internal data structures in the method area
+create an instance of class java.lang.Class that represents the type
+
+The Class instance, the end product of the loading step, serves as an interface between the program and the internal data structures. To access information about a type that is stored in the internal data structures, the program invokes methods on the Class instance for that type. Together, the processes of parsing the binary data for a type into internal data structures in the method area and instantiating a Class object on heap are called creating the type.
+
+After a type has been through the first two phases of linking: verification and preparation, it is ready for the third and final phase of linking: resolution. Resolution is the process of locating classes, interfaces, fields, and methods referenced symbolically from a type's constant pool, and replacing those symbolic references with direct references. As mentioned above, this phase of linking is optional until (and unless) each symbolic reference is first used by the program.
+
+A class variable initializer is an equals sign and expression next to a class variable declaration
+
+A static initializer is a block of code introduced by the static keyword
+
+All the class variable initializers and static initializers of a type are collected by the Java compiler and placed into one special method. For classes, this method is called the class initialization method; for interfaces, the interface initialization method.
+
+The code of a () method does not explicitly invoke a superclass's () method. Before a Java virtual machine invokes the () method of a class, therefore, it must make certain the () methods of superclasses have been executed.
+
+Once a class has been loaded, linked, and initialized, it is ready for use. The program can access its static fields, invoke its static methods, or create instances of it.
+
+The four ways a class can be instantiated explicitly are with the new operator, by invoking newInstance()on a Class or java.lang.reflect.Constructor object, by invoking clone() on any existing object, or by deserializing an object via the getObject() method of classjava.io.ObjectInputStream.
+
+In the Java class file, the instance initialization method is named "<init>." For each constructor in the source code of a class, the Java compiler generates one <init>() method. If the class declares no constructors explicitly, the compiler generates a default no-arg constructor that just invokes the superclass's no-arg constructor. As with any other constructor, the compiler creates an <init>() method in the class file that corresponds to this default constructor.
+o
+
+If a class declares a method named finalize() that returns void, the garbage collector will execute that method (called a "finalizer") once on an instance of that class, before it frees the memory space occupied by that instance.
+
+The garbage collector may invoke an object's finalizer at most once
+
+Any exceptions thrown by the finalize() method during its automatic invocation by the garbage collector are ignored.

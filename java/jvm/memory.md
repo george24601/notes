@@ -1,5 +1,3 @@
-# Memory model
-
 Each thread running in the Java virtual machine has its own thread stack.
 The thread stack also contains all local variables for each method being executed (all methods on the call stack)
 
@@ -80,4 +78,9 @@ what is alive, is it too much?
 
 4. pstree、netstat - to check process creation and network connection #
 
+# native method stack
 
+If an implementation's native method interface uses a C-linkage model, then the native method stacks are C stacks. When a C program invokes a C function, the stack operates in a certain way. The arguments to the function are pushed onto the stack in a certain order. The return value is passed back to the invoking function in a certain way. This would be the behavior of the of native method stacks in that implementation.
+
+
+JNI is designed so it can be supported by any implementation of the Java virtual machine, no matter what garbage collection technique or object representation the implementation uses. This in turn enables developers to link the same (JNI compatible) native method binaries to any JNI-supporting virtual machine implementation on a particular host platform.

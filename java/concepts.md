@@ -39,3 +39,5 @@ memory - during object creation and destruction, what memory region is affected
 G1 vs CMS
 
 class object
+
+string pool will NOT be GCed - string pool concat is done at COMPILE time, at RUNTIME, created is put on heap e.g. "TEST" + myVar 

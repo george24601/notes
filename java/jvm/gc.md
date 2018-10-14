@@ -40,7 +40,17 @@ so gc root exists in method area, stack, and local method area - referenced by G
 
 gc uses a daemon thread inside JVM
 
+#unloading types
 
 if an implementation uses a mark and sweep algorithm, it must be able to mark an object as referenced or unreferenced. For each unreferenced object, it may also need to indicate whether or not the object's finalizer has been run. As with thread locks, this data may be kept separate from the object image.
+
+
+The way in which a Java virtual machine can tell whether a dynamically loaded type is still needed by the application is similar to the way it tells whether an object is still needed by the program. If the application has no references to the type, then the type can't affect the future course of computation. The type is unreachable and can be garbage collected.
+
+Types loaded through the bootstrap class loader will always be reachable and never be unloaded. Only types loaded through user-defined class loaders can become unreachable and be unloaded by the virtual machine. A type is unreachable if its Class instance is found to be unreachable through the normal process of garbage collecting the heap.
+
+implementations must be able to locate the type data in the method area for an object's class, given only a reference to the object. For this reason, the image of an object on the heap likely includes some kind of pointer to its type data in the method area. From the type data, the virtual machine must be able to locate the Class instances for the object's class, all its superclasses, and all its superinterfaces.
+
+Thus, given only a reference to a reachable instance of class MyThread, the garbage collector is able to "reach" the Class instances for MyThread and all its supertypes: Cloneable, Thread, Runnable, and Object.
 
 

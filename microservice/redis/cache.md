@@ -1,5 +1,3 @@
-Overall: avoid remote operations in transaction-lock etc!
-
 Scenario
 --------
 Update cache without timeouts
@@ -32,7 +30,7 @@ Scenario
 --------
 Counting
 
-A counting service will store the counting result in the cache, when data cahbnes, use the counting service to update the count rather async db count
+A counting service will store the counting result in the cache, when data changes, use the counting service to update the count rather async db count
 
 
 Scenario
