@@ -84,3 +84,16 @@ If an implementation's native method interface uses a C-linkage model, then the 
 
 
 JNI is designed so it can be supported by any implementation of the Java virtual machine, no matter what garbage collection technique or object representation the implementation uses. This in turn enables developers to link the same (JNI compatible) native method binaries to any JNI-supporting virtual machine implementation on a particular host platform.
+
+### memory size estimate
+
+In a modern 64-bit JDK, an object has a 12-byte header, padded to a multiple of 8 bytes
+
+In an int[dim1][dim2] array instance, every nested int[dim2] array is an Object in its own right. Each adds the usual 16-byte array overhead.
+
+the String class adds another 24 bytes of overhead.
+
+All arrays have an extra integer "length" field stored in their header
+
+The object header consists of a mark word and a klass pointer.
+

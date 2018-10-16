@@ -45,3 +45,20 @@ def comp_front(request_id):
         retry_and_to_dlq(request_id)
 
 
+def base(buyer, seller, amount, mq_tbl):
+    begin_tnx()
+    insert_transaction(buyer, seller, amount)
+    queue_buyer_update(mq_tbl, buyer, amount)
+    queue_seller_update(mq_tbl, seller, amount)
+    end_tnx()
+
+    for msg in get_msg(mq_tbl):
+        begin_tnx()
+          if not msg.processed:
+              good = actual_process(msg)
+        end_tnx()
+
+`   if good:
+        begin_tnx()
+        delete(msg, mq_tbl)
+        end_tnx()

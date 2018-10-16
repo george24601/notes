@@ -2,27 +2,6 @@ when class laoded by JVM, it will create an instanceKlass, and leave it the meth
 
 when new(), JVM will create instanceOopDec, which contains mark work, pointer to metadata, and instance data,
 
-# creation
-
-1. class loader check - check in the constant pool if params are valid, check if the type has been loaded
-
-2. allocate memory
-	1. CAS + retry for thread safety
-
-	2. TLAB: allocate a small amount of memory in Eden region for EACH thread
-
-3. init defaults - that is why default constructor works
-
-4. set object header - type, where to find type metadata (pointer to the type's metadata, this is how type checking is done by JVM), object's hash, object's gc gen info
-
-5. run init method 
-
-#visit 
-
-1. handle: in heap has a handle pool, that has pointer to the object type data and pointer to object instance data.
-
-2. direct pointer, to the object instance data already AND pointer to the object type data
-
 A.
 String str1 = "abcd"  - in constant pool
 
@@ -44,19 +23,7 @@ the Java virtual machine contains two kinds of class loaders: a bootstrap class 
 
 user-defined class loaders are regular Java objects whose class descends from java.lang.ClassLoader. The methods of class ClassLoader allow Java applications to access the virtual machine's class loading machinery. Also, for every type a Java virtual machine loads, it creates an instance of class java.lang.Class to represent that type. Like all objects, user-defined class loaders and instances of class Class reside on the heap. Data for loaded types resides in the method area.
 
-These activities are performed in a strict order:
-
-Loading: finding and importing the binary data for a type
-Linking: performing verification, preparation, and (optionally) resolution
-Verification: ensuring the correctness of the imported type
-Preparation: allocating memory for class variables and initializing the memory to default values
-Resolution: transforming symbolic references from the type into direct references.
-Initialization: invoking Java code that initializes class variables to their proper starting values.
-
-This implementation searches a user-defined directory path stored in an environment variable named CLASSPATH. The bootstrap loader looks in each directory, in the order the directories appear in the CLASSPATH, until it finds a file with the appropriate name: the type's simple name plus ".class". Unless the type is part of the unnamed package, the bootstrap loader expects the file to be in a subdirectory of one the directories in the CLASSPATH. The path name of the subdirectory is built from the package name of the type.
-
-searching the class path is the job of the system class loader, a user-defined class loader that is created automatically when the virtual machine starts up
-
+user-defined class loader that is created automatically when the virtual machine starts up
 
 The two overloaded defineClass() methods accept a byte array, data[], as input. Starting at position offset in the array and continuing for length bytes, class ClassLoader expects binary data conforming to the Java class file format--binary data that represents a new type for the running application -- with the fully qualified name specified in name. The type is assigned to either a default protection domain, if the first version of defineClass() is used, or to the protection domain object referenced by the protectionDomain parameter. Every Java virtual machine implementation must make sure the defineClass() method of class ClassLoader can cause a new type to be imported into the method area.
 
@@ -66,37 +33,39 @@ The resolveClass() method accepts a reference to a Class instance. This method c
 
 #life cycle 
 
-Loading is the process of bringing a binary form for a type into the Java virtual machine. Linking is the process of incorporating the binary type data into the runtime state of the virtual machine. Linking is divided into three sub-steps: verification, preparation, and resolution. Verification ensures the type is properly formed and fit for use by the Java virtual machine. Preparation involves allocating memory needed by the type, such as memory for any class variables. Resolution is the process of transforming symbolic references in the constant pool into direct references.
-
-(1) loading, (2) linking, and (3) initialization must take place in that order. The only exception to this required ordering is the third phase of linking, resolution, which may optionally take place after initialization.
-
-To load a type, the Java virtual machine must:
-
-given the type's fully qualified name, produce a stream of binary data that represents the type
-parse the stream of binary data into internal data structures in the method area
-create an instance of class java.lang.Class that represents the type
-
-The Class instance, the end product of the loading step, serves as an interface between the program and the internal data structures. To access information about a type that is stored in the internal data structures, the program invokes methods on the Class instance for that type. Together, the processes of parsing the binary data for a type into internal data structures in the method area and instantiating a Class object on heap are called creating the type.
-
-After a type has been through the first two phases of linking: verification and preparation, it is ready for the third and final phase of linking: resolution. Resolution is the process of locating classes, interfaces, fields, and methods referenced symbolically from a type's constant pool, and replacing those symbolic references with direct references. As mentioned above, this phase of linking is optional until (and unless) each symbolic reference is first used by the program.
-
 A class variable initializer is an equals sign and expression next to a class variable declaration
 
 A static initializer is a block of code introduced by the static keyword
 
 All the class variable initializers and static initializers of a type are collected by the Java compiler and placed into one special method. For classes, this method is called the class initialization method; for interfaces, the interface initialization method.
 
-The code of a () method does not explicitly invoke a superclass's () method. Before a Java virtual machine invokes the () method of a class, therefore, it must make certain the () methods of superclasses have been executed.
+In Java class files for both classes and interfaces, this method is named "". Regular methods of a Java application cannot invoke a method. This kind of method can only be invoked by the Java virtual machine, which invokes it to set a type's static variables to their proper initial values.
 
-Once a class has been loaded, linked, and initialized, it is ready for use. The program can access its static fields, invoke its static methods, or create instances of it.
+When the Java virtual machine creates a new instance of a class, either implicitly or explicitly, it first allocates memory on the heap to hold the object's instance variables.
+Once the virtual machine has allocated memory for the new object and initialized the instance variables to default values, it is ready to give the instance variables their proper initial values.
 
-The four ways a class can be instantiated explicitly are with the new operator, by invoking newInstance()on a Class or java.lang.reflect.Constructor object, by invoking clone() on any existing object, or by deserializing an object via the getObject() method of classjava.io.ObjectInputStream.
+If the object is being created because of a clone() invocation, the virtual machine copies the values of the instance variables of the object being cloned into the new object. If the object is being deserialized via a readObject() invocation on an ObjectInputStream, the virtual machine initializes non-transient instance variables of the object from values read from the input stream. Otherwise, the virtual machine invokes an instance initialization method on the object. The instance initialization method initializes the object's instance variables to their proper initial values.
 
 In the Java class file, the instance initialization method is named "<init>." For each constructor in the source code of a class, the Java compiler generates one <init>() method. If the class declares no constructors explicitly, the compiler generates a default no-arg constructor that just invokes the superclass's no-arg constructor. As with any other constructor, the compiler creates an <init>() method in the class file that corresponds to this default constructor.
-o
+
+The code of a () method does not explicitly invoke a superclass's () method. Before a Java virtual machine invokes the () method of a class, therefore, it must make certain the () methods of superclasses have been executed.
 
 If a class declares a method named finalize() that returns void, the garbage collector will execute that method (called a "finalizer") once on an instance of that class, before it frees the memory space occupied by that instance.
 
 The garbage collector may invoke an object's finalizer at most once
 
 Any exceptions thrown by the finalize() method during its automatic invocation by the garbage collector are ignored.
+
+. If the application has no references to the type, then the type can't affect the future course of computation. The type is unreachable and can be garbage collected.
+
+Types loaded through the bootstrap class loader will always be reachable and never be unloaded. Only types loaded through user-defined class loaders can become unreachable and be unloaded by the virtual machine. A type is unreachable if its Class instance is found to be unreachable through the normal process of garbage collecting the heap.
+
+### object header
+“KlassOOPs” are different from the Class?? 
+The “Mark” field of the OOP header??
+Fields that belong to different classes of the hierarchy are NEVER mixed up together. Fields of the superclass come first, obeying rule 2, followed by the fields of the subclass.??
+Between the last field of the superclass and the first field of the subclass there must be padding to align to a 4 bytes boundary.
+
+When the first field of a subclass is a double or long and the superclass doesn’t align to an 8 bytes boundary, JVM will break rule 2 and try to put an int, then shorts, then bytes, and then references at the beginning of the space reserved to the subclass until it fills the gap.
+
+

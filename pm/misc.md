@@ -23,3 +23,4 @@ Training is the highest leverage activity a manager can do to increase the outpu
 Don’t leave training to outsiders, do it yourself.
 
 never complain your company or your team's task in front your subordinates - and stop the complaints at you! However, it is OK to complain to your boss! 
+

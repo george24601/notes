@@ -61,13 +61,6 @@ Periodically
 When a process needing the value encounters a cache miss
 This approach requires one more moving part - the external process - that needs to be maintained and monitored. In addition, this solution requires unnatural code separation/duplication and is mostly suited for static cache keys (i.e., not dynamically generated, as in the case of keys indexed by an id).
 
-Probabilistic early expiration
----------
-the probability of performing the early recomputation increases as we get closer to the expiration of the value.
-
-The following implementation based on an exponential distribution has been shown to be optimal in terms of its effectiveness in preventing stampedes and how early recomputations can happen.
-
-Some caches enable you to specify the expiration period as an absolute value, or as a sliding value that causes the item to be removed from the cache if it is not accessed within the specified time.
 
 # Defend against stampede
 
@@ -94,3 +87,6 @@ Some caches enable you to specify the expiration period as an absolute value, or
 2. need to cache empty results
 
 3. For a key that does not exist for sure, use bloomfilter to filter
+
+
+Persistance may consume much resource on high volumes  - maybe persist on separate disk. Although persistance helps recovery, and can support certain storage requirement
