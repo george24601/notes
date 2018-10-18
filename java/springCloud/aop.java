@@ -1,5 +1,7 @@
 //Annotations themselves may be annotated to indicate where and when they can be used:
+//
 @Retention(RetentionPolicy.RUNTIME) // Make this annotation accessible at runtime via reflection.
+//You can specify which Java elements your custom annotation can be used to annotate. You do so by annotating your annotation definition with the @Target annotation.
 @Target({ElementType.METHOD})       // This annotation can only be applied to class methods.
 public @interface Tweezable {
 }

@@ -13,3 +13,5 @@ Here we are by default in “Entity Manager per transaction” mode. In this mod
 EntityManager is an interface, and what gets injected in the spring bean is not the entity manager itself but a context aware proxy that will delegate to a concrete entity manager at runtime.
 
 Usually the concrete class used for the proxy is SharedEntityManagerInvocationHandler, this can be confirmed with the help a debugger.
+
+the class object is passed to the JPA implementation at run-time, which then extracts the annotations to generate an object-relational mapping.

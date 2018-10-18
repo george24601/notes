@@ -11,7 +11,7 @@ Finally, an application can also be both concurrent and parallel, in that it bot
 
 
 
-# synchronized
+### synchronized
 
 A synchronized block in Java is synchronized on some object.
 
@@ -26,8 +26,6 @@ A synchronized instance method in Java is synchronized on the instance (object) 
 
 every object has a monitor lock, montiorenter and monitorexit
 
-
-
 Synchronized static methods are synchronized on the class object of the class the synchronized static method belongs to. Since only one class object exists in the Java VM per class, only one thread can execute inside a static synchronized method in the same class.
 
 The object taken in the parentheses by the synchronized construct is called a monitor object.
@@ -35,15 +33,10 @@ The object taken in the parentheses by the synchronized construct is called a mo
 
 
 1. Mark word in object header,e.g., hashcode, ago, bias, lock tag. Object header = mark word + type pointer
-
 2. an object in addiotn has the instance data and padding
-
 3. JVM will take note of the thread id/adress of Thread pointer  as the owner of the syncrhonzied object
-
 4. for unbias lock, will assign a Lock Record in the stack frame, as copy the object's mark own to each. Whoever wants to access it will change the address of Lock Record into Mark Word
-
 5. for heavyweight lock,e.g., monitor, need to use Mutex from OS. The synched object will point to the created monitor object
-
 6. monitor lock, monitor enter, monitor exit
 
 
@@ -66,7 +59,7 @@ Only one thread can execute inside any of these two methods at the same time.
 
 Had the second synchronized block been synchronized on a different object than MyClass.class, then one thread could execute inside each method at the same time.
 
-#self-rotate lock?
+# self-rotate lock?
 
 # re-entrant lock
 
@@ -86,7 +79,7 @@ Modern CPUs have built-in support for atomic compare and swap operations. From J
 # AbstractQueuedSynchronizer
 and cas??
 
-#deadlock
+### deadlock
 
 Lock ordering is a simple yet effective deadlock prevention mechanism. However, it can only be used if you know about all locks needed ahead of taking any of the locks. This is not always the case.
 
@@ -97,3 +90,24 @@ Every time a thread takes a lock it is noted in a data structure (map, graph etc
 A better option is to determine or assign a priority of the threads so that only one (or a few) thread backs up. The rest of the threads continue taking the locks they need as if no deadlock had occurred. If the priority assigned to the threads is fixed, the same threads will always be given higher priority. To avoid this you may assign the priority randomly whenever a deadlock is detected.
 
 When all non-daemon threads of a Java application terminate, the virtual machine instance will exit.
+
+### monitor
+The form of monitor used by the Java virtual machine is called a "Wait and Notify" monitor. (It is also sometimes called a "Signal and Continue" monitor.) In this kind of monitor, a thread that currently owns the monitor can suspend itself inside the monitor by executing a wait command. When a thread executes a wait, it releases the monitor and enters a wait set. The thread will stay suspended in the wait set until some time after another thread executes a notify command inside the monitor. When a thread executes a notify, it continues to own the monitor until it releases the monitor of its own accord, either by executing a wait or by completing the monitor region. After the notifying thread has released the monitor, the waiting thread will be resurrected and will reacquire the monitor.
+
+The kind of monitor used in the Java virtual machine is sometimes called a Signal and Continue monitor because after a thread does a notify (the signal) it retains ownership of the monitor and continues executing the monitor region (the continue). At some later time, the notifying thread releases the monitor and a waiting thread is resurrected.
+
+As a result, a notify must often be considered by waiting threads merely as a hint that the desired state may exist. Each time a waiting thread is resurrected, it may need to check the state again to determine whether it can move forward and do useful work. If it finds the data still isn't in the desired state, the thread could execute another wait or give up and exit the monitor.
+
+### object locking
+
+Java programs need to coordinate multi-threaded access to two kinds of data: o instance variables, which are stored on the heap o class variables, which are stored in the method area
+
+Class locks are actually implemented as object locks. As mentioned in earlier chapters, when the Java virtual machine loads a class file, it creates an instance of class java.lang.Class. When you lock a class, you are actually locking that class's Class object.
+
+A single thread is allowed to lock the same object multiple times. For each object, the Java virtual machine maintains a count of the number of times the object has been locked.
+
+For an instance method, the virtual machine acquires the lock associated with the object upon which the method is being invoked. For a class method, it acquires the lock associated with the class to which the method belongs (it locks a Class object).
+
+If this method completes abruptly, just as if it completes normally, the virtual machine will release the lock on the this object automatically.
+
+The one difference is that instead of acquiring a lock on this (as there is no this in a class method), the thread must acquire a lock on the appropriate Class instance.

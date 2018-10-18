@@ -1,0 +1,3 @@
+#!/bin/bash
+
+(printf "PING\r\nPING\r\nPING\r\n"; sleep 1) | nc localhost 6379
