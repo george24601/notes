@@ -10,16 +10,16 @@ The AnnotatedElement interface provides access to annotations having RUNTIME ret
 * Target object: Object being advised by one or more aspects. Also referred to as the advised object. Since Spring AOP is implemented using runtime proxies, this object will always be a proxied object.
 * Weaving: Linking aspects with other application types or objects to create an advised object. This can be done at compile time (using the AspectJ compiler, for example), load time, or at runtime. Spring AOP, like other pure Java AOP frameworks, performs weaving at runtime.
 
-### Types of advice
+Runtime weaving: class ->(via bean reference) Proxy class (advice injected here to the proxy class)  ->(via reference) class
 
-Before: Advice that executes before a join point, but which does not have the ability to prevent execution flow proceeding to the join point (unless it throws an exception).
+Spring’s AOP: Offers @AspectJ declarations: proxy classes, annotations for advice and pointcut declaration
 
-AfterReturning: Advice to be executed after a join point completes normally: for example, if a method returns without throwing an exception. AfterThrowing: Advice to be executed if a method exits by throwing an exception.
+In section 3.3, we showed that Spring AOP is based on proxy patterns. Because of this, it needs to subclass the targeted Java class and apply cross-cutting concerns accordingly.
 
-After (finally): Advice to be executed regardless of the means by which a join point exits (normal or exceptional return).
+But it comes with a limitation. We cannot apply cross-cutting concerns (or aspects) across classes that are “final” because they cannot be overridden and thus it would result in a runtime exception.
 
-Around: Advice that surrounds a join point such as a method invocation. This is the most powerful kind of advice. Around advice can perform custom behavior before and after the method invocation. It is also responsible for choosing whether to proceed to the join point or to shortcut the advised method execution by returning its own return value or throwing an exception.
+The same applies for static and final methods. Spring aspects cannot be applied to them because they cannot be overridden. Hence Spring AOP because of these limitations, only supports method execution join points.
 
+It’s also worth noting that in Spring AOP, aspects aren’t applied to the method called within the same class.
 
-### Runtime weaving
-class ->(via bean reference) Proxy class (advice injected here to the proxy class)  ->(via reference) class
+That’s obviously because when we call a method within the same class, then we aren’t calling the method of the proxy that Spring AOP supplies. If we need this functionality, then we do have to define a separate method in different beans, or use AspectJ.

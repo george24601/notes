@@ -24,3 +24,14 @@ Don’t leave training to outsiders, do it yourself.
 
 never complain your company or your team's task in front your subordinates - and stop the complaints at you! However, it is OK to complain to your boss! 
 
+### difficult talk
+
+If you expect the discussion to go poorly, it will be clear during the conversation itself. Positive visioning is helpful in any endeavor, and difficult conversations are no different. Before the conversation, think about your ideal outcome. It’s very possible that the conversation will go much better than you initially thought.
+
+You may want to write down your talking points beforehand, but preparing an entire script is unreasonable. It’s unlikely that the conversation will go exactly as planned. A script could create a situation where you are delivering a monologue instead of finding a solution together through dialogue.
+
+It’s important that you tell the truth during the conversation, but it’s equally important that you use language that your counterpart will be receptive to. Being either too blunt or too vague decreases your chances of achieving your desired result.
+
+Slowing down helps you to be more conscious about what you are saying. If you can feel yourself getting defensive or reactive, pause and take a breath.
+
+Place both feet on the floor and put your hands on your knees. Face the person you’re talking with.

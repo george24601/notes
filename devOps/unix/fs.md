@@ -76,3 +76,5 @@ On many types of file system implementations, the maximum number of inodes is fi
 The inode number indexes a table of inodes in a known location on the device
 
 A file's inode number can be found using the ls -i command. The ls -i command prints the i-node number in the first column of the report.
+
+

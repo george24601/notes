@@ -107,3 +107,34 @@ An object is in the resurrectable state if it is not currently reachable by trac
 Any object referenced directly from a root node, such as a local variable, is strongly reachable. Likewise, any object referenced directly from an instance variable of a strongly reachable object is strongly reachable.
 
 Reference Objects???
+
+### from another post
+
+. When stop-the-world occurs, every thread except for the threads needed for the GC will stop their tasks. The interrupted tasks will resume only after the GC task has completed. GC tuning often means reducing this stop-the-world time.
+
+GC for perm gen?
+
+What if an object in the old generation need to reference an object in the young generation?
+
+To handle these cases, there is something called the a "card table" in the old generation, which is a 512 byte chunk. Whenever an object in the old generation references an object in the young generation, it is recorded in this table. When a GC is executed for the young generation, only this card table is searched to determine whether or not it is subject for GC, instead of checking the reference of all the objects in the old generation. This card table is managed with write barrier. This write barrier is a device that allows a faster performance for minor GC.
+
+The young generation is divided into 3 spaces.
+One Eden space
+Two Survivor spaces
+
+GC order:
+The majority of newly created objects are located in the Eden space.
+After one GC in the Eden space, the surviving objects are moved to one of the Survivor spaces. 
+After a GC in the Eden space, the objects are piled up into the Survivor space, where other surviving objects already exist.
+Once a Survivor space is full, surviving objects are moved to the other Survivor space. Then, the Survivor space that is full will be changed to a state where there is no data at all.
+The objects that survived these steps that have been repeated a number of times are moved to the old generation.
+
+Note that in HotSpot VM, two techniques are used for faster memory allocations. One is called "bump-the-pointer," and the other is called "TLABs (Thread-Local Allocation Buffers)."
+
+Bump-the-pointer technique tracks the last object allocated to the Eden space. That object will be located on top of the Eden space. And if there is an object created afterwards, it checks only if the size of the object is suitable for the Eden space. If the said object seems right, it will be placed in the Eden space, and the new object goes on top. So, when new objects are created, only the lastly added object needs to be checked, which allows much faster memory allocations. However, it is a different story if we consider a multithreaded environment. To save objects used by multiple threads in the Eden space for Thread-Safe, an inevitable lock will occur and the performance will drop due to the lock-contention. TLABs is the solution to this problem in HotSpot VM. This allows each thread to have a small portion of its Eden space that corresponds to its own share. As each thread can only access to their own TLAB, even the bump-the-pointer technique will allow memory allocations without a lock.
+
+The GC in the old generation uses an algorithm called "mark-sweep-compact."
+
+The first step of this algorithm is to mark the surviving objects in the old generation.
+Then, it checks the heap from the front and leaves only the surviving ones behind (sweep).
+In the last step, it fills up the heap from the front with the objects so that the objects are piled up consecutively, and divides the heap into two parts: one with objects and one without objects (compact).

@@ -32,3 +32,11 @@ for non-parallel systems, throughput and latency are in reverse
 
 
 /proc/interrupt
+
+cat /proc/$(pidof accept.out)/stack
+
+/proc/<pid>/limits - this process's limit
+
+information about active sockets under three different files:  /proc/<pid>/net/tcp, /proc/<pid>/fd, and /proc/<pid>/net/sockstat.
+
+While the fd directory presents us a list of files opened by the process,  /proc/<pid>/net/tcp file gives us information regarding currently active TCP connections (in their various states) under the process network namespace.  sockstat, on the other hand, acts more like a summary.

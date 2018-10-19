@@ -32,3 +32,6 @@ nohup abcd &
 
 #check context switch times, 10 times, once per second, see if cs >> in. Can use pidstat on top of it
 vmstat -1 -10
+
+# Set the maximum number of open files to 10.
+ulimit -n 10
