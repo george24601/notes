@@ -1,4 +1,16 @@
-copy() vs deepcopy()
+Python coroutine?
+
+mutable and immutable types?
+
+__new()__ vs __int()__
+
+list comprehension vs generator
+
+implement a singleton via decorator
+
+gc in python?
+
+copy() vs deepcopy(), how do you implement deepcopy()
 
 list vs tuple
 
@@ -7,8 +19,6 @@ ternary operaote, e.g., like ?: in C++
 help() and dir() in python?
 
 money patching?
-
-pass keyword?
 
 __doc__ is also a valid attribute, returning the docstring belonging to the class
 

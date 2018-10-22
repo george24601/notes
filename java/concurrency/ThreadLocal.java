@@ -186,3 +186,13 @@ static class Entry extends WeakReference<ThreadLocal<?>> {
 }
 
 
+class TLEx {
+
+private ThreadLocal<String> myThreadLocal = new ThreadLocal<String>();
+
+void run() { 
+myThreadLocal.set("Hello ThreadLocal");
+String threadLocalValue = myThreadLocal.get();
+}
+
+}

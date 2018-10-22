@@ -2,7 +2,7 @@ Hashmap, TreeMap, LinkedHashMap, HashTab, thread-safe maps. How concurrentMap, C
 
 CyclicBarrier
 
-NIO - selector, blocking and non-blocking, BIO vs NIO
+NIO - selector, blocking and non-blocking, BIO vs NIO, AIO?
 
 class loader - double parent delegation
 dual parent loading - same class as java class name? different types of class loader?
@@ -41,3 +41,7 @@ G1 vs CMS
 class object
 
 string pool will NOT be GCed - string pool concat is done at COMPILE time, at RUNTIME, created is put on heap e.g. "TEST" + myVar 
+
+Difference between Thread.run and Thread.start
+
+When will reflection not get the params?

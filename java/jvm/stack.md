@@ -15,3 +15,5 @@ It pushes the double return value onto addAndPrint()'s operand stack and frees t
 another implementation, Note that the operand stack of the current frame is always at the "top" of the Java stack. Although this may be easier to visualize in the contiguous memory implementation
 
 . In the remainder of this book, "pushing a value onto the stack" refers to pushing a value onto the operand stack of the current frame.
+
+the stack also has reference to the dynamic linking information

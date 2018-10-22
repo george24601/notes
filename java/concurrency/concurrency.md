@@ -8,28 +8,13 @@ An application can also be parallel but not concurrent. This means that the appl
 
 Finally, an application can also be both concurrent and parallel, in that it both works on multiple tasks at the same time, and also breaks each task down into subtasks for parallel execution.
 
-
-
-
 ### synchronized
-
-A synchronized block in Java is synchronized on some object.
-
-The synchronized keyword can be used to mark four different types of blocks:
-
-Instance methods
-Static methods
-Code blocks inside instance methods
-Code blocks inside static methods
 
 A synchronized instance method in Java is synchronized on the instance (object) owning the method.
 
 every object has a monitor lock, montiorenter and monitorexit
 
 Synchronized static methods are synchronized on the class object of the class the synchronized static method belongs to. Since only one class object exists in the Java VM per class, only one thread can execute inside a static synchronized method in the same class.
-
-The object taken in the parentheses by the synchronized construct is called a monitor object.
-
 
 
 1. Mark word in object header,e.g., hashcode, ago, bias, lock tag. Object header = mark word + type pointer
@@ -59,7 +44,8 @@ Only one thread can execute inside any of these two methods at the same time.
 
 Had the second synchronized block been synchronized on a different object than MyClass.class, then one thread could execute inside each method at the same time.
 
-# self-rotate lock?
+
+### self-rotate lock?
 
 # re-entrant lock
 
@@ -68,7 +54,7 @@ Had the second synchronized block been synchronized on a different object than M
 
 # biased and unbiased lock
 
-# java compare and swap
+### java compare and swap
 
 use it to implement an optimistic lock
 
@@ -111,3 +97,16 @@ For an instance method, the virtual machine acquires the lock associated with th
 If this method completes abruptly, just as if it completes normally, the virtual machine will release the lock on the this object automatically.
 
 The one difference is that instead of acquiring a lock on this (as there is no this in a class method), the thread must acquire a lock on the appropriate Class instance.
+
+
+The class java.lang.Object defines three methods, wait(), notify(), and notifyAll(), to facilitate this.
+
+In order to call either wait() or notify the calling thread must first obtain the lock on that object. In other words, the calling thread must call wait() or notify() from inside a synchronized block.
+
+A thread cannot call wait(), notify() or notifyAll() without holding the lock on the object the method is called on. If it does, an IllegalMonitorStateException is thrown.
+
+### Nested Monitor Lockout
+
+To avoid slipped conditions the testing and setting of the conditions must be done atomically by the thread doing it, meaning that no other thread can check the condition in between the testing and setting of the condition by the first thread
+
+that fair lock implementation problem?
