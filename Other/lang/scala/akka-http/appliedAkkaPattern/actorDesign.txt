@@ -1,0 +1,35 @@
+obvious choice is var in state
+
+alternatively, use become feature. Don't forget unbecome as well!
+
+class Person extends Actor {
+
+//could use an additoinal uninitalized state that does not require info, and then transition into "initialized" when we receive a message
+  override def receive: Receive = updated(PersonalInformation())
+
+  private def updated(personalInformation: PersonalInformation):Receive = {
+    case SetFirstName(firstName: FirstName) =>
+      context.become(updated(personalInformation.copy(firstName = Some(firstName))))
+    ...
+  }
+}
+
+------
+
+4 directives: (More details to come!)
+Restart
+Resume
+Stop
+Escalate
+
+-----
+
+ we could perform any “risky” operations inside a temporary actor. In this case we create a new actor for each request, and that actor has
+the job of performing the task and then shutting itself down. => alternativley, use activation and passviation pattern in Akka Cluster Sharding to avoid thrashing
+
+Instead, when the actor restarts we simply send it some kind of initialization message that will tell it to perform whatever task it was
+created for. This message could even be sent to itself on construction such that when the actor restarts it automatically retries the task
+that it was intended to perform.
+
+
+--------

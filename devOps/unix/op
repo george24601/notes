@@ -35,3 +35,11 @@ vmstat -1 -10
 
 # Set the maximum number of open files to 10.
 ulimit -n 10
+
+
+#d, l, s(ocket), c(har device), p(ipe), -(other, e.g., normal file)
+#add exec permission
+chmod u+x xxx.sh
+
+#make the file readonly by the group and other user
+chmod go-w xxx.sh

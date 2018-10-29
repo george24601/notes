@@ -1,3 +1,4 @@
+#!/bin/bash
 #It is best to run iostat specifying a time interval in seconds (for example iostat -x 30)
 
 #Display a continuous device report at two second intervals

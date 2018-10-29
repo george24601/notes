@@ -8,8 +8,7 @@ If every voter prefers alternative X over alternative Y, then the group prefers 
 If every voter's preference between X and Y remains unchanged, then the group's preference between X and Y will also remain unchanged (even if voters' preferences between other pairs like X and Z, Y and Z, or Z and W change).
 There is neither "dictator" nor "prophet": no single voter possesses the power or the knowledge to always determine the group's preference.
 
-# Culture
-
+### Culture
 a critical feature of effective complex organisations is that they make people do all the jobs.
 
 I made the IT staff go and sit with the developers for a couple of weeks as soon as I could. The resistance I got to this idea, even among the keen ones, was deeply surprising to me.
@@ -35,3 +34,5 @@ It’s important that you tell the truth during the conversation, but it’s equ
 Slowing down helps you to be more conscious about what you are saying. If you can feel yourself getting defensive or reactive, pause and take a breath.
 
 Place both feet on the floor and put your hands on your knees. Face the person you’re talking with.
+
+One reason to put conclusion first is to help form the first impression, and trick person into confirmation bias

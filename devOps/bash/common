@@ -1,5 +1,14 @@
 #!/bin/bash
 
+<<LINK
+& run multiple commands in the background
+&& run the next one only if the first one returns 0
+|| run the second one if the frist one returns non-0
+
+$($IF) && $($THEN) || $(ELSE)
+
+LINK
+
 
 #delete the folder if it exists, note that the spaces around -d predicate matter! 
 [ -d $FOLDER ] && rm -r $FOLDER
@@ -75,5 +84,3 @@ diff <(grep somestring file1) <(grep somestring file2)
 #default value for variables
 #You can also assign directly with ${VAR:=defaultval} (equals sign, not dash) but note that this won’t work with positional variables in scripts or functions.
 THIRD_ARG="${3:-no_third_arg}"
-
-

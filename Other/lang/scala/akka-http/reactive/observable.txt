@@ -1,0 +1,57 @@
+Future and Try are duals
+Future trait onComplete is of type
+(Try[T] => Unit) => Unit
+reverse the direction, we get
+() =>(() =>Try[T])
+
+i.e., when this executes many times, we get Try[T]
+------
+
+Iterable and observable are duals
+Iterator can be simplified to type
+() => Option[T]
+
+Iterable, therefore, can be simplifed to () =>(() => Try[Option[T]])
+
+reverse the direciton
+
+(Throwable => Unit, ()=> Unit, T=> Unit) => Unit
+
+type Observer[T] = (Throwable => Unit, ()=> Unit, T=> Unit)
+
+trait Observer[T] = {
+	def onError(..
+	def onCompleted(
+	def onNext(Value:..)
+}
+
+and introduce trait Observable[T]
+subscribe returns a Subscribtion => you can send unsubscribe to Subscribtion
+
+-------
+
+Subject vs promise
+has onComplete , onComplete
+
+Promise complete twice => error , so tryComplete
+Subject wont fail in this case
+onCompelted => close the channel =>next will do nothing
+
+PublishSubject, ReplaySubject, asyncSubject, behaviorSubject
+
+Potential problems, most likely you dont need that
+
+--
+Convert Future to Observable
+
+Notication: represents signal sent to observable
+use matrizliae to turn into Observable
+toBlocking useful for demo and debug
+
+iterable to observable
+
+-----
+always use observable from factory methods
+contracts: auto unsubscribe
+(onNext)*(onCompleted+onError)?
+onNexts will be serialized

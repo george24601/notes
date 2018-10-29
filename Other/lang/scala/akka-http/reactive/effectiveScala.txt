@@ -1,0 +1,129 @@
+invariance, covariance, and contravariance
+Immutable collections should be covariant. Mutable collections should be invariant. 
+When using collections, qualify names by importing scala.collection.immutable and/or scala.collection.mutable
+If your method needs a sequence, use Seq[T], not List[T]. 
+
+
+You don’t even have to use the new keyword to create a new instance of a case class. 
+
+val evenNumbers =
+ for {
+  number <- numbers
+  if number % 2 == 0
+ } yield number
+
+Use return type annotaion for public methods
+
+-----
+type aliases
+
+class ConcurrentPool[K, V] {
+  type Queue = ConcurrentLinkedQueue[V]
+  type Map   = ConcurrentHashMap[K, Queue]
+  ...
+}
+
+-----
+Cases to use implicit
+
+Extending or adding a Scala-style collection
+Adapting or extending an object (“pimp my library” pattern)
+Use to enhance type safety by providing constraint evidence
+To provide type evidence (typeclassing)
+
+For Manifests
+
+----
+future
+
+Do not throw your own exceptions in methods that return Futures. Futures represent both successful and failed computations. Therefore, it’s
+important that errors involved in that computation are properly encapsulated in the returned Future. Concretely, return Future.exception
+instead of throwing that exception:
+
+def divide(x: Int, y: Int): Future[Result] = {
+  if (y == 0)
+    return Future.exception(new IllegalArgumentException("Divisor is 0"))
+
+  Future.value(x/y)
+}
+
+----
+return inside closure is implemented as catch/throwing pair - performance implication
+
+----
+assert: invariants that the code assumes
+require: API contracts 
+
+Declaring the type sealed allows the compiler to do exhaustivity analysis since constructors cannot be added outside the source file.
+
+opt foreach { value =>
+  operate(value)
+}
+
+operate(opt getOrElse defaultValue)
+----
+partial functions
+
+val pf: PartialFunction[Int, String] = {
+  case i if i%2 == 0 => "even"
+}
+and they may be composed with orElse
+
+val tf: (Int => String) = pf orElse { case _ => "odd"}
+
+or in situations that might otherwise call for returning an Option:
+
+----
+Destruction binding
+
+val tweet = Tweet("just tweeting", Time.now)
+val Tweet(text, timestamp) = tweet
+
+-----
+A class member marked private,
+
+private val x: Int = ...
+is visible to all instances of that class (but not their subclasses). In most cases, you want private[this].
+
+private[this] val x: Int = 
+
+----
+case classes: preferred way to define complex data
+e.g.
+
+abstract class JSON
+case class JSeq(elems: List[JSON]) extends JSON
+case class JObj (bindings: Map[String, JSON]) extends JSON
+case class JStr(num: String) extends JSON
+case object JNull extends JSON
+
+
+-------
+e1.map(x=>e2)
+for  (x <- e1) yield e2
+
+for(x<-e1 if f; s) yield e2
+for (x<- e1.withfilter(x=>f); s) yield e2
+
+for(x<-e1; y<-e2; s) yield e3
+e1.flatMap(x => for (y<-e2; s) yield e3)
+
+x<- expr withFilter {
+	case pat => true
+	case _ => false
+} map {
+ case pat => x
+}
+------
+Note that try and some are monads
+
+val adventure = new Adventure()
+val t1: Try[Int] = adventure.collect().flatMap(coins => { adventure.buy(coins) })
+
+//this is equvalent to
+val t2: Try[Int] = for {
+  coins <- adventure.collect()
+  treasure <- adventure.buy(coins)
+} yield treasure
+
+-------
