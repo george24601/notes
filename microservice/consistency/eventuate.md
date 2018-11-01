@@ -1,7 +1,3 @@
-Polling - for other databases
-
-MessageProducer vs DomainEventPublisher?
-
 mysql> describe events;
 +------------------+---------------+------+-----+---------+-------+
 | Field            | Type          | Null | Key | Default | Extra |
@@ -31,15 +27,9 @@ how is message id generated? by the IdGeneratorImpl
 
 how about desination??
 
-why separate column for published??
-
 Schema is defined in EventuateSchema
 
 The message is actually written by the MessageProducerJdbcImpl, which uses spring's standard jdbctemplate - this means we need to tweak the code for mybatis/jpa
-
-Eventuate Tram CDC service
-
-eventuate-tram-cdc-mysql-service, uses com.github.shyiko binlog parser, however, our past experience shows that binlog parting is flaky - not a problem for data analystics where response time is not sensitive, but critical for user-facing 
 
 PollingCdcProcessor - 
 
@@ -52,18 +42,35 @@ pollingDao.findEventsToPublish
 
 spring jdbc transaction??
 
-"SELECT * FROM %s WHERE %s = 0 ORDER BY %s ASC LIMIT :limit"
-
 spring boot version is still on 1.3 - 1.4!
 
 uses spring-boot-starter-jdbc
 
 org.hibernate:hibernate-validator
 
-Spring Data JDBC vs Spring Data JPA
+### Poller
 
-JPA is a standard for Object Relational Mapping. This is a technology which allows you to map between objects in code and database tables.
-The most famous JPA provider is Hibernate, so it's a good place to start for concrete examples.
-Hibernate and most other providers for JPA write SQL and use JDBC to read and write from and to the DB.
+cdcProcessor.start(cdcDataPublisher::handleEvent)
 
-Spring Data JDBC aims at being conceptually easy. In order to achieve this it does NOT offer caching, lazy loading, write behind
+* has an AtomicBoolean(AB) as the control flag
+* spawns a new thread, which runs on the while loop on this AB
+* as pollingDao to get a list of events to publish 
+* ask consumer to accept each event one by one
+* uses a CountDownLatch to implement draining
+* sender is on a exponential retry 5 times, interval starts at 1 seconds
+
+
+### publisher
+
+PollingCdcDataPublisher
+
+  public CompletableFuture<?> send(String topic, String key, String body) {
+    CompletableFuture<Object> result = new CompletableFuture<>();
+    producer.send(new ProducerRecord<>(topic, key, body), (metadata, exception) -> {
+      if (exception == null)
+        result.complete(metadata);
+      else
+        result.completeExceptionally(exception);
+    });
+    return result;
+  }

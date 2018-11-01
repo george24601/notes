@@ -20,12 +20,16 @@ curl	    --request PUT \
 
 curl 0.0.0.0:8500/v1/catalog/service/mockservice | jq
 
+curl 0.0.0.0:8500/v1/catalog/service/vault | jq
+
 #It is usually preferable to instead use the agent endpoints for deregistration as they are simpler and perform anti-entropy.
 #note that you have to run this from the instance the actual service runs on!
 curl -v	    --request PUT \
 	        0.0.0.0:8500/v1/agent/service/deregister/mockservice-development-10000
 
 curl 0.0.0.0:8500/v1/health/service/mockservice?passing=true | jq
+
+curl 0.0.0.0:8500/v1/health/service/vault?passing=true | jq
 
 
 curl --request PUT \
