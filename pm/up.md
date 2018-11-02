@@ -6,20 +6,6 @@ Options
 
 2. Ask people to give feedback directly to the issuser, most likely your supervisor.
 
-
-# Building relationship
-
-1. Authority care most what you can contribute in the future
-
-2. To affect opinions of people, not only the person himself, but also whoever that can directly affect the said person too. Build common interest between the people around the authority
-
-4. Easier to build new relationship than saving old relationship
-
-5. Can be a leader or follower regardless of current status and self-esteem
-
-6. Sacrifice short term interest, and move to a different position to avoid contraversy and power struggle
-
-
 # Scenario: Sudden bad news/crisis
 
 Options: 
@@ -72,4 +58,20 @@ Slowing down helps you to be more conscious about what you are saying. If you ca
 
 Place both feet on the floor and put your hands on your knees. Face the person you’re talking with.
 
-One reason to put conclusion first is to help form the first impression, and trick person into confirmation bias
+### Culture
+
+a critical feature of effective complex organisations is that they make people do all the jobs.
+
+I was shocked to discover that it was not considered standard to have the overall manager personally vet new hires.
+
+Training is the highest leverage activity a manager can do to increase the output of an organization.  Don’t leave training to outsiders, do it yourself.
+
+never complain your company or your team's task in front your subordinates - and stop the complaints at you! However, it is OK to complain to your boss! 
+
+### Building relationship
+
+1. Authority care most what you can contribute in the future
+2. To affect opinions of people, not only the person himself, but also whoever that can directly affect the said person too. Build common interest between the people around the authority
+4. Easier to build new relationship than saving old relationship
+5. Can be a leader or follower regardless of current status and self-esteem
+6. Sacrifice short term interest, and move to a different position to avoid contraversy and power struggle

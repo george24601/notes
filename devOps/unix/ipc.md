@@ -1,6 +1,12 @@
 File
 
-Signal / Asynchronous System Trap
+### Signal
+
+Signals are similar to interrupts, the difference being that interrupts are mediated by the processor and handled by the kernel while signals are mediated by the kernel (possibly via system calls) and handled by processes. The kernel may pass an interrupt as a signal to the process that caused it
+
+Signal handling is vulnerable to race conditions. As signals are asynchronous, another signal (even of the same type) can be delivered to the process during execution of the signal handling routine.
+
+Other exceptions, however, the kernel cannot process intelligently and it must instead defer the exception handling operation to the faulting process. This deferral is achieved via the signal mechanism, wherein the kernel sends to the process a signal corresponding to the current exception.
 
 Socket
 -------
