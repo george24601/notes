@@ -14,12 +14,22 @@ Runtime weaving: class ->(via bean reference) Proxy class (advice injected here 
 
 Spring’s AOP: Offers @AspectJ declarations: proxy classes, annotations for advice and pointcut declaration
 
-In section 3.3, we showed that Spring AOP is based on proxy patterns. Because of this, it needs to subclass the targeted Java class and apply cross-cutting concerns accordingly.
+Spring AOP is based on proxy patterns. Because of this, it needs to subclass the targeted Java class and apply cross-cutting concerns accordingly.
 
 But it comes with a limitation. We cannot apply cross-cutting concerns (or aspects) across classes that are “final” because they cannot be overridden and thus it would result in a runtime exception.
 
-The same applies for static and final methods. Spring aspects cannot be applied to them because they cannot be overridden. Hence Spring AOP because of these limitations, only supports method execution join points.
+The same applies for static and final methods. Spring aspects cannot be applied to them because they cannot be overridden. Hence Spring AOP because of these limitations, only supports method execution join points.It’s also worth noting that in Spring AOP, aspects aren’t applied to the method called within the same class.
 
-It’s also worth noting that in Spring AOP, aspects aren’t applied to the method called within the same class.
+### Dynamic proxy
+CGLib, aopallaince - no concrete class implementation, just define important concept interface
 
-That’s obviously because when we call a method within the same class, then we aren’t calling the method of the proxy that Spring AOP supplies. If we need this functionality, then we do have to define a separate method in different beans, or use AspectJ.
+MethodInterceptor < Interceptor < Advice, has a invoke(MethodInvocation) => MethodInvocation.proceed=> Method.invoke
+
+Proxy is done by PostProcessor calssed by postProcessBefore(After)Initialization
+
+* Find all pointcut bean
+* construct AdvisorSupport
+* Get proxy via proxyFactory
+
+
+

@@ -1,9 +1,3 @@
-### Configuration
-
-This annotation is used on classes that define beans. @Configuration is an analog for an XML configuration file – it is configuration using Java classes. A Java class annotated with @Configuration is a configuration by itself and will have methods to instantiate and configure the dependencies.
-
-Spring Configuration annotation indicates that the class has @Bean definition methods. So Spring container can process the class and generate Spring Beans to be used in the application.
-
 ### Async
 
 The @EnableAsync annotation switches on Spring’s ability to run @Async methods in a background thread pool. This class also customizes the used Executor.
@@ -18,10 +12,6 @@ self-invocation – calling the async method from within the same class – won�
 @Async can also be applied to a method with return type – by wrapping the actual return in the Future
 
 Unlike methods annotated with @Scheduled, the methods annotated with @Async can take arguments. They will be invoked in the normal way by callers at runtime rather than by a scheduled task.
-
-### Bean
-
-The @Bean annotation works with @Configuration to create Spring beans. As mentioned earlier, @Configuration will have methods to instantiate and configure dependencies. Such methods will be annotated with @Bean. The method annotated with this annotation works as the bean ID, and it creates and returns the actual bean.
 
 ### Component
 

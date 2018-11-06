@@ -1,0 +1,10 @@
+#!/bin/bash
+#start a new screen session with session name
+screen -S sessionName
+screen -d -R sessionName
+
+#list running sessions/screens	
+screen -ls
+
+#back to the same terminal
+screen -r

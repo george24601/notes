@@ -98,16 +98,6 @@ Java's array allows depth subcheckng, and will raise runtime excpetion if the su
 Java and c# allow null to have any object type, so every field access and method call includes a run-time check for null => NullPonterException => proposals to never hold null support, e.g., Option types in ML
 
 ---
-function subtyping
-if ta <: tb then t->ta <: t-> tb => return tyeps are covariants for function subtyping meaning the subtyping for the return types works "the same way" as for types overall
-
-but argument types are NOT covariant for function subtyping => but contravariance, i.e. => f accepting super type
-
-If tb <: ta, then ta -> t <: tb -> t
-
-function subtyping is needed for higher-order functions or for stoirng functions themselves in records
-
----
 a subtype can have extra fields
 because fields are mutable, a subtype cannot have a different type for a field
 a subytpe can have extra methods

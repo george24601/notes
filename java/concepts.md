@@ -2,7 +2,7 @@ Hashmap, TreeMap, LinkedHashMap, HashTab, thread-safe maps. How concurrentMap, C
 
 CyclicBarrier
 
-NIO - selector, blocking and non-blocking, BIO vs NIO, AIO?
+NIO - selector, blocking and non-blocking, BIO vs NIO, AIO? mmap, sendfile
 
 class loader - double parent delegation
 dual parent loading - same class as java class name? different types of class loader?
@@ -24,9 +24,6 @@ Generics, type erasing at compile time, so that run time has no type info
 < ? extends T>, <? super T>, and <?>,
 
 Design: use generics to implement LRU, hints: LinkedHashMap, removeEldestEntry()
-
-can you pass List<String> as List<Object> param? How about vice versa?  
-answer is no - contravariant and co-variant
 
 Example of type unchecked warning,e.g.,  List<String> rawList = new ArrayList()
 
