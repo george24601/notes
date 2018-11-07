@@ -17,3 +17,6 @@ another implementation, Note that the operand stack of the current frame is alwa
 . In the remainder of this book, "pushing a value onto the stack" refers to pushing a value onto the operand stack of the current frame.
 
 the stack also has reference to the dynamic linking information
+
+
+

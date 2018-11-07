@@ -28,6 +28,16 @@ why do we need second-level VM mapping table?
 
 what does buffer and cache in free mean?
 
+* Terminal exec() to load the exe into memory, code, data, bbs, stack are mapped into memory space via mmap()
+* pass cpu control to DLL 
+* If user mode asks for huge memory, use map to allocate memory, but what returned is virtual memory - physical memory is allocationed only at the first time visit
+* on free(), return to memory allocator, which will in turn return memory to the system.
+* When applied vm much larger than physical memory, will OOM
+* cache and DLL is mapped to kernal cache, i.e., when executing shared file mapping, file first read to cache, and then to the user process's space
+* ipc based on tmpfs has the same lifecycle as kernel - can't be released by drop_caches, but can swap out 
+* file mapping: code,d ata, DLL shred storage, user program's file mapping
+* anonymous mapping: bbs, heap, malloced by mmap, mmap shared memory itself
+
 # segmentation of symbol table, source text, constant, parse tree, and call stack
 
 # Memory-mapping file

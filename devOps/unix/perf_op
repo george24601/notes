@@ -1,0 +1,85 @@
+#!/bin/bash
+
+#try to limit the average load to < 0.7 * CPU cores 
+top -p pid_value
+
+top -u franshesco
+
+#sort by %CPU
+top -o %CPU
+
+<<CS
+note may need to install sysstat
+check # of CSs, possible caues
+1. normal CS by CPU
+2. has higher priority tasks
+3. I/O blocking
+4. resourse contention and failed to acquire
+CS
+#check context switch times, 10 times, once per second, see if cs >> in. Can use pidstat on top of it
+vmstat -1 -10
+
+#check memory, unit kb, buffer is buffer cache in memory, 
+#second line is the memory used by the program = free + buffers + cached. Note that buffers and cached are considered used from OS pov
+#grep oom_killer is /var/log/messages
+free
+
+
+#It is best to run iostat specifying a time interval in seconds (for example iostat -x 30)
+
+#Display a continuous device report at two second intervals
+
+<<IOSTAT
+rrqm/s: The number of read requests merged per second that were queued to the device
+
+rsec/s: The number of sectors read from the device per second.
+
+avgrq-sz:The average size (in sectors) of the requests that were issued to the device.
+
+await:The average time (in milliseconds) for I/O requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.
+
+%util
+Percentage of CPU time during which I/O requests were issued to the device (bandwidth utilization for the device). Device saturation occurs when this value is close to 100%.
+
+IOSTAT
+iostat -dc 10
+
+###jstack
+
+#shows the heapsize
+java -XX:+PrintFlagsFinal -version | grep HeapSize
+
+#find jvm thread with highest cpu usage, can use jps to get java process id
+#you can also use jps if you know the process name
+top -H -p 63847
+
+#find thread 2803, 2833 high cpu usage within that thread
+
+# find java processes
+ps axu | grep java
+
+#thread dump
+sudo jstack 63847 > 1.log
+
+#need to covert decimal pid to hex
+echo "obase=16; 3747" | bc
+
+#if you need one-off stack, kill -3 would show the dump as well
+kill  -3 63847
+
+### info on GC 
+jstat -gcxx -t pid $INTERVAL $COUNT
+
+#check heap usage 
+jmap -heap -dump:file=xxx  pid
+
+#show java process id
+jps
+
+#view the port associated with a daemon
+lsof -i -n -P | grep sendmail
+
+#list open files in the open space
+lsof -P -n | wc -l
+
+

@@ -68,9 +68,6 @@ env DISPLAY=foo.bar:1.0 xcalc
 #take out --decode to encode
 base64 --decode ${FILE_PATH}
 
-#list open files in the open space
-lsof -P -n | wc -l
-
 # -n to not append the extra newline, use --decode after base64 to decode
 echo -n ${DD_KEY} | base64 
 
@@ -84,3 +81,27 @@ diff <(grep somestring file1) <(grep somestring file2)
 #default value for variables
 #You can also assign directly with ${VAR:=defaultval} (equals sign, not dash) but note that this won’t work with positional variables in scripts or functions.
 THIRD_ARG="${3:-no_third_arg}"
+
+
+#show which processes are using a specified file, file system, or unix socket.
+fuser -m -u /mnt/usb1
+
+#check what processes are using a network port
+fuser -v -n tcp 80
+
+pmap -x [pid]
+
+#starts the program abcd in the background in such a way that the subsequent logout does not stop it.
+#nohup is often used in combination with the nice command to run processes on a lower priority
+nohup abcd &
+
+# Set the maximum number of open files to 10.
+ulimit -n 10
+
+#d, l, s(ocket), c(har device), p(ipe), -(other, e.g., normal file)
+#add exec permission
+chmod u+x xxx.sh
+
+#make the file readonly by the group and other user
+chmod go-w xxx.sh
+

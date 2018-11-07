@@ -1,5 +1,3 @@
-Hashmap, TreeMap, LinkedHashMap, HashTab, thread-safe maps. How concurrentMap, ConcurrentHashMap vs HashMap
-
 CyclicBarrier
 
 NIO - selector, blocking and non-blocking, BIO vs NIO, AIO? mmap, sendfile
@@ -42,3 +40,7 @@ string pool will NOT be GCed - string pool concat is done at COMPILE time, at RU
 Difference between Thread.run and Thread.start
 
 When will reflection not get the params?
+
+error vs exception:  error is mostly VM related, e.g., stackoverflowerror, outofmemoryerror, Exception means recoverable 
+
+

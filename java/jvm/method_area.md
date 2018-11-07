@@ -23,3 +23,4 @@ String s3="kv" + "ill";
 System.out.println( s0==s3 );//true
 
 
+In JDK 1.8, method area no longer exists, compile code and data moved to metaspace, it no longer uses heap, uses native memory instead

@@ -97,3 +97,8 @@ All arrays have an extra integer "length" field stored in their header
 
 The object header consists of a mark word and a klass pointer.
 
+stack can cause out of memory too. OS has limit on # of threads in a process, by experience is about 3000
+
+method area can go OOM by creating many dynamic types
+
+DirectMemory can cause OOM, e.g., java NIO

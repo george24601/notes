@@ -119,4 +119,4 @@ If this is you, you probably want an iptables rule something like this on your h
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ```
 
-
+C10K - PID was a signed 16-bit int - i.e. 32k processes max
