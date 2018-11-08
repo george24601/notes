@@ -107,6 +107,12 @@ A thread cannot call wait(), notify() or notifyAll() without holding the lock on
 
 ### Nested Monitor Lockout
 
-To avoid slipped conditions the testing and setting of the conditions must be done atomically by the thread doing it, meaning that no other thread can check the condition in between the testing and setting of the condition by the first thread
+Notice how the lock() method first synchronizes on "this", then synchronizes on the monitorObject member. If isLocked is false there is no problem. The thread does not call monitorObject.wait(). If isLocked is true however, the thread calling lock() is parked waiting in the monitorObject.wait() call.
+
+The problem with this is, that the call to monitorObject.wait() only releases the synchronization monitor on the monitorObject member, and not the synchronization monitor associated with "this". In other words, the thread that was just parked waiting is still holding the synchronization lock on "this".
+
+### slipped conditions
 
 that fair lock implementation problem?
+
+### re-entrant read-write lock?

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 ##dig###
 <<DATA
 the answer section:
@@ -55,6 +54,9 @@ sudo tcpdump dst port $PORT
 
 #-i : Select interface that the capture is to take place on, this will often be an ethernet card or wireless adapter but could also be a vlan or something more unusual. Not always required if there is only one network adapter. "any" means all interfaces
 sudo tcpdump -i any dst port 8500
+
+#take a dump at tcp port at 900
+sudo tcpdump -iany tcp port 8500
 
 #-X: show the packet's contents
 #-w Writing a standard pcap file is a common command option.
@@ -126,3 +128,28 @@ sudo ss -nt dport \< :100
 
 # connections to remote port 80
 sudo ss -nt state connected dport = :80
+
+#(TLS) Tells curl to use the specified certificate file to verify the peer. The file may contain multiple CA certificates. The certificate(s) must be in PEM format. Normally curl is built to use a default file for this, so this option is typically used to alter that default file.
+curl --cacert <file>
+
+#check domain owner info
+
+whois example.com
+
+#check corresponding IP address's MAC address - network card physical address
+ip n (ip neighbor)
+
+#see if server ignores the ACK from client,i.e., server thinks connection is NOT up yet, server will set a reset to server
+cat /proc/sys/net/ipv4/tcp_abort_on_overflow
+
+#check tcp connections at each state, don't
+ss -nat
+
+#check open sockets
+lsof -i:port
+
+#check # of tcp connections
+sar -n SOCK
+
+#follows routes a packet takes
+traceroute

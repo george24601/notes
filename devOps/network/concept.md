@@ -44,8 +44,6 @@ Ensure that your network access control and security group rules allow the relev
 Your instance is only aware of the private (internal) IP address space defined within the VPC and subnet.
 
 
-
-
 LB
 -------
 1. can use dns to do LB -> but client side cache will still return the deleted ip

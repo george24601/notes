@@ -76,7 +76,7 @@ what is alive, is it too much?
 
 3. /proc/${PID}/fd, /proc/${PID}/task
 
-4. pstree、netstat - to check process creation and network connection #
+4. pstree、ss - to check process creation and network connection #
 
 # native method stack
 

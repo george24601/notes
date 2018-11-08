@@ -1,21 +1,12 @@
 CyclicBarrier
 
-NIO - selector, blocking and non-blocking, BIO vs NIO, AIO? mmap, sendfile
-
-class loader - double parent delegation
-dual parent loading - same class as java class name? different types of class loader?
+AIO vs NIO, AIO? mmap, sendfile
 
 object life cycle from creation to destruction
 
-Design: deduct money not into negative (distirbuted transaction and lock), Idempotency (can not deduct more than once)
-
 distributed session settings, consistency, idempotency
 
-use of jmap and jutil?
-
 protential problem with bouldless blocking queue?
-
-Design: service's interfact implementation, load balance and route robin between 3 IPs (consider concurrency case)
 
 Generics, type erasing at compile time, so that run time has no type info
 
@@ -42,5 +33,3 @@ Difference between Thread.run and Thread.start
 When will reflection not get the params?
 
 error vs exception:  error is mostly VM related, e.g., stackoverflowerror, outofmemoryerror, Exception means recoverable 
-
-

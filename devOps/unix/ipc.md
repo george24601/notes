@@ -59,5 +59,16 @@ Memory-mapped file
 -------
 A file mapped to RAM and can be modified by changing memory addresses directly instead of outputting to a stream.
 
+in most operating systems the memory region mapped actually is the kernel's page cache (file cache), meaning that no copies need to be created in user space.
+
+Non-persisted files are not associated with a file on a disk. When the last process has finished working with the file, the data is lost. These files are suitable for creating shared memory for inter-process communications (IPC)
 
 a file descriptor (FD, less frequently fildes) is an abstract indicator (handle) used to access a file or other input/output resource, such as a pipe or network socket.Each Unix process (except perhaps a daemon) should expect to have three standard POSIX file descriptors, corresponding to the three standard streams, 0, 1, 2 - stdin stdout stderr
+
+The memory-mapped approach has its cost in minor page faults—when a block of data is loaded in page cache, but is not yet mapped into the process's virtual memory space.
+
+Perhaps the most common use for a memory-mapped file is the process loader in most modern operating systems
+
+When a process is started, the operating system uses a memory mapped file to bring the executable file, along with any loadable modules, into memory for execution. Most memory-mapping systems use a technique called demand paging, where the file is loaded into physical memory in subsets (one page each), and only when that page is actually referenced.
+
+Another common use for memory-mapped files is to share memory between multiple processes

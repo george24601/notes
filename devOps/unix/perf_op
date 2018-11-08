@@ -81,5 +81,3 @@ lsof -i -n -P | grep sendmail
 
 #list open files in the open space
 lsof -P -n | wc -l
-
-
