@@ -1,11 +1,19 @@
-### Architecture ###
+### Architecture
 Reflections on software architecture problems
 
-### Papers ###
-Papers summaries with study questions/answers
-
-### DevOps ###
+### DevOps
 Tools, notes, and scripts on unix, network, and aws
 
-### Specific ###
+### Java
+
+### Microservice
+Tools, patterns, and notes related to microservices
+
+### Papers
+Papers summaries with study questions/answers
+
+### Python
+
+### Specific
 Notes on specific tools/frameworks
+
