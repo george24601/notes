@@ -74,3 +74,7 @@ implements ApplicationListener<ApplicationReadyEvent> {
 }
 //As an alternative, you can do this using @EventListenerannotation on a Bean method, passing as argument the class event you want to hook to
 ```
+
+In a Spring-based application, your application objects will live within the Spring container. As illustrated in figure 2.1, the container will create the objects, wire them together, configure them, and manage their complete lifecycle from cradle to grave (or new to finalize() as the case may be).
+
+Spring comes with several container implementations that can be categorized into two distinct types. Bean factories (defined by the org.springframework.beans.factory.BeanFactory interface) are the simplest of containers, providing basic support for DI. Application contexts (defined by the org.springframework.context.ApplicationContext interface) build on the notion of a bean factory by providing application framework services, such as the ability to resolve textual messages from a properties file and the ability to publish application events to interested event listeners.

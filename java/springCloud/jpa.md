@@ -35,11 +35,15 @@ try {
 
 The transactional annotation itself defines the scope of a single database transaction. The database transaction happens inside the scope of a persistence context.
 
-The persistence context is in JPA the EntityManager, implemented internally using an Hibernate Session (when using Hibernate as the persistence provider).
+To rollback the exception programmatically - You are strongly encouraged to use the `declarative approach` to `rollback` if at all possible.
+```
+@Transactional(rollbackFor={MyException1.class, MyException2.class, ....})
+public Result doStuff(){
+   ...
+}
 
-The persistence context is just a synchronizer object that tracks the state of a limited set of Java objects and makes sure that changes on those objects are eventually persisted back into the database.
-
-This is a very different notion than the one of a database transaction. One Entity Manager can be used across several database transactions, and it actually often is.
+@Transactional(rollbackFor = Exception.class)
+```
 
 What defines the EntityManager vs Transaction relation?
 
@@ -55,7 +59,16 @@ Probably you're also using Spring Data. Calls on Spring Data repositories are by
 
 @Transactional annotations within your own code, however, are only evaluated when you have @EnableTransactionManagement activated (or configured transaction handling some other way).
 
-
 By default, Spring Boot will enable JPA repository support and look in the package (and its subpackages) where @SpringBootApplication is located. If your configuration has JPA repository interface definitions located in a package not visible, you can point out alternate packages using @EnableJpaRepositories and its type-safe basePackageClasses=MyRepository.class parameter.
 
+Spring recommends that you only annotate concrete classes (and methods of concrete classes) with the @Transactional annotation, as opposed to annotating interfaces.
 
+Then with @Transaction the default behavior is that any RuntimeException triggers rollback, and any checked Exception does not. Then your transaction roll back for all RuntimeException an for the checked Exception Throwable
+
+Only unchecked exceptions (that is, subclasses of java.lang.RuntimeException, but not java.lang.Exception()) are rollbacked by default.
+
+EJB CMT does not roll back the transaction automatically on an application exception (that is, a checked exception other than java.rmi.RemoteException). While the Spring default behavior for declarative transaction management follows EJB convention (roll back is automatic only on unchecked exceptions), it is often useful to customize this.
+
+BMT. If we need a finer control over business logic or want to introduce savepoints, this type of technique should be adopted, where a bean provider has a responsibility to start, commit, and roll back the transaction.
+
+If we want to delegate the responsibility to a container, we use this instead. Sometimes we call it a declarative transaction. We all know in Spring that, using the @Transactional annotation, we can adopt a declarative transaction technique.

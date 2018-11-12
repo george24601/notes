@@ -1,3 +1,6 @@
+/*Below, a poorman's implementation
+ *
+ */
 public class ThreadPool {
 
     private BlockingQueue taskQueue = null;

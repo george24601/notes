@@ -1,9 +1,41 @@
 #!/bin/bash
+<<TOP
+* Note that `top` has different layouts on centos and os x
+* Are there too many users? Load average should be < 0.5 * # of cores
+* If `us` is too high, then user processes are consuming much CPU resources, use `top -p $PID`
+* If `sy` is too high, what is kernel working on?
+* If `wa` is too high, the cpu idle waits for IO too much.
+* If `Swap` > 0, are we running out of physical RAM?
+* Check if `VIRT` is within your expectation - You should have a basic idea on how much virtual memory a process uses.
+
+ni: high nice value user space process
+
+Tasks
+-------
+PR: it is the process actual priority, as viewed by the Linux kernel, the scheduling priority of the process. For normal processes, the kernel priority is simply +20 from the nice value. Thus a process with the neutral nice value of zero has a kernel priority of 20. For processes running under real-time, the value of the field is RT
+
+RES: It is the resident memory size. Resident memory is the amount of non-swapped physical memory a task is using. It stands for the resident size, which is an accurate representation of how much actual physical memory a process is consuming. (This also corresponds directly to the %MEM column.)
+
+SHR: SHR is the shared memory used by the process and it indicates how much of the VIRT size is actually sharable (memory or libraries). In the case of libraries, it does not necessarily mean that the entire library is resident.
+
+%MEM: It represents the percentage of available physical memory used by the process.
+
+TIME+: The total CPU time the task has used since it started, with precision up to hundredth of a second.
+
+COMMAND: The command which was used to start the process
+
+cache is page cache/disk cache in memory
+cache for file system I/O, also used as other deviced's cache, e..g, block device
+buffer cache is for block device IO -, also memory managed by block
+
+number of online customers is more straightforward, number of concurent request is more accurate
+TOP
+
 
 #try to limit the average load to < 0.7 * CPU cores 
 top -p pid_value
 
-top -u franshesco
+top -U franshesco
 
 #sort by %CPU
 top -o %CPU
@@ -17,12 +49,15 @@ check # of CSs, possible caues
 4. resourse contention and failed to acquire
 CS
 #check context switch times, 10 times, once per second, see if cs >> in. Can use pidstat on top of it
+# if si(swap into memory) and so(swap out to harddrive) often > 0, means memory may not be enough
+# us(user execution time) too high, means user process consumes too much CPU 
+# wa(IO wait percentable), means IO wait too much
 vmstat -1 -10
 
 #check memory, unit kb, buffer is buffer cache in memory, 
-#second line is the memory used by the program = free + buffers + cached. Note that buffers and cached are considered used from OS pov
+#second line is the memory used by the program = free + buffers + cached. Note that buffers and cached are considered used from OS pov, note the difference between buffer and cache
 #grep oom_killer is /var/log/messages
-free
+free -h
 
 
 #It is best to run iostat specifying a time interval in seconds (for example iostat -x 30)
@@ -97,16 +132,8 @@ du -h --max-depth=1
 #free space at each mouting point
 df -h
 
-#show available physical memeroy, swap memroy, and buffer used by the kernel
-free -h
-
 #check a process's memory usage 
 pmap $PID
-
-# if si(swap into memory) and so(swap out to harddrive) often > 0, means memory may not be enough
-# us(user execution time) too high, means user process consumes too much CPU 
-# wa(IO wait percentable), means IO wait too much
-vmstat
 
 # check process parent-child relationship
 pstree 
