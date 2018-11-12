@@ -65,27 +65,25 @@ This approach requires one more moving part - the external process - that needs 
 # Defend against stampede
 
 0. happens when cache server restarts or many cache entries expire at the same time, so all traffics hit DB
-
 1. Real db should have enough capacity in case of cache failure
-
 2. HA cache, sharding, but additional cache on the caller side is very debatable
-
 3. stagger the cache time out,e.g., add a randomized slacks 
+4. Another case is some super hot key got expired, and much traffic hits the DB. 
+  * To solve it, set a mutex key (SETNX), and then load db and set the cache. Otherwise, retry the whole get cache method
+  * Alternatively, inside value itself set a timeout value to1 (which is less than to2), when we read the cache and find it already expired, we extend timeout1, and reset it on cache 
+  * do not send expiring time, but store the logical value inside the value, if we find it is about to expire, use a background thread to update construct the value asyncly
+
 
 # competing renew problem
 
-1. in case we need only one renewl (e.g., leased tokens, or 1 thread per node), just use cron job in the backend instead of front end
-
+1. in case we need only one renew (e.g., leased tokens, or 1 thread per node), just use cron job in the backend instead of front end
 2. add a timestamp to token, so don't renew too frequently
-
 3. service layer will extend the renew period, and itself will renew, while others still think it is safe to use the cache
 
 # cache penetration
 
 1. look for a non-exist key for a long time -> a lot of traffic goes to DB too
-
-2. need to cache empty results
-
+2. cache empty results  with < 5 min expiry time 
 3. For a key that does not exist for sure, use bloomfilter to filter
 
 

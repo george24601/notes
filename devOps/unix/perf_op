@@ -81,3 +81,32 @@ lsof -i -n -P | grep sendmail
 
 #list open files in the open space
 lsof -P -n | wc -l
+
+###last time  system online
+uptime
+
+###who are on this machine
+who -a
+
+###uname -a
+system version
+
+#under current dir, each dir's space
+du -h --max-depth=1
+
+#free space at each mouting point
+df -h
+
+#show available physical memeroy, swap memroy, and buffer used by the kernel
+free -h
+
+#check a process's memory usage 
+pmap $PID
+
+# if si(swap into memory) and so(swap out to harddrive) often > 0, means memory may not be enough
+# us(user execution time) too high, means user process consumes too much CPU 
+# wa(IO wait percentable), means IO wait too much
+vmstat
+
+# check process parent-child relationship
+pstree 

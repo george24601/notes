@@ -1,5 +1,4 @@
-IntelliJ
------------- 
+### IntelliJ
 recent files pop-up
 C + A + arrow 
 
@@ -14,3 +13,5 @@ S + F6
 
 reformat
 A + C + L
+
+RC + Show Diagram on types
