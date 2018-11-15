@@ -68,3 +68,35 @@ It instructs the compiler to check parent classes for matching methods. In this 
 ### Deprecated
 
 indicates that the marked element is deprecated and should no longer be used. The compiler generates a warning whenever a program uses a method, class, or field with the @Deprecated annotation. When an element is deprecated, it should also be documented using the Javadoc @deprecated tag, as shown in the following example.
+
+
+
+Try to avoid field injection and setter injection, prefer constructor injection
+
+How do you go about testing classes using field injection? Chances are you’re somewhere along the path of memorizing the unintuitive Mockito idiom for doing this
+
+```
+@RunWith(MockitoJUnitRunner.class)
+public class MyBeanTest {
+    @Mock
+    private AnotherBean anotherBean;
+    @InjectMocks
+    private MyBean target;
+    //Tests...
+}
+```
+
+Classes Using Field Injection Are Non-Final, but Are Prone to Circular Dependencies. This problem can be resolved by either making one of the dependencies not required (allow the field to be null with @Autowired(required = false)) or lazy (set the field after resolving beans that depend on this bean with @Lazy).
+
+since final fields can be initialized in the constructor, our dependencies can be immutabl
+
+```
+public class MyBeanTest {
+    private AnotherBean anotherBean = Mockito.mock(AnotherBean.class);
+    private MyBean target = new MyBean(anotherBean);
+    //Tests...
+}
+```
+
+
+
