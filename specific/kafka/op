@@ -1,0 +1,7 @@
+#!/bin/bash
+
+bin/kafka-consumer-groups.sh -bootstrap-server  $BROKER:9092 -describe -group $CONSUMER_GROUP
+
+bin/kafka-consumer-groups.sh --bootstrap-server $BROKER:9092 --group my-group --reset-offsets --to-latest --topic $TOPIC --execute
+
+

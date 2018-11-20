@@ -29,3 +29,15 @@ Java NIO’s selectors allow a single thread to monitor multiple channels of inp
 Reading from a channel is simple: we simply create a buffer and then ask a channel to read data into it. Writing is also fairly simply: we create a buffer, fill it with data, and then ask a channel to write from it.
 
 java.net will require one thread per socket.
+
+There are four different events we can listen for, each is represented by a constant in the SelectionKey class:
+
+Connect – when a client attempts to connect to the server. Represented by SelectionKey.OP_CONNECT
+Accept – when the server accepts a connection from a client. Represented by SelectionKey.OP_ACCEPT
+Read – when the server is ready to read from the channel. Represented by SelectionKey.OP_READ
+Write – when the server is ready to write to the channel. Represented by SelectionKey.OP_WRITE
+
+The ready set defines the set of events that the channel is ready for. It is an integer value as well;
+
+
+

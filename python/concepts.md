@@ -40,4 +40,20 @@ Important warning: The default value is evaluated only once. This makes a differ
 
 List comprehension?
 
+object's __dict__ dictionary
+
+An underscore  at the beginning is used to denote private variables in Python. Please note that private variables don't exist in Python. There are simply norms to be followed. The language itself don't apply any restrictions.
+
+We can use the @ symbol along with the name of the decorator function and place it above the definition of the function to be decorated.
+
+In Python, this magic is done as `function(*args, **kwargs)`. In this way, args will be the tuple of positional arguments and kwargs will be the dictionary of keyword arguments.
+
+```python
+def works_for_all(func):
+    def inner(*args, **kwargs):
+        print("I can decorate any function")
+        return func(*args, **kwargs)
+    return inner
+```
+
 

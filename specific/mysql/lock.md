@@ -100,8 +100,5 @@ SELECT * FROM TABLE WHERE ID > 200 LOCK IN SHARE MODE -- S + gap lock from (200.
 
 SELECT * FROM TABLE WHERE ID = 200 FOR UPDATE-- current read X on clustered index 
 SELECT * FROM TABLE WHERE ID > 200 FOR UDPATE-- X on clustered index + gap locks from ID (200....
-
-
-
 ```
 

@@ -33,6 +33,13 @@ shopt -s cdspell
 #shell to exit if any subcommand or pipeline returns a non-zero status
 set -e
 
+#-a Mark variables and function which are modified or created for export to the environment of subsequent commands. 
+#Note that you can use + to revert/undo the set option
+set -a
+
+#why do we need exec here???
+exec locust -f $LOCUST_FILE
+
 #multiline to a single line
 cat file.txt|xargs
 

@@ -33,4 +33,13 @@ Proxy is done by PostProcessor calssed by postProcessBefore(After)Initialization
 * Get proxy via proxyFactory
 
 
+Spring’s meta-annotation support lets you define custom shortcut annotations for your specific use cases.
+
+```java
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Transactional("order")
+public @interface OrderTx {
+}
+```
 
