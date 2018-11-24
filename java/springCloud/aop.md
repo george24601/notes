@@ -34,6 +34,7 @@ Proxy is done by PostProcessor calssed by postProcessBefore(After)Initialization
 
 
 Spring’s meta-annotation support lets you define custom shortcut annotations for your specific use cases.
+an annotation is termed as meta-annotation if it is used on another annotation
 
 ```java
 @Target({ElementType.METHOD, ElementType.TYPE})

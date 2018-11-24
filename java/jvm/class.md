@@ -2,21 +2,6 @@ when class laoded by JVM, it will create an instanceKlass, and leave it the meth
 
 when new(), JVM will create instanceOopDec, which contains mark work, pointer to metadata, and instance data,
 
-A.
-String str1 = "abcd"  - in constant pool
-
-String str2 = new String("abcd") - in heap space
-
-B. how many objects does it create? 
-
-String s1 = new String("abc");
-
-How do you verify it?
-
-C.
-doube parent delegate model???
-Bootstrap classloader?
-
 ### classloader
 
 the Java virtual machine contains two kinds of class loaders: a bootstrap class loader and user-defined class loaders. The bootstrap class loader is a part of the virtual machine implementation, and user-defined class loaders are part of the running Java application. Classes loaded by different class loaders are placed into separate name spaces inside the Java virtual machine.
@@ -68,4 +53,25 @@ Between the last field of the superclass and the first field of the subclass the
 
 When the first field of a subclass is a double or long and the superclass doesn’t align to an 8 bytes boundary, JVM will break rule 2 and try to put an int, then shorts, then bytes, and then references at the beginning of the space reserved to the subclass until it fills the gap.
 
+### class file
+
+Field ref:
+* 1
+  * 2
+* 16
+  * 5
+  * 6
+
+```bash
+#show bytecode
+java -p Employee.class
+```
+
+Bytecode:
+new #24 -- create Account instance
+invokespecial #26  --call Account()
+invokevirutal #27 -- acall Account.check()
+
+LineNumberTalbe: stores bytecode -> source code line #
+LocalVariableTable: stores method's arg NAMES, otherwise, IDE will have to use arg0, arg1...etc
 

@@ -17,7 +17,12 @@ Before a transaction can acquire a shared lock on a row or a table, it must firs
 
 Before a transaction can acquire an exclusive lock on a row in a table, it must first acquire an IX lock on the TABLE.
 
-Intention locks do not block anything except full table requests (for example, LOCK TABLES ... WRITE). The main purpose of intention locks is to show that someone is locking a row, or going to lock a row in the table.
+Intention locks do not block anything except full table requests (for example, LOCK TABLES ... WRITE). The main purpose of intention locks is to show that someone is locking a row, or going to lock a row in the table, BUT IT WILL CONFLICT S AND X locks 
+
+SELECT ... LOCK IN SHARE MODE: always requires IS lock
+SELECT ... FOR UPDATE: needs IX lock
+
+
 
 ### Record Locks 
 
@@ -44,15 +49,21 @@ Note that table locks are implemented by gap locks!
 ### Next-Key Locks
 A next-key lock is a combination of a record lock on the index record AND a gap lock on the GAP before the index record.
 
-InnoDB performs row-level locking in such a way that when it searches or scans a table index, it sets shared or exclusive locks on the index records it encounters. Thus, the row-level locks are actually index-record locks. A next-key lock on an index record also affects the “gap” before that index record.
+InnoDB performs row-level locking in such a way that when it searches or scans a table index, it sets shared or exclusive locks on the index records it encounters. Thus, the row-level locks are actually index-record locks. A next-key lock on an index record also affects the “gap” before that index record. 
+
+Mainly to avoid phatom read!
 
 
 
 ### Insert Intention Locks
 
+for insert lock, based on gap lock, but will they need not wait for each other if they are not inserting at the same postion within the gap, 
+
+
+
 ### AUTO-INC Locks
 
-In the simplest case, if one transaction is inserting values into the table, any other transactions must wait to do their own inserts into that table, so that rows inserted by the first transaction receive consecutive primary key values.
+In the simplest case, if one transaction is inserting values into the table, any other transactions MUST WAIT to do their own inserts into that table, so that rows inserted by the first transaction receive consecutive primary key values.
 
 To use the AUTO_INCREMENT mechanism with an InnoDB table, an AUTO_INCREMENT column must be defined as part of an index such that it is possible to perform the equivalent of an indexed SELECT MAX(ai_col) lookup on the table to obtain the maximum column value.
 

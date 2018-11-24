@@ -32,3 +32,23 @@ both contentType header as well as the target type (targetClass) which allows th
 BINDING: The contentType can be set per destination binding by setting the spring.cloud.stream.bindings.input.content-type property.
 
 The logic for selecting the appropriate MessageConverter resides with the argument resolvers (HandlerMethodArgumentResolvers), which trigger right before the invocation of the user-defined handler method (which is when the actual argument type is known to the framework
+
+headerMode: 
+When set to none, disables header parsing on input. Effective only for messaging middleware that does not support message headers natively and requires header embedding. This option is useful when consuming data from non-Spring Cloud Stream applications when native headers are not supported. When set to headers, it uses the middleware’s native header mechanism. When set to embeddedHeaders, it embeds headers into the message payload.
+
+useNativeDecoding
+When set to true, the inbound message is deserialized directly by the client library, which must be configured correspondingly (for example, setting an appropriate Kafka producer value deserializer). When this configuration is being used, the inbound message unmarshalling is not based on the contentType of the binding. When native decoding is used, it is the responsibility of the producer to use an appropriate encoder (for example, the Kafka producer value serializer) to serialize the outbound message. Also, when native encoding and decoding is used, the headerMode=embeddedHeaders property is ignored and headers are not embedded in the message. See the producer property useNativeEncoding.
+
+Default: false.
+
+public void handleRequest(@RequestBody String body, @PathVariable("target") target,
+           @RequestHeader(HttpHeaders.CONTENT_TYPE) Object contentType) {
+        sendMessage(body, target, contentType);
+    }
+
+private void sendMessage(String body, String target, Object contentType) {
+        resolver.resolveDestination(target).send(MessageBuilder.createMessage(body,
+                new MessageHeaders(Collections.singletonMap(MessageHeaders.CONTENT_TYPE, contentType))));
+    }
+
+

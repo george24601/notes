@@ -118,3 +118,8 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ```
 
 C10K - PID was a signed 16-bit int - i.e. 32k processes max
+
+how to handle corss domain problem?
+resend vs redirect?
+full conneciton q vs half connection q
+

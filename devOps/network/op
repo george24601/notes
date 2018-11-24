@@ -55,7 +55,7 @@ sudo tcpdump dst port $PORT
 #-i : Select interface that the capture is to take place on, this will often be an ethernet card or wireless adapter but could also be a vlan or something more unusual. Not always required if there is only one network adapter. "any" means all interfaces
 sudo tcpdump -i any dst port 8500
 
-#take a dump at tcp port at 900
+#take a dump at tcp port at 900, can also filter by src/dst
 sudo tcpdump -iany tcp port 8500
 
 #-X: show the packet's contents
@@ -63,6 +63,7 @@ sudo tcpdump -iany tcp port 8500
 #Without the option to force line (-l) buffered (or packet buffered -C) mode you will not always get the expected response when piping the tcpdump output to another command such as grep.
 sudo tcpdump -nn -w "${PCAP_FILE}"
 
+# -w saves the dump instead of printing in on screen
 sudo tcpdump -nn -XX -w d1 host 172.16.100.64
 
 #-r $target_fiile : load the file written by -w
@@ -70,12 +71,23 @@ sudo tcpdump -nn -XX -r d1
 
 sudo tcpdump -nn -r d1
 
+#grab only icmp, i.e., ping
+sudo tcpdump -i any -c5 icmp
+
 <<SAMPLE
 00:34:41.474225 IP willow.csail.mit.edu.39675 > maple.csail.mit.edu.5001: Flags [.], seq 1473:2921, ack 1, win 115, options [nop,nop,TS val 282136474 ecr 282202089], length 1448
 
 The time stamp 00:34:41.474225 denotes the time at which the packet was transmitted by willow.
+
+Flags: S/F/P/R/. means SYN/FIN/PUSH/RST/ACK can be combined
 In reality, there is one sequence number per byte of data. 
 The above packet has a sequence number 1473:2921, indicating that it contains all bytes from byte #1473 to byte #2920 (= 2921 - 1) in the stream, which is a total of 1448 bytes.
+
+ack 1 means it is the sender, on receiver side it would be the next expected sequence number 
+
+win: # of bytes available in the receiver buffer
+
+length means the data packet's effective payload length
 
 00:34:41.482047 IP maple.csail.mit.edu.5001 > willow.csail.mit.edu.39675: Flags [.], ack 2921, win 159, options [nop,nop,TS val 282202095 ecr 282136474], length 0
 

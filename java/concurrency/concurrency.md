@@ -44,16 +44,6 @@ Only one thread can execute inside any of these two methods at the same time.
 
 Had the second synchronized block been synchronized on a different object than MyClass.class, then one thread could execute inside each method at the same time.
 
-
-### self-rotate lock?
-
-# re-entrant lock
-
-# readwrite lock
-
-
-# biased and unbiased lock
-
 ### java compare and swap
 
 use it to implement an optimistic lock
@@ -115,4 +105,3 @@ The problem with this is, that the call to monitorObject.wait() only releases th
 
 that fair lock implementation problem?
 
-### re-entrant read-write lock?

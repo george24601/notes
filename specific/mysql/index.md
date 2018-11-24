@@ -2,4 +2,19 @@ If the table has no PRIMARY KEY or suitable UNIQUE index, InnoDB internally gene
 
 By definition, each table has only 1 clusted index
 
-non-cluster index's leaf is not row, instead, still points to the cluster index's B+ tree
+non-cluster index's leaf is not row, instead, still points to the cluster index's B+ tree, i.e., normal idnex stores the PK, on search, it will normal index to find PK, and use PK to find the row
+
+InnoDB doesn't support hash index, but any part related to sort/range, it is messed up
+
+B tree: 
+* both leaves and non-leaves store the data 
+* normally a page is 4KB in OS, mysql seems to be 16k - can set node size to page size to take advantage of pre-read
+* for each node, # of keys j,  m/2 <= j <= m, where m is the # of branchs
+
+B+ tree:
+* non-leaves no longer store the data
+* linked list between lieaves -> range search easier 
+* leaves goes to disk, non-leaves good for memeory
+
+
+

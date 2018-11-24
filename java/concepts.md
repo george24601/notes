@@ -10,8 +10,6 @@ protential problem with bouldless blocking queue?
 
 Generics, type erasing at compile time, so that run time has no type info
 
-< ? extends T>, <? super T>, and <?>,
-
 Design: use generics to implement LRU, hints: LinkedHashMap, removeEldestEntry()
 
 Example of type unchecked warning,e.g.,  List<String> rawList = new ArrayList()
@@ -32,4 +30,4 @@ Difference between Thread.run and Thread.start
 
 When will reflection not get the params?
 
-error vs exception:  error is mostly VM related, e.g., stackoverflowerror, outofmemoryerror, Exception means recoverable 
+Netty vs NIO

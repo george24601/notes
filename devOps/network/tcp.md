@@ -29,6 +29,11 @@ Each of these headers contains a bit known as the "reset" (RST) flag. In most pa
 * LISTENING: listen to connection request from remote TCP port server has to open a socket and listen to it - status to LISTEN
 * SYN-SENT: client side, after SYN is sent, if good, it becomes ESTABLISHED, normally SYN-SENT should be quick
 * SYN-RCVD: server side, after ACK+SYN is sent, similar to SYN-SENT, should be very quick to change to ESTABLISHED. Note if you have many SYN-RCVD, maybe a sign of SYN flood DDoS
-* CLOSE_WAIT: server side, when client disconnects and sends FIN. If server side doesn't not receive the FIN, it will remain established
+* CLOSE_WAIT: server side, when client disconnects and sends FIN. If server side doesn't not receive the FIN, it will remain established. Needed so that client can ACK all on-the-fly but after FIN data
 * FIN-WAIT-1: active close side, after FIN is sent
 * FIN-WAIT-2: after the active close side receives ACK 
+
+On server receiving SYN, needs to ACK + SYN back to the client to ensure the new connection is not some stale packet. Client set will SEQ NO  = ISN + 1, normally ISN is randomized by time clock + 32 bit counter - a lot of ISN gen details
+
+
+

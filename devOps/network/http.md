@@ -11,4 +11,4 @@ In addition to Upgrade headers, the client sends a Sec-WebSocket-Key header cont
 
 It is important (from a security perspective) to validate the "Origin" header during the connection establishment process on the server side (against the expected origins) to avoid Cross-Site WebSocket Hijacking attacks, which might be possible when the connection is authenticated with Cookies or HTTP authentication. It is better to use tokens or similar protection mechanisms to authenticate the WebSocket connection when sensitive (private) data is being transferred over the WebSocket.
 
-http/tcp long connection?
+http/tcp long connection???
