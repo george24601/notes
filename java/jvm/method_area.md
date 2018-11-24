@@ -1,3 +1,8 @@
+NO LONGER EXISTS IN java 8!
+
+class info and byte code is moved to metaspace which is not on heap memory, it is on NativeMemory instead
+
+
 the memory of the method area need not be contiguous. It could be allocated on a heap--even on the virtual machine's own heap.
 
 The method area can also be garbage collected. Because Java programs can be dynamically extended via user-defined class loaders, classes can become "unreferenced" by the application. If a class becomes unreferenced, a Java virtual machine can unload the class (garbage collect it) to keep the memory occupied by the method area at a minimum.

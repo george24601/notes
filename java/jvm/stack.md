@@ -18,5 +18,6 @@ another implementation, Note that the operand stack of the current frame is alwa
 
 the stack also has reference to the dynamic linking information
 
+Out of memory possible if sum of stack + heap + method are > available physical memory
 
 

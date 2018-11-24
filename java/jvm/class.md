@@ -2,21 +2,32 @@ when class laoded by JVM, it will create an instanceKlass, and leave it the meth
 
 when new(), JVM will create instanceOopDec, which contains mark work, pointer to metadata, and instance data,
 
-### classloader
+### life cycle 
 
-the Java virtual machine contains two kinds of class loaders: a bootstrap class loader and user-defined class loaders. The bootstrap class loader is a part of the virtual machine implementation, and user-defined class loaders are part of the running Java application. Classes loaded by different class loaders are placed into separate name spaces inside the Java virtual machine.
+* load - done by the class loader
+  * get byte stream via FQTN
+  * transform byte stream to method area's runtime data structure
+  * create java.lang.Class for this type
+* Verification
+  * file format, meta data, byte code, symbol reference
+* Prep
+  * allocate memories for class variable and assign init values
+  * However for final value, at this same it will be that value already
+* Analyze
+  * Replace symbolic refrence with direct reference
+* Init 
+  * execute type constructor () method, 
+  * () is to construct types: which ahs static code block or static assign value
+  * () method is to execute instances, which runs () first
 
-user-defined class loaders are regular Java objects whose class descends from java.lang.ClassLoader. The methods of class ClassLoader allow Java applications to access the virtual machine's class loading machinery. Also, for every type a Java virtual machine loads, it creates an instance of class java.lang.Class to represent that type. Like all objects, user-defined class loaders and instances of class Class reside on the heap. Data for loaded types resides in the method area.
-
-user-defined class loader that is created automatically when the virtual machine starts up
-
-The two overloaded defineClass() methods accept a byte array, data[], as input. Starting at position offset in the array and continuing for length bytes, class ClassLoader expects binary data conforming to the Java class file format--binary data that represents a new type for the running application -- with the fully qualified name specified in name. The type is assigned to either a default protection domain, if the first version of defineClass() is used, or to the protection domain object referenced by the protectionDomain parameter. Every Java virtual machine implementation must make sure the defineClass() method of class ClassLoader can cause a new type to be imported into the method area.
-
-The findSystemClass() method accepts a String representing a fully qualified name of a type. When a user-defined class loader invokes this method in version 1.0 and 1.1, it is requesting that the virtual machine attempt to load the named type via its bootstrap class loader. If the bootstrap class loader has already loaded or successfully loads the type, it returns a reference to the Class object representing the type. If it can't locate the binary data for the type, it throws ClassNotFoundException. In version 1.2, the findSystemClass() method attempts to load the requested type from the system class loader. Every Java virtual machine implementation must make sure the findSystemClass() method can invoke the bootstrap (if version 1.0 or 1.1) or system (if version 1.2 or later) class loader in this way.
-
-The resolveClass() method accepts a reference to a Class instance. This method causes the type represented by the Class instance to be linked (if it hasn't already been linked). The defineClass() method, described previous, only takes care of loading. (See the previous section, "Loading, Linking, and Initialization" for definitions of these terms.) When defineClass() returns a Class instance, the binary file for the type has definitely been located and imported into the method area, but not necessarily linked and initialized. Java virtual machine implementations make sure the resolveClass() method of class ClassLoader can cause the class loader subsystem to perform linking.
-
-#life cycle 
+Sequence of actions:
+* parent's staic block
+* child's static block
+* parent's non-stack block
+* parent's ctor
+* child's non-static block
+* child's ctor
+  
 
 A class variable initializer is an equals sign and expression next to a class variable declaration
 

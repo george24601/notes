@@ -39,5 +39,5 @@ Write – when the server is ready to write to the channel. Represented by Selec
 
 The ready set defines the set of events that the channel is ready for. It is an integer value as well;
 
-
+ByteBuffer's allocateDirect allocates native memory
 

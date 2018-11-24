@@ -102,3 +102,9 @@ stack can cause out of memory too. OS has limit on # of threads in a process, by
 method area can go OOM by creating many dynamic types
 
 DirectMemory can cause OOM, e.g., java NIO
+
+### recommendation
+* Same -Xmx and -Xms, default 1/64 and 1/4 of physical memory
+* Bigger new gen, but no need to be big if old gen is on CMS, new gen recommended to be 3/8 of the heap
+* method area no longer needs to be big
+* default stack size - 1M

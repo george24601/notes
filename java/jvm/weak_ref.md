@@ -7,5 +7,3 @@ Why do we need that in thread local map?
 
 parent to child: strong ref
 child to parent: weak ref
-
-

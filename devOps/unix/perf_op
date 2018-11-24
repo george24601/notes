@@ -108,6 +108,8 @@ jstat -gcxx -t pid $INTERVAL $COUNT
 #check heap usage 
 jmap -heap -dump:file=xxx  pid
 
+jmap -histo pid
+
 #show java process id
 jps
 

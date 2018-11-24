@@ -8,22 +8,6 @@ An application can also be parallel but not concurrent. This means that the appl
 
 Finally, an application can also be both concurrent and parallel, in that it both works on multiple tasks at the same time, and also breaks each task down into subtasks for parallel execution.
 
-### synchronized
-
-A synchronized instance method in Java is synchronized on the instance (object) owning the method.
-
-every object has a monitor lock, montiorenter and monitorexit
-
-Synchronized static methods are synchronized on the class object of the class the synchronized static method belongs to. Since only one class object exists in the Java VM per class, only one thread can execute inside a static synchronized method in the same class.
-
-
-1. Mark word in object header,e.g., hashcode, ago, bias, lock tag. Object header = mark word + type pointer
-2. an object in addiotn has the instance data and padding
-3. JVM will take note of the thread id/adress of Thread pointer  as the owner of the syncrhonzied object
-4. for unbias lock, will assign a Lock Record in the stack frame, as copy the object's mark own to each. Whoever wants to access it will change the address of Lock Record into Mark Word
-5. for heavyweight lock,e.g., monitor, need to use Mutex from OS. The synched object will point to the created monitor object
-6. monitor lock, monitor enter, monitor exit
-
 
 ```
 public static synchronized void log1(String msg1, String msg2){
@@ -43,17 +27,6 @@ public static synchronized void log1(String msg1, String msg2){
 Only one thread can execute inside any of these two methods at the same time.
 
 Had the second synchronized block been synchronized on a different object than MyClass.class, then one thread could execute inside each method at the same time.
-
-### java compare and swap
-
-use it to implement an optimistic lock
-
-Basically, compare and swap compares an expected value to the concrete value of a variable, and if the concrete value of the variable is equals to the expected value, swaps the value of the variable for a new variable.
-
-Modern CPUs have built-in support for atomic compare and swap operations. From Java 5 you can get access to these functions in the CPU via some of the new atomic classes in the java.util.concurrent.atomic package.
-
-# AbstractQueuedSynchronizer
-and cas??
 
 ### deadlock
 

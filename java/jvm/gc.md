@@ -26,17 +26,14 @@ ompaction as possible
 The postion of the compaction area changes at each GC, using one or two sliding windows to determin the next position
 
 
-# where are the GC roots?
+### GC roots
 
-GC root : referred by local variables in VM stackframe
+* referred by local variables in VM stackframe
+* method area, referred by class static 
+* method area, referred by constant
+* local method stack, referred by JNI
 
-method area, referred by class static 
-
-method area, referred by constant
-
-local method stack, referred by JNI
-
-so gc root exists in method area, stack, and local method area - referenced by GC roots will not be GCed.  can GC root be on heap too?
+After tagged unreachable from GC, will decide is object didn't override finalize() or finalized() has been called, then the object will be executed
 
 gc uses a daemon thread inside JVM
 
@@ -123,15 +120,18 @@ What if an object in the old generation need to reference an object in the young
 To handle these cases, there is something called the a "card table" in the old generation, which is a 512 byte chunk. Whenever an object in the old generation references an object in the young generation, it is recorded in this table. When a GC is executed for the young generation, only this card table is searched to determine whether or not it is subject for GC, instead of checking the reference of all the objects in the old generation. This card table is managed with write barrier. This write barrier is a device that allows a faster performance for minor GC.
 
 The young generation is divided into 3 spaces.
-One Eden space
-Two Survivor spaces
+* Eden
+* From Survior
+* To Survivor
 
-GC order:
-The majority of newly created objects are located in the Eden space.
-After one GC in the Eden space, the surviving objects are moved to one of the Survivor spaces. 
-After a GC in the Eden space, the objects are piled up into the Survivor space, where other surviving objects already exist.
-Once a Survivor space is full, surviving objects are moved to the other Survivor space. Then, the Survivor space that is full will be changed to a state where there is no data at all.
-The objects that survived these steps that have been repeated a number of times are moved to the old generation.
+
+### GC algo:
+* The majority of newly created objects are located in the Eden space.
+* After a GC in the Eden space, the objects are piled up into the Survivor space, where other surviving objects already exist. 
+* If Eden + From Surivior obj size < To Survivor , move them to to surivior, otherwise, to old gen directly. increase these object age by 1, when it hits age 15, they enter old gen
+* after minor GC, if Eden is not enough to for the new object, the new object goes to old gen directly
+*  > To Surivior half size, and with equal age, any objects older than this age  enter the old gen
+* when doing minor GC, will determin if old gen's max continious space > total object sizes in the new gen, this is ONE of the steps of deciding if we should do full gc instead
 
 Note that in HotSpot VM, two techniques are used for faster memory allocations. One is called "bump-the-pointer," and the other is called "TLABs (Thread-Local Allocation Buffers)."
 
@@ -142,3 +142,45 @@ The GC in the old generation uses an algorithm called "mark-sweep-compact."
 The first step of this algorithm is to mark the surviving objects in the old generation.
 Then, it checks the heap from the front and leaves only the surviving ones behind (sweep).
 In the last step, it fills up the heap from the front with the objects so that the objects are piled up consecutively, and divides the heap into two parts: one with objects and one without objects (compact).
+
+### gc method area
+Maining decide if constant and types are still in use.Need to satify ALL of
+* all instance are gced
+* the ClassLoader for this type is gced
+* java.lang.Class object is not referenced at all
+
+### GC algos
+mark and sleep are slow, memory will be fragmented - for old gen
+replication: use only half, gc, and then move survior into the other region - for young gen
+tag-clean up: tag object toward the same direction,and in the end clear all memory outside object boundtry - for old gen
+
+safe point: points where you can pause user thread,i.e., needed for GC
+
+safe area: for sleep or blocked threads, in the code, reference relationship won't change
+
+
+### collectors
+* Serial: for new gen, single thread, use replication algo, stop the world
+* ParNew: mutli-threaded verion of serials
+* Parallel Scanvenge: at new gen , repliation, at old gen, tag and clean
+* Serial old: Serial for old gen
+* CMS: shortest stop time. 
+  * tag objects directed referenced by GC roots
+  * use GC root tracing to tag all garbages, user thread still running
+  * fix changed introduced during the concurrent tag stage
+  * concurrently use tag-cleanup to clean the garbage object, user thread . By default, will defrag first
+  * By default GC thread 3 = (CPU + 3) /4
+* Parallel old: for old gen, use mark-clean
+* G1: 
+  * jdk9 default, separate heap into same size regions
+  * Every region has a Remembmered Set to record 
+  * similar steps as CMS: init tag, concurrent tag, final tag, filter and recycle. Note that in the last step it will pause the user thread, and will instead recycle region only based on how much gc pause user wants
+
+### To print GC log
+* XX:+PrintGCDetalis 
+* -Xlog-gc:/data/jvm/gc.log
+* -verbose:gc
+
+
+
+
