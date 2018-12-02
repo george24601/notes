@@ -108,3 +108,11 @@ DirectMemory can cause OOM, e.g., java NIO
 * Bigger new gen, but no need to be big if old gen is on CMS, new gen recommended to be 3/8 of the heap
 * method area no longer needs to be big
 * default stack size - 1M
+
+
+Reference Objects???
+
+### To print GC log
+* XX:+PrintGCDetalis 
+* -Xlog-gc:/data/jvm/gc.log
+* -verbose:gc

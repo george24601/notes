@@ -18,3 +18,7 @@ locust -f locust_files/my_locust_file.py --no-web -c 1000 -r 100
 
 #The files will be named example_distribution.csv and example_requests.csv
 locust -f examples/basic.py --csv=example --no-web -t10m
+
+locust -f stg_l_p2p.py --master
+
+locust -f stg_l_p2p.py --slave --master-host=0.0.0.0

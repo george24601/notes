@@ -1,3 +1,18 @@
+ApplicationContext:
+* Central interface to provide configuration for an application. This is read-only while the application is running, but may be reloaded if the implementation supports this.
+* The root interface for accessing a Spring bean container. This is the basic client view of a bean container.
+
+By container they refer to the core spring Inversion of Control container. The container provides a way to initialize/bootstrap your application (loading the configuration in xml files or annotations), through use of reflection, and to manage the lifecycle of Java objects, which are called beans or managed objects.
+
+ApplicationContext (as an interface, and by the direct implementation flavours) is the mean of implementing this IoC container, as opposed to the BeanFactory, which is now (a sparsely used and) more direct way of managing beans, which by the way provides the base implementation features for the ApplicationContext.
+
+an implementation of a Spring containe
+
+A container manages the life cycle of an object. Tomcat is a an example of a container. Just like Spring container manages the app via ApplicationContext a J2EE container Tomcat manages the app via web.xml
+
+It supports multithreading, spawns a new thread for every request for a resource.
+
+
 ### Bean
 
 This annotation is used on classes that define beans. @Configuration is an analog for an XML configuration file – it is configuration using Java classes. A Java class annotated with @Configuration is a configuration by itself and will have methods to instantiate and configure the dependencies.
@@ -60,10 +75,6 @@ public void doSomethingAfterStartup() {
 public class ApplicationStartup 
 implements ApplicationListener<ApplicationReadyEvent> {
 
-  /**
-   * This event is executed as late as conceivably possible to indicate that 
-   * the application is ready to service requests.
-   */
   @Override
   public void onApplicationEvent(final ApplicationReadyEvent event) {
 

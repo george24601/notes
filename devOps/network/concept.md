@@ -12,10 +12,6 @@ a data table stored in a router or a networked computer that lists the routes to
 
 With hop-by-hop routing, each routing table lists, for all reachable destinations, the address of the next device along the path to that destination: the next hop.
 
-VPN
----------
-It is common for packets originating in private address spaces to be misrouted onto the Internet. Private networks often do not properly configure DNS services for addresses used internally and attempt reverse DNS lookups for these addresses, causing extra traffic to the Internet root nameservers. 
-
 NAT
 -----------
  remapping one IP address space into another by modifying network address information in Internet Protocol (IP) datagram packet headers while they are in transit across a traffic routing device
@@ -44,20 +40,18 @@ Ensure that your network access control and security group rules allow the relev
 Your instance is only aware of the private (internal) IP address space defined within the VPC and subnet.
 
 
-LB
--------
+### LB
 1. can use dns to do LB -> but client side cache will still return the deleted ip
-
 2. A single request might come as multiple packets, need it to be stickly, i..e, we need to maintian the mapping! - 4 layer load balancing
-
 3. 7 layer-loadblaancing, change packet all the way to the http level - NAT mode
-
 4. Separate request and responding, the server behind respond directly => all servers will have the same VIP bound to their loopback -> use ARP to broacast VIP, and machine with such IP will reply its own MAC address, but only LB can respond to the ARP reqeust -> but LB will not change IP data header, that means server ports must match LB prots - DR mode
-
 5. actual LB instances need to have same VIP and (virtual) MAC address  via ARP request
 
+### keepalived
 
-What does keeplive in http do?
+* Nginx clusters, with each instance deploys keepalived, and set them with the same virtual IP. But only one instance is up (active-standby)
+* use lvs/f5 IN FRONT OF nginx, e.g. f5 can do 100k qps, and use the same keepalived + virtual IP trick on lvs - enough for most cases
+* If you need EVEN HIGHER, add mutilple IPs for the same domain name,i.e., DNS polling
 
 Different between implementation of session and cookie?
 
@@ -123,3 +117,4 @@ how to handle corss domain problem?
 resend vs redirect?
 full conneciton q vs half connection q
 
+### Push CDNs vs Pull CDNs

@@ -26,14 +26,19 @@ One use case is, for e.g. if you only want to test if a port is still available/
 Each of these headers contains a bit known as the "reset" (RST) flag. In most packets this bit is set to 0 and has no effect; however, if this bit is set to 1, it indicates to the receiving computer that the computer should immediately stop using the TCP connection; it should not send any more packets using the connection's identifying numbers, called ports, and discard any further packets it receives with headers indicating they belong to that connection.
 
 ### tcp status
-* LISTENING: listen to connection request from remote TCP port server has to open a socket and listen to it - status to LISTEN
+* LISTENING: listen to connection request from remote TCP port server has to open a socket and listen to it 
 * SYN-SENT: client side, after SYN is sent, if good, it becomes ESTABLISHED, normally SYN-SENT should be quick
 * SYN-RCVD: server side, after ACK+SYN is sent, similar to SYN-SENT, should be very quick to change to ESTABLISHED. Note if you have many SYN-RCVD, maybe a sign of SYN flood DDoS
-* CLOSE_WAIT: server side, when client disconnects and sends FIN. If server side doesn't not receive the FIN, it will remain established. Needed so that client can ACK all on-the-fly but after FIN data
+* CLOSE_WAIT: server/passive close side, when client disconnects and sends FIN. If server side doesn't not receive the FIN, it will remain established. Needed so that client can ACK all on-the-fly but after FIN data
 * FIN-WAIT-1: active close side, after FIN is sent
 * FIN-WAIT-2: after the active close side receives ACK 
+* CLOSING: rare
+* TIME WAIT: Service gives a FIN, and client replies ACK, and client has to wait 2 2 * MSL so that server's resend FIN will timeout, 2 * MSL because it is the TIME of longest ACK time + longest FIN time. Common id gen is done by timebased + random
+* LAST-ACK: passive close side, the program received to EOF to call CLOSE, PCS will send a FIN and wait for ACK, e.g., when disconnect stress testing client, you will see many LAST-ACK
 
 On server receiving SYN, needs to ACK + SYN back to the client to ensure the new connection is not some stale packet. Client set will SEQ NO  = ISN + 1, normally ISN is randomized by time clock + 32 bit counter - a lot of ISN gen details
 
+
+timer: every conneciton has one
 
 
