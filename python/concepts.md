@@ -56,4 +56,8 @@ def works_for_all(func):
     return inner
 ```
 
+iterator? 
 
+yield?
+
+which queue is thread safe?

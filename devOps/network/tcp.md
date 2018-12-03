@@ -33,7 +33,7 @@ Each of these headers contains a bit known as the "reset" (RST) flag. In most pa
 * FIN-WAIT-1: active close side, after FIN is sent
 * FIN-WAIT-2: after the active close side receives ACK 
 * CLOSING: rare
-* TIME WAIT: Service gives a FIN, and client replies ACK, and client has to wait 2 2 * MSL so that server's resend FIN will timeout, 2 * MSL because it is the TIME of longest ACK time + longest FIN time. Common id gen is done by timebased + random
+* TIME WAIT: Service gives a FIN, and client replies ACK, and client has to wait 2 * MSL so that server's resend FIN will timeout, 2 * MSL because it is the TIME of longest ACK time + longest FIN time. Common id gen is done by timebased + random
 * LAST-ACK: passive close side, the program received to EOF to call CLOSE, PCS will send a FIN and wait for ACK, e.g., when disconnect stress testing client, you will see many LAST-ACK
 
 On server receiving SYN, needs to ACK + SYN back to the client to ensure the new connection is not some stale packet. Client set will SEQ NO  = ISN + 1, normally ISN is randomized by time clock + 32 bit counter - a lot of ISN gen details
@@ -41,4 +41,6 @@ On server receiving SYN, needs to ACK + SYN back to the client to ensure the new
 
 timer: every conneciton has one
 
+sticky packet??
 
+Too many time_wait? how about close_wait? What are the possible causes?

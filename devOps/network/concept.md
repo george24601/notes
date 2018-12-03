@@ -118,3 +118,14 @@ resend vs redirect?
 full conneciton q vs half connection q
 
 ### Push CDNs vs Pull CDNs
+
+### tcp long connection/keepalive
+when you set up a TCP connection, you associate a set of timers. Some of these timers deal with the keepalive procedure. When the keepalive timer reaches zero, you send your peer a keepalive probe packet with no data in it and the ACK flag turned on.
+
+The other useful goal of keepalive is to prevent inactivity from disconnecting the channel. It's a very common issue, when you are behind a NAT proxy or a firewall, to be disconnected without a reason. This behavior is caused by the connection tracking procedures implemented in proxies and firewalls, which keep track of all connections that pass through them. Because of the physical limits of these machines, they can only keep a finite number of connections in their memory. The most common and logical policy is to keep newest connections and to discard old and inactive connections first.
+
+### Http keep-alive
+
+using a single TCP connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair.
+
+In HTTP 1.1, all connections are considered persistent unless declared otherwise

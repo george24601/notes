@@ -126,3 +126,16 @@ When a session ends when the user logs out (exits the shell, which terminates th
 In Bash, a program can be started as a background job by appending an ampersand (&) to the command line; its output is directed to the terminal (potentially interleaved with other programs' output), but it cannot read from the terminal input.
 
 the kill builtin (not /bin/kill) can signal jobs by job ID as well as by process group ID – sending a signal to a job sends it to the whole process group, and jobs specified by a job ID should be killed by prefixing "%".
+
+### Green threads
+
+green threads are threads that are scheduled by a runtime library or virtual machine (VM) instead of natively by the underlying operating system. Green threads emulate multithreaded environments without relying on any native OS capabilities, and they are managed in user space instead of kernel space, enabling them to work in environments that do not have native thread support
+
+On a multi-core processor, native thread implementations can automatically assign work to multiple processors, whereas green thread implementations normally cannot
+
+Green threads significantly outperform Linux native threads on thread activation and synchronization.
+Linux native threads have slightly better performance on I/O and context switching operations.
+
+When a green thread executes a blocking system call, not only is that thread blocked, but all of the threads within the process are blocked
+
+To avoid that problem, green threads must use asynchronous I/O operations, although the increased complexity on the user side can be reduced if the virtual machine implementing the green threads spawns specific I/O processes (hidden to the user) for each I/O operation

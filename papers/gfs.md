@@ -53,25 +53,19 @@ Even if the master loses communication with a primary, it can safely grant a new
 sequence of actions for write
 
 1. client asks master for the location of chuck primary and other replicas
-
 2. client pushes data to all replicas
-
 3. client sends write request to primary
-
 4. primary decides order in which mutation are appended, and apply it locally 
-
-5. primary forward write requests to replicas
-
+5. primary forward write requests to ALL replicas, the consequence is that only need to read 1 replica to satisfy R + W > N
 6. primary gets ack from replicas, and reply to client
 
 
-In case of errors, the write may have succeeded at the primary and an arbitrary subset of the secondary replicas. (If it had failed at the
-primary, it would not have been assigned a serial number and forwarded.) The client request is considered to have failed, and the modified region is left in an inconsistent state. Our client code handles such errors by retrying the failed mutation.
+In case of errors, the write may have succeeded at the primary and an arbitrary subset of the secondary replicas. (If it had failed at the primary, it would not have been assigned a serial number and forwarded.) The client request is considered to have failed, and the modified region is left in an inconsistent state. Our client code handles such errors by retrying the failed mutation.
 
-GFS does not guarantee that all replicas are bytewise identical. It only guarantees that the data is written at least once as an atomic
-unit.
+GFS does not guarantee that all replicas are bytewise identical. It only guarantees that the data is written at least once as an atomic unit.
 
 for the operation to report success, the data must have been written at the same offset on all replicas of some chunk
+
 
 ---------
 After the leases have been revoked or have expired, the master logs the operation to disk. It then applies this log record to its in-memory
@@ -79,22 +73,17 @@ state by duplicating the metadata for the source file or directory tree. The new
 source files.
 
 --------
-Whenever the master grants a new lease on a chunk, it increases the chunk version number and informs the up-to-date replicas. The master
-and these replicas all record the new version number in their persistent state.
+Whenever the master grants a new lease on a chunk, it increases the chunk version number and informs the up-to-date replicas. The master and these replicas all record the new version number in their persistent state.
 
-If the master sees a version number greater than the one in its records, the master assumes that it failed when granting the lease and so
-takes the higher version to be up-to-date.
+If the master sees a version number greater than the one in its records, the master assumes that it failed when granting the lease and so takes the higher version to be up-to-date.
 
 --------
-If its machine or disk fails, monitoring infrastructure outside GFS starts a new master process elsewhere with the replicated operation log.
 Clients use only the canonical name of the master (e.g. gfs-test), which is a DNS alias that can be changed if the master is relocated to
 another machine.
 
-In fact, since file content is read from chunkservers, appli- cations do not observe stale file content. What could be stale within short
-windows is file metadata, like directory contents or access control information.
+In fact, since file content is read from chunkservers, applications do not observe stale file content. What could be stale within short windows is file metadata, like directory contents or access control information.
 It depends on the primary master only for replica location updates resulting from the primary’s decisions to create and delete replicas.
 
- Like other metadata, checksums are kept in memory and stored persistently with logging, separate from user data.
+Like other metadata, checksums are kept in master's memory and stored persistently with logging, separate from user data. By calculate we can see that metadata can fit into memory completely
 
------
-shadow master techinique
+shadow master techinique also means that 50% resource usage
