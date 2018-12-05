@@ -4,12 +4,10 @@ Spring Cloud Netflix Hystrix looks for any method annotated with the @HystrixCom
 
 Circuit breakers are a valuable place for monitoring. Any change in breaker state should be logged and breakers should reveal details of their state for deeper monitoring. Breaker behavior is often a good source of warnings about deeper troubles in the environment. Operations staff should be able to trip or reset breakers.
 
-In cases of error and an open circuit, a fallback can be provided by the developer.
-
-Propagating the Security Context or Using Spring Scopes???
-
 The state of the connected circuit breakers are also exposed in the /health endpoint of the calling application
 
 To enable the Hystrix metrics stream, include a dependency on spring-boot-starter-actuator and set management.endpoints.web.exposure.include: hystrix.stream. Doing so exposes the /actuator/hystrix.stream as a management endpoint
+
+Wrap your method in a Cmd type, note that HystrixCommand maintains a threadpool, which will run Cmd's run()
 
 

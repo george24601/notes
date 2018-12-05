@@ -14,4 +14,10 @@ You can think of them as all being created as the ApplicationContext initialises
 
 Beans can be configured as (scope) prototype beans - and for those, each time they are injected, a new instance is created. But that is not the default, and it's not all that commonly used.
 
-how is spring IoC implemented?
+how is spring IoC implemented? by reflection
+
+controller is a singleton, so may have threadsafety probiel
+
+DispatherServelt/HandlerMapping/HandlerAdaptor?
+
+difference between BeanFactory and ApplicationContext?

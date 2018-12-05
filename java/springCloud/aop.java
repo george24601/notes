@@ -58,3 +58,13 @@ public class LogTimeAspect {
 
     }
 }
+
+/*
+Spring’s meta-annotation support lets you define custom shortcut annotations for your specific use cases.
+an annotation is termed as meta-annotation if it is used on another annotation
+ */
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
+@Transactional("order")
+public @interface OrderTx {
+}

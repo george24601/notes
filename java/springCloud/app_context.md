@@ -6,20 +6,8 @@ By container they refer to the core spring Inversion of Control container. The c
 
 ApplicationContext (as an interface, and by the direct implementation flavours) is the mean of implementing this IoC container, as opposed to the BeanFactory, which is now (a sparsely used and) more direct way of managing beans, which by the way provides the base implementation features for the ApplicationContext.
 
-an implementation of a Spring containe
-
 A container manages the life cycle of an object. Tomcat is a an example of a container. Just like Spring container manages the app via ApplicationContext a J2EE container Tomcat manages the app via web.xml
 
-It supports multithreading, spawns a new thread for every request for a resource.
-
-
-### Bean
-
-This annotation is used on classes that define beans. @Configuration is an analog for an XML configuration file – it is configuration using Java classes. A Java class annotated with @Configuration is a configuration by itself and will have methods to instantiate and configure the dependencies.
-
-Spring Configuration annotation indicates that the class has @Bean definition methods. So Spring container can process the class and generate Spring Beans to be used in the application.
-
-The @Bean annotation works with @Configuration to create Spring beans. As mentioned earlier, @Configuration will have methods to instantiate and configure dependencies. Such methods will be annotated with @Bean. The method annotated with this annotation works as the bean ID, and it creates and returns the actual bean.
 
 ### How BeanFactory works
 

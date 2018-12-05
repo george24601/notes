@@ -1,4 +1,3 @@
-
 The Java compiler conditionally stores annotation metadata in the class files, if the annotation has a RetentionPolicy of CLASS or RUNTIME. Later, the JVM or other programs can look for the metadata to determine how to interact with the program elements or change their behavior.
 
 The AnnotatedElement interface provides access to annotations having RUNTIME retention. This access is provided by the getAnnotation, getAnnotations, and isAnnotationPresent methods. Because annotation types are compiled and stored in byte code files just like classes, the annotations returned by these methods can be queried just like any regular Java object.
@@ -13,8 +12,6 @@ The AnnotatedElement interface provides access to annotations having RUNTIME ret
 
 Runtime weaving: class ->(via bean reference) Proxy class (advice injected here to the proxy class)  ->(via reference) class
 
-Spring’s AOP: Offers @AspectJ declarations: proxy classes, annotations for advice and pointcut declaration
-
 Spring AOP is based on proxy patterns. Because of this, it needs to subclass the targeted Java class and apply cross-cutting concerns accordingly.
 
 But it comes with a limitation. We cannot apply cross-cutting concerns (or aspects) across classes that are “final” because they cannot be overridden and thus it would result in a runtime exception.
@@ -22,7 +19,13 @@ But it comes with a limitation. We cannot apply cross-cutting concerns (or aspec
 The same applies for static and final methods. Spring aspects cannot be applied to them because they cannot be overridden. Hence Spring AOP because of these limitations, only supports method execution join points.It’s also worth noting that in Spring AOP, aspects aren’t applied to the method called within the same class.
 
 ### Dynamic proxy
-CGLib, aopallaince - no concrete class implementation, just define important concept interface
+
+Spring AOP will create an aop object in memmory. Two ways: JDK and CGLib
+
+* JDK dynamic proxy based on reflection, requires InvocationHandler and Proxy type
+* CGLib, will create a subclass on run time
+
+CGLib- no concrete class implementation, just define important concept interface
 
 MethodInterceptor < Interceptor < Advice, has a invoke(MethodInvocation) => MethodInvocation.proceed=> Method.invoke
 
@@ -32,15 +35,4 @@ Proxy is done by PostProcessor calssed by postProcessBefore(After)Initialization
 * construct AdvisorSupport
 * Get proxy via proxyFactory
 
-
-Spring’s meta-annotation support lets you define custom shortcut annotations for your specific use cases.
-an annotation is termed as meta-annotation if it is used on another annotation
-
-```java
-@Target({ElementType.METHOD, ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Transactional("order")
-public @interface OrderTx {
-}
-```
 

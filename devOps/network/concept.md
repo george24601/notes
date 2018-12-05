@@ -53,10 +53,6 @@ Your instance is only aware of the private (internal) IP address space defined w
 * use lvs/f5 IN FRONT OF nginx, e.g. f5 can do 100k qps, and use the same keepalived + virtual IP trick on lvs - enough for most cases
 * If you need EVEN HIGHER, add mutilple IPs for the same domain name,i.e., DNS polling
 
-Different between implementation of session and cookie?
-
-Use script to calculate current tcp connections, and group them by the state
-
 # MAC address
 
 a unique identifier assigned to a network interface controller (NIC) for communications at the data link layer of a network segment.
@@ -112,10 +108,6 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 ```
 
 C10K - PID was a signed 16-bit int - i.e. 32k processes max
-
-how to handle corss domain problem?
-resend vs redirect?
-full conneciton q vs half connection q
 
 ### Push CDNs vs Pull CDNs
 
