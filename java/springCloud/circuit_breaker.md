@@ -10,4 +10,18 @@ To enable the Hystrix metrics stream, include a dependency on spring-boot-starte
 
 Wrap your method in a Cmd type, note that HystrixCommand maintains a threadpool, which will run Cmd's run()
 
+What data can we get from the CB?
 
+Spring Cloud Netflix Hystrix looks for any method annotated with the @HystrixCommand annotation, and wraps that method in a proxy connected to a circuit breaker so that Hystrix can monitor it. This currently only works in a class marked with @Component or @Service
+
+By default the name of command key is command method name: doTest, default group key name is class name of annotated method: HystrixService. You can change it using necessary @HystrixCommand properties
+
+```
+hystrix.command.default.<command property name>
+ 
+Example : hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds = 1000
+
+hystrix.command.<HystrixCommandKey>.<command property name>
+OR
+Example : hystrix.command.ServiceACommandKey.execution.isolation.thread.timeoutInMilliseconds = 1000
+```

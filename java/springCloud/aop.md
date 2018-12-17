@@ -12,11 +12,7 @@ The AnnotatedElement interface provides access to annotations having RUNTIME ret
 
 Runtime weaving: class ->(via bean reference) Proxy class (advice injected here to the proxy class)  ->(via reference) class
 
-Spring AOP is based on proxy patterns. Because of this, it needs to subclass the targeted Java class and apply cross-cutting concerns accordingly.
-
-But it comes with a limitation. We cannot apply cross-cutting concerns (or aspects) across classes that are “final” because they cannot be overridden and thus it would result in a runtime exception.
-
-The same applies for static and final methods. Spring aspects cannot be applied to them because they cannot be overridden. Hence Spring AOP because of these limitations, only supports method execution join points.It’s also worth noting that in Spring AOP, aspects aren’t applied to the method called within the same class.
+Hence Spring AOP because of these limitations, only supports method execution join points.It’s also worth noting that in Spring AOP, aspects aren’t applied to the method called within the same class.
 
 ### Dynamic proxy
 

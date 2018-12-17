@@ -79,6 +79,7 @@ This approach requires one more moving part - the external process - that needs 
 1. in case we need only one renew (e.g., leased tokens, or 1 thread per node), just use cron job in the backend instead of front end
 2. add a timestamp to token, so don't renew too frequently
 3. service layer will extend the renew period, and itself will renew, while others still think it is safe to use the cache
+* if a hot value is about to expire, can use mutex update or set another internal lease mechanism,i.e., if many set the same key, then use distrubited lock or meta-version for CAS
 
 # cache penetration
 
