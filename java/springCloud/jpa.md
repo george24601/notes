@@ -72,3 +72,7 @@ EJB CMT does not roll back the transaction automatically on an application excep
 BMT. If we need a finer control over business logic or want to introduce savepoints, this type of technique should be adopted, where a bean provider has a responsibility to start, commit, and roll back the transaction.
 
 If we want to delegate the responsibility to a container, we use this instead. Sometimes we call it a declarative transaction. We all know in Spring that, using the @Transactional annotation, we can adopt a declarative transaction technique.
+
+A JDBC batch can target one table only, so every new DML statement targeting a different table ends up the current batch and initiates a new one. Mixing different table statements is therefore undesirable when using SQL batch processing.
+
+

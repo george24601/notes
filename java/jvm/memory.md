@@ -111,8 +111,3 @@ DirectMemory can cause OOM, e.g., java NIO
 
 
 Reference Objects???
-
-### To print GC log
-* XX:+PrintGCDetalis 
-* -Xlog-gc:/data/jvm/gc.log
-* -verbose:gc

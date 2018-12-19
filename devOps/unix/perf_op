@@ -119,6 +119,11 @@ lsof -i -n -P | grep sendmail
 #list open files in the open space
 lsof -P -n | wc -l
 
+#show deleted but still referenced files, so use 
+lsof | grep deleted
+#don't just rm! echo write instead. Otherwise, df still shows referenced file size
+echo "" > tomcat.log
+
 ###last time  system online
 uptime
 

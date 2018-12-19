@@ -89,3 +89,4 @@ This approach requires one more moving part - the external process - that needs 
 
 
 Persistance may consume much resource on high volumes  - maybe persist on separate disk. Although persistance helps recovery, and can support certain storage requirement
+

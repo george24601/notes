@@ -17,3 +17,5 @@ memory - during object creation and destruction, what memory region is affected
 class object
 
 When will reflection not get the params?
+
+Why no return inside finally block?

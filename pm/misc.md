@@ -10,3 +10,5 @@ There is neither "dictator" nor "prophet": no single voter possesses the power o
 
 
 Shut up on issues related to money and people management - that is the management's job
+
+People tend to avoid losses than acquiring gains. Therefore, instead of taking stuff from people, construct a scenario where they are willing to give themselves.

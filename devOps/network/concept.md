@@ -121,3 +121,5 @@ The other useful goal of keepalive is to prevent inactivity from disconnecting t
 using a single TCP connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair.
 
 In HTTP 1.1, all connections are considered persistent unless declared otherwise
+
+socket api is between application layer and transport layer

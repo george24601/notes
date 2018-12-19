@@ -1,0 +1,12 @@
+#!/bin/bash
+#show bytecode
+java -p Employee.class
+
+
+### To print GC log
+-XX:+PrintGCDetalis 
+ -Xlog-gc:/data/jvm/gc.log
+ -verbose:gc
+
+#This will show heap memory, code region, unsafe.allocateMemory, DirectByteBuffer
+-XX:NativeMemroryTracking=summary
