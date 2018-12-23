@@ -31,10 +31,16 @@ when biased lock is competed by after thead, it will be upgraded to lightweight 
 
 if the sync obj lock is 01, jvm will setup a Lock Record in the stackframe to store the lock object's Mark Word, and then use CAS to change object's markwor to pointer to the Lock Record, and set Lock Record's owner to object's Mark Word, if good, then Mark Word's lock status is 00
 
+Thread will try CAS to the object header's mark word to the pointer to lock record
+
 if update failed, jvm will check object's mark word is pointing to current thread's stack frame, if only 1 waiting, the thread will just spin, if the thread spins too many times, or one thread is hold, one spinning, and a third coming, LW will upgrade to heavy weight lock
+
+When release, try CAD to repalce Mark Word back into object header. if failed, means there is contention with the lock, upgrade to heavyweight lock
 
 # heavyweight lock
 When upgrading to heavy weight lock, lock status changed to "10", Mark Word stores pointer to HW lock, all waiting threads wil bokc
+
+based on monitor inside the object, which in turns based on MutexLock from OS - blocking and waking up requiring OS, i.e., from user mode to kenel mode
 
 
 

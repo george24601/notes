@@ -53,7 +53,7 @@ This annotation is used on classes to indicate a Spring component. The @Componen
 
 ### Service
 
-This annotation is used on a class. @Service marks a Java class that performs some service, such as executing business logic, performing calculations, and calling external APIs. This annotation is a specialized form of the@Component annotation intended to be used in the service layer.
+This annotation is used on a class. @Service marks a Java class that performs some service, such as executing business logic, performing calculations, and calling external APIs. This annotation is a specialized form of the@Component annotation intended to be used in the service layer. better meaning, more specific than component
 
 ### Repository
 This annotation is used on Java classes that directly access the database. The @Repository annotation works as a marker for any class that fulfills the role of repository or Data Access Object.

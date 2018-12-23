@@ -16,6 +16,7 @@ A container manages the life cycle of an object. Tomcat is a an example of a con
   * By reflection, create new instance object by BeanDefinition's class object, and get a new bean object
   * doCreatBean - assign the new bean object to Bean definition, and inject properties in BeanDefinition to Bean  
 3. initializeBean - postProcessBeforeINitialiization, and postProcessAfterInitialization
+4. uses lazy loading
 
 
 ### ApplicationContext

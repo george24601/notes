@@ -20,4 +20,4 @@ controller is a singleton, so may have threadsafety probiel
 
 DispatherServelt/HandlerMapping/HandlerAdaptor?
 
-difference between BeanFactory and ApplicationContext?
+bean scope: singleton, prototype, request....
