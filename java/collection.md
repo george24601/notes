@@ -1,5 +1,3 @@
-Hashmap, TreeMap, LinkedHashMap, HashTab, thread-safe maps. How concurrentMap, ConcurrentHashMap vs HashMap
-
 ### Hashmap
 array (default 16) + linked list, inserted into head
 on 0.75 load, double the capacity, the main benefit is that length-1 is all 1, means we can use the last few bits of hashcode as the index
@@ -20,8 +18,10 @@ Get:
 * use the hash to locate array index inside the segment
 
 CHM(1.8):
-Node array + CAD + Synchronized, similarly, the underlying structure is array + linkedlist + RBT
-e.g. java unsafe, cas, aqs, re-entrant lock
+Node array + CAS + Synchronized + Unsafe: 
+value and next are volativle, can't setVlaue directly to change Node's value
+
+, similarly, the underlying structure is array + linkedlist + RBT
 
 
 

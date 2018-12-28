@@ -87,5 +87,3 @@ public final hasQueuedPredecessors() {
 
 }
 }
-
-
