@@ -113,3 +113,5 @@ SELECT * FROM TABLE WHERE ID = 200 FOR UPDATE-- current read X on clustered inde
 SELECT * FROM TABLE WHERE ID > 200 FOR UDPATE-- X on clustered index + gap locks from ID (200....
 ```
 
+### Deadlock
+common for big commands, FTS, big txn,

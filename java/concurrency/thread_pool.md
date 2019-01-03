@@ -1,11 +1,10 @@
-Not recommend to create via Executors static Factory, instead, use ThreadPoolExecutor 
-acc
-corePoolSize
-maximumPoolSzie
-workQueue
-keepAliveTime
-threadFactory
-handler
+NOT recommend to create via Executors static Factory, instead, use ThreadPoolExecutor 
+* corePoolSize
+* long keepAliveTime - when # of threads > cores, idle threads will wait this long before got terminated
+* maximumPoolSzie
+* workQueue
+* threadFactory
+* RejectedExecutionHandler handler - when out of thread range or queue capacity
 
 On execute() 
 1. if # of threads < corePoolSize, execute addWorker, 
@@ -24,5 +23,13 @@ On runWorker(Worker w):
 2. after acquiring the task, preexecute
 3. execute
 4. postexecute
+
+### Inside executor
+* ThreadPool
+* PoolWorker
+* Task
+* taskQueue
+* Recommend to use newCacheThreadExecutor, defaults to ThreadPoolExecutor
+* Real TP interface is ExecutorService / ScheduledExecutorService
 
 

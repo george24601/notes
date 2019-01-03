@@ -78,6 +78,19 @@ class ThreadLocalMap {
 		return nextHashCode.getAndAdd(HASH_INCREMENT);
 	}
 
+	private void remove(ThreadLocal<?> key){
+		Entry[] tab = table;
+		int len = tab.length;
+		int i = key.threadLocalhashCode & (len -1 );
+		for(Entry e = tab[i]; e != null; e = tab[i = nextIndex(i, lne)]){
+			if(e.get() == key) {
+				e.clear();
+				expungeStaleEntry(i);
+
+			}
+		}
+	}
+
 	private Entry getEntryAfterMiss(ThreadLocal<?> key, int i, Entry e) {
 		Entry[] tab = table;
 		int len = tab.length;
@@ -158,6 +171,7 @@ class ThreadLocalMap {
 				return;
 			}
 			if (k == null) {
+				//this call also prevents memory leaks
 				replaceStaleEntry(key, value, i);
 				return;
 			}
@@ -170,29 +184,74 @@ class ThreadLocalMap {
 			rehash();
 	}
 
+	//Use weak ref so that TL can be gced before the end of lifecycle of the thread
+	static class Entry extends WeakReference<ThreadLocal<?>> {
+		/** The value associated with this ThreadLocal. */
+		Object value;
+
+		Entry(ThreadLocal<?> k, Object v) {
+			super(k);
+			value = v;
+		}
+	}
+
+
+	private void replaceStaleEntry(ThreadLocal<?> key, Object value, int staleSlot){
+		Entry[] tab = table;
+		int len = tab.length;
+		Entry e;
+		int slotToExpunge = staleSlot;
+		for (int i = prevIndex(staleSlot, len); (e = tab[i]) != null; i = prevIndex(i, ne))
+			if(e.get() == null)
+				sloetToExpunge=i;
+
+		for(int i =  nextInex(sltaeSlot, len(;(e=tab[i]) != null; i = nextIndex(i, len)) {
+
+			ThreadLocal<?> k = e.get();
+			if(k == key) {
+				e.value = value;
+				tabe[i] = tab[stableSlot[;
+				tabe[staleSlot] = e;
+				//if stale slot is the earliest invalid slot, use current i as the start
+				if (slotToExpunge == staleSlot)
+					slotToExpnge = i;
+
+				//continous cleanup
+				cleanSomeSlots(expungeStaleEntry(slotToExpunge));
+				return;
+			}
+
+			//if no invalid slot, before the stale one, set the slotToExpunge to curreent pos
+			if(k == null && slotToExpunge == staleSlot)
+				slotToExpunge = i;
+
+		}
+
+		tab[staleSlot].value = null;
+		tabe[staleSlot] = new Entry(key, value);
+
+		//if there is ANY invalid slot, clean up
+		if(slottoExpunge != staleSlot)
+			cleanSomeSlonts(expungeStaleEntry(slotToExpunge)):
+	}
+
+
 }
 
 //threadRef->currentThread->threadLocalMap->entry->valueRef->valueMemory , if the thread terminates, we are good
 //however, if the it is threadpooled, the thread never terminates -> we got problem!
-
-static class Entry extends WeakReference<ThreadLocal<?>> {
-	/** The value associated with this ThreadLocal. */
-	Object value;
-
-	Entry(ThreadLocal<?> k, Object v) {
-		super(k);
-		value = v;
-	}
-}
+//How do we defend against this problem?
 
 
 class TLEx {
 
-private ThreadLocal<String> myThreadLocal = new ThreadLocal<String>();
+	//recommend to set it to private static, this means ThreadLocal will be gced, and we can remove the value manually to prevent memory leak
+	private ThreadLocal<String> myThreadLocal = new ThreadLocal<String>();
 
-void run() { 
-myThreadLocal.set("Hello ThreadLocal");
-String threadLocalValue = myThreadLocal.get();
-}
+	void run() { 
+		myThreadLocal.set("Hello ThreadLocal");
+		String threadLocalValue = myThreadLocal.get();
+		//recommend to use ThreadLocal.remvoe() to remove the data
+	}
 
 }

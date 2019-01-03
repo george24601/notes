@@ -7,3 +7,9 @@ Why do we need that in thread local map?
 
 parent to child: strong ref
 child to parent: weak ref
+
+soft ref: on GC, JVM will decide to recyle soft ref or not. 
+Weak ref: will be recycled in the next GC for sure
+Phantom Reference: rarely used?
+
+

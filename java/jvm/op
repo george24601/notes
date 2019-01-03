@@ -10,3 +10,8 @@ java -p Employee.class
 
 #This will show heap memory, code region, unsafe.allocateMemory, DirectByteBuffer
 -XX:NativeMemroryTracking=summary
+
+-XX:+PrintGCiTimeStamps 
+-XX:+PrintHeapAtGC
+
+
