@@ -23,7 +23,4 @@ value and next are volativle, can't setVlaue directly to change Node's value
 
 , similarly, the underlying structure is array + linkedlist + RBT
 
-
-
-
-
+what is the hashmap's inital capacity and size increase factor?
