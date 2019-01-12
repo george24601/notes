@@ -32,4 +32,4 @@ On runWorker(Worker w):
 * Recommend to use newCacheThreadExecutor, defaults to ThreadPoolExecutor
 * Real TP interface is ExecutorService / ScheduledExecutorService
 
-
+Actions when a thread is created in thread pool?
