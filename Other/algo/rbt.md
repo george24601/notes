@@ -1,6 +1,6 @@
 ### Invariants:
 * Root node black
-* Leaves are black empty node
+* Leaves are black EMPTY node,i.e., no data
 * every red node's two children are black
 * From node to all leaves, same # of black nodes
 

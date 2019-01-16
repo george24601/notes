@@ -41,17 +41,8 @@ Your instance is only aware of the private (internal) IP address space defined w
 
 
 ### LB
-1. can use dns to do LB -> but client side cache will still return the deleted ip
-2. A single request might come as multiple packets, need it to be stickly, i..e, we need to maintian the mapping! - 4 layer load balancing
-3. 7 layer-loadblaancing, change packet all the way to the http level - NAT mode
 4. Separate request and responding, the server behind respond directly => all servers will have the same VIP bound to their loopback -> use ARP to broacast VIP, and machine with such IP will reply its own MAC address, but only LB can respond to the ARP reqeust -> but LB will not change IP data header, that means server ports must match LB prots - DR mode
-5. actual LB instances need to have same VIP and (virtual) MAC address  via ARP request
-
-### keepalived
-
-* Nginx clusters, with each instance deploys keepalived, and set them with the same virtual IP. But only one instance is up (active-standby)
-* use lvs/f5 IN FRONT OF nginx, e.g. f5 can do 100k qps, and use the same keepalived + virtual IP trick on lvs - enough for most cases
-* If you need EVEN HIGHER, add mutilple IPs for the same domain name,i.e., DNS polling
+* use lvs/f5 IN FRONT OF nginx, e.g. f5 can do 100k qps, and use the same keepalived + virtual IP trick on lvs - enough for most cases. Note that lvs is level 4, nginx is leve 7. i.e, lvs will share the same virtual IP. Note that Nginx in this case doesn't need keep alived anymore - lvs does this for you alreay!
 
 # MAC address
 

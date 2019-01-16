@@ -97,9 +97,8 @@ fuser -v -n tcp 80
 
 pmap -x [pid]
 
-#starts the program abcd in the background in such a way that the subsequent logout does not stop it.
-#nohup is often used in combination with the nice command to run processes on a lower priority
-nohup abcd &
+#no hup - no hung up, the seond & means run it as a background job, 2 is std err, &1 means FD 1, note that abad>a 2>a will open the file twice, and stdout will but overwrittend by stderr!
+nohup abcd 2>&1  &
 
 # Set the maximum number of open files to 10.
 ulimit -n 10

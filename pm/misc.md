@@ -1,14 +1,3 @@
-# Arrow's impossibility theorem
-
-when voters have three or more distinct alternatives (options), no ranked voting electoral system can convert the ranked preferences of individuals into a community-wide (complete and transitive) ranking while also meeting a specified set of criteria: unrestricted domain, non-dictatorship, Pareto efficiency, and independence of irrelevant alternatives.
-
-In short, the theorem states that no rank-order electoral system can be designed that always satisfies these three "fairness" criteria:
-
-If every voter prefers alternative X over alternative Y, then the group prefers X over Y.
-If every voter's preference between X and Y remains unchanged, then the group's preference between X and Y will also remain unchanged (even if voters' preferences between other pairs like X and Z, Y and Z, or Z and W change).
-There is neither "dictator" nor "prophet": no single voter possesses the power or the knowledge to always determine the group's preference. 
-(what does this imply)
-
 Shut up on issues related to money and people management - that is the management's job
 
 People tend to avoid losses than acquiring gains. Therefore, instead of taking stuff from people, construct a scenario where they are willing to give themselves.
@@ -25,4 +14,6 @@ If you have conviction on a particular direction even though there’s no consen
 
 you can commit to a course of action that you disagree with and maintain your integrity in situations where the disagreement stems from the unknown. The disagreement is not about the facts, it’s about what might happen — the 30% of information that we don’t have. Both sides are making educated bets, but either bet can turn out to be true
 
-Even in situations when the “highest paid person” is not explicitly acting as a tie-breaker, the intensity of her opinion is often times amplified when interpreted by others: a reaction is interpreted as an objection, a stake becomes a boulder, a boulder becomes a tombstone. The highest paid person deciding to “disagree & commit” sends an incredibly strong and empowering message to the rest of the team.
+The team should have strong sense of ownership, no by-stander, no interrruption of each other
+
+Change the culture by exposing the stressful stuations, do it many times if once does not work
