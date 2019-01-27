@@ -77,3 +77,14 @@ The problem with this is, that the call to monitorObject.wait() only releases th
 ### slipped conditions
 
 that fair lock implementation problem?
+
+Normally use ArrayBlockingQueue
+```
+ExecutorService service = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS,
+                new ArrayBlockingQueue<Runnable>(CAPACITY), new RejectedExecutionHandler() {
+
+                    @Override
+                    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+                    }
+                });
+```

@@ -114,4 +114,9 @@ SELECT * FROM TABLE WHERE ID > 200 FOR UDPATE-- X on clustered index + gap locks
 ```
 
 ### Deadlock
+
 common for big commands, FTS, big txn,
+
+Snapshot read means Consistent nonlocking read on the rollback segment, i.e., historical snapshot
+
+normal select read is always snapshot read, unless explicitly ask for locking, RR reads on a fixed version though

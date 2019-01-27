@@ -16,4 +16,4 @@ maxConnecitons: Acceptor will not read from the accept queue if # of conns > thi
 
 maxThreads: default 200, request processing thread's max #, ignored fi the Connector has a bound executor
 
-
+Normally init heap size is same as max heap size, to avoid full GC when the init memory is not enough

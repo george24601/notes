@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ######Let's encrypt/certbot, use --staging flag for dev
+##Ideally use it on a different screen session
 sudo certbot certonly --manual  --preferred-challenges dns
 
 $INPUT_YOUR_DOMAIN_HERE
