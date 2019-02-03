@@ -17,3 +17,7 @@ you can commit to a course of action that you disagree with and maintain your in
 The team should have strong sense of ownership, no by-stander, no interrruption of each other
 
 Change the culture by exposing the stressful stuations, do it many times if once does not work
+
+There is one more thing worth mentioning about breaking up user stories that many teams get wrong. When slicing stories, they should be sliced vertically, rather than horizontally.
+
+By creating vertically-sliced stories, the team has a clear picture of what specific tasks need to be completed to add value for the end-user, and the tasks are more discrete and easier to keep track of.

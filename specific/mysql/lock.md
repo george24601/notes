@@ -1,3 +1,11 @@
+row-locks uses 2PL, i.e., acquire on need, and release when the txn is over
+each data uses the auto-incrementing transaction id as the version, i.e., row_trx_id
+
+HWM: > means not yet started txn
+LWM: < means commited txns
+In the middle means not yet started txns
+
+
 ### Shared and Exclusive Locks
 InnoDB implements standard row-level locking where there are two types of locks, shared (S) locks and exclusive (X) locks.
 
@@ -120,3 +128,4 @@ common for big commands, FTS, big txn,
 Snapshot read means Consistent nonlocking read on the rollback segment, i.e., historical snapshot
 
 normal select read is always snapshot read, unless explicitly ask for locking, RR reads on a fixed version though
+
