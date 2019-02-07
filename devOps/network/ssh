@@ -24,3 +24,7 @@ ssh -R 9000:localhost:3000 user@example.com
 
 #first js -> second js -> mysql, assuming first and second share the same pem file
 ssh -A -i ${PERM_PATH} -t -l ec2-user ${FIRST_JS}  -L 3306:localhost:3306 ssh -A -t -l ec2-user ${SECOND_JS} -L 3306:${MYSQL_HOST}:3306
+
+#Key based authentication. ssh will look into .ssh/authorized_keys to determine which clients it should let in. To copy a public key over we can use the
+cat .ssh/id_dsa.pub | ssh foobar@remote 'cat >> ~/.ssh/authorized_keys'
+

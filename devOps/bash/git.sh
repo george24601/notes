@@ -48,6 +48,6 @@ git checkout <commit> path/to/file
 git commit
 
 #merge the last two commits
-#amend: fix/replace the most recent commit
+#amend: fix/replace the most recent commit, HEAD^ means the commit before HEAD. HEAD~3 means 3 commits before HEAD
 git reset --soft "HEAD^"
 git commit --amend

@@ -41,3 +41,12 @@ forward data securely from another client application running on the same comput
 
 Two important items in local port forwarding are the destination server, and two port numbers. Connections from the SSH client are forwarded via the SSH server, then to a destination server. 
 
+
+Using the -X flag tells SSH to forward
+
+For trusted X11 forwarding the -Y flag can be used.
+
+Final note is that for this to work the sshd_config on the server must have the following options
+
+X11Forwarding yes
+X11DisplayOffset 10

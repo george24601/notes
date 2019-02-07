@@ -1,4 +1,3 @@
-zombie process - child program terminate, the parent process hasn't read these data yet
 
 #PID
 
@@ -60,8 +59,10 @@ In the child process, the return value of the fork() appears as zero (which is a
 Although all data are replaced, the file descriptors that were open in the parent are closed only if the program has explicitly marked them close-on-exec. This allows for the common practice of the parent creating a pipe prior to calling fork() and using it to communicate with the executed program.
 
 
-zombie process
---------
+### Zombie Process
+
+Child program terminate, the parent process hasn't read these data yet
+
 a process that has completed execution (via the exit system call) but still has an entry in the process table: it is a process in the "Terminated state". This occurs for child processes, where the entry is still needed to allow the parent process to read its child's exit status: once the exit status is read via the wait system call, the zombie's entry is removed from the process table and it is said to be "reaped".
 
 Also, unlike normal processes, the kill command has no effect on a zombie process.
