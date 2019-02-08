@@ -20,3 +20,5 @@ B+ tree:
 InnoDB's Btree has about 1.2k children for each node
 
 Non key index will return the ID, and then use the primary index to get the actual row
+
+Try to order by index to avoid the relative expensive sort buffer inside memory

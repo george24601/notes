@@ -50,18 +50,21 @@ Gap locks in InnoDB are “purely inhibitive”, which means that their only pur
 
 used only during Repeatable Read  and Serializable isolation level. Note that RR does NOT fully prevent phantom read
 
-e.g., suppose you have index with values 10,11,13, and 20 then the  gap lock (-INF, 10], (10, 11], (11,13]....
+e.g., suppose you have index with values 10,11,13, and 20 then the  gap lock (-INF, 10], (10, 11], (11,13].... The definition is always < + <=
 
 Note that table locks are implemented by gap locks!
 
+deadlock caused by gap lock??
+
 ### Next-Key Locks
-A next-key lock is a combination of a record lock on the index record AND a gap lock on the GAP before the index record.
+
+A next-key lock is a combination of a record lock on the index record AND a gap lock on the GAP before the index record. 
 
 InnoDB performs row-level locking in such a way that when it searches or scans a table index, it sets shared or exclusive locks on the index records it encounters. Thus, the row-level locks are actually index-record locks. A next-key lock on an index record also affects the “gap” before that index record. 
 
-Mainly to avoid phatom read!
+Mainly to avoid phatom read,i.e., range returns more results as we go!
 
-
+Note during the run it IS implemented as a combination of row lock and then gap lock
 
 ### Insert Intention Locks
 
@@ -121,11 +124,8 @@ SELECT * FROM TABLE WHERE ID = 200 FOR UPDATE-- current read X on clustered inde
 SELECT * FROM TABLE WHERE ID > 200 FOR UDPATE-- X on clustered index + gap locks from ID (200....
 ```
 
-### Deadlock
-
-common for big commands, FTS, big txn,
-
 Snapshot read means Consistent nonlocking read on the rollback segment, i.e., historical snapshot
 
 normal select read is always snapshot read, unless explicitly ask for locking, RR reads on a fixed version though
 
+SHOW PROCESSLIST to see current statement's state

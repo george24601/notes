@@ -56,6 +56,6 @@ Save the open session so that you can get back to your list of open files later
 :mksession session_file_name.vim
 vim -S session_file_name.vim
 ```
-
-
-
+gt	Cycle forward through your open tabs
+gT	Cycle backward through your open tabs
+Ngt	Go to the Nth tab
