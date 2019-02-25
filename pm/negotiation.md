@@ -1,48 +1,13 @@
-1. it is basic skill we need to practice daily
-
-2. Human factor is MORE important than facts - people liking is just a prerequisite
-
-3. focus on your counterpart's feeling and need,i.e., ask not what you can do for them, instead of what they can do for you
-
 4. Focus on the main goal, ignore everything else
 
 5. understand counterparts's PoV, emotion, feeling, promise and reliability. Keep yourself low
 
 6. emotional means less rational, try to calm emotion instead of listing theories and facts first
 
-7. list requirements step by step, 
-
-8. trade what you don't value but your counterpart valueso
+8. trade what you don't value but your counterpart values
 
 9. spot the counterpart's inconsitency with the past policy
-
-10. never walk away unless it is mutual rest or you want to end the talk
-
-### That is not all
-
-When offering or conceding something to somebody, rather than give it to them as a final item, give it in incremental pieces. Do not allow them to respond to each piece you give them -- keep on offering more.
-
-The increments can be in different amounts, but each should surprise and delight the person. It can also help if the final increment is particularly desirable
-
-The method depends largely on an automatic social response and hence works better when the customer does not have time to think hard about what is going on.
-
 ### Fear-Then-Relief 
-
-Invoke fear in the other person. Then, when they seek a solution, provide one that leads them in the direction you choose.
-
-Fear is invoked by threatening needs. Relief may be gained by doing what you request. Relief may also given 'freely' to create trust and invoke the rules of social exchange.
-
-Be careful not to be seen as an aggressor, for example by using external sources to invoke the fear.
-
-Also be careful not to invoke so much fear that they flee from you or become aggressive.
-
-This is a direct application of the hurt and rescue principle, creating discomfort and then providing the means of reducing that discomfort. Whilst a relatively crude method, it is still quite common and often effective when done well.
-
-This works as the pleasant relief is linked with the second request, which receives the pleasant emotion by association. In the state of blessed relief the person may also be temporarily unthinking as the strong emotion overwhelms any rational consideration.
-
-Repeated fear-relief cycles can be emotionally very exhausting and is used in such as interrogation and conversion to break a person down. When a person thinks they are rescued from a fearful situation, they relax and drop their guard, making the next wave even more terrifying as they are less and less able to  emotional defend against it.
-
-Invoking fear can be hazardous as it may well trigger the Fight-or-Flight reaction. Particularly when the persuader is seen as the primary cause of the discomfort, they may become the target of aggression and compliance will become very unlikely. One way this can be handled is that the persuader pleads innocence or unintentional action
 
 ### Selling The Top Of The Line (TOTL)
 
@@ -59,3 +24,31 @@ Selling the top of the line' is a common approach that is a variant of the Door 
 Acting as a 'product geek' in showing off the more expensive item establishes the sales person as an expert and can help to build trust. Note that serious attempts to sell the expensive product may negate or even invert these effects.
 
 The more expensive product creates desire, but cannot be afforded. The second product hooks into the created desire with something that is closer to the buyers budget. The method uses the contrast principle to make the second product appear relatively inexpensive.
+
+### Never split the difference
+
+The Ackerman Model is an offer-counteroffer method. The six-step process is:
+
+Set your target price (your goal).
+Set your first offer at 65 percent of your target price.
+Calculate three raises of decreasing increments (to 85, 95, and 100 percent).
+Use lots of empathy and different ways of saying “No” to get the other side to counter before you increase your offer.
+On your final number, throw in a non-monetary item (that they probably don’t want) to show you’re at your limit. ("That is not all")
+
+1.We just want what is fair - OK I apologize, let's go back to where the fair part begins
+2.We've given you a fair offer - how do you provide evidence to support it?
+3. I want you to feel like you are being treated fairly, so stop me at any time if you feel i am being unfair, and we will fix it
+
+List the worst things that the other party could say about you and say them before the other person can. Because these accusations often sound exaggerated when said aloud, speaking them will encourage the other person to claim that quite the opposite is true.
+
+To bend your counterpart’s reality, you have to start with the basics of empathy. Start out with an accusation audit acknowledging all of their fears. By anchoring their emotions in preparation for a loss, you inflame the other side’s loss aversion so that they’ll jump at the chance to avoid it. ("Fear then relief")
+
+You’ve got to be careful when you let the other party anchor. You have to prepare yourself psychically to withstand the first offer. If the other guy’s a pro, a shark, he’s going to go for an extreme anchor in order to bend your reality.
+
+When you are selling yourself to a manager, sell yourself as more than a body for a job; sell yourself, and your success, as a way they can validate their own intelligence and broadcast it to the rest of the company.
+
+Make sure they know you’ll act as a flesh-and-blood argument for their importance. Once you’ve bent their reality to include you as their ambassador, they’ll have a stake in your success.
+
+And if the other side pushes you to go first, wriggle from his grip. Instead of naming a price, allude to an incredibly high number that someone else might charge.
+
+If you are working to lure a client away from a competitor, you might say, “Why would you ever do business with me? Why would you ever change from your existing supplier? They’re great!” In these questions, the “Why?” coaxes your counterpart into working for you.

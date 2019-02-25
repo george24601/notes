@@ -74,3 +74,5 @@ When got assigned by the higher-up, commit even if you disagreee. When given new
 1. Should obey the command
 2. explain current context including boss's direction
 3. let the boss know the change and command as soon as time permits
+
+Shut up on issues related to money and people management - that is the management's job
