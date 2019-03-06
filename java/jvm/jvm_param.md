@@ -1,6 +1,7 @@
-#!/bin/bash
-#show bytecode
-java -p Employee.class
+-XX:+PrintCGApplicationStoppedTime
+
+-XX:+PrintSafepointStatistics
+-XX:-UseBiasedLocking
 
 
 ### To print GC log

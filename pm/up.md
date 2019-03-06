@@ -66,7 +66,6 @@ never complain your company or your team's task in front your subordinates - and
 2. To affect opinions of people, not only the person himself, but also whoever that can directly affect the said person too. Build common interest between the people around the authority
 4. Easier to build new relationship than saving old relationship
 5. Can be a leader or follower regardless of current status and self-esteem
-6. Sacrifice short term interest, and move to a different position to avoid contraversy and power struggle
 
 When got assigned by the higher-up, commit even if you disagreee. When given new power/benefit, may not need to APPEAR greedy.
 

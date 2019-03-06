@@ -1,19 +1,10 @@
 row-locks uses 2PL, i.e., acquire on need, and release when the txn is over
 each data uses the auto-incrementing transaction id as the version, i.e., row_trx_id
 
-HWM: > means not yet started txn
-LWM: < means commited txns
+HWM: greater than that  means not yet started txn
+LWM: less than that  means commited txns
 In the middle means not yet started txns
 
-
-### Shared and Exclusive Locks
-InnoDB implements standard row-level locking where there are two types of locks, shared (S) locks and exclusive (X) locks.
-
-A shared (S) lock permits the transaction that holds the lock to read a row.
-
-An exclusive (X) lock permits the transaction that holds the lock to update or delete a row.
-
-UPDATE, DELETE are on row-level locks, LOCK TABLE..READ and LOCK TABLE ...WRITE are on full table lock
 
 ### Intention Locks
 
@@ -31,13 +22,6 @@ SELECT ... LOCK IN SHARE MODE: always requires IS lock
 SELECT ... FOR UPDATE: needs IX lock
 
 
-
-### Record Locks 
-
-A record lock is a lock on an INDEX RECORD. For example, SELECT c1 FROM t WHERE c1 = 10 FOR UPDATE; prevents any other transaction from inserting, updating, or deleting rows where the value of t.c1 is 10. Most likely on the clustered index
-
-Record locks always lock index records, even if a table is defined with no indexes. For such cases, InnoDB creates a hidden clustered index and uses this index for record locking.
-
 ### Gap Locks
 
 A gap lock is a lock on a gap between index records, or a lock on the gap before the first or after the last index record. For example, SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE; prevents other transactions from inserting a value of 15 into column t.c1, whether or not there was already any such value in the column, because the gaps between all existing values in the range are locked.
@@ -50,7 +34,7 @@ Gap locks in InnoDB are “purely inhibitive”, which means that their only pur
 
 used only during Repeatable Read  and Serializable isolation level. Note that RR does NOT fully prevent phantom read
 
-e.g., suppose you have index with values 10,11,13, and 20 then the  gap lock (-INF, 10], (10, 11], (11,13].... The definition is always < + <=
+e.g., suppose you have index with values 10,11,13, and 20 then the  gap lock (-INF, 10], (10, 11], (11,13].... 
 
 Note that table locks are implemented by gap locks!
 
@@ -123,9 +107,5 @@ SELECT * FROM TABLE WHERE ID > 200 LOCK IN SHARE MODE -- S + gap lock from (200.
 SELECT * FROM TABLE WHERE ID = 200 FOR UPDATE-- current read X on clustered index 
 SELECT * FROM TABLE WHERE ID > 200 FOR UDPATE-- X on clustered index + gap locks from ID (200....
 ```
-
-Snapshot read means Consistent nonlocking read on the rollback segment, i.e., historical snapshot
-
-normal select read is always snapshot read, unless explicitly ask for locking, RR reads on a fixed version though
 
 SHOW PROCESSLIST to see current statement's state

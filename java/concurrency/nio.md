@@ -1,5 +1,3 @@
-NIO data transfer is based on buffers (java.nio.Buffer and related classes). These classes represent a contiguous extent of memory, together with a small number of data transfer operations.
-
 Typically, this would be used to allow the buffer contents to occupy the same physical memory used by the underlying operating system for its native I/O operations, thus allowing the most direct transfer mechanism, and eliminating the need for any additional copying. In most operating systems, provided the particular area of memory has the right properties, transfer can take place without using the CPU at all.
 
 Channels (classes implementing the interface java.nio.channels.Channel) are designed to provide for bulk data transfers to and from NIO buffers.Channels are analogous to "file descriptors" found in Unix-like operating systems.
@@ -16,10 +14,6 @@ A byte buffer can be allocated as a direct buffer, in which case the Java virtua
 
 A byte buffer can be created by mapping a region of a file directly into memory, in which case a few additional file-related operations defined in the MappedByteBuffer class are available.
 
-t IO is stream oriented, where NIO is buffer oriented.
-
-What you do with the read bytes is up to you. They are not cached anywhere. Furthermore, you cannot move forth and back in the data in a stream. If you need to move forth and back in the data read from a stream, you will need to cache it in a buffer first
-
 you need to make sure that when reading more data into the buffer, you do not overwrite data in the buffer you have not yet processed.
 
 A channel is like a stream. It represents a connection between a data source/sink and a Java program for data transfer.
@@ -27,8 +21,6 @@ A channel is like a stream. It represents a connection between a data source/sin
 Java NIO’s selectors allow a single thread to monitor multiple channels of input. You can register multiple channels with a selector, then use a single thread to “select” the channels that have input available for processing, or select the channels that are ready for writing. This selector mechanism makes it easy for a single thread to manage multiple channels.
 
 Reading from a channel is simple: we simply create a buffer and then ask a channel to read data into it. Writing is also fairly simply: we create a buffer, fill it with data, and then ask a channel to write from it.
-
-java.net will require one thread per socket.
 
 There are four different events we can listen for, each is represented by a constant in the SelectionKey class:
 
@@ -41,3 +33,13 @@ The ready set defines the set of events that the channel is ready for. It is an 
 
 ByteBuffer's allocateDirect allocates native memory
 
+Channel is bi-directional, but can asyncly read and write buffer
+
+* buffer based, channel orientied. As a comparsion, IO is stream oriented
+* Why the IO package uses decorator?
+
+NIO has selector and IO does not, which is used to use a single thread to process multiple channels
+
+NIO was implemented by epoll(), so empty polling will incrase CPU usage -> hence netty
+
+AIO,i.e., NIO 2,note netty is not used yet 

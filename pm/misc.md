@@ -1,7 +1,5 @@
 People tend to avoid losses than acquiring gains. Therefore, instead of taking stuff from people, construct a scenario where they are willing to give themselves.
 
-that even when people can’t come to an agreement around an issue, they must still leave the room unambiguously committed to a common course of action.
-
 It’s only when colleagues speak up and put their opinions on the table, without holding back, that the leader can confidently fulfill one of his most important responsibilities: breaking ties.
 
 The arc that he draws is: team can’t reach consensus → has a healthy conflict where everyone advocates for their point of view → leader breaks tie and makes a decision → everyone disagrees and commits.

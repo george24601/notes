@@ -20,4 +20,5 @@ Use forceindex, STRAIGHT_JOIN to tweak query plan
 
 Change buffer???
 
-
+prefer timestamp to datetime?
+prefer IN to OR? limit size of IN to 200

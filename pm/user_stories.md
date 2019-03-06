@@ -44,11 +44,7 @@ many stories are evaluated by purchasers than users
 
 variate tech-dev focused term into true user-story,i.e., user-value
 
-if dev does not have the tech knowledge, spend timeboxes spike time as a story to estimate
-
 if dev does not have the domain knowledge, talk to the user to figure out
-
-Put the spike in a different iteration
 
 Bug reports and user interface changes often are too small for a story => combine them to a bigger one
 

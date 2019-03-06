@@ -1,36 +1,4 @@
-#Concurrency and parallelism
-Concurrency means that an application is making progress on more than one task at the same time (concurrently).Well, if the computer only has one CPU the application may not make progress on more than one task at exactly the same time, but more than one task is being processed at a time inside the application. It does not completely finish one task before it begins the next.
-Parallelism means that an application splits its tasks up into smaller subtasks which can be processed in parallel, for instance on multiple CPUs at the exact same time.
-
-As you can see, an application can be concurrent, but not parallel. This means that it processes more than one task at the same time, but the tasks are not broken down into subtasks.
-
-An application can also be parallel but not concurrent. This means that the application only works on one task at a time, and this task is broken down into subtasks which can be processed in parallel.
-
-Finally, an application can also be both concurrent and parallel, in that it both works on multiple tasks at the same time, and also breaks each task down into subtasks for parallel execution.
-
-
-```
-public static synchronized void log1(String msg1, String msg2){
-       log.writeln(msg1);
-       log.writeln(msg2);
-    }
-
-  
-    public static void log2(String msg1, String msg2){
-       synchronized(MyClass.class){
-          log.writeln(msg1);
-          log.writeln(msg2);  
-       }
-    }
-```
-
-Only one thread can execute inside any of these two methods at the same time.
-
-Had the second synchronized block been synchronized on a different object than MyClass.class, then one thread could execute inside each method at the same time.
-
 ### deadlock
-
-Lock ordering is a simple yet effective deadlock prevention mechanism. However, it can only be used if you know about all locks needed ahead of taking any of the locks. This is not always the case.
 
 Another deadlock prevention mechanism is to put a timeout on lock attempts meaning a thread trying to obtain a lock will only try for so long before giving up. If a thread does not succeed in taking all necessary locks within the given timeout, it will backup, free all locks taken, wait for a random amount of time and then retry.
 
@@ -48,19 +16,6 @@ The kind of monitor used in the Java virtual machine is sometimes called a Signa
 As a result, a notify must often be considered by waiting threads merely as a hint that the desired state may exist. Each time a waiting thread is resurrected, it may need to check the state again to determine whether it can move forward and do useful work. If it finds the data still isn't in the desired state, the thread could execute another wait or give up and exit the monitor.
 
 ### object locking
-
-Java programs need to coordinate multi-threaded access to two kinds of data: o instance variables, which are stored on the heap o class variables, which are stored in the method area
-
-Class locks are actually implemented as object locks. As mentioned in earlier chapters, when the Java virtual machine loads a class file, it creates an instance of class java.lang.Class. When you lock a class, you are actually locking that class's Class object.
-
-A single thread is allowed to lock the same object multiple times. For each object, the Java virtual machine maintains a count of the number of times the object has been locked.
-
-For an instance method, the virtual machine acquires the lock associated with the object upon which the method is being invoked. For a class method, it acquires the lock associated with the class to which the method belongs (it locks a Class object).
-
-If this method completes abruptly, just as if it completes normally, the virtual machine will release the lock on the this object automatically.
-
-The one difference is that instead of acquiring a lock on this (as there is no this in a class method), the thread must acquire a lock on the appropriate Class instance.
-
 
 The class java.lang.Object defines three methods, wait(), notify(), and notifyAll(), to facilitate this.
 

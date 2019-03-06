@@ -113,5 +113,3 @@ DirectMemory can cause OOM, e.g., java NIO
 Reference Objects???
 
 Note that by default JVM uses native type for value [-127, 128], note that contant pool still in heap
-
-

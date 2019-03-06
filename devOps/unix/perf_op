@@ -110,8 +110,8 @@ jmap -heap -dump:file=xxx  pid
 
 jmap -histo pid
 
-#show java process id
-jps
+#show java process id or can just ps aux | grep java. Here you can see the importance to giving meaninigful thread name
+jps -v 
 
 #view the port associated with a daemon
 lsof -i -n -P | grep sendmail
