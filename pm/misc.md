@@ -17,3 +17,5 @@ System bias can also show up in far more insidious ways. If a team views their r
  Formal structures like tech leads can serve to make this even worse if the domains are particularly small. I tend to prefer establishing DRIs for sub-priorities with a team. The DRI is responsible for a sub-priority or sub-component but it's not their identity; they're still expected to work on other stuff on the team and to focus their energies on whatever matters most to the team as a whole.
 
 BRIEF for email: background, reason, information (bullet points), End (what notes you want to finish), Follow-up(image what questions the other side will ask)
+
+Individual development plan??

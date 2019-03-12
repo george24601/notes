@@ -1,10 +1,4 @@
-you can optionally define parent-child relationships between tables if you want Cloud Spanner to physically co-locate their rows for efficient retrieval.
-
 If you declare a table to be a child of another table, the primary key column(s) of the parent table must be the prefix of the primary key of the child table.
-
-Cloud Spanner stores rows in sorted order by primary key values, with child rows inserted between parent rows that share the same primary key prefix. This insertion of child rows between parent rows along the primary key dimension is called interleaving, and child tables are also called interleaved tables.
-
- For example, if you insert records with a monotonically increasing integer as the key, you'll always insert at the end of your key space. This is undesirable because Cloud Spanner divides data among servers by key ranges, which means your inserts will be directed at a single server, creating a hotspot.
 
 
 1. Hash the key and store it in a column. Use the hash column (or the hash column and the unique key columns together) as the primary key.
@@ -28,3 +22,18 @@ Reading efficiency. Reads are faster if there are fewer splits to scan.
 
     It is okay to create an interleaved index like this though, because rows of interleaved indexes are interleaved in corresponding parent rows, and it's unlikely for a single parent row to produce thousands of events per second.
 
+Note that the DESC annotation above applies only to SongName. To index by descending order of other index keys, annotate them with DESC as well: SingerId DESC, AlbumId DESC.
+
+For SQL queries that use an index directive, Cloud Spanner's SQL query processor might need to read columns that are required by the query but that aren't stored in the index. The query processor retrieves these columns using a join between the index and the base table.
+For example, in the definition of the AlbumsByAlbumTitle index above, the MarketingBudget column is not stored in the index, but is one of the selected columns in the SQL query on that index. To fetch this column, Cloud Spanner does a lookup of the MarketingBudget column from the base table under the hood and joins it with data from the index to return the query results.
+
+
+  Cloud Spanner can create approximately 3 non-interleaved indexes per day per database, regardless of the size of the tables being indexed.
+
+Avoid making many schema updates to a single database's schema in a given 7-day period. 
+
+Avoid more than 30 DDL statements that require validation or index backfill in a given 7-day period, because each statement creates multiple versions of the schema internally.
+
+Cloud Spanner buffers insertions, updates, and deletions performed using DML statements on the server-side, and the results are visible to subsequent SQL and DML statements within the same transaction. This behavior is different from the Mutation API, where Cloud Spanner buffers the mutations on the client-side and sends the mutations server-side as part of the commit operation. As a result, mutations in the commit request are not visible to SQL or DML statements within the same transaction.
+
+but it's a best practice to explicitly tell Cloud Spanner to use that index by specifying an index directive in the FROM clause

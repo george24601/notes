@@ -75,3 +75,7 @@ When got assigned by the higher-up, commit even if you disagreee. When given new
 3. let the boss know the change and command as soon as time permits
 
 Shut up on issues related to money and people management - that is the management's job
+
+Once the boss made the decision, it is our job to fulfill the vision within the boss's framework. Don't expect to influence the boss too much on the decision. In general, do not try to change people
+
+Importance is to bring value to the boss. Do not to use threatening with resigning and active rejection

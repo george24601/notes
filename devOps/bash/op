@@ -120,3 +120,5 @@ screen -ls
 
 #back to the same terminal
 screen -r
+
+#can use script to record and check the result of long-running process, by checking its generated typescript file
