@@ -108,4 +108,16 @@ SELECT * FROM TABLE WHERE ID = 200 FOR UPDATE-- current read X on clustered inde
 SELECT * FROM TABLE WHERE ID > 200 FOR UDPATE-- X on clustered index + gap locks from ID (200....
 ```
 
-SHOW PROCESSLIST to see current statement's state
+
+### Why default isolation level to RR?
+
+STATEMENT format binlog replication under read committed has bugs, that is why you need repeatable read
+
+1- delete
+2 - insert
+2 - commit
+1 - commit
+
+because binlog will record insertion first and delete second, so slave has wrong data. GL,i.e., turn on RR, will block the delete due to the gap lock
+
+Or switich to row format, we can go with RC

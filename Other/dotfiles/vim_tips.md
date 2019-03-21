@@ -3,15 +3,19 @@ append to the end of line
 :%s/$/replace_string/g
 ```
 
-jump back to the "{" at the start of the current code block.
+jump back to the "{" at the start of the current code block
 ```
 [{
+```
+And conversely
+```
+]}
 ```
 
 jump from the use of a variable to its local declaration
 ```
 gd
-``
+```
 The same mechanism can be used to type a long word with just a few characters. Especially useful for words that you find hard to type, and it avoids that you type them wrong. Examples:
 ```
 :abbr pn penguin
@@ -22,8 +26,6 @@ H/M/L: cursor to high/middle/low part of the page
 
 Ctrl+R:	Redo the last undo.
 
-J	Joins two lines
-
 Ctrl+G	Tells where where you are, and what file you're editing
 
 Ctrl+F, Ctrl+B	The same as PgUp and PgDn. I often use F=forward, B=backward as mnemonic.
@@ -32,15 +34,11 @@ C/D - change/delete rest of the line
 
 :%s/foo/bar(&)/g will look for foo, and surround the matched pattern with bar().
 
-To jump to the beginning of a C code block (while, switch, if etc), use the [{ command.
-
-To jump to the end of a C code block (while, switch, if etc), use the ]} command.
-
 [[ : sections backward or to the previous '{' in the first column.
 
 ]] : sections forward or to the next '{' in the first column.
 
-select row(s)                            SHIFT + v                             
+select row(s)                            SHIFT + v
 select blocks (columns)                  CTRL  + v
 
 gi - switches to insertion mode placing the cursor at the same location it was previously
@@ -59,3 +57,12 @@ vim -S session_file_name.vim
 gt	Cycle forward through your open tabs
 gT	Cycle backward through your open tabs
 Ngt	Go to the Nth tab
+
+
+{ — Move to start of previous paragraph or code block.
+} — Move to end of next paragraph or code block.
+
+t<char> — Move forward until the next occurrence of the character.
+f<char> — Move forward over the next occurrence of the character.
+T<char> — Move backward until the previous occurrence of the character.
+F<char> — Move backward over the previous occurrence of the character.

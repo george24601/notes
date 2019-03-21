@@ -1,5 +1,5 @@
-A survey on how to work with cross dc with different framework/techs
------------
+### survey on how to work with cross dc with different framework/techs
+
 Kafka's schema registry: backup SR points to master DC's ZK and kafka, with it master set to false. Master DC is MMed to into the back up DC
 In case DC A failed, we switch that SR to DC B, with master set to true. Note schema is immutable, and identified with only (name, version)
 
@@ -47,8 +47,3 @@ Ideas
 Other consideration
 1. enable SSL in MM, to safely transfer data cross DC
 2. Run MM close to target cluster
-
---------
-CDN
-
-
