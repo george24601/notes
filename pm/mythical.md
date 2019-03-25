@@ -155,3 +155,157 @@ This whole process is helped if the boss labels meetings, reviews, conferences, 
 I have found it handy to carry both "scheduled" and "estimated" dates in the milestone report. The scheduled dates are the property of the project manager and represent a consistent work plan for the project as a whole, and one which is a priori a reasonable plan. The estimated dates are the property of the lowest level manager who has cognizance over the piece of work in question, and represents his best judgment as to when it will actually happen, given the resources he has available and when he received (or has commitments for delivery of) his prerequisite inputs. The project manager has to keep his fingers off the estimated dates, and put the emphasis on getting accurate, unbiased estimates rather than palatable optimistic estimates or self-protective conservative ones.
 
 The preparation of the PERT chart is a function of the boss and the managers reporting to him. Its updating, revision, and reporting requires the attention of a small (one to three man) staff group which serves as an extension of the boss. Such a Plans and Controls team is invaluable for a large project. It has no authority except to ask all the line managers when they will have set or changed milestones, and whether milestones have been met. Since the Plans and Controls group handles all the paperwork, the burden on the line managers is reduced to the essentials—making the decisions
+
+### Chapter 16: No Silver Bullet—Essence and Accident in Software Engineering
+
+I believe the hard part of building software to be the specification, design, and testing of this conceptual construct, not the labor of representing it and testing the fidelity of the representation. We still make syntax errors, to be sure; but they are fuzz compared to the conceptual errors in most systems.
+
+Many of the classical problems of developing software products derive from this essential complexity and its nonlinear increases with size.
+
+Not only technical problems but management problems as well come from the complexity. This complexity makes overview hard, thus impeding conceptual integrity. It makes it hard to find and control all the loose ends. It creates the tremendous learning and understanding burden that makes personnel turnover a disaster.
+
+More seriously, even perfect program verification can only establish that a program meets its specification. The hardest part of the software task is arriving at a complete and consistent specification, and much of the essence of building a program is in fact the debugging of the specification.
+
+Therefore the most important function that software builders do for their clients is the iterative extraction and refinement of the product requirements. For the truth is, the clients do not know what they want. They usually do not know what questions must be answered, and they almost never have thought of the problem in the detail that must be specified. Even the simple answer—"Make the new software system work like our old manual information-processing system"—is in fact too simple. Clients never want exactly that. Complex software systems are, moreover, things that act, that move, that work. The dynamics of that action are hard to imagine. So in planning any software activity, it is necessary to allow for an extensive iteration between the client and the designer as part of the system definition.
+
+I would go a step further and assert that it is really impossible for clients, even those working with software engineers, to specify completely, precisely, and correctly the exact requirements of a modern software product before having built and tried some versions of the product they are specifying.
+
+A prototype software system is one that simulates the important interfaces and performs the main functions of the intended system, while not being necessarily bound by the same hardware speed, size, or cost constraints. Prototypes typically perform the mainline tasks of the application, but make no attempt to handle the exceptions, respond correctly to invalid inputs, abort cleanly, etc. The purpose of the prototype is to make real the conceptual structure specified, so that the client can test it for consistency and usability.
+
+The building metaphor has outlived its usefulness. It is time to change again. If, as I believe, the conceptual structures we construct today are too complicated to be accurately specified in advance, and too complex to be built faultlessly, then we must take a radically different approach.
+
+Let us turn to nature and study complexity in living things, instead of just the dead works of man. Here we find constructs whose complexities thrill us with awe. The brain alone is intricate beyond mapping, powerful beyond imitation, rich in diversity, self-protecting, and self-renewing. The secret is that it is grown, not built.
+
+So it must be with our software systems. Some years ago Harlan Mills proposed that any software system should be grown by incremental development.[11] That is, the system should first be made to run, even though it does nothing useful except call the proper set of dummy subprograms. Then, bit by bit it is fleshed out, with the subprograms in turn being developed into actions or calls to empty stubs in the level below.
+
+
+How to grow great designers? Space does not permit a lengthy discussion, but some steps are obvious:
+
+• Systematically identify top designers as early as possible. The best are often not the most experienced.
+
+• Assign a career mentor to be responsible for the development of the prospect, and keep a careful career file.
+
+• Devise and maintain a career development plan for each prospect, including carefully selected apprenticeships with top designers, episodes of advanced formal education, and short courses, all interspersed with solo design and technical leadership assignments.
+
+• Provide opportunities for growing designers to interact with and stimulate each other.
+
+### Chapter 17. "No Silver Bullet" Refined
+
+"NSB" argues, indisputably, that if the accidental part of the work is less than 9/10 of the total, shrinking it to zero (which would take magic) will not give an order of magnitude productivity improvement. One must attack the essence.
+
+Since "NSB," Bruce Blum has drawn my attention to the 1959 work of Herzberg, Mausner, and Sayderman.[8] They find that motivational factors can increase productivity. On the other hand, environmental and accidental factors, no matter how positive, cannot; but these factors can decrease productivity when negative. "NSB" argues that much software progress has been the removal of such negative factors
+
+In my experience most of the complexities which are encountered in systems work are symptoms of organizational malfunctions. Trying to model this reality with equally complex programs is actually to conserve the mess instead of solving the problems.
+
+• People learn in sentence contexts, so we need to publish many examples of composed products, not just libraries of parts.
+
+• People do not memorize anything but spelling. They learn syntax and semantics incrementally, in context, by use.
+
+• People group word composition rules by syntactic classes, not by compatible subsets of objects.
+
+### Chapter 18. Propositions of The Mythical Man-Month: True or False?
+
+3.3 A small sharp team is best—as few minds as possible.
+
+3.4 A team of two, with one leader, is often the best use of minds. [Note God's plan for marriage.]
+
+3.5 A small sharp team is too slow for really big systems.
+
+4.3 To achieve conceptual integrity, a design must proceed from one mind or a small group of agreeing minds.
+
+4.4 "Separation of architectural effort from implementation is a very powerful way of getting conceptual integration on very large projects." [Small ones, too.]
+
+4.5 "If a system is to have conceptual integrity, someone must control the concepts. That is an aristocracy that needs no apology."
+
+4.6 Discipline is good for art. The external provision of an architecture enhances, not cramps, the creative style of an implementing group.
+
+4.8 Much of software architecture, implementation, and realization can proceed in parallel. [Hardware and software design can likewise proceed in parallel.]
+
+6.1 Even when a design team is large, the results must be reduced to writing by one or two, in order that the mini-decisions be consistent.
+
+6.2 It is important to explicitly define the parts of an architecture that are not prescribed as carefully as those that are.
+
+6.3 One needs both a formal definition of a design, for precision, and a prose definition for comprehensibility.
+
+6.4 One of the formal and prose definitions must be standard, and the other derivative. Either definition can serve in either role.
+
+7.6 The workbook structure needs to be designed carefully and early.
+
+7.7 Properly structuring the on-going documentation from the beginning "molds later writing into segments that fit into that structure" and will improve the product manuals.
+
+7.19 The communication structure in an organization is a network, not a tree, so all kinds of special organization mechanisms ("dotted lines") have to be devised to overcome the communication deficiencies of the tree-structured organization.
+
+7.20 Every subproject has two leadership roles to be filled, that of the producer and that of the technical director, or architect. The functions of the two roles are quite distinct and require different talents.
+
+8.1 One cannot accurately estimate the total effort or schedule of a programming project by simply estimating the coding time and multiplying by factors for the other parts of the task.
+
+8.2 Data for building isolated small systems are not applicable to programming systems projects.
+
+8.4 Some published studies show the exponent to be about 1.5. [Boehm's data do not at all agree with this, but vary from 1.05 to 1.2.][1]
+
+8.5 Portman's ICL data show full-time programmers applying only about 50 percent of their time to programming and debugging, versus other overhead-type tasks.
+
+9.8 Fostering a total-system, user-oriented attitude may well be the most important function of the programming manager.
+
+10.11 Only a small part of a technical project manager's time—perhaps 20 percent—is spent on tasks where he needs information from outside his head.
+
+11.5 Delivering the first system, the throwaway, to users will buy time, but only at the cost of agony for the user, distraction for the builders supporting it while they do the redesign, and a bad reputation for the product that will be hard to live down.
+
+11.6 Hence, plan to throw one away; you will, anyhow.
+
+11.8 Both the actual need and the user's perception of that need will change as programs are built; tested, and used.
+
+11.9 The tractability and the invisibility of the software product expose its builders (exceptionally) to perpetual changes in requirements.
+
+11.11 The techniques for planning a software product for change, especially structured programming with careful module interface documentation, are well known but not uniformly practiced. It also helps to use table-driven techniques wherever possible. [Modern memory costs and sizes make such techniques better and better.]
+
+11.16 The project boss must work at keeping the managers and the technical people as interchangeable as their talents allow; in particular, one wants to be able to move people easily between technical and managerial roles.
+
+11.21 The total lifetime cost of maintaining a widely used program is typically 40 percent or more of the cost of developing it.
+
+11.24 Fixing a defect has a substantial (20 to 50 percent) chance of introducing another.
+
+12.6 Allocating substantial blocks of target machine time to one subteam at a time proved the best way to schedule, much better than interleaving subteam use, despite theory. (Reason?)
+
+12.12 Build a performance simulator(tech or business?), outside in, top down. Start it very early. Listen when it speaks.
+
+13.7 Sometimes one has to go back, scrap a high level, and start over.
+
+13.17 Lehman and Belady offer evidence the change quanta should be large and infrequent or else very small and frequent. The latter is more subject to instability. [A Microsoft team makes small frequent quanta work. The growing system is rebuilt every night.] (How to define frequency?)
+
+14.6 Studies of estimating behavior by government contractors on large projects show that activity time estimates revised carefully every two weeks do not significantly change as the start time approaches, that during the activity overestimates come steadily down; and that underestimates do not change until about three weeks before scheduled completion.
+
+14.7 Chronic schedule slippage is a morale-killer. [Jim McCarthy of Microsoft says, "If you miss one deadline, make sure you make the next one."[2]]
+
+14.17 Vyssotsky: "I have found it handy to carry both 'scheduled' (boss's dates) and 'estimated' (lowest-level manager's dates) dates in the milestone report. The project manager has to keep his fingers off the estimated dates."
+
+15.5 Most documentation fails in giving too little overview. Stand way back and zoom in slowly. (???)
+
+### Chapter 19. The Mythical Man-Month after 20 Years
+
+Any product that is sufficiently big or urgent to require the effort of many minds thus encounters a peculiar difficulty: the result must be conceptually coherent to the single mind of the user and at the same time designed by many minds. How does one organize design efforts so as to achieve such conceptual integrity? This is the central question addressed by The MM-M. One of its theses is that managing large programming projects is qualitatively different from managing small ones, just because of the number of minds involved. Deliberate, and even heroic, management actions are necessary to achieve coherence.
+
+
+that the most important action is the commissioning of some one mind to be the product's architect, who is responsible for the conceptual integrity of all aspects of the product perceivable by the user. The architect forms and owns the public mental model of the product that will be used to explain its use to the user. This includes the detailed specification of all of its function and the means for invoking and controlling it. The architect is also the user's agent, knowledgeably representing the user's interest in the inevitable tradeoffs among function, performance, size, cost, and schedule. This role is a full-time job, and only on the smallest teams can it be combined with that of the team manager. The architect is like the director and the manager like the producer of a motion picture.
+
+Recursion of architects. For quite large products, one mind cannot do all of the architecture, even after all implementation concerns have been split off. So it is necessary for the system master architect to partition the system into subsystems. The subsystem boundaries must be at those places where interfaces between the subsystems are minimal and easiest to define rigorously. Then each piece will have its own architect, who must report to the system master architect with respect to the architecture. Clearly this process can proceed recursively as required.
+
+After teaching a software engineering laboratory more than 20 times, I came to insist that student teams as small as four people choose a manager and a separate architect. Defining distinct roles in such small teams may be a little extreme, but I have observed it to work well and to contribute to design success even for small teams.
+
+How is the architect to arrive at these frequencies? Surveying this ill-defined population is a dubious and costly proposition.[4] Over the years I have become convinced that an architect should guess, or, if you prefer, postulate, a complete set of attributes and values with their frequencies, in order to develop a complete, explicit, and shared description of the user set.
+
+To summarize: write down explicit guesses for the attributes of the user set. It is far better to be explicit and wrong than to be vague
+
+The "second" system in Chapter 11 is the second try at building what should be the first system to be fielded. It is built under all the schedule, talent, and ignorance constraints that characterize new projects—the constraints that exert a slimness discipline.
+
+One may well, therefore, iterate through two or more architecture-implementation design cycles before realizing anything as code.
+
+I dismissed Parnas's concept as a "recipe for disaster" in Chapter 7. Parnas was right, and I was wrong. I am now convinced that information hiding, today often embodied in object-oriented programming, is the only way of raising the level of software design.
+
+More fundamentally, it sprang from a conviction that the quality of the people on a project, and their organization and management, are much more important factors in success than are the tools they use or the technical approaches they take.
+
+The top performers' space is quieter, more private, better protected against interruption, and there is more of it. . . . Does it really matter to you . . . whether quiet, space, and privacy help your current people to do better work or [alternatively] help you to attract and keep better people?
+
+I think it is management's overlooking fusion that accounts for the readiness I have observed in multilocation companies to move a project from one laboratory to another.
+
+My experience and observation are limited to perhaps a half-dozen moves. I have never seen a successful one. One can move missions successfully. But in every case of attempts to move projects, the new team in fact started over, in spite of having good documentation, some well-advanced designs, and some of the people from the sending team.
