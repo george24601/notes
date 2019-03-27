@@ -4,10 +4,6 @@ It’s only when colleagues speak up and put their opinions on the table, withou
 
 The arc that he draws is: team can’t reach consensus → has a healthy conflict where everyone advocates for their point of view → leader breaks tie and makes a decision → everyone disagrees and commits.
 
-If you have conviction on a particular direction even though there’s no consensus, it’s helpful to say, “Look, I know we disagree on this but will you gamble with me on it? Disagree and commit?” By the time you’re at this point, no one can know the answer for sure, and you’ll probably get a quick yes… This isn’t one way. If you’re the boss, you should do this too. I disagree and commit all the time.
-
-you can commit to a course of action that you disagree with and maintain your integrity in situations where the disagreement stems from the unknown. The disagreement is not about the facts, it’s about what might happen — the 30% of information that we don’t have. Both sides are making educated bets, but either bet can turn out to be true
-
 Change the culture by exposing the stressful stuations, do it many times if once does not work
 
 BRIEF for email: background, reason, information (bullet points), End (what notes you want to finish), Follow-up(image what questions the other side will ask)
@@ -22,9 +18,6 @@ We change by parcticing a different behavior, that, over time, leads us to think
 
 We are what we repeatedly do. excellence, then, is not an act, but a habit
 
-
-Some people profess difficulty at finding applications to write.  I have never understood this: talk to people.  People have problems — lots of problems, more than you could enumerate in a hundred lifetimes.  Talk to a carpenter, ask him what about carpentry sucks.  Talk to the receptionist at your dentist’s office — ask her what about her job sucks.  Talk to a teacher — ask her what she spends time that she thinks adds the least value to her day.  (I’ll bet you the answer is “Prep!” or “Paperwork!”)
-
 One quick test is to see whether they pay money for solving the problem currently: if people are spending hundreds of thousands of dollars on inefficient, semi-manual ways to do something that you could do with Hello World and a random number generator, you may be on to something.  (For example, if you knew nothing about the educational market, you can infer that there are at least several hundred thousand dollars sold of reading vocabulary bingo cards every year, just by seeing those cards stocked in educational stores across the country and doing some quick retail math.  So clearly people are spending money on reading vocabulary bingo.  It isn’t that much a reach to assume they might pay money for software.)
 
 This should go without saying, but talk to your customers prior to building anything.  People love talking about their problems to anyone who will listen to them.  Often they won’t have the first clue about what a solution looks like, but at the very least repeated similar emotional reactions from many people in a market should tell you that the problem is there and real.  After that, it is “just” a matter of marketing.
@@ -34,8 +27,7 @@ This should go without saying, but talk to your customers prior to building anyt
  “The only acceptable response to a feature request is: ‘Thank you for your feedback.  I will take it under advisement and consider it for inclusion in a later version of the software.’”  That line actually works.  (There are industries and relationships in which it won’t work — for example, if you’re in a regulated industry and the regulations change, you can’t fob the regulatory authority off with that.  Don’t be in a regulated industry.)
 
  The person who has decided to bring on one more engineer is not doing it because they love having a geek around the room, they are doing it because adding the geek allows them to complete a project (or projects) which will add revenue or decrease costs.
- 
-  Add revenue.  Reduce costs.  Those are your only goals.
+ => Add revenue.  Reduce costs.  Those are your only goals.
 
 You really want to be attached to Profit Centers because it will bring you higher wages, more respect, and greater opportunities for everything of value to you
 

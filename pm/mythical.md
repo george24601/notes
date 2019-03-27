@@ -1,5 +1,3 @@
-### Chapter 14. Hatching a Catastrophe
-
 ### Chapter 16: No Silver Bullet—Essence and Accident in Software Engineering
 
 Many of the classical problems of developing software products derive from this essential complexity and its nonlinear increases with size.
@@ -35,35 +33,7 @@ In my experience most of the complexities which are encountered in systems work 
 
 ### Chapter 18. Propositions of The Mythical Man-Month: True or False?
 
-3.3 A small sharp team is best—as few minds as possible.
-
-3.4 A team of two, with one leader, is often the best use of minds. [Note God's plan for marriage.]
-
-3.5 A small sharp team is too slow for really big systems.
-
-4.8 Much of software architecture, implementation, and realization can proceed in parallel. [Hardware and software design can likewise proceed in parallel.]
-
-6.1 Even when a design team is large, the results must be reduced to writing by one or two, in order that the mini-decisions be consistent.
-
-6.2 It is important to explicitly define the parts of an architecture that are not prescribed as carefully as those that are.
-
-6.3 One needs both a formal definition of a design, for precision, and a prose definition for comprehensibility.
-
-6.4 One of the formal and prose definitions must be standard, and the other derivative. Either definition can serve in either role.
-
-7.6 The workbook structure needs to be designed carefully and early.
-
 7.7 Properly structuring the on-going documentation from the beginning "molds later writing into segments that fit into that structure" and will improve the product manuals.
-
-7.19 The communication structure in an organization is a network, not a tree, so all kinds of special organization mechanisms ("dotted lines") have to be devised to overcome the communication deficiencies of the tree-structured organization.
-
-7.20 Every subproject has two leadership roles to be filled, that of the producer and that of the technical director, or architect. The functions of the two roles are quite distinct and require different talents.
-
-8.2 Data for building isolated small systems are not applicable to programming systems projects.
-
-8.4 Some published studies show the exponent to be about 1.5. [Boehm's data do not at all agree with this, but vary from 1.05 to 1.2.][1]
-
-10.11 Only a small part of a technical project manager's time—perhaps 20 percent—is spent on tasks where he needs information from outside his head.
 
 11.8 Both the actual need and the user's perception of that need will change as programs are built; tested, and used.
 
@@ -71,19 +41,12 @@ In my experience most of the complexities which are encountered in systems work 
 
 11.11 The techniques for planning a software product for change, especially structured programming with careful module interface documentation, are well known but not uniformly practiced. It also helps to use table-driven techniques wherever possible. [Modern memory costs and sizes make such techniques better and better.]
 
-11.21 The total lifetime cost of maintaining a widely used program is typically 40 percent or more of the cost of developing it.
-
-11.24 Fixing a defect has a substantial (20 to 50 percent) chance of introducing another.
-
-12.6 Allocating substantial blocks of target machine time to one subteam at a time proved the best way to schedule, much better than interleaving subteam use, despite theory. (Reason?)
-
-12.12 Build a performance simulator(tech or business?), outside in, top down. Start it very early. Listen when it speaks.
-
 13.7 Sometimes one has to go back, scrap a high level, and start over.
 
 15.5 Most documentation fails in giving too little overview. Stand way back and zoom in slowly. (???)
 
 ### Chapter 19. The Mythical Man-Month after 20 Years
+
 
 that the most important action is the commissioning of some one mind to be the product's architect, who is responsible for the conceptual integrity of all aspects of the product perceivable by the user. The architect forms and owns the public mental model of the product that will be used to explain its use to the user. This includes the detailed specification of all of its function and the means for invoking and controlling it. The architect is also the user's agent, knowledgeably representing the user's interest in the inevitable tradeoffs among function, performance, size, cost, and schedule. This role is a full-time job, and only on the smallest teams can it be combined with that of the team manager. The architect is like the director and the manager like the producer of a motion picture.
 

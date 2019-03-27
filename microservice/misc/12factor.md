@@ -1,3 +1,18 @@
+One-off admin processes should be run in an identiacl environment as the regular processes against a release, same codebase and config. admin code must be shipped with application code
+
+In local deploy, developers invoke one-off admin processes by direct shell command inside the app's checkout dir.
+In production depoy, ssh into the shell to do similar thing
+
+graceful shutdown by SIGTERM:
+1. cease to listen on service port
+2. finish current request and then exit
+3. client should seamlessly reconnect when connection is lsot
+4. worker should return its current job back to queue. meaning the job is
+reentrant,i.e., either operation's execution/writing is an all or nothing
+transaction, or it is idempotent
+
+#### Dockers
+
 Dev container:
 More likely built from docker file than from image
 Simulate production run so should have all production dependency and no dev tool installed

@@ -1,0 +1,27 @@
+@startuml
+[Option 1 Eval] -> [Decide on the direction]
+[Option 2 Eval] -> [Decide on the direction] 
+[Decide on the direction] --> [v1]
+[v1] -> [Migrate a non-critical service]
+[Migrate a non-critical service] -> [v2]
+[Migrate a non-critical service] --> [Second non-critial service onboard]
+[v2] --> [read-heavy critical service onboard]
+[Second non-critial service onboard] -> [read-heavy critical service onboard]
+[read-heavy critical service onboard] --> [write-heavy critical service]
+@enduml
+
+@startuml
+[Mar 28 - close list of candidates] --> [George design 1st reviewed]: 3 days 
+note left: Shinno, Sam, Max 
+[Mar 28 - close list of candidates] --> [Shinno design 1st reviewed]: 6 days 
+note left: George, Sam, Max 
+[George design 1st reviewed] --> [George PoC]: 5 days
+note left: wallet-read on new db with 100% int test passed
+[Shinno design 1st reviewed] --> [Shinno PoC]: 6 days 
+[George PoC] -->[George design 2nd reviewed]: 2 days
+[Shinno PoC] -->[Shinno design 2nd reviewed]: 2 days
+[George design 2nd reviewed] --> [Sign off on design]: 2 days 
+[Shinno design 2nd reviewed] --> [Sign off on design]: 2 days
+note right: Sam, Max
+@enduml
+
