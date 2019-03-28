@@ -42,3 +42,13 @@ The only time to ever discuss salary is after you have reached agreement in prin
 If you are part of a team effort and the team effort succeeds, the right note to hit is not “I owe it all to my team” unless your position is such that everyone will understand you are lying to be modest.  Try for “It was a privilege to assist my team by leading their efforts with regards to $YOUR_SPECIALTY.”
 
 Actual grooming is at least moderately important, too, because people are hilariously easy to hack by expedients such as dressing appropriately for the situation, maintaining a professional appearance, speaking in a confident tone of voice, etc.  Your business suit will probably cost about as much as a computer monitor.  You only need it once in a blue moon, but when you need it you’ll be really, really, really glad that you have it.  Take my word for it, if I wear everyday casual when I visit e.g. City Hall I get treated like a hapless awkward twenty-something, if I wear the suit I get treated like the CEO of a multinational company.
+
+When you hear somebody criticise someone’s work ethic or ability, be wary of taking this opinion for yourself. You always need to question the motives of people around you. Are they in competition with the other person? Do they feel threatened by their experience or skill?
+
+You don’t need to act as if every comment is part of a murder mystery, but it still pays to be impartial, and to think about what may be driving the behaviour of the person giving you the information.
+
+Making assumptions about people can be dangerous for your team. When you’ve just taken on a new role and are trying to understand the situation, you need to be able to take a step back and think clearly about what people are telling you.
+
+When you’re new, this is when you are at your most vulnerable. This is because you want to make sense of your environment so you can start being an effective leader.
+
+Remember, if your mind is made up a certain way, it’s going to be hard to change. Stop yourself from making assumptions before it’s too late.

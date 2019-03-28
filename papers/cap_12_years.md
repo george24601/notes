@@ -1,46 +1,11 @@
-The modern CAP goal should be to maximize combinations of consistency and availability that make sense for the specific application. Such an
-approach incorporates plans for operation during a partition and for recovery afterward, 
-
-Allowing at least one node to update state will cause the nodes to become inconsistent, thus forfeiting C. Likewise, if the choice is to
-preserve consistency, one side of the partition must act as if it is unavailable, thus forfeiting A
-
-First, because partitions are rare, there is little reason to forfeit C or A when the system is not partitioned. Second, the choice between
-C and A can occur many times within the same system at very fine granularity; not only can subsystems make different choices, but the choice
-can change according to the operation or even the specific data or user involved. Finally, all three properties are more continuous than
-binary. Availability is obviously continuous from 0 to 100 percent, but there are also many levels of consistency, and even partitions have
-nuances, including disagreement within the system about whether a partition exists.
-
-
 Because partitions are rare, CAP should allow perfect C and A most of the time, but when partitions are present or perceived, a strategy
 that detects partitions and explicitly accounts for them is in order. This strategy should have three steps: detect partitions, enter an
 explicit partition mode that can limit some operations, and initiate a recovery process to restore consistency and compensate for mistakes
 made during a partition.
 
- Isolation is at the core of the CAP theorem: if the system requires ACID isolation, it can operate on at most one side during a partition.
-Serializability requires communication in general and thus fails across partitions. Weaker definitions of correctness are viable across
-partitions via compensation during partition recovery.
-
-Retrying communication to achieve consistency, for example, via Paxos or a two-phase commit, just delays the decision. At some point the
-program must make the decision; retrying communication indefinitely is in essence choosing C over A.
-
-This pragmatic view gives rise to several important consequences. The first is that there is no global notion of a partition, since some
-nodes might detect a partition, and others might not. The second consequence is that nodes can detect a partition and enter a partition
-mode-a central part of optimizing C and A.
-
 Facebook uses the opposite strategy:6 the master copy is always in one location, so a remote user typically has a closer but potentially
 stale copy. However, when users update their pages, the update goes to the master copy directly as do all the user’s reads for a short time,
 despite higher latency. After 20 seconds, the user’s traffic reverts to the closer copy, which by that time should reflect the update.
-
- This exception, commonly known as disconnected operation or offline mode,7 is becoming increasingly important. Some HTML5 features-in
-particular, on-client persistent storage-make disconnected operation easier going forward. These systems normally choose A over C and thus
-must recover from long partitions.
-
-within a primary partition, it is possible to ensure complete consistency and availability, while outside the partition, service is not
-available. Paxos and atomic multicast systems typically match this scenario.8 In Google, the primary partition usually resides within one
-datacenter; however, Paxos is used on the wide area to ensure global consensus, as in Chubby,
-
-choosing CA should mean that the probability of a partition is far less than that of other systemic failures, such as disasters or multiple
-simultaneous faults.
 
 nvariant that keys in a table are unique, designers typically decide to risk that invariant and allow duplicate keys during a partition.
 Duplicate keys are easy to detect during recovery, and, assuming that they can be merged, the designer can easily restore the invariant.
@@ -60,8 +25,9 @@ greater than or equal to B’s and at least one of A’s times is greater.
 
 f it is impossible to order the vectors, then the updates were concurrent and possibly inconsistent. Thus, given the version vector history
 of both sides, the system can easily tell which operations are already in a known order and which executed concurrently. Recent work14
+
 proved that this kind of causal consistency is the best possible outcome in general if the designer chooses to focus on availability.
----------
+
 igner must solve two hard problems during recovery:
 the state on both sides must become consistent, and
 there must be compensation for the mistakes made during partition mode.
@@ -70,7 +36,6 @@ ome systems can always merge conflicts by choosing certain operations. A case in
 operations to applying a style and adding or deleting text. Thus, although the general problem of conflict resolution is not solvable, in
 practice, designers can choose to constrain the use of certain operations during partitioning so that the system can automatically merge
 state during recovery. Delaying risky operations is one relatively easy implementation of this strategy.
-
 
 cated data types (CRDTs), a class of data structures that provably converge after a partition, and describe how to use these structures to
 
@@ -93,3 +58,21 @@ designer can choose A and still ensure that state converges automatically after 
 RDTs allow only locally verifiable invariants-a limitation that makes compensation unnecessary but that somewhat decreases the approach’s
 power. However, a solution that uses CRDTs for state convergence could allow the temporary violation of a global invariant, converge the
 state after the partition, and then execute any needed compensations.
+
+Atomic in CAP means atomic consistency, and is not same in ACID: it doesn't mean all-or-nothing, just order of operations
+
+A pure asych system uses no local clock, and can not declare timeout
+
+consistency that is both instanneous and global is impossible
+
+We assume that clients make queries to servers, in which case there are at least two metrics for correct behavior: yield, which is the
+probability of completing a request, and harvest, which measures the fraction of the data reflected in the response, i.e. the completeness
+of the answer to the query.
+
+Despite your best efforts, your system will experience enough faults that it will have to make a choice between reducing yield (i.e., stop
+answering requests) and reducing harvest (i.e., giving answers based on incomplete data). This decision should be based on business
+requirements.
+
+EC with strong guarantees: CRDT, although data types that can be implemented as CRDT are limited
+
+CALM:  something is logically monotonic, then it is also safe to run without coordination
