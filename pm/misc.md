@@ -6,7 +6,6 @@ The arc that he draws is: team can’t reach consensus → has a healthy conflic
 
 Change the culture by exposing the stressful stuations, do it many times if once does not work
 
-BRIEF for email: background, reason, information (bullet points), End (what notes you want to finish), Follow-up(image what questions the other side will ask)
 
 Individual development plan??
 
