@@ -1,3 +1,12 @@
+Examples of applications of consensus include whether to commit a transaction to a database, agreeing on the identity of a leader, state machine replication, and atomic broadcasts.
+
+Consensus protocols can be broadly classified into two categories: leader-based and leaderless. Paxos and Raft are the two most commonly used leader-based consensus protocols where the task of data updates and replication is handled by a “leader”. S
+
+ Application of leaderless protocols can be found in blockchain distributed ledgers.
+
+At the heart of Paxos is a three-phase commit protocol that allows participants to give up on other stalled participants after some amount of time. It describes the actions of the participants by their roles in the protocol: client, acceptor, proposer, learner, and leader (aka a distinguished proposer). Many participants may believe they are leaders, but the protocol only guarantees progress if one of them is chosen. This essentially becomes the first phase of the protocol as shown in the figure below.
+
+### old notes
 proposer, acceptor, learner
 
 when a majority of acceptors accept the value, it is chosen. 

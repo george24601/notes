@@ -10,14 +10,34 @@
 [read-heavy critical service onboard] --> [write-heavy critical service]
 @enduml
 
+
 @startuml
-[Mar 28 - close list of candidates] --> [Decide 2 PoC Candidates]: 2 days 
-[Decide 2 PoC Candidates] --> [George PoC]: 5 days
-note left: wallet-read 100% int test passed
-[Decide 2 PoC Candidates] --> [Shinno PoC]: 6 days 
-note left: milestone TBD
-[George PoC] -->[Design 1st reviewed]: 2 days
-[Shinno PoC] -->[Design 1st reviewed]: 2 days
-note right: Sam, Max
+
+skinparam component {
+	backgroundColor<<done>> Green
+	backgroundColor<<doing>> Yellow
+	backgroundColor Red
+}
+[Mar 28 - close list of candidates] <<done>>
+[Apr 1 - Decide 2 PoC Candidates]  <<done>>
+[Apr 8 - tidb local PoC] <<doing>>
+
+[Load testing tools] --> [Cluster PoC]
+note top of [Load testing tools]: 400 writes/sec, 4k reads per sec
+
+[Cluster setup] --> [Cluster PoC]
+note top of [Cluster setup]: 3 nodes, each with 1/4 the size of current stg
+
+[Apr 8 - tidb local PoC] --> [Cluster PoC]
+[Vitess PoC] --> [Cluster PoC]
+
+[Mar 28 - close list of candidates] --> [Apr 1 - Decide 2 PoC Candidates]
+[Apr 1 - Decide 2 PoC Candidates] --> [Apr 8 - tidb local PoC]
+note top: wallet-read 100% int test passed
+[Apr 1 - Decide 2 PoC Candidates] --> [Vitess PoC]
+note top: milestone TBD
+[Apr 8 - tidb local PoC] -->[Design 1st reviewed]
+[Vitess PoC] -->[Design 1st reviewed]
+note left of [Design 1st reviewed]: Sam, Max
 @enduml
 

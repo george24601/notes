@@ -1,3 +1,5 @@
+### Old notes
+
 multi-version,sync-replicated, externally-consistent distributed transactions
 
 shard data across set of Paxos state machines. auto failover, auto resharding/rebalancing

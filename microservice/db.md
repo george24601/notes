@@ -32,10 +32,3 @@ Mysql's own repliation is normally not reliable, self-made a DRC, e.g., DTS on a
   * migrate queueed data into the new db
   * Verify the consistency, remove double write code, and then point to the new db
   * Note need to handle deletion and udpate carefully
-
-### ShardingSphere
-Sharding-JDBC: on top of JDBC 
-Sharding-Proxy: DB proxy on server end, seems more used for sharding proxy than sharding JDBC
-Sharding-Sidecar: similar idea for service mesh, for cloud native
-Need to refactor the auto-incremental id part out
-

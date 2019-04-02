@@ -1,3 +1,11 @@
+The separation of logic stems from the fact that Raft makes leader election a separate and mandatory step before the leader can get the data replicated where as a Paxos implementation would make the leader election process an implicit outcome of reaching agreement through data replication.
+
+Finally, Raft imposes the restriction that only the servers with most up-to-date data can become leaders. These optimizations radically simplify edge cases in which a succession of leadership changes can result in data discrepancies, but the tradeoff is that leader election in Raft can be more complicated than its counterpart in Paxos.
+
+
+
+### old notes
+
 Leader election: Raft uses randomized timers to elect leaders. This adds only a small amount of mechanism to the heartbeats already required for any consensus algorithm, while resolving conflicts sim- ply and rapidly.
 
 Membership changes: Raft’s mechanism for changing the set of servers in the cluster uses a new joint consensus approach where the majorities of two different configurations overlap during transi- tions. This allows the cluster to continue operating normally during configuration changes.
