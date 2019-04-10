@@ -1,6 +1,5 @@
 If you declare a table to be a child of another table, the primary key column(s) of the parent table must be the prefix of the primary key of the child table.
 
-
 1. Hash the key and store it in a column. Use the hash column (or the hash column and the unique key columns together) as the primary key.
 You can use the hash value to create logical shards, or partitions, in your database. (In a physically sharded database, the rows are spread across several databases. In a logically sharded database, the shards are defined by the data in the table.) For example, to spread writes to the Users table across N logical shards, you could prepend a ShardId key column to the table
 
@@ -18,15 +17,13 @@ Reading efficiency. Reads are faster if there are fewer splits to scan.
 * If you're using an interleaved table for the history, and you'll be reading the parent row as well. 
 * If you're reading sequential entries in reverse chronological order, and you don't know exactly how far back you're going. 
 
-    , because indexes are implemented as tables under the hood, and the resulting index table would use a column whose value monotonically increases as its first key part.
+### Index
 
-    It is okay to create an interleaved index like this though, because rows of interleaved indexes are interleaved in corresponding parent rows, and it's unlikely for a single parent row to produce thousands of events per second.
+because indexes are implemented as tables under the hood, and the resulting index table would use a column whose value monotonically increases as its first key part.
 
-Note that the DESC annotation above applies only to SongName. To index by descending order of other index keys, annotate them with DESC as well: SingerId DESC, AlbumId DESC.
+It is okay to create an interleaved index like this though, because rows of interleaved indexes are interleaved in corresponding parent rows, and it's unlikely for a single parent row to produce thousands of events per second.
 
 For SQL queries that use an index directive, Cloud Spanner's SQL query processor might need to read columns that are required by the query but that aren't stored in the index. The query processor retrieves these columns using a join between the index and the base table.
-For example, in the definition of the AlbumsByAlbumTitle index above, the MarketingBudget column is not stored in the index, but is one of the selected columns in the SQL query on that index. To fetch this column, Cloud Spanner does a lookup of the MarketingBudget column from the base table under the hood and joins it with data from the index to return the query results.
-
 
   Cloud Spanner can create approximately 3 non-interleaved indexes per day per database, regardless of the size of the tables being indexed.
 

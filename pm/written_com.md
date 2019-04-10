@@ -36,5 +36,27 @@ Use log log‐scale: ‐ when range spans 2+
 orders of magnitude ‐ to highlight ratios instead of difference
 
 
+### Weekly reports
 
+But as a manager, you need to fundamentally shift your thinking to be about the projects instead of the tasks.
+
+The bad report was written by an employee who considered their actions to be their accomplishments. This is characteristic of an individual contributor, not a manager. The difference between an individual contributor and a manager is that the individual contributor’s accomplishments are the tasks they perform, while the manager’s accomplishments are the projects they own and their metrics.
+
+Taking ownership means putting yourself in a position to take credit for a project’s successes, and also to be held accountable for its failures
+
+Managers shall not just read, but make comments in the employee's report. Giving employees feedback is crucially important.
+
+
+Use bulleted lists when you can. This format is easier for your supervisor to read than lengthy paragraphs
+
+Writing a weekly report about your research progress can make your research more successful, less frustrating, and more visible to others, among other benefits.
+
+
+Any time that you spend organizing your thoughts will more than pay itself back in better understanding and improved productivity.
+
+When a project is complete, it is all too easy to forget some of your contributions. You can look back over your progress reports to remember what was difficult, and to think about how to work more productively in the future. You may be able to re-use some of the text when writing up your results.
+
+When you have a weekly research meeting, the report should be sent 24 hours in advance, to help everyone prepare. (Two hours is not an acceptable alternative: it does not let everyone — both you and others — mull over the ideas.)
+
+ It also keeps you on their radar screen and reminds them of your work, which a good thing if you don't meet with them frequently. (For PhD students, a periodic report to the members of your thesis committee can pay big dividends.)
 
