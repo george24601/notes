@@ -18,26 +18,23 @@ skinparam component {
 	backgroundColor<<doing>> Yellow
 	backgroundColor Red
 }
-[Mar 28 - close list of candidates] <<done>>
 [Apr 1 - Decide 2 PoC Candidates]  <<done>>
-[Apr 8 - tidb local PoC] <<doing>>
+[Apr 8 - tidb local PoC] <<done>>
+[April 12 - Vitess local PoC] <<done>>
+[April 16 - Load testing tools]  
+note top : local run for 1 min
+[Cluster setup]<<doing>>
 
-[Load testing tools] --> [Cluster PoC]
-note top of [Load testing tools]: 400 writes/sec, 4k reads per sec
-
+[April 16 - Load testing tools]  --> [Cluster PoC]
 [Cluster setup] --> [Cluster PoC]
-note top of [Cluster setup]: 3 nodes, each with 1/4 the size of current stg
-
 [Apr 8 - tidb local PoC] --> [Cluster PoC]
-[Vitess PoC] --> [Cluster PoC]
-
-[Mar 28 - close list of candidates] --> [Apr 1 - Decide 2 PoC Candidates]
+[April 12 - Vitess local PoC] --> [Cluster PoC]
 [Apr 1 - Decide 2 PoC Candidates] --> [Apr 8 - tidb local PoC]
 note top: wallet-read 100% int test passed
-[Apr 1 - Decide 2 PoC Candidates] --> [Vitess PoC]
-note top: milestone TBD
-[Apr 8 - tidb local PoC] -->[Design 1st reviewed]
-[Vitess PoC] -->[Design 1st reviewed]
-note left of [Design 1st reviewed]: Sam, Max
+[Apr 1 - Decide 2 PoC Candidates] --> [April 12 - Vitess local PoC]
+note top: wallet-read 100% int test passed
+[Apr 8 - tidb local PoC] -->[Apr 26 - Design 1st reviewed]
+[April 12 - Vitess local PoC] -->[Apr 26 - Design 1st reviewed]
+note left of [Apr 26 - Design 1st reviewed]: Sam, Max
 @enduml
 

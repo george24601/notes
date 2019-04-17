@@ -1,9 +1,0 @@
-4. Probably consider TiSpark
-
-6. Cistern? For TiDB binlog
-
-11. Note it does not support SP, View, trigger, UDF, FK 
-
-
-
-
