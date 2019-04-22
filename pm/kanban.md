@@ -84,8 +84,4 @@ Technical Debt – Things that we should have done :-/
 
 Customer / Business Features – New features to be introduced in Kanbanize
 
-Technical Features – Usually DevOps tasks, deployment-related activities, database schema changes, etc.
-
-As a matter of fact, technical features may often make it to the expedite swimlane, if we have an automation piece that blocks the release.
-
-The main purpose of this swimlane is to visually separate technical features from business features and to allow better tracking of the given work type.
+Technical Features – Usually DevOps tasks, deployment-related activities, database schema changes, etc. Note some items may be expedite given context

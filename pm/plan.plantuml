@@ -38,3 +38,16 @@ note top: wallet-read 100% int test passed
 note left of [Apr 26 - Design 1st reviewed]: Sam, Max
 @enduml
 
+
+@startuml
+
+[Identify waste by hand] --> [Checklist for product engineers]
+note top: George
+[Get current Labs process] --> [Process for platform team]
+note top: From Siyuan
+[Get current Paytm process] --> [Process for platform team]
+note top: From parakh.agarwal
+[Identify waste by hand] --> [Process for platform team]
+[Identify waste by hand] --> [Pushing changes to be exercied by the platform team]
+
+@enduml

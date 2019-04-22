@@ -6,7 +6,6 @@ The arc that he draws is: team can’t reach consensus → has a healthy conflic
 
 Change the culture by exposing the stressful stuations, do it many times if once does not work
 
-
 Individual development plan??
 
 The informed captain on that decision has the responsibility to welcome, understand, and consider your opinions, but may not agree. Once the captain makes a decision, we expect everyone to help make it as successful as possible.
@@ -16,8 +15,6 @@ An org's processes, practices, and results are an outcome of people's thinking b
 We change by parcticing a different behavior, that, over time, leads us to think about things differently
 
 We are what we repeatedly do. excellence, then, is not an act, but a habit
-
-One quick test is to see whether they pay money for solving the problem currently: if people are spending hundreds of thousands of dollars on inefficient, semi-manual ways to do something that you could do with Hello World and a random number generator, you may be on to something.  (For example, if you knew nothing about the educational market, you can infer that there are at least several hundred thousand dollars sold of reading vocabulary bingo cards every year, just by seeing those cards stocked in educational stores across the country and doing some quick retail math.  So clearly people are spending money on reading vocabulary bingo.  It isn’t that much a reach to assume they might pay money for software.)
 
 This should go without saying, but talk to your customers prior to building anything.  People love talking about their problems to anyone who will listen to them.  Often they won’t have the first clue about what a solution looks like, but at the very least repeated similar emotional reactions from many people in a market should tell you that the problem is there and real.  After that, it is “just” a matter of marketing.
 
@@ -34,20 +31,12 @@ Instead, describe yourself by what you have accomplished for previously employer
 
 A good engineer has a track record of — repeat after me — increasing revenue or decreasing costs.
 
-“What is your previous salary?” is employer-speak for “Please give me reasons to pay you less money.”  Answer appropriately.
-
-The only time to ever discuss salary is after you have reached agreement in principle that they will hire you if you can strike a mutually beneficial deal.  This is late in the process after they have invested a lot of time and money in you, specifically, not at the interview.  Remember that there are large costs associated with them saying “No, we can’t make that work” and, appropriately, they will probably not scuttle the deal over comparatively small issues which matter quite a bit to you, like e.g. taking their offer and countering for that plus a few thousand bucks then sticking to it.
-
 If you are part of a team effort and the team effort succeeds, the right note to hit is not “I owe it all to my team” unless your position is such that everyone will understand you are lying to be modest.  Try for “It was a privilege to assist my team by leading their efforts with regards to $YOUR_SPECIALTY.”
 
 Actual grooming is at least moderately important, too, because people are hilariously easy to hack by expedients such as dressing appropriately for the situation, maintaining a professional appearance, speaking in a confident tone of voice, etc.  Your business suit will probably cost about as much as a computer monitor.  You only need it once in a blue moon, but when you need it you’ll be really, really, really glad that you have it.  Take my word for it, if I wear everyday casual when I visit e.g. City Hall I get treated like a hapless awkward twenty-something, if I wear the suit I get treated like the CEO of a multinational company.
 
-When you hear somebody criticise someone’s work ethic or ability, be wary of taking this opinion for yourself. You always need to question the motives of people around you. Are they in competition with the other person? Do they feel threatened by their experience or skill?
-
-You don’t need to act as if every comment is part of a murder mystery, but it still pays to be impartial, and to think about what may be driving the behaviour of the person giving you the information.
-
-Making assumptions about people can be dangerous for your team. When you’ve just taken on a new role and are trying to understand the situation, you need to be able to take a step back and think clearly about what people are telling you.
-
 When you’re new, this is when you are at your most vulnerable. This is because you want to make sense of your environment so you can start being an effective leader.
 
-Remember, if your mind is made up a certain way, it’s going to be hard to change. Stop yourself from making assumptions before it’s too late.
+One reason is that virtually every employee now affects the overall customer experience, even employees who do not directly interact with customers. Most individual episodes cross corporate functions, with any change requiring decisions that span compartmentalized products, policies, operations, channels and technologies. Yet nobody is accountable until the decision reaches a senior executive. Slogging through consensus among dozens of managers, or escalating to a busy executive, is too slow and cumbersome for the many decisions required to deliver a great experience. Each function, moreover, may have very different goals. 
+
+They place more value on adapting to change than on sticking to a plan, and they hold themselves accountable for outcomes (such as growth, profitability and customer loyalty), not outputs (such as lines of code or the number of new products).
