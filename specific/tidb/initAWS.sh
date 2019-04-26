@@ -59,5 +59,4 @@ sudo su
 systemctl start ntpd
 systemctl status ntpd
 
-
 sudo chown ec2-user:ec2-user instanceStorage

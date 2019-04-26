@@ -32,3 +32,5 @@ Mysql's own repliation is normally not reliable, self-made a DRC, e.g., DTS on a
   * migrate queueed data into the new db
   * Verify the consistency, remove double write code, and then point to the new db
   * Note need to handle deletion and udpate carefully
+
+Partitioned table number needs to be 2^N, because when we mod, if you want to partition again, this can reduce the impact?!

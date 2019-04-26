@@ -144,3 +144,5 @@ pmap $PID
 
 # check process parent-child relationship
 pstree 
+
+### Note that 32G 128G physical machine can be considered high end already, should be able to handle 100k+ rqs

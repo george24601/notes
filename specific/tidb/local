@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ### Make sure you have NO OTHER mysql daemon running
+###For macOS, you need to allocate 2+ CPU and 4G+ Memory to Docker.
 
 cd tidb-docker-compose && docker-compose pull # Get the latest Docker images
 docker-compose up -d

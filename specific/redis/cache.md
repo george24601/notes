@@ -20,3 +20,9 @@ every dictEntry: 66 bytes, bucket size is closest 2^n, each element 8 bytes (i.e
 The reason is that processes in a system are not always running, actually it is the kernel scheduler that let the process run, so what happens is that, for instance, the benchmark is allowed to run, reads the reply from the Redis server (related to the last command executed), and writes a new command. The command is now in the loopback interface buffer, but in order to be read by the server, the kernel should schedule the server process (currently blocked in a system call) to run, and so forth. So in practical terms the loopback interface still involves network-alike latency, because of how the kernel scheduler works.
 
 Because moving hash slots from a node to another does not require to stop operations, adding and removing nodes, or changing the percentage of hash slots hold by nodes, does not require any downtime.
+
+Use BF to filter out obvious nos
+
+Use lock when fetch value from db to defend against penetration
+
+against stampdede/cascading failure, ideally db shoudl be able to handle that, if too hard, rate limiting is a must combiled with persisted recovered and active-standby clusters

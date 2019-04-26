@@ -100,4 +100,11 @@ public class Dump {
 	 Object returnValue = method.invoke(null, "parameter-value1");
   }
 
+  public void test() {
+	  WorkAction action = (WorkAction) actionClazz.newInstance();
+	  WorkRes execute =action.execute(paramMap)
+
+
+  }
+
 }

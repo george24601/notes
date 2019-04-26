@@ -1,9 +1,3 @@
-lock-free concurrency: e.g. concurrentHashMap
-
-CAS: optimistic lock
-
-jps-jstack for deadlock
-
 # Producer-consumer problem
 
 ```
