@@ -3,7 +3,7 @@ ID generaion:
 * Snowflake
 
 Sharding:
-* range based: hot slice problem
+* range based: hot slice problem, especially auto-inc id
 * Hash based: what if you need range scan
 
 ### How to migrate if you want to increase db capacity:

@@ -18,24 +18,20 @@ skinparam component {
 	backgroundColor<<doing>> Yellow
 	backgroundColor Red
 }
-[Apr 1 - Decide 2 PoC Candidates]  <<done>>
-[Apr 8 - tidb local PoC] <<done>>
-[April 12 - Vitess local PoC] <<done>>
-[April 16 - Load testing tools]  
-note top : local run for 1 min
-[Cluster setup]<<doing>>
 
-[April 16 - Load testing tools]  --> [Cluster PoC]
+[Decide scenario]<<doing>> 
+note top: George, before Apr 30
+[Cluster setup]<<doing>>
+note top: Shinno, before May 1
+[Load testing tools]  --> [Cluster perf test]
+note top: George, Shinno
+[Cluster setup] --> [Cluster perf test]
 [Cluster setup] --> [Cluster PoC]
-[Apr 8 - tidb local PoC] --> [Cluster PoC]
-[April 12 - Vitess local PoC] --> [Cluster PoC]
-[Apr 1 - Decide 2 PoC Candidates] --> [Apr 8 - tidb local PoC]
-note top: wallet-read 100% int test passed
-[Apr 1 - Decide 2 PoC Candidates] --> [April 12 - Vitess local PoC]
-note top: wallet-read 100% int test passed
-[Apr 8 - tidb local PoC] -->[Apr 26 - Design 1st reviewed]
-[April 12 - Vitess local PoC] -->[Apr 26 - Design 1st reviewed]
-note left of [Apr 26 - Design 1st reviewed]: Sam, Max
+[Decide scenario] -> [Local migration]
+[Local migration] --> [Cluster PoC]
+[Backup design] --> [Design 1st reviewed]
+[Monitoring design] --> [Design 1st reviewed]
+[Migration design] --> [Design 1st reviewed]
 @enduml
 
 
