@@ -31,7 +31,7 @@ Each of these headers contains a bit known as the "reset" (RST) flag.  if this b
 * SYN-RCVD: server side, after ACK+SYN is sent, similar to SYN-SENT, should be very quick to change to ESTABLISHED. Note if you have many SYN-RCVD, maybe a sign of SYN flood DDoS. Connection is now to half-opened state inside the half-connection queue, Transmission Control Block allocated
 * ESTABLISHED: full conneciton queue: not ACCEPTED by the apply, will have packet loss if they are full 
 * FIN-WAIT-1: active close side, after FIN is sent, includes a current serial number K, and include an ACK to confirm have received the the latest data
-* CLOSE_WAIT: server/passive close side, when client disconnects and sends FIN. If server side doesn't not receive the FIN, it will remain established. Needed so that client can ACK all on-the-fly but after FIN data. will set K+1 as ACK number
+* CLOSE_WAIT: server/passive close side, when client disconnects and sends FIN. If server side doesn't not receive the FIN, it will remain established. Needed so that client can ACK all on-the-fly but after FIN data. will set K+1 as ACK number. A common problem is not closing the connection from client (while the client side maybe closed due to long idleness)
 * FIN-WAIT-2: after the active close side receives ACK 
 * CLOSING: rare
 * LAST-ACK: passive close side, the program received to EOF to call CLOSE, PCS will send a FIN and wait for ACK, e.g., when disconnect stress testing client, you will see many LAST-ACK
@@ -43,3 +43,4 @@ Note that both client and server have a separate ISN
 
 timer: every conneciton has one
 
+max window size 16bit = 65535

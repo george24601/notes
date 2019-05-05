@@ -34,3 +34,12 @@ Mysql's own repliation is normally not reliable, self-made a DRC, e.g., DTS on a
   * Note need to handle deletion and udpate carefully
 
 Partitioned table number needs to be 2^N, because when we mod, if you want to partition again, this can reduce the impact?!
+
+### Another migration approach
+1. virtual IP to the original master
+2. give another virtual IP to both old and new
+3. change the config to point to the new, restart the service
+4. restart the service
+5. change double virtual ip to single virtual IP, cut off the double sync
+6. add new HA replica to the new dbs
+7. purge stale data

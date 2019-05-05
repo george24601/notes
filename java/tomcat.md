@@ -17,3 +17,32 @@ maxConnecitons: Acceptor will not read from the accept queue if # of conns > thi
 maxThreads: default 200, request processing thread's max #, ignored fi the Connector has a bound executor
 
 Normally init heap size is same as max heap size, to avoid full GC when the init memory is not enough
+
+### arch
+Service: connector + container, connector for connection-baed, sockeet request/response
+
+constainer use to manage servlent, and handle actual request
+
+one tomcat-> one server -> multiple services
+
+one service only one container, but multiple connectors, which encapsulates into Request and response
+
+### Connector
+
+ProtocalHandler: Endpont (Acceptor + Handler + AsyncTimeoutb) -> Procceor->Adaptor...> Container
+
+### Container:w
+Engine: Host: Context (one app): Wrapper(one servelet)
+
+Uses Pipeline-Value mode: every pipeline has spectifi value, and it is the last one in the pipeline, called basevalue
+* Upper level BaseValue will calll the lower level container's pipe
+
+EnginePipeline -> HOstPipeline -> ContextPipeline -> WrapperPipeline 
+
+StandardWrapperValue will have the filterChain and call doFilter, which has all FIlter and Servlet we configed
+
+Default shutdown: 8005
+
+
+
+

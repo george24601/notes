@@ -4,8 +4,6 @@ Channels (classes implementing the interface java.nio.channels.Channel) are desi
 
 File channels (java.nio.channels.FileChannel) can use arbitrary buffers but can also establish a buffer directly mapped to file contents using memory-mapped file. They can also interact with file system locks. Similarly, socket channels (java.nio.channels.SocketChannel and java.nio.channels.ServerSocketChannel) allow for data transfer between sockets and NIO buffers.
 
-A selector (java.nio.channels.Selector and subclasses) provides a mechanism for waiting on channels and recognizing when one or more become available for data transfer.
-
 A buffer is a container for a fixed amount of data of a specific primitive type. In addition to its content a buffer has a position, which is the index of the next element to be read or written, and a limit, which is the index of the first element that should not be read or written.
 
 Byte buffers are distinguished in that they can be used as the sources and targets of I/O operations. They also support several features not found in the other buffer classes
@@ -38,8 +36,4 @@ Channel is bi-directional, but can asyncly read and write buffer
 * buffer based, channel orientied. As a comparsion, IO is stream oriented
 * Why the IO package uses decorator?
 
-NIO has selector and IO does not, which is used to use a single thread to process multiple channels
-
 NIO was implemented by epoll(), so empty polling will incrase CPU usage -> hence netty
-
-AIO,i.e., NIO 2,note netty is not used yet 

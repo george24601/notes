@@ -11,3 +11,5 @@ A similar process occurs when a bucket is added. By adding new bucket points, we
 The portion of the keys associated with each bucket can be altered by altering the number of angles that bucket maps to.
 
 nstead of mapping machine number  to a single point on the circle, we’ll map it to multiple points (“replicas”). In particular, let’s imagine that for each machine we pick out  points, by hashing onto the circle. 
+
+virtual node number common to 32

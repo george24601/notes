@@ -5,3 +5,5 @@ class type.newInstance, ConstructorType.newInstance - classType newInstance call
 add/remove inside foreach =>may get concurrency exception even when single threaded due to the check inside iterator!
 
 use classloader isolation for jar version conflict
+
+async worker, exception handling problem

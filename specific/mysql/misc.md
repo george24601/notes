@@ -22,3 +22,5 @@ Change buffer???
 
 prefer timestamp to datetime?
 prefer IN to OR? limit size of IN to 200
+
+Innodb uses old and young for separate LRU, young for hot, old for cold. They meet at midpoint. If the data point exists in oldLRU for more than 1 sec, move to young
