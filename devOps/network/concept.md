@@ -40,10 +40,6 @@ Ensure that your network access control and security group rules allow the relev
 Your instance is only aware of the private (internal) IP address space defined within the VPC and subnet.
 
 
-### LB
-4. Separate request and responding, the server behind respond directly => all servers will have the same VIP bound to their loopback -> use ARP to broacast VIP, and machine with such IP will reply its own MAC address, but only LB can respond to the ARP reqeust -> but LB will not change IP data header, that means server ports must match LB prots - DR mode
-* use lvs/f5 IN FRONT OF nginx, e.g. f5 can do 100k qps, and use the same keepalived + virtual IP trick on lvs - enough for most cases. Note that lvs is level 4, nginx is leve 7. i.e, lvs will share the same virtual IP. Note that Nginx in this case doesn't need keep alived anymore - lvs does this for you alreay!
-
 # MAC address
 
 a unique identifier assigned to a network interface controller (NIC) for communications at the data link layer of a network segment.
@@ -53,8 +49,6 @@ A network node may have multiple NICs and each NIC must have a unique MAC addres
 he MAC address is expected to uniquely identify each node on that segment and allows frames to be marked for specific hosts. It thus forms the basis of most of the link layer (OSI Layer 2) networking upon which upper layer protocols rely to produce complex, functioning networks.
 
 Although intended to be a permanent and globally unique identification, it is possible to change the MAC address on most modern hardware. Changing MAC addresses is necessary in network virtualization. It can also be used in the process of exploiting security vulnerabilities. This is called MAC spoofing.
-
-#HTTP 2.0
 
 #Routing
 
@@ -102,15 +96,3 @@ C10K - PID was a signed 16-bit int - i.e. 32k processes max
 
 ### Push CDNs vs Pull CDNs
 
-### tcp long connection/keepalive
-when you set up a TCP connection, you associate a set of timers. Some of these timers deal with the keepalive procedure. When the keepalive timer reaches zero, you send your peer a keepalive probe packet with no data in it and the ACK flag turned on.
-
-The other useful goal of keepalive is to prevent inactivity from disconnecting the channel. It's a very common issue, when you are behind a NAT proxy or a firewall, to be disconnected without a reason. This behavior is caused by the connection tracking procedures implemented in proxies and firewalls, which keep track of all connections that pass through them. Because of the physical limits of these machines, they can only keep a finite number of connections in their memory. The most common and logical policy is to keep newest connections and to discard old and inactive connections first.
-
-### Http keep-alive
-
-using a single TCP connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair.
-
-In HTTP 1.1, all connections are considered persistent unless declared otherwise
-
-socket api is between application layer and transport layer

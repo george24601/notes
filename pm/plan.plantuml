@@ -1,49 +1,51 @@
 @startuml
-[Option 1 Eval] -> [Decide on the direction]
-[Option 2 Eval] -> [Decide on the direction] 
-[Decide on the direction] --> [v1]
-[v1] -> [Migrate a non-critical service]
-[Migrate a non-critical service] -> [v2]
-[Migrate a non-critical service] --> [Second non-critial service onboard]
-[v2] --> [read-heavy critical service onboard]
-[Second non-critial service onboard] -> [read-heavy critical service onboard]
-[read-heavy critical service onboard] --> [write-heavy critical service]
-@enduml
-
-
-@startuml
-
 skinparam component {
 	backgroundColor<<done>> Green
 	backgroundColor<<doing>> Yellow
 	backgroundColor Red
 }
 
-[Decide scenario]<<doing>> 
-note top: George, before Apr 30
-[Cluster setup]<<doing>>
-note top: Shinno, before May 1
-[Load testing tools]  --> [Cluster perf test]
-note top: George, Shinno
-[Cluster setup] --> [Cluster perf test]
-[Cluster setup] --> [Cluster PoC]
-[Decide scenario] -> [Local migration]
-[Local migration] --> [Cluster PoC]
-[Backup design] --> [Design 1st reviewed]
-[Monitoring design] --> [Design 1st reviewed]
-[Migration design] --> [Design 1st reviewed]
+[BI PoC]<<doing>> 
+[BI PoC] --> [v1]
+[BI PoC] --> [Migrate BI] 
+[v1] --> [Migrate a non-critical service]
+[Migrate a non-critical service] --> [v2]
+[Migrate a non-critical service] --> [Second non-critial service onboard]
+[v2] --> [read-heavy critical service onboard]
+[Second non-critial service onboard] --> [read-heavy critical service onboard]
+[Migrate BI] --> [Find SRE]
+[Migrate BI] --> [Find DBA]
+[Find SRE] --> [read-heavy critical service onboard]
+[Find DBA] --> [read-heavy critical service onboard]
 @enduml
 
 
 @startuml
-
-[Identify waste by hand] --> [Checklist for product engineers]
-note top: George
-[Get current Labs process] --> [Process for platform team]
-note top: From Siyuan
-[Get current Paytm process] --> [Process for platform team]
-note top: From parakh.agarwal
-[Identify waste by hand] --> [Process for platform team]
-[Identify waste by hand] --> [Pushing changes to be exercied by the platform team]
-
+skinparam component {
+	backgroundColor<<done>> Green
+	backgroundColor<<doing>> Yellow
+	backgroundColor Red
+}
+[Solution for Paypay]<<doing>> 
+note top: George, before May 10
+[Migration design]<<doing>> 
+note top: George, before May 10
+[Decide scenario]<<done>> 
+[tidb on ec2 setup]<<doing>>
+note top: Shinno, by May 10
+[Load testing tools]
+note top: Shinno, by May 10
+[Load testing tools]  --> [benchmark perf test]
+[Decide scenario] --> [Solution for Paypay]
+[tidb on ec2 setup] --> [benchmark perf test]
+[tidb on ec2 setup] --> [Online migration PoC]
+[Decide scenario] --> [Online migration PoC]
+[Backup design] --> [Design 1st reviewed]
+[Monitoring design] --> [Design 1st reviewed]
+[Migration design] --> [Design 1st reviewed]
+[Online migration PoC] --> [Design 1st reviewed]
+[tidb on ec2 setup] --> [TiDB-Operator setup]
+[TiDB-Operator setup] --> [TiDB-Operator perf test]
+[Online migration PoC] --> [BI perf Test]
 @enduml
+
