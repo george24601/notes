@@ -36,6 +36,3 @@ search_data -> index -> rank
 
 Hash vs range partition, range parititon has better extensibiilty with pre-defined block ranges (need help with incremental id)
 
-
-
-

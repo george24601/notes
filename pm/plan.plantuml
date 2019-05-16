@@ -4,19 +4,17 @@ skinparam component {
 	backgroundColor<<doing>> Yellow
 	backgroundColor Red
 }
+[Dev cluster] <<doing>>
+[Compatibility testing on dev]
+note left: Finish by May 31
 
-[BI PoC]<<doing>> 
-[BI PoC] --> [v1]
-[BI PoC] --> [Migrate BI] 
-[v1] --> [Migrate a non-critical service]
-[Migrate a non-critical service] --> [v2]
-[Migrate a non-critical service] --> [Second non-critial service onboard]
-[v2] --> [read-heavy critical service onboard]
-[Second non-critial service onboard] --> [read-heavy critical service onboard]
-[Migrate BI] --> [Find SRE]
-[Migrate BI] --> [Find DBA]
-[Find SRE] --> [read-heavy critical service onboard]
-[Find DBA] --> [read-heavy critical service onboard]
+[Backup system] --> [Stg cluster]
+[Dev cluster] --> [Compatibility testing on dev]
+[Dev cluster] --> [Stg cluster]
+[Stg cluster] --> [Perf testing]
+[Stg cluster] --> [Prod cluster]
+[Find SRE] 
+[Find DBA] 
 @enduml
 
 
@@ -26,26 +24,21 @@ skinparam component {
 	backgroundColor<<doing>> Yellow
 	backgroundColor Red
 }
-[Solution for Paypay]<<doing>> 
-note top: George, before May 10
-[Migration design]<<doing>> 
-note top: George, before May 10
-[Decide scenario]<<done>> 
-[tidb on ec2 setup]<<doing>>
-note top: Shinno, by May 10
-[Load testing tools]
-note top: Shinno, by May 10
-[Load testing tools]  --> [benchmark perf test]
-[Decide scenario] --> [Solution for Paypay]
-[tidb on ec2 setup] --> [benchmark perf test]
-[tidb on ec2 setup] --> [Online migration PoC]
-[Decide scenario] --> [Online migration PoC]
-[Backup design] --> [Design 1st reviewed]
-[Monitoring design] --> [Design 1st reviewed]
-[Migration design] --> [Design 1st reviewed]
-[Online migration PoC] --> [Design 1st reviewed]
-[tidb on ec2 setup] --> [TiDB-Operator setup]
-[TiDB-Operator setup] --> [TiDB-Operator perf test]
-[Online migration PoC] --> [BI perf Test]
+[Monitoring PoC]<<doing>> 
+note left: Shinno, ETA?
+[Dev cluster setup]<<doing>>
+note left: George, ETA?
+[Dev migration]
+note left: George
+[Backup PoC] 
+note left: Shinno
+
+[Monitoring PoC] --> [Monitoring design] 
+[Dev cluster setup] --> [Dev migration]
+[Dev migration] --> [Migration design]
+[Backup PoC] --> [Backup design] 
+[Backup design] --> [Stg cluster]
+[Monitoring design] --> [Stg cluster]
+[Migration design] --> [Stg cluster]
 @enduml
 
