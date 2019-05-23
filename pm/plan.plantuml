@@ -24,14 +24,14 @@ skinparam component {
 	backgroundColor<<doing>> Yellow
 	backgroundColor Red
 }
-[Monitoring PoC]<<doing>> 
-note left: Shinno, ETA?
+[Monitoring PoC]<<done>> 
+note left: Shinno
 [Dev cluster setup]<<doing>>
 note left: George, ETA?
 [Dev migration]
 note left: George
-[Backup PoC] 
-note left: Shinno
+[Backup PoC] <<doing>>
+note left: Shinno, ETA?
 
 [Monitoring PoC] --> [Monitoring design] 
 [Dev cluster setup] --> [Dev migration]

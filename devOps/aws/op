@@ -6,7 +6,28 @@ export AWS_PROFILE=user2
 aws ec2 describe-instances --profile user2
 
 #Delete streams from a specific month
-export LOG_GROUP=dev_v2-cluster
 
-aws logs describe-log-streams --log-group-name $LOG_GROUP --query 'logStreams[?starts_with(logStreamName,`2018/03`)].logStreamName' --output table | awk '{print $2}' | grep -v ^$ | while read x; do aws logs delete-log-stream --log-group-name $LOG_GROUP --log-stream-name $x; done
+####Use cli with MFA, make sure you source so that it changes the current shell process
+
+#Format:arn:aws:iam::$ACCOUNT_NUM:mfa/$ACCOUNT_NAME
+MFA_ARN=""
+#Format: arn:aws:iam::$ACCOUNT_NUM:role/$ROLE_NAME
+ROLE_ARN="" 
+#6 digit authenticator code here
+CODE_6_DIGIT=''
+
+unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+
+RESPONSE=`aws sts assume-role \
+    --duration-seconds 129600  \
+    --role-arn ${ROLE_ARN} \
+    --role-session-name session-${ENV} \
+    --token-code ${CODE_6_DIT} \
+    --serial-number ${MFA_ARN}`
+
+export AWS_ACCESS_KEY_ID=`echo ${RESPONSE} | jq .Credentials.AccessKeyId -r`
+export AWS_SECRET_ACCESS_KEY=`echo ${RESPONSE} | jq .Credentials.SecretAccessKey -r`
+export AWS_SESSION_TOKEN=`echo ${RESPONSE} | jq .Credentials.SessionToken -r`
+
+######Above section ends
 

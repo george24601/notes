@@ -4,6 +4,13 @@
 
 #aws logs delete-log-stream --log-group-name my-logs --log-stream-name 20150531
 
+"""
+bash way
+export LOG_GROUP=dev_v2-cluster
+
+aws logs describe-log-streams --log-group-name $LOG_GROUP --query 'logStreams[?starts_with(logStreamName,`2018/03`)].logStreamName' --output table | awk '{print $2}' | grep -v ^$ | while read x; do aws logs delete-log-stream --log-group-name $LOG_GROUP --log-stream-name $x; done
+"""
+
 import datetime
 import time
 

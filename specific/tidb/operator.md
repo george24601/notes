@@ -1,3 +1,9 @@
+installed by helm charts.
+Network, local PV support
+
+tidb cluster charts -> helm -> 
+
+
 graceful shutown and ecti-leader-scheduler
 
 K8s cross region is done via Federation, still weak
@@ -22,3 +28,27 @@ every time stopping the service, let controller notify cluster to do the data mi
 
 Alternavite: ValidationAdmissionWebhook NOte k8s AdmissionControler is simliar to filter or middleware
 Dynamic admiision control very powerful
+
+### From official docs
+
+Allthough TiDB Operator can use network volume to persist TiDB data, this is slower due to redundant replication. It is highly recommended to set up (k8s) local volume for better performance.
+
+If you want to use a different envirnoment, a proper DNS addon must be installed in the Kubernetes cluster. You can follow the k8s official documentation to set up a DNS addon.
+
+The Kubernetes cluster is suggested to enable (k8s)RBAC. Otherwise you may want to set rbac.create to false in the values.yaml of both tidb-operator and tidb-cluster charts
+
+Because TiDB by default will use lots of file descriptors, the worker node and its Docker daemon's ulimit must be configured to greater than 1048576
+
+```bash
+sudo vim /etc/systemd/system/docker.service
+```
+
+After TiDB Operator and Helm are deployed correctly, TiDB cluster can be deployed using following command
+
+These settings can make TiDB cluster run on a small Kubernetes cluster like DinD or the default GKE cluster for testing. But for production deployment, you would likely to adjust the cpu, memory and storage resources according to the recommendations.
+
+The resource limits should be equal or bigger than the resource requests, it is suggested to set limit and request equal to get Guaranteed QoS.
+
+For other settings, the variables in values.yaml are self-explanatory with comments. You can modify them according to your need before installing the charts.
+
+By default TiDB service is exposed using NodePort. You can modify it to ClusterIP which will disable access from outside of the cluster. Or modify it to LoadBalancer if the underlining Kubernetes supports this kind of service.
