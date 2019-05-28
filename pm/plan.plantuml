@@ -2,19 +2,30 @@
 skinparam component {
 	backgroundColor<<done>> Green
 	backgroundColor<<doing>> Yellow
+	backgroundColor<<explore>> Blue
 	backgroundColor Red
 }
+[Scale up]
 [Dev cluster] <<doing>>
-[Compatibility testing on dev]
-note left: Finish by May 31
-
-[Backup system] --> [Stg cluster]
-[Dev cluster] --> [Compatibility testing on dev]
-[Dev cluster] --> [Stg cluster]
-[Stg cluster] --> [Perf testing]
+note left: Geroge, Blocked by AWS limitation
+[Backup solution] <<doing>>
+note left: Shinno, ETA?
+[Start training DBA]
+note right: June 7 
+[Stg cluster]
+note left: June 15
+[Perf testing]<<explore>>
+[Backup solution] --> [Stg cluster]
+[Migration solution] --> [Stg cluster]
+[Dev cluster] --> [Dev migration]
+[Dev cluster] --> [Migration solution]
 [Stg cluster] --> [Prod cluster]
-[Find SRE] 
-[Find DBA] 
+[Dev cluster] --> [Start training DBA] 
+[Start training DBA] --> [Prod cluster]
+[Stg cluster] --> [Stg migration]
+[Stg migration] --> [Perf testing]
+[Prod cluster] --> [Prod migration]
+[Perf testing] --> [Start contracting process with tidb]
 @enduml
 
 
@@ -24,21 +35,19 @@ skinparam component {
 	backgroundColor<<doing>> Yellow
 	backgroundColor Red
 }
-[Monitoring PoC]<<done>> 
-note left: Shinno
 [Dev cluster setup]<<doing>>
-note left: George, ETA?
-[Dev migration]
+note left: George, Blocked by AWS
+[Dev code migration]
 note left: George
-[Backup PoC] <<doing>>
+[Full backup design] <<doing>>
 note left: Shinno, ETA?
-
-[Monitoring PoC] --> [Monitoring design] 
-[Dev cluster setup] --> [Dev migration]
-[Dev migration] --> [Migration design]
-[Backup PoC] --> [Backup design] 
-[Backup design] --> [Stg cluster]
-[Monitoring design] --> [Stg cluster]
+[Dev data migration] 
+note left: Shinno
+[Full backup design] --> [Incremental Backup]
+[Dev cluster setup] --> [Dev data migration]
+[Dev cluster setup] --> [Dev code migration]
+[Dev data migration] --> [Migration design]
+[Full backup design] --> [Stg cluster]
 [Migration design] --> [Stg cluster]
 @enduml
 

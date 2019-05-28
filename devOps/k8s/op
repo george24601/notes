@@ -23,3 +23,7 @@ kubectl describe service mockservice
 
 #populate env var to the first column of the 2nd line
 export POD_NAME=$(kubectl get pods -l k8s-app=mockservice | sed -n 2p | awk '{ print $1 }')
+
+aws eks --region ap-northeast-1 update-kubeconfig --name george_dev
+
+kubectl config current-context
