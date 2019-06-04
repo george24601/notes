@@ -27,3 +27,35 @@ export POD_NAME=$(kubectl get pods -l k8s-app=mockservice | sed -n 2p | awk '{ p
 aws eks --region ap-northeast-1 update-kubeconfig --name george_dev
 
 kubectl config current-context
+
+ MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default wintering-rodent-mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode; echo)
+
+ ### Run an Ubuntu pod that you can use as a client
+ kubectl run -i --tty ubuntu --image=ubuntu:16.04 --restart=Never -- bash -il
+
+### see what is released
+helm ls
+
+### You get a simple idea of the features of this MySQL chart by running 
+helm inspect stable/mysql
+
+## To see what options are configurable on a chart, use 
+helm inspect values stable/mariadb
+
+### override any of these settings
+cat << EOF > config.yaml
+mariadbUser: user0
+mariadbDatabase: user0db
+EOF
+helm install -f config.yaml stable/mariadb
+
+### When it is time to uninstall or delete a release from the cluster, use the helm delete command
+helm delete happy-panda
+
+helm create deis-workflow
+#### Now there is a chart in ./deis-workflow. You can edit it and create your own templates
+
+### As you edit your chart, you can validate that it is well-formatted by running 
+helm lint
+### When it’s time to package the chart up for distribution
+helm package deis-workflow

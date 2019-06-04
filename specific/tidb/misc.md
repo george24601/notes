@@ -73,3 +73,12 @@ every instance on a separate disk
 
 Does not handle write skew, have to use select for update
 on default, will have lost update problem, i.e., if both A and B read and then update the same entry, if A submit first, B 
+
+### Table partition
+
+same table logically, but underlying uses multiple physical partitions, common in other relational DBs
+
+data partitioned into seprate physical tables, program uses the logical name
+
+
+

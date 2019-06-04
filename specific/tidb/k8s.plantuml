@@ -1,0 +1,29 @@
+@startuml
+!include <aws/common>
+!include <aws/Compute/AmazonVPC/VPCpeering/VPCpeering>
+!include <aws/NetworkingContentDelivery/AmazonRoute53/AmazonRoute53>
+!include <aws/NetworkingContentDelivery/ElasticLoadBalancing/ElasticLoadBalancing>
+
+package "service vpc - tokyo" {
+AMAZONROUTE53(tidb_dns, tidb dns name)
+[service k8s]
+}
+VPCPEERING(peering)
+[service k8s] --> peering
+package "tidb vpc - tokyo"{
+ELASTICLOADBALANCING(tidb_lb, LB provisioned by helm)
+package "eks" {
+package "tidb-operator"{
+}
+package "tidb-cluster"{
+}
+}
+}
+peering --> tidb_lb
+
+
+@enduml
+
+
+
+
