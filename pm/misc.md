@@ -134,3 +134,26 @@ The experts recommend that you focus on demonstrating your vision, supporting an
  Being treated with respect was more important to employees than recognition and appreciation, communicating an inspiring vision, providing useful feedback — even opportunities for learning, growth, and development.
 
 Leaders also need to be role models for civility. One surefire way to communicate how much you value civility is to directly evaluate and reward it during performance reviews. Include metrics on interpersonal skills or emotional competence. Introduce peer and customer recognition and rewards is to catch people in the act and reinforce respectful behaviors.
+
+summary - details to support - summary
+
+deadline is the best driver: so small deadlines
+
+Mutually Exclusive, Collectively Exhaustive
+
+structured procastination - work on something importatnt but not urgetn!
+
+the true end of task - complete work and get evaluation
+
+Cold reading??
+
+Elicit Value??
+
+stay silent to see if the other side can pursue you
+
+don't mention things you hear in different locations, at least don't frame as such
+
+find a way to reply with equal or more amount of information to keep conversation going
+
+when commenting, compare with the same person's previous product, to cushion the shocks
+

@@ -7,3 +7,14 @@ add/remove inside foreach =>may get concurrency exception even when single threa
 use classloader isolation for jar version conflict
 
 async worker, exception handling problem
+
+### From alibaba's conventions
+
+* table name and DO name should be singular, 
+* unique index name should be uk_, indices start with idx_
+* table must have 3 columns, id, created_at, updated_at (use datetime type)
+* two table join is OK but be careful. More than 3 tables are NOT allowed
+* Not allowed to return hashmap directly, because they had problem deserializing bigint object
+
+
+

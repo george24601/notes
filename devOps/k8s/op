@@ -42,7 +42,7 @@ helm inspect stable/mysql
 ## To see what options are configurable on a chart, use 
 helm inspect values stable/mariadb
 
-### override any of these settings
+### override any of these settings, use -f or --values options
 cat << EOF > config.yaml
 mariadbUser: user0
 mariadbDatabase: user0db
@@ -58,4 +58,12 @@ helm create deis-workflow
 ### As you edit your chart, you can validate that it is well-formatted by running 
 helm lint
 ### When it’s time to package the chart up for distribution
+### Once you have edited a chart, helm can package it into a chart archive for you:
 helm package deis-workflow
+
+### List the deployed packages with their release versions by running
+helm ls --deleted
+
+
+
+
