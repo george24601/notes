@@ -1,0 +1,20 @@
+#!/bin/bash
+# your MFA device's ARN
+DEVICE_SERIAL_NUMBER='arn:aws:iam::246545710953:mfa/george.li@pay2.jp'
+ROLE_ARN='arn:aws:iam::916258433031:role/role-dev-super'
+ 
+echo -n "Input authenticator's code> "
+read TOKEN_CODE
+ 
+unset AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
+ 
+RESPONSE=`aws sts assume-role \
+    --duration-seconds 40000 \
+    --role-arn ${ROLE_ARN} \
+    --role-session-name session-${ENV} \
+    --token-code ${TOKEN_CODE} \
+    --serial-number ${DEVICE_SERIAL_NUMBER}`
+ 
+export AWS_ACCESS_KEY_ID=`echo ${RESPONSE} | jq .Credentials.AccessKeyId -r`
+export AWS_SECRET_ACCESS_KEY=`echo ${RESPONSE} | jq .Credentials.SecretAccessKey -r`
+export AWS_SESSION_TOKEN=`echo ${RESPONSE} | jq .Credentials.SessionToken -r`
