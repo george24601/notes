@@ -13,19 +13,6 @@ while it is possible to use Pod directly, it’s far more common in Kubernetes t
 
 Subsequent changes to the template or even switching to a new template has no direct effect on the pods already created. Similarly, pods created by a replication controller may subsequently be updated directly.
 
-# Controller
-
-A controller is a reconciliation loop that drives actual cluster state toward the desired cluster state
-
-The set of pods that constitute a service are defined by a label selector. 
-
-Logically, each controller is a separate process, but to reduce complexity, they are all compiled into a single binary and run in a single process.
-
-Node Controller: Responsible for noticing and responding when nodes go down.
-Replication Controller: Responsible for maintaining the correct number of pods for every replication controller object in the system.
-Endpoints Controller: Populates the Endpoints object (that is, joins Services & Pods).
-Service Account & Token Controllers: Create default accounts and API access tokens for new namespaces.
-
 # Deployment
 
 A Deployment controller provides declarative updates for Pods and ReplicaSets.
@@ -69,24 +56,13 @@ An API object that manages external access to the services in a cluster, typical
 
 Edge router: A router that enforces the firewall policy for your cluster. This could be a gateway managed by a cloud provider or a physical piece of hardware.
 
-#Resource requests & limits
-
-Although requests and limits can only be specified on individual Containers, it is convenient to talk about Pod resource requests and limits. A Pod resource request/limit for a particular resource type is the sum of the resource requests/limits of that type for each Container in the Pod.
-
-The kubelet uses liveness probes to know when to restart a Container.
-
-The kubelet uses readiness probes to know when a Container is ready to start accepting traffic. A Pod is considered ready when all of its Containers are ready
 
 
 Kubelet is responsible for the running state of each node, ensuring that all containers on the node are healthy. It takes care of starting, stopping, and maintaining application containers organized into pods as directed by the control plane.
 
-Kubelet monitors the state of a pod, and if not in the desired state, the pod re-deploys to the same node. Node status is relayed every few seconds via heartbeat messages to the master. Once the master detects a node failure, the Replication Controller (note the replicationcontroller is the old way now - use Deployment and ReplicaSet now! ) observes this state change and launches pods on other healthy nodes.
-
 The Kube-proxy is an implementation of a network proxy and a load balancer, and it supports the service abstraction along with other networking operation. It is responsible for routing traffic to the appropriate container based on IP and port number of the incoming request.
 
 cAdvisor is an agent that monitors and gathers resource usage and performance metrics such as CPU, memory, file and network usage of containers on each node.
-
-To make updates to your cluster’s state, you submit these files to the Kubernetes API server (kube-apiserver).
 
 kube-scheduler: Component on the master that watches newly created pods that have no node assigned, and selects a node for them to run on.
 Namespaced addon objects are created in the kube-system namespace.
@@ -95,11 +71,7 @@ A Cluster-level logging mechanism is responsible for saving container logs to a 
 
 Container Resource Monitoring records generic time-series metrics about containers in a central database, and provides a UI for browsing that data.
 
-The status describes the actual state of the object, and is supplied and updated by the Kubernetes system.
-
 the Status of the Ready condition is “Unknown” or “False” for longer than the pod-eviction-timeout, an argument is passed to the kube-controller-manager and all of the Pods on the node are scheduled for deletion by the Node Controller.
-
-What this means is that when Kubernetes creates a node, it is really just creating an object that represents the node. After creation, Kubernetes will check whether the node is valid or not
 
 Kubernetes will create a node object internally (the representation), and validate the node by health checking based on the metadata.name field (we assume metadata.name can be resolved). If the node is valid, i.e. all necessary services are running, it is eligible to run a pod; otherwise, it will be ignored for any cluster activity until it becomes valid. Note that Kubernetes will keep the object for the invalid node unless it is explicitly deleted by the client, and it will keep checking to see if it becomes valid.
 
@@ -152,4 +124,6 @@ The sidecar container runs a logging agent, which is configured to pick up logs 
 
 Using a logging agent in a sidecar container can lead to significant resource consumption. Moreover, you won’t be able to access those logs using kubectl logs command, because they are not controlled by the kubelet.
 
+### Annotation
 
+ In contrast, annotations are not used to identify and select objects. The metadata in an annotation can be small or large, structured or unstructured, and can include characters not permitted by labels.

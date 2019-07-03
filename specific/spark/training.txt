@@ -41,12 +41,4 @@ Could it be GC?
 spark.executor.extraJavaOptions=-XX:-PrintGCDetails -XX:+PrintGCTimeStamps
 check spark/work/app../[n]/stdout on executoers
 
-jmap -histo [pid]
-Gets a histogram of objects in the JVM heap
-
-jmap -histo:live [pid]
-Gets a histogram of objects in the heap after GC
-
 Use mapPartitions and reuse objects to reduce GC impact
-
-local debugging => run in local mode and use debugger with sample dataset

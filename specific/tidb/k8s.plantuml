@@ -4,26 +4,23 @@
 !include <aws/NetworkingContentDelivery/AmazonRoute53/AmazonRoute53>
 !include <aws/NetworkingContentDelivery/ElasticLoadBalancing/ElasticLoadBalancing>
 
-package "service vpc - tokyo" {
-AMAZONROUTE53(tidb_dns, tidb dns name)
+package "Service vpc - Tokyo " {
 [service k8s]
 }
-VPCPEERING(peering)
-[service k8s] --> peering
-package "tidb vpc - tokyo"{
-ELASTICLOADBALANCING(tidb_lb, LB provisioned by helm)
+package "Tidb vpc - Tokyo "{
 package "eks" {
-package "tidb-operator"{
+[tidb-operator]
+[tidb payment cluster]
+[tidb BA cluster]
 }
-package "tidb-cluster"{
 }
-}
-}
-peering --> tidb_lb
 
-
+[service k8s] --> [tidb payment cluster] : VPC peering
+[tidb payment cluster] --> [tidb BA cluster] : binlog replication
 @enduml
 
+VPCPEERING(peering)
+peering --> "eks"
 
-
-
+ELASTICLOADBALANCING(tidb_lb, LB provisioned by helm)
+AMAZONROUTE53(tidb_dns, tidb dns name)

@@ -2,9 +2,6 @@
 
 kops export kubecfg --name $CLUSTER_ADDR --state s3://$S3_BUCKET
 
-####Pod######
-kubectl get pod
-
 #List the pods created by the deployment. For similar purposes, can use --show-labels instead of -l
 kubectl get pods -l app=nginx
 
@@ -64,6 +61,6 @@ helm package deis-workflow
 ### List the deployed packages with their release versions by running
 helm ls --deleted
 
-
-
-
+# Verify that your chosen node has a disktype=ssd label, and then you can use spec.nodeSelector.disktype: ssd
+# Use the configuration file to create a pod, by applying the yaml file, and that pod will be scheduled on the chosen node
+kubectl get nodes --show-labels

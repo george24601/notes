@@ -157,3 +157,5 @@ find a way to reply with equal or more amount of information to keep conversatio
 
 when commenting, compare with the same person's previous product, to cushion the shocks
 
+
+company wellness initiatives are not the primary way to respond to that stress. Our data suggests that while wellness initiatives can be helpful, a much bigger lever is the work itself. HR should work with front-line managers to monitor the level of demands they’re placing on people, as well as the balance between demands and resources. The higher the work demands, the higher employees’ need for support, acknowledgement, or opportunities for recovery.

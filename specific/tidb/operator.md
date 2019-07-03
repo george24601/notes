@@ -52,3 +52,42 @@ The resource limits should be equal or bigger than the resource requests, it is 
 For other settings, the variables in values.yaml are self-explanatory with comments. You can modify them according to your need before installing the charts.
 
 By default TiDB service is exposed using NodePort. You can modify it to ClusterIP which will disable access from outside of the cluster. Or modify it to LoadBalancer if the underlining Kubernetes supports this kind of service.
+
+########
+
+Interesting components:
+* discovery
+* pd (config map only)
+* tidb cluster
+* tidb initializer
+* tidb service
+* tikv configmap
+
+TiKV config map Labels:
+```
+ app.kubernetes.io/name: {{ template "chart.name" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: tikv
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+"  "_" }}
+```
+
+Interesting default configs:
+* pvReclaimPolicy: Retain
+* pd service is exposed via ClusterIP
+* discovery pulls the tidb-operator image
+* pd storageClassName: local-storage (in the context of k8s)
+* tikv storageClassName: local-storage (in the context of k8s)
+
+Tidb Service
+```
+    labels:
+  app.kubernetes.io/name: {{ template "chart.name" . }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: tidb
+    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+"  "_" }}
+
+spec.load balancer IP:
+```
+

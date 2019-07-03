@@ -16,5 +16,5 @@ async worker, exception handling problem
 * two table join is OK but be careful. More than 3 tables are NOT allowed
 * Not allowed to return hashmap directly, because they had problem deserializing bigint object
 
-
+how to delete element in a list?
 

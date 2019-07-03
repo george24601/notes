@@ -106,9 +106,9 @@ kill  -3 63847
 jstat -gcxx -t pid $INTERVAL $COUNT
 
 #check heap usage 
-jmap -heap -dump:file=xxx  pid
-
-jmap -histo pid
+jmap -heap -dump:file=xxx $PID 
+#check object number and size
+jmap -histo:live pid $PID 
 
 #show java process id or can just ps aux | grep java. Here you can see the importance to giving meaninigful thread name
 jps -v 
