@@ -24,3 +24,9 @@ prefer timestamp to datetime?
 prefer IN to OR? limit size of IN to 200
 
 Innodb uses old and young for separate LRU, young for hot, old for cold. They meet at midpoint. If the data point exists in oldLRU for more than 1 sec, move to young
+
+### Debug slow query
+lock problem: `show processlist`
+cadinality is done by sampling and predicting , see if  you can use `force index(a)` clause , and use `show index from t` to see if index data matches the reality
+
+may consider using UNION instead of OR, because OR may trigger FTS. `idx_col IS NULL OR idx_col = val` often triggers full table scan

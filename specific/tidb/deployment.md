@@ -31,8 +31,6 @@ discovery
 monitor
 
 
-
-
 Because TiDB by default will use lots of file descriptors, the worker node and its Docker daemon's ulimit must be configured to greater than 1048576:
 
 from google pov, can accept latency of network drive => inspires persistent volumne. on average google's db write latency is 100 - 150 ms

@@ -2,28 +2,9 @@ Note it does not support SP, View, trigger, UDF, FK
 
 watch out for the case where index and shard data are not on the same shard : two cases where double scan won't be a problem! 
 
-avg latency 1.2ms, 95th percentile to 5ms
-
-
-Split by KV range: has NOTHING to do with table partitioning
-
-Data is tagged with versions: key_version:value
-
 lock-free snapshot read: change to snapshot version,i.e., lock free
 
-Percolator based txn: almost decentralized 2PC. single point failure is the timestamp allocation. 
-
 isolation: snapshot isolation
-
-layered tikv: txn -> MVCC -> raftkv -> local kv (rocks db)
-
-PD: placement driver, itself a 3 replica cluster
-
-Admin can inject config into PD
-
-Row: key: table id + row id, value: row value
-index: table id + index id + index-column-value, value: rowid (non-unique, goes rowid will go to the index)
-encoding should preserve order
 
 every mysql master can use a syncer to aggregate into the same tidb cluster (e.g., sharded db)
 
@@ -36,12 +17,6 @@ at most 512 columns in a single table
 ANALYZE TABLE
 EXPLAIN
 USE INDEX, FORCE INDEX, IGNORE INDEX
-
-2pc problem with transaction manager HA
-
-PD/TiKV/TiDB control
-
-LB in front of tidb servers
 
 10 mins to gc expired MVCC
 
@@ -57,28 +32,26 @@ SI is roughly as RR
 
 1 index, 1 kv entry => more kv, more storage
 
-turn params to improve sql performance
-
 best virtualization gives 30% penalty over physical machine
 
 keep synclog-log = true
-
-PD= 5 copies
-tikv=5 copies
-every instance on a separate disk
-
-1000 mysql, 1000 syncher?
 
 #### For dev 
 
 Does not handle write skew, have to use select for update
 on default, will have lost update problem, i.e., if both A and B read and then update the same entry, if A submit first, B 
 
-### Table partition
+### PD
 
-same table logically, but underlying uses multiple physical partitions, common in other relational DBs
+PD leader is different from the etcd leader!
 
-data partitioned into seprate physical tables, program uses the logical name
+physical time + logical time
+1. when PD becomes leader, will get last saved time from etcd, and hold until current time >= that value
+2. apply a lease to etcd, within this window PD will be the TSO
+3. client batchs n request and get TSs togehter from PD
 
-
-
+### To split region
+1. Leader peer sends request to PD
+2. PD creates new region ID and peer ID, and return to leader peer
+3. leader peer writes the split action into a raft log, and execute it at apply
+4. Tikv tells PD, PD updates cache and persist it to etcd

@@ -1,5 +1,7 @@
 ### deadlock
 
+note that deadlock-only case means low CPU usages
+
 Another deadlock prevention mechanism is to put a timeout on lock attempts meaning a thread trying to obtain a lock will only try for so long before giving up. If a thread does not succeed in taking all necessary locks within the given timeout, it will backup, free all locks taken, wait for a random amount of time and then retry.
 
 Every time a thread takes a lock it is noted in a data structure (map, graph etc.) of threads and locks. Additionally, whenever a thread requests a lock this is also noted in this data structure.
@@ -43,3 +45,9 @@ ExecutorService service = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS
                     }
                 });
 ```
+
+### Thread steate
+New, Runnable: waiting for CPU to become running
+Watiing: thread.join(), object.wait()....
+Timed_watiing: thread.sleep(long)....
+Blocked: need to acquire lock but unable to

@@ -1,11 +1,23 @@
 #!/bin/bash
 
+#force variable set 
+set -o nounset
+#force fail fast
+set -o errexit
+
 <<LINK
 & run multiple commands in the background
 && run the next one only if the first one returns 0
 || run the second one if the frist one returns non-0
 
 $($IF) && $($THEN) || $(ELSE)
+
+use readonly variable and local - var inside the function
+
+bash -n synatx check
+bash -v track execution 
+OR 
+set -o verbose  + set -o xtrace
 
 LINK
 
@@ -97,7 +109,8 @@ fuser -v -n tcp 80
 
 pmap -x [pid]
 
-#no hup - no hung up, the seond & means run it as a background job, 2 is std err, &1 means FD 1, note that abad>a 2>a will open the file twice, and stdout will but overwrittend by stderr!
+#nohup & - no hung up, the seond & means run it as a background job, 2 is std err, &1 means FD 1, note that abad>a 2>a will open the file twice, and stdout will but overwrittend by stderr!
+# The log goes to nohup.out
 nohup abcd 2>&1  &
 
 # Set the maximum number of open files to 10.

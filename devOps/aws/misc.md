@@ -64,3 +64,7 @@ Data sent or received is transmitted using the HTTPS or SSH encrypted network pr
 ### EKS
 
 Instead, EKS fully manages just the Kubernetes control plane (master nodes, etcd, api server), for a flat usage fee of $0.20 per hour or ~$145 per month. The tradeoff to this is that you do not have access to the master nodes at all, and are unable to make any modifications to the control plane.
+
+Kops has been around since late 2016, well before EKS existed.
+
+Kops significantly simplifies Kubernetes cluster set up and management compared to manually setting up master and worker nodes. It manages Route53, AutoScaling Groups, ELBs for the api server, security groups, master bootstrapping, node bootstrapping, and rolling updates to your cluster.

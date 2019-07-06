@@ -96,3 +96,8 @@ C10K - PID was a signed 16-bit int - i.e. 32k processes max
 
 ### Push CDNs vs Pull CDNs
 
+HAProxy + Nginx together?
+
+open too many files -> each tcp opens a socket which exhausts number of open files , common corelation with close_wait state , need to check client side's timeout settings
+
+Use disk IO latency to decide if disk is under stress

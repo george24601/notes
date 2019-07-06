@@ -1,13 +1,19 @@
---------
 Layers:
 Transaction -> MVCC -> Raft KV -> Rocks DB
 
+```
 //return max version of the value <= version
 MVCCGet(key, version)
 MVCCScan(startKey, endKey, limit, version)
 
 //write k-v at version, user is responsible for ensure auto-increment of user
 MVCCPut(key, value, version)
+```
+
+Row: key: table id + row id, value: row value
+index: table id + index id + index-column-value, value: rowid (non-unique, goes rowid will go to the index)
+encoding should preserve order
+
 
 Inside RocksDB, it stores
 
@@ -16,8 +22,13 @@ key + version1 -> value at v1
 key + version2 -> value at v2
 
 Note we will split key with version value to avoid too huge updates
---------
-Write in transaction: Isolation level: repeatable read
+
+
+### Write in transaction 
+Percolator based txn: almost decentralized 2PC. single point failure is the timestamp allocation. 
+
+Isolation level: repeatable read
+
 1. buffer all update/delete on client side. Pick one row as primary row, and others as secondary.
 
 2. Prewrite primaryRow: 
