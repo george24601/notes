@@ -55,3 +55,9 @@ physical time + logical time
 2. PD creates new region ID and peer ID, and return to leader peer
 3. leader peer writes the split action into a raft log, and execute it at apply
 4. Tikv tells PD, PD updates cache and persist it to etcd
+
+
+
+If you want to see the PD latency of getting tso, you could see the PD TSO RPC Duration. The PD TSO Wait Duration actually contains the PD TSO RPC Duration. The “Wait” here is actually the asynchronous wait time, that is, the time from the asynchronous acquisition of the TSO to the time when the transaction actually needs to use the TSO to read/write data. In general, the time to get the TSO is earlier than the time it takes to use it. The name of this indicator is somewhat confusing.
+
+From me: PD TSO RPC duration, 99 at 1.74 ms makes way more sense

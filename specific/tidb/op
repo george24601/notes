@@ -1,0 +1,51 @@
+#!/bin/bash
+
+<<EOF
+if you only care about the leader count of each store, you can run `./pd-ctl -d store | jq '.stores[] | {tikv: .store.address, leader: .status.leader_count} '`
+(a store is corresponding to a TiKV Pod)
+
+To set the leader priority for AZ:
+1. label the TiKV nodes by AZ, the Pod will automatically pick up this label then
+2. set reject leader scheduler to ensure the leader will not be placed to the target AZ if possible:
+`pd-ctl config set label-property reject-leader az <az_name>`
+3. note that the new Nodes also need to be labeled
+
+EOF
+
+
+scp -i $PERM_PATH ~/pd-ctl ec2-user@$BASTION:/home/ec2-user
+
+kubectl port-forward -n stg1 svc/stg1-tidb-cluster-pd 2379:2379
+
+./pd-ctl -d store | jq '.stores[] | {tikv: .store.address, leader: .status.leader_count}'
+
+./pd-ctl -d member leader_priority stg1-tidb-cluster-pd-0  6
+
+./pd-ctl -d member leader_priority stg1-tidb-cluster-pd-2 1
+
+helm install charts/tidb-cluster --name stg1-tidb-cluster --namespace stg1 --values stg1_tidb_cluster_values.yaml
+
+kubectl get TidbCluster stg1-tidb-cluster --namespace stg1 
+
+#turns out pd-2, the leader is in 1a!
+kubectl get pods stg1-tidb-cluster-pd-2 -n stg1
+
+<<SET
+set global tidb_hashagg_final_concurrency=1;
+set global tidb_hashagg_partial_concurrency=1;
+set global tidb_disable_txn_auto_retry=0;
+SET
+
+
+#verify context
+kubectl get svc -n stg1
+
+aws eks --region ap-northeast-1 update-kubeconfig --name stg2tidb
+
+kubectl config current-context
+
+kubectl get nodes --show-labels
+
+kubectl get TidbCluster  -n tidb-admin
+
+helm delete --purge tidb-cluster-george
