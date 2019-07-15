@@ -73,10 +73,17 @@ avgrq-sz:The average size (in sectors) of the requests that were issued to the d
 
 await:The average time (in milliseconds) for I/O requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.
 
+if await > svctm, often a sign of long IO queue
+
+iowait in top: wait because of IO, CPU is idle at this time, not a strong indicator itself
+
 %util
 Percentage of CPU time during which I/O requests were issued to the device (bandwidth utilization for the device). Device saturation occurs when this value is close to 100%.
 
+%idle < 70% often a sign of busy IO
+
 IOSTAT
+iostat x
 iostat -dc 10
 
 ###jstack
@@ -146,3 +153,11 @@ pmap $PID
 pstree 
 
 ### Note that 32G 128G physical machine can be considered high end already, should be able to handle 100k+ rqs
+
+<<GC
+
+reduce GC frequence to increasing heap size
+reduce GC STW, by reducing heap space or use CMS
+avoid Full gc by changing CMS trigger ration, give old gen more space, and incrase GC threads number
+GC
+

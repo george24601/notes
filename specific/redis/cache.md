@@ -26,3 +26,5 @@ Use BF to filter out obvious nos
 Use lock when fetch value from db to defend against penetration
 
 against stampdede/cascading failure, ideally db shoudl be able to handle that, if too hard, rate limiting is a must combiled with persisted recovered and active-standby clusters
+
+expire key: random deletiion (repeating if the expriation ratio > 1/4)  + lazy deletion on get + LRU (e.g., with LinkedHashMap)

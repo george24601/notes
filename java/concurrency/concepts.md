@@ -51,3 +51,6 @@ New, Runnable: waiting for CPU to become running
 Watiing: thread.join(), object.wait()....
 Timed_watiing: thread.sleep(long)....
 Blocked: need to acquire lock but unable to
+
+##happens before rule
+works differnet for volatile and monitors!

@@ -121,3 +121,15 @@ STATEMENT format binlog replication under read committed has bugs, that is why y
 because binlog will record insertion first and delete second, so slave has wrong data. GL,i.e., turn on RR, will block the delete due to the gap lock
 
 Or switich to row format, we can go with RC
+
+## gap lock case
+S1: select * from t3 where id=22 for update; --assume empty here
+S2: select * from t3 where id=23 for update; --assume empty here
+S1: insert into t3 values(22) ---waitng for lock here
+S2: insert into t3 values(23) -- deadlock detected
+
+if a statement operations on non-key index, mysql will lock this non-key index AND THEN lock the key index. Clustered index's leaves saves the whole row. This is a common source of DL too
+
+
+
+

@@ -30,3 +30,6 @@ lock problem: `show processlist`
 cadinality is done by sampling and predicting , see if  you can use `force index(a)` clause , and use `show index from t` to see if index data matches the reality
 
 may consider using UNION instead of OR, because OR may trigger FTS. `idx_col IS NULL OR idx_col = val` often triggers full table scan
+
+why do you need undo log (for A?)
+why do you need redo log (optimization for D, to improve on random write?)

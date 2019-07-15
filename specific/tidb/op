@@ -12,6 +12,17 @@ To set the leader priority for AZ:
 
 EOF
 
+#Label nodes
+for item in $( kubectl get node --output=name);
+  do kubectl label "$item" \
+  $(kubectl get "$item" --output=json | jq -r -S '.metadata.labels | to_entries | .[] | select (.key | contains ("zone")) | "zone=\(.value)"' 2>/dev/null);
+done
+
+kubectl label "$item"
+$(kubectl get "$item" --output=json | jq -r -S '.metadata.labels | to_entries | .[] | select (.key | contains ("zone")) | "zone=\(.value)"' 2>/dev/null);
+
+#reject leader
+pd-ctl config set label-property reject-leader zone ap-northeast-1a 
 
 scp -i $PERM_PATH ~/pd-ctl ec2-user@$BASTION:/home/ec2-user
 
