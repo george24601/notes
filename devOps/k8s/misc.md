@@ -127,3 +127,29 @@ Using a logging agent in a sidecar container can lead to significant resource co
 ### Annotation
 
  In contrast, annotations are not used to identify and select objects. The metadata in an annotation can be small or large, structured or unstructured, and can include characters not permitted by labels.
+
+ 
+### reserved labels
+* Example: kubernetes.io/hostname=ip-172-20-114-199.ec2.internal
+
+Used on: Node
+
+Kubelet populates this with the hostname. Note that the hostname can be changed from the “actual” hostname by passing the --hostname-override flag to kubelet.
+
+* beta.kubernetes.io/instance-type=m3.medium
+This can be handy if you want to target certain workloads to certain instance types, but typically you want to rely on the Kubernetes scheduler to perform resource-based scheduling, and you should aim to schedule based on properties rather than on instance types (e.g. require a GPU, instead of requiring a g2.2xlarge)
+
+* failure-domain.beta.kubernetes.io/zone=us-east-1c
+
+Used on: Node, PersistentVolume
+
+On the Node: Kubelet populates this with the zone information as defined by the cloudprovider. It will not be set if not using a cloudprovider, but you should consider setting it on the nodes if it makes sense in your topology.
+
+On the PersistentVolume: The PersistentVolumeLabel admission controller will automatically add zone labels to PersistentVolumes, on GCE and AWS
+
+Kubernetes will automatically spread the pods in a replication controller or service across nodes in a single-zone cluster (to reduce the impact of failures). With multiple-zone clusters, this spreading behaviour is extended across zones (to reduce the impact of zone failures). This is achieved via SelectorSpreadPriority
+
+We assume that the different zones are located close to each other in the network, so we don’t perform any zone-aware routing. In particular, traffic that goes via services might cross zones (even if some pods backing that service exist in the same zone as the client), and this may incur additional latency and cost.
+
+
+

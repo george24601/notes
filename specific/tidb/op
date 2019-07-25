@@ -21,18 +21,8 @@ done
 kubectl label "$item"
 $(kubectl get "$item" --output=json | jq -r -S '.metadata.labels | to_entries | .[] | select (.key | contains ("zone")) | "zone=\(.value)"' 2>/dev/null);
 
-#reject leader
-pd-ctl config set label-property reject-leader zone ap-northeast-1a 
-
 scp -i $PERM_PATH ~/pd-ctl ec2-user@$BASTION:/home/ec2-user
 
-kubectl port-forward -n stg1 svc/stg1-tidb-cluster-pd 2379:2379
-
-./pd-ctl -d store | jq '.stores[] | {tikv: .store.address, leader: .status.leader_count}'
-
-./pd-ctl -d member leader_priority stg1-tidb-cluster-pd-0  6
-
-./pd-ctl -d member leader_priority stg1-tidb-cluster-pd-2 1
 
 helm install charts/tidb-cluster --name stg1-tidb-cluster --namespace stg1 --values stg1_tidb_cluster_values.yaml
 
@@ -60,3 +50,23 @@ kubectl get nodes --show-labels
 kubectl get TidbCluster  -n tidb-admin
 
 helm delete --purge tidb-cluster-george
+
+for item in $( kubectl get node --output=name);
+  do kubectl label "$item" \
+  $(kubectl get "$item" --output=json | jq -r -S '.metadata.labels | to_entries | .[] | select (.key | contains ("zone")) | "zone=\(.value)"' 2>/dev/null);
+done
+
+helm get values stg5tidb > ~/helm_stg5.yaml
+
+kubectl describe configmap -n stg5tidb stg5tidb-tikv-aa63007f > ~/conf_tikv
+
+kubectl describe configmap -n stg5tidb stg5tidb-tidb
+
+kubectl logs stg5tidb-tidb-0 slowlog -n stg5tidb > ~/slow_q
+
+kubectl logs stg5tidb-tidb-0 tidb -n stg5tidb > ~/tidb_log
+
+kubectl describe configmap -n stg5tidb stg5tidb-tidb > ~/conf_tidb
+
+kubectl logs stg5tidb-tikv-0 -n stg5tidb > ~/tikv_log
+

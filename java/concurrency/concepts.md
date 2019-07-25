@@ -54,3 +54,5 @@ Blocked: need to acquire lock but unable to
 
 ##happens before rule
 works differnet for volatile and monitors!
+
+what is the difference between start() and run()? why in the TPE it uses run() instead of start()?

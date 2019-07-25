@@ -44,5 +44,14 @@ echo "Sleep for $SLEEP_DURATION"
 CURRENT_BASH_DIR=$(dirname "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd -P )")
 
 
+if [ $# -ne 1 ]; then
+
+  echo $USAGE
+
+elif [ $1 = "install" ]; then
+
+  echo "install"
+else
+fi
 
 

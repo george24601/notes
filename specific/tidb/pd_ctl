@@ -1,0 +1,40 @@
+#!/bin/bash
+
+kubectl port-forward -n stg5tidb svc/stg5tidb-pd 2379:2379
+
+./pd-ctl config show all
+
+#reject leader
+pd-ctl config set label-property reject-leader zone ap-northeast-1a 
+
+./pd-ctl -d store | jq '.stores[] | {tikv: .store.address, leader: .status.leader_count}'
+
+./pd-ctl -d member leader_priority stg5tidb-pd-1 10 
+
+./pd-ctl -d member leader show
+
+./pd-ctl operator add split-region 42466 --policy=approximate     
+
+operator add split-region 1 --policy=scan            // Split Region 1 into two Regions in halves, based on accurate scan value
+
+
+<<CONFIG
+[prepared-plan-cache]
+enabled = true
+
+log-level = "error"
+[readpool.storage]
+normal-concurrency = 10
+[server]
+grpc-concurrency = 6
+[rocksdb.defaultcf]
+block-cache-size = "14GB"
+[rocksdb.writecf]
+block-cache-size = "8GB"
+[rocksdb.lockcf]
+block-cache-size = "1GB"
+
+CONFIG
+
+
+
