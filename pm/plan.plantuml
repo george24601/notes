@@ -3,51 +3,39 @@ skinparam component {
 	backgroundColor<<done>> Green
 	backgroundColor<<doing>> Yellow
 	backgroundColor<<explore>> Blue
-	backgroundColor Red
 }
-[Scale up]
-[Dev cluster] <<doing>>
-note left: Geroge, Blocked by AWS limitation
-[Backup solution] <<doing>>
-note left: Shinno, ETA?
-[Start training DBA]
-note right: June 7 
-[Stg cluster]
-note left: June 15
-[Perf testing]<<explore>>
-[Backup solution] --> [Stg cluster]
-[Migration solution] --> [Stg cluster]
-[Dev cluster] --> [Dev migration]
-[Dev cluster] --> [Migration solution]
-[Stg cluster] --> [Prod cluster]
-[Dev cluster] --> [Start training DBA] 
-[Start training DBA] --> [Prod cluster]
-[Stg cluster] --> [Stg migration]
-[Stg migration] --> [Perf testing]
-[Prod cluster] --> [Prod migration]
-[Perf testing] --> [Start contracting process with tidb]
-@enduml
+
+[STG consumer indexer recon]
+note left: Aug 7
+[STG traffic switch int test]
+note left: Aug 13
+[STG agg migration performance]
+note left: Aug 8
+[PERF consumer indexer perf]
+note left: Aug 5 - 12
+[PERF consumer indexer recon]
+note left: Aug 12 - 14
+[STG backup/restore drill]
+note left: Aug 9
+[STG DR Drill]
+note left: Aug 12 - 14
 
 
-@startuml
-skinparam component {
-	backgroundColor<<done>> Green
-	backgroundColor<<doing>> Yellow
-	backgroundColor Red
-}
-[Dev cluster setup]<<doing>>
-note left: George, Blocked by AWS
-[Dev code migration]
-note left: George
-[Full backup design] <<doing>>
-note left: Shinno, ETA?
-[Dev data migration] 
-note left: Shinno
-[Full backup design] --> [Incremental Backup]
-[Dev cluster setup] --> [Dev data migration]
-[Dev cluster setup] --> [Dev code migration]
-[Dev data migration] --> [Migration design]
-[Full backup design] --> [Stg cluster]
-[Migration design] --> [Stg cluster]
+[STG consumer indexer recon] --> [STG traffic switch int test] 
+[STG agg migration performance] --> [STG traffic switch int test] 
+[PERF consumer indexer perf] --> [PERF traffic switch int test] 
+[PERF consumer indexer recon] --> [PERF traffic switch int test] 
+[PERF agg migration performance] --> [PERF traffic switch int test] 
+[PERF agg migration recon] --> [PERF traffic switch int test] 
+[STG backup/restore drill] --> [PERF backup/restore drill]
+[PERF backup/restore drill] --> [PERF DR drill]
+[STG backup/restore drill] --> [STG DR drill]
+[STG DR drill] --> [PERF DR drill]
+[PERF traffic switch int test] --> [PERF scale up drill]
+[STG traffic switch int test] --> [PERF traffic switch int test] 
+[PERF traffic switch int test] --> [PERF payment read perf test]
+[PERF DR drill] --> [PROD cluster provision] 
+[PERF payment read perf test] --> [PROD cluster provision]
 @enduml
+
 

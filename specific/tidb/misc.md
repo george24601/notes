@@ -50,4 +50,8 @@ physical time + logical time
 3. leader peer writes the split action into a raft log, and execute it at apply
 4. Tikv tells PD, PD updates cache and persist it to etcd
 
+based on experience, 400M rows of data takes 10min+ to analyze (default setting, tidb_build_stats_concurrency=4).
 
+A cop task refers to a computing task that is executed using the TiKV coprocessor. A root task refers to a computing task that is executed in TiDB.
+
+ IndexLookUp represents filtering part of the data from the index, returning only the Handle ID, and retrieving the table data again using Handle ID. In the second way, data is retrieved twice from TiKV

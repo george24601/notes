@@ -1,3 +1,11 @@
+## Bain's rapid model
+R – Recommend
+A – Agree
+P – Perform
+I – Input
+D – Decide
+
+
 R = Responsible: A person actually doing the work. You can have multiple “R” entries for a task. This means more than one person does the work.
 
 A = Accountable: The person who will be ultimately held accountable for the work. Should have only one person
