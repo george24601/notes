@@ -4,31 +4,21 @@ watch out for the case where index and shard data are not on the same shard : tw
 
 lock-free snapshot read: change to snapshot version,i.e., lock free
 
-isolation: snapshot isolation
+isolation: snapshot isolation (roughly RR)
 
 every mysql master can use a syncer to aggregate into the same tidb cluster (e.g., sharded db)
 
-tidb binlog: backup in real time
 dumper + loader for full backup restore => tidb-lighting: 1T data in 6 hours ingestion
 
 at most 512 columns in a single table 
-
-### optimize queries
-ANALYZE TABLE
-EXPLAIN
-USE INDEX, FORCE INDEX, IGNORE INDEX
 
 10 mins to gc expired MVCC
 
 pd harder to scale up/down
 
-SI is roughly as RR
-
 1 index, 1 kv entry => more kv, more storage
 
 best virtualization gives 30% penalty over physical machine
-
-keep synclog-log = true
 
 #### For dev 
 
@@ -55,3 +45,7 @@ based on experience, 400M rows of data takes 10min+ to analyze (default setting,
 A cop task refers to a computing task that is executed using the TiKV coprocessor. A root task refers to a computing task that is executed in TiDB.
 
  IndexLookUp represents filtering part of the data from the index, returning only the Handle ID, and retrieving the table data again using Handle ID. In the second way, data is retrieved twice from TiKV
+If you want to see the PD latency of getting tso, you could see the PD TSO RPC Duration. The PD TSO Wait Duration actually contains the PD TSO RPC Duration. The “Wait” here is actually the asynchronous wait time, that is, the time from the asynchronous acquisition of the TSO to the time when the transaction actually needs to use the TSO to read/write data. In general, the time to get the TSO is earlier than the time it takes to use it. The name of this indicator is somewhat confusing.
+
+From me: PD TSO RPC duration, 99 at 1.74 ms makes way more sense
+

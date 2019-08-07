@@ -1,42 +1,21 @@
 #!/bin/bash
 
-<<EOF
-if you only care about the leader count of each store, you can run `./pd-ctl -d store | jq '.stores[] | {tikv: .store.address, leader: .status.leader_count} '`
-(a store is corresponding to a TiKV Pod)
-
-To set the leader priority for AZ:
-1. label the TiKV nodes by AZ, the Pod will automatically pick up this label then
-2. set reject leader scheduler to ensure the leader will not be placed to the target AZ if possible:
-`pd-ctl config set label-property reject-leader az <az_name>`
-3. note that the new Nodes also need to be labeled
-
-EOF
-
-#Label nodes
-for item in $( kubectl get node --output=name);
-  do kubectl label "$item" \
-  $(kubectl get "$item" --output=json | jq -r -S '.metadata.labels | to_entries | .[] | select (.key | contains ("zone")) | "zone=\(.value)"' 2>/dev/null);
-done
-
 kubectl label "$item"
 $(kubectl get "$item" --output=json | jq -r -S '.metadata.labels | to_entries | .[] | select (.key | contains ("zone")) | "zone=\(.value)"' 2>/dev/null);
 
+#random read + sequential write IOPS test
+sudo fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=4 -runtime=15 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
+
+#random read + sequential write Latency test:
+sudo fio -ioengine=psync -bs=32k -fdatasync=1 -thread -rw=randrw -percentage_random=100,0 -size=10G -filename=fio_randread_write_latency_test.txt -name='fio mixed randread and sequential write test' -iodepth=1 -runtime=60 -numjobs=1 -group_reporting --output-format=json --output=fio_randread_write_latency_test.json
+
 scp -i $PERM_PATH ~/pd-ctl ec2-user@$BASTION:/home/ec2-user
 
-
-helm install charts/tidb-cluster --name stg1-tidb-cluster --namespace stg1 --values stg1_tidb_cluster_values.yaml
+scp -i stg5tidb.pem ec2-user@10.223.65.7:/mnt/local-ssd/f7cd03b9-5a24-4416-8b73-56da42e52a6f/fio/*.json .
 
 kubectl get TidbCluster stg1-tidb-cluster --namespace stg1 
 
 #turns out pd-2, the leader is in 1a!
-kubectl get pods stg1-tidb-cluster-pd-2 -n stg1
-
-<<SET
-set global tidb_hashagg_final_concurrency=1;
-set global tidb_hashagg_partial_concurrency=1;
-set global tidb_disable_txn_auto_retry=0;
-SET
-
 
 #verify context
 kubectl get svc -n stg1
@@ -48,8 +27,6 @@ kubectl config current-context
 kubectl get nodes --show-labels
 
 kubectl get TidbCluster  -n tidb-admin
-
-helm delete --purge tidb-cluster-george
 
 for item in $( kubectl get node --output=name);
   do kubectl label "$item" \
@@ -72,6 +49,9 @@ kubectl logs stg5tidb-tidb-1 tidb -n stg5tidb > ~/log_tidb
 
 kubectl exec -it stg5tidb-tidb-1 -n stg5tidb --container tidb  -- cat  /etc/tidb/tidb.toml
 
+
+kubectl exec -it stg5tidb-tidb-1 -n stg5tidb --container tidb  -- ls /etc/tidb
+
 kubectl logs stg5tidb-tidb-1 tidb -n stg5tidb > ~/log_tidb
 
 kubectl describe configmap -n stg5tidb stg5tidb-tidb > ~/conf_tidb
@@ -84,5 +64,13 @@ kubectl logs stg5tidb-tikv-4 -n stg5tidb > ~/log_tikv
 You can grep loaded config: [INFO] [printer.go:54] ["loaded config"]
 
 CON
+
+kubectl port-forward -n stg5tidb svc/stg5tidb-pd 2379:2379
+
+kubectl port-forward -n stg5tidb svc/stg5tidb-tidb-peer 10080:10080
+
+go tool pprof http://localhost:10080/debug/pprof/heap
+
+go tool pprof http://localhost:10080/debug/pprof/profile
 
 kubectl port-forward -n stg5tidb svc/stg5tidb-pd 2379:2379

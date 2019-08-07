@@ -43,3 +43,25 @@ kubectl get services -n stg1
 
 kubectl port-forward svc/stg1-tidb-cluster-pd 2379:2379
 
+helm delete --purge tidb-cluster-george
+
+
+<<EOF
+if you only care about the leader count of each store, you can run `./pd-ctl -d store | jq '.stores[] | {tikv: .store.address, leader: .status.leader_count} '`
+(a store is corresponding to a TiKV Pod)
+
+To set the leader priority for AZ:
+1. label the TiKV nodes by AZ, the Pod will automatically pick up this label then
+2. set reject leader scheduler to ensure the leader will not be placed to the target AZ if possible:
+`pd-ctl config set label-property reject-leader az <az_name>`
+3. note that the new Nodes also need to be labeled
+
+EOF
+
+#Label nodes
+for item in $( kubectl get node --output=name);
+  do kubectl label "$item" \
+  $(kubectl get "$item" --output=json | jq -r -S '.metadata.labels | to_entries | .[] | select (.key | contains ("zone")) | "zone=\(.value)"' 2>/dev/null);
+done
+
+

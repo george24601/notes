@@ -1,12 +1,6 @@
-installed by helm charts.
-Network, local PV support
-
 tidb cluster charts -> helm -> 
 
-
 graceful shutown and ecti-leader-scheduler
-
-K8s cross region is done via Federation, still weak
 
 use admission webhook to gracefully handle online and offline of nodes
 
@@ -23,15 +17,10 @@ When the pod migrteas, the ip address will change, SS can use bound domain name 
  
 include automatic backup and restore => hooks to k8s status, and sends analystical stuff inside k8s
 
-
 every time stopping the service, let controller notify cluster to do the data migration off the node => need to implement a controller and inside controller's constorl to check if pod can be shutdown gracefully
 
 Alternavite: ValidationAdmissionWebhook NOte k8s AdmissionControler is simliar to filter or middleware
 Dynamic admiision control very powerful
-
-### From official docs
-
-Allthough TiDB Operator can use network volume to persist TiDB data, this is slower due to redundant replication. It is highly recommended to set up (k8s) local volume for better performance.
 
 If you want to use a different envirnoment, a proper DNS addon must be installed in the Kubernetes cluster. You can follow the k8s official documentation to set up a DNS addon.
 
@@ -43,34 +32,12 @@ Because TiDB by default will use lots of file descriptors, the worker node and i
 sudo vim /etc/systemd/system/docker.service
 ```
 
-After TiDB Operator and Helm are deployed correctly, TiDB cluster can be deployed using following command
-
-These settings can make TiDB cluster run on a small Kubernetes cluster like DinD or the default GKE cluster for testing. But for production deployment, you would likely to adjust the cpu, memory and storage resources according to the recommendations.
-
 The resource limits should be equal or bigger than the resource requests, it is suggested to set limit and request equal to get Guaranteed QoS.
 
 For other settings, the variables in values.yaml are self-explanatory with comments. You can modify them according to your need before installing the charts.
 
 By default TiDB service is exposed using NodePort. You can modify it to ClusterIP which will disable access from outside of the cluster. Or modify it to LoadBalancer if the underlining Kubernetes supports this kind of service.
 
-########
-
-Interesting components:
-* discovery
-* pd (config map only)
-* tidb cluster
-* tidb initializer
-* tidb service
-* tikv configmap
-
-TiKV config map Labels:
-```
- app.kubernetes.io/name: {{ template "chart.name" . }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: tikv
-    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+"  "_" }}
-```
 
 Interesting default configs:
 * pvReclaimPolicy: Retain
@@ -78,16 +45,3 @@ Interesting default configs:
 * discovery pulls the tidb-operator image
 * pd storageClassName: local-storage (in the context of k8s)
 * tikv storageClassName: local-storage (in the context of k8s)
-
-Tidb Service
-```
-    labels:
-  app.kubernetes.io/name: {{ template "chart.name" . }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/component: tidb
-    helm.sh/chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+"  "_" }}
-
-spec.load balancer IP:
-```
-

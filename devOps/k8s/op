@@ -68,3 +68,6 @@ kubectl get nodes --show-labels
 kubectl exec shell-demo ps aux
 kubectl exec shell-demo ls /
 kubectl exec shell-demo cat /proc/1/mounts
+
+#If a Pod has more than one Container, use --container or -c to specify a Container in the kubectl exec command. For example, suppose you have a Pod named my-pod, and the Pod has two containers named main-app and helper-app. The following command would open a shell to the main-app Container.
+kubectl exec -it my-pod --container main-app -- /bin/bash
