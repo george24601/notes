@@ -20,7 +20,7 @@ kubectl get TidbCluster stg1-tidb-cluster --namespace stg1
 #verify context
 kubectl get svc -n stg1
 
-aws eks --region ap-northeast-1 update-kubeconfig --name stg2tidb
+aws eks --region ap-northeast-1 update-kubeconfig --name stg5tidb
 
 kubectl config current-context
 
@@ -39,7 +39,7 @@ kubectl get configmap -n stg5tidb
 
 helm get values stg5tidb > ~/helm_stg5.yaml
 
-kubectl describe configmap -n stg5tidb stg5tidb-tikv-028072d6  > ~/conf_tikv
+kubectl describe configmap -n stg5tidb stg5tidb-tikv-c10d5a3e > ~/conf_tikv
 
 kubectl describe configmap -n stg5tidb stg5tidb-tidb > ~/conf_tidb
 

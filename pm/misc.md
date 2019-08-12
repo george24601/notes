@@ -159,3 +159,12 @@ when commenting, compare with the same person's previous product, to cushion the
 
 
 company wellness initiatives are not the primary way to respond to that stress. Our data suggests that while wellness initiatives can be helpful, a much bigger lever is the work itself. HR should work with front-line managers to monitor the level of demands they’re placing on people, as well as the balance between demands and resources. The higher the work demands, the higher employees’ need for support, acknowledgement, or opportunities for recovery.
+
+Many people confuse leverage and efficiency. They are different. Efficiency is fixing a desired output and minimizing the effort to achieve it. We are not an efficiency company.
+
+We are a leverage company. For a fixed amount of effort, how can you maximize your impact? This question is your guiding light. In everything you do, figure out how to multiply the impact you have by 10x.
+Never confuse efficiency and leverage. Efficiency is what lazy people aspire to. Leverage is what we do.
+
+ At a certain point your learning will plateau, and this is when the second type of work kicks in: executing. This is the act of applying that knowledge to get the job done and create leverage. Eventually, you will create enough leverage to automate the job or grow out of it, and this is when you start the cycle over. Learn. Execute.
+
+  The best people are recruited, not bought. The companies who pay top-of-market will always win the salary-optimizing people. The best people optimize to learn (remember Learn vs Earn?). Winning and retaining those people means creating an environment where people are willing to trade short-term compensation for long-term career capital. Many companies think paying the most gets them the best people. They are wrong. Companies that teach the most get the best people.

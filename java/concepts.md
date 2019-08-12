@@ -19,3 +19,5 @@ async worker, exception handling problem
 how to delete element in a list?
 
 ArrayList: DEAULT_CAPCITY=10, will copy with 50% increased capacity. Part of the reason init size is recommended to be set
+
+why no enum type as API return type?
