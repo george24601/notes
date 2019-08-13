@@ -1,10 +1,6 @@
-seems all protobuf based
-
-mydumper + loader for full, 
 note lighting is faster for full import - 7 hours for 1 TB
 
 lightning -> tikv importer, which talks to the PD server, note that tidb-lightening does not talk to PD directly
-syncer for deltas 
 
 lightning and importer are resource intensive, recommend two separate servers
 
@@ -21,7 +17,3 @@ DM will filter certain binlog event, e.g., drop, truncate table
 dm is on ansible too?!
 
 tidb-binlog, relationship with data management
-
-
-
-

@@ -4,9 +4,6 @@
 
 From Principles of Product Development Flow: key to the problem is almost always blocked requirment instead of blocked resources
 
-Kanban stages
-
-choose, design, to review, to dev, dev design, dev (req, front end, backend, test, dependency, complete), to test, test, to release
 
 separate req tickets with dev/resource tickets, put resource/work ticket same lane as its requirement ticket, requirement ticket in its requriment column in the dev column group
 
@@ -18,7 +15,6 @@ recognize tech resk and define solution
 assign a coordintor for progress coordniate if >= 3 people involved
 
 * There are no pre-defined roles for a team. Although there may still be a Project Manager, the team is encouraged to collaborate and chip in when any one person becomes overwhelmed.
-
 * Allows for changes to be made to a project mid-stream, allowing for iterations and continuous improvement prior to the completion of a project
 * Best for projects with widely-varying priorities
 * If your team has a continuous stream of work requests, kanban may be right for you. no regular fixed length sprints, key metrics is cycle time - change can happen at any time
@@ -44,44 +40,26 @@ Scrum
 
 Columns from left to right:
 
-Backlog – Ideas that we may or may not implement.
-
-Requested / Business Requirements – Ideas that are going to be developed. The business need of the work item is listed inside the card.
-
-Requested / Ready for Tech Design – Things that have been clarified and agreed to get to In Progress.
-
+* Backlog – Ideas that we may or may not implement.
+* Requested / Business Requirements – Ideas that are going to be developed. The business need of the work item is listed inside the card.
+* Requested / Ready for Tech Design – Things that have been clarified and agreed to get to In Progress.
 In Progress / Tech Design / Tech Design – The assignee of any card that is started writes in the technical design of what they’re about to start developing.
-
-In Progress / Tech Design/ Ready for Review – The card is wating to be reviewed.
-
-In Progress / Tech Design/ Tech Design Review – A fellow team member reviews the tech design and suggest changes (if necesarry).
-
-In Progress / Tech Design/ Ready for Coding – After the tech design is finalized, the card remains here untill the assignee can start coding.
-
-In Progress / Development / Coding – Code is written.
-
-In Progress / Development / Ready for Code Review – Cards are waiting for code review.
-
-In Progress / Development / Code Review – The actual review stage where the code is checked.
-
-In Progress / Ready for Production – Cards ready to be deployed on production.
-
-Production / To be Tested on Production – Cards deployed on to production, pending a final verification by the QA team.
-
-Done / Possible to Return – For special features requested by customer that may be returned for rework.
-
-Done – Done pile for non-production related items like research, meetings, etc.
+* In Progress / Tech Design/ Ready for Review – The card is wating to be reviewed.
+* In Progress / Tech Design/ Tech Design Review – A fellow team member reviews the tech design and suggest changes (if necesarry).
+* In Progress / Tech Design/ Ready for Coding – After the tech design is finalized, the card remains here untill the assignee can start coding.
+* In Progress / Development / Coding – Code is written.
+* In Progress / Development / Ready for Code Review – Cards are waiting for code review.
+* In Progress / Development / Code Review – The actual review stage where the code is checked.
+* In Progress / Ready for Production – Cards ready to be deployed on production.
+* Production / To be Tested on Production – Cards deployed on to production, pending a final verification by the QA team.
+* Done / Possible to Return – For special features requested by customer that may be returned for rework.
+* Done – Done pile for non-production related items like research, meetings, etc.
 
 Swimlanes from top to bottom:
 
-Expedite – Super urgent cards. Everyone helps to get the item expedited. Usually a critical customer defect, security-related issues, etc.
-
-Customer Issues – Defects reported by customers. The customer is always first, remember?
-
-Bugs – Internal bugs found by somebody on the team
-
-Technical Debt – Things that we should have done :-/
-
-Customer / Business Features – New features to be introduced in Kanbanize
-
-Technical Features – Usually DevOps tasks, deployment-related activities, database schema changes, etc. Note some items may be expedite given context
+* Expedite – Super urgent cards. Everyone helps to get the item expedited. Usually a critical customer defect, security-related issues, etc.
+* Customer Issues – Defects reported by customers. The customer is always first, remember?
+* Bugs – Internal bugs found by somebody on the team
+* Technical Debt – Things that we should have done :-/
+* Customer / Business Features – New features to be introduced in Kanbanize
+* Technical Features – Usually DevOps tasks, deployment-related activities, database schema changes, etc. Note some items may be expedite given context

@@ -6,8 +6,6 @@ lock-free snapshot read: change to snapshot version,i.e., lock free
 
 isolation: snapshot isolation (roughly RR)
 
-every mysql master can use a syncer to aggregate into the same tidb cluster (e.g., sharded db)
-
 dumper + loader for full backup restore => tidb-lighting: 1T data in 6 hours ingestion
 
 at most 512 columns in a single table 
@@ -19,11 +17,6 @@ pd harder to scale up/down
 1 index, 1 kv entry => more kv, more storage
 
 best virtualization gives 30% penalty over physical machine
-
-#### For dev 
-
-Does not handle write skew, have to use select for update
-on default, will have lost update problem, i.e., if both A and B read and then update the same entry, if A submit first, B 
 
 ### PD
 
@@ -48,4 +41,3 @@ A cop task refers to a computing task that is executed using the TiKV coprocesso
 If you want to see the PD latency of getting tso, you could see the PD TSO RPC Duration. The PD TSO Wait Duration actually contains the PD TSO RPC Duration. The “Wait” here is actually the asynchronous wait time, that is, the time from the asynchronous acquisition of the TSO to the time when the transaction actually needs to use the TSO to read/write data. In general, the time to get the TSO is earlier than the time it takes to use it. The name of this indicator is somewhat confusing.
 
 From me: PD TSO RPC duration, 99 at 1.74 ms makes way more sense
-

@@ -53,7 +53,5 @@ Question on modifying monitoring services: currently if you change any monitorin
 Yes, EBS is ReadWriteOnce, StatefulSet is a solution, also, change the upgrade strategy of monitor deployment to recreate should work.
 
 
-
-
 the dynamic expansion makes it easy to manage monitor services. But we haven't tested the dynamic expansion of EBS storage yet, some cloud storage needs to reboot to expand the cloud disk. We're not sure if EBS supports online expansion. We'll try and test it.
 So the expanded EBS volume goes from one node to another node to let pod reboot. Users have to manually delete the pod.

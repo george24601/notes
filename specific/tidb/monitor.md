@@ -29,8 +29,6 @@ use grpc message count's prewrite and commit to identify potential hot servers
 co-processor good way to check read hotspot
 
 KV backoff ops: check conflicts
-disk latency: how slow is slow?
-
 
 The suggested connection count should be less than 500 under OLTP workload, pay close attention to whether the number of connections is balanced between multiple tidb-server instances.
 
@@ -84,5 +82,3 @@ TiDB alert rules are configured in Prometheus not Grafana.
 Currently, the alert rules are defined in the configmap, this can be changed by kubectl edit configmap
 The alertmanager is not managed by tidb-operator, users should deploy and configure alertmanager themselves. And usually only one alertmanager is needed for the whole platform
 We’ll deploy promtheus-operator in our cluster too.
-
-

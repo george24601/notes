@@ -1,5 +1,3 @@
-tidb cluster charts -> helm -> 
-
 graceful shutown and ecti-leader-scheduler
 
 use admission webhook to gracefully handle online and offline of nodes
@@ -15,8 +13,6 @@ When the pod migrteas, the ip address will change, SS can use bound domain name 
 1. User create/update TidbCluster object via k8s API server by helm
 2. TiDB operator use `watch API server`'s tidb cluster create/update/delete. Maintains PD/TiKV/TiDB StatefulSet, Service, Deployment
  
-include automatic backup and restore => hooks to k8s status, and sends analystical stuff inside k8s
-
 every time stopping the service, let controller notify cluster to do the data migration off the node => need to implement a controller and inside controller's constorl to check if pod can be shutdown gracefully
 
 Alternavite: ValidationAdmissionWebhook NOte k8s AdmissionControler is simliar to filter or middleware
@@ -26,7 +22,6 @@ If you want to use a different envirnoment, a proper DNS addon must be installed
 
 The Kubernetes cluster is suggested to enable (k8s)RBAC. Otherwise you may want to set rbac.create to false in the values.yaml of both tidb-operator and tidb-cluster charts
 
-Because TiDB by default will use lots of file descriptors, the worker node and its Docker daemon's ulimit must be configured to greater than 1048576
 
 ```bash
 sudo vim /etc/systemd/system/docker.service
