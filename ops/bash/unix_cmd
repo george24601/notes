@@ -1,0 +1,158 @@
+#!/bin/bash
+
+#force variable set 
+set -o nounset
+#force fail fast
+set -o errexit
+
+<<LINK
+& run multiple commands in the background
+&& run the next one only if the first one returns 0
+|| run the second one if the frist one returns non-0
+
+$($IF) && $($THEN) || $(ELSE)
+
+use readonly variable and local - var inside the function
+
+bash -n synatx check
+bash -v track execution 
+OR 
+set -o verbose  + set -o xtrace
+
+LINK
+
+#delete the folder if it exists, note that the spaces around -d predicate matter! 
+[ -d $FOLDER ] && rm -r $FOLDER
+
+#But -d does not work with wildcards! 0 - stdin 1 - stdout 2 - stderr &1 means it is not a file but a file descriptor
+# note the positiovne of 2>&1 matters, have to go AFTER the file, otherwise &1 means the current console - bash loads from left to right!
+if ls /path/to/your/files* 1> /dev/null 2>&1; then
+      echo "files do exist"
+
+#compress and decompress, -c compress, -x extract
+tar -czvf $TO.tar.gz $FROM
+
+#display error code of the last command,e.g., use it after a semicolon 
+echo $?
+#similarly, !$ is the last argument of the previous command
+cd !$
+
+#use of CDPATH, probably what to edit your ~/.bashrc
+
+#automatically corrects small typos in directory names and jumps to the best guess of existing directories.
+shopt -s cdspell
+
+#shell to exit if any subcommand or pipeline returns a non-zero status
+set -e
+
+#-a Mark variables and function which are modified or created for export to the environment of subsequent commands. 
+#Note that you can use + to revert/undo the set option
+set -a
+
+#why do we need exec here???
+exec locust -f $LOCUST_FILE
+
+#multiline to a single line
+cat file.txt|xargs
+
+#single to multilines
+cat single.txt | xargs -n 3
+#replace tab with space
+tr '\t' ' '
+
+#delete all digits
+tr -d '0-9'
+
+#remove duplicate spaces
+cat file | tr -s ' '
+
+#cut 2nd and 4th column
+cut -f2,4 file
+
+#get all but 3rd column
+cut -f3 --complement file
+
+#search only files with certain extensions
+grep -r --include=*.scala 'spray' ./ | less
+
+#record terminal output
+script my.terminal.seeesion
+
+#creating a new environment without any existing environment variables for a new shell
+env -i /bin/sh
+
+#Note that this use of env is often unnecessary since most shells support setting environment variables in front of a command
+env DISPLAY=foo.bar:1.0 xcalc
+
+#take out --decode to encode
+base64 --decode ${FILE_PATH}
+
+# -n to not append the extra newline, use --decode after base64 to decode
+echo -n ${DD_KEY} | base64 
+
+#It’s similar to $() in that the output of the command inside is re-used. In this case, though, the output is treated as a file. This file can be used as an argument to commands that take files as an argument.
+diff <(grep somestring file1) <(grep somestring file2)
+
+#!$ repeats the last argument of the last command
+
+#!:1-$ It takes all the arguments to the previous command and drops them in.
+
+#default value for variables
+#You can also assign directly with ${VAR:=defaultval} (equals sign, not dash) but note that this won’t work with positional variables in scripts or functions.
+THIRD_ARG="${3:-no_third_arg}"
+
+#show which processes are using a specified file, file system, or unix socket.
+fuser -m -u /mnt/usb1
+
+#check what processes are using a network port
+fuser -v -n tcp 80
+
+pmap -x [pid]
+
+#nohup & - no hung up, the seond & means run it as a background job, 2 is std err, &1 means FD 1, note that abad>a 2>a will open the file twice, and stdout will but overwrittend by stderr!
+# The log goes to nohup.out
+nohup abcd 2>&1  &
+
+# Set the maximum number of open files to 10.
+ulimit -n 10
+
+#d, l, s(ocket), c(har device), p(ipe), -(other, e.g., normal file)
+#add exec permission
+chmod u+x xxx.sh
+
+#make the file readonly by the group and other user
+chmod go-w xxx.sh
+
+###screen
+#start a new screen session with session name
+screen -S sessionName
+screen -d -R sessionName
+
+#list running sessions/screens	
+screen -ls
+
+#back to the same terminal
+screen -r
+
+#can use script to record and check the result of long-running process, by checking its generated typescript file
+
+### chmod
+# -R recursive
+# -v verbose
+
+#read and write by file owner
+#read and write by group
+#read only by other user
+chmod 664 sharedFile
+
+#show permision, or just ls -l
+stat -c %a findPhoneNumbers.sh
+
+#-rwxr-xr--
+#leading hyphen: plain file
+#each 3 letters, file owner, group, other user
+#every file on linux is owned by a user and a group
+
+
+
+

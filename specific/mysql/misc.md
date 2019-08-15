@@ -14,7 +14,7 @@ UNION vs UNION ALL
 
 IN vs EXISTS: IN outer big, inner small; EXISTS outer small inner big
 
-Avoid null check in where => may lead to FTS instead of index scan 
+Avoid null check in where => may lead to FTS instead of index scan , note that null compares with anything is null
 
 Use forceindex, STRAIGHT_JOIN to tweak query plan
 

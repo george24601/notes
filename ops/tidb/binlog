@@ -15,7 +15,7 @@ sleep 3
 ./bin/tidb-server --config=tidb.toml &>tidb.out &
 
 
-## If you wish to restart the cluster after all services exit, use the same commands you ran originally to start the services. As discussed in the binlogctl section above, you’ll need to start drainer before pump, and pump before tidb-server
+## If you wish to restart the cluster after all services exit, use the same commands you ran originally to start the services. you’ll need to start drainer before pump, and pump before tidb-server
 ./bin/pd-server --config=pd.toml &>pd.out &
 ./bin/tikv-server --config=tikv.toml &>tikv.out &
 ./bin/drainer --config=drainer.toml &>drainer.out &
@@ -24,7 +24,7 @@ sleep 3
 sleep 3
 ./bin/tidb-server --config=tidb.toml &>tidb.out &
 
-
+#get tidb cluster's current TSO, and manage pump and drainer
 ./bin/binlogctl -cmd drainers
 
 ./bin/binlogctl -cmd pumps

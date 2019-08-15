@@ -74,3 +74,6 @@ go tool pprof http://localhost:10080/debug/pprof/heap
 go tool pprof http://localhost:10080/debug/pprof/profile
 
 kubectl port-forward -n stg5tidb svc/stg5tidb-pd 2379:2379
+
+kubectl exec -it -n stg5tidb stg5tidb-tikv-1 -- du -sh /var/lib/tikv
+

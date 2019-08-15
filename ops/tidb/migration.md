@@ -17,3 +17,8 @@ DM will filter certain binlog event, e.g., drop, truncate table
 dm is on ansible too?!
 
 tidb-binlog, relationship with data management
+
+### loader
+1. loader will use a by default tidb_loader db as checkpoint db
+2. 
+

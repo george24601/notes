@@ -57,26 +57,6 @@ cat file.txt|xargs
 
 #single to multilines
 cat single.txt | xargs -n 3
-#replace tab with space
-tr '\t' ' '
-
-#delete all digits
-tr -d '0-9'
-
-#remove duplicate spaces
-cat file | tr -s ' '
-
-#cut 2nd and 4th column
-cut -f2,4 file
-
-#get all but 3rd column
-cut -f3 --complement file
-
-#search only files with certain extensions
-grep -r --include=*.scala 'spray' ./ | less
-
-#record terminal output
-script my.terminal.seeesion
 
 #creating a new environment without any existing environment variables for a new shell
 env -i /bin/sh
@@ -84,14 +64,6 @@ env -i /bin/sh
 #Note that this use of env is often unnecessary since most shells support setting environment variables in front of a command
 env DISPLAY=foo.bar:1.0 xcalc
 
-#take out --decode to encode
-base64 --decode ${FILE_PATH}
-
-# -n to not append the extra newline, use --decode after base64 to decode
-echo -n ${DD_KEY} | base64 
-
-#It’s similar to $() in that the output of the command inside is re-used. In this case, though, the output is treated as a file. This file can be used as an argument to commands that take files as an argument.
-diff <(grep somestring file1) <(grep somestring file2)
 
 #!$ repeats the last argument of the last command
 
@@ -101,37 +73,21 @@ diff <(grep somestring file1) <(grep somestring file2)
 #You can also assign directly with ${VAR:=defaultval} (equals sign, not dash) but note that this won’t work with positional variables in scripts or functions.
 THIRD_ARG="${3:-no_third_arg}"
 
-#show which processes are using a specified file, file system, or unix socket.
-fuser -m -u /mnt/usb1
+### loop ex section starts
+for var in "${ArrayName[@]}"
+do
+  echo "${var}"
+  # do something on $var
+done
 
-#check what processes are using a network port
-fuser -v -n tcp 80
+echo "Total files in array : ${#files[*]}"
+#total=${#files[*]}
 
-pmap -x [pid]
+while true
+do
+	sleep 1
+done
 
-#nohup & - no hung up, the seond & means run it as a background job, 2 is std err, &1 means FD 1, note that abad>a 2>a will open the file twice, and stdout will but overwrittend by stderr!
-# The log goes to nohup.out
-nohup abcd 2>&1  &
+for i $(seq 0 6); do kubectl exec -it -n stg5tidb stg5tidb-tikv-$i -- du -sh /var/lib/tikv; done
+### loop ex section ends
 
-# Set the maximum number of open files to 10.
-ulimit -n 10
-
-#d, l, s(ocket), c(har device), p(ipe), -(other, e.g., normal file)
-#add exec permission
-chmod u+x xxx.sh
-
-#make the file readonly by the group and other user
-chmod go-w xxx.sh
-
-###screen
-#start a new screen session with session name
-screen -S sessionName
-screen -d -R sessionName
-
-#list running sessions/screens	
-screen -ls
-
-#back to the same terminal
-screen -r
-
-#can use script to record and check the result of long-running process, by checking its generated typescript file
