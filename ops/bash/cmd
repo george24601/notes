@@ -1,10 +1,5 @@
 #!/bin/bash
 
-#force variable set 
-set -o nounset
-#force fail fast
-set -o errexit
-
 <<LINK
 & run multiple commands in the background
 && run the next one only if the first one returns 0
@@ -21,14 +16,6 @@ set -o verbose  + set -o xtrace
 
 LINK
 
-#delete the folder if it exists, note that the spaces around -d predicate matter! 
-[ -d $FOLDER ] && rm -r $FOLDER
-
-#But -d does not work with wildcards! 0 - stdin 1 - stdout 2 - stderr &1 means it is not a file but a file descriptor
-# note the positiovne of 2>&1 matters, have to go AFTER the file, otherwise &1 means the current console - bash loads from left to right!
-if ls /path/to/your/files* 1> /dev/null 2>&1; then
-      echo "files do exist"
-
 #compress and decompress, -c compress, -x extract
 tar -czvf $TO.tar.gz $FROM
 
@@ -41,16 +28,6 @@ cd !$
 
 #automatically corrects small typos in directory names and jumps to the best guess of existing directories.
 shopt -s cdspell
-
-#shell to exit if any subcommand or pipeline returns a non-zero status
-set -e
-
-#-a Mark variables and function which are modified or created for export to the environment of subsequent commands. 
-#Note that you can use + to revert/undo the set option
-set -a
-
-#why do we need exec here???
-exec locust -f $LOCUST_FILE
 
 #multiline to a single line
 cat file.txt|xargs
@@ -97,10 +74,6 @@ diff <(grep somestring file1) <(grep somestring file2)
 
 #!:1-$ It takes all the arguments to the previous command and drops them in.
 
-#default value for variables
-#You can also assign directly with ${VAR:=defaultval} (equals sign, not dash) but note that this won’t work with positional variables in scripts or functions.
-THIRD_ARG="${3:-no_third_arg}"
-
 #show which processes are using a specified file, file system, or unix socket.
 fuser -m -u /mnt/usb1
 
@@ -108,10 +81,6 @@ fuser -m -u /mnt/usb1
 fuser -v -n tcp 80
 
 pmap -x [pid]
-
-#nohup & - no hung up, the seond & means run it as a background job, 2 is std err, &1 means FD 1, note that abad>a 2>a will open the file twice, and stdout will but overwrittend by stderr!
-# The log goes to nohup.out
-nohup abcd 2>&1  &
 
 # Set the maximum number of open files to 10.
 ulimit -n 10
@@ -153,6 +122,11 @@ stat -c %a findPhoneNumbers.sh
 #each 3 letters, file owner, group, other user
 #every file on linux is owned by a user and a group
 
+###cron
+#edit, -l to list
+crontab -e
 
+#3am job every day, pipe yes "y" to answer questions
+0 3 * * * docker system prune -a 1> /home/ec2-user/cron.log  2> /home/ec2-user/cron.err
 
-
+#In k8s, following a range with /<number> specifies skips of the number’s value through the range. For example, 0-23/2 can be used in the hours field to specify command execution every other hour. 0 */2 * * * means every 2 hours

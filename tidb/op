@@ -18,7 +18,8 @@ kubectl get TidbCluster stg1-tidb-cluster --namespace stg1
 #turns out pd-2, the leader is in 1a!
 
 #verify context
-kubectl get svc -n stg1
+
+kubectl describe pod stg5tidb-pd-0 -n stg5tidb
 
 aws eks --region ap-northeast-1 update-kubeconfig --name stg5tidb
 
@@ -40,6 +41,7 @@ kubectl get configmap -n stg5tidb
 helm get values stg5tidb > ~/helm_stg5.yaml
 
 kubectl describe configmap -n stg5tidb stg5tidb-tikv-c10d5a3e > ~/conf_tikv
+
 
 kubectl describe configmap -n stg5tidb stg5tidb-tidb > ~/conf_tidb
 
@@ -76,4 +78,6 @@ go tool pprof http://localhost:10080/debug/pprof/profile
 kubectl port-forward -n stg5tidb svc/stg5tidb-pd 2379:2379
 
 kubectl exec -it -n stg5tidb stg5tidb-tikv-1 -- du -sh /var/lib/tikv
+
+df -h | grep /var/lib/tikv
 

@@ -107,3 +107,11 @@ To active drainer from existing cluster:
 3. table schemas
 4. binary logs under binlog_snapshot
 
+###managing backup
+* keep the last 3 copies, one full back up per weekly
+* upload history full backup to S3
+* incremental backup data should cover the local full backup
+* may consider taking backup from slave (stg2)
+* pump by default keeps 7 days 
+* try to limit mydumper file to 64MB
+* how to check the replication lag at pump and drainer?

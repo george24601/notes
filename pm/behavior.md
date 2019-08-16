@@ -39,6 +39,11 @@ Note often these things appear together. Need to identify which is the main one
 2. explain current context including boss's direction
 3. let the boss know the change and command as soon as time permits
 
+### Someone wants to gossip with you
+1. Be very explict you are not interested
+2. Change topic
+3. If keeps happening, report to his manager
+
 Shut up on issues related to money and people management - that is the management's job
 
 Importance is to bring value to the boss. Do not to use threatening with resigning and active rejection

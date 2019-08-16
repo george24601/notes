@@ -1,15 +1,8 @@
-regular dr drill -> find systematic risk -> optimize business system -> produce dr cookbook
+99.99% is a bit LT 1 hour per year
+99.9% is a bit LT 9 hours per year
 
-* need to pass colored data in the context
-* need to simular dependency errors
+* regular dr drill -> find systematic risk -> optimize business system -> produce dr cookbook
+* need to pass colored data in the context, but only with colored traffic. Ideally have shadow table isolation too.
+* simulate error on depending service, if the impact of such failure is huge
 * need to simulate traffic record/reply/isolation
-
-inject error into the core business
-
-simular error on depending service, if the impact of such failure is huge
-
-consier using prod server with no traffic
-
-traffic isolation and shadow table isolation
-
-only inject error into colored traffic
+* consider using prod server with no traffic

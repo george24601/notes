@@ -2,7 +2,7 @@ Note it does not support SP, View, trigger, UDF, FK
 
 watch out for the case where index and shard data are not on the same shard : two cases where double scan won't be a problem! 
 
-lock-free snapshot read: change to snapshot version,i.e., lock free
+lock-free snapshot read: change to snapshot version,i.e., lock free. History read is possible by setting @@tidb_snapshot
 
 isolation: snapshot isolation (roughly RR)
 
@@ -20,7 +20,7 @@ best virtualization gives 30% penalty over physical machine
 
 ### PD
 
-PD leader is different from the etcd leader!
+PD leader is different from the etcd leader! PD is on active-standby, uses the etcd for leader election
 
 physical time + logical time
 1. when PD becomes leader, will get last saved time from etcd, and hold until current time >= that value
