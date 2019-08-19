@@ -1,0 +1,11 @@
+@startuml
+skinparam component {
+	backgroundColor<<done>> Green
+	backgroundColor<<doing>> Yellow
+	backgroundColor<<explore>> Blue
+}
+
+
+@enduml
+
+

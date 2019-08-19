@@ -20,13 +20,6 @@ when commenting, compare with the same person's previous product, to cushion the
 We also encouraged our employees to interview elsewhere regularly. That was the most reliable and efficient way to learn how competitive our pay was.
 
 “Instead of 150 new people, are you sure you don’t want 75 people whom you pay twice as much because they have twice as much experience and can be higher performers?”
-
-It’s only when colleagues speak up and put their opinions on the table, without holding back, that the leader can confidently fulfill one of his most important responsibilities: breaking ties.
-
-The arc that he draws is: team can’t reach consensus → has a healthy conflict where everyone advocates for their point of view → leader breaks tie and makes a decision → everyone disagrees and commits.
-
-The informed captain on that decision has the responsibility to welcome, understand, and consider your opinions, but may not agree. Once the captain makes a decision, we expect everyone to help make it as successful as possible.
-
 We change by parcticing a different behavior, that, over time, leads us to think about things differently
 
 When you’re new, this is when you are at your most vulnerable. This is because you want to make sense of your environment so you can start being an effective leader.
@@ -92,3 +85,55 @@ The best people are recruited, not bought. The companies who pay top-of-market w
 Have strong onboarding documents and employee handbooks
 
 Have new employees improve those onboarding documents
+
+Focusing on people is arguably the highest leverage activity to spend time on as CEO, since great people build great products, which leads to great profits (in that order)
+
+For example, who to hire, promote, pay more, etc. This should be done by a group of peers or a committee (this is a form of Ray Dalio’s believability weighted decision making).
+
+It’s ok, and even desirable to have products with some overlap. Each pushes the other to be better with friendly competition
+
+It’s easier to hire 90th percentile performers who start doing great work right away, than to train average performers into 90th percentile performers
+
+It’s better to occasionally miss out on a great hire than to make a bad hire. Weight the decision making process to avoid false positives, not false negatives. For example, give veto rights to multiple people: the hiring manager, bar raiser, founder, etc.
+
+People refer friends because it’s a great place to work, not (primarily) for the referral bonus.
+
+Be more like an all-star team than a family. All star teams pay to recruit the best players. Players who don’t contribute or work as a team get cut.
+
+People use judgements made in the first 10 seconds of an interview to form an assessment. These aren’t predictive of outcomes.
+
+Interview based on sample work and structured interview questions
+Create pre-defined interview questions that all candidates get asked, then score answers on a consistent rubric. e.g. Tell me about a time when you [outcome that is needed for this role].
+
+Find and develop your best interviewers
+Since the interview skillset is not equal, ask the best interviewers to make this a bigger part of their job.
+
+Have at least two interviewers assess each value or key competency
+Interviewers should be taking notes and filling out scorecards during every interview.
+
+People Ops should communicate in detail how decisions are made on hiring, promotions, comp, terminations, etc, but not reveal the details of any individual’s situation to respect their privacy.
+
+Manager quality is the single best predictor of whether an employee will stay or leave. Good managers also cause their reports to have higher performance scores.
+
+In training, spend more time on practice/repetition, and less on content
+The tough part is getting people to put what they know into practice.
+
+Have the best employees in each area run trainings
+Favor internal people over external people for trainings.
+
+Non cash rewards, whether they are experiences (dinner for two, a trip) or gifts (a new phone) trigger an emotional response. When people are surveyed they say they prefer cash awards, but they report higher levels of happiness when receiving experiential awards.
+
+
+As I’ve reflected on the regrettable departures of folks I’ve managed, hindsight allows me to point to the moment the person changed. Whether it was a detected subtle change or an outright declaration of their boredom, there was a clear sign that the work sitting in front of them was no longer interesting. And I ignored my observation. I assumed it was insignificant. He’s having a bad day. I assumed things would just get better. In reality, the boredom was a seed. What was “I’m bored” grew roots and became “I’m bored and why isn’t anyone doing anything about it?” and sprouted “I’m bored, I told my boss, and he… did nothing,” and finally bloomed into “I don’t want to work at a place where they don’t care if I’m bored.”
+
+I think of boredom as a clock. Every second that someone on my team is bored, a second passes on this clock. After some aggregated amount of seconds that varies for every person, they look at the time, throw up their arms, and quit.
+
+ Here are some narratives that might keep developers around:
+
+“If you implement feature X on or ahead of schedule, we will promote you.”
+“With the work that we’re giving you over the next few months, you’re going to become the foremost NoSQL expert in our organization.”
+“We recognize that you have a lot of respect for Bob’s Ruby work, so we’re putting you on a project with him to serve as your mentor so that you can learn from him and get to his level.”
+“We’re building an accounting package that’s critical to our business, and you are going to be solely responsible for the security and logging portions of it.”
+“If your work on project Y keeps going well, we’re going to allow you to choose your next assignment based on which language you’re most interested in using/learning.”
+
+A new team member who says, “I want to be the department’s principal architect” may have his head in the clouds a bit, but you might be able to find a small, one-man project and say, “start by architecting this and we’ll take it from there.”
