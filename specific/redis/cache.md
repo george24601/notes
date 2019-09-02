@@ -28,3 +28,5 @@ Use lock when fetch value from db to defend against penetration
 against stampdede/cascading failure, ideally db shoudl be able to handle that, if too hard, rate limiting is a must combiled with persisted recovered and active-standby clusters
 
 expire key: random deletiion (repeating if the expriation ratio > 1/4)  + lazy deletion on get + LRU (e.g., with LinkedHashMap)
+
+every sec randomly select 5 nodes,and find the oldest node that has not sent message too. Every 100ms, scale lcoal node list, if the node received last pong > cluster-node-timeout/2, send ping

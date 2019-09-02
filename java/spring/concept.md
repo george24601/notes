@@ -18,3 +18,4 @@ controller is a singleton, so may have threadsafety probiel
 
 bean scope: singleton, prototype, request....
 
+a simple spring boot consuemrs at least 1G ram, so 2G memory set is a must

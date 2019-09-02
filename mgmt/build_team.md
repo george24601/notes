@@ -1,13 +1,12 @@
-### Building relationship
+Authority care most what you can contribute in the future
 
-1. Authority care most what you can contribute in the future
-2. To affect opinions of people, not only the person himself, but also whoever that can directly affect the said person too. Build common interest between the people around the authority
-4. Easier to build new relationship than saving old relationship
-5. Can be a leader or follower regardless of current status and self-esteem
+To affect opinions of people, not only the person himself, but also whoever that can directly affect the said person too. Build common interest between the people around the authority
+
+Easier to build new relationship than saving old relationship
+
+Can be a leader or follower regardless of current status and self-esteem
 
 a critical feature of effective complex organisations is that they make people do all the jobs.
-
-I was shocked to discover that it was not considered standard to have the overall manager personally vet new hires.
 
 Training is the highest leverage activity a manager can do to increase the output of an organization.  Don’t leave training to outsiders, do it yourself.
 
@@ -16,8 +15,6 @@ never complain your company or your team's task in front your subordinates - and
 HR should work with front-line managers to monitor the level of demands they’re placing on people, as well as the balance between demands and resources. The higher the work demands, the higher employees’ need for support, acknowledgement, or opportunities for recovery.
 
 when commenting, compare with the same person's previous product, to cushion the shocks
-
-We also encouraged our employees to interview elsewhere regularly. That was the most reliable and efficient way to learn how competitive our pay was.
 
 “Instead of 150 new people, are you sure you don’t want 75 people whom you pay twice as much because they have twice as much experience and can be higher performers?”
 We change by parcticing a different behavior, that, over time, leads us to think about things differently
@@ -88,28 +85,13 @@ Have new employees improve those onboarding documents
 
 Focusing on people is arguably the highest leverage activity to spend time on as CEO, since great people build great products, which leads to great profits (in that order)
 
-For example, who to hire, promote, pay more, etc. This should be done by a group of peers or a committee (this is a form of Ray Dalio’s believability weighted decision making).
-
 It’s ok, and even desirable to have products with some overlap. Each pushes the other to be better with friendly competition
 
 It’s easier to hire 90th percentile performers who start doing great work right away, than to train average performers into 90th percentile performers
 
-It’s better to occasionally miss out on a great hire than to make a bad hire. Weight the decision making process to avoid false positives, not false negatives. For example, give veto rights to multiple people: the hiring manager, bar raiser, founder, etc.
-
 People refer friends because it’s a great place to work, not (primarily) for the referral bonus.
 
 Be more like an all-star team than a family. All star teams pay to recruit the best players. Players who don’t contribute or work as a team get cut.
-
-People use judgements made in the first 10 seconds of an interview to form an assessment. These aren’t predictive of outcomes.
-
-Interview based on sample work and structured interview questions
-Create pre-defined interview questions that all candidates get asked, then score answers on a consistent rubric. e.g. Tell me about a time when you [outcome that is needed for this role].
-
-Find and develop your best interviewers
-Since the interview skillset is not equal, ask the best interviewers to make this a bigger part of their job.
-
-Have at least two interviewers assess each value or key competency
-Interviewers should be taking notes and filling out scorecards during every interview.
 
 People Ops should communicate in detail how decisions are made on hiring, promotions, comp, terminations, etc, but not reveal the details of any individual’s situation to respect their privacy.
 
@@ -123,9 +105,6 @@ Favor internal people over external people for trainings.
 
 Non cash rewards, whether they are experiences (dinner for two, a trip) or gifts (a new phone) trigger an emotional response. When people are surveyed they say they prefer cash awards, but they report higher levels of happiness when receiving experiential awards.
 
-
-As I’ve reflected on the regrettable departures of folks I’ve managed, hindsight allows me to point to the moment the person changed. Whether it was a detected subtle change or an outright declaration of their boredom, there was a clear sign that the work sitting in front of them was no longer interesting. And I ignored my observation. I assumed it was insignificant. He’s having a bad day. I assumed things would just get better. In reality, the boredom was a seed. What was “I’m bored” grew roots and became “I’m bored and why isn’t anyone doing anything about it?” and sprouted “I’m bored, I told my boss, and he… did nothing,” and finally bloomed into “I don’t want to work at a place where they don’t care if I’m bored.”
-
 I think of boredom as a clock. Every second that someone on my team is bored, a second passes on this clock. After some aggregated amount of seconds that varies for every person, they look at the time, throw up their arms, and quit.
 
  Here are some narratives that might keep developers around:
@@ -137,3 +116,24 @@ I think of boredom as a clock. Every second that someone on my team is bored, a 
 “If your work on project Y keeps going well, we’re going to allow you to choose your next assignment based on which language you’re most interested in using/learning.”
 
 A new team member who says, “I want to be the department’s principal architect” may have his head in the clouds a bit, but you might be able to find a small, one-man project and say, “start by architecting this and we’ll take it from there.”
+
+Humans are wired for teamwork, and the possibility of contributing to the creation of something larger in cooperation with others can, in itself, create an engaging workplace.
+
+So work to create the feeling of teamwork, in such a way that everyone feels they’re working together and contributing to the whole. This will increase the attachment that your team feels to their work, and their working environment.
+
+ we, as leaders, are here — first and foremost — to serve our organizations. This may sound obvious, or even inevitable, but in our experience, it’s neither. In more traditional organizations, the service ethic flows in the opposite direction; that is, the organization is set up to serve its leaders, not the other way around.
+
+To live Servant Leadership effectively; we start with the view that we are going to treat our staff as our “customers.”
+
+Rather than just look at how to engage employees, it’s also helpful to look at how to lose them, and do the opposite.
+
+when someone quits they are effectively saying, “I no longer believe in this company”. What’s worse is that what they were originally thinking was, “I’m bored”.
+
+You ask, “Are you bored?” Even if you don’t have a gut feeling, it’s a good question to randomly ask your team. When I ask, I look you straight in the eyes and if you can’t stare me in the face and answer, I’m going to keep digging until you look me in the eye. Remember, the goal here is to discover boredom before they know it, and the act of a simple question might be just the mental impetus they need to see the early signs in themselves.
+
+They’ll tell you halfway through your 1:1 and they won’t use the word bored. They’ll say something innocuous like, “…and I really don’t know what to do next,” and you’re going to blow right by the most important thing they’ve said in a while because you’re worried about your next meeting.
+
+Let them experiment. Let them obsess. Let them scratch that itch. If there is no project on their plate that you know is engaging them, create time for them to explore whatever they want to obsess about. I absolutely guarantee there is an investigation somehow related to their work that they are dying to tinker with. The business justification for this wild-ass effort is likely not obvious, so I’ll define it: the act of exploration is as valuable as the act of building.
+Exploration is hard to justify because it’s hard to measure. When exploration is complete, you often have nothing to hold up to your project manager to explain or justify the expenditure of time. Here’s what you tell them, “My job isn’t just building product; I also build people.”
+
+a daily set of distractions courtesy of exhausting people will pull your engineer away from their work. Random meetings, phone calls, interviews. These 30- to 60-minute tasks feel transactional and brief and there is no way you can fully remove a team member from them, but you manage them. Similar to crap work, it’s your job to evenly spread the load of daily noise across the team. More importantly, it’s your job to remember that productivity costs surrounding these micro-tasks aren’t just the 30 minutes necessary to get them done, it’s the context-switching tax involved in stopping their work, preparing for the task, doing the task, and then rebuilding the context regarding the work that floats their boat.

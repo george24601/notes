@@ -130,3 +130,10 @@ crontab -e
 0 3 * * * docker system prune -a 1> /home/ec2-user/cron.log  2> /home/ec2-user/cron.err
 
 #In k8s, following a range with /<number> specifies skips of the number’s value through the range. For example, 0-23/2 can be used in the hours field to specify command execution every other hour. 0 */2 * * * means every 2 hours
+
+#starts the program abcd in the background in such a way that the subsequent logout does not stop it
+#often used in combination with the nice command to run processes on a lower priority
+nohup abcd &
+
+#A different issue that often arises in this situation is that ssh is refusing to log off ("hangs"), since it refuses to lose any data from/to the background job(s).[5][6] This problem can also be overcome by redirecting all three I/O streams
+nohup ./myprogram > foo.out 2> foo.err < /dev/null &
