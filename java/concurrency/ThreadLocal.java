@@ -238,11 +238,6 @@ class ThreadLocalMap {
 
 }
 
-//threadRef->currentThread->threadLocalMap->entry->valueRef->valueMemory , if the thread terminates, we are good
-//however, if the it is threadpooled, the thread never terminates -> we got problem!
-//How do we defend against this problem?
-
-
 class TLEx {
 
 	//recommend to set it to private static, this means ThreadLocal will be gced, and we can remove the value manually to prevent memory leak

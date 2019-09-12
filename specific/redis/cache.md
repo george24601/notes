@@ -30,3 +30,5 @@ against stampdede/cascading failure, ideally db shoudl be able to handle that, i
 expire key: random deletiion (repeating if the expriation ratio > 1/4)  + lazy deletion on get + LRU (e.g., with LinkedHashMap)
 
 every sec randomly select 5 nodes,and find the oldest node that has not sent message too. Every 100ms, scale lcoal node list, if the node received last pong > cluster-node-timeout/2, send ping
+
+cache aside means cmp and constrast with write through and read through!

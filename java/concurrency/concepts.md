@@ -33,26 +33,20 @@ The problem with this is, that the call to monitorObject.wait() only releases th
 
 ### slipped conditions
 
-that fair lock implementation problem?
-
-Normally use ArrayBlockingQueue
-```
-ExecutorService service = new ThreadPoolExecutor(4, 4, 0L, TimeUnit.MILLISECONDS,
-                new ArrayBlockingQueue<Runnable>(CAPACITY), new RejectedExecutionHandler() {
-
-                    @Override
-                    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-                    }
-                });
-```
-
 ### Thread steate
 New, Runnable: waiting for CPU to become running
-Watiing: thread.join(), object.wait()....
+Waiting: thread previosuly called thread.join(), object.wait(), need Object.notify/notifyAll to become runnable
 Timed_watiing: thread.sleep(long)....
 Blocked: need to acquire lock but unable to
 
 ##happens before rule
+JVM will add a memory barrier Store-Load aroudn volatile
 works differnet for volatile and monitors!
 
 what is the difference between start() and run()? why in the TPE it uses run() instead of start()?
+
+
+StampledLock newly added in java 8
+
+###CAS
+implmented by `unsafe` and the atomicity of native methods

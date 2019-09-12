@@ -137,3 +137,19 @@ This annotation is used on classes that define beans. @Configuration is an analo
 The @Bean annotation works with @Configuration to create Spring beans. As mentioned earlier, @Configuration will have methods to instantiate and configure dependencies. Such methods will be annotated with @Bean. The method annotated with this annotation works as the bean ID, and it creates and returns the actual bean.
 
 EnableAutoConfiguration: scan ClassPath and load beans
+
+if the object implements some interface, then spring apoi will use JDK proxy to create the proxy class to implement the same interface, otherwise, use gclib to create the class's subclass as the proxy object
+
+all spring beans are singleton by default, so consider using ThreadLocal
+
+@Request: every http req will create a ne bean, alive during the rquest
+@Session: every http req will create a new bean, alive usirng th ession
+
+Spring bean lifecycle?
+
+@Component vs @Bean: on class vs on method. Note @C is the default annotation if @Repo or @Service is not a good fit
+@C uses classpath to scan and assemble into the conainer (can also use COmponoentScan).
+
+Suppose we have an interface I, with method A, B, A has @Transactionl, and a class C that implements the I, and B calls A, if we call be, will A have transaction? what if there is no interface?
+(first cae: no, second case, yes, extended question, why has to be public method AND called from outside at the same time to make it in effect)
+

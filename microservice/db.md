@@ -1,6 +1,7 @@
 ID generaion:
 * GUID
 * Snowflake
+* ID + segment based, i.e., id, cur_max_id, incr_step, version, with id as the PK, every time the service will grab a list, and that (cur_max_id, id, version) itself acts as the optimistic lock. On top of that , for each db, add a different start and with same step grows, i.e., if 3 dbs, A gets 1, 4,7, B gets 2, 5, 8, and C gets 3, 6, 9
 
 Sharding:
 * range based: hot slice problem, especially auto-inc id
@@ -43,3 +44,15 @@ Partitioned table number needs to be 2^N, because when we mod, if you want to pa
 5. change double virtual ip to single virtual IP, cut off the double sync
 6. add new HA replica to the new dbs
 7. purge stale data
+
+### testOnBorrow
+
+To prevent (actually only lower the risk) getting an invalid connection from the pool a solution seems to be the configuration of connections validation. Validating a connection means to run a very basic query on the database (e.g. SELECT 1; on MySQL).
+
+Tomcat JDBC Connection Pool offers several options to test the connection. The two I find the more interesting are testOnBorrow and testWhileIdle.
+
+First I was thinking that testOnBorrow is the best option because it basically validate the connection before providing it to the application (with a max frequency defined by validationInterval).
+
+But after a second though I realized that testing the connection right before using it might impact the responsiveness of the application. So I though that using testWhileIdle can be more efficient as it test connections while they are not used.
+
+Most of the times, testOnBorrow is the least risky since it ensures (as best it can) that before a connection is returned from the pool for your use, a basic sanity check has been made that the client and db-server are on talking terms.
