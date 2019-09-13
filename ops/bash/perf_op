@@ -140,6 +140,9 @@ lsof | grep deleted
 #don't just rm! echo write instead. Otherwise, df still shows referenced file size
 echo "" > tomcat.log
 
+#check a port's connectivities
+lsof -i:port
+
 ###last time  system online
 uptime
 
@@ -171,4 +174,9 @@ GC
 # slat: how long did it take to submit this IO to the kernel for processing?
 # clat: time that passes between submission to the kernel and when the IO is complete, not including submission latency.
 # Fio has an iodepth setting that controls how many IOs it issues to the OS at any given time.
+
+
+# find process taking most CPU
+ps H -eo pid,pcpu | sort -nk2 | tail
+ll /proc/$PID
 

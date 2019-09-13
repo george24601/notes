@@ -50,3 +50,5 @@ StampledLock newly added in java 8
 
 ###CAS
 implmented by `unsafe` and the atomicity of native methods
+
+###lost wake up problem
