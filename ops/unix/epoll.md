@@ -1,3 +1,14 @@
+select(): add the thread to each socket it is listening to's wait list, when a message arrives at one socket, remove them fromt hese wait list, and add to the worker queue, select it self is blocking
+epoll(): use epoll_ctl to maintin the waiting queue, use epoll_wait to block the process. Use a separate rdlist to maintain what sockets ahve the data
+IO reused: select + poll, when the kernel finds that process's i/o condition is satisfied, call the process
+select() and poll() are blocking themselves, when the socket reports readable, it will read by the recform
+
+creates eventpoll object, similar to socket, adds it to the socket's waitlist. Every time socket receives data, kernel adds socket ref to the eventpoll's readlist
+
+epoll_wait() will add the treadh to eventpoll's waitlist and block it. When the socket receives data, interuptro will modify the rdlist and wake up threads on the eventpoll
+
+aysnc IO: signal based IO tells when we are START reading, async model tells us when IO can be completed!
+
 edge-triggered()
 
 Kernel: Receives first connection. Two threads, A and B, are waiting. Due to "edge triggered" behavior only one is notified - let's say thread A.

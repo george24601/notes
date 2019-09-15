@@ -1,3 +1,13 @@
+what is the safe point?
+
+when are yong gc and full gc triggered?
+
+how is off-heap memory recycled?
+
+G1's remember set, how is that implemented
+
+For large memory, consider using G1, and set expected GC stop time
+
 Each thread running in the Java virtual machine has its own thread stack.
 The thread stack also contains all local variables for each method being executed (all methods on the call stack)
 

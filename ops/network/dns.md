@@ -37,6 +37,14 @@ Hosted zone
 --------
 A container for resource record sets, which include information about how you want to route traffic for a domain (such as example.com) and all of its subdomains.. A hosted zone has the same name as the corresponding domain.
 
+Any limite on the # of connections a brower that can connect tot he host?
+
+Why DNS uses UDP? for de-alias speed, and less than 512 bytes. However, the replication between master and region replica is done by TCP
+
+
+
+
+
 SRV record
 ----------
 _service._proto.name. TTL class SRV priority weight port target.

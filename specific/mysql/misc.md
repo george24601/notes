@@ -20,7 +20,7 @@ Null/not null doesn't affect index performance MUCH, because innodb uses a separ
 
 Use forceindex, STRAIGHT_JOIN to tweak query plan
 
-Change buffer???
+Change buffer to improve write performance??? Note that it applies only to non-unique indices
 
 prefer timestamp to datetime?
 prefer IN to OR? limit size of IN to 200

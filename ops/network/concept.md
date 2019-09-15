@@ -101,3 +101,11 @@ HAProxy + Nginx together?
 open too many files -> each tcp opens a socket which exhausts number of open files , common corelation with close_wait state , need to check client side's timeout settings
 
 Use disk IO latency to decide if disk is under stress
+
+TCP_NODELAY and Nagle's algorithm, when there is no reponse data, ACK will be delayed to go with other ACK's response code. Note if when waiting for ACK, the next packet arrives, we need to send ACK immediately. So A sends B, and B won't response immediately, and by Nagle' A will wait for ACK. This means if the two packets are from the same request, the request will be delayed by settings (default 40ms)
+
+Where MSS is the maximum segment size, the largest segment that can be sent on this connection, and the window size is the currently acceptable window of unacknowledged data
+
+HTTP2 supoerts multiplexing to send multiple http requests in the same TCP CONCURRENTLY
+
+Chromes allows mmax 6 TCP connections to the same host concurrently

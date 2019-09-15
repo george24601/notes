@@ -1,3 +1,9 @@
+Power Sales Negotiators know that splitting the difference does not mean splitting it down the middle. Just split the difference twice and the split becomes 75 percent/25 percent. Furthermore, you may be able to get the other party to split the difference three or more times.
+
+The first thing to remember is that you should never offer to split the difference yourself, but always encourage the other person to offer to split the difference.
+
+Remember that the essence of Power Sales Negotiating is to always leave the other side thinking that they won.
+
 ### Selling The Top Of The Line (TOTL)
 
 First promote an expensive product. Then show them a cheaper product.
@@ -35,14 +41,11 @@ No, after expressing his appreciation of the invitation and regretting his inabi
 
 Create responsibility and titles as toys for people, this will also instill a sense of ownership
 
-1. Be sincere. Do not promise anything that you cannot deliver. Forget about the benefits to yourself and concentrate on the benefits to the other person.
-2. Know exactly what it is you want the other person to do.
-3. Be empathetic. Ask yourself what is it the other person really wants.
-4. Consider the benefits that person will receive from doing what you suggest.
-5. Match those benefits to the other person’s wants.
-6. When you make your request, put it in a form that will convey to the other person the idea that he personally will benefit.
+Be sincere. Do not promise anything that you cannot deliver. Forget about the benefits to yourself and concentrate on the benefits to the other person.
 
-B. F. Skinner, the world-famous psychologist, proved through his experiments that an animal rewarded for good behavior will learn much more rapidly and retain what it learns far more effectively than an animal punished for bad behavior. Later studies have shown that the same applies to humans. By criticizing, we do not make lasting changes and often incur resentment.
+Consider the benefits that person will receive from doing what you suggest.
+
+When you make your request, put it in a form that will convey to the other person the idea that he personally will benefit.
 
 It taught him an invaluable lesson in the art of dealing with people. Never again did he write an insulting letter. Never again did he ridicule anyone. And from that time on, he almost never criticized anybody for anything.
 
@@ -54,11 +57,24 @@ You cannot teach a man anything; you can only help him to find it within himself
 
 Be wiser than other people if you can; but do not tell them so.
 
-Merely stating a truth isn’t enough. The truth has to be made vivid, interesting, dramatic.
-
-“Last week I called on a neighborhood grocer and saw that the cash registers he was using at his checkout counters were very old-fashioned. I approached the owner and told him: ‘You are literally throwing away pennies every time a customer goes through your line.’ With that I threw a handful of pennies on the floor. He quickly became more attentive. The mere words should have been of interest to him, but the sound of Pennies hitting the floor really stopped him. I was able to get an order from him to replace all of his old machines.”
-
-It works in home life as well. When the old-time lover Proposed to his sweetheart, did he just use words of love? No! He went down on his knees. That really showed he meant what he said. We don’t propose on our knees any more, but many suitors still set up a romantic atmosphere before they pop the question.
+Merely stating a truth isn’t enough. The truth has to be made vivid, interesting, dramatic. Use multiple senses at the same time!
 
 People tend to avoid losses than acquiring gains. Therefore, instead of taking stuff from people, construct a scenario where they are willing to give themselves.
 
+To trigger other people's bragging and make them feel good: time + scenario + slightly irritating/negative experience + positively peak as the end.
+
+Persons in crisis resist the request to talk because, as Stokoe points out, cultural idioms encourage us to put little value on “talk”. After all, “talk is cheap” and “talking the talk” is less meaningful than “walking the walk”. However, a single word substitution could be enough to save a life.
+
+Perhaps because we do not have equivalent cultural idioms, “speak” seems to work. In real conversations between a negotiator and person in crisis, when the negotiator says “speak” (“I wanna come down and I wanna speak to you…”) they get their desired response. 
+
+It is effective for several reasons; it is not a question, it is a statement, and it allows the caller to frame themselves as a good person while not having to backtrack on blaming the other party.
+
+“Is there something else you want to address in the visit today?”. A third group acted as a control and said nothing to solicit further concerns. In doing so, the researchers were able to test the effectiveness of the words “any-“ and “some-“ when used in open-ended questions.
+
+Questions with “Yes” or “No” answers are very useful for getting information quickly, like whether the person in trouble is breathing. But more subtle questions, such as what colour the person looks, might need further prompting. In this case, a “menu” of possible answers is required, but it is important that the menu contains at least three options, otherwise it might lead someone towards an inaccurate answer.
+
+Take this exchange from the fateful Dallas call described at the start of this article:
+
+Dispatcher: “Okay is this a house or an apartment?”
+
+Caller: “It… it is a home”.

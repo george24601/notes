@@ -151,11 +151,37 @@ whois example.com
 #check corresponding IP address's MAC address - network card physical address
 ip n (ip neighbor)
 
+
 #see if server ignores the ACK from client,i.e., server thinks connection is NOT up yet, server will set a reset to server
 cat /proc/sys/net/ipv4/tcp_abort_on_overflow
 
 #check tcp connections at each state, don't
+#By default, ss displays a list of open non-listening sockets (e.g. TCP/UNIX/UDP) that have established a connection.
+#If we want to pick up connections that are listening, we have to add the -a option 
 ss -nat
+
+#Show all listing tcp sockets including the corresponding process
+ss -tlp
+
+#Show all sockets connecting to 192.168.1.10 on port 443
+ss -t dst 192.168.1.10:443
+
+#view all listening IPv4 sockets on your machine, -4 means ipv4, use -6 for ipv6
+ss -4 state listening
+
+#Show all ssh related connection
+ss -t state established '( dport = :ssh or sport = :ssh )'
+
+#List tcp and udp ports with no hostname resolution
+ss -tun
+
+#Print process which owns the connection, -l for current listening sockets
+ss -ltp
+
+#Pass -s option to get a list of socket related stats, -t and -u can be used to show only tcp or udp stats respectively
+ss -s
+
+#The Procfs is a file system that Linux exposes that is like a peek into kernel memory. It lives in /proc and it exposes information about TCP and UDP sockets at /proc/net/tcp and /proc/net/udp, netstat uses procfs
 
 #check open sockets
 lsof -i:port
@@ -165,3 +191,15 @@ sar -n SOCK
 
 #follows routes a packet takes
 traceroute
+
+<<NETSTAT
+netstat -r   replaced by   $ ip route
+netstat -i   replaced by  $ ip -s lin
+netstat -g   replaced by  $ ip maddr.
+
+
+Replacement for netstat is ss.   
+Replacement for  netstat -r is ip route.  
+Replacement for netstat -i is ip -s link.
+Replacement for netstat -g is ip maddr
+NETSTAT

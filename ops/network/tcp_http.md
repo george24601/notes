@@ -20,7 +20,7 @@ Each of these headers contains a bit known as the "reset" (RST) flag.  if this b
 * FIN-WAIT-2: after the active close side receives ACK 
 * CLOSING: rare
 * LAST-ACK: passive close side, the program received to EOF to call CLOSE, PCS will send a FIN and wait for ACK, e.g., when disconnect stress testing client, you will see many LAST-ACK
-* TIME_WAIT: 
+* TIME_WAIT: waits 2 MSL so that 1. make sure the last ack from client is received, and no retry comes from server (if there is, we reset the 2MSL timer). All ongoing datagrams will be expired when the new connections tarts with the same port. Note that Scoket/port is sitll occupied at this state
 
 On server receiving SYN, needs to ACK + SYN back to the client to ensure the new connection is not some stale packet. Client set will SEQ NO  = ISN + 1, normally ISN is randomized by time clock + 32 bit counter - a lot of ISN gen details
 

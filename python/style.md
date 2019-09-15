@@ -1,4 +1,7 @@
-Use docstrings.
+With Python, we use “snake_case,” which separates the words by underscores, and where all the letters are lowercase. The same convention is used for function names.
+
+The docstring is just a string that’s listed under the function definition that explains what the function does. Use them
+
 
 Name your classes and functions consistently; the convention is to use CamelCase for classes and lower_case_with_underscores for functions and methods. Always use self as the name for the first method argument
 

@@ -1,3 +1,5 @@
+use classloader isolation for jar version conflict
+
 when class laoded by JVM, it will create an instanceKlass, and leave it the method region
 
 If one class loader delegates to another class loader, and the delegated-to class loader defines the type, both class loaders are marked as initiating loaders for that type. The type defined by the delegated-to class loader is shared among all the namespaces of the initiating loaders of the type. 
@@ -63,3 +65,5 @@ LocalVariableTable: stores method's arg NAMES, otherwise, IDE will have to use a
 
 every Class object has a ClassLoader ref to mark which Classloader loads it
 Can use ClassLoader to partially solve diamond dependency problem -> different versions use different classloader 
+
+type info itself is a Class<?> after classloader loads an instance, will generate a corresponding CLass<?> type object

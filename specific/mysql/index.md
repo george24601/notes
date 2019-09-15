@@ -9,7 +9,7 @@ InnoDB doesn't support hash index, but any part related to sort/range, it is mes
 B tree: 
 * both leaves and non-leaves store the data 
 * normally a page is 4KB in OS, mysql seems to be 16k - can set node size to page size to take advantage of pre-read
-* for each node, # of keys j,  m/2 <= j <= m, where m is the # of branchs
+* for each node, # of keys j,  m/2 <= j LTE m, where m is the # of branchs
 
 B+ tree:
 * non-leaves no longer store the data

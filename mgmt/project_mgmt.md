@@ -1,4 +1,14 @@
+Suppose project completion time follows a Pareto (power law) distribution with parameter α. That is, for t > 1, the probability that completion time is bigger than t is t-α. (We start out time at t = 1 because that makes the calculations a little simpler.)
+
+Now suppose we know that a project has lasted until t0 so far. Then the expected finish time is αt0/(α-1) and so the expected additional time is t0/(α-1). Note that both are proportional to t0. So the longer it has taken, the longer it will take. If the project is running late, you can expect the time remaining to be even more than the expected time before the project started. The finish line is moving away from you!
+
+For example, suppose α = 2 (in applications of power laws, α is often between 1 and 3) and you’re measuring time in years. When the project starts at t = 1, it is expected to take one year, until t = 2. Now suppose you’re starting the second year and the project isn’t done. Now it’s expected to finish at t = 4, two more years. When you started, the project was supposed to take a year. One year later, it has taken a year, and should be expected to take two more years.
+
+This phenomenon sometimes occurs regardless of the individual's knowledge that past tasks of a similar nature have taken longer to complete than generally planned.[3][4][5] The bias only affects predictions about one's own tasks; when outside observers predict task completion times, they show a pessimistic bias, overestimating the time needed
+
  At a certain point your learning will plateau, and this is when the second type of work kicks in: executing. This is the act of applying that knowledge to get the job done and create leverage. Eventually, you will create enough leverage to automate the job or grow out of it, and this is when you start the cycle over. Learn. Execute.
+
+ The segmentation effect (?) is defined as the time allocated for a task being significantly smaller than the sum of the time allocated to individual smaller sub-tasks of that task.
 
  Testing is not something you should take lightly though, and if the consequences of a test outcome are big, say because it requires a large amount of development costs or scrapping a part of your product roadmap, then you really need to ensure your tests are valid and you should conduct the test multiple times to check you get consistent results.
 
@@ -96,3 +106,16 @@ When estimating project times, it should be remembered that programming products
 The preparation of a PERT chart is the most valuable part of its use. Laying out the network, identifying the dependencies, and estimating the legs all force a great deal of very specific planning very early in a project. The first chart is always terrible, and one invents and invents in making the second one.
 
 As the project proceeds, the PERT chart provides the answer to the demoralizing excuse, "The other piece is late anyhow." It shows how hustle is needed to keep one's own part off the critical path, and it suggests ways to make up the lost time in the other part.
+
+Work complicates to fill the available time.
+
+The demand upon a resource tends to expand to match the supply of the resource (If the price is zero). The reverse is not true.
+
+This phenomenon sometimes occurs regardless of the individual's knowledge that past tasks of a similar nature have taken longer to complete than generally planned.[3][4][5] The bias only affects predictions about one's own tasks; when outside observers predict task completion times, they show a pessimistic bias, overestimating the time needed.[6][7] The planning fallacy requires that predictions of current tasks' completion times are more optimistic than the beliefs about past completion times for similar projects and that predictions of the current tasks' completion times are more optimistic than the actual time needed to complete the tasks.
+
+A survey of Canadian tax payers, published in 1997, found that they mailed in their tax forms about a week later than they predicted. They had no misconceptions about their past record of getting forms mailed in, but expected that they would get it done more quickly next time.[10] This illustrates a defining feature of the planning fallacy; that people recognize that their past predictions have been over-optimistic, while insisting that their current predictions are realistic
+
+The segmentation effect is defined as the time allocated for a task being significantly smaller than the sum of the time allocated to individual smaller sub-tasks of that task. 
+
+Implementation intentions are concrete plans that accurately show how, when, and where one will act. It has been shown through various experiments that implementation intentions help people become more aware of the overall task and see all possible outcomes. Initially, this actually causes predictions to become even more optimistic. However, it is believed that forming implementation intentions "explicitly recruits willpower" by having the person commit themselves to the completion of the task.
+

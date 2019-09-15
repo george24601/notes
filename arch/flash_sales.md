@@ -49,3 +49,4 @@ trie tree for url-ish leveled dir with common prefixes,i.e., we can use it the o
 
 db connection is very valuable - mysql each gives 1k connection, for 50 per machine, this means at most 20 nodes
 
+for write requests, use queue, and pass only the limited number of the request to the queue

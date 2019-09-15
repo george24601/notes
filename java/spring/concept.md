@@ -1,3 +1,5 @@
+how is circular dependency solved?
+
 How spring inits object - create instance, pre-init,  create Bean instance, post-init, porcess annotation and inject properties
 
 When creates proxy class, will as CGLib to create a new class on Runtime. Inheritanc uses cglib's dynamic deletitation, composition sues jvm's own dynamic delegation
@@ -19,3 +21,7 @@ controller is a singleton, so may have threadsafety probiel
 bean scope: singleton, prototype, request....
 
 a simple spring boot consuemrs at least 1G ram, so 2G memory set is a must
+
+async worker, exception handling problem
+
+use ApplicationEvent and ApplicationContext, ApplicationEventPubliserAware to decouple
