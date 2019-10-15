@@ -56,6 +56,11 @@ when you set up a TCP connection, you associate a set of timers. Some of these t
 
 ### Http keep-alive
 
+client sends a Connection: keep-alive header, and server will respond with Conneciton:keep-alive in the header
+on the last request, client will use Conneciton:close in the header
+
+http keep-alive is to reuse existing connection
+tcp keep-alive is make sure the other end is still alive, but sending heartbeat packet
 using a single TCP connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair.
 
 In HTTP 1.1, all connections are considered persistent unless declared otherwise

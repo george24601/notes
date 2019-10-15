@@ -1,3 +1,4 @@
+
 @startuml
 skinparam component {
 	backgroundColor<<done>> Green
@@ -5,7 +6,10 @@ skinparam component {
 	backgroundColor<<explore>> Blue
 }
 
-
+[Java] --> [Spring]
+[Network] --> [RDS]
+[Network] --> [Redis]
+[RDS] --> [Spring]
+[Java] --> [Kafka]
+[Network] --> [Kafka]
 @enduml
-
-

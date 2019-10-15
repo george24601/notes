@@ -6,6 +6,11 @@ Dedup multiple request form the same user =>
 1. redis for consitency check, set 5 mins expire time
 2. unique token for each submission request on the frontend
 
+at nginx level: block the dup requests 
+
+use MQ to decouple as much as we can, i.e., won the lottery vs sending out the gifts
+
+note lottery is differnet from flash sale
 
 Cancel order: MQ based solutions
 

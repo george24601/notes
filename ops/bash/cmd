@@ -137,3 +137,6 @@ nohup abcd &
 
 #A different issue that often arises in this situation is that ssh is refusing to log off ("hangs"), since it refuses to lose any data from/to the background job(s).[5][6] This problem can also be overcome by redirecting all three I/O streams
 nohup ./myprogram > foo.out 2> foo.err < /dev/null &
+
+#check how the command is resolved
+type -a python3

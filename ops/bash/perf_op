@@ -43,6 +43,7 @@ But even that isn't the whole answer. If a process calls fork(), it splits into 
 Confused yet? Here's what you really need to know: use the free command and check the results before and after starting your program (on the +/- buffers/cache line). That difference is how much new memory your newly-started program used.
 
 try to limit the average load to < 0.7 * CPU cores 
+load is the avg # of threads in running or un-interruptable
 TOP
 
 

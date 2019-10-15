@@ -1,4 +1,17 @@
+kernel space vs user space VM is about 1:3
+
+when user process starts bash, it will get pid() to find current pid via kernel's pid service
+
+DMA: 
+* user process uses read(), entering kernel mode, and then blocked on data return
+* CPU sends instruction to DMA disk ctrler
+* DMA ...
+
 When executing a program from terminal, the terminal process use exec to load executable into memory, now code, data, bbs, stack, are mapped into the memory space via mmap, heap may map depending on if the you applied for the memory on the heap
+
+mmap maps the process's address space into the disk file address, but still need to copy from kernel read buffer to kernel's socket buffer. read buffer and user buffer are mmaped
+
+note that you can't change data in sendfile. Copy on write to improve perf
 
 exec will pass the control of CPU to dynamic linker linker, which will load the dynamically linked libary into memeory, and then execution starts. For more details, use strace
 

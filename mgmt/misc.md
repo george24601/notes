@@ -49,3 +49,35 @@ Tell the person why you are disappointed and how you feel; and
 better than this. I want to see you back here tomorrow morning at 9 a.m., and I want to
 see the kind of work that I know you can do." You're saying, "You're okay as a person,
 but the way you handled this monkey is inappropriate
+
+### Manage by outcome
+
+The clearest indicators that you are managing (or being managed) by outputs are roadmaps that list a fixed set of features with release dates, Gantt charts that sequence the year’s projects, and annual budgeting cycles where you commit to funding specific projects.
+
+An outcome is typically defined by a quantitative metric—a number that is both meaningful to the business and measurable by the team. It creates autonomy and accountability.
+
+In neither case should this inch toward defining specific actions—features, projects, or initiatives—that must be done to reach those outcomes.
+
+We assign quarterly OKRs and then we either dictate a fixed roadmap or we ask the team to commit to a fixed roadmap.
+
+We spend all of our time discussing actions and only talk about outcomes during the one or two weeks we spend defining what outcomes to set next.
+
+We are still managing by outputs with some outcome language sprinkled around the edges.
+
+
+This is often easier said than done. Defining the right metric is challenging in and of itself, let alone setting up the infrastructure to measure that metric reliably and accurately.
+
+This is one of the reasons why OKRs have become so popular. By defining both a qualitative objective and one or more quantitative key results, OKRs allow us to take multiple iterations to define the correct metric without changing the overarching objective.
+
+Managers don’t trust that teams can reach outcomes on their own. Therefore, managers micromanage their teams’ outputs. As a result, teams don’t communicate their progress toward their outcomes. Which leads to managers continuing to mistrust their teams’ ability to reach those outcomes.
+
+Most teams communicate progress by communicating outputs. We talk about what’s in the next sprint. We share 12-month roadmaps. We talk through project plans.
+
+Too often, when we comment on outputs, we are simply stating our uninformed opinion or personal preference.
+
+The most important feedback a leader can give their team is what outcomes they should be focused on. This should be a two-way negotiation between the leader and the team.
+
+The leader should bring the across-the-business view of what the business needs at that moment in time. The team, if they are a true continuous discovery team, should be closest to the customer with a deep understanding of the technology, and should communicate how much progress can be made on what timeline.
+
+So remember, if you want to break the vicious cycle of mistrust, first teach your teams how to show their work, then fix how you give feedback. Ask more questions and don’t fixate on the conclusions.
+
