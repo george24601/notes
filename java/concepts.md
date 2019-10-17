@@ -12,7 +12,7 @@ class type.newInstance, ConstructorType.newInstance - classType newInstance call
 
 ArrayList: DEAULT_CAPCITY=10, will copy with 50% increased capacity. Part of the reason init size is recommended to be set
 
-why no enum type as API return type?
+why no enum type as API return type? If the callee extends a new enum type, the caller will have serialization error. This is similar to convariant - contravariant rule. Enum is a good point as params. One can compare this to the robustness principle of communication: "be liberal in what you accept and conservative in what you produce.
 
 Array.asList() returns an immutable list, underlying is still the array, and has to be a bagged type. To convert to mutable type, use ArrayList ctor directly
 

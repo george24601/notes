@@ -1,126 +1,32 @@
-new object stays in eden only
-
-when is minor GC triggered:
-1. when eden gen can't fit the new object
-2. old gen has enough size to support current suvivors in young gen
-3. eden and one survior has not enough space
-4. check if all objects LT old gen available space, if so, use minor GC
-5. If HandlePromotionFailure is not set, trigger full GC
-6. check AVG of minor gc size entering the old gen, if GT cur old gen space, full gc. Otherwise, minor GC
-
-before minor gc
-if to survive object size LT survior space, then enter survivor
-if between that and old gen space, enter old gen (another case of entering old gen is past the MaxTenuringThreshold)
-Otherwise, full gc, and then minor GC
-
-Note that after minor GC, eden is empty
-
-Full gc uses tag and clean up
-
-before minor gc, check all objects size in young gen and cmp with old gen. That is why it is quicker
-
-
-two ways to locate object: handle, direct pointer
-
 TLAB: thread local allocation buffer
-what is the safe point?
-
-after reachability test, if no link to GC Roots, it will be amrked first, sn filtered, and check if we need to finalize(), finalize() is the last change object adds a reference - but not recommended to do so. Note that finalize() is guaranteed to execute only once
-
-when are yong gc and full gc triggered?
-
-how is off-heap memory recycled?
-
-G1's remember set, how is that implemented
-
-For large memory, consider using G1, and set expected GC stop time
-
-Each thread running in the Java virtual machine has its own thread stack.
-The thread stack also contains all local variables for each method being executed (all methods on the call stack)
-
-All local variables of primitive types ( boolean, byte, short, char, int, long, float, double - no String) are fully stored on the thread stack and are thus not visible to other threads.
-
-The heap contains all objects created in your Java application, regardless of what thread created the object.
-
-An object may contain methods and these methods may contain local variables. These local variables are also stored on the thread stack, even if the object the method belongs to is stored on the heap.
-
-An object's member variables are stored on the heap along with the object itself. That is true both when the member variable is of a primitive type, and if it is a reference to an object.
-
-Static class variables are also stored on the heap along with the class definition.
-
-methods, thread stacks, and native handles are allocated in memory separate from the heap
-3. VM Stack(includeing stack frames) -thread local
-
-4. native method stack  -thread local. In Hotspot VM Stack and Method Stack are combined.)
-	
-	* -> Native method interface -> native method libraries
-	
-
-5. program coutner register  - thread local
-
 
 local var table needed ram space is determned during compliation, when entering a method, the size of stack frame is fixed, so it won't change local var table's size
 
 
 2. what happened when java creates an object?
 
-3. visit an object, handle and direct pointer?
+3. visit an object, handle and direct pointer?  two ways to locate object: handle, direct pointer
 
 4. string type and constant pool
 
 # Offheap/Native/Direct memory
 
-Direct memory: is similar to native, but also implies that an underlying buffer within the hardware is being shared. For example buffer within the network adapter or graphics display. The goal here is to reduce the number of times the same bytes is being copied about in memory.
-
-Given a direct byte buffer, the Java virtual machine will make a best effort to perform native I/O operations directly upon it. That is, it will attempt to avoid copying the buffer's content to (or from) an intermediate buffer before (or after) each invocation of one of the underlying operating system's native I/O operations. 
+Direct memory: is similar to native, but also implies that an underlying buffer within the hardware is being shared. For example buffer within the network adapter or graphics display. The goal here is to reduce the number of times the same bytes is being copied around in memory.
 
 However, the application still uses an object on the Java heap to orchestrate I/O operations, but the buffer that holds the data is held in native memory, the Java heap object only contains a reference to the native heap buffer.
 
-The new I/O (NIO) classes introduced a new way of performing I/O based on channels and buffers. NIO added support for direct ByteBuffers, which can be passed directly to native memory rather than Java heap. Making them significantly faster in some scenarios because they can avoid copying data between Java heap and native heap.
-
 Scalability to large memory sizes e.g. over 1 TB and larger than main memory.
-
-Notional impact on GC pause times.
 
 Sharing between processes, reducing duplication between JVMs, and making it easier to split JVMs.
 
 Persistence for faster restarts or replying of production data in test.
 
-The use of off heap memory gives you more options in terms of how you design your system.  The most important improvement is not performance, but determinism.
-
-By storing all your input events and data off heap in a persisted way you can turn your critical systems into a series of complex state machines. (Or in simple cases, just one state machine)
-
-The biggest issue with off heap is your data structures become less natural.  You either need a simple data structure which can be mapped directly to off heap, or you have a complex data structure which serializes and deserializes to put it off heap.
-
 Use cases:
 
 1. session cache in the server app: inactive sessions stored on offheap
-
 2. medium to long lived mutable objects
-
 3. stores keys on heap and values off heap
 
-Eden, Survivor1, and survivor2
-
-#To locate OOM problem
-
-1. jmap -heap
-check new and old jen size
-
-2. jmap -histo:live
-
-what is alive, is it too much?
-
-3. /proc/${PID}/fd, /proc/${PID}/task
-
-4. pstree、ss - to check process creation and network connection #
-
-# native method stack
-
-If an implementation's native method interface uses a C-linkage model, then the native method stacks are C stacks. When a C program invokes a C function, the stack operates in a certain way. The arguments to the function are pushed onto the stack in a certain order. The return value is passed back to the invoking function in a certain way. This would be the behavior of the of native method stacks in that implementation.
-
-
-JNI is designed so it can be supported by any implementation of the Java virtual machine, no matter what garbage collection technique or object representation the implementation uses. This in turn enables developers to link the same (JNI compatible) native method binaries to any JNI-supporting virtual machine implementation on a particular host platform.
 
 ### memory size estimate
 
@@ -140,13 +46,23 @@ method area can go OOM by creating many dynamic types
 
 DirectMemory can cause OOM, e.g., java NIO
 
-### recommendation
-* Same -Xmx and -Xms, default 1/64 and 1/4 of physical memory
-* Bigger new gen, but no need to be big if old gen is on CMS, new gen recommended to be 3/8 of the heap
-* method area no longer needs to be big
-* default stack size - 1M
-
-
 Reference Objects???
 
-Note that by default JVM uses native type for value [-127, 128], note that contant pool still in heap
+### Metaspace
+In JDK 1.8, method area no longer exists, compile code and data moved to metaspace, it no longer uses heap, uses native memory instead
+
+Constants (class variables declared final) are not treated in the same way as non-final class variables. Every type that uses a final class variable gets a copy of the constant value in its own constant pool. 
+
+If the virtual machine is unable to load the requested type into the current name space, forName() will throw ClassNotFoundException.
+
+An alternative way to get a Class reference is to invoke getClass() on any object reference. This method is inherited by every object from class Object itself:
+
+string pool/string literal pool: stored the references in a StringTable, but the actual objects are on the heap
+
+runtime constant pool: inside the method area? one for each class durng the run, JVM put class contant pool into runtime contant pool
+
+
+String s0="kvill";
+String s3="kv" + "ill";
+System.out.println( s0==s3 );//true
+

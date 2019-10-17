@@ -1,4 +1,8 @@
+The index in query plan means FTS via index, the real index hit should be range
+
 One significant difference is blob types are stored in secondary storage, while varbinaries are stored inline in the row in the same way as varchars and other "simple" types.
+
+make sure you check the query plan when you use the deadlock
 
 service_id: last bit(byte?) in the IP address + current mysql service's port # - make sure they are different on master and slave
 

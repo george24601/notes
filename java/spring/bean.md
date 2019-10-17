@@ -31,3 +31,16 @@ spring decides to init all singleton bean on start to discovery problem early, i
 @PostConstrauct and @PreDesotry for bean init and destroy
 
 ### How is circular dependency avoided?
+object init is done via reflection, object' properties are done via object's init
+recursively uses `ApplicataionContext.getBean()` to get depending object, and then inject into the current object
+at this time, the objects are created, but properties are not set 
+
+uses a 
+```java
+set<String> singletonsCurrentlyInCreation` ,
+Map<String, ObjectFactor<?>> singletonFactories
+```
+
+ObjectFactory.getObject() to get target object
+
+

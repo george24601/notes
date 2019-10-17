@@ -1,10 +1,9 @@
+can use reflection to get a class type's Class
 use classloader isolation for jar version conflict
 
 when class laoded by JVM, it will create an instanceKlass, and leave it the method region
 
 If one class loader delegates to another class loader, and the delegated-to class loader defines the type, both class loaders are marked as initiating loaders for that type. The type defined by the delegated-to class loader is shared among all the namespaces of the initiating loaders of the type. 
-
-Like all objects, user-defined class loaders and instances of class Class reside on the heap. Data for loaded types resides in the method area.
 
 The resolveClass() method accepts a reference to a Class instance. This method causes the type represented by the Class instance to be linked (if it hasn't already been linked). The defineClass() method only takes care of loading. When defineClass() returns a Class instance, the binary file for the type has definitely been located and imported into the method area, but not necessarily linked and initialized. Java virtual machine implementations make sure the resolveClass() method of class ClassLoader can cause the class loader subsystem to perform linking.
 
@@ -18,7 +17,7 @@ Sequence of actions:
 * parent's ctor
 * child's non-static block
 * child's ctor
-  
+
 A class variable initializer is an equals sign and expression next to a class variable declaration
 
 A static initializer is a block of code introduced by the static keyword
@@ -46,19 +45,23 @@ Between the last field of the superclass and the first field of the subclass the
 When the first field of a subclass is a double or long and the superclass doesn’t align to an 8 bytes boundary, JVM will break rule 2 and try to put an int, then shorts, then bytes, and then references at the beginning of the space reserved to the subclass until it fills the gap.
 
 ### class file
+constant pool: 
+* literal value and symbolic reference, which includes
+  * type and interface's FQN
+  * string's name and descriptor
+  * method name and descriptor
+* Every constant in the constant pool is a table
+* can use  `javap -v className` to check the constant pool data
 
-Field ref:
-* 1
-  * 2
-* 16
-  * 5
-  * 6
+after class is loaded, the actual values in th RCP, and the references in the class file got replaced by direct reference
 
+Field info:
+* access_flags
+* name_index
+* decriotpr_idnex
+* attribute_info
 
-Bytecode:
-new #24 -- create Account instance
-invokespecial #26  --call Account()
-invokevirutal #27 -- acall Account.check()
+Method info: very similar layout to field info
 
 LineNumberTalbe: stores bytecode -> source code line #
 LocalVariableTable: stores method's arg NAMES, otherwise, IDE will have to use arg0, arg1...etc
