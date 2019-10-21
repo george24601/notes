@@ -30,3 +30,5 @@ CAS: implmented by `unsafe` and the atomicity of native methods
 In ArrayList, it has a  modCount.
 In ArrayList, we have an internal Itr time, which has a expectedModCount, it implments Iterator, i.e., the instance you get from ArrayList.iterator and use that to prevent concurrent change
 but iterator.remove is OK
+
+concurrentHashMap.size() is not accurate??

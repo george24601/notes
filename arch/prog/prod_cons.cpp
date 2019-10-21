@@ -1,6 +1,3 @@
-# Producer-consumer problem
-
-```
 #define N 100
 typedef int semaphore;
 semaphore mutex = 1;
@@ -154,5 +151,3 @@ void test(i) {
         up(&s[i]);
     }
 }
-
-```

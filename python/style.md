@@ -2,12 +2,19 @@ With Python, we use “snake_case,” which separates the words by underscores, 
 
 The docstring is just a string that’s listed under the function definition that explains what the function does. Use them
 
+Use import statements for packages and modules only, not for individual classes or functions
 
 Name your classes and functions consistently; the convention is to use CamelCase for classes and lower_case_with_underscores for functions and methods. Always use self as the name for the first method argument
 
 Use import x for importing packages and modules.
 
+Use from x import y where x is the package prefix and y is the module name with no prefix.
+
+Do not use relative names in imports. Even if the module is in the same package, use the full package name. 
+
 Container types, like dictionaries and lists, define default iterators and membership test operators ("in" and "not in").
+
+Import each module using the full pathname location of the module.
 
 Yes:  for key in adict: ...
       if key not in adict: ...

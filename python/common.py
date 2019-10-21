@@ -1,3 +1,32 @@
+list = ['larry', 'curly', 'moe']
+  list.append('shemp')         ## append elem at end
+  list.insert(0, 'xxx')        ## insert elem at index 0
+  list.extend(['yyy', 'zzz'])  ## add list of elems at end
+  print list  ## ['xxx', 'larry', 'curly', 'moe', 'shemp', 'yyy', 'zzz']
+  print list.index('curly')    ## 2
+
+  list.remove('curly')         ## search and remove that element
+  list.pop(1)                  ## removes and returns 'larry'
+  print list  ## ['xxx', 'moe', 'shemp', 'yyy', 'zzz']
+
+list = [1, 2, 3]
+  print list.append(4)   ## NO, does not work, append() returns None
+  ## Correct pattern:
+  list.append(4)
+  print list  ## [1, 2, 3, 4]
+
+list = ['larry', 'curly', 'moe']
+if 'curly' in list: #in addition to the for-loop usage
+  print 'yay'
+
+  # Split the line into chunks, which are concatenated automatically by Python
+  text = (
+    "%d little pigs come out, "
+    "or I'll %s, and I'll %s, "
+    "and I'll blow your %s down."
+    % (3, 'huff', 'puff', 'house'))
+
+
 a, b, c = 1, 2L, "john"
 #casting
 int(value)

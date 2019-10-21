@@ -90,4 +90,3 @@ done
 
 for i $(seq 0 6); do kubectl exec -it -n stg5tidb stg5tidb-tikv-$i -- du -sh /var/lib/tikv; done
 ### loop ex section ends
-
