@@ -56,7 +56,6 @@ don't mention things you hear in different locations, at least don't frame as su
 
 find a way to reply with equal or more amount of information to keep conversation going
 
-
 Actual grooming is at least moderately important, too, because people are hilariously easy to hack by expedients such as dressing appropriately for the situation, maintaining a professional appearance, speaking in a confident tone of voice, etc. 
 
 When the message is not clear, guess one direction and trial and error

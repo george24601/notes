@@ -1,3 +1,7 @@
+Use split region to pre-split hot regions
+`SHOW TABLE test_hospot REGIONS` to see if SCATTERING col is all 0
+txn-local-latchs: default is turned on to pre-emptive txn conflict
+
 Note it does not support SP, View, trigger, UDF, FK 
 
 watch out for the case where index and shard data are not on the same shard : two cases where double scan won't be a problem! 

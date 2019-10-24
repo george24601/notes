@@ -1,3 +1,10 @@
+Conflict: write-write conflict is easier to be exposed by the user
+
+Retry trys only write sql but not read sql!, i.e., if we rely on the saved query results. Do not turn on the retry logic
+
+write-write confict is heavy, done inside prewrite, check scheculer latch wait duration
+ 
+
 Layers:
 Transaction -> MVCC -> Raft KV -> Rocks DB
 

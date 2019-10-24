@@ -1,8 +1,4 @@
 ### How do managers get stuck
-* Can’t delegate
-* Not training your team
-* Not enough attention to the process
-* Won’t say no
 * Doesn’t attend to the details. Everything from clearly communicating the things that your team has accomplished, and sharing challenges or setbacks, to keeping your manager in the loop about major design decisions or roadmap changes, these details all matter. The best managers push information up without being asked and are quick to provide more details as necessary. Your manager wants to know that you are paying attention to what is going on.
 * Doesn’t show a professional face to more senior managers. Do you openly look bored, distracted, or impatient in meetings? Do you write emails that communicate clearly? Do you think your manager would be comfortable having you present to her peers, alone? Your verbal, written, and body language communication is more and more important the more senior you become, and if you are lazy here it can hold you back.
 
@@ -11,26 +7,25 @@ When your manager asks you to do something, either do it, or say you can’t/don
  If you want to be able to find interesting work and also work on important things, you generally have to go find the interesting important things yourself. This requires that you to talk to a lot of people and listen to their problems, and then place a bet on a solution to one of these problems that will actually both be feasible but will also be seen as important. Your manager might help identify people that you could talk to, but you must take responsibility for doing the legwork and making the final choice in problems to address.
 
 Individual Contributors often get sidetracked by…
-Brainstorming/architecture: “I must have thought through all edge cases of all parts of everything before I can begin this project”
-Researching possible solutions forever (often accompanied by desire to do a “bakeoff” where they build prototypes in different platforms/languages/etc)
-Refactoring: “this code could be cleaner and everything would be just so much easier if we cleaned this up… and this up… and…”
-Helping other people instead of doing their assigned tasks
-Jumping on fires even when not on-call
-Working on side projects instead of the main project
+* Brainstorming/architecture: “I must have thought through all edge cases of all parts of everything before I can begin this project”
+* Researching possible solutions forever (often accompanied by desire to do a “bakeoff” where they build prototypes in different platforms/languages/etc)
+* Refactoring: “this code could be cleaner and everything would be just so much easier if we cleaned this up… and this up… and…”
+* Helping other people instead of doing their assigned tasks
+* Jumping on fires even when not on-call
+* Working on side projects instead of the main project
 
 Individual Contributors often get stuck when they need to…
-Finish the last 10–20% of a project
-Start a project completely from scratch
-Do project planning (You need me to write what now? A roadmap?)
-Work with unfamiliar code/libraries/systems
-Work with other teams (please don’t make me go sit with data engineering!!)
-Talk to other people (in engineering, or more commonly, outside of engineering)
-Ask for help (far beyond the point they realized they were stuck and needed help)
-Deal with surprises or unexpected setbacks
-Navigate bureaucracy
-Pull the trigger and going into prod
-Deal with vendors/external partners
-
+* Finish the last 10–20% of a project
+* Start a project completely from scratch
+* Do project planning (You need me to write what now? A roadmap?)
+* Work with unfamiliar code/libraries/systems
+* Work with other teams (please don’t make me go sit with data engineering!!)
+* Talk to other people (in engineering, or more commonly, outside of engineering)
+* Ask for help (far beyond the point they realized they were stuck and needed help)
+* Deal with surprises or unexpected setbacks
+* Navigate bureaucracy
+* Pull the trigger and going into prod
+* Deal with vendors/external partners
 
 Never ever hire a person you feel is overly ego-driven.
 
@@ -59,9 +54,7 @@ When you’re new, this is when you are at your most vulnerable. This is because
 
 They take pride in being human shields, absorbing or deflecting heat from inside and outside the company, doing all manner of boring and silly tasks, and battling idiots and slights that make life harder than necessary on their people.
 
-  But sometimes good bosses face senior leaders and powerful groups that cram bad ideas down everyone’s throat. When your people’s performance or well-being is threatened by idiocy from on high, you need to decide whether to comply or resist, depending on what will help them—and you—most. Sometimes the political costs of defiance are too high, and sometimes seemingly idiotic directives turn out to be useful.
-
-it’s important for managers to sit down with their team members and lay out a path for growth.  One on ones are a perfect time to do this, and ensure there’s a time for follow up much sooner than the next review cycle.
+It’s important for managers to sit down with their team members and lay out a path for growth.  One on ones are a perfect time to do this, and ensure there’s a time for follow up much sooner than the next review cycle.
 
 they found that people with a mentor to help develop them were much more likely to stick around
 

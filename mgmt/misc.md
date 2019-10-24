@@ -2,12 +2,6 @@ You really want to be attached to Profit Centers because it will bring you highe
 
 summary - details to support - summary
 
-Mutually Exclusive, Collectively Exhaustive
-
-Cold reading??
-
-Elicit Value??
-
 Stress is stress, fatigue on one task spills over into another
 
 we need to be mindful that what is going on in our players’ minds, and in their personal lives away from the training ground, plays a huge part in what we get from them on a day-to-day basis
@@ -50,8 +44,6 @@ better than this. I want to see you back here tomorrow morning at 9 a.m., and I 
 see the kind of work that I know you can do." You're saying, "You're okay as a person,
 but the way you handled this monkey is inappropriate
 
-### Manage by outcome
-
 The clearest indicators that you are managing (or being managed) by outputs are roadmaps that list a fixed set of features with release dates, Gantt charts that sequence the year’s projects, and annual budgeting cycles where you commit to funding specific projects.
 
 An outcome is typically defined by a quantitative metric—a number that is both meaningful to the business and measurable by the team. It creates autonomy and accountability.
@@ -63,7 +55,6 @@ We assign quarterly OKRs and then we either dictate a fixed roadmap or we ask th
 We spend all of our time discussing actions and only talk about outcomes during the one or two weeks we spend defining what outcomes to set next.
 
 We are still managing by outputs with some outcome language sprinkled around the edges.
-
 
 This is often easier said than done. Defining the right metric is challenging in and of itself, let alone setting up the infrastructure to measure that metric reliably and accurately.
 
@@ -80,4 +71,3 @@ The most important feedback a leader can give their team is what outcomes they s
 The leader should bring the across-the-business view of what the business needs at that moment in time. The team, if they are a true continuous discovery team, should be closest to the customer with a deep understanding of the technology, and should communicate how much progress can be made on what timeline.
 
 So remember, if you want to break the vicious cycle of mistrust, first teach your teams how to show their work, then fix how you give feedback. Ask more questions and don’t fixate on the conclusions.
-

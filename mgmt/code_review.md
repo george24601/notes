@@ -1,11 +1,8 @@
-Encourage developers to solve the problem they know needs to be 
-  solved now, not the problem that the developer speculates might need to be solved in the future. The future 
-  problem should be solved once it arrives and you can see its actual shape and requirements in the physical 
-  universe.
+Encourage developers to solve the problem they know needs to be solved now, not the problem that the developer speculates might need to be solved in the future. The future problem should be solved once it arrives and you can see its actual shape and requirements in the physical universe.
 
-  The most important thing to cover in a review is the overall design of the CL
+The most important thing to cover in a review is the overall design of the CL
 
-   If you see something nice in the CL, tell the developer, especially when they addressed one of your comments in a great way. Code reviews often just focus on mistakes, but they should offer encouragement and appreciation for good practices, as well. It’s sometimes even more valuable, in terms of mentoring, to tell a developer what they did right than to tell them what they did wrong.
+ If you see something nice in the CL, tell the developer, especially when they addressed one of your comments in a great way. 
 
 Review code in this order: protocol buffers, unit tests, headers, implementation. It's common for a new employee to be an expert on C++ or Java or whatever languages but it's very uncommon to meet anyone who knows how to define a decent protocol message. The tests should give the reviewer a very clear idea of what's happening in the code (and this should be congruent with the description of the change), if not send back to author at this point. The headers should contain clear interfaces, types, and comments and should not contain anything that's not part of the API (when this is technically possible). Finally look in the CC file; at this point the reviewer should see things they were already expecting and no funny business.
 
