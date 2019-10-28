@@ -7,6 +7,15 @@ A better option is to determine or assign a priority of the threads so that only
 
 When all non-daemon threads of a Java application terminate, the virtual machine instance will exit.
 
+To fix deadlock:
+* Process-resource graph
+ * Resource -> Process: Resource allocated to Process already
+ * Process -> Resource: process requests resources
+* matrix-based: E, A, C, R
+
+prevention - banker's algorithm
+
+
 ### monitor
 The form of monitor used by the Java virtual machine is called a "Wait and Notify" monitor. (It is also sometimes called a "Signal and Continue" monitor.) In this kind of monitor, a thread that currently owns the monitor can suspend itself inside the monitor by executing a wait command. When a thread executes a wait, it releases the monitor and enters a wait set. The thread will stay suspended in the wait set until some time after another thread executes a notify command inside the monitor. When a thread executes a notify, it continues to own the monitor until it releases the monitor of its own accord, either by executing a wait or by completing the monitor region. After the notifying thread has released the monitor, the waiting thread will be resurrected and will reacquire the monitor.
 

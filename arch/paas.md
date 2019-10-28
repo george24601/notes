@@ -1,3 +1,8 @@
+Cache service:
+1. ConfigService + Client
+2. SDK to ftech the end points directly. Or use Proxy to forward request to backend
+3. cluster manager to manage the config service
+
 A well-documented and reproducible Kubernetes deployment for FoundationDB is officially still a work-in-progress. One of the key blockers for such a deployment is the inability to specify hosts using hostname as opposed to IP. Kubernetes StatefulSets create ordinal and stable network IDs for their pods making the IDs similar to hostnames in the traditional world. Using IPs to identify such pods would be impossible since those IPs would change frequently. The latest thread on the design challenges involved can be tracked in this forum post.
 
 Running Snowflake as a data warehouse-as-a-service requires high availability even during software upgrades. As a result, multiple versions of the service can be deployed at the same time. And services accessing metadata must be able to handle multiple version of metadata objects.

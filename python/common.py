@@ -1,3 +1,32 @@
+dict = {}
+  dict['a'] = 'alpha'
+  dict['g'] = 'gamma'
+  dict['o'] = 'omega'
+
+  print dict  ## {'a': 'alpha', 'o': 'omega', 'g': 'gamma'}
+if 'z' in dict: print dict['z']     ## Avoid KeyError
+
+# Get the .keys() list:
+for key in dict: print key
+
+for k, v in dict.items(): print k, '>', v
+
+hash = {}
+  hash['word'] = 'garfield'
+  hash['count'] = 42
+  s = 'I want %(count)d copies of %(word)s' % hash  # %d for int, %s for string
+
+  del list[0]     ## Delete first element
+  del list[-2:]   ## Delete last two elements
+
+f = open('foo.txt', 'rU')
+  for line in f:   ## iterates over the lines of the file
+    print line,    ## trailing , so print does not add an end-of-line char
+                   ## since 'line' already includes the end-of-line.
+f.close()
+
+
+
 list = ['larry', 'curly', 'moe']
   list.append('shemp')         ## append elem at end
   list.insert(0, 'xxx')        ## insert elem at index 0
