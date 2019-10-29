@@ -1,3 +1,15 @@
+50% storage and 80% CPU are used by a couple high dimension metrics
+
+```
+//check metric's number of time series, alert if it is over 10k
+count by(__name__)({__name__=~".+"}) > 10000
+
+```
+
+rate first and then sum
+
+Recording rule should get the values to be calced directly, AVOID mid result and then aggregate
+
 rate(v range-vector) calculates the per-second average rate of increase of the time series 
 
 per-second rate of HTTP requests as measured over the last 5 minutes, per time series in the range vector

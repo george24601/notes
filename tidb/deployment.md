@@ -1,19 +1,22 @@
-FengChao: DBReplay - based on gopacket
+## FengChao payment
+Migration process:
+* Check tidb: 
+  * turn off auto retry
+  * verify tidb GC time
+  * auto analyze time to 0.3, 
+  * set max_execution_time    
+* DM from mysql to tidb, real time data verification
+* Verification and testing: DBreplay/gopacket real time traffic, 
+* data duo dir sync: clear tidb, dm data single dir, data real time, dbreplay real time traffic replay
+* Grey: timed analyze table, real tiem comparison, switch back to mysql
 
-NetEast: mysql is done via keeplive + master-slave, behind VIP
-
-### Dev
-
-* 2 * TiDB: 16 core + 32G RAM
-* 3 * TiKV: 16 core + 32G RAM 200 - 300 G SSD
-* 3 * PD: 4 core + 8G RAM + 100 G+ SSD
-
-### New Prod
-
-Minimum:
-* 2 * TiDB: 32 core + 64G RAM
-* 3 * TiKV: 32 core + 64G RAM 200 - 500 G SSD
-* 3 * PD: 8 core + 16G RAM + 200 G+ SSD
+DBReplay
+* get mysql packet
+* analyze mysql protocol
+* mysql command back to the file
+* multiX replay
+* based on gopacket
+* tcp copy doesn't work for long connection
 
 Example prod:
 * c5.4xlarge x4: 16, 32, 8GB (EBS) (for both TiDB and PD)

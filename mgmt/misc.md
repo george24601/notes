@@ -71,3 +71,61 @@ The most important feedback a leader can give their team is what outcomes they s
 The leader should bring the across-the-business view of what the business needs at that moment in time. The team, if they are a true continuous discovery team, should be closest to the customer with a deep understanding of the technology, and should communicate how much progress can be made on what timeline.
 
 So remember, if you want to break the vicious cycle of mistrust, first teach your teams how to show their work, then fix how you give feedback. Ask more questions and don’t fixate on the conclusions.
+
+
+#### What Makes an Effective Executive
+
+What made them all effective is that they followed the same eight practices:
+
+They asked, “What needs to be done?”
+They asked, “What is right for the enterprise?”
+They developed action plans.
+They took responsibility for decisions.
+They took responsibility for communicating.
+They were focused on opportunities rather than problems.
+They ran productive meetings.
+They thought and said “we” rather than “I.”
+
+Note that the question is not “What do I want to do?” Asking what has to be done, and taking the question seriously, is crucial for managerial success.
+
+The answer to the question “What needs to be done?” almost always contains more than one urgent task. But effective executives do not splinter themselves. They concentrate on one task if at all possible. If they are among those people—a sizable minority—who work best with a change of pace in their working day, they pick two tasks.
+
+Hence, after asking what needs to be done, the effective executive sets priorities and sticks to them
+
+However, after completing the original top-priority task, the executive resets priorities rather than moving on to number two from the original list. He asks, “What must be done now?” This generally results in new and different priorities.
+
+He asked himself which of the two or three tasks at the top of the list he himself was best suited to undertake. Then he concentrated on that task; the others he delegated. Effective executives try to focus on jobs they’ll do especially well. They know that enterprises perform if top management performs—and don’t if it doesn’t.
+
+Beyond the entrance level, a family member got a promotion only if a panel composed primarily of nonfamily managers judged the person to be superior in ability and performance to all other employees at the same level.
+
+But failure to ask the question virtually guarantees the wrong decision.
+
+The action plan is a statement of intentions rather than a commitment. It must not become a straitjacket. It should be revised often, because every success creates new opportunities.
+A written plan should anticipate the need for flexibility.
+
+And organizations—whether government agencies, businesses, or nonprofits—are inherently time wasters. The action plan will prove useless unless it’s allowed to determine how the executive spends his or her time.
+
+Napoleon allegedly said that no successful battle ever followed its plan. Yet Napoleon also planned every one of his battles, far more meticulously than any earlier general had done. Without an action plan, the executive becomes a prisoner of events. And without check-ins to reexamine the plan as events unfold, the executive has no way of knowing which events really matter and which are only noise.
+
+* Take responsibility for decisions.
+A decision has not been made until people know:
+
+the name of the person accountable for carrying it out;
+the deadline;
+the names of the people who will be affected by the decision and therefore have to know about, understand, and approve it—or at least not be strongly opposed to it—and
+the names of the people who have to be informed of the decision, even if they are not directly affected by it.
+
+Such a review is especially important for the most crucial and most difficult of all decisions, the ones about hiring or promoting people. Studies of decisions about people show that only one-third of such choices turn out to be truly successful. One-third are likely to be draws—neither successes nor outright failures. And one-third are failures, pure and simple. Effective executives know this and check up (six to nine months later) on the results of their people decisions.
+If they find that a decision has not had the desired results, they don’t conclude that the person has not performed. They conclude, instead, that they themselves made a mistake. In a well-managed enterprise, it is understood that people who fail in a new job, especially after a promotion, may not be the ones to blame.
+
+Executives also owe it to the organization and to their fellow workers not to tolerate nonperforming individuals in important jobs. It may not be the employees’ fault that they are underperforming, but even so, they have to be removed. People who have failed in a new job should be given the choice to go back to a job at their former level and salary. This option is rarely exercised; such people, as a rule, leave voluntarily, at least when their employers are U.S. firms. But the very existence of the option can have a powerful effect, encouraging people to leave safe, comfortable jobs and take risky new assignments. The organization’s performance depends on employees’ willingness to take such chances.
+
+Systematic decision review also shows executives their own weaknesses, particularly the areas in which they are simply incompetent. In these areas, smart executives don’t make decisions or take actions. They delegate. Everyone has such areas; there’s no such thing as a universal executive genius.
+
+Above all, effective executives treat change as an opportunity rather than a threat. They systematically look at changes, inside and outside the corporation, and ask, “How can we exploit this change as an opportunity for our enterprise?”
+
+Effective executives also make sure that problems do not overwhelm opportunities. In most companies, the first page of the monthly management report lists key problems. It’s far wiser to list opportunities on the first page and leave problems for the second page. Unless there is a true catastrophe, problems are not discussed in management meetings until opportunities have been analyzed and properly dealt with.
+
+Effective executives put their best people on opportunities rather than on problems. One way to staff for opportunities is to ask each member of the management group to prepare two lists every six months—a list of opportunities for the entire enterprise and a list of the best-performing people throughout the enterprise. These are discussed, then melded into two master lists, and the best people are matched with the best opportunities.
+
+

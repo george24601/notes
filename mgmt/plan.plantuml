@@ -1,3 +1,15 @@
+@startuml
+[Archiving data into tidb] --> [API to read archive db] 
+
+[Archiving data into tidb] --> [Clean up old data from Aurora] 
+
+[API to read archive db] --> [Reduce the cut off period to 2 weeks] 
+
+[Clean up old data from Aurora] --> [Reduce the cut off period to 2 weeks] 
+
+[Reduce the cut off period to 2 weeks] --> [Wallet API test]
+
+@enduml
 
 @startuml
 skinparam component {

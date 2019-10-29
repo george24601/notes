@@ -1,3 +1,17 @@
+### Raftstore
+
+Request from tidb will turn into gRPC and storage to the corresponding region as KV. Raftstore will poll each region to see if there is any to process, and then activate raft state machine 
+
+HB a common source to let raftstore CPU become bottleneck - propose wait duration: time between sending the request to raftstore to when the raftstore processes the request
+
+Look into region merge (opposite of region split)
+
+raft-base-tick-interval - increase heartbeat interval
+
+region routing info is stored in PD in v2 - PD leader failover may be slow!
+
+Check tikv's Worker pending tasks to see if task is accumulating
+
 Use split region to pre-split hot regions
 `SHOW TABLE test_hospot REGIONS` to see if SCATTERING col is all 0
 txn-local-latchs: default is turned on to pre-emptive txn conflict

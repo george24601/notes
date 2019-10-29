@@ -1,9 +1,4 @@
-dict = {}
-  dict['a'] = 'alpha'
-  dict['g'] = 'gamma'
-  dict['o'] = 'omega'
-
-  print dict  ## {'a': 'alpha', 'o': 'omega', 'g': 'gamma'}
+print dict  ## {'a': 'alpha', 'o': 'omega', 'g': 'gamma'}
 if 'z' in dict: print dict['z']     ## Avoid KeyError
 
 # Get the .keys() list:
@@ -21,10 +16,8 @@ hash = {}
 
 f = open('foo.txt', 'rU')
   for line in f:   ## iterates over the lines of the file
-    print line,    ## trailing , so print does not add an end-of-line char
-                   ## since 'line' already includes the end-of-line.
+    print line,    ## trailing , so print does not add an end-of-line char since 'line' already includes the end-of-line.
 f.close()
-
 
 
 list = ['larry', 'curly', 'moe']
@@ -58,8 +51,6 @@ if 'curly' in list: #in addition to the for-loop usage
 
 a, b, c = 1, 2L, "john"
 #casting
-int(value)
-str(value)
 float(value)
 bool(value) # Will only return false for an empty string or an int=0
 list_of_ints = [int(i) for i in list_of_strings]
@@ -68,12 +59,6 @@ list_of_ints = [int(i) for i in list_of_strings]
 print("Hello World");
 # Without newline
 print("Hello World", end='')
-
-for n in range(10, 0, -2) :
-    print(n)
-
-for c in "string" :
-  print(c)
 
 #scala style yield is possible, called generator here
 
@@ -92,21 +77,6 @@ while b < 10:
     print(b)
     #print(b, end=',') The keyword argument end can be used to avoid the newline after the output, or end the output with a different string
     a, b = b, a+b
-
-if x < 0:
-    x = 0
-    print('Negative changed to zero')
-elif x == 0:
-    print('Zero')
-elif x == 1:
-    print('Single')
-else:
-    print('More')    
-
-
-words = ['cat', 'window', 'defenestrate']
-for w in words:
-    print(w, len(w))
 
 #A tuple consists of a number of values separated by commas
 t = 12345, 54321, 'hello!'
@@ -255,8 +225,6 @@ f.write("This is a test")
 contents = f.read()
 print(contents) # will print "This is a test"
 
-L5 = L3[1:-1] # L3 from index 1 to (not including) last item.
-
 # but there's a built in function for that! and more!
 print(sum(L3)) # sum of all items in L3
 print(len(L3)) # length of L3
@@ -268,15 +236,6 @@ print(sorted(L3)) # L3 but sorted (smallest to largest)
 print(9 in L3)
 print(11 in L3)
 
-### List Comprehensions
-
-print(5/2)  # normal division: 2.5
-print(5//2)  # integer division: 2
-print(5**2)  # 2 to the power of 3
-
-L = [1, 3, 4, -1, 12, 7, -5, 6]
-L2 = sorted(L)
-print(L2)  # [-5, -1, 1, 3, 4, 6, 7, 12]
 L3 = sorted(L, key=abs)  # using the key abs(), which returns the absolute value of a number
 
 """
@@ -353,3 +312,14 @@ print(s)  # 4 squared is 16
 num = 4
 s = "%d squared is %f" % num, num**2
 print(s)  # 4 squared is 16
+
+list.append(elem) # adds a single element to the end of the list. Common error: does not return the new list, just modifies the original.
+list.insert(index, elem) # inserts the element at the given index, shifting elements to the right.
+list.extend(list2) # adds the elements in list2 to the end of the list. Using + or += on a list is similar to using extend().
+list.index(elem) # searches for the given element from the start of the list and returns its index. Throws a ValueError if the element does not appear (use "in" to check without a ValueError).
+list.remove(elem) # searches for the first instance of the given element and removes it (throws ValueError if not present)
+list.sort() # sorts the list in place (does not return it). (The sorted() function shown later is preferred.)
+list.reverse() # reverses the list in place (does not return it)
+list.pop(index) # removes and returns the element at the given index. Returns the rightmost element if index is omitted (roughly the opposite of append()).
+
+
