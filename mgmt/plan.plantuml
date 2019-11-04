@@ -12,15 +12,15 @@
 @enduml
 
 @startuml
-[Aurora hot] --> [archiver]
+[Aurora hot] <-- [archiver]
+
+[Aurora hot] <-- [Persist backup]
 
 [archiver] --> [TiDB cold]
 
-[Aurora hot] <-- [purger] 
+[Persist backup] <-- [purger] 
 
 [purger] --> [TiDB cold]
-
-[purger] --> [Reliable storage]
 
 @enduml
 

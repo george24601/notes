@@ -1,9 +1,4 @@
 You really want to be attached to Profit Centers because it will bring you higher wages, more respect, and greater opportunities for everything of value to you
-
-Stress is stress, fatigue on one task spills over into another
-
-we need to be mindful that what is going on in our players’ minds, and in their personal lives away from the training ground, plays a huge part in what we get from them on a day-to-day basis
-
 if you are checking your phone couple of seconds, it is a sign you are tired, fatigued
 
 Don’t go bringing problems based on people from other teams complaining to you. Those teams need to bring up the problems themselves. If you must, tell their manager that you’re hearing these complaints, and let that manager decide whether to deal with it.
@@ -24,23 +19,7 @@ Organizational alignment is important because it lets you successfully ask more 
 
 So, instinct and guesses are necessary. But we needn't lose our analytical approach just because we don't have data. When you build something, you have a hypothesis about the person you are building it for. You have a guess as to what they will like, and most of the time you have a reason for that guess. When you're trying to build a business, you need a chain of events that you expect could happen that would indicate a product is successful. You have a sense of what to start measuring once the thing is released that will show whether it is working.
 
-Remember, part of your job now is to define what work needs to be done. Your boss won't always be able to tell you what to do, and she probably expects you to tell her what needs to be done. Use this time to answer that question.
-
-So the first thing you have to do, before giving them books, is to really convince them that they need to change.
-
-
 Predict the questions that your boss tends to ask, and have some general answers prepared. That will give you some ammunition to use as you push back for time to get details on specific concerns. And you will need to push back occasionally. The worst outcome is having your boss go directly to the team themselves and ask for a status update.
-
-First, praise people as soon as possible after observing the desired behavior
-Second, be specific. Tell the person what you liked. Don't wait for the perfect performances
-Feedback cycle needs to be quick!!!
-
-Tell the person why you are disappointed and how you feel; and
-4) Reaffirm the person. You might say: "The real reason I am upset is because you are
-better than this. I want to see you back here tomorrow morning at 9 a.m., and I want to
-see the kind of work that I know you can do." You're saying, "You're okay as a person,
-but the way you handled this monkey is inappropriate
-
 The clearest indicators that you are managing (or being managed) by outputs are roadmaps that list a fixed set of features with release dates, Gantt charts that sequence the year’s projects, and annual budgeting cycles where you commit to funding specific projects.
 
 An outcome is typically defined by a quantitative metric—a number that is both meaningful to the business and measurable by the team. It creates autonomy and accountability.

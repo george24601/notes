@@ -1,8 +1,0 @@
-Unit testing pipeline locally, before performaing full runs with the service, is often the base of most direct way of identify and fix bugs
-
-Unit testing DoFn before using them
-
-use the test clases in the Dataflow SDKs to test an entire pipeline end-to-end
-1. for every source of input data to your pipeline, create known static test input data
-2. create some static test ouput data that matches what your expect in final output PCollection
-3. Create a TestPipeline in place of the standard pipeline

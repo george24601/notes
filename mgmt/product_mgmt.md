@@ -1,7 +1,5 @@
 It’s choosing a few key metrics to keep an eye on, spend less time tracking, and more time acting upon the found data.
 
-Depending on what your objective is – attracting a new customer segment, improving popularity with users, getting ideas for new features – you need to choose the right metrics.
-
 Monthly recurring revenue (MRR)
 These metrics measure a product’s total revenue in one month
 
