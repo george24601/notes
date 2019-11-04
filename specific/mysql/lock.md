@@ -8,8 +8,6 @@ In the middle means not yet started txns
 
 ### Intention Locks
 
-InnoDB supports multiple granularity locking which permits coexistence of row locks and table locks.
-
 For example, a statement such as LOCK TABLES ... WRITE takes an exclusive lock (an X lock) on the specified table. To make locking at multiple granularity levels practical, InnoDB uses intention locks. Intention locks are table-level locks that indicate which type of lock (shared or exclusive) a transaction requires later for a row in a table.
 
 Before a transaction can acquire a shared lock on a row or a table, it must first acquire an intention to share (IS) lock or stronger on the TABLE.
@@ -24,11 +22,7 @@ SELECT ... FOR UPDATE: needs IX lock
 
 ### Gap Locks
 
-A gap lock is a lock on a gap between index records, or a lock on the gap before the first or after the last index record. For example, SELECT c1 FROM t WHERE c1 BETWEEN 10 and 20 FOR UPDATE; prevents other transactions from inserting a value of 15 into column t.c1, whether or not there was already any such value in the column, because the gaps between all existing values in the range are locked.
-
 A gap might span a single index value, multiple index values, or even be empty.
-
-Gap locking is not needed for statements that lock rows using a unique index to search for a unique row.
 
 Gap locks in InnoDB are “purely inhibitive”, which means that their only purpose is to prevent other transactions from inserting to the gap.
 
@@ -37,8 +31,6 @@ used only during Repeatable Read  and Serializable isolation level. Note that RR
 e.g., suppose you have index with values 10,11,13, and 20 then the  gap lock (-INF, 10], (10, 11], (11,13].... 
 
 Note that table locks are implemented by gap locks!
-
-deadlock caused by gap lock??
 
 ### Next-Key Locks
 
@@ -49,12 +41,6 @@ InnoDB performs row-level locking in such a way that when it searches or scans a
 Mainly to avoid phatom read,i.e., range returns more results as we go!
 
 Note during the run it IS implemented as a combination of row lock and then gap lock
-
-### Insert Intention Locks
-
-for insert lock, based on gap lock, but will they need not wait for each other if they are not inserting at the same postion within the gap, 
-
-
 
 ### AUTO-INC Locks
 
@@ -129,7 +115,3 @@ S1: insert into t3 values(22) ---waitng for lock here
 S2: insert into t3 values(23) -- deadlock detected
 
 if a statement operations on non-key index, mysql will lock this non-key index AND THEN lock the key index. Clustered index's leaves saves the whole row. This is a common source of DL too
-
-
-
-

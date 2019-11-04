@@ -1,7 +1,7 @@
 @startuml
-[Archiving data into tidb] --> [API to read archive db] 
+[archiving data into tidb] --> [API to read archive db] 
 
-[Archiving data into tidb] --> [Clean up old data from Aurora] 
+[archiving data into tidb] --> [Clean up old data from Aurora] 
 
 [API to read archive db] --> [Reduce the cut off period to 2 weeks] 
 
@@ -10,6 +10,37 @@
 [Reduce the cut off period to 2 weeks] --> [Wallet API test]
 
 @enduml
+
+@startuml
+[Aurora hot] --> [archiver]
+
+[archiver] --> [TiDB cold]
+
+[Aurora hot] <-- [purger] 
+
+[purger] --> [TiDB cold]
+
+[purger] --> [Reliable storage]
+
+@enduml
+
+
+@startuml
+[STG new refund] --> [STG purge mutable]
+[STG archiving immutable] --> [STG purge immutable]
+[STG archiving immutable] --> [STG archiving mutable] 
+[STG archiving immutable] --> [PROD cluster]
+[PROD cluster] --> [PROD archive]
+[PROD archive] --> [PROD purge]
+[STG new refund] --> [PROD new refund]
+[PROD new refund] --> [PROD purge]
+[STG archiving mutable] --> [STG purge mutable]
+[STG purge immutable] --> [STG purge mutable]
+[STG purge mutable] --> [PROD purge]
+@enduml
+
+
+
 
 @startuml
 skinparam component {

@@ -27,8 +27,6 @@ Individual Contributors often get stuck when they need to…
 * Pull the trigger and going into prod
 * Deal with vendors/external partners
 
-Never ever hire a person you feel is overly ego-driven.
-
 If the candidate is gung-ho about functional programming and microservices and you are happy in a more conservative technical space, you may end up with someone who wants to make big technical changes that you might not agree with. The team should feel a general alignment to their technical perspective, and ideally people are excited about working for this person because they feel that they will learn something, but don't just hire them as a manager because people are excited about their technical chops.
 
 Authority care most what you can contribute in the future
@@ -36,8 +34,6 @@ Authority care most what you can contribute in the future
 To affect opinions of people, not only the person himself, but also whoever that can directly affect the said person too. Build common interest between the people around the authority
 
 Easier to build new relationship than saving old relationship
-
-Can be a leader or follower regardless of current status and self-esteem
 
 a critical feature of effective complex organisations is that they make people do all the jobs.
 

@@ -4,13 +4,11 @@ Now suppose we know that a project has lasted until t0 so far. Then the expected
 
 For example, suppose α = 2 (in applications of power laws, α is often between 1 and 3) and you’re measuring time in years. When the project starts at t = 1, it is expected to take one year, until t = 2. Now suppose you’re starting the second year and the project isn’t done. Now it’s expected to finish at t = 4, two more years. When you started, the project was supposed to take a year. One year later, it has taken a year, and should be expected to take two more years.
 
-This phenomenon sometimes occurs regardless of the individual's knowledge that past tasks of a similar nature have taken longer to complete than generally planned.[3][4][5] The bias only affects predictions about one's own tasks; when outside observers predict task completion times, they show a pessimistic bias, overestimating the time needed
+This phenomenon sometimes occurs regardless of the individual's knowledge that past tasks of a similar nature have taken longer to complete than generally planned.The bias only affects predictions about one's own tasks; when outside observers predict task completion times, they show a pessimistic bias, overestimating the time needed
 
  At a certain point your learning will plateau, and this is when the second type of work kicks in: executing. This is the act of applying that knowledge to get the job done and create leverage. Eventually, you will create enough leverage to automate the job or grow out of it, and this is when you start the cycle over. Learn. Execute.
 
  The segmentation effect (?) is defined as the time allocated for a task being significantly smaller than the sum of the time allocated to individual smaller sub-tasks of that task.
-
- Testing is not something you should take lightly though, and if the consequences of a test outcome are big, say because it requires a large amount of development costs or scrapping a part of your product roadmap, then you really need to ensure your tests are valid and you should conduct the test multiple times to check you get consistent results.
 
 deadline is the best driver: so small deadlines
 
@@ -18,15 +16,11 @@ structured procastination - work on something important but not urgent!
 
 the true end of task - complete work and get evaluation
 
-### On remote teams
-
-- Most work is async by far. People post what they're up to, and other people will go and bother them if they're doing something relevant.
+Most work is async by far. People post what they're up to, and other people will go and bother them if they're doing something relevant.
 
 100% on self starters. Micromanagers or workers that require great oversight aren't going to work.
 
 That sounds like how all my best managers have worked, whether on site or remote. Their job is to facilitate your work, not control it.
-
-Innovation is not a group activity, it is always the work of a single individual's creativity. You might think otherwise, that brainstorming and bouncing ideas off each other is important, but you'd be wrong.
 
 “International team” where expectation and default cultural bias are major issues.
 
@@ -39,6 +33,7 @@ If you need a small office, make sure people in it don’t have a critical mass 
 In remote teams, you need to set up in a way people can be as autonomously as they need. Autonomously doesn’t mean “left alone” it means “be able to run alone” (when needed).
 
 Wait for problems before you introduce solutions (esp. processes or infrastructure)
+
 ## Bain's rapid model
 R – Recommend
 A – Agree
@@ -86,10 +81,6 @@ The person/function who must be informed of the result of the activity.
 
 
 ### Chapter 18. Propositions of The Mythical Man-Month: True or False?
-11.9 The tractability and the invisibility of the software product expose its builders (exceptionally) to perpetual changes in requirements.
-
-13.7 Sometimes one has to go back, scrap a high level, and start over.
-
 15.5 Most documentation fails in giving too little overview. Stand way back and zoom in slowly.
 
 Moving down across the horizontal boundary, a program becomes a programming product. This is a program that can be run, tested, repaired, and extended by anybody. It is usable in many operating environments, for many sets of data.
@@ -105,8 +96,6 @@ When estimating project times, it should be remembered that programming products
 
 The preparation of a PERT chart is the most valuable part of its use. Laying out the network, identifying the dependencies, and estimating the legs all force a great deal of very specific planning very early in a project. The first chart is always terrible, and one invents and invents in making the second one.
 
-As the project proceeds, the PERT chart provides the answer to the demoralizing excuse, "The other piece is late anyhow." It shows how hustle is needed to keep one's own part off the critical path, and it suggests ways to make up the lost time in the other part.
-
 Work complicates to fill the available time.
 
 The demand upon a resource tends to expand to match the supply of the resource (If the price is zero). The reverse is not true.
@@ -116,6 +105,3 @@ This phenomenon sometimes occurs regardless of the individual's knowledge that p
 A survey of Canadian tax payers, published in 1997, found that they mailed in their tax forms about a week later than they predicted. They had no misconceptions about their past record of getting forms mailed in, but expected that they would get it done more quickly next time.[10] This illustrates a defining feature of the planning fallacy; that people recognize that their past predictions have been over-optimistic, while insisting that their current predictions are realistic
 
 The segmentation effect is defined as the time allocated for a task being significantly smaller than the sum of the time allocated to individual smaller sub-tasks of that task. 
-
-Implementation intentions are concrete plans that accurately show how, when, and where one will act. It has been shown through various experiments that implementation intentions help people become more aware of the overall task and see all possible outcomes. Initially, this actually causes predictions to become even more optimistic. However, it is believed that forming implementation intentions "explicitly recruits willpower" by having the person commit themselves to the completion of the task.
-
