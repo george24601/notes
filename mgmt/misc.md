@@ -1,4 +1,5 @@
 You really want to be attached to Profit Centers because it will bring you higher wages, more respect, and greater opportunities for everything of value to you
+
 if you are checking your phone couple of seconds, it is a sign you are tired, fatigued
 
 Don’t go bringing problems based on people from other teams complaining to you. Those teams need to bring up the problems themselves. If you must, tell their manager that you’re hearing these complaints, and let that manager decide whether to deal with it.

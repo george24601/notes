@@ -30,6 +30,7 @@
 [STG archiving immutable] --> [STG purge immutable]
 [STG archiving immutable] --> [STG archiving mutable] 
 [STG archiving immutable] --> [PROD cluster]
+[Aurora persist] --> [PROD purge]
 [PROD cluster] --> [PROD archive]
 [PROD archive] --> [PROD purge]
 [STG new refund] --> [PROD new refund]
