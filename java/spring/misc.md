@@ -2,7 +2,7 @@ how is circular dependency solved?
 
 How spring inits object - create instance, pre-init,  create Bean instance, post-init, porcess annotation and inject properties
 
-Spring transaction need us to config a transactional manager, which in turn requires us to inject DataSource
+Spring transaction need us to config a transactional manager, which in turn requires us to inject DataSource. 
 
 every web project has a ServletContext - our listener listens to it. Listener will load spring config, and put created object into ServletContext
 

@@ -8,8 +8,6 @@ EnableAutoConfiguration: scan ClassPath and load beans
 
 all spring beans are singleton by default, so consider using ThreadLocal
 
-Spring bean lifecycle?
-
 @Component vs @Bean: on class vs on method. Note @C is the default annotation if @Repo or @Service is not a good fit
 @C uses classpath to scan and assemble into the conainer (can also use COmponoentScan).
 
@@ -42,5 +40,3 @@ Map<String, ObjectFactor<?>> singletonFactories
 ```
 
 ObjectFactory.getObject() to get target object
-
-

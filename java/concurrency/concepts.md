@@ -1,3 +1,5 @@
+reentrant lock vs synchronized?
+
 ### deadlock
 note that deadlock-only case means low CPU usages
 
