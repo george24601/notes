@@ -16,16 +16,39 @@
 
 [Aurora hot] <-- [Persist backup]
 
-[archiver] --> [TiDB cold]
+[archiver] --> [Cold db]
 
-[Persist backup] <-- [purger] 
+[purger] --> [refund & comp flow cold] 
 
-[purger] --> [TiDB cold]
+[refund & comp flow cold] --> [Cold db]  
+
+[Aurora hot] <-- [purger] 
+
+[Aurora hot] <-- [binlog rep ignoring delete] 
+
+[binlog rep ignoring delete] --> [replicated db]
 
 @enduml
 
+@startuml
+
+[Payment] --> [Aurora Mar] 
+
+[Payment] --> [Aurora Feb] 
+
+[Refund db] --> [Aurora Jan]
+[Refund db] --> [Aurora Feb]
+[Refund db] --> [Aurora Mar]
+
+[Refund] --> [Refund db]
+@enduml
+
+
+
 
 @startuml
+[STG cluster] --> [STG new refund]
+[STG cluster] --> [STG archiving immutable]
 [STG new refund] --> [STG purge mutable]
 [STG archiving immutable] --> [STG purge immutable]
 [STG archiving immutable] --> [STG archiving mutable] 

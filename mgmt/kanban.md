@@ -15,16 +15,10 @@ recognize tech resk and define solution
 assign a coordintor for progress coordniate if >= 3 people involved
 
 * There are no pre-defined roles for a team. Although there may still be a Project Manager, the team is encouraged to collaborate and chip in when any one person becomes overwhelmed.
-* Allows for changes to be made to a project mid-stream, allowing for iterations and continuous improvement prior to the completion of a project
-* Best for projects with widely-varying priorities
-* If your team has a continuous stream of work requests, kanban may be right for you. no regular fixed length sprints, key metrics is cycle time - change can happen at any time
-* Kanban is great for teams that have lots of incoming requests that vary in priority and scope.
 * The best part of Kanban is making custom columns for how your team works.
 * In theory, kanban does not prescribe a fixed time to deliver a task. If the task gets completed earlier (or later), it can be released as needed without having to wait for a preset release milestone, as in the case of scrum.
 * unlike scrum, there is no single “kanban master” who keeps everything running smoothly. It’s the collective responsibility of the entire team to collaborate and deliver the tasks on the board.
 * Cycle time is an important metric for kanban teams. It is the average amount of time that it takes for a task to move from the start to finish line. Improving cycle times indicates the success of kanban teams.
-* A Kanban team is not required to be cross-functional since the Kanban work flow is intended to be used by any and all teams involved in the project. Therefore, a team of specialists and a separate team of generalists may be working on different aspects of the same Kanban project from the same board, and that’s ok.
-* Since each column has a limited number of allowed stories and there are no required time boxes (such as sprint length), there is no reason to reset the Kanban board as work progresses.
 * Need to define clear definition of moving to the next stage
 
 Scrum

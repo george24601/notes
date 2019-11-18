@@ -16,7 +16,7 @@ set -o verbose  + set -o xtrace
 
 LINK
 
-#compress and decompress, -c compress, -x extract
+#compress and decompress, -c compress, -x extract, -exclude to exclude list of repos
 tar -czvf $TO.tar.gz $FROM
 
 #display error code of the last command,e.g., use it after a semicolon 

@@ -10,8 +10,6 @@ Don’t go bringing problems based on people from other teams complaining to you
 
  Learning how to pick your battles is also about learning how to pick your company and pick your boss, because your job really shouldn’t be all or even mostly about battles. Going through this exercise of solving an unowned problem is fun once in a while, but it’s a real drag when you feel like you’re surrounded by such problems
 
- In fact, I think that it is important that most negative/corrective feedback from me go to my direct reports instead of farther down the chain. That doesn't mean that I can't offer suggestions on architectural improvements or process tweaks, but it is demoralizing for me to ask a developer why the build is broken. In fact, it is important that I'm seen as an inspirational figure to my team, someone they look up to and look forward to interacting with, and not vice-versa.
-
 The entrepreneurial gap comes in when you give people bigger accountability than they have the direct ability to execute against. This is in many ways the classic startup move.
 
 . When you are in direct competition with your peers for scarce resources and you are not going to be graded on the same outcomes, the entrepreneurial gap produces a toxic environment of politics and power plays. Perhaps the best idea sometimes wins in these situations, but more often the best political players rule the day.
@@ -47,3 +45,15 @@ The leader should bring the across-the-business view of what the business needs 
 
 So remember, if you want to break the vicious cycle of mistrust, first teach your teams how to show their work, then fix how you give feedback. Ask more questions and don’t fixate on the conclusions.
 
+stay silent to see if the other side can pursue you
+
+When the message is not clear, guess one direction and trial and error
+
+### oral
+
+* To trigger other people's bragging and make them feel good: time + scenario + slightly irritating/negative experience + positively peak as the end.
+* Instead of use "talk", "speak" seems to work, e.g., "I wanna come down and I wanna speak to you…"
+* Use "something" instead of "anything", e.g., "Is there something else you want to address in the visit today?"
+* Provide three options instead of yes/no questions, so that people is more likely to give valid info, espeically when under stress
+* Find a way to reply with equal or more amount of information to keep conversation going
+* Reaction is immediate and visceral. It’s tied to our reptilian brains, and loaded with emotion. Response is more thoughtful and measured. It’s high-context, and actionable.

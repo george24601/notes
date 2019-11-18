@@ -42,8 +42,6 @@ Underestimates do not change significantly during the activity until about three
 
 When estimating project times, it should be remembered that programming products (which can be sold to paying customers) and programming systems are both three times as hard to write as simple independent in-house programs.
 
-The preparation of a PERT chart is the most valuable part of its use. Laying out the network, identifying the dependencies, and estimating the legs all force a great deal of very specific planning very early in a project. The first chart is always terrible, and one invents and invents in making the second one.
-
 Work complicates to fill the available time.
 
 The demand upon a resource tends to expand to match the supply of the resource (If the price is zero). The reverse is not true.
@@ -55,5 +53,3 @@ A survey of Canadian tax payers, published in 1997, found that they mailed in th
 The segmentation effect is defined as the time allocated for a task being significantly smaller than the sum of the time allocated to individual smaller sub-tasks of that task. 
 
 Remember, part of your job now is to define what work needs to be done. Your boss won't always be able to tell you what to do, and she probably expects you to tell her what needs to be done. Use this time to answer that question.
-
-

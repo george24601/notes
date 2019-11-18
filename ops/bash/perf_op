@@ -110,6 +110,15 @@ top -H -p 63847
 # find java processes
 ps axu | grep java
 
+# find thread numbers
+ps -eLf
+pstree -p
+
+# find large file, then use echo "" > a.log to clear the log
+find / -type f -name "*log*" | xargs | s-lSh | more 
+du -a / |sort -rn |grep log | more
+find / -name '*log*' -size +1000M -exec du -h {}\'
+
 #thread dump
 sudo jstack 63847 > 1.log
 
@@ -187,3 +196,6 @@ ll /proc/$PID
 
 # check /var/log/messages for linux OOM killer action, i.e., "killed process"
 # for check /var/log/hs_err_pid<pid>.log for jvm fatal erro
+
+# check all process id doing writes
+iotop -o
