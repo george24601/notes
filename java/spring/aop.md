@@ -80,3 +80,5 @@ public class MyBeanTest {
 @Session: every http req will create a new bean, alive usirng th ession
 
 Excepiton handling: @ControllerAdvice + @ExceptionHandler, and use MockMvc to simulate Http requests + ResponseStatusException
+
+Validation of fields with @NotNull, @Size, @Pattern, @Valid, @Validated, and custom validator

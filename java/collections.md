@@ -1,5 +1,3 @@
-TreeSet is implemented by TreeMap, which in turn is based on RBT
-
 ###Hashmap
 
 hashmap init size is 16? =>  i = (n - 1) & hash, when n is 2^n, it is equal to n % hash, because & is faster than mod
@@ -12,8 +10,4 @@ aside from linkedlist, probing opening bucket is also a possible solution
 
 concurrent hashmap uses Unsafe to do native CAS
 
-linktedhashmap?
-
 copyonwritearraylist, why no concurrentArraylist?
-
-How LinkedBlockingQueue, DelayQ impleemtation

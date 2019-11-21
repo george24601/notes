@@ -1,18 +1,4 @@
-80% of requirements release in 2 weeks
-80% of requirement dev can be done in a week
-80% of of release can be done 1 hour after the submit
-
-From Principles of Product Development Flow: key to the problem is almost always blocked requirment instead of blocked resources
-
-
 separate req tickets with dev/resource tickets, put resource/work ticket same lane as its requirement ticket, requirement ticket in its requriment column in the dev column group
-
-when it enters to dev: 
-dev, test, busis clarify on requirment, and agree on the interactive process and test standard
-big reg to smaller task within 2 weeks
-confirm  plan with related business 
-recognize tech resk and define solution
-assign a coordintor for progress coordniate if >= 3 people involved
 
 * There are no pre-defined roles for a team. Although there may still be a Project Manager, the team is encouraged to collaborate and chip in when any one person becomes overwhelmed.
 * The best part of Kanban is making custom columns for how your team works.

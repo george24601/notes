@@ -63,7 +63,9 @@ CS
 #check context switch times, 10 times, once per second, see if cs >> in. Can use pidstat on top of it
 # if si(swap into memory) and so(swap out to harddrive) often > 0, means memory may not be enough
 # us(user execution time) too high, means user process consumes too much CPU 
-# wa(IO wait percentable), means IO wait too much
+# wa(IO wait percentable) too high, means IO wait too much
+# sy(system time- kernel) too high, means IO bottleneck 
+#free: current remaining memory
 vmstat -1 -10
 
 #grep oom_killer is /var/log/messages
@@ -78,7 +80,7 @@ rrqm/s: The number of read requests merged per second that were queued to the de
 
 rsec/s: The number of sectors read from the device per second.
 
-avgrq-sz:The average size (in sectors) of the requests that were issued to the device.
+avgrq-sz:The average size (in sectors) of the requests that were issued to the device., if > 1, often sign device is full
 
 await:The average time (in milliseconds) for I/O requests issued to the device to be served. This includes the time spent by the requests in queue and the time spent servicing them.
 
@@ -87,7 +89,7 @@ if await > svctm, often a sign of long IO queue
 iowait in top: wait because of IO, CPU is idle at this time, not a strong indicator itself
 
 %util
-Percentage of CPU time during which I/O requests were issued to the device (bandwidth utilization for the device). Device saturation occurs when this value is close to 100%.
+Percentage of CPU time during which I/O requests were issued to the device (bandwidth utilization for the device). Device saturation occurs when this value > 60%.
 
 %idle < 70% often a sign of busy IO
 
@@ -199,3 +201,8 @@ ll /proc/$PID
 
 # check all process id doing writes
 iotop -o
+
+#buffers: buffer cache for block device i/o
+#cached: page cache used by FS
+# either approaching 0 suggests I/O too high. note that free memory includes the part cache uses. that free is in the context of the application
+free -m

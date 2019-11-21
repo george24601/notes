@@ -1,3 +1,15 @@
+* StringBuilder vs StringBuffer
+  * StringBuffer is threadsafe
+  * StringUtils.join uses StringBuilder too
+* Why no isSuccess var name?
+  * In Java Bean spec, the boolean type method must be isProperty.
+  * isSuccess var name may confuse different serialization/deserialization framework
+  * As per alibaba recommendation, POJO member properteis must be packaged type, and local var uses basic type, so that you get NPE early instead unexpected null
+* Proper ex handling should have local context and stack race, or re-throw
+```java
+logger.error(param, object strings + "_" + e.getMessage(), e)
+```
+
 Example of type unchecked warning,e.g.,  List<String> rawList = new ArrayList()
 
 class type.newInstance, ConstructorType.newInstance - classType newInstance calls reflection constructor type's parameter-less methods
@@ -13,8 +25,6 @@ class type.newInstance, ConstructorType.newInstance - classType newInstance call
 ArrayList: DEAULT_CAPCITY=10, will copy with 50% increased capacity. Part of the reason init size is recommended to be set
 
 why no enum type as API return type? If the callee extends a new enum type, the caller will have serialization error. This is similar to convariant - contravariant rule. Enum is a good point as params. One can compare this to the robustness principle of communication: "be liberal in what you accept and conservative in what you produce.
-
-Array.asList() returns an immutable list, underlying is still the array, and has to be a bagged type. To convert to mutable type, use ArrayList ctor directly
 
 Array extends the size by 1.5 times, default size to 10, i.e., will increase size to 10, on the first write. Every time resize, a complete copy is required
 

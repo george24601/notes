@@ -1,7 +1,6 @@
 It’s choosing a few key metrics to keep an eye on, spend less time tracking, and more time acting upon the found data.
 
-Monthly recurring revenue (MRR)
-These metrics measure a product’s total revenue in one month
+Monthly recurring revenue (MRR): These metrics measure a product’s total revenue in one month
 
 Average revenue per user (ARPU) allows you to count the revenue generated per user monthly or annually.
 
@@ -15,7 +14,6 @@ Daily Active User/Monthly Active User ratio
 DAU/MAU of 20 percent is considered a good sign, while 50+ percent indicates extreme success
 
 Customer retention rate (CRR) is the percentage of customers who stayed with the company after a certain time period
-
 According to the Product Benchmarks Report by Mixpanel, the average CRR for most software products is below 20 percent over 8 weeks
 
 It can be tracked with statistics that display the number of logins or site visits. This KPI reveals the popularity of a product – if the audience engages with it again and again. Unlike traffic or session duration, the number of sessions per user shows an average for a particular group of people in some time period.
@@ -37,10 +35,6 @@ Customer Lifetime Value (CLV)
 , the number one priority for your data should be finding the overall “product-market fit.” Usage data (like events) is a good place to start for this, but you absolutely need to include customer feedback. One manager I talked to said that no observational usage data has ever stacked up to the insight she gains from picking up the phone and talking to 10 customers directly. As a general rule I agree with her but it’s not just because conversations have magical power (though they do) it’s because you probably haven’t setup formal tests for evaluating the usage data.
 
 This should go without saying, but talk to your customers prior to building anything.  People love talking about their problems to anyone who will listen to them.  Often they won’t have the first clue about what a solution looks like, but at the very least repeated similar emotional reactions from many people in a market should tell you that the problem is there and real.  After that, it is “just” a matter of marketing.
-
- That is 100% avoidable if you simply don’t commit to schedules.  (Also note that committing to a schedule is time debt, by definition.  If you ever say “Yes, I will implement that”, you’ve lost the ability to decide not to implement it if your priorities change.)
-
- “The only acceptable response to a feature request is: ‘Thank you for your feedback.  I will take it under advisement and consider it for inclusion in a later version of the software.’”  That line actually works.  (There are industries and relationships in which it won’t work — for example, if you’re in a regulated industry and the regulations change, you can’t fob the regulatory authority off with that.  Don’t be in a regulated industry.)
 
 
 ### User stories applied

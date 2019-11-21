@@ -1,3 +1,9 @@
+* How many ways to create a thread?
+  * inherit from Thread
+  * implemnt RUnnable
+  * finally use start()
+  * start() means thread is ready statu, but not running, and then run() is the actual thing. run() will execute inside the main thread
+
 reentrant lock vs synchronized?
 
 ### deadlock
@@ -36,10 +42,5 @@ when object.notify() wakes up this thread, it will try to enter the monitor, wil
 CAS: implmented by `unsafe` and the atomicity of native methods
 
 ###lost wake up problem
-
-### iterator's concurrent modificatoin problem, why not foreach?
-In ArrayList, it has a  modCount.
-In ArrayList, we have an internal Itr time, which has a expectedModCount, it implments Iterator, i.e., the instance you get from ArrayList.iterator and use that to prevent concurrent change
-but iterator.remove is OK
 
 concurrentHashMap.size() is not accurate??

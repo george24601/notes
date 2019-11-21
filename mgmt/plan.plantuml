@@ -12,15 +12,16 @@
 @enduml
 
 @startuml
-[Aurora hot] <-- [archiver]
+[Aurora hot] 
 
 [Aurora hot] <-- [Persist backup]
-
-[archiver] --> [Cold db]
 
 [purger] --> [refund & comp flow cold] 
 
 [refund & comp flow cold] --> [Cold db]  
+
+[purger] --> [big query & recon] 
+[big query & recon] --> [Cold db]  
 
 [Aurora hot] <-- [purger] 
 
@@ -47,8 +48,19 @@
 
 
 @startuml
-[STG cluster] --> [STG new refund]
-[STG cluster] --> [STG archiving immutable]
+[STG cold]  <-- [PERF cold]
+[STG cold] <-- [STG refund & comp flow]
+[STG refund & comp flow] <-- [STG purge]
+[STG cold] <-- [STG big query & recon]
+[STG big query & recon] <-- [STG purge]
+[STG big query & recon] <-- [PERF big query & recon] 
+[STG purge] <-- [PERF purge]
+[PERF cold] <-- [PERF refund & comp flow]
+[PERF refund & comp flow] <-- [PERF purge]
+[PERF big query & recon] <-- [PERF purge]
+@enduml
+
+[STG cold] --> [STG archiving immutable]
 [STG new refund] --> [STG purge mutable]
 [STG archiving immutable] --> [STG purge immutable]
 [STG archiving immutable] --> [STG archiving mutable] 
@@ -61,7 +73,6 @@
 [STG archiving mutable] --> [STG purge mutable]
 [STG purge immutable] --> [STG purge mutable]
 [STG purge mutable] --> [PROD purge]
-@enduml
 
 
 

@@ -16,10 +16,10 @@ Have new employees improve those onboarding documents
 
 It’s ok, and even desirable to have products with some overlap. Each pushes the other to be better with friendly competition
 
-In remote teams, you need to set up in a way people can be as autonomously as they need. Autonomously doesn’t mean “left alone” it means “be able to run alone” (when needed).
-
 In a remote team You need to act like a larger company than you actually are. you need to be stricter about best practices, and you will run into communication problems… a lot of them.
 
 Similarly problematic are satellite offices. The bridge between the offices has 5x communication needs, but people in each office act like co-located teams. Unless the offices can work mostly autonomously, this communication bridge between them will suffer.
 
 If you need a small office, make sure people in it don’t have a critical mass in projects and communicate remote-friendly.
+
+ At a certain point your learning will plateau, and this is when the second type of work kicks in: executing. This is the act of applying that knowledge to get the job done and create leverage. Eventually, you will create enough leverage to automate the job or grow out of it, and this is when you start the cycle over. Learn. Execute.
