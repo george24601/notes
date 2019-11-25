@@ -33,3 +33,5 @@ Suppose we have an aggregate query on CompanyId and TS, but no userId, but our r
 Now we need an index on (CompanyId, TS)
 
 (UserId, Company, TimeStamp, EntryShardId) - an EntryShardId,ie., acts as logical shard
+
+
