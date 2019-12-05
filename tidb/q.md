@@ -23,4 +23,13 @@
 * Explain tidb's 2PC sequence of actions
 
 
+### 4.2
+* Explain the binlog format and its content (Slides prob didn't cover enough).
+* How tidb writes binlog, including its sequence of actions?
+* How does drainer work?
 
+### 5.1.1
+* Explain SQL layer architecture
+
+### 5.1.2
+* Explain the vectorized execution model

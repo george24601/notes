@@ -35,3 +35,6 @@ Controller: param verification, exception handling
 Service: normally one service per controller, hard to reuse
 Manager: reusable logic 
 DAO: data access object
+
+highlly recommend NOT to use Optional as the param type
+don't option on the collection type
