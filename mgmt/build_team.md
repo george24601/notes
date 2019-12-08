@@ -50,3 +50,18 @@ Share that writing with another neutral human who you know will give you critica
 Sleep on the conversation that you’ve written down and vetted with the neutral humans. Your background processing skills are strong.
 
  The complete delegation of work to someone else on the team is a vote of confidence in their ability, which is one essential way the trust forms within a team. Letting go of doing the work is tricky, but the gig as a manager isn’t doing quality work, it’s building a healthy team that does quality work at scale.
+
+ Values are principles or standards of behavior, and in a group of humans, they are first defined by the founding employees and then evolved over time by the leadership team. Painting them on the walls or writing them down in an employee handbook makes them accessible and obvious, but it is how these values are consistently applied especially during times of crisis that gives values value.
+
+
+For every open job on your team, you need to spend one hour a day on recruiting-related activities. Cap that investment at 50% of your time. 
+
+ it’s my belief the moment that when it becomes a struggle to spend 30 minutes a week with each of the folks on your team, it’s time to consider your team might be too big. New managers can handle less people, experienced managers more.
+
+Seven plus or minus three.
+
+What is missing from this dialog is a discussion. The process feels heavy because in this particular hypothetical company, we value velocity over completeness. Whether they’ve written them down or not, the Old Guard embodies the initial values of the company and when they say, “It feels off…” what they are poorly articulating is, “This process that you’re building does not support one (or more) of the key values of the company.”
+
+
+
+
