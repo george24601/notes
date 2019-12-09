@@ -15,10 +15,6 @@ scp -i stg5tidb.pem ec2-user@10.223.65.7:/mnt/local-ssd/f7cd03b9-5a24-4416-8b73-
 
 kubectl get TidbCluster stg1-tidb-cluster --namespace stg1 
 
-#turns out pd-2, the leader is in 1a!
-
-#verify context
-
 kubectl describe pod stg5tidb-pd-0 -n stg5tidb
 
 aws eks --region ap-northeast-1 update-kubeconfig --name stg5tidb
@@ -80,4 +76,12 @@ kubectl port-forward -n stg5tidb svc/stg5tidb-pd 2379:2379
 kubectl exec -it -n stg5tidb stg5tidb-tikv-1 -- du -sh /var/lib/tikv
 
 df -h | grep /var/lib/tikv
+
+#check hot table and index region distribution
+python table-regions.py --host -port $DB $TBL
+
+
+curl http://$TIDB_HOST:10080/tables/$DB/$TBL/regions
+#and use pd-ctl to split region
+
 

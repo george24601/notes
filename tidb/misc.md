@@ -1,24 +1,10 @@
-### Raftstore
-
-Request from tidb will turn into gRPC and storage to the corresponding region as KV. Raftstore will poll each region to see if there is any to process, and then activate raft state machine 
-
 HB a common source to let raftstore CPU become bottleneck - propose wait duration: time between sending the request to raftstore to when the raftstore processes the request
-
-Look into region merge (opposite of region split)
 
 raft-base-tick-interval - increase heartbeat interval
 
-region routing info is stored in PD in v2 - PD leader failover may be slow!
-
 Check tikv's Worker pending tasks to see if task is accumulating
 
-Use split region to pre-split hot regions
-`SHOW TABLE test_hospot REGIONS` to see if SCATTERING col is all 0
 txn-local-latchs: default is turned on to pre-emptive txn conflict
-
-Note it does not support SP, View, trigger, UDF, FK 
-
-watch out for the case where index and shard data are not on the same shard : two cases where double scan won't be a problem! 
 
 lock-free snapshot read: change to snapshot version,i.e., lock free. History read is possible by setting @@tidb_snapshot
 
@@ -26,13 +12,7 @@ isolation: snapshot isolation (roughly RR)
 
 dumper + loader for full backup restore => tidb-lighting: 1T data in 6 hours ingestion
 
-at most 512 columns in a single table 
-
-10 mins to gc expired MVCC
-
 pd harder to scale up/down
-
-1 index, 1 kv entry => more kv, more storage
 
 best virtualization gives 30% penalty over physical machine
 
@@ -45,17 +25,10 @@ physical time + logical time
 2. apply a lease to etcd, within this window PD will be the TSO
 3. client batchs n request and get TSs togehter from PD
 
-### To split region
-1. Leader peer sends request to PD
-2. PD creates new region ID and peer ID, and return to leader peer
-3. leader peer writes the split action into a raft log, and execute it at apply
-4. Tikv tells PD, PD updates cache and persist it to etcd
-
 based on experience, 400M rows of data takes 10min+ to analyze (default setting, tidb_build_stats_concurrency=4).
 
-A cop task refers to a computing task that is executed using the TiKV coprocessor. A root task refers to a computing task that is executed in TiDB.
+A root task refers to a computing task that is executed in TiDB.
 
- IndexLookUp represents filtering part of the data from the index, returning only the Handle ID, and retrieving the table data again using Handle ID. In the second way, data is retrieved twice from TiKV
-If you want to see the PD latency of getting tso, you could see the PD TSO RPC Duration. The PD TSO Wait Duration actually contains the PD TSO RPC Duration. The “Wait” here is actually the asynchronous wait time, that is, the time from the asynchronous acquisition of the TSO to the time when the transaction actually needs to use the TSO to read/write data. In general, the time to get the TSO is earlier than the time it takes to use it. The name of this indicator is somewhat confusing.
+The PD TSO Wait Duration actually contains the PD TSO RPC Duration. The “Wait” here is actually the asynchronous wait time, that is, the time from the asynchronous acquisition of the TSO to the time when the transaction actually needs to use the TSO to read/write data. 
 
 From me: PD TSO RPC duration, 99 at 1.74 ms makes way more sense

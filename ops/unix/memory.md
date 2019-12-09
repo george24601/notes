@@ -1,3 +1,5 @@
+physical mem address can be shared by multiple processes, maintained by the page table, default 4KB
+
 kernel space vs user space VM is about 1:3
 
 when user process starts bash, it will get pid() to find current pid via kernel's pid service
