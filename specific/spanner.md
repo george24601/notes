@@ -1,3 +1,12 @@
+At every replica that is a leader, each spanserver implements a lock table to support two-phase-locking based concurrency control and a transaction manager to support distributed transactions. If a transaction involves only one Paxos group (as is the case in single row & single shard transactions), it bypasses the transaction manager. The lock table and Paxos together are enough to do the job here. If a transaction involves more than one Paxos group (as is the case in distributed transactions), those groups’ leaders coordinate to perform two-phase commit. The state of the transaction manager is also modeled as a persistent Paxos group to ensure continued availability.
+
+The most noteworthy innovation in Spanner is that it achieves external consistency, an isolation level even stricter than serializability, by assigning global commit timestamps to all transactions using the TrueTime API. TrueTime is Google’s highly reliable “wall-clock” time tracking service (with a bounded uncertainty of 7ms) that is built on GPS and atomic clocks.
+
+We believe it is better to have application programmers deal with performance problems due to overuse of transactions as bottlenecks arise, rather than always coding around the lack of transactions. Running two-phase commit over Paxos mitigates the availability problems.
+
+ In active/active, the benefit of write scaling is negated by conflict-ridden concurrent writes on same rows at different masters. Such conflicts are resolved without explicit knowledge of the app using non-deterministic heuristics such as Last-Write-Wins (LWW) and Conflict-Free Replicated Data Types (CRDT)
+
+
 If you declare a table to be a child of another table, the primary key column(s) of the parent table must be the prefix of the primary key of the child table.
 
 1. Hash the key and store it in a column. Use the hash column (or the hash column and the unique key columns together) as the primary key.

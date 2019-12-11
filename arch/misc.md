@@ -1,3 +1,12 @@
+99.9%: LT 9 hours per year 
+
+reverse proxy layer: nginx keepalived + virtual ip
+
+web server layer: configs web servers behind nginx
+
+write db: mater + shadow master with keepalived + virtual IP
+
+
 ### Time and order in distributed system
 Cassandra => asumes clocks are synchronized, uses timestamps to revole conflicts between writes
 alternative=> use vector clocks

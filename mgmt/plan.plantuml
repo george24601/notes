@@ -1,35 +1,55 @@
 @startuml
-[archiving data into tidb] --> [API to read archive db] 
+database TiDB_M
+database TiDB_S
+database Aurora_M
+database Aurora_S
 
-[archiving data into tidb] --> [Clean up old data from Aurora] 
+TiDB_M <-- Aurora_M: binlog
+TiDB_M -> TiDB_S: binlog
+Aurora_M -> Aurora_S : existing binlog
+Aurora_S -> Daas: exisiting pipeline
 
-[API to read archive db] --> [Reduce the cut off period to 2 weeks] 
-
-[Clean up old data from Aurora] --> [Reduce the cut off period to 2 weeks] 
-
-[Reduce the cut off period to 2 weeks] --> [Wallet API test]
-
+[Payment] -> Aurora_M
 @enduml
 
 @startuml
-[Aurora hot] 
-
-[Aurora hot] <-- [Persist backup]
-
-[purger] --> [refund & comp flow cold] 
-
-[refund & comp flow cold] --> [Cold db]  
-
-[purger] --> [big query & recon] 
-[big query & recon] --> [Cold db]  
-
-[Aurora hot] <-- [purger] 
-
-[Aurora hot] <-- [binlog rep ignoring delete] 
-
-[binlog rep ignoring delete] --> [replicated db]
-
+database TiDB
+database Aurora_M as RDS
+database Aurora_S as Slave
+component [cashier] as C {
+    [proxy]
+}
+component [NPS] as P
+queue kafka
+[/pay] -> C
+proxy --> [OPS]: 99% /pay
+proxy --> P: 1% /pay
+[OPS] -> RDS
+P --> TiDB
+TiDB --> RDS: binlog
+[other APIs] --> [NRS]
+kafka --> [NRS]
+[NRS] -> RDS
+[NRS] -> TiDB
+RDS -> Slave: existing binlog
+Slave -> [DaaS]: existing pipeline
 @enduml
+
+@startuml
+database TiDB_M
+database TiDB_S
+database Aurora_M
+database Aurora_S
+
+TiDB_M --> Aurora_M: binlog
+TiDB_M -> TiDB_S: binlog
+Aurora_M -> Aurora_S : existing binlog
+Aurora_S -> Daas: exisiting pipeline
+
+[Payment] -> TiDB_M
+@enduml
+
+
 
 @startuml
 
