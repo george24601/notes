@@ -1,16 +1,167 @@
 @startuml
+
+database RDS {
+[p2p tables]
+[topup tables]
+[other tables]
+}
+database TiDB {
+"p2p tables" as [tidb_p2p]
+"top up tables" as [tidb_topup]
+"other tables" as [tidb_others]
+}
+
+
+[payment] --> [tidb_others]
+[payment] --> [tidb_p2p]
+[payment] --> [tidb_topup]
+
+[tidb_p2p] --> [p2p tables] : binlog to
+[tidb_topup] --> [topup tables] : binlog to
+[tidb_others] --> [other tables]: binlog to
+
+@enduml
+
+
+@startuml
+
+database RDS {
+[p2p tables]
+[topup tables]
+[other tables]
+}
+database TiDB {
+"p2p tables" as [tidb_p2p]
+"top up tables" as [tidb_topup]
+"other tables" as [tidb_others]
+}
+
+
+component [payment] {
+    component [sharding-proxy]
+}
+[sharding-proxy] --> [tidb_others]
+[sharding-proxy] --> [tidb_p2p]
+[sharding-proxy] --> [tidb_topup]
+
+[tidb_p2p] --> [p2p tables] : binlog to
+[tidb_topup] --> [topup tables] : binlog to
+[other tables] --> [tidb_others]: binlog to
+
+@enduml
+
+
+@startuml
+
+database RDS {
+[p2p tables]
+[topup tables]
+[other tables]
+}
+database TiDB {
+"p2p tables" as [tidb_p2p]
+"top up tables" as [tidb_topup]
+"other tables" as [tidb_others]
+}
+
+
+component [payment] {
+    component [sharding-proxy]
+}
+[sharding-proxy] --> [tidb_others]
+[sharding-proxy] --> [tidb_p2p]
+[sharding-proxy] --> [tidb_topup]
+
+[tidb_p2p] --> [p2p tables] : binlog to
+[tidb_topup] --> [topup tables] : binlog to
+[other tables] --> [tidb_others]: binlog to
+
+@enduml
+
+@startuml
+
+database RDS {
+    [topup]
+    [others]
+}
+database TiDB {
+    "topup" as [T-topup]
+    "others" as [T-others]
+}
+
+
+request --> [payment]
+component [payment] {
+    component [sharding-proxy]
+}
+[sharding-proxy] --> [T-others]
+[sharding-proxy] --> [T-topup]
+
+[T-topup] --> [topup]: replication
+[T-others] --> [others]: replication
+
+@enduml
+
+@startuml
 database TiDB_M
 database TiDB_S
 database Aurora_M
 database Aurora_S
+database TiDB_V
 
-TiDB_M <-- Aurora_M: binlog
-TiDB_M -> TiDB_S: binlog
-Aurora_M -> Aurora_S : existing binlog
-Aurora_S -> Daas: exisiting pipeline
-
-[Payment] -> Aurora_M
+TiDB_M <-- Aurora_M: binlog to
+TiDB_M --> TiDB_S: binlog to
+Aurora_M --> Aurora_S : existing binlog to
+Aurora_S -> Daas: exisiting pipeline to
+[Payment] --> [Replay proxy]
+[Replay proxy] --> Aurora_M: RW
+[Replay proxy] --> TiDB_V: RW
 @enduml
+
+@startuml
+database "aurora" {
+  [payment_p2p]
+  [subpayment_p2p]
+  [tranfer_p2p]
+  [payment_other]
+  [subpayment_other]
+  [payment_acq]
+  [subpayment_acq]
+  [payment_topup]
+  [subpayment_topup]
+  [other tables....]
+}
+database tidb
+aurora --> tidb: binlog all tables
+@enduml
+
+
+@startuml
+database TiDB_M
+database TiDB_S
+database Aurora_M
+database Aurora_S
+database Wallet_S
+
+TiDB_M --> Aurora_M: binlog to
+TiDB_M --> TiDB_S: binlog to
+Aurora_M --> Aurora_S : existing binlog to
+Aurora_S -> Daas: exisiting pipeline to
+[Payment] --> TiDB_M: RW
+[Domain checker] --> Wallet_S: R
+[Domain checker] --> TiDB_M: RW
+@enduml
+
+database Wallet_S
+[DB checker] --> Aurora_S: R
+[DB checker] --> TiDB_M: RW
+[Domain checker] --> TiDB_M: RW
+[Domain checker] --> Wallet_S: R
+[Verifier] --> TiDB_V: RW
+[Verifier] --> Wallet_S: R
+[Verifier] --> Aurora_S: R
+
+
 
 @startuml
 database TiDB
