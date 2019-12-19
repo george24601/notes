@@ -40,11 +40,7 @@ monitor
 
 Because TiDB by default will use lots of file descriptors, the worker node and its Docker daemon's ulimit must be configured to greater than 1048576:
 
-zhihu: 40k writes per sec peak, 30k+ qps P99 = 25ms, 
 DM + lighting import 1 tri for 4 days
-
-xiaohongshu: write latency LT 20ms, 10 tikv + 3pd
-write 5k per sec, batch size LT 100 seems good enough
 
 EKS CNI plugin allocates many private IPs for pods on a node by default. If the subnet CIDR is too small, it will soon be worn out.
 

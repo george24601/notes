@@ -1,4 +1,4 @@
-how is circular dependency solved?
+How is meterregistry implemented with the system metrics?
 
 How spring inits object - create instance, pre-init,  create Bean instance, post-init, porcess annotation and inject properties
 

@@ -1,3 +1,5 @@
+sync diff is often done by xor
+
 business and traffic replay
 
 traffic replay via dbreplay to tidb, which sits on the nginx cluster
