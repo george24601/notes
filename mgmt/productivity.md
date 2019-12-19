@@ -17,3 +17,4 @@ The best way is always to stop when you are going good and when you know what wi
 
 Combing through an email backlog or discussing strategy on a forum is time-consuming and ultimately ineffective. 
 
+Duckworth first recommends taking a future-oriented approach to your day, such as planning breaks and the time slots for checking emails in advance. If you can refrain from resigning to your urges before the time you’ve allotted for yourself, you may achieve a greater handle on your overall self-control.

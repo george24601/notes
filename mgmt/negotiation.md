@@ -1,4 +1,3 @@
-
 Remember that the essence of Power Sales Negotiating is to always leave the other side thinking that they won.
 
 ### Selling The Top Of The Line (TOTL)

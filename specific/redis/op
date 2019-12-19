@@ -1,3 +1,17 @@
 #!/bin/bash
 
 (printf "PING\r\nPING\r\nPING\r\n"; sleep 1) | nc localhost 6379
+
+#after connected by redis-cli
+#used_memory_rss: same number as shown in top, PS, should be higher than used_memory
+info memory
+
+slowlog get
+
+redis-cli-h $IP -p $PORT --bigkeys
+
+#latestforkusec should be < 1 sec 
+info stats
+
+#check aofdelayedfsync
+info persistence

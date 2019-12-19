@@ -7,8 +7,6 @@ Daily Active User/Monthly Active User ratio: DAU/MAU of 20 percent is considered
 Customer retention rate (CRR) is the percentage of customers who stayed with the company after a certain time period
 According to the Product Benchmarks Report by Mixpanel, the average CRR for most software products is below 20 percent over 8 weeks
 
-The core principles you should focus on as a product manager revolves around product usage, customer-centric design (especially user experience), competitive offerings, pricing, market share and industry trends.
-
 Customer Acquisition Cost (CAC)
 Customer Conversion Rate (CCR)
 Repurchase Rate (RR)
@@ -18,8 +16,6 @@ User Churn (UC)
 Net Promoter Score (NPS)
 Customer Satisfaction (CSAT)
 Customer Lifetime Value (CLV)
-
-, the number one priority for your data should be finding the overall “product-market fit.” Usage data (like events) is a good place to start for this, but you absolutely need to include customer feedback. One manager I talked to said that no observational usage data has ever stacked up to the insight she gains from picking up the phone and talking to 10 customers directly. As a general rule I agree with her but it’s not just because conversations have magical power (though they do) it’s because you probably haven’t setup formal tests for evaluating the usage data.
 
 tech vs customer/analyst/domain expoert communication: either side dominates => project loses
 

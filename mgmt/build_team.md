@@ -1,7 +1,5 @@
 Authority care most what you can contribute in the future
 
-To affect opinions of people, not only the person himself, but also whoever that can directly affect the said person too. Build common interest between the people around the authority
-
 Easier to build new relationship than saving old relationship
 
 When you’re new, this is when you are at your most vulnerable. This is because you want to make sense of your environment so you can start being an effective leader.
