@@ -1,5 +1,54 @@
 @startuml
 
+database Aurora_M
+database Aurora_S
+database TiDB_M
+database Wallet
+
+[cross domain checker] as dc
+[sync-diff] as sd
+[payment] as pay
+
+pay --> Aurora_M
+TiDB_M <-- Aurora_M: binlog to
+Aurora_M --> Aurora_S : existing binlog to
+
+dc --> TiDB_M
+dc --> Wallet
+
+sd --> TiDB_M
+sd --> Aurora_S
+
+@enduml
+
+
+@startuml
+
+component [Pre-prod] {
+database TiDB
+queue "saved mysql traffic" as traffic 
+[sync-diff] as sd
+database Aurora_V
+[cross domain checking] as cd
+}
+
+component [PROD] {
+[payment] as srv
+database wallet_s
+}
+
+
+srv --> traffic
+traffic --> Aurora_V
+traffic --> TiDB
+
+sd --> TiDB
+
+sd --> Aurora_V
+@enduml
+
+@startuml
+
 component [PROD]{
 database Aurora_M
 database Aurora_S
@@ -34,31 +83,6 @@ sd --> Aurora_S
 
 @enduml
 
-
-@startuml
-
-component [Pre-prod] {
-database TiDB
-queue "saved mysql traffic" as traffic 
-[cross domain checker] as dc
-[sync-diff] as sd
-}
-
-component [PROD] {
-database Aurora_V
-database Wallet
-}
-
-
-traffic --> Aurora_V
-traffic --> TiDB
-
-dc --> TiDB
-dc --> Wallet
-
-sd --> TiDB
-sd --> Wallet
-@enduml
 
 @startuml
 
