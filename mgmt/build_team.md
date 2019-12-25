@@ -14,11 +14,6 @@ It’s ok, and even desirable to have products with some overlap. Each pushes th
 
  At a certain point your learning will plateau, and this is when the second type of work kicks in: executing. This is the act of applying that knowledge to get the job done and create leverage. Eventually, you will create enough leverage to automate the job or grow out of it, and this is when you start the cycle over. Learn. Execute.
 
-Designate someone to take notes in the meeting.
-Start by reviewing open items from the prior version of this meeting.
-Close the meeting by repeating the decisions, the issues that remain open, and the owners of those issues.
-Send the notes from that meeting to the broadest possible set of appropriate humans after removing confidential or sensitive topics.
-
 Meetings are a privilege, but the privilege isn’t that you get to go, the privilege is that you get to go to represent your team. This means you show up informed and capable of representing their interests and when the meeting is over that you deftly and capably communicate the results of the meeting to your team.
 
  Values are principles or standards of behavior, and in a group of humans, they are first defined by the founding employees and then evolved over time by the leadership team. Painting them on the walls or writing them down in an employee handbook makes them accessible and obvious, but it is how these values are consistently applied especially during times of crisis that gives values value.

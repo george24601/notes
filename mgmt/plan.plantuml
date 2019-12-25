@@ -192,26 +192,6 @@ Aurora_S -> Daas: exisiting pipeline
 
 
 @startuml
-
-[Payment] --> [Aurora Mar] 
-
-[Payment] --> [Aurora Feb] 
-
-[Refund db] --> [Aurora Jan]
-[Refund db] --> [Aurora Feb]
-[Refund db] --> [Aurora Mar]
-
-[Refund] --> [Refund db]
-@enduml
-
-
-
-
-
-
-
-
-@startuml
 skinparam component {
 	backgroundColor<<done>> Green
 	backgroundColor<<doing>> Yellow
