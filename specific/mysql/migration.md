@@ -1,37 +1,7 @@
-Offline Migration
-------
+ This tool reads an InnoDB tablespace file, calculates the checksum for each page, compares the calculated checksum to the stored checksum, and reports mismatches, which indicate damaged pages. It was originally developed to speed up verifying the integrity of tablespace files after power outages but can also be used after file copies. Because checksum mismatches cause InnoDB to deliberately shut down a running server, it may be preferable to use this tool rather than waiting for an in-production server to encounter the damaged pages.
 
-1. App to read only mode 
+ default checksum algo is CRC32
 
-2. DB to read only mode
+remember to turn on and off read only mode during db migration
 
-3. Extract A, tranlsate, and load to B
-
-4. Consistency check
-
-5. app to normal mode
-
-6. back up db a
-
-Online Migration
---------
-
-1. Export A's snapshot
-
-2. ETL to b
-
-3. ETL online delta a to b
-
-4. ETL continous consume delta data a to b
-
-5. app stops shortly
-
-6. wait until b's delta consumption is complete
-
-7. DB a readonly mode
-
-8. db consistency check
-
-9. App back to normal R/W mode
-
-10. backup DB a
+If checksum mismatches are found, you would normally restore the tablespace from backup or start the server and attempt to use mysqldump to make a backup of the tables within the tablespace.

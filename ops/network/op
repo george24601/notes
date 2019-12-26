@@ -1,4 +1,7 @@
 #!/bin/bash
+
+### Use script to calculate current tcp connections, and group them by the statet
+
 ##dig###
 <<DATA
 the answer section:

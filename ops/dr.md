@@ -1,3 +1,5 @@
+simulate the machine problem by blocking the in/out port, configurable, and have a default recovery time
+
 99.99% is a bit LT 1 hour per year
 99.9% is a bit LT 9 hours per year
 
