@@ -1,3 +1,9 @@
+Two ways to visit object: 
+* handle 
+* direct pointer. 
+
+The difference is that direct pointer has the instance data with it, but handle points to a separate space on the heap
+
 Metaspace OOM issue caused by low SoftRef LRU time. The metaspace itself is most likely populated by internal class objected created via exception
 
 Why do we need that in thread local map?
