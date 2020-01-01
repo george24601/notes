@@ -14,28 +14,15 @@ hash = {}
   del list[0]     ## Delete first element
   del list[-2:]   ## Delete last two elements
 
-f = open('foo.txt', 'rU')
-  for line in f:   ## iterates over the lines of the file
-    print line,    ## trailing , so print does not add an end-of-line char since 'line' already includes the end-of-line.
-f.close()
-
 
 list = ['larry', 'curly', 'moe']
   list.append('shemp')         ## append elem at end
-  list.insert(0, 'xxx')        ## insert elem at index 0
   list.extend(['yyy', 'zzz'])  ## add list of elems at end
   print list  ## ['xxx', 'larry', 'curly', 'moe', 'shemp', 'yyy', 'zzz']
   print list.index('curly')    ## 2
 
   list.remove('curly')         ## search and remove that element
-  list.pop(1)                  ## removes and returns 'larry'
   print list  ## ['xxx', 'moe', 'shemp', 'yyy', 'zzz']
-
-list = [1, 2, 3]
-  print list.append(4)   ## NO, does not work, append() returns None
-  ## Correct pattern:
-  list.append(4)
-  print list  ## [1, 2, 3, 4]
 
 list = ['larry', 'curly', 'moe']
 if 'curly' in list: #in addition to the for-loop usage
@@ -49,21 +36,14 @@ if 'curly' in list: #in addition to the for-loop usage
     % (3, 'huff', 'puff', 'house'))
 
 
-a, b, c = 1, 2L, "john"
-#casting
-float(value)
-bool(value) # Will only return false for an empty string or an int=0
 list_of_ints = [int(i) for i in list_of_strings]
 
-# With newline
-print("Hello World");
 # Without newline
 print("Hello World", end='')
 
 #scala style yield is possible, called generator here
 
-name = input("Enter name\n")
-age = int(input("Enter age\n"))
+#all input is just gotten from the input() function, which you do not need to import. As a parameter to the input function, you give the prompt for the user.
 print("Name is ", name ," and age is ", age)
 
 # replace some values
@@ -91,10 +71,6 @@ tel = {'jack': 4098, 'sape': 4139}
 'jack' not in tel
 
 del tel['sape']
-
-#swap values
-x, y = 1, 2
-x, y = y, x
 
 #Combining a list of strings into a single one
 sentence_list = ["my", "name", "is", "George"]
@@ -219,12 +195,6 @@ contents = f.read()
 print(contents)
 f.close()
 
-# write to a file
-f = open("/tmp/bar.txt","r+") # open for both read and write
-f.write("This is a test")
-contents = f.read()
-print(contents) # will print "This is a test"
-
 # but there's a built in function for that! and more!
 print(sum(L3)) # sum of all items in L3
 print(len(L3)) # length of L3
@@ -309,17 +279,13 @@ num = 4
 s = "{} squared is {}".format(num, num**2)
 print(s)  # 4 squared is 16
 
-num = 4
-s = "%d squared is %f" % num, num**2
-print(s)  # 4 squared is 16
-
-list.append(elem) # adds a single element to the end of the list. Common error: does not return the new list, just modifies the original.
-list.insert(index, elem) # inserts the element at the given index, shifting elements to the right.
 list.extend(list2) # adds the elements in list2 to the end of the list. Using + or += on a list is similar to using extend().
 list.index(elem) # searches for the given element from the start of the list and returns its index. Throws a ValueError if the element does not appear (use "in" to check without a ValueError).
 list.remove(elem) # searches for the first instance of the given element and removes it (throws ValueError if not present)
 list.sort() # sorts the list in place (does not return it). (The sorted() function shown later is preferred.)
 list.reverse() # reverses the list in place (does not return it)
-list.pop(index) # removes and returns the element at the given index. Returns the rightmost element if index is omitted (roughly the opposite of append()).
+new_grades = [x+10 for x in grades]
+
+even_nums = [x for x in nums if x%2==0]
 
 

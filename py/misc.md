@@ -10,11 +10,7 @@ Suppose you've got a module "binky.py" which contains a "def foo()". The fully q
 
 we recommend the original form with the fully-qualified names because it's a lot easier to determine where a function or attribute came from.o
 
-String literals can be enclosed by either double or single quotes, although single quotes are more commonly used
-
 Unlike Java, the '+' does not automatically convert numbers or other types to string form. The str() function converts values to a string form so they can be combined with other strings
-
-There is no ++ operator, but +=, -=, etc. work.
 
  A "raw" string literal is prefixed by an 'r' and passes all the chars through without special treatment of backslashes, so r'x\nx' evaluates to the length-4 string 'x\nx'. A 'u' prefix allows you to write a unicode string literal
 
@@ -29,8 +25,6 @@ can use == to compare strings
 
 None, False, 0, "", (), [] are all False. Others are true
 
-In Python, all input is just gotten from the input() function, which you do not need to import. As a parameter to the input function, you give the prompt for the user.
-
 dir is a function that will not be useful in your actual code, per se. However, it’s exceptionally useful when you’re dealing with some kind of new object, and you want to find out what kind of attributes it has.
 
 help() is a function similar to dir(), in that it’s useful for debugging and quick testing. When you pass it a function, it will show you the docstring help text for that function.
@@ -38,10 +32,6 @@ help() is a function similar to dir(), in that it’s useful for debugging and q
 pop() is an interesting method - it returns the last item of a list, but also removes it from the list
 
 Sort of like range, reversed takes in a list, and returns an iterator with the reverse of a list. an iterator is another kind of lazy object that you can loop over.
-
-new_grades = [x+10 for x in grades]
-
-even_nums = [x for x in nums if x%2==0]
 
 You can also always convert a list to a tuple using the tuple, or a tuple to a list using the list function
 
