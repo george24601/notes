@@ -5,3 +5,6 @@ SHOW ENGINE INNODB STATUS
 SHOW PROESSLIST
 SHOW STATUS LIKE '%lock%'
 slowlog 
+
+-- cadinality is done by sampling and predicting , see if index data matches the reality
+show index from t

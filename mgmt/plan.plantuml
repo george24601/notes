@@ -3,6 +3,48 @@
 database Aurora_M
 database Aurora_S
 database TiDB_M
+database TiDB_S
+
+TiDB_M <-- Aurora_M: binlog to
+Aurora_M --> Aurora_S : binlog to
+TiDB_M --> TiDB_S: binlog to
+
+[sync-diff by pingcap] as sdp
+[sync-diff by paypay] as sd
+
+sd --> Aurora_S
+sd --> TiDB_S
+
+sdp --> TiDB_M
+sdp --> TiDB_S
+
+
+@enduml
+
+
+@startuml
+
+database Aurora_M
+database Aurora_S
+database TiDB_M
+
+TiDB_M <-- Aurora_M: binlog to
+Aurora_M --> Aurora_S : binlog to
+
+[sync-diff] as sd
+
+sd --> Aurora_S
+sd --> TiDB_M
+
+
+@enduml
+
+
+@startuml
+
+database Aurora_M
+database Aurora_S
+database TiDB_M
 database Wallet
 
 [cross domain checker] as dc

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+mysql -h paylite-payment-db1-stg-rw.paypay-corp.co.jp -u ops_sync_diff -p
+
+mysql -h paylite-payment-db1-stg-rw.paypay-corp.co.jp -u ops_sync_diff -p
+
 kubectl label "$item"
 $(kubectl get "$item" --output=json | jq -r -S '.metadata.labels | to_entries | .[] | select (.key | contains ("zone")) | "zone=\(.value)"' 2>/dev/null);
 

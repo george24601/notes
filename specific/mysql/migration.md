@@ -3,5 +3,3 @@
  default checksum algo is CRC32
 
 remember to turn on and off read only mode during db migration
-
-If checksum mismatches are found, you would normally restore the tablespace from backup or start the server and attempt to use mysqldump to make a backup of the tables within the tablespace.
