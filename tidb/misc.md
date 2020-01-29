@@ -1,3 +1,7 @@
+The recommended startup sequence: PD -> TiKV -> Pump -> TiDB -> Drainer
+mysql dump 4-5G per min
+loader 28G/h lightining 150-200G/h
+
 HB a common source to let raftstore CPU become bottleneck - propose wait duration: time between sending the request to raftstore to when the raftstore processes the request
 
 raft-base-tick-interval - increase heartbeat interval
@@ -9,8 +13,6 @@ txn-local-latchs: default is turned on to pre-emptive txn conflict
 lock-free snapshot read: change to snapshot version,i.e., lock free. History read is possible by setting @@tidb_snapshot
 
 isolation: snapshot isolation (roughly RR)
-
-dumper + loader for full backup restore => tidb-lighting: 1T data in 6 hours ingestion
 
 pd harder to scale up/down
 
@@ -30,5 +32,3 @@ based on experience, 400M rows of data takes 10min+ to analyze (default setting,
 A root task refers to a computing task that is executed in TiDB.
 
 The PD TSO Wait Duration actually contains the PD TSO RPC Duration. The “Wait” here is actually the asynchronous wait time, that is, the time from the asynchronous acquisition of the TSO to the time when the transaction actually needs to use the TSO to read/write data. 
-
-From me: PD TSO RPC duration, 99 at 1.74 ms makes way more sense

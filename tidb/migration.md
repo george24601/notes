@@ -1,42 +1,57 @@
-sync diff is often done by xor
+DM supports both full data migration and delta migration, DM uses loader instead of TiDB lightning?
 
-business and traffic replay
+DM will filter certain binlog event, e.g., drop, truncate table
 
-traffic replay via dbreplay to tidb, which sits on the nginx cluster
+loader will use a by default tidb_loader db as checkpoint db
 
-pump and drainer from mysql to tidb, and then tidb to old mysql master
+note lighting is faster for full import - 7 hours for 1 TB
 
-timestamp based dbcompare 
-read-write traffic grey at the same time, by the db, new data in tidb is synced back to mysql
+lightning -> tikv importer, which talks to the PD server, note that tidb-lightening does not talk to PD directly
 
-failover to the aurora in case of most critical error
+lightning and importer are resource intensive, recommend two separate servers
 
-### Steps
+Data migration is the next gen syncer for delta migration
 
-* Build the TiDB cluster 
-  * disable explicit txn retry
-  * Confirm GC time
-  * Set `max_execution_time`
-* DM into TiDB with real time.
-  * Diff by time or int id 	
-  * Use `BIT_XOR` over all rows over a time period
-  * Can reuse sync-diff inspector, what if the data keeps changing?
-* Option1:  dbreplay real time traffic replay. 
-  * decrypt mysql packets on the network drive
-  * analyze MySql protocol
-  * record and replay
-  * need to check for error and latency, and verify response
-* Option2: stop data sync, use traffic replay tool to copy the online traffic and read/write tidb/mysql at the same time
-  * write to mysql to return the incremental id, and use that id to write to tidb
-* Option 3: double write at the applicaiton level
-* Domain check
-* Setup tidb DR cluster
 
-Periodically check payment endpoint to see if TiDB is available
+* try to limit mydumper file to 64MB
 
-mysqldump weekly, drainer PB binlog backup every 5 mins
+### reparo
 
-mysql dump 4-5G per min
-loader 28G/h lightining 200G/h
+replicate-do-db specifies the database for recovery. If it is not set, all the databases are to be recovered.
+replicate-do-table specifies the table for recovery. If it is not set, all the tables are to be recovered.
+
+The data exported from MySQL contains a metadata file which includes the position information
+The position information (Pos: 930143241) needs to be stored in the syncer.meta file for syncer to synchronize:
+The syncer.meta file only needs to be configured once when it is first used. The position will be automatically updated when binlog is synchronized.
+
+```syncer toml
+
+log-level = "info"
+log-file = "syncer.log"
+log-rotate = "day"
+
+server-id = 101
+
+meta = "./syncer.meta"
+worker-count = 16
+batch = 1000
+flavor = "mysql"
+
+# The testing address for pprof. It can also be used by Prometheus to pull Syncer metrics.
+status-addr = ":8271"
+
+# If you set its value to true, Syncer stops and exits when it encounters the DDL operation.
+stop-on-ddl = false
+
+# max-retry is used for retry during network interruption.
+max-retry = 100
+```
+
+
+###mydumper output
+1. metadata: start, end time, and binlog file postions
+2. table data: every table has a file
+3. table schemas
+4. binary logs under binlog_snapshot
 
 

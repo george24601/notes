@@ -1,3 +1,32 @@
+A decision is a judgement. It is a choice between alternatives. It is rarely a choice between right and wrong.
+The effective executive knows that people do not start out with the search for facts. They start out with an opinion.
+People inevitably start out with an opinion: to ask them to search for facts first is even undesirable.
+The only rigorous method, the only one that enables us to test an opinion against reality, is based on the clear recognition that opinions came first-and that is the way it should be.
+The effective executive encourages opinions. He then asks: “What would the facts have to be to make this opinion tenable?”
+
+
+There is a fairly reliable symptom of overstaffing. If the senior people in the group spend more than one-tenth of their time on problems of human relations, on feuds and frictions, on jurisdictional disputes, then the workforce is almost certainly too large.
+In a lean organization, people have room to move without colliding with one another, and can do the work without having to explain it all the time.
+The excuse for overstaffing is always the need for a specialist in the team just in case we need him. One should only have on a team the knowledges and skills that are needed day in day out for the bulk of the work. Specialists who are needed once in a while should always remain outside, and hired on contract.
+
+As a rule, meetings should never be allowed to become the main demand on an executive’s time.
+
+Too many meetings signify that work that should be in one job or one component is spread over several jobs or several components. They signify that the responsibility is diffused.
+
+Senior executives rarely have as much as one quarter of their time truly at their disposal and available for the important matters, the matters that contribute, the matters they are being paid for.
+The higher up an executive, the larger will the proportion of his time that is not under his control and not spent on contribution. Therefore, the effective executive knows that he has to consolidate his discretionary time (the time that makes real contribution).
+
+He knows that he needs large chunks of time and small chunks are of no value at all.
+Some senior men work at home one day a week: a common method for time consolidation.
+Other people schedule all the operating work — meetings, reviews, problem session — for two days a week, and set aside mornings of the remaining days for consistent, containing work on major issues.
+Effective executives start by ESTIMATING how much discretionary time they can realistically call their own. Then they set aside continous time in the appropriate manner.
+
+They ask themselves, “why are we having this meeting?””Do we want a decision, or do we want to inform, or do we want to make clear to ourselves what we should be doing?”
+They insist that the purpose be thought through and spelt out before a meeting is called.
+The effective executive always states at the outset of a meeting the specific purpose and contribution it is to achieve. He does not allow a meeting called to inform to degenerate into a brainstorming session in which everyone shares a bright idea.
+
+He always at the end of the meetings, goes back to the opening statement and relates the final conclusions to the original intent
+
 structured procastination - work on something important but not urgent!
 
 if you are checking your phone couple of seconds, it is a sign you are tired, fatigued

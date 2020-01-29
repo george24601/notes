@@ -10,13 +10,13 @@ Aurora_M --> Aurora_S : binlog to
 TiDB_M --> TiDB_S: binlog to
 
 [sync-diff by pingcap] as sdp
-[sync-diff by paypay] as sd
+[JSON-SD] as sd
 
 sd --> Aurora_S
 sd --> TiDB_S
 
-sdp --> TiDB_M
-sdp --> TiDB_S
+sdp --> TiDB_M: optional
+sdp --> TiDB_S: optional
 
 
 @enduml
