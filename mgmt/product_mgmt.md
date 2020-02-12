@@ -1,3 +1,7 @@
+PMF: 
+at least 100 target clients
+find one or two pilots - more likely to be small companeis than larger ones
+
 There are two types of ARPU: per new account and per existing account. ARPU per new account refers to metrics based on new accounts appearing after the subscription plan or product price was changed. ARPU per existing account involves the data from accounts established before the price change.
 
 Sales & marketing spendings for a period of time / total # of customers generated for a period of time = CAC

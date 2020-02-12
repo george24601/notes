@@ -14,4 +14,3 @@ After that’s done, my next measure of a team meeting is: did we make tangible 
 
 Third, these approaches required changing a habitual behavior, which is notoriously difficult to change. Nudging is particularly effective at shaping one-off behaviors, such as getting flu shots, but it hasn’t yet been shown to be as reliably effective at changing decisions that require daily actions, like exercise.
 
-

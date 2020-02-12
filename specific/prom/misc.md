@@ -4,12 +4,7 @@ run identical Prometheus servers on two or more separate machines. Identical ale
 
 streams of timestamped values belonging to the same metric and the same set of labeled dimensions. Besides stored time series, Prometheus may generate temporary derived time series as the result of queries.
 
-Every time series is uniquely identified by its metric name and optional key-value pairs called labels.
-
 P*'s pushes alerts to alert manager
-
-Instant vector - a set of time series containing a single sample for each time series, all sharing the same timestamp
-Range vector - a set of time series containing a range of data points over time for each time series
 
 in the simplest form, only a metric name is specified. This results in an instant vector containing elements for all time series that have this metric name.
 
@@ -18,7 +13,6 @@ Range vector literals work like instant vector literals, except that they select
 when constructing queries over unknown data, always start building the query in the tabular view of Prometheus's expression browser until the result set seems reasonable (hundreds, not thousands, of time series at most).
 
 where a bare metric name selector like api_http_requests_total could expand to thousands of time series with different labels.
-
 
 50% storage and 80% CPU are used by a couple high dimension metrics
 
