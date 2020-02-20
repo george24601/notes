@@ -1,3 +1,5 @@
+mysql dump 4-5G per min
+loader 28G/h lightining 150-200G/h
 DM supports both full data migration and delta migration, DM uses loader instead of TiDB lightning?
 
 DM will filter certain binlog event, e.g., drop, truncate table

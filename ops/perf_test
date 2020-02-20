@@ -1,0 +1,20 @@
+#!/bin/bash
+# do not FIO HD directly, very easy to destroy it!
+fio -ioengine=libaio -bs=32k -direct=1 -thread -rw=read  -size=10G -filename=test -name="max throughput" -iodepth=4 -runtime=60
+
+# dd for disk performance
+dd bs=4k count=250000 oflag=direct if=/dev/zero of=./dd_test.txt
+
+# sysbench for disk performance
+sysbench --test=fileio --file-num=16 --file-block-size=16384 --file-total-size=2G prepare
+sysbench --test=fileio --file-num=16 --file-block-size=16384 --file-total-size=2G --num-threads=4 --max-requests=100000000 --max-time=180 --file-test-mode=seqwr --file-extra-flags=direct run
+sysbench --test=fileio --file-num=16 --file-block-size=16384 --file-total-size=2G --num-threads=4 --max-requests=100000000 --max-time=180 --file-test-mode=seqwr --file-extra-flags=direct clean
+
+# scp for network speed
+dd if=/dev/zero bs=2M count=2048 of=./test
+scp ./test ip ip
+
+# dd + pv + nc
+dd if=/dev/zero bs=1M count=1024 of=./test
+pv test| nc 10.0.1.8 5433 #req test
+nc -vv -l -p 5433 > test #recv test

@@ -1,6 +1,6 @@
+Note speical settings needed to truly enable prepared statements. Most likely you do not turn it on yet
+
 The recommended startup sequence: PD -> TiKV -> Pump -> TiDB -> Drainer
-mysql dump 4-5G per min
-loader 28G/h lightining 150-200G/h
 
 HB a common source to let raftstore CPU become bottleneck - propose wait duration: time between sending the request to raftstore to when the raftstore processes the request
 
