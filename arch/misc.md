@@ -1,3 +1,9 @@
+#cookie
+set a cookie: 
+set-cookie header in response, may have may set-cookie headers, e.g., session cookie in its own set-cookie header
+Later on when browser will put the content of the cookie in Cookie header in request
+auto-fill: encodes preferences in acooke and sends the cookie back tot he browser
+
 99.9%: LT 9 hours per year 
 
 reverse proxy layer: nginx keepalived + virtual ip
