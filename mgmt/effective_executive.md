@@ -1,3 +1,63 @@
+### Chapter 4 Making Strength Productive
+
+The effective executive fills posi- tions and promotes on the basis of what a man can do. He does not make staffing decisions to minimize weaknesses but to maxi- mize strength.
+
+The executive who is concerned with what a man cannot do rather than with what he can do, and who therefore tries to avoid weakness rather than make strength effective is a weak man him- self. He probably sees strength in others as a threat to himself.
+
+To try to build against weakness frustrates the purpose of organization. Organization is the specific instrument to make human strengths redound to performance while human weak- ness is neutralized and largely rendered harmless. The very strong neither need nor desire organization. They are much better off working on their own.
+
+The main reason is that the immediate task of the executive is not to place a man; it is to fill a job. The tendency is therefore to start out with the job as being a part of the order of nature. Then one looks for a man to fill the job. It is only too easy to be misled this way into looking for the “least misfit” —the one man who leaves least to be desired. And this is invariably the medioc- rity.
+The widely advertised “cure” for this is to structure jobs to fit the personalities available. But this cure is worse than the dis- ease—except perhaps in a very small and simple organization. Jobs have to be objective; that is, determined by task rather than by personality.
+
+Jobs in an organization are interdependent and interlocked. One can- not change everybody’s work and responsibility just because one has to replace a single man in a single job. To structure a job to a person is almost certain to result in the end in greater discrep- ancy between the demands of the job and the available talent. It results in a dozen people being uprooted and pushed around in order to accommodate one.
+
+To tolerate diversity, relationships must be task-focused rather than personality-focused. Achievement must be measured against objective criteria of contribution and per- formance. This is possible, however, only if jobs are defined and structured impersonally. Otherwise the accent will be on “Who is right?” rather than on “What is right?” In no time, personnel decisions will be made on “Do I like this fellow?” or “Will he be acceptable?” rather than by asking “Is he the man most likely to do an outstanding job?”
+
+ Any job that has defeated two or three men in succession, even though each had performed well in his previous assignments, must be assumed unfit for human beings. It must be redesigned.
+
+All one can measure is performance. And all one should measure is performance. This is another reason for making jobs big and challenging. It is also a reason for thinking through the contribution a man should make to the results and the perform- ance of his organization.
+
+Effective executives rarely suffer from the delusion that two mediocrities achieve as much as one good man. They have learned that, as a rule, two mediocrities achieve even less than one mediocrity—they just get in each other’s way. 
+
+They are above all intolerant of the argument: “I can’t spare this man; I’d be in trouble without him.” They have learned that there are only three explanations for an “indispensable man”: He is actually incompetent and can only survive if carefully shielded from demands; his strength is misused to bolster a weak superior who cannot stand on his own two feet; or his strength is misused to delay tackling a serious problem if not to conceal its existence.
+
+But Marshall also insisted that to relieve a man from command was less a judgment on the man than on the com- mander who had appointed him. “The only thing we know is that this spot was the wrong one for the man,” he argued. “This does not mean that he is not the ideal man for some other job. Appointing him was my mistake, now it’s up to me to find what he can do.”
+
+Marshall was only concerned with weaknesses when they limited the full development of a man’s strength. These he tried to overcome through work and career opportunities.
+
+This should be elementary prudence. Contrary to popular legend, subordinates do not, as a rule, rise to position and prominence over the prostrate bodies of incompetent bosses. If their boss is not promoted, they will tend to be bottled up behind him. And if their boss is relieved for incompetence or failure, the successor is rarely the bright, young man next in line. He usually is brought in from the outside and brings with him his own bright, young men. Conversely, there is nothing quite as conducive to success, as a successful and rapidly promoted superior.
+
+Subordinates typically want to “reform” the boss. The able senior civil servant is inclined to see himself as the tutor to the newly appointed political head of his agency. He tries to get his boss to overcome his limitations. The effective ones ask instead: “What can the new boss do?” And if the answer is: “He is good at relationships with Congress, the White House, and the public,” then the civil servant works at mak- ing it possible for his minister to use these abilities.
+
+People who are both readers and listen- ers—trial lawyers have to be both, as a rule—are exceptions. It is generally a waste of time to talk to a reader. He only listens after he has read. It is equally a waste of time to submit a voluminous report to a listener. He can only grasp what it is all about through the spoken word.
+
+The adaptation needed to think through the strengths of the boss and to try to make them productive always affects the “how” rather than the “what.” It concerns the order in which dif- ferent areas, all of them relevant, are presented, rather than what is important or right. If the superior’s strength lies in his political ability in a job in which political ability is truly relevant, then one presents to him first the political aspect of a situation. This enables him to grasp what the issue is all about and to put his strength effectively behind a new policy.
+
+The assertion that “somebody else will not let me do any- thing” should always be suspected as a cover-up for inertia. 
+
+The effective executive knows that it is easier to raise the performance of one leader than it is to raise the per- formance of a whole mass. He therefore makes sure that he puts into the leadership position, into the standard-setting, the per- formance-making position, the man who has the strength to do the outstanding, the pace-setting job. This always requires focus on the one strength of a man and dismissal of weaknesses as irrel- evant unless they hamper the full deployment of the available strength.
+
+
+### Chapter 3 What Can I Contribute?
+
+The great majority of executives tend to focus downward. They are occupied with efforts rather than with results. They worry over what the organization and their superiors “owe” them and should do for them. And they are conscious above all of the authority they “should have.” As a result, they render themselves ineffectual.
+
+“And what do you do that justifies your being on the pay- roll?” The great majority, he reports, answer: “I run the accounting department,” or “I am in charge of the sales force.” Indeed, not uncommonly the answer is, “I have 850 people working under me.” Only a few say, “It’s my job to give our managers the information they need to make the right decisions,” or “I am responsible for finding out what products the customer will want tomorrow,” or “I have to think through and prepare the decisions the president will have to face tomorrow.”
+
+“Contribution,” as the two illustrations just given show, may mean different things. For every organization needs per- formance in three major areas: It needs direct results; building of values and their reaffirmation; and building and develop- ing people for tomorrow. If deprived of performance in any one of these areas, it will decay and die. 
+
+The most common cause of executive failure is inability or unwillingness to change with the demands of a new position. The executive who keeps on doing what he has done successfully before he moved is almost bound to fail. Not only do the results change to which his contribution ought to direct itself. The rela- tive importance between the three dimensions of performance changes. The executive who fails to understand this will sud- denly do the wrong things the wrong way—even though he does exactly what in his old job had been the right things done the right way.
+
+In fact, he can, as a rule, be effective only if he has learned to do one thing very well; that is, if he has special- ized. By itself, however, a specialty is a fragment and sterile. Its output has to be put together with the output of other specialists before it can produce results.
+
+But executives who take responsibility for contribution in their own work will as a rule demand that their subordinates take responsibility too. They will tend to ask their men: “What are the contributions for which this organization and I, your supe- rior, should hold you accountable? What should we expect of you? What is the best utilization of your knowledge and your ability?” And then communication becomes possible, becomes indeed easy.
+
+The executive who focuses on contribution also stimulates others to develop themselves, whether they are subordinates, col- leagues, or superiors. He sets standards which are not personal but grounded in the requirements of the task. 
+
+They ask themselves: “Why are we having this meeting? Do we want a decision, do we want to inform, or do we want to make clear to ourselves what we should be doing?” They insist that the purpose be thought through and spelled out before a meeting is called, a report asked for, or a presentation organized. They insist that the meeting serve the contribution to which they have committed themselves.
+
+
+
 ### Chapter 2 Know Thy Time
 Effective executives, in my observation, do not start with their tasks. They start with their time. And they do not start out with planning. They start by finding out where their time actu- ally goes. Then they attempt to manage their time and to cut back unproductive demands on their time. Finally they consoli- date their “discretionary” time into the largest possible continu- ing units. This three-step process:
 • recording time,

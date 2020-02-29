@@ -1,3 +1,41 @@
+
+### older starts
+block-cache? write-buffer?
+
+leader sends snapshot to follower - common cause to stress io
+
+store maintains the local peers of different regions,which will drive the tick (by default every 100ms)
+
+generate and apply snapshots are slow, that is why they are async
+region_heartbeat: report to PD, e.g., # of peers
+
+store_heartbeat: report to PD, e.g., current free space
+
+ask_split/report_split: region report to PD before and after the split
+
+tikv and etcd membership change is slightly different from the Raft paper: apply the config change log first, and then config change
+
+leader heartbeats once every 10 ticks to follower, if follower didn't receive heartbeat after a while, it restarts election tikv defaults to 50. the tick is the unit of time (configurable)
+
+tikv tick is 100 ms 
+
+step: receives messages from other raft nodes
+
+advance: tell raft ready to go to the next step
+
+when external discovers that RawNode is ready, save snapshot to storage, and asyncly apply snapshot data to statemachine(snapshot is in general huge)
+
+when split the region, apply the split region to the raft statement, once it is successfully applied, we know the op is successfully copied. then elect leader for the new region
+
+raft rebalance: add replica, transfer leadership, remove local replica
+
+when the leader has region stale error, tikv client will request from metadata the renew the routing cache
+
+heartbeats to pd with region info, PD's etcd is just cached routing info
+
+### older ends
+
+
 Each TiKV contains two RocksDB instances. One of them is used to store Raft Log, which we call Raft RocksDB, and the other is to store the actual data, which we call KV RocksDB.
 
 A TiKV store contains multiple Regions. In Raft RocksDB, we use the Region ID as the prefix of the key, which is combined with Raft Log ID to uniquely identify a Raft Log
