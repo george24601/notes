@@ -1,3 +1,108 @@
+###  Conclusion: Effectiveness Must Be Learned
+
+recording where the time goes. This is mechanical if not mechanistic. The executive need not even do this himself; it is better done by a sec- retary or assistant. Yet if this is all the executive ever does, he will reap a substantial improvement. The results should be fast, if not immediate. If done with any continuity, recording one’s time will also prod and nudge a man toward the next steps for greater effectiveness.
+
+### Chapter 7 Effective Decisions
+
+It is at best a choice between “almost right” and “probably wrong”—but much more often a choice between two courses of action neither of which is provably more nearly right than the other.
+
+To determine what is a fact requires first a decision on the criteria of relevance, espe- cially on the appropriate measurement. This is the hinge of the effective decision, and usually its most controversial aspect
+
+The understanding that underlies the right decision grows out of the clash and conflict of divergent opinions and out of the seri- ous consideration of competing alternatives.
+
+Not to have an opinion after having been exposed to an area for a good long time would argue an unobservant eye and a sluggish mind.
+
+We know what to do with hypotheses—one does not argue them; one tests them. One finds out which hypotheses are tenable, and therefore worthy of serious consideration, and which are eliminated by the first test against observable experi- ence.
+
+who voice an opinion also take responsibility for defining what factual findings can be expected and should be looked for.
+
+The traditional measurement reflects yesterday’s deci- sion. That there is need for a new one normally indicates that the measurement is no longer relevant.
+
+Finding the appropriate measurement is thus not a mathe- matical exercise. It is a risk-taking judgment.
+
+Effective executives therefore insist on alternatives of meas- urement—so that they can choose the one appropriate one.
+
+The first rule in decision-making is that one does not make a decision unless there is disagreement.
+
+ail alone understood that this is the ineffectual way to fight a degenerative condi- tion. Even if one wins every battle, one can never win the war. He saw that drastic action was needed to create a new situation. 
+
+• Act if on balance the benefits greatly outweigh cost and risk; and
+• Act or do not act; but do not “hedge” or compromise.
+
+“Is there any reason to believe that additional study will produce anything new? And is there reason to believe that the new is likely to be relevant?” And if the answer is “no”—as it usually is—the effective executive does not permit another study.
+
+Executives are not paid for doing things they like to do. They are paid for getting the right things done—most of all in their specific task, the making of effective decisions
+
+“It is our aim to give 90 per cent of our customers 90 per cent fulfillment of delivery promises” sounds precise. It is actually meaningless, as one finds out when one tries to convert it into the step-by- step moron logic of the computer.
+
+
+
+
+### Chapter 6 The Elements of Decision- making
+
+By far the most common mistake is to treat a generic situa- tion as if it were a series of unique events; that is, to be pragmatic when one lacks the generic understanding and principle. This inevitably leads to frustration and futility.
+
+Equally common is the mistake of treating a new event as if it were just another example of the old problem to which, there- fore, the old rules should be applied.
+
+The effective decision-maker, therefore, always assumes ini- tially that the problem is generic.
+He always assumes that the event that clamors for his atten- tion is in reality a symptom. He looks for the true problem. He is not content with doctoring the symptom alone.
+
+And if the event is truly unique, the experienced decision- maker suspects that this heralds a new underlying problem and that what appears as unique will turn out to have been simply the first manifestation of a new generic situation.
+
+1. The clear realization that the problem was generic and could only be solved through a decision which established a rule, a principle;
+2. The definition of the specifications which the answer to the problem had to satisfy, that is, of the “boundary condion
+tions”;
+3. The thinking through what is “right,” that is, the solution
+which will fully satisfy the specifications before attention is given to the compromises, adaptations, and concessions needed to make the decision acceptable;
+4. The building into the decision of the action to carry it out; 5. The “feedback” which tests the validity and effectiveness of
+the decision against the actual course of events.
+
+This example shows why the incomplete explanation is often more dangerous than the totally wrong explanation.o
+
+And if the event is truly unique, the experienced decision- maker suspects that this heralds a new underlying problem and that what appears as unique will turn out to have been simply the first manifestation of a new generic situation.
+
+He too improvises, of course. But he asks himself every time, “If I had to live with this for a long time, would I be willing to?”
+And if the answer is “No,” he keeps on working to find a more general, a more conceptual, a more comprehensive solution— one which establishes the right principle.
+
+“A country with many laws is a country of incompetent lawyers,” says an old legal proverb. It is a country which attempts to solve every problem as a unique phenomenon, rather than as a special case under general rules of law. Similarly, an executive who makes many decisions is both lazy and ineffectual.
+
+My only instruction to you is to put down what you think is right as you see it. Don’t you worry about our reac- tion. Don’t you worry about whether we will like this or dis- like that. And don’t you, above all, concern yourself with the compromises that might be needed to make your recom- mendations acceptable. There is not one executive in this company who does not know how to make every single con- ceivable compromise without any help from you. But he can’t make the right compromise unless you first tell him what ‘right’ is.”
+
+My only instruction to you is to put down what you think is right as you see it. Don’t you worry about our reac- tion. Don’t you worry about whether we will like this or dis- like that. And don’t you, above all, concern yourself with the compromises that might be needed to make your recom- mendations acceptable. There is not one executive in this company who does not know how to make every single con- ceivable compromise without any help from you. But he can’t make the right compromise unless you first tell him what ‘right’ is.”
+
+
+
+### Chapter 5 First Things First
+Some do their best work when doing two tasks in parallel at the same time, thus providing a change of pace. This presupposes however that they give each of the two tasks the minimum quantum needed to get anything done. 
+
+The people who get nothing done often work a great deal harder. In the first place, they underestimate the time for any one task. They always expect that everything will go right. 
+
+Yesterday’s successes, however, always linger on long beyond their productive life. Even more danger- ous are the activities which should do well and which, for some reason or other, do not produce. These tend to become, as I have explained elsewhere “investments in managerial ego” and sacred.
+
+Above all, the effective executive will slough off an old activ- ity before he starts on a new one. This is necessary in order to keep organizational “weight control.”
+
+The alternative—to “hire in” new people for new tasks—is too risky. One hires new people to expand on already established and smoothly running activity. But one starts something new with people of tested and proven strength, that is, with veterans. Every new task is such a gamble—even if other people have done the same job many times before—that an experienced and effec- tive executive will not, if humanly possible, add to it the addi- tional gamble of hiring an outsider to take charge.
+
+If the pressures rather than the executive are allowed to make the decision, the important tasks will predictably be sacrificed. Typically, there will then be no time for the most time-consum- ing part of any task, the conversion of decision into action.
+
+Another predictable result of leaving control of priorities to the pressures is that the work of top management does not get done at all. That is always postponable work, for it does not try to solve yesterday’s crises but to make a different tomorrow. And the pressures always favor yesterday. In partic- ular, a top group which lets itself be controlled by the pres- sures will slight the one job no one else can do. It will not pay attention to the outside of the organization. It will therefore lose touch with the only reality, the only area in which there are results. For the pressures always favor what goes on inside. They always favor what has happened over the future, the cri- sis over the opportunity, the immediate and visible over the real, and the urgent over the relevant.
+
+The reason why so few executives concen- trate is the difficulty of setting “posteriorities”—that is, deciding what tasks not to tackle—and of sticking to the decision.
+
+Courage rather than analysis dictates the truly important rules for identifying priorities:
+• Pick the future as against the past;
+• Focus on opportunity rather than on problem;
+• Choose your own direction—rather than climb on the
+bandwagon; and
+• Aim high, aim for something that will make a difference,
+rather than for something that is “safe” and easy to do.
+
+Similarly, in business the successful companies are not those that work at developing new products for their existing line but those that aim at innovating new technologies or new businesses. 
+
+The effective executive does not, in other words, truly com- mit himself beyond the one task he concentrates on right now. Then he reviews the situation and picks the next one task that now comes first.
+
+
+
 ### Chapter 4 Making Strength Productive
 
 The effective executive fills posi- tions and promotes on the basis of what a man can do. He does not make staffing decisions to minimize weaknesses but to maxi- mize strength.
