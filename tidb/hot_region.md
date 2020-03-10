@@ -1,4 +1,6 @@
-Use split region to pre-split hot regions
+Use split region to pre-split hot regions, otherwise,even though the id is evenly distributed, the newly split region leaders will most likely stay on the same store
+
+conversely, need to turn on region merge if deletion is common
 
 ### To split region
 1. Leader peer sends request to PD
