@@ -18,10 +18,6 @@ DBReplay
 * based on gopacket
 * tcp copy doesn't work for long connection
 
-Example prod:
-* c5.4xlarge x4: 16, 32, 8GB (EBS) (for both TiDB and PD)
-* i3.4xlarge x10: 16, 122, 1900GB x2 (ephemeral) (for TiKV)
-
 TiDB is going to be deployed in 2 parts using a Helm Chart; tidb-operator and tidb-cluster.
 tidb-operator consists of:
 ReplicaSets of:

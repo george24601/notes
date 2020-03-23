@@ -5,3 +5,36 @@ addr="127.0.0.1:8250"
 advertise-addr="127.0.0.1:8250"
 pd-urls="http://127.0.0.1:2379"
 
+#dm-master.toml
+# log configuration
+log-file = "dm-master.log"
+# DM-master listening address
+master-addr = ":8261"
+# DM-worker deployment. It will be refined when the new deployment function is available.
+[[deploy]]
+source-id = "mysql-replica-01"
+dm-worker = "172.16.10.72:8262"
+[[deploy]]
+source-id = "mysql-replica-02"
+dm-worker = "172.16.10.73:8262"
+
+#dm-worker.toml
+# Worker Configuration.
+# Log configuration.
+log-file = "dm-worker.log"
+# DM-worker listen address.
+worker-addr = ":8262"
+# Represents a MySQL/MariaDB instance or a replication group.
+source-id = "mysql-replica-01"
+# Server id of slave for binlog replication.
+# Each instance (master and slave) in replication group should have different server id.
+server-id = 101
+# flavor: mysql/mariadb
+flavor = "mysql"
+# The directory that used to store relay log.
+relay-dir = "./relay_log"
+[from]
+host = "127.0.0.1"
+user = "root"
+password = "Up8156jArvIPymkVC+5LxkAT6rek"
+port = 3306

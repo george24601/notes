@@ -1,8 +1,5 @@
 mysql dump 4-5G per min
 loader 28G/h lightining 150-200G/h
-DM supports both full data migration and delta migration, DM uses loader instead of TiDB lightning?
-
-DM will filter certain binlog event, e.g., drop, truncate table
 
 loader will use a by default tidb_loader db as checkpoint db
 
@@ -11,8 +8,6 @@ note lighting is faster for full import - 7 hours for 1 TB
 lightning -> tikv importer, which talks to the PD server, note that tidb-lightening does not talk to PD directly
 
 lightning and importer are resource intensive, recommend two separate servers
-
-Data migration is the next gen syncer for delta migration
 
 
 * try to limit mydumper file to 64MB

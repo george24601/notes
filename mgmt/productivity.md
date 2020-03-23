@@ -23,3 +23,7 @@ The best way is always to stop when you are going good and when you know what wi
 Combing through an email backlog or discussing strategy on a forum is time-consuming and ultimately ineffective. 
 
 Duckworth first recommends taking a future-oriented approach to your day, such as planning breaks and the time slots for checking emails in advance. If you can refrain from resigning to your urges before the time you’ve allotted for yourself, you may achieve a greater handle on your overall self-control.
+
+I've found there are two types of thoughts especially worth avoiding — thoughts like the Nile Perch in the way they push out more interesting ideas. One I've already mentioned: thoughts about money. Getting money is almost by definition an attention sink. The other is disputes. 
+
+Turning the other cheek turns out to have selfish advantages. Someone who does you an injury hurts you twice: first by the injury itself, and second by taking up your time afterward thinking about it. If you learn to ignore injuries you can at least avoid the second half. I've found I can to some extent avoid thinking about nasty things people have done to me by telling myself: this doesn't deserve space in my head. I'm always delighted to find I've forgotten the details of disputes, because that means I hadn't been thinking about them. 
