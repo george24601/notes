@@ -1,0 +1,23 @@
+##yaml for dm task config
+#start-task ./task.yaml
+#query-status
+name: globally_unique_task_name
+task-mode: all         #"full"、"incremental"、"all"
+
+target-database:       
+  host: "127.0.0.1"
+  port: 4000
+  user: "root"
+  password: ""         #need dmctl encryption when not empty
+
+black-white-list:        
+  bw-rule-1:             
+    do-dbs: ["all_mode"] 
+
+    #can specify mutliple mysql instances, our use cases have only 1
+mysql-instances:
+  - source-id: "mysql-replica-01"  
+    black-white-list:  "bw-rule-1" 
+    mydumper-thread: 4             
+    loader-thread: 16              
+    syncer-thread: 16              

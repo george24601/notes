@@ -29,7 +29,10 @@ task-mode: "all": full + incremental
 
 then use dm-ctl to start the task, also use it to check the task status
 
+when relay log or upstream binlog event is damaged or lost, need to reset the whole dm tasks. Note need to clear all synced data already synced
 
+within first 5 mins of starting/recovring, dm worker will be in safe mode
 
+to handle active-standby switch, we have to turn on GTID, inside DM, the different connections may not point to different instances of mysql
 
 

@@ -1,5 +1,6 @@
 inno db redo log is a separate thing, not same as the binlog. redo log is used mostly for crash-safe
 
+
 On update
 1. store the pdate in memory
 2. write it to the redo log, at prepared state
