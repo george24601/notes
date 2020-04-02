@@ -1,65 +1,35 @@
 @startuml
 
-database Aurora_M
-database Aurora_S
-database TiDB_M
-database TiDB_S
+[Stop purger] as sp
+[Stop copier] as sc
+[flyway hot] as fh
+[flyway cold] as fc
+[Start purger] as p
+[Start copier] as c
 
-TiDB_M <-- Aurora_M: binlog to
-Aurora_M --> Aurora_S : binlog to
-TiDB_M --> TiDB_S: binlog to
-
-[sync-diff by pingcap] as sdp
-[JSON-SD] as sd
-
-sd --> Aurora_S
-sd --> TiDB_S
-
-sdp --> TiDB_M: optional
-sdp --> TiDB_S: optional
-
+sp --> fh
+sc --> fh
+sp --> fc
+sc --> fc
+fh --> c
+fc --> c
+c --> p
 
 @enduml
 
 
 @startuml
 
-database Aurora_M
-database Aurora_S
-database TiDB_M
-
-TiDB_M <-- Aurora_M: binlog to
-Aurora_M --> Aurora_S : binlog to
-
-[sync-diff] as sd
-
-sd --> Aurora_S
-sd --> TiDB_M
-
-
-@enduml
-
-
-@startuml
-
-database Aurora_M
-database Aurora_S
-database TiDB_M
-database Wallet
-
-[cross domain checker] as dc
-[sync-diff] as sd
-[payment] as pay
-
-pay --> Aurora_M
-TiDB_M <-- Aurora_M: binlog to
-Aurora_M --> Aurora_S : existing binlog to
-
-dc --> TiDB_M
-dc --> Wallet
-
-sd --> TiDB_M
-sd --> Aurora_S
+[full restore] as fr
+[single row insert with pt-archiver] as si
+[single row deletion] as sd
+[batch row insert] as bi
+[batch row delete] as bd
+fr --> si
+si --> sd
+si --> bi 
+bi --> bd
+sd --> bd
 
 @enduml
 
@@ -148,7 +118,6 @@ component [payment] {
 [T-topup] --> [topup]: replication
 [T-others] --> [others]: replication
 
-@enduml
 @startuml
 database "aurora" {
   [payment_p2p]
@@ -165,33 +134,6 @@ database "aurora" {
 database tidb
 aurora --> tidb: binlog all tables
 @enduml
-
-
-@startuml
-database TiDB_M
-database TiDB_S
-database Aurora_M
-database Aurora_S
-database Wallet_S
-
-TiDB_M --> Aurora_M: binlog to
-TiDB_M --> TiDB_S: binlog to
-Aurora_M --> Aurora_S : existing binlog to
-Aurora_S -> Daas: exisiting pipeline to
-[Payment] --> TiDB_M: RW
-[Domain checker] --> Wallet_S: R
-[Domain checker] --> TiDB_M: RW
-@enduml
-
-database Wallet_S
-[DB checker] --> Aurora_S: R
-[DB checker] --> TiDB_M: RW
-[Domain checker] --> TiDB_M: RW
-[Domain checker] --> Wallet_S: R
-[Verifier] --> TiDB_V: RW
-[Verifier] --> Wallet_S: R
-[Verifier] --> Aurora_S: R
-
 
 
 @startuml
@@ -215,20 +157,6 @@ kafka --> [NRS]
 [NRS] -> TiDB
 RDS -> Slave: existing binlog
 Slave -> [DaaS]: existing pipeline
-@enduml
-
-@startuml
-database TiDB_M
-database TiDB_S
-database Aurora_M
-database Aurora_S
-
-TiDB_M --> Aurora_M: binlog
-TiDB_M -> TiDB_S: binlog
-Aurora_M -> Aurora_S : existing binlog
-Aurora_S -> Daas: exisiting pipeline
-
-[Payment] -> TiDB_M
 @enduml
 
 

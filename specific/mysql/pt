@@ -1,0 +1,25 @@
+#!/bin/bash
+
+mysql -h 127.0.0.1 -P 11801 -uroot -p
+
+sudo docker run --network="host" perconalab/percona-toolkit pt-archiver \
+	--source h=127.0.0.1,P=11801,D=g_f,t=t,u=root,p=root,L=true \ 
+	--dest  h=127.0.0.1,P=11801,D=g_f,t=t,u=root,p=root,L=true \ 
+	--limit=10000 --txn-size 10000 --progress 10000 --where "id > 0" \
+	--bulk-insert --bulk-delete --no-check-charset  --statistics --dry-run
+
+
+sudo docker run perconalab/percona-toolkit pt-archiver --source h=127.0.0.1,P=11801,D=g_f,t=t,u=root,p=root,L=true --dest  h=127.0.0.1,P=11801,D=g_f,t=t,u=root,p=root,L=true  --limit=10000 --txn-size 10000 --progress 10000 --where "id > 0" --bulk-insert --bulk-delete --no-check-charset  --statistics --dry-run
+
+bin/pt-archiver
+
+bin/pt-archiver --source h=127.0.0.1,D=g_f,t=t,u=root,p=root --purge \
+  --where 'NOT EXISTS(SELECT * FROM parent WHERE col=child.col)'
+
+sudo docker run perconalab/percona-toolkit pt-archiver --source h=127.0.0.1:11801,D=g_f,t=t,u=root,p=root --purge \
+  --where 'id> 1'
+
+docker run --network="host" perconalab/percona-toolkit pt-archiver --source h=127.0.0.1,P=11801,D=g_f,t=t,u=root,p=root,L=true --dest  h=127.0.0.1,P=11801,D=g_t,t=t,u=root,p=root,L=true --limit 2 --where "1=1" --bulk-insert --no-check-charset  --statistics --dry-run
+
+docker run --network="host" perconalab/percona-toolkit pt-archiver --source h=127.0.0.1,P=11801,D=g_f,t=t,u=root,p=root,L=true --dest  h=127.0.0.1,P=11801,D=g_t,t=t,u=root,p=root,L=true --limit 2 --where "1=1" --bulk-insert --no-check-charset  --statistics 
+

@@ -1,3 +1,7 @@
+I have a standing agenda item for all team meetings that reads “gossip, rumors, and lies” and when we hit that agenda item, it’s a chance for everyone on the team to figure out what is the truth and what is a lie
+
+After that’s done, my next measure of a team meeting is: did we make tangible progress on something? I don’t know what you build, so I don’t know what’s broken on your team, but I do know that something is broken and a team meeting is a great place to not only identify the brokenness, but also to start to discuss how to fix it.
+
 The excuse for overstaffing is always the need for a specialist in the team just in case we need him. One should only have on a team the knowledges and skills that are needed day in day out for the bulk of the work. Specialists who are needed once in a while should always remain outside, and hired on contract.
 
 Easier to build new relationship than saving old relationship

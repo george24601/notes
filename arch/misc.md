@@ -23,11 +23,6 @@ if counter(a) LT  count(b), either a happens before b, or a, b are not comparabl
 vector lock: maintains array of N logical clocks. each node increment its own clock by 1 for each internal event
 similar to lamport clock, upon recieving a message, update local to max, AND THEN increase its own clock by 1 more
 
-* token-based idempotent API:
- * generate token
- * call buy(token, commodity_id)
- * add requests to MQs to avoid reordering of same token requests
-
 A change event looks like:
 
 1. PK
@@ -92,3 +87,28 @@ service container + testing dependencies + environment variables for testing.
 Installation container:
 package service container with env vars, builds a container image that goes to production
 
+The effectiveness of a set of tests can be measured less by their rate of problem detection and more by the rate of change that they enable.
+
+In a world of permissionless innovation, services can and should routinely come and go. It's worth investing some effort to make it easier to deprecate services that haven't meaningfully caught on. One approach to doing this is to have a sufficiently high degree of competition for resources so that any resource-constrained team that is responsible for a languishing service is drawn to spending most of their time on other services that matter more to customers.
+
+As this occurs, responsibility for the unsuccessful service should be transferred to the consumer who cares about it the most. This team may rightfully consider themselves to have been left "holding the can," although the deprecation decision also passes into their hands. Other teams that wish not to be left holding the can have an added incentive to migrate or terminate their dependencies. This may sound brutal, but it's an important part of "failing fast."
+
+To determine whether permissionless innovation has been unleashed to the degree possible, a simple test is to look at the prevalence of meetings between teams (as distinct from within teams). Cross-team meetings suggest coordination, coupling, and problems with the granularity or functionality of service interfaces. Engineers don't seek out meetings if they can avoid them; such meetings could mean that a service's APIs aren't all that is needed to integrate. An organization that has embraced permissionless innovation should have a high rate of experimentation and a low rate of cross-team meetings.
+How is CB turned into deploy
+1. build: code repo to exe bundle, a build, the build stage vendors
+dependencies and compiles binaries/assents. Initialized when new code is
+deployed.
+2. release: takes the build and combine it with deploy's config
+3. run: launch app processes against selected release. can happen
+automatically,e.g., to restart the process. This stage needs to be simple so
+if app fails to run, we can solve it without dev help
+
+ability to rollback a release with deployment tools
+
+Releases are append-only ledger and immutable. Have to create a new release
+for changes
+
+compile assets in build stage, instead of using filesystem as cache or JIT
+
+
+app is self-contained and does not rely on the existence of web server app on the host. The only contract it has is that it binds itself to ports
