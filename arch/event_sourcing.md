@@ -79,3 +79,13 @@ need a delay based queue, at the serivce entrance, start, at the end of executio
 also, possible to let consumer to poll main side, useful in the case of non-time-sensitive txns, e.g., notification service
 
 
+A change event looks like:
+
+1. PK
+2. Op
+3. state after the change
+4. state before the change
+5. metadata about the source: location in log, db, table, transaction id, source timestamp
+6. capture timestamp
+
+

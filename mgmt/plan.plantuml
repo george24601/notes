@@ -1,4 +1,15 @@
 @startuml
+[dev poc copier - 3 days] as cp_poc
+[dev poc purger - 2 days] as purger_poc
+[insertion development - 3 days] as in_d
+[development - 3 days] as in_d
+
+di --> dc
+di --> 
+
+@enduml
+
+@startuml
 
 [Stop purger] as sp
 [Stop copier] as sc
@@ -17,22 +28,20 @@ c --> p
 
 @enduml
 
-
 @startuml
-
 [full restore] as fr
-[single row insert with pt-archiver] as si
+[single row insert] as si
+[wallet code change] as cc
 [single row deletion] as sd
 [batch row insert] as bi
 [batch row delete] as bd
 fr --> si
-si --> sd
-si --> bi 
+si --> bi
 bi --> bd
 sd --> bd
-
+si -> cc
+cc -> sd
 @enduml
-
 
 @startuml
 
@@ -43,20 +52,6 @@ queue "saved mysql traffic" as traffic
 database Aurora_V
 [cross domain checking] as cd
 }
-
-component [PROD] {
-[payment] as srv
-database wallet_s
-}
-
-
-srv --> traffic
-traffic --> Aurora_V
-traffic --> TiDB
-
-sd --> TiDB
-
-sd --> Aurora_V
 @enduml
 
 @startuml
@@ -81,42 +76,8 @@ database TiDB_V
 
 TiDB_M <-- Aurora_M: binlog to
 TiDB_M --> TiDB_S: binlog to
-Aurora_M --> Aurora_S : existing binlog to
-Aurora_S -> Daas: exisiting pipeline to
-Payment --> rp
-rp --> Aurora_M: RW
-rp --> TiDB_V: RW
-
-dc --> TiDB_V
-dc --> Wallet
-
-sd --> TiDB_V
-sd --> Aurora_S
-
 @enduml
 
-
-@startuml
-
-database RDS {
-    [topup]
-    [others]
-}
-database TiDB {
-    "topup" as [T-topup]
-    "others" as [T-others]
-}
-
-
-request --> [payment]
-component [payment] {
-    component [sharding-proxy]
-}
-[sharding-proxy] --> [T-others]
-[sharding-proxy] --> [T-topup]
-
-[T-topup] --> [topup]: replication
-[T-others] --> [others]: replication
 
 @startuml
 database "aurora" {
@@ -134,32 +95,6 @@ database "aurora" {
 database tidb
 aurora --> tidb: binlog all tables
 @enduml
-
-
-@startuml
-database TiDB
-database Aurora_M as RDS
-database Aurora_S as Slave
-component [cashier] as C {
-    [proxy]
-}
-component [NPS] as P
-queue kafka
-[/pay] -> C
-proxy --> [OPS]: 99% /pay
-proxy --> P: 1% /pay
-[OPS] -> RDS
-P --> TiDB
-TiDB --> RDS: binlog
-[other APIs] --> [NRS]
-kafka --> [NRS]
-[NRS] -> RDS
-[NRS] -> TiDB
-RDS -> Slave: existing binlog
-Slave -> [DaaS]: existing pipeline
-@enduml
-
-
 
 @startuml
 skinparam component {

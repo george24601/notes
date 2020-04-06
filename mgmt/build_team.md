@@ -1,3 +1,11 @@
+To determine whether permissionless innovation has been unleashed to the degree possible, a simple test is to look at the prevalence of meetings between teams (as distinct from within teams). Cross-team meetings suggest coordination, coupling, and problems with the granularity or functionality of service interfaces. Engineers don't seek out meetings if they can avoid them; such meetings could mean that a service's APIs aren't all that is needed to integrate. An organization that has embraced permissionless innovation should have a high rate of experimentation and a low rate of cross-team meetings.
+
+Wherever knowledge workers perform well in large organiza- tions, senior executives take time out, on a regular schedule, to sit down with them, sometimes all the way down to green juniors, and ask: “What should we at the head of this organ- ization know about your work? What do you want to tell me regarding this organization? Where do you see opportunities we do not exploit? Where do you see dangers to which we are still blind? And, all together, what do you want to know from me about the organization?”
+
+ Any job that has defeated two or three men in succession, even though each had performed well in his previous assignments, must be assumed unfit for human beings. It must be redesigned.
+
+The alternative—to “hire in” new people for new tasks—is too risky. One hires new people to expand on already established and smoothly running activity. But one starts something new with people of tested and proven strength, that is, with veterans. Every new task is such a gamble—even if other people have done the same job many times before—that an experienced and effec- tive executive will not, if humanly possible, add to it the addi- tional gamble of hiring an outsider to take charge.
+
 I have a standing agenda item for all team meetings that reads “gossip, rumors, and lies” and when we hit that agenda item, it’s a chance for everyone on the team to figure out what is the truth and what is a lie
 
 After that’s done, my next measure of a team meeting is: did we make tangible progress on something? I don’t know what you build, so I don’t know what’s broken on your team, but I do know that something is broken and a team meeting is a great place to not only identify the brokenness, but also to start to discuss how to fix it.

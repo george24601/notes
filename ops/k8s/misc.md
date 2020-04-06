@@ -1,3 +1,20 @@
+#container
+Build container:
+Dev container + build dependencies
+Source can be from mounted volume or directly read into docker as container builting process
+Builder container will create the final service container,i.e., init the service container and inject the built code.
+Notice that build process will NOT handle different environment varaibles between deployment environment. That is part of release process
+
+Service container: what goes to production - environment variables. most likely from an image
+Little difference from dev container. Should bulit code be inside container or mounted? No clear disadvantage of inside container 
+
+Test container:
+service container + testing dependencies + environment variables for testing.
+
+Installation container:
+package service container with env vars, builds a container image that goes to production
+
+
 # Pod
 pod consists of one or more containers that are guaranteed to be co-located on the host machine and can share resources.
 
@@ -46,7 +63,6 @@ Kubernetes services perform health checks on the default pod port and endpoint "
 #k8s DNS server
 
 The DNS server watches the Kubernetes API for new Services and creates a set of DNS records for each
-Kubernetes also supports DNS SRV (service) records for named ports. If the "my-service.my-ns" Service has a port named "http" with protocol TCP, you can do a DNS SRV query for "_http._tcp.my-service.my-ns" to discover the port number for "http"
 
 When you create a Service, it creates a corresponding DNS entry. This entry is of the form <service-name>.<namespace-name>.svc.cluster.local, which means that if a container just uses <service-name>, it will resolve to the service which is local to a namespace.
 

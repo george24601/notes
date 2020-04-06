@@ -1,9 +1,0 @@
-Switch: Before modifying the value of any key, the transaction creates a switch, which is a writeable value distinct from any of the real values being changed in the batch. The switch cannot be concurrently accessed – reads and writes of the switch are strictly ordered. The switch is initially “off,” and it can be switched to “on.”
-
-Stage: The writer prepares several changes to the database, but does not overwrite any existing values; the new values are instead staged in proximity to the original values.
-
-Filter: For any key with a staged value, reads for that key must check the state of the transaction’s switch before returning a value. If the switch is “off,” the reader returns the original value of the key. If the switch is “on,” the reader returns the staged value. Thus, all reads of a key with a staged value are filtered through the switch’s state.
-
-Flip: When the writer has prepared all changes in the transaction, the writer flips the switch to the “on” position. In combination with the filtering, all values staged as part of the transaction are immediately returned by any future reads.
-
-Unstage: Once a transaction is completed (either aborted or committed), the staged values are cleaned up as soon as possible. If the transaction succeeded, then the original values are replaced by the staged values; on failure, the staged values are discarded. Note that unstaging is done asynchronously and does not need to have finished before the transaction is considered committed.

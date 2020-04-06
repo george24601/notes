@@ -1,26 +1,3 @@
-ID generaion:
-* GUID
-* Snowflake
-* ID + segment based, i.e., id, cur_max_id, incr_step, version, with id as the PK, every time the service will grab a list, and that (cur_max_id, id, version) itself acts as the optimistic lock. On top of that , for each db, add a different start and with same step grows, i.e., if 3 dbs, A gets 1, 4,7, B gets 2, 5, 8, and C gets 3, 6, 9
-
-Sharding:
-* range based: hot slice problem, especially auto-inc id
-* Hash based: what if you need range scan
-
-### How to migrate if you want to increase db capacity:
-1. add slave db to the real master, and sync
-2. change sharding rule to include reads from the new shards
-3. remove the master-slave sync
-4. later on you can remove the redundant data
-
-### Multi region
-Every region has a shard, every shard better guarantee only one place to write, avoid double write
-
-Need leader election between shards to decide who is the write master
-
-Mysql's own repliation is normally not reliable, self-made a DRC, e.g., DTS on alicloud (based on otter + canal)
-
-
 ### How to migrate for sharded db
 
 * Maintanence window
