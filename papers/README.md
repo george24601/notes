@@ -8,3 +8,4 @@
 * How to build a highly available system with consensus
 * Reconfiguring a State Machine
 * The five-minute rule twenty years later, and how flash memory changes the rules
+* Lamport lock and vector lock
