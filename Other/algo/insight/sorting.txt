@@ -1,8 +1,0 @@
-sorting is immediately assoicated with bsearch, 
-but one potential problem is that bsearch we need to specify the range of bsearch carefully if our element of interest may be in the range
-
----------
-If order doesnt matter,e.g., operation related to set, sorting can provide a forced order easy to work on
-
-Sorting is , of course, closely related to extreme values as well, since often in greedy/optimization solutions we naturally have interest
-in some form of extreme value

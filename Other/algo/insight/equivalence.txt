@@ -1,9 +1,0 @@
-A relation is equivalence if it is reflexive, symmetric, and transitive
-
-Therefore, if we know the relationship is equvialence, then we can decide if a and b are equivalent if 
-
-1. a and b reduce to each other (a <= b and b <= a, i.e., reflexive and transitive, but not symmetric)
-2. a = c and b = c (transitive properites), notice the c can be formed in a chain of steps, which in turn implies c is some extreme value or
-identity value, as often happens with the step-wise system, i.e., theyare in the same equivalence classes
-
-Another way to prove is the calculate the signature of the equivalent class, if both a and b can be "hashed" into the same eq class, we can prove it is true.

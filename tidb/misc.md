@@ -8,12 +8,6 @@ raft-base-tick-interval - increase heartbeat interval
 
 Check tikv's Worker pending tasks to see if task is accumulating
 
-txn-local-latchs: default is turned on to pre-emptive txn conflict
-
-lock-free snapshot read: change to snapshot version,i.e., lock free. History read is possible by setting @@tidb_snapshot
-
-isolation: snapshot isolation (roughly RR)
-
 pd harder to scale up/down
 
 best virtualization gives 30% penalty over physical machine
@@ -27,8 +21,12 @@ physical time + logical time
 2. apply a lease to etcd, within this window PD will be the TSO
 3. client batchs n request and get TSs togehter from PD
 
-based on experience, 400M rows of data takes 10min+ to analyze (default setting, tidb_build_stats_concurrency=4).
-
-A root task refers to a computing task that is executed in TiDB.
-
 The PD TSO Wait Duration actually contains the PD TSO RPC Duration. The “Wait” here is actually the asynchronous wait time, that is, the time from the asynchronous acquisition of the TSO to the time when the transaction actually needs to use the TSO to read/write data. 
+
+mysql dump 4-5G per min, try to limit mydumper file to 64MB
+
+lightining 150-200G/h note lighting is faster for full import - 7 hours for 1 TB
+
+lightning -> tikv importer, which talks to the PD server, note that tidb-lightening does not talk to PD directly
+
+lightning and importer are resource intensive, recommend two separate servers

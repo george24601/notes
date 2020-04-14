@@ -1,4 +1,15 @@
 @startuml
+[Hot] as h 
+[Syncer - singleton] as s
+[Cold] as c
+
+h <-- s: single thread read
+s --> c: multi thread write
+
+@enduml
+
+
+@startuml
 [dev poc copier - 3 days] as cp_poc
 [dev poc purger - 2 days] as purger_poc
 [insertion development - 3 days] as in_d
