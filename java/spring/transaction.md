@@ -1,3 +1,5 @@
+UnexpectedRollbackException: when part of the txn needs to roll back beause of exception, but you swallowed the exception and the code reachs the Transactional node
+
 Transaction boundaries are only created when properly annotated (see above) methods are called through a Spring proxy. This means that you need to call your annotated method directly through an @Autowired bean or the transaction will never start. If you call a method on an @Autowired bean that isn’t annotated which itself calls a public method that is annotated YOUR ANNOTATION IS IGNORED. This is because Spring AOP is only checking annotations when it first enters the @Autowired code.
 
 Never blindly trust that your @Transactional annotations are actually creating transaction boundaries. When in doubt test whether a transaction really is active (see below)

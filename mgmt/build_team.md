@@ -12,17 +12,9 @@ After that’s done, my next measure of a team meeting is: did we make tangible 
 
 The excuse for overstaffing is always the need for a specialist in the team just in case we need him. One should only have on a team the knowledges and skills that are needed day in day out for the bulk of the work. Specialists who are needed once in a while should always remain outside, and hired on contract.
 
-Easier to build new relationship than saving old relationship
-
-You have to care deeply about your people, but not what they think of you
-
 Have strong onboarding documents and employee handbooks. Have new employees improve those onboarding documents
 
-It’s ok, and even desirable to have products with some overlap. Each pushes the other to be better with friendly competition
-
- It’s your responsibility, therefore, to get your team on the same page: Get used to repeating yourself, and drop the passive-aggressive “as I said last week” and “per my last email.” Research shows that neutral tones come across as negative, and positive tones as neutral. Overcorrect with emoji, GIFs, and explicit communication. Sarcasm and irony are big gambles—our advice is to skip them. 
-
- At a certain point your learning will plateau, and this is when the second type of work kicks in: executing. This is the act of applying that knowledge to get the job done and create leverage. Eventually, you will create enough leverage to automate the job or grow out of it, and this is when you start the cycle over. Learn. Execute.
+ It’s your responsibility, therefore, to get your team on the same page: Get used to repeating yourself, and drop the passive-aggressive “as I said last week” and “per my last email.” 
 
 For every open job on your team, you need to spend one hour a day on recruiting-related activities. Cap that investment at 50% of your time. 
 
@@ -40,4 +32,3 @@ KPI- rough range:
 10% -satifaction from front end teams 360 degree review - to avoid arrogance from middle tier team
 
 service does not need stable business, that is how simple service grows to the most valuable IT assets - specific domain expert -> helps innovation in business
-

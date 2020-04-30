@@ -1,10 +1,53 @@
 @startuml
-[Hot] as h 
-[Syncer - singleton] as s
-[Cold] as c
+queue "min topics" as mt
+queue "hour topics" as ht
+queue "day topics" as dt
+queue "week topics" as wt
 
-h <-- s: single thread read
-s --> c: multi thread write
+queue "segment match topic" as uet
+queue "effective event topic" as eet
+[producer] as p
+[min consumer] as mc
+[hour consumer] as hc
+[day consumer] as dc
+[week consumer] as wc
+p --> mt
+p --> ht
+p --> dt
+p --> wt
+p --> uet
+mc --> mt
+mc --> eet
+hc --> ht
+hc --> mt
+dc --> dt
+dc --> mt 
+wc --> wt
+wc --> dt
+
+@enduml
+
+
+@startuml
+[producer] as p
+[consumer] as c
+
+queue "segment match topic" as uet
+queue "effective event topic" as eet
+queue "hour 1" as h1
+queue "hour 2" as h2
+queue "hour 168" as h168
+
+p --> uet
+p --> h1 
+p --> h2
+p --> h168
+
+c --> h1
+c --> h2
+c --> h168
+
+c --> eet
 
 @enduml
 
@@ -91,20 +134,31 @@ TiDB_M --> TiDB_S: binlog to
 
 
 @startuml
-database "aurora" {
-  [payment_p2p]
-  [subpayment_p2p]
-  [tranfer_p2p]
-  [payment_other]
-  [subpayment_other]
-  [payment_acq]
-  [subpayment_acq]
-  [payment_topup]
-  [subpayment_topup]
-  [other tables....]
+database "events" {
+  [activation_events] as ae
 }
-database tidb
-aurora --> tidb: binlog all tables
+database "metadata" {
+  [consumer_meta] as cm 
+}
+
+[producer] as dep
+
+queue "segment match topic" as uet
+queue "effective event topic" as eet
+
+[multiple consumers] as c1
+[coordinator] as co
+[cleanup daemon] as cd
+
+dep --> eet
+uet <-- dep
+dep --> ae
+c1 --> co
+co --> cm
+c1 --> ae
+cd --> ae
+c1 --> eet
+
 @enduml
 
 @startuml

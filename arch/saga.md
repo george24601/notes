@@ -66,26 +66,3 @@ Compensating request
 2. Communtative with Request - book and then cancel is same as cancel then book. This is the defend against the case where a later arrival of a request that has been cancelled
 
 3. can not abort (eventually)
-
-use a semantic lock to mark possible dirty read - but need timeout as deadlock prevention
-
-can also use COMMUTATITVE updates to compensate to defend the lost update problem, does action and compensate have to be commutative
-
-pessimistic view to avoid compenstation - no dirty read
-
-re-read value before update
-
-Q: why the compenstating request has to be commutative?
-
-To address the complexity issue of the Saga pattern, it is quite normal to add a process manager as an orchestrator/execution coordinator. The process manager is responsible for listening to events and triggering endpoints.
-
-
-### From the original BASE paper
-
-What if estimates are not acceptable, though? How can you still decouple the user and transaction updates? Introducing a persistent message queue solves the problem. There are several choices for implementing persistent messages. The most critical factor in implementing the queue, however, is ensuring that the backing persistence is on the same resource as the database. This is necessary to allow the queue to be transactionally committed without involving a 2PC.
-
-Even update operations that simply set a value, however, are not idempotent with regard to order of operations. If the system cannot guarantee that updates will be applied in the order they are received, the final state of the system will be incorrect.
-
-In the case of balance updates, you need a way to track which updates have been applied successfully and which are still outstanding. One technique is to use a table that records the transaction identifiers that have been applied.
-
-By simply not allowing the last_purchase time to go backward in time, you have made the update operations order independent. You can also use this approach to protect any update from out-of-order updates. As an alternative to using time, you can also try a monotonically increasing transaction ID.
