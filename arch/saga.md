@@ -1,8 +1,4 @@
-You should define the steps in a compensating transaction as idempotent commands.  
-
 Placing a short-term timeout-based lock on each resource that's required to complete an operation, and obtaining these resources in advance, can help increase the likelihood that the overall activity will succeed. The work should be performed only after all the resources have been acquired. All actions must be finalized before the locks expire.
-
-Consider using retry logic that is more forgiving than usual to minimize failures that trigger a compensating transaction. If a step in an operation that implements eventual consistency fails, try handling the failure as a transient exception and repeat the step. Only stop the operation and initiate a compensating transaction if a step fails repeatedly or irrecoverably.
 
 Choreography - Peer to Peer, distributed
 -------
@@ -39,30 +35,4 @@ Orchestration with Saga as coordinator, centralized
 	c. Database triggers
 
 	d. Transaction log tailing
-
 7. Note that even in centralized case, steps are performed IN ORDER instead of parallel
-
-
-
-Saga doens't guarantee isolation:
-
-1. lost update problem 
-
-2. dirty read problem: read unsubmitted data 
-
-3. non-repetable read: read submitted data from another txn in between
-
-
-Request: 
-
-1. Idempotent
-
-2. Can abort/fail 
-
-Compensating request
-
-1. Idempotent
-
-2. Communtative with Request - book and then cancel is same as cancel then book. This is the defend against the case where a later arrival of a request that has been cancelled
-
-3. can not abort (eventually)

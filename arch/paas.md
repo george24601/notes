@@ -10,6 +10,3 @@ Running Snowflake as a data warehouse-as-a-service requires high availability ev
 While selecting a metadata store, we prefer key-value stores for the simplicity and flexibility they bring to schema evolution. Also, our cloud services expect the underlying store to be ACID compliant.
 
 To make it easy to add new metadata objects, we built an object-mapping layer on top of key-values. Schema definition, evolution and metadata versioning are done by this layer as well. User-visible objects, such as catalog definitions, users, sessions, access control, copy history and others all have metadata backing them. Every statement executed has a metadata entry, along with statistics of its execution. Transaction state and lock queues are also persisted in FoundationDB. In fact, lock queues are implemented using the watch feature mentioned earlier. A data manipulation statement is enqueued on a resource’s lock queue, and a FoundationDB watch notifies the statement when the statement reached the front of the resource’s queue. There is also user-invisible metadata such as data distribution information, servers and encryption keys.
-
-
-

@@ -5,14 +5,6 @@ Later on when browser will put the content of the cookie in Cookie header in req
 auto-fill: encodes preferences in acooke and sends the cookie back tot he browser
 
 
-* has an AtomicBoolean(AB) as the control flag
-* spawns a new thread, which runs on the while loop on this AB
-* as pollingDao to get a list of events to publish 
-* ask consumer to accept each event one by one
-* uses a CountDownLatch to implement draining
-* sender is on a exponential retry 5 times, interval starts at 1 seconds
-
-
 "Two-phase locking" is one way to implement serializability
   each database record has a lock
   the lock is stored at the server that stores the record
@@ -39,10 +31,6 @@ How does locking interact with two-phase commit?
       (or just forget about them during the crash)
     And then say "no" to TC's prepare message.
 
-Raft does not ensure that all servers do something
-    since only a majority have to be alive
-
-
 A change event looks like:
 
 1. PK
@@ -52,4 +40,23 @@ A change event looks like:
 5. metadata about the source: location in log, db, table, transaction id, source timestamp
 6. capture timestamp
 
-be defensive - don't rely on downstream's promise
+### domian driven
+
+Surround model and its context with a boundary
+
+Explicitly map between different contexts
+
+model transactional boundaries as aggregates
+
+invariant rules across your domain model - model the invariants and assocaited entity/values as aggregates - aggregates focus on transactional boundaries - individual aggregates are transactional consistent 
+
+### multi-tenant
+service identify verification: tenant id + BizCode, under it multiple extension point
+
+abostract extension point
+
+Use annotation to mark extension, Bootstrap type will scan the class and register the extension 
+
+At run time, use TenantContext to choose the extension, TC is initialized before the business logic, via interceptor
+
+metadata to support extension?

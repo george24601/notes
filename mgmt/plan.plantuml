@@ -1,29 +1,33 @@
 @startuml
-queue "min topics" as mt
-queue "hour topics" as ht
-queue "day topics" as dt
-queue "week topics" as wt
+queue "12 min topics" as mt
+queue "24 hour topics" as ht
+queue "7 day topics" as dt
 
-queue "segment match topic" as uet
-queue "effective event topic" as eet
-[producer] as p
+queue "segment match" as uet
+queue "effective event" as eet
+queue "dispatcher dlq" as dd 
+queue "min dlq" as  md 
+queue "hour dlq" as hd 
+queue "day dlq"as  dd 
+[dispatcher] as p
 [min consumer] as mc
 [hour consumer] as hc
 [day consumer] as dc
-[week consumer] as wc
 p --> mt
 p --> ht
 p --> dt
-p --> wt
 p --> uet
+p --> eet
 mc --> mt
 mc --> eet
 hc --> ht
 hc --> mt
 dc --> dt
 dc --> mt 
-wc --> wt
-wc --> dt
+p --> dd
+mc --> md
+hc --> hd
+dc --> dd
 
 @enduml
 

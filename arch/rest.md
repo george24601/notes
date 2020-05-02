@@ -1,4 +1,3 @@
-----
 /video => all videos
 	GET: list of all vidoe
 	PUT: create/replace the whole collection
@@ -16,9 +15,6 @@ use 207 for multiple independent operations
 
 Patch suggests that operation is atomic
 
--------
-For pagination, dont use direct paginiation, use resource identifier and potentially order filter
-
 Use rel attribute to show client what a link does. For predefined rel types, if you use it, make sure API behaves per definition
 
 Non-standard rel types must be a URI
@@ -26,42 +22,7 @@ Non-standard rel types must be a URI
 For long running asynch ops, return 202 (Accepted) and temporary resource inside the location header
 
 If user tries to get the temporary resource after actual resource is created, return 303 (see other) and actual resource in the location header. Return 410 (gone) if the temp resource expired
-bulk API in ES
-in ES:
 
-POST /_bulk
-{ "delete": { "_index": "website", "_type": "blog", "_id": "123" }} 
-{ "create": { "_index": "website", "_type": "blog", "_id": "123" }}
-
-
-{
-   "took": 4,
-   "errors": false, 
-   "items": [
-      {  "delete": {
-            "_index":   "website",
-            "_type":    "blog",
-            "_id":      "123",
-            "_version": 2,
-            "status":   200,
-            "found":    true
-      }},
-      {  "create": {
-            "_index":   "website",
-            "_type":    "blog",
-            "_id":      "123",
-            "_version": 3,
-            "status":   201
-      }}
-]
-}
-
-------
-need to implmenet a machsimn to support serveral isnertions on a same POST method => content based or action identifier based,e.g, custom header
-
-The status code of the response will always be 200 and errors, if any, described in the response payload, as shown below:
-
-------
 From google drive API:
 
 You're limited to 100 calls in a single batch request
@@ -70,9 +31,9 @@ A batch request is a single standard HTTP request containing multiple Drive API 
 main HTTP request, each of the parts contains a nested HTTP request.
 
 The server's response is a single standard HTTP response with a multipart/mixed content type; each part is the response to one of the
-requests in the batched request, in the same order as the requests.
---------
-Google Drive's bulk API: Request
+requests in the batched request, in the same order as the requests. 
+
+### Google Drive's bulk API: Request
 
 POST /batch HTTP/1.1
 Host: www.googleapis.com
@@ -107,8 +68,7 @@ Content-Transfer-Encoding: binary
 Response:
 
 
--------------
-From FB graph API:
+### From FB graph API:
 
 curl \
     -F ‘access_token=…’ \
@@ -129,5 +89,3 @@ curl \
       ],
       “body”:”{\”data\”: [{…}]}}
 ]
-
--------------
