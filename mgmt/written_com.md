@@ -29,9 +29,6 @@ Slide titles are prime real estate: Use slide content to prove your point(may ne
 
 Claims 15 in slide titles => strong story line
 
-Use a sans-serif font
-
 Use log log‐scale: ‐ when range spans 2+
 
 orders of magnitude ‐ to highlight ratios instead of difference
-

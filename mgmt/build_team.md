@@ -30,5 +30,3 @@ KPI- rough range:
 25% - innovation , 1 P1 or 2 P2 introduced due to innovation
 20% - service acceptance rate 0%
 10% -satifaction from front end teams 360 degree review - to avoid arrogance from middle tier team
-
-service does not need stable business, that is how simple service grows to the most valuable IT assets - specific domain expert -> helps innovation in business

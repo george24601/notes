@@ -1,4 +1,27 @@
 @startuml
+
+database redis {
+[128 zsets to store events] as data
+}
+
+[dispatcher] as p
+[consumer] as c
+
+queue "segment match" as uet
+queue "effective event" as eet
+queue "dispatcher dlq" as dd 
+queue "consumer dlq" as cd 
+uet <-- p
+p --> dd
+p --> eet
+p --> data
+
+c --> data
+c -->cd
+c --> eet
+@enduml
+
+@startuml
 queue "12 min topics" as mt
 queue "24 hour topics" as ht
 queue "7 day topics" as dt

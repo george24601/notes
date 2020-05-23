@@ -11,10 +11,8 @@ Daily Active User/Monthly Active User ratio: DAU/MAU of 20 percent is considered
 Customer retention rate (CRR) is the percentage of customers who stayed with the company after a certain time period
 According to the Product Benchmarks Report by Mixpanel, the average CRR for most software products is below 20 percent over 8 weeks
 
-Customer Acquisition Cost (CAC)
 Customer Conversion Rate (CCR)
 Repurchase Rate (RR)
-Daily Active Users (DAU)
 Feature Usage (FU, yes that’s really the abbreviation)
 User Churn (UC)
 Net Promoter Score (NPS)
