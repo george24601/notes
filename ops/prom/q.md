@@ -2,6 +2,9 @@ The expression browser is available at /graph on the Prometheus server, allowing
 --check metric's number of time series, alert if it is over 10k
 count by(__name__)({__name__=~".+"}) > 10000
 
+we select all the values we have recorded within the last 5 minutes for all time series that have the metric name http_requests_total and a job label set to prometheus:
+http_requests_total{job="prometheus"}[5m]
+
 --per-second rate of HTTP requests as measured over the last 5 minutes, per time series in the range vector
 rate(http_requests_total{job="api-server"}[5m])
 
@@ -11,5 +14,5 @@ rate(http_requests_total{job="api-server"}[5m])
   rate(http_requests_total[5m])
 )
 
-
-
+the number of HTTP requests as measured over the last 5 minutes, per time series in the range vector:
+increase(http_requests_total{job="api-server"}[5m])

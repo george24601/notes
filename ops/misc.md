@@ -52,5 +52,3 @@ One-off admin processes should be run in an identiacl environment as the regular
 
 In local deploy, developers invoke one-off admin processes by direct shell command inside the app's checkout dir.
 In production depoy, ssh into the shell to do similar thing
-
-

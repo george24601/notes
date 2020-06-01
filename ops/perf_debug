@@ -24,8 +24,6 @@ RES: It is the resident memory size. Resident memory is the amount of non-swappe
 
 SHR: SHR is the shared memory used by the process and it indicates how much of the VIRT size is actually sharable (memory or libraries). In the case of libraries, it does not necessarily mean that the entire library is resident.
 
-%MEM: It represents the percentage of available physical memory used by the process.
-
 TIME+: The total CPU time the task has used since it started, with precision up to hundredth of a second.
 
 COMMAND: The command which was used to start the process
@@ -34,20 +32,16 @@ cache is page cache/disk cache in memory
 cache for file system I/O, also used as other deviced's cache, e..g, block device
 buffer cache is for block device IO -, also memory managed by block
 
-number of online customers is more straightforward, number of concurent request is more accurate
-
 For example, if a process memory-maps a large file, the file is actually stored on disk, but it still takes up "address space" in the process.
 
-But even that isn't the whole answer. If a process calls fork(), it splits into two parts, and both of them initially share all their RSS. So even if RSS was initially 1 GB, the result after forking would be two processes, each with an RSS of 1 GB, but you'd still only be using 1 GB of memory.
-
-Confused yet? Here's what you really need to know: use the free command and check the results before and after starting your program (on the +/- buffers/cache line). That difference is how much new memory your newly-started program used.
-
-try to limit the average load to < 0.7 * CPU cores 
 load is the avg # of threads in running or un-interruptable
 TOP
 
 
 top -U franshesco
+
+#check the full command that started the process, including location of gc log, jvm configs etc
+ps -eaf -p 2973
 
 #sort by %CPU, %MEM to set mem
 top -o %CPU
@@ -71,11 +65,10 @@ vmstat -1 -10
 #grep oom_killer is /var/log/messages
 
 
-#It is best to run iostat specifying a time interval in seconds (for example iostat -x 30)
-
-#Display a continuous device report at two second intervals
-
 <<IOSTAT
+It is best to run iostat specifying a time interval in seconds (for example iostat -x 30)
+Display a continuous device report at two second intervals
+
 rrqm/s: The number of read requests merged per second that were queued to the device
 
 rsec/s: The number of sectors read from the device per second.
@@ -107,33 +100,18 @@ java -XX:+PrintFlagsFinal -version | grep HeapSize
 #you can also use jps if you know the process name
 top -H -p 63847
 
-#find thread 2803, 2833 high cpu usage within that thread
-
 # find java processes
 ps axu | grep java
 
 # find thread numbers
 ps -eLf
+# check process parent-child relationship
 pstree -p
 
 # find large file, then use echo "" > a.log to clear the log
 find / -type f -name "*log*" | xargs | s-lSh | more 
 du -a / |sort -rn |grep log | more
 find / -name '*log*' -size +1000M -exec du -h {}\'
-
-#thread dump
-sudo jstack 63847 > 1.log
-
-#need to covert decimal pid to hex
-echo "obase=16; 3747" | bc
-
-#if you need one-off stack, kill -3 would show the dump as well
-kill  -3 63847
-
-### info on GC 
-jstat -gcxx -t pid $INTERVAL $COUNT
-# if FGC > 5000, a sign of problem
-jstate -gcutil 9 1000 10
 
 #check heap usage 
 jmap -heap -dump:file=xxx $PID 
@@ -171,20 +149,6 @@ du -h --max-depth=1
 
 #check a process's memory usage 
 pmap $PID
-
-# check process parent-child relationship
-pstree 
-
-### Note that 32G 128G physical machine can be considered high end already, should be able to handle 100k+ rqs
-
-<<GC
-
-reduce GC frequence to increasing heap size
-reduce GC STW, by reducing heap space or use CMS
-avoid Full gc by changing CMS trigger ration, give old gen more space, and incrase GC threads number
-
-to debug: -XX:+PrintGCDtails -XX:+PrintGCDateStamps
-GC
 
 ###fio
 # slat: how long did it take to submit this IO to the kernel for processing?
