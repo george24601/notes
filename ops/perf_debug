@@ -62,10 +62,9 @@ CS
 #free: current remaining memory
 vmstat -1 -10
 
-#grep oom_killer is /var/log/messages
-
-
 <<IOSTAT
+
+Use disk IO latency to decide if disk is under stress
 It is best to run iostat specifying a time interval in seconds (for example iostat -x 30)
 Display a continuous device report at two second intervals
 
@@ -90,7 +89,6 @@ IOSTAT
 iostat x
 iostat -dc 10
 
-###jstack
 ###VM Thread often means the GC thread, nid is the OS thread id
 
 #shows the heapsize
@@ -107,12 +105,6 @@ ps axu | grep java
 ps -eLf
 # check process parent-child relationship
 pstree -p
-
-# find large file, then use echo "" > a.log to clear the log
-find / -type f -name "*log*" | xargs | s-lSh | more 
-du -a / |sort -rn |grep log | more
-find / -name '*log*' -size +1000M -exec du -h {}\'
-
 #check heap usage 
 jmap -heap -dump:file=xxx $PID 
 #check object number and size

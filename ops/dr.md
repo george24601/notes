@@ -1,3 +1,14 @@
+Pages with rote, algorithmic responses should be a red flag. Unwillingness on the part of your team to automate such pages implies that the team lacks confidence that they can clean up their technical debt. This is a major problem worth escalating.
+
+Email alerts are of very limited value and tend to easily become overrun with noise; instead, you should favor a dashboard that monitors all ongoing subcritical problems for the sort of information that typically ends up in email alerts.
+* reverse proxy layer: nginx keepalived + virtual ip
+* web server layer: configs web servers behind nginx
+* write db: mater + shadow master with keepalived + virtual IP
+
+Migrate redis:
+* use internal DNS for quick switching IP
+* kill existing connection, let CP re-estabilith the connection
+
 simulate the machine problem by blocking the in/out port, configurable, and have a default recovery time
 
 99.99% is a bit LT 1 hour per year

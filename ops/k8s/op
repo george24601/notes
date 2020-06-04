@@ -23,44 +23,15 @@ export POD_NAME=$(kubectl get pods -l k8s-app=mockservice | sed -n 2p | awk '{ p
 
 aws eks --region ap-northeast-1 update-kubeconfig --name george_dev
 
+kubectl config get-contexts
 kubectl config current-context
 
- MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default wintering-rodent-mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode; echo)
+MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default wintering-rodent-mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode; echo)
 
- ### Run an Ubuntu pod that you can use as a client
- kubectl run -i --tty ubuntu --image=ubuntu:16.04 --restart=Never -- bash -il
-
-### see what is released
-helm ls
-
-### You get a simple idea of the features of this MySQL chart by running 
-helm inspect stable/mysql
-
-## To see what options are configurable on a chart, use 
-helm inspect values stable/mariadb
-
-### override any of these settings, use -f or --values options
-cat << EOF > config.yaml
-mariadbUser: user0
-mariadbDatabase: user0db
-EOF
-helm install -f config.yaml stable/mariadb
-
-### When it is time to uninstall or delete a release from the cluster, use the helm delete command
-helm delete happy-panda
-
-helm create deis-workflow
-#### Now there is a chart in ./deis-workflow. You can edit it and create your own templates
-
-### As you edit your chart, you can validate that it is well-formatted by running 
-helm lint
-### When it’s time to package the chart up for distribution
-### Once you have edited a chart, helm can package it into a chart archive for you:
-helm package deis-workflow
-
-### List the deployed packages with their release versions by running
-helm ls --deleted
-
+### Run an Ubuntu pod that you can use as a client
+kubectl run -i --tty ubuntu --image=ubuntu:16.04 --restart=Never -- bash -il
+ 
+kubectl get pods -n tpi | grep ete-terminator | head -n 1  | awk '{ print $1 }' | xargs kubectl logs -n tpi
 # Verify that your chosen node has a disktype=ssd label, and then you can use spec.nodeSelector.disktype: ssd
 # Use the configuration file to create a pod, by applying the yaml file, and that pod will be scheduled on the chosen node
 kubectl get nodes --show-labels

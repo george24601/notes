@@ -1,3 +1,9 @@
+
+# find large file, then use echo "" > a.log to clear the log
+find / -type f -name "*log*" | xargs | s-lSh | more 
+du -a / |sort -rn |grep log | more
+find / -name '*log*' -size +1000M -exec du -h {}\'
+
 #find all .c file starting at the current dir, note find can be chained to other commands too!
 #e.g., the dangerous -delete option! Similarly, -exec option is dangerous too!
 #-iname for case insentivie
