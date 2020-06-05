@@ -1,6 +1,0 @@
-1. backup all config files (of course!)
-2. All brokers are upgraded before clients, because clients from older release works with new brokers. Client incldues any application uses
-Kafka producer/consumer, including but not limited to, Cmaus, Schema Registry, and REstProxy.
-Speical case: client on the same node as broker!
-3. supports rolling upgrades: upgrade one broker at a time, but need to upgrade ALL kafka brokers
-4. upgrade SR, RP, and Camus,i.e.,all clients

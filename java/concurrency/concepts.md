@@ -1,3 +1,6 @@
+Daemon thread vs user thread
+ * GC is a daemon thread
+
 * How many ways to create a thread?
   * inherit from Thread
   * implemnt RUnnable

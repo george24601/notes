@@ -54,13 +54,17 @@ check # of CSs, possible caues
 3. I/O blocking
 4. resourse contention and failed to acquire
 CS
-#check context switch times, 10 times, once per second, see if cs >> in. Can use pidstat on top of it
-# if si(swap into memory) and so(swap out to harddrive) often > 0, means memory may not be enough
-# us(user execution time) too high, means user process consumes too much CPU 
-# wa(IO wait percentable) too high, means IO wait too much
-# sy(system time- kernel) too high, means IO bottleneck 
-#free: current remaining memory
-vmstat -1 -10
+<<VMSTAT
+check context switch times, 10 times, once per second, see if cs >> in. Can use pidstat on top of it
+in:interrupt
+if si(swap into memory) and so(swap out to harddrive) often > 0, means memory may not be enough
+us(user execution time) too high, means user process consumes too much CPU 
+wa(IO wait percentable) too high, means IO wait too much
+sy(system time- kernel) too high, means IO bottleneck 
+r: waiting threads
+free: current remaining memory
+VMSTAT
+vmstat 1 10
 
 <<IOSTAT
 
@@ -94,8 +98,6 @@ iostat -dc 10
 #shows the heapsize
 java -XX:+PrintFlagsFinal -version | grep HeapSize
 
-#find jvm thread with highest cpu usage, can use jps to get java process id
-#you can also use jps if you know the process name
 top -H -p 63847
 
 # find java processes
@@ -112,6 +114,9 @@ jmap -histo:live pid $PID
 
 #show java process id or can just ps aux | grep java. Here you can see the importance to giving meaninigful thread name
 jps -v 
+#jstack -l to show lock info, -m to show native stack
+#check current gc status
+jstat -gc pid
 
 #view the port associated with a daemon
 lsof -i -n -P | grep sendmail

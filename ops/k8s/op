@@ -5,18 +5,19 @@ kops export kubecfg --name $CLUSTER_ADDR --state s3://$S3_BUCKET
 #List the pods created by the deployment. For similar purposes, can use --show-labels instead of -l
 kubectl get pods -l app=nginx
 
-kubectl describe pod $POD_NAME
+#list pods for all namespaces
+kubectl get pods --all-namespaces -o wide
 
-####Deployment#####
-kubectl get deployments
+kubectl get namespaces
 
-kubectl describe deployment nginx-deployment
+#useful for debugging failure
+kubectl describe pod -n $NS $POD_NAME 
 
-####Services#####
+#see events from nodes
+kubectl describe node <nodename>
 
-kubectl get services
-
-kubectl describe service mockservice
+#list ingress in cluster
+kubectl get ing --all-namespaces
 
 #populate env var to the first column of the 2nd line
 export POD_NAME=$(kubectl get pods -l k8s-app=mockservice | sed -n 2p | awk '{ print $1 }')
@@ -30,6 +31,9 @@ MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace default wintering-rodent-my
 
 ### Run an Ubuntu pod that you can use as a client
 kubectl run -i --tty ubuntu --image=ubuntu:16.04 --restart=Never -- bash -il
+
+### Another way to get a root shell
+kubectl run ubuntu-$user --image ubuntu -ti -n $NS -- /bin/bash
  
 kubectl get pods -n tpi | grep ete-terminator | head -n 1  | awk '{ print $1 }' | xargs kubectl logs -n tpi
 # Verify that your chosen node has a disktype=ssd label, and then you can use spec.nodeSelector.disktype: ssd
@@ -42,3 +46,8 @@ kubectl exec shell-demo cat /proc/1/mounts
 
 #If a Pod has more than one Container, use --container or -c to specify a Container in the kubectl exec command. For example, suppose you have a Pod named my-pod, and the Pod has two containers named main-app and helper-app. The following command would open a shell to the main-app Container.
 kubectl exec -it my-pod --container main-app -- /bin/bash
+
+kubectl port-forward $POD -n $NS $LOCAL_PORT:$POD_PORT
+
+#List the pods on one node
+kubectl get pods --all-namespaces -o wide --field-selector spec.nodeName=$NODE

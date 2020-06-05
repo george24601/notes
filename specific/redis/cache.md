@@ -1,5 +1,4 @@
 cache layer: visit redis mater , redis sentientl monitors and M and S and swtich.
-If cache miss is acceptable, cache client -> cache proxy -> to multiple instances, each instance has no HA. Note we try not to re-hash in case of failure
 
 ### Size estimate for "hello" -> "world"
 dictEntry: 25 bytes
