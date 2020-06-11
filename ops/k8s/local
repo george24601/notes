@@ -1,8 +1,0 @@
-#!/bin/bash
-
-### HELM
-helm init --history-max 200
-
-helm repo update       
-
-helm install stable/mysql

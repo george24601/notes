@@ -1,20 +1,3 @@
-#container
-Build container:
-Dev container + build dependencies
-Source can be from mounted volume or directly read into docker as container builting process
-Builder container will create the final service container,i.e., init the service container and inject the built code.
-Notice that build process will NOT handle different environment varaibles between deployment environment. That is part of release process
-
-Service container: what goes to production - environment variables. most likely from an image
-Little difference from dev container. Should bulit code be inside container or mounted? No clear disadvantage of inside container 
-
-Test container:
-service container + testing dependencies + environment variables for testing.
-
-Installation container:
-package service container with env vars, builds a container image that goes to production
-
-
 # Pod
 pod consists of one or more containers that are guaranteed to be co-located on the host machine and can share resources.
 
@@ -34,8 +17,6 @@ Subsequent changes to the template or even switching to a new template has no di
 
 A Deployment controller provides declarative updates for Pods and ReplicaSets.
 
-You describe a desired state in a Deployment object, and the Deployment controller changes the actual state to the desired state at a controlled rate.
-
 Deployment - An API object that manages a replicated application.  
 
 You can run a stateful application by creating a Kubernetes Deployment and connecting it to an existing PersistentVolume using a PersistentVolumeClaim.
@@ -43,8 +24,6 @@ You can run a stateful application by creating a Kubernetes Deployment and conne
 # Service
 
 By itself, a Deployment can’t receive traffic.
-
-Kubernetes provides service discovery and request routing by assigning a stable IP address and DNS name to the service, and load balances traffic in a round-robin manner to network connections of that IP address among the pods matching the selector. By default a service is exposed inside a cluster, but a service can also be exposed outside a cluster.
 
 Services generally abstract access to Kubernetes Pods, but they can also abstract other kinds of backends. For example:
 
@@ -58,11 +37,7 @@ For example, if you have a Service called "my-service" in Kubernetes Namespace "
 
 ClusterIP: Exposes the service on a cluster-internal IP. Choosing this value makes the service only reachable from within the cluster.
 
-Kubernetes services perform health checks on the default pod port and endpoint "/". If you don't have that endpoint mapped or if it's secured, you need to include livenessProbe and readinessProbe configuration
-
 #k8s DNS server
-
-The DNS server watches the Kubernetes API for new Services and creates a set of DNS records for each
 
 When you create a Service, it creates a corresponding DNS entry. This entry is of the form <service-name>.<namespace-name>.svc.cluster.local, which means that if a container just uses <service-name>, it will resolve to the service which is local to a namespace.
 
@@ -71,8 +46,6 @@ When you create a Service, it creates a corresponding DNS entry. This entry is o
 An API object that manages external access to the services in a cluster, typically HTTP.
 
 Edge router: A router that enforces the firewall policy for your cluster. This could be a gateway managed by a cloud provider or a physical piece of hardware.
-
-
 
 Kubelet is responsible for the running state of each node, ensuring that all containers on the node are healthy. It takes care of starting, stopping, and maintaining application containers organized into pods as directed by the control plane.
 
@@ -97,7 +70,6 @@ StatefulSets are best suited for scenarios where replicas (Pods) need to coordin
 
 Why not use round-robin DNS?
 
-
 In order to store the state of your cluster, and the representation of your cluster, we need to create a dedicated S3 bucket for kops to use. This bucket will become the source of truth for our cluster configuration. 
 
 We STRONGLY recommend versioning your S3 bucket in case you ever need to revert or recover a previous state store.
@@ -105,10 +77,6 @@ We STRONGLY recommend versioning your S3 bucket in case you ever need to revert 
 An instance group is a set of instances, which will be registered as kubernetes nodes. On AWS this is implemented via auto-scaling-groups.
 
 #log
-
-As such, logs should have a separate storage and lifecycle independent of nodes, pods, or containers. This concept is called cluster-level-logging. Cluster-level logging requires a separate backend to store, analyze, and query logs. Kubernetes provides no native storage solution for log data, but you can integrate many existing logging solutions into your Kubernetes cluster.
-
-For example, the Docker container engine redirects those two streams to a logging driver, which is configured in Kubernetes to write to a file in json format.
 
 Note: The Docker json logging driver treats each line as a separate message. When using the Docker logging driver, there is no direct support for multi-line messages. You need to handle multi-line messages at the logging agent level or higher.
 
@@ -140,10 +108,6 @@ The sidecar container runs a logging agent, which is configured to pick up logs 
 
 Using a logging agent in a sidecar container can lead to significant resource consumption. Moreover, you won’t be able to access those logs using kubectl logs command, because they are not controlled by the kubelet.
 
-### Annotation
-
- In contrast, annotations are not used to identify and select objects. The metadata in an annotation can be small or large, structured or unstructured, and can include characters not permitted by labels.
-
  
 ### reserved labels
 * Example: kubernetes.io/hostname=ip-172-20-114-199.ec2.internal
@@ -167,16 +131,6 @@ Kubernetes will automatically spread the pods in a replication controller or ser
 
 We assume that the different zones are located close to each other in the network, so we don’t perform any zone-aware routing. In particular, traffic that goes via services might cross zones (even if some pods backing that service exist in the same zone as the client), and this may incur additional latency and cost.
 
-
-### Control plane
-
-The various parts of the Kubernetes Control Plane, such as the Kubernetes Master and kubelet processes, govern how Kubernetes communicates with your cluster. The Control Plane maintains a record of all of the Kubernetes Objects in the system, and runs continuous control loops to manage those objects’ state. At any given time, the Control Plane’s control loops will respond to changes in the cluster and work to make the actual state of all the objects in the system match the desired state that you provided.
-
-The Kubernetes master is responsible for maintaining the desired state for your cluster. When you interact with Kubernetes, such as by using the kubectl command-line interface, you’re communicating with your cluster’s Kubernetes master.
-
-The “master” refers to a collection of processes managing the cluster state. Typically all these processes run on a single node in the cluster, and this node is also referred to as the master. The master can also be replicated for availability and redundancy
-
-The nodes in a cluster are the machines (VMs, physical servers, etc) that run your applications and cloud workflows. The Kubernetes master controls each node; you’ll rarely interact with nodes directly.
 
 ###Eviction
 

@@ -14,7 +14,7 @@ kubectl get namespaces
 kubectl describe pod -n $NS $POD_NAME 
 
 #see events from nodes
-kubectl describe node <nodename>
+kubectl describe node $NODE_NAME
 
 #list ingress in cluster
 kubectl get ing --all-namespaces
@@ -37,14 +37,10 @@ kubectl run ubuntu-$user --image ubuntu -ti -n $NS -- /bin/bash
  
 kubectl get pods -n tpi | grep ete-terminator | head -n 1  | awk '{ print $1 }' | xargs kubectl logs -n tpi
 # Verify that your chosen node has a disktype=ssd label, and then you can use spec.nodeSelector.disktype: ssd
-# Use the configuration file to create a pod, by applying the yaml file, and that pod will be scheduled on the chosen node
+
 kubectl get nodes --show-labels
 
-kubectl exec shell-demo ps aux
-kubectl exec shell-demo ls /
-kubectl exec shell-demo cat /proc/1/mounts
-
-#If a Pod has more than one Container, use --container or -c to specify a Container in the kubectl exec command. For example, suppose you have a Pod named my-pod, and the Pod has two containers named main-app and helper-app. The following command would open a shell to the main-app Container.
+#If a Pod has more than one Container, use --container or -c to specify a Container in the kubectl exec command. 
 kubectl exec -it my-pod --container main-app -- /bin/bash
 
 kubectl port-forward $POD -n $NS $LOCAL_PORT:$POD_PORT

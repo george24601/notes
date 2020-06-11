@@ -1,5 +1,4 @@
 @startuml
-
 database redis {
 [128 zsets to store events] as data
 }
@@ -7,14 +6,23 @@ database redis {
 [dispatcher] as p
 [consumer] as c
 
-queue "segment match" as uet
-queue "effective event" as eet
-queue "dispatcher dlq" as dd 
-queue "consumer dlq" as cd 
+[upstream pods] as upstream
+
+[optional demultiplexer] as demul
+queue "effectve topic per event" as etpe
+
+queue "multiplexed segment match topic" as uet
+queue "multiplexed effective event" as eet
+queue "dispatcher dlq" as dd
+queue "consumer dlq" as cd
+
 uet <-- p
 p --> dd
 p --> eet
 p --> data
+upstream --> uet
+eet <-- demul
+demul --> etpe
 
 c --> data
 c -->cd
