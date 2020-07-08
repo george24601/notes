@@ -1,5 +1,3 @@
-cache layer: visit redis mater , redis sentientl monitors and M and S and swtich.
-
 ### Size estimate for "hello" -> "world"
 dictEntry: 25 bytes
 redisObject: 16 Buytes
@@ -19,11 +17,6 @@ Because moving hash slots from a node to another does not require to stop operat
 
 every sec randomly select 5 nodes,and find the oldest node that has not sent message too. Every 100ms, scale lcoal node list, if the node received last pong > cluster-node-timeout/2, send ping
 
-RDD is implemented by fork and COW
-
-
-redis sentinel: HA
-redis cluster: sharding
 
 ### bgsave
 Forks a child process and writes via that process. Otherwise, the main process will just block. Child process at init share the same data segment and code segment, and will copy on write if child wants to change the data
