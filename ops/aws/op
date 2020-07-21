@@ -5,8 +5,6 @@ export AWS_PROFILE=user2
 #describe instances
 aws ec2 describe-instances --profile user2
 
-#Delete streams from a specific month
-
 ####Use cli with MFA, make sure you source so that it changes the current shell process
 
 #Format:arn:aws:iam::$ACCOUNT_NUM:mfa/$ACCOUNT_NAME
@@ -29,11 +27,7 @@ export AWS_ACCESS_KEY_ID=`echo ${RESPONSE} | jq .Credentials.AccessKeyId -r`
 export AWS_SECRET_ACCESS_KEY=`echo ${RESPONSE} | jq .Credentials.SecretAccessKey -r`
 export AWS_SESSION_TOKEN=`echo ${RESPONSE} | jq .Credentials.SessionToken -r`
 
-######Above section ends
-
-####Deploy k8s dashboard
-
-
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
-
-
+### download unzip from s3
+aws s3 cp s3://$BUCKET/$DIR $TAR_DIR --recursive
+# recursively unzip
+sudo find . -name "*.gz" | xargs gunzip

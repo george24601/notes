@@ -1,70 +1,64 @@
+Ensure that your VPCs do not have overlapping IPv4 CIDR blocks. If they do, the status of the VPC peering connection immediately goes to failed
 
-DefaultAWSCredentialsProviderChain Sequences
--------
-1. Environment variables–AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
-2. Java system properties–aws.accessKeyId and aws.secretKey
-3. The default credential profiles file– typically located at ~/.aws/credentials
-4. Amazon ECS container credentials– loaded from the Amazon ECS if the environment variable AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set
-5. Instance profile credentials– used on EC2 instances, and delivered through the Amazon EC2 metadata service. The AWS SDK for Java uses the InstanceProfileCredentialsProvider to load these credentials.
+You have a limit on the number of active and pending VPC peering connections that you can have per VPC.
 
-TRUSTED ENTITY?
+If the IPv4 CIDR block of a VPC in a VPC peering connection falls outside of the private IPv4 address ranges specified by RFC 1918, private DNS hostnames for that VPC cannot be resolved to private IP addresses. To resolve private DNS hostnames to private IP addresses, you can enable DNS resolution support for the VPC peering connection. For more information, see Enabling DNS Resolution Support for a VPC Peering Connection.
 
-When you create the role, you define the Development account as a trusted entity and specify a permissions policy that allows trusted users to update the productionapp bucket.
+You must both create and accept the VPC peering connection request yourself to activate it.
 
-you can and should use an IAM role to manage temporary credentials for applications that run on an EC2 instance. When you use a role, you don't have to distribute long-term credentials to an EC2 instance. Instead, the role supplies temporary permissions that applications can use when they make calls to other AWS resources. When you launch an EC2 instance, you specify an IAM role to associate with the instance. Applications that run on the instance can then use the role-supplied temporary credentials to sign API requests.
+Select the VPC peering connection that you've created, and choose Actions, Accept Request.
 
-The instance profile contains the role and can provide the role's credentials to an application that runs on the instance. Those credentials can then be used in the application's API calls to access resources and to limit access to only those resources that the role specifies. Note that only one role can be assigned to an EC2 instance at a time, and all applications on the instance share the same role and permissions.
+To send private IPv4 traffic from your instance to an instance in a peer VPC, you must add a route to the route table that's associated with your subnet in which your instance resides. The route points to the CIDR block (or portion of the CIDR block) of the peer VPC in the VPC peering connection.
 
-a role can also be attached to an EC2 instance that is already running
+If a subnet is not explicitly associated with a route table, it uses the main route table by default.
 
-Alternatively, the application can get the temporary credentials directly from the instance metadata of the EC2 instance. Credentials and related values are available from the iam/security-credentials/role-name category (in this case, iam/security-credentials/Get-pics) of the metadata. If the application gets the credentials from the instance metadata, it can cache the credentials.
+You have a limit on the number of entries you can add per route table. If the number of VPC peering connections in your VPC exceeds the route table entry limit for a single route table, consider using multiple subnets that are each associated with a custom route table.
 
-iam role to access codecommit repo: AWSCodeCommitFullAccess
+The owner of the other VPC in the peering connection must also add a route to their subnet's route table to direct traffic back to your VPC.
 
-The automatic credentials refresh happens only when you use the default client constructor, which creates its own InstanceProfileCredentialsProvider as part of the default provider chain, or when you pass an InstanceProfileCredentialsProvider instance directly to the client constructor. If you use another method to obtain or pass instance profile credentials, you are responsible for checking for and refreshing expired credentials.
-
-You can specify a credential provider that is different from the default credential provider chain by using the client builder.
+add add a CNAME to the dev VPC to resolve to the tidb's internal ELB
 
 
-Making API requests with IAM roles
------------
-1. Create an IAM role.
-2. Define which accounts or AWS services can assume the role.
-3. Define which API actions and resources the application can use after assuming the role.
-4. Specify the role when you launch your instance, or attach the role to a running or stopped instance.
-5. Have the application retrieve a set of temporary credentials and use them
+A customer gateway is the anchor on your side of that connection. It can be a physical or software appliance. The anchor on the AWS side of the VPN connection is called a virtual private gateway.
 
-An application on the instance retrieves the security credentials provided by the role from the instance metadata item iam/security-credentials/role-name
+the VPN connection consists of two tunnels to provide increased availability for the Amazon VPC service. If there's a device failure within AWS, your VPN connection automatically fails over to the second tunnel so that your access isn't interrupted.
 
-To view all categories of instance metadata from within a running instance,
+When you configure your customer gateway, it's therefore important that you configure both tunnels.
 
-```
-curl http://169.254.169.254/latest/meta-data/
-curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
-```
-An account administrator can attach permissions policies to IAM identities (that is, users, groups, and roles).
+You can create additional VPN connections to other VPCs using the same customer gateway device. You can reuse the same customer gateway IP address for each of those VPN connections.
 
-The AWS account owns the resources that are created in the account, regardless of who created them
+The virtual private gateway is not the initiator; your customer gateway must initiate the tunnels.
 
-If you create an IAM user in your AWS account and grant permissions to create AWS CodeCommit resources to that user, the user can create AWS CodeCommit resources. However, your AWS account, to which the user belongs, owns the AWS CodeCommit resources.
+To protect against a loss of connectivity if your customer gateway becomes unavailable, you can set up a second VPN connection.
 
-Currently, AWS CodeCommit supports only identity-based policies (IAM policies).
+This team (which may or may not consist of you) must use the AWS Management Console to create a VPN connection and get the information that you need to configure your customer gateway.
 
- A trust policy specifies which trusted accounts are allowed to grant its users permissions to assume the role.
+To create a VPN connection in AWS, you need the following information.
 
-For example, the administrator in Account A can create a role to grant cross-account permissions to another AWS account (for example, Account B) or an AWS service as follows:
-Account A administrator creates an IAM role and attaches a permissions policy to the role that grants permissions on resources in Account A.
-Account A administrator attaches a trust policy to the role identifying Account B as the principal who can assume the role.
-Account B administrator can then delegate permissions to assume the role to any users in Account B. Doing this allows users in Account B to create or access resources in Account A. If you want to grant an AWS service permissions to assume the role, the principal in the trust policy can also be an AWS service principal. For more information, see Delegation in IAM Terms and Concepts.
+	1. Customer gateway vendor (for example, Cisco), platform (for example, ISR Series Routers), and software version (for example, IOS 12.4)
 
-Principal – In identity-based policies (IAM policies), the only type of policies that AWS CodeCommit supports, the user that the policy is attached to is the implicit principal.
+	2. The internet-routable IP address for the customer gateway device's external interface.
 
-Data sent or received is transmitted using the HTTPS or SSH encrypted network protocols.
+	3. (Optional) Border Gateway Protocol (BGP) Autonomous System Number (ASN) of the customer gateway.
 
-### EKS
+	4. (Optional) The ASN for the Amazon side of the BGP session.
 
-Instead, EKS fully manages just the Kubernetes control plane (master nodes, etcd, api server), for a flat usage fee of $0.20 per hour or ~$145 per month. The tradeoff to this is that you do not have access to the master nodes at all, and are unable to make any modifications to the control plane.
+        5. Tunnel information for each VPN tunnel	
 
-Kops has been around since late 2016, well before EKS existed.
+The configuration file for your customer gateway includes the values that you specify for the above items. It also contains any additional values required for setting up the VPN tunnels, including the outside IP address for the virtual private gateway. This value is static unless you recreate the VPN connection in AWS.
 
-Kops significantly simplifies Kubernetes cluster set up and management compared to manually setting up master and worker nodes. It manages Route53, AutoScaling Groups, ELBs for the api server, security groups, master bootstrapping, node bootstrapping, and rolling updates to your cluster.
+Configuring a Firewall Between the Internet and Your Customer Gateway?
+
+Setting Up an AWS VPN Connection
+------------
+1. Create a Customer Gateway
+
+2. Create a Virtual Private Gateway
+
+If you configure CloudFront to serve HTTPS requests using Server Name Indication (SNI), CloudFront associates your alternate domain name with an IP address for each edge location, but the IP address is not dedicated to your distribution. When a viewer submits an HTTPS request for your content, DNS routes the request to the IP address for the applicable edge location. However, because the IP address isn't dedicated to your distribution, CloudFront can't determine, based on the IP address, which domain the request is for.
+
+When you're using a custom origin, the SSL/TLS certificate on your origin includes a domain name in the Common Name field, and possibly several more in the Subject Alternative Names field. (CloudFront supports wildcard characters in certificate domain names.)
+
+One of the domain names in the certificate must match the domain name that you specify for Origin Domain Name. If no domain name matches, CloudFront returns HTTP status code 502 (Bad Gateway) to the viewer.
+
+

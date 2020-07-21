@@ -41,11 +41,6 @@ A change event looks like:
 5. metadata about the source: location in log, db, table, transaction id, source timestamp
 6. capture timestamp
 
-### domian driven
-
-Surround model and its context with a boundary
-
-Explicitly map between different contexts
 
 invariant rules across your domain model - model the invariants and assocaited entity/values as aggregates - aggregates focus on transactional boundaries - individual aggregates are transactional consistent 
 
