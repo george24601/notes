@@ -1,4 +1,58 @@
 @startuml
+
+database "recon" {
+  [channel_coupon] as meta
+}
+
+queue "budget control alerts" as bca
+queue "pai.gm.clm.coupon" as clm
+queue "pai.gm.clm.coupon" as clm
+queue "pai.gm.mcms.coupon" as mcms
+queue "pai.gm.mcms.date.resolve" as sn
+
+[merchant notification scanner] as mns
+mns --> mcms : src
+mns --> bca :src
+mns --> clm :sink
+mns --> sn : sink
+mns --> recon
+@enduml
+
+@startuml
+database "notification" {
+  [channel_coupon] as coupon
+  [customer_coupon] as uc
+  [user_status] as status
+  [merchant_status] as ms
+}
+
+queue "budget control alerts" as bca
+queue "MCMS - coupon state change" as cs
+queue "Coupon wallet - user action" as ua
+queue "customer sink" as sink
+queue "merchant sink" as merchant_sink
+[coupon state capture] as csc
+csc --> coupon
+csc --> cs
+[user coupon action capture] as ucac
+ucac --> uc
+ucac --> ua
+[user notification scanner] as ns
+ns --> coupon
+ns --> uc 
+ns --> sink
+ns --> status
+
+[merchant notification scanner] as mns
+mns --> ms
+mns --> coupon
+mns --> merchant_sink
+mns --> bca
+
+@enduml
+
+
+@startuml
 database redis {
 [128 zsets to store events] as data
 }
@@ -29,184 +83,4 @@ c -->cd
 c --> eet
 @enduml
 
-@startuml
-queue "12 min topics" as mt
-queue "24 hour topics" as ht
-queue "7 day topics" as dt
 
-queue "segment match" as uet
-queue "effective event" as eet
-queue "dispatcher dlq" as dd 
-queue "min dlq" as  md 
-queue "hour dlq" as hd 
-queue "day dlq"as  dd 
-[dispatcher] as p
-[min consumer] as mc
-[hour consumer] as hc
-[day consumer] as dc
-p --> mt
-p --> ht
-p --> dt
-p --> uet
-p --> eet
-mc --> mt
-mc --> eet
-hc --> ht
-hc --> mt
-dc --> dt
-dc --> mt 
-p --> dd
-mc --> md
-hc --> hd
-dc --> dd
-
-@enduml
-
-
-@startuml
-[producer] as p
-[consumer] as c
-
-queue "segment match topic" as uet
-queue "effective event topic" as eet
-queue "hour 1" as h1
-queue "hour 2" as h2
-queue "hour 168" as h168
-
-p --> uet
-p --> h1 
-p --> h2
-p --> h168
-
-c --> h1
-c --> h2
-c --> h168
-
-c --> eet
-
-@enduml
-
-
-@startuml
-[dev poc copier - 3 days] as cp_poc
-[dev poc purger - 2 days] as purger_poc
-[insertion development - 3 days] as in_d
-[development - 3 days] as in_d
-
-di --> dc
-di --> 
-
-@enduml
-
-@startuml
-
-[Stop purger] as sp
-[Stop copier] as sc
-[flyway hot] as fh
-[flyway cold] as fc
-[Start purger] as p
-[Start copier] as c
-
-sp --> fh
-sc --> fh
-sp --> fc
-sc --> fc
-fh --> c
-fc --> c
-c --> p
-
-@enduml
-
-@startuml
-[full restore] as fr
-[single row insert] as si
-[wallet code change] as cc
-[single row deletion] as sd
-[batch row insert] as bi
-[batch row delete] as bd
-fr --> si
-si --> bi
-bi --> bd
-sd --> bd
-si -> cc
-cc -> sd
-@enduml
-
-@startuml
-
-component [Pre-prod] {
-database TiDB
-queue "saved mysql traffic" as traffic 
-[sync-diff] as sd
-database Aurora_V
-[cross domain checking] as cd
-}
-@enduml
-
-@startuml
-
-component [PROD]{
-database Aurora_M
-database Aurora_S
-database TiDB_M
-database TiDB_S
-component Payment
-database Wallet
-}
-
-component [PRE-PROD]{
-
-queue ReplayProxy as rp
-database TiDB_V
-[cross domain checker] as dc
-[sync-diff] as sd
-}
-
-
-TiDB_M <-- Aurora_M: binlog to
-TiDB_M --> TiDB_S: binlog to
-@enduml
-
-
-@startuml
-database "events" {
-  [activation_events] as ae
-}
-database "metadata" {
-  [consumer_meta] as cm 
-}
-
-[producer] as dep
-
-queue "segment match topic" as uet
-queue "effective event topic" as eet
-
-[multiple consumers] as c1
-[coordinator] as co
-[cleanup daemon] as cd
-
-dep --> eet
-uet <-- dep
-dep --> ae
-c1 --> co
-co --> cm
-c1 --> ae
-cd --> ae
-c1 --> eet
-
-@enduml
-
-@startuml
-skinparam component {
-	backgroundColor<<done>> Green
-	backgroundColor<<doing>> Yellow
-	backgroundColor<<explore>> Blue
-}
-
-[Java] --> [Spring]
-[Network] --> [RDS]
-[Network] --> [Redis]
-[RDS] --> [Spring]
-[Java] --> [Kafka]
-[Network] --> [Kafka]
-@enduml

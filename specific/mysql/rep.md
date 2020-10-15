@@ -46,3 +46,18 @@ This format is used to represent GTIDs in the output of statements such as SHOW 
 As written in the output of statements such as SHOW MASTER STATUS or SHOW SLAVE STATUS, a sequence of GTIDs originating from the same server may be collapsed into a single expression, as shown here.
 
 If a GTID was assigned for the transaction, the GTID is externalized non-atomically (very shortly after the transaction is committed) by adding it to the set of GTIDs in the gtid_executed system variable (@@global.gtid_executed). This GTID set contains a representation of the set of all committed GTID transactions. With binary logging enabled (as required for the master), the set of GTIDs in the gtid_executed system variable is a complete record of the transactions applied, but the mysql.gtid_executed table is not, because the most recent history is still in the current binary log file.
+
+
+### Specific tools
+
+cannal/maxwell vs kafka connect
+* Deployment, unbalanced resources, no HA
+* Note mysql to ES binlog replication is a bit tricky
+
+* maxwell has HA problem
+
+### Canal
+ZK for HA
+No FK or trigger support
+Memory hungry
+github start is order of magnitude less than than canal
