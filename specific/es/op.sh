@@ -1,27 +1,12 @@
-#create index
-curl -X PUT https://search-prod-ek-g2yflstdow7bkz7pz7xdxdd2ou.us-west-2.es.amazonaws.com:443/prod -H 'Content-Type: application/json' -d'
-{
-    "settings" : {
-        "index" : {
-            "number_of_shards" : 3,
-            "number_of_replicas" : 2
-        }
-    }
-}
-'
+#test if ES is up
+curl http://localhost:9200/?pretty
 
-curl -X PUT https://$ES_HOST:443/test -H 'Content-Type: application/json' -d'
-{
-    "settings" : {
-        "index" : {
-            "number_of_shards" : 3,
-            "number_of_replicas" : 2
-        }
-    }
-}
-'
 #list all indices via metadata
-curl https://$ES_HOST/_cat/indices
+curl http://localhost:9200/_cat/indices
+
+curl http://localhost:9200/_cat/indices/coupon
+
+curl http://localhost:9200/coupon/_mapping
 
 curl -d @qPL.json http://localhost:9200/spark/_search?pretty 
 
