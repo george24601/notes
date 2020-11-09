@@ -1,6 +1,3 @@
-#test if ES is up
-curl http://localhost:9200/?pretty
-
 #list all indices via metadata
 curl http://localhost:9200/_cat/indices
 
@@ -24,8 +21,11 @@ curl -XGET 'http://localhost:9200/_count?pretty' -d '
                 }
                 '
 
-
+#explain understanding document score computation
+curl -XGET 'localhost:9200/twitter/tweet/1/_explain' -d '{
+      "query" : {
+        "term" : { "message" : "search" }
+      }
+}'
 #HEAD verb to check whether the doucment exists
 curl -i -XHEAD http://localhost:9200/website/blog/123
-
-curator [--config CONFIG.YML] [--dry-run] ACTION_FILE.YML
