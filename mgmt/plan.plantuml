@@ -1,86 +1,90 @@
-@startuml
-
-database "recon" {
-  [channel_coupon] as meta
-}
-
-queue "budget control alerts" as bca
-queue "pai.gm.clm.coupon" as clm
-queue "pai.gm.clm.coupon" as clm
-queue "pai.gm.mcms.coupon" as mcms
-queue "pai.gm.mcms.date.resolve" as sn
-
-[merchant notification scanner] as mns
-mns --> mcms : src
-mns --> bca :src
-mns --> clm :sink
-mns --> sn : sink
-mns --> recon
-@enduml
 
 @startuml
-database "notification" {
-  [channel_coupon] as coupon
-  [customer_coupon] as uc
-  [user_status] as status
-  [merchant_status] as ms
+
+queue "pai.gm.mcms.coupon" as couponQ
+
+database "reco redis" as redis {
 }
 
-queue "budget control alerts" as bca
-queue "MCMS - coupon state change" as cs
-queue "Coupon wallet - user action" as ua
-queue "customer sink" as sink
-queue "merchant sink" as merchant_sink
-[coupon state capture] as csc
-csc --> coupon
-csc --> cs
-[user coupon action capture] as ucac
-ucac --> uc
-ucac --> ua
-[user notification scanner] as ns
-ns --> coupon
-ns --> uc 
-ns --> sink
-ns --> status
+database "reco ES" as es {
+}
 
-[merchant notification scanner] as mns
-mns --> ms
-mns --> coupon
-mns --> merchant_sink
-mns --> bca
+
+
+[Reco indexer] as indexer
+
+indexer --> es : continously scan
+indexer --> redis : populate zsets
+indexer --> couponQ: listen to manually end event
 
 @enduml
 
 
 @startuml
-database redis {
-[128 zsets to store events] as data
+
+database "notification" as db {
+[channel_coupon] as couponT
+[customer_coupon] as customerT
+[msg_meta] as meta
+
 }
 
-[dispatcher] as p
-[consumer] as c
+queue "pai.plc.coupon.wallet" as cwQ
+queue "pai.gm.mcms.coupon" as couponQ
+queue "coupon.wallet.expiring" as sink
+[mcms change capture] as mcmsCC
+[cw change capture] as cwCC
+[notification scanner] as scanner
 
-[upstream pods] as upstream
+mcmsCC --> couponT
+mcmsCC --> couponQ
+cwCC --> customerT
+cwCC --> cwQ 
+scanner --> db
+scanner --> sink
+@enduml
 
-[optional demultiplexer] as demul
-queue "effectve topic per event" as etpe
 
-queue "multiplexed segment match topic" as uet
-queue "multiplexed effective event" as eet
-queue "dispatcher dlq" as dd
-queue "consumer dlq" as cd
+@startuml
 
-uet <-- p
-p --> dd
-p --> eet
-p --> data
-upstream --> uet
-eet <-- demul
-demul --> etpe
+database "mcms read replica" as mcms {
+}
 
-c --> data
-c -->cd
-c --> eet
+queue "pai.gm.mcms.coupon" as couponQ
+queue "pai.gm.mcms.store" as storeQ
+
+database "reco redis" as redis {
+}
+
+[redis indexer] as indexer
+
+indexer --> mcms : continously scan
+indexer --> redis : write
+indexer --> couponQ: read event triggers
+indexer --> storeQ: read event triggers
+@enduml
+
+@startuml
+!include <aws/common>
+!include <aws/Storage/AmazonS3/AmazonS3>
+AMAZONS3(store_list)
+[bff] --> [channels] 
+[channels] -->[reco]
+[bff] -->[reco]
+database "elasticsearch" as es {
+}
+database "redis" as redis {
+}
+
+queue "pai.gm.mcms.coupon" as couponQ
+queue "pai.gm.mcms.store" as storeQ
+[es updater] as updater
+updater --> couponQ
+updater --> storeQ
+reco --> redis
+reco --> es
+updater -> es
+updater -> store_list
 @enduml
 
 

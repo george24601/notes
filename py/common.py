@@ -1,11 +1,3 @@
-print dict  ## {'a': 'alpha', 'o': 'omega', 'g': 'gamma'}
-if 'z' in dict: print dict['z']     ## Avoid KeyError
-
-# Get the .keys() list:
-for key in dict: print key
-
-for k, v in dict.items(): print k, '>', v
-
 hash = {}
   hash['word'] = 'garfield'
   hash['count'] = 42
@@ -15,19 +7,6 @@ hash = {}
   del list[-2:]   ## Delete last two elements
 
 
-list = ['larry', 'curly', 'moe']
-  list.append('shemp')         ## append elem at end
-  list.extend(['yyy', 'zzz'])  ## add list of elems at end
-  print list  ## ['xxx', 'larry', 'curly', 'moe', 'shemp', 'yyy', 'zzz']
-  print list.index('curly')    ## 2
-
-  list.remove('curly')         ## search and remove that element
-  print list  ## ['xxx', 'moe', 'shemp', 'yyy', 'zzz']
-
-list = ['larry', 'curly', 'moe']
-if 'curly' in list: #in addition to the for-loop usage
-  print 'yay'
-
   # Split the line into chunks, which are concatenated automatically by Python
   text = (
     "%d little pigs come out, "
@@ -35,8 +14,6 @@ if 'curly' in list: #in addition to the for-loop usage
     "and I'll blow your %s down."
     % (3, 'huff', 'puff', 'house'))
 
-
-list_of_ints = [int(i) for i in list_of_strings]
 
 # Without newline
 print("Hello World", end='')
@@ -46,76 +23,10 @@ print("Hello World", end='')
 #all input is just gotten from the input() function, which you do not need to import. As a parameter to the input function, you give the prompt for the user.
 print("Name is ", name ," and age is ", age)
 
-# replace some values
-# However, out of range slice indexes are handled gracefully when used for slicing
-letters[2:5] = ['C', 'D', 'E']
-
-letters[2:5] = []
-
-a, b = 0, 1
-while b < 10:
-    print(b)
-    #print(b, end=',') The keyword argument end can be used to avoid the newline after the output, or end the output with a different string
-    a, b = b, a+b
-
-#A tuple consists of a number of values separated by commas
-t = 12345, 54321, 'hello!'
-u = t, (1, 2, 3, 4, 5) #((12345, 54321, 'hello!'), (1, 2, 3, 4, 5))
-#Note that tuple uses (, list [ in py, and { in cpp 
-
-tel = {'jack': 4098, 'sape': 4139}
-
-#The comparison operators in and not in check whether a value occurs (does not occur) in a sequence. The operators is and is not compare whether two objects are really the same object; this only matters for mutable objects like lists. All comparison operators have the same priority, which is lower than that of all numerical operators.
-'guido' in tel
-
-'jack' not in tel
-
-del tel['sape']
-
-#Combining a list of strings into a single one
-sentence_list = ["my", "name", "is", "George"]
-sentence_string = " ".join(sentence_list)
-
 #Merging dictionaries
 x = {'a': 1, 'b': 2}
 y = {'b': 3, 'c': 4}
 z = {**x, **y}
-
-for key in x:
-    print(x[key])
-
-#Returning multiple values from a function
-def get_a_string():
-    a = "George"
-    b = "is"
-    c = "cool"
-    return a, b, b
-sentence = get_a_string()
-(a, b, c) = sentence
-
-#Iterating over a dictionary
-m = {'a': 1, 'b': 2, 'c': 3, 'd': 4}
-for key, value in m.items():
-    print('{0}: {1}'.format(key, value))
-
-#Iterating over list values while getting the index too
-m = ['a', 'b', 'c', 'd']
-for index, value in enumerate(m):
-    print('{0}: {1}'.format(index, value))
-
-
-#Initialising empty containers
-a_list = list()
-a_dict = dict()
-a_map = map()
-#Curly braces or the set() function can be used to create sets. Note: to create an empty set you have to use set(), not {}; the latter creates an empty dictionary, a data structure that we discuss in the next section.
-a_set = set()
-
-#multiple assignment & with tuple
-a,b,c=3,4,5
-my_tuple=3,4,5
-x,y,z=my_tuple
-
 
 """
 The *args and **kwargs is a common idiom to allow arbitrary number of arguments to functions as described in the section more on defining functions in the Python documentation.
