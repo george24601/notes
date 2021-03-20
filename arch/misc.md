@@ -1,3 +1,25 @@
+For bi-directional a-b  maapings, for sharding, data replication is still needed. so that we hit only 1 db for different queries
+
+### Async payment
+3rd party payment api shows only the payment is accepted, but not if itself is successful or not  
+* Add it to another in progess table - we choose not to reuse the main table so we can easily purge it
+* Can solve this by pulling, but latency may be a concern. If it is latency sensitive, add it to the delayed queue, use delayed queue consumer to update the state
+
+### API gateway
+
+* Two different departments on two seperate apps. The communcations between them should be done via api gateway, and should not share the service discovery/registration center
+  * Otherwise, team's internal APIs will be exposed too 
+* For canary, gateway can listen to rules pub/subed by redis. The gateway will parse colored headers from user request and forward to corresponding environment
+  * App knows what header to send and when to send headers, by loading the rule sepearately
+  * Rule must be versioned so it can be backward compatible. Note reponse should notify app that its header/rule is outdated
+  * Canary one piece at a time, front end and BE together is very tricky
+
+### How Kafka handles many connections
+* connection -> acceptor
+* acceptor -> processor, each processer handles many connections
+* proesssor communiats with worker threads by request and reponse qs
+
+
 Notificaton:
 long-live http keep alive conntion to mark if there is data or not. Even if there is no data, we still push a no-op to keep alive
 client does poll once see there is data coming
