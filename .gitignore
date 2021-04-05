@@ -7,3 +7,5 @@ project
 *.idea
 *.tfstate*
 *.swo
+*.lock
+node_module*
