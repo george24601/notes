@@ -1,21 +1,5 @@
-function formatName(user) {
-    return user.firstName + ' ' + user.lastName;
-  }
-  
-  const user = {
-    firstName: 'Harper',
-    lastName: 'Perez'
-  };
-  
-  const element = (
-    <h1>
-      Hello, {formatName(user)}!
-    </h1>
-  );
-
-  const emptyElement = <img src={user.avatarUrl} />;
-  
-  function Clock(props) {
+///
+function Clock(props) {
     return (
       <div>
         <h1>Hello, world!</h1>
@@ -33,9 +17,8 @@ function formatName(user) {
   
   setInterval(tick, 1000);
 
- //The render method will be called each time an update happens, but as long as we render <Clock /> into the same DOM node, only a single instance of the Clock class will be used. This lets us use additional features such as local state and lifecycle methods.
-
- class Clock extends React.Component {
+///
+  class Clock extends React.Component {
     constructor(props) {
       super(props);
       //The only place where you can assign this.state is the constructor.
@@ -74,19 +57,7 @@ function formatName(user) {
     <Clock />,
     document.getElementById('root')
   );
-
-  // Correct
-this.setState((state, props) => ({
-    counter: state.counter + props.increment
-  }));
-
-  // Correct
-this.setState(function(state, props) {
-    return {
-      counter: state.counter + props.increment
-    };
-  });
-
+////
 function ActionLink() {
     function handleClick(e) {
         e.preventDefault();
