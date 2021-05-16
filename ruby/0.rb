@@ -20,3 +20,45 @@ my_proc = Proc.new { puts "foo" }
 
 my_method_call(&my_proc) # is identical to:
 my_method_call { puts "foo" }
+
+int.times {puts "hi"}
+
+y = 7 
+[4,6,8].each {y += 1}
+
+sum = 0
+[4,6,8].each {|x| 
+sum += x
+puts sum
+}
+
+sum = [4,6,8].inject(0) {|acc, elt| acc + elt}
+
+class Point
+attr_accessor :x, :y
+
+def initialize(x,y)
+	@x = x
+	@y = y
+end
+
+def distFromOrigin
+	Math.sqrt(@x * @x + @y * @y)
+end
+
+def distFromOrigin2
+	Math.sqrt(x * x + y * y)//uses getter method
+end
+
+end
+
+class ColorPoint < Point
+attr_accessor :color
+
+def initialize(x,y,c="clear")
+	super(x,y) //not required but often desired
+	@color = c
+end
+
+end
+
