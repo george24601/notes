@@ -1,4 +1,3 @@
-
   // Correct
 this.setState((state, props) => ({
     counter: state.counter + props.increment
@@ -33,6 +32,19 @@ const colorEnum = color as Color;
     </h1>
   );
 
-  const emptyElement = <img src={user.avatarUrl} />;
+<Parent key="value">
+              <Children />
+            </Parent>
 
 
+//also note the index signature in typescript
+export const configs = {
+  [MyEnum.EnumV]: {
+	k1 : 'Value'
+}
+}
+
+const enumVSet = new Set(Object.values(MyEnum) as string[])
+
+const myEnum = nullableV ? (nullableV as MyEnum) : undefined
+const stringV: string = optionalV ?? ''
