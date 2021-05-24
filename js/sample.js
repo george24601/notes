@@ -48,3 +48,11 @@ const enumVSet = new Set(Object.values(MyEnum) as string[])
 
 const myEnum = nullableV ? (nullableV as MyEnum) : undefined
 const stringV: string = optionalV ?? ''
+
+<div className={classNames({
+styleSelector : true })}
+>
+</div>
+
+//Comparing with string enum
+stringV !== StringEnum.Val
