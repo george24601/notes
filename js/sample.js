@@ -1,3 +1,31 @@
+import React, { useState, useEffect } from 'react';
+
+//This is one of the traits of async functions — their return values are guaranteed to be converted to promises.
+let hello = async () => { return "Hello" };
+
+
+function useFriendStatus(friendID) {
+  const [isOnline, setIsOnline] = useState(null);
+
+  function handleStatusChange(status) {
+    setIsOnline(status.isOnline);
+  }
+
+  useEffect(() => {
+    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
+    return () => {
+      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
+    };
+  });
+
+  return isOnline;
+}
+
+// The defaultValue argument is only used when a component does not have a matching Provider above it in the tree. This default value can be helpful for testing components in isolation without wrapping them. Note: passing undefined as a Provider value does not cause consuming components to use defaultValue.
+const MyContext = React.createContext(defaultValue);
+
+
+
   // Correct
 this.setState((state, props) => ({
     counter: state.counter + props.increment

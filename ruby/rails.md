@@ -1,3 +1,14 @@
+### Arel
+
+When using Arel, you're mainly interacting with tables (Arel::Table) and nodes (Arel::Nodes::Node subclasses).
+
+The query interface for ActiveRecord is built on top of Arel. Anytime you call things like Model.find_by, Model.where, Model.joins, ActiveRecord is using Arel to construct the SQL query string. Scope chains are basically chained Arel nodes. At any point in the scope chain, you can check the SQL query string that Arel will build by tossing a .to_sql at the end.
+
+
+
+
+The & calls to_proc on the object, and passes it as a block to the method. In Ruby, to_proc is implemented on Symbol
+
 In Active Record, objects carry both persistent data and behavior which operates on that data. Active Record takes the opinion that ensuring data access logic as part of the object will educate users of that object on how to write to and read from the database.
 
 Model Class - Singular with the first letter of each word capitalized (e.g., BookClub).

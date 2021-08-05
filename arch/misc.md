@@ -1,3 +1,10 @@
+### Active record
+A database table or view is wrapped into a class. An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data
+
+An object carries both data and behavior. Much of this data is persistent and needs to be stored in a database. Active Record uses the most obvious approach, putting data access logic in the domain object. 
+
+The interface of an object conforming to this pattern would include functions such as Insert, Update, and Delete, plus properties that correspond more or less directly to the columns in the underlying database table.
+
 For bi-directional a-b  maapings, for sharding, data replication is still needed. so that we hit only 1 db for different queries
 
 ### Async payment
