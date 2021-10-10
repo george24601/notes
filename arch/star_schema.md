@@ -1,3 +1,30 @@
+Starflake schemas aim to leverage the benefits of both star schemas and snowflake schemas. The hierarchies of star schemas are denormalized, while the hierarchies of snowflake schemas are normalized.
+
+Starflake schemas are normalized to remove any redundancies in the dimensions. To normalize the schema, the shared dimensional hierarchies are placed in outriggers.
+
+Other dimensions might be members of this fact table (such as location/region) but these add nothing to the uniqueness of the fact records. These “affiliate dimensions” allow for additional slices of the independent facts but generally provide insights at a higher level of aggregation (a region contains many stores).
+
+When rolling up dimensions, you are provided with an excellent opportunity to perform aggregate functions on the dimension itself and store the results as new attributes. For example, you may want to know how many customers are living in each state. This could be used as the denominator in some population calculation you plan to use against the aggregate fact. 
+
+Attributes that are part of a hierarchy and are queried independently.  Examples include the year, quarter, and month attributes of a date hierarchy; and the country and state attributes of a geographic hierarchy.
+
+Sparsely populated attributes, where most dimension member records have a NULL value for the attribute, are moved to a sub-dimension.
+Low cardinality attributes that are queried independently.  For example, a product dimension may contain thousands of products, but only a handful of product types.  Moving the product type attribute to its own dimension table can improve performance when the product types are queried independently.
+
+Snowflaking for the sole purpose of minimizing disk space is not recommended, however, because it can adversely impact query performance.
+
+If a dimension is very sparse (i.e. most of the possible values for the dimension have no data) and/or a dimension has a very long list of attributes which may be used in a query, the dimension table may occupy a significant proportion of the database and snowflaking may be appropriate.
+
+
+aggregate fact table: unit sold for the month. Unit sold
+factless fact table
+star flake tables to support agg tables at all levels?
+
+Aggregates are precalculated summaries derived from the most granular fact table. These summaries form a set of separate aggregate fact tables. You may create each aggregate fact table as a specific summarization across any number of dimensions.
+
+The snowflake schema is similar to the star schema. However, in the snowflake schema, dimensions are normalized into multiple related tables, whereas the star schema’s dimensions are normalized with each dimension represented by a single table.
+
+
 The star schema separates business process data into facts, which hold the measurable, quantitative data about a business, and dimensions which are descriptive attributes related to fact data. Examples of fact data include sales price, sale quantity, and time, distance, speed and weight measurements. Related dimension attribute examples include product models, product colors, product sizes, geographic locations, and salesperson names
 
 Fact tables record measurements or metrics for a specific event. Fact tables generally consist of numeric values, and foreign keys to dimensional data where descriptive information is kept.[4] Fact tables are designed to a low level of uniform detail (referred to as "granularity" or "grain"), meaning facts can record events at a very atomic level. This can result in the accumulation of a large number of records in a fact table over time. Fact tables are defined as one of three types:
