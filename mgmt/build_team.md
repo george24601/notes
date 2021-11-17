@@ -1,9 +1,16 @@
+You should swarm to existential problems, but if a problem isn't existential, then you should be skeptical of adding your efforts where everyone's already focused. Folks often chase leadership's top priority, but with so many folks looking to make their impact there, it's often challenging to have a meaningful impact.
+
+Teaching a company to value something it doesn't care about is the hardest sort of work you can do, and it often fails, so you should do as little of it as you can, but no less. 
+
+It's surprisingly common that coaching a teammate on how to tweak a project into something finishable and then lending them your privilege to budge the right friction points will transform a six-month slog into a two-week sprint with almost an identical impact.
+
+Whatever it is, things that simply won't happen if you don't do them are your biggest opportunity to work on something that matters, and it's a category that will get both narrower and deeper the further you get into your career.
+
+The worst outcome is having your boss go directly to the team themselves and ask for a status update.
 One of the questions I asked was 'who do you go to for advice and bouncing ideas off'. This gave me a great view of the key knowledge nexus points and how people are connected to each other in the team.
 After I'd spoken to everyone, I created a report for the executive committee summarizing all topics that had come up multiple times, and highlighting individuals that were widely relied on.
 
 To determine whether permissionless innovation has been unleashed to the degree possible, a simple test is to look at the prevalence of meetings between teams (as distinct from within teams). Cross-team meetings suggest coordination, coupling, and problems with the granularity or functionality of service interfaces. Engineers don't seek out meetings if they can avoid them; such meetings could mean that a service's APIs aren't all that is needed to integrate. An organization that has embraced permissionless innovation should have a high rate of experimentation and a low rate of cross-team meetings.
-
-Wherever knowledge workers perform well in large organiza- tions, senior executives take time out, on a regular schedule, to sit down with them, sometimes all the way down to green juniors, and ask: “What should we at the head of this organ- ization know about your work? What do you want to tell me regarding this organization? Where do you see opportunities we do not exploit? Where do you see dangers to which we are still blind? And, all together, what do you want to know from me about the organization?”
 
  Any job that has defeated two or three men in succession, even though each had performed well in his previous assignments, must be assumed unfit for human beings. It must be redesigned.
 
@@ -15,8 +22,6 @@ After that’s done, my next measure of a team meeting is: did we make tangible 
 
 The excuse for overstaffing is always the need for a specialist in the team just in case we need him. One should only have on a team the knowledges and skills that are needed day in day out for the bulk of the work. Specialists who are needed once in a while should always remain outside, and hired on contract.
 
-Have strong onboarding documents and employee handbooks. Have new employees improve those onboarding documents
-
  It’s your responsibility, therefore, to get your team on the same page: Get used to repeating yourself, and drop the passive-aggressive “as I said last week” and “per my last email.” 
 
 For every open job on your team, you need to spend one hour a day on recruiting-related activities. Cap that investment at 50% of your time. 
@@ -26,10 +31,3 @@ The value created isn’t just the small decrease in entropy, it’s that you ar
 If team members are feeling overwhelmed then you've gone too far. Don't throw your intern to the sharks
 
 changing people's habit is hard - nudging is not very effective at least
-
-
-KPI- rough range:
-40% -  stability LT 2 P1 incidents within half year
-25% - innovation , 1 P1 or 2 P2 introduced due to innovation
-20% - service acceptance rate 0%
-10% -satifaction from front end teams 360 degree review - to avoid arrogance from middle tier team
