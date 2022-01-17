@@ -1,3 +1,22 @@
+### Giving feedbacks
+For this leader to be maximally effective, what should they do more of and less of?
+
+Often, the feedback that people give me is based on the giver’s personal leadership beliefs or preferences, and yet the most useful feedback starts with an understanding of what the organization values. When a feedback giver says “She has a great sense of humor,” what they are usually saying is “Her sense of humor matches mine so I enjoy it. (And who cares if others don’t like sarcasm!)” Strategic developmental feedback is based on the organization’s leadership competency mode, a shared understanding of what effective leadership looks like, or even a comparison of the leader in question with another leader in the organization who is universally thought of as effective.
+
+
+
+### Asking for feedback
+
+you come up with a go-to question
+Your question must sound like you — something you would naturally say. If you sound like Kim Scott and not yourself, people won’t believe you really want to hear what they have to say.  The question I like to use is, “What I could do or stop doing that would make it easier to work with me?” However, If those words don’t fall easily off your tongue, find words that do.
+
+that opening question is just designed to get things moving
+
+One technique is to count to six before saying anything else, forcing them to endure the silence. The goal is not to be a bully but to insist on a candid discussion — to make it harder for the person to say nothing than to tell you what they’re thinking. If they can’t come up with anything on the spot, you can always arrange a time to meet again. If counting to six doesn’t do the trick, ask the question again. And again if necessary. 
+
+Another way to embrace the discomfort is to point out when people’s body language is at odds with what they’re saying. Imagine you’re at a meeting with a colleague with whom you’ve just shared a big, possibly impractical idea. He responds, “Oh! Great idea,” but you notice that he hunches over and crosses his arms defensively. Ignoring that sort of nonverbal cue is a lost opportunity. Without being obnoxious, try saying something like, “Then why are you folding your arms and hunching down in your seat? Come on, tell me what you’re really thinking!”
+
+
 “No surprises. There should never be any surprises in a formal performance review, and if you’ve been diligent about offering regular impromptu guidance, you’ll lower the odds of this happening considerably”
 
 “Visual cues that make you aware of when you’re moving toward Radical Candor or away from it are invaluable. One of the most effective ways to become more Radically Candid is to explain the framework to your team and then ask them to gauge your guidance each week. Track your progress over time. Are you moving toward Radical Candor, or away from it?”
