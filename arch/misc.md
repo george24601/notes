@@ -1,3 +1,18 @@
+### column-oriented db
+Benefits include more efficient access to data when only querying a subset of columns (by eliminating the need to read columns that are not relevant), and more options for data compression. However, they are typically less efficient to insert new data.
+
+001, 002..etc being the internal rowid
+
+10:001,12:002,11:003,22:004;
+Smith:001,Jones:002,Johnson:003,Jones:004;
+Joe:001,Mary:002,Cathy:003,Bob:004;
+60000:001,80000:002,94000:003,55000:004;
+
+n a row-oriented system, indices map column values to rowids, whereas in a column-oriented system, columns map rowids to column values.
+ A row-oriented system can retrieve the row in a single disk read, whereas numerous disk operations to collect data from multiple columns are required from a columnar database.  This is even more true for writing data into the database, especially if the data tends to be "sparse" with many optional columns. For this reason, column stores have demonstrated excellent real-world performance in spite of many theoretical disadvantages
+
+online transaction processing (OLTP)-focused RDBMS systems are more row-oriented, while online analytical processing (OLAP)-focused systems are a balance of row-oriented and column-oriented.
+
 ### Active record
 A database table or view is wrapped into a class. An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data
 
