@@ -1,17 +1,9 @@
+
 ### written communication
 Informative:
 opening: clearly tell the audience what you want them to know
 Reasons: drive the point you are tyring to make, offer benefits to readers if applicable
 positive close: remind your audience of what you want them to know. Possible add contact info. Short and related to the topic
-
-Persuasive:
-Opening: clearly tell the audience what you want them to do
-* state the problem/oppurtunity, and tell the audience what you want to do with it
-* get readers attention quickly and make them see the issue from your pov
-* They must view the situtaion less than ideal if persuation is ever going to work
-Reasons: antificapting readers'q estuions and answer them with facts and emotional appeals
-Action steps: remind your audicne of waht you want them to do, this seciton turns ideas into action
-
 
 * Devise a strategy.
  * Positive or neutral. Start with headline. Add reasons and details. Pleasant close

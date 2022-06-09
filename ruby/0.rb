@@ -1,3 +1,38 @@
+class Person
+  
+  def initialize
+    @name = "Gabriella" #a class initialized with an instance variable @name
+  end
+end
+
+new_person = Person.new
+new_person.name # NoMethodError: undefined method `name’ 
+
+# The two are similar
+attr_reader :engine
+
+def engine
+  @engine
+end
+
+# refactoring is easier. From
+attr_reader :engine
+
+# To 
+def engine
+  @engine ||= EngineFactory.create
+end
+
+
+class TicTacToe
+
+attr_accessor :grid
+def reset_game
+    self.grid = game.create_grid(players) #self is required
+  end
+end
+
+
 table = Employee.arel_table
 table
   .project(table[Arel.star])

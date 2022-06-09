@@ -1,3 +1,8 @@
+class_methods
+
+let’s not access the instance variables directly, but let’s use the methods that the attr_reader created:. The error message is better this way
+
+
 ### Arel
 
 When using Arel, you're mainly interacting with tables (Arel::Table) and nodes (Arel::Nodes::Node subclasses).
