@@ -160,4 +160,3 @@ We have the sprint above the backlog.  We would like the icebox below the backlo
 
 Either create a status called icebox and allow transition from to do, OR (do what I do) and create a sprint called icebox.
 
-

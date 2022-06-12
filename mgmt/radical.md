@@ -1,4 +1,5 @@
 ### Giving feedbacks
+
 For this leader to be maximally effective, what should they do more of and less of?
 
 Often, the feedback that people give me is based on the giver’s personal leadership beliefs or preferences, and yet the most useful feedback starts with an understanding of what the organization values. When a feedback giver says “She has a great sense of humor,” what they are usually saying is “Her sense of humor matches mine so I enjoy it. (And who cares if others don’t like sarcasm!)” Strategic developmental feedback is based on the organization’s leadership competency mode, a shared understanding of what effective leadership looks like, or even a comparison of the leader in question with another leader in the organization who is universally thought of as effective.

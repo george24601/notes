@@ -1,17 +1,10 @@
-
-### written communication
-Informative:
-opening: clearly tell the audience what you want them to know
-Reasons: drive the point you are tyring to make, offer benefits to readers if applicable
-positive close: remind your audience of what you want them to know. Possible add contact info. Short and related to the topic
-
-* Devise a strategy.
- * Positive or neutral. Start with headline. Add reasons and details. Pleasant close
- * Negative unexpected. Buffer + reason + pleasant
- * Work from an outline. Divide main idea to 3-5 sections
+# Five paragraph order
+* "S" Situation, "M" Mission, "E" Execution, "A" Administration/Logistics, "C" Command/Signal.
+* Execution – If a briefing is considered to be a sandwich this would be considered the filling. It should be the longest part of the briefing and will explain in detail exactly what is going to be done under all conditions. This means the first plan of attack and any thing that will be done if the plan is compromised in any way for example if something unexpected happens.
+* Command and signal – This section involves mainly two things everything to do with radios and all passwords and code names and signals which may be used during the patrol.
 
 
-AIDA framework
+# AIDA framework
 * Attention: grab the reader's attion with something unexpected and catchy in a positive way. Offer startling stats and numbers. "see how much time was wasted on the old process"
 * Interest: a list to highlight the benefits
 * desire: anticipate the friction. can pre-emptive address thme
