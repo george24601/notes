@@ -1,3 +1,84 @@
+#You are not limited to querying fields from a single table, you can query multiple tables as well.
+Order.joins(:customer, :books).pluck("orders.created_at, customers.email, books.title")
+
+#This command will return a set of values as a hash and put them into the results variable
+results = ActiveRecord::Base.connection.execute(sql)
+
+#.exec_query returns an ActiveRecord::Result object which is very handy with easily accessible .columns and .rows attributes
+#you'd typically want to use .entries when using .exec_query to get the results as an array of hashes
+ActiveRecord::Base.connection.exec_query(sql)
+
+if results.present?
+
+# Your database might start throwing "Too many connections" errors if you have code that uses ActiveRecord::Base.connection without calling ActiveRecord::Base.clear_active_connections!
+@connection = ActiveRecord::Base.connection
+result = @connection.exec_query('select tablename from system.tables')
+result.each do |row|
+puts row
+end
+
+#Once you get the MySql::Result object
+results = ActiveRecord::Base.connection.execute(query)
+#will make array of this format [[row1][row2]...]
+results.to_a
+
+Client.find_by_sql("
+  SELECT * FROM clients
+  INNER JOIN orders ON clients.id = orders.client_id
+  ORDER BY clients.created_at desc
+")
+# => [<Client id: 1, first_name: "Lucas" >, <Client id: 2, first_name: "Jan">...]
+
+Model.connection.select_all('sql').to_hash
+
+Client.connection.select_all("SELECT first_name, created_at FROM clients
+   WHERE id = '1'").to_hash
+# => [
+  {"first_name"=>"Rafael", "created_at"=>"2012-11-10 23:23:45.281189"},
+  {"first_name"=>"Eileen", "created_at"=>"2013-12-09 11:22:35.221282"}
+]
+
+result = Post.connection.select_all('SELECT id, title, body FROM posts')
+# Get the column names of the result:
+result.columns
+# => ["id", "title", "body"]
+
+# Get the record values of the result:
+result.rows
+# => [[1, "title_1", "body_1"],
+      [2, "title_2", "body_2"],
+      ...
+     ]
+
+# Get an array of hashes representing the result (column => value):
+result.to_hash
+# => [{"id" => 1, "title" => "title_1", "body" => "body_1"},
+      {"id" => 2, "title" => "title_2", "body" => "body_2"},
+      ...
+     ]
+
+# ActiveRecord::Result also includes Enumerable.
+result.each do |row|
+  puts row['title'] + " " + row['body']
+end
+
+
+
+sql = "Select * from ... your sql query here"
+# records_array will be of different types for different database adapters. If you're using PG, it will be an instance of PG::Result, not Array.
+# you'd need to call values on this PG::Result object to get the results array
+records_array = ActiveRecord::Base.connection.execute(sql)
+
+
+
+
+
+
+
+#returning the connection back to the connection pool afterwards
+res = ActiveRecord::Base.connection_pool.with_connection { |con| con.exec_query( "SELECT 1;" ) }
+
+
 class Person
   
   def initialize
