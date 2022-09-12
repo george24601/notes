@@ -1,3 +1,17 @@
+Creative work is best done in short chunks with breaks. For example, you could write as rapidly as possible for 30 minutes, using short sentences and informal language. Take a 5 minute break, and then write about another idea.
+Set a deadline for when your madman will hand off his duties to the architect. At some point your ideas will need structure and strategy
+
+When producing, use the content generated from your brainstorming, researching, and freewriting. Insert that “raw material” into the outline. If you’re not sure what to do with a sentence, put it aside for the judge to decide.
+As with the madman, time your carpenter’s work. The goal is to write as rapidly as possible. If you review each sentence too carefully for grammar, punctuation, etc., you’ll slow down the building and probably feel blocked.
+
+* Objective testing – What did you want your document to achieve? Does it? Does it follow a logical structure, make an emotional connection and underline the credibility of the
+author? Does it lead your reader to your objectives?
+* Can you write the same thing but with fewer and/or shorter words? Is the whole piece too long or too short? Is your average sentence length between 15 and 20 words?
+* Does it pass the 20 second (or 2 second) test and grab your reader’s attention?
+* Have you read your work aloud to check for errors and improvements?
+
+
+
 # Five paragraph order
 * "S" Situation, "M" Mission, "E" Execution, "A" Administration/Logistics, "C" Command/Signal.
 * Execution – If a briefing is considered to be a sandwich this would be considered the filling. It should be the longest part of the briefing and will explain in detail exactly what is going to be done under all conditions. This means the first plan of attack and any thing that will be done if the plan is compromised in any way for example if something unexpected happens.
