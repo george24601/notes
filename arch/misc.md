@@ -1,3 +1,105 @@
+### feature flag
+
+Feature toggles can be categorized across two major dimensions: how long the feature toggle will live and how dynamic the toggling decision must be
+
+
+#### Release Toggles
+
+* Normally lives for a few weeks
+* Hides half-complete features from the end user
+* Mostly changes with release versions
+
+#### Experiment Toggles
+* Lives for a few weeks
+* By their nature Experiment Toggles are highly dynamic - each incoming request is likely on behalf of a different user and thus might be routed differently than the last.
+
+#### Ops Toggles
+* We might introduce an Ops Toggle when rolling out a new feature which has unclear performance implications so that system operators can disable or degrade that feature quickly in production if needed.
+* can live for months
+
+#### Permissioning Toggles
+* For example we may have a set of "premium" features which we only toggle on for our paying customers. Or perhaps we have a set of "alpha" features which are only available to internal users and another set of "beta" features which are only available to internal users plus beta users. 
+* A Champagne Brunch is similar in many ways to a Canary Release. The distinction between the two is that a Canary Released feature is exposed to a randomly selected cohort of users while a Champagne Brunch feature is exposed to a specific set of users.
+* When used as a way to manage a feature which is only exposed to premium users a Permissioning Toggle may be very-long lived compared to other categories of Feature Toggles - at the scale of multiple years. Since permissions are user-specific the toggling decision for a Permissioning Toggle will always be per-request, making this a very dynamic toggle.
+
+
+For example the router for an Experiment Toggle makes routing decisions dynamically for a given user, perhaps using some sort of consistent cohorting algorithm based on that user's id. Rather than reading a static toggle state from configuration this toggle router will instead need to read some sort of cohort configuration defining things like how large the experimental cohort and control cohort should be.
+
+Anti-patterns
+* De-coupling decision points from decision logic
+
+Before
+
+```javascript
+  const features = fetchFeatureTogglesFromSomewhere();
+
+  function generateInvoiceEmail(){
+    const baseEmail = buildEmailForInvoice(this.invoice);
+    if( features.isEnabled("next-gen-ecomm") ){ 
+      return addOrderCancellationContentToEmail(baseEmail);
+    }else{
+      return baseEmail;
+    }
+  }
+```
+
+The decision on whether to include order cancellation functionality in our invoice emails is wired directly to that rather broad next-gen-ecomm feature - using a magic string, no less. Why should the invoice emailling code need to know that the order cancellation content is part of the next-gen feature set? What happens if we'd like to turn on some parts of the next-gen functionality without exposing order cancellation? Or vice versa? What if we decide we'd like to only roll out order cancellation to certain users? It is quite common for these sort of "toggle scope" changes to occur as features are developed.
+
+After
+
+```
+  const features = fetchFeatureTogglesFromSomewhere();
+  const featureDecisions = createFeatureDecisions(features);
+
+  function generateInvoiceEmail(){
+    const baseEmail = buildEmailForInvoice(this.invoice);
+    if( featureDecisions.includeOrderCancellationInEmail() ){
+      return addOrderCancellationContentToEmail(baseEmail);
+    }else{
+      return baseEmail;
+    }
+  }
+```
+
+* Inversion of Decision 
+``` javascript
+  function createInvoiceEmailler(config){
+    return {
+      generateInvoiceEmail(){
+        const baseEmail = buildEmailForInvoice(this.invoice);
+        if( config.includeOrderCancellationInEmail ){
+          return addOrderCancellationContentToEmail(email);
+        }else{
+          return baseEmail;
+        }
+      },
+  
+      // ... other invoice emailer methods ...
+    };
+  }
+
+  function createFeatureAwareFactoryBasedOn(featureDecisions){
+    return {
+      invoiceEmailler(){
+        return createInvoiceEmailler({
+          includeOrderCancellationInEmail: featureDecisions.includeOrderCancellationInEmail()
+        });
+      },
+  
+      // ... other factory methods ...
+    };
+  }
+```
+
+
+* Avoiding conditionals
+
+if ldclient.toggle('temp-awesome-xyz', user, False):
+    do_the_new_thing()
+else:
+    do_the_old_thing()
+
+
 ### column-oriented db
 Benefits include more efficient access to data when only querying a subset of columns (by eliminating the need to read columns that are not relevant), and more options for data compression. However, they are typically less efficient to insert new data.
 

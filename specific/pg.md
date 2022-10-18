@@ -1,3 +1,10 @@
+### UUID
+128-bit UUID
+
+PostgreSQL enables you to store and compare UUID values but it does not incorporate functions for producing the UUID values in its core. Instead, it depends on the third-party modules that offer certain algorithms to generate UUIDs. For example the uuid-ossp module offers some handy functions that carry out standard algorithms for generating UUIDs.
+
+A UUID is written as a sequence of lower-case hexadecimal digits, in several groups separated by hyphens, specifically a group of 8 digits followed by three groups of 4 digits followed by a group of 12 digits, for a total of 32 digits representing the 128 bits.
+
 You can tune random_page_cost to influence the point where a sequential scan is chosen. If you have SSD storage, you should set the parameter to 1.0 or 1.1 to tell PostgreSQL that index scans are cheaper on your hardware.
 
 PostgreSQL uses a cost based optimizer, not a rule based optimizer. If you take the estimated cost of the index scan, 18693, and scale it up linearly by the ratio of the expected rows between the two plans (which is not exactly what the planner does, but should be a good enough first approximation) you get 22330. That is higher than the expected cost of the seq scan, 21372, so it chooses the seq scan.

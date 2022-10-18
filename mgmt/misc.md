@@ -1,3 +1,6 @@
+
+Never fight feedback. It’s very common for an executive to have a critical piece of feedback but to not quite have the right framing to communicate it within the moment. You want them to deliver the feedback anyway, not hold it back and probably forget to give it later. If you show up as resistant to feedback, then they’ll start swallowing their comments, and you’ll get relatively little out of the meeting. Focus on gathering feedback; don’t worry about whether you agree with it until you have more time afterward. If there’s a decision that needs to be made that you disagree with, then you should inject one or two pieces of relevant data that might change their mind, but afterward, let it go.
+
 ### reduce filler
 
 We use these words as a verbal place holder when we are thinking — while communicating. They are a verbal representation of our thinking and an indication to our listener that we are not yet done communicating. They are a signal that what we are saying is getting ahead of what we are thinking.

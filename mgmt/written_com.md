@@ -1,11 +1,46 @@
+This writer had to juggle several related actions, few of which he entirely understood, much less how they were related. When he had to express his confused ideas, he dumped onto the page all the concepts that seemed relevant, expressing them in abstractions loosely tied together with all-purpose prepositions.
+
+some of us feel compelled to use pretentious language to make ideas that we think are too simple seem more impressive. In the same way, others use difficult and therefore intimidating lan­ guage to protect what they have from those who want a share of it
+
+There are risks in both pedagogies. In the first way a sche­ matic structure that we then modify and qualify we risk ap- pearing to be superficial before we have a chance to qualify and elaborate. We also risk the possibility that the learner will learn only the simple structure and then caricature it. But the second way   teaching a structure of knowledge by simultaneously de­ scribing, qualifying, elaborating, complicating every detail­ risks conceptual clutter
+
+When presenting complex new knowledge, first sketch a schematic structure that is too simple to reflect the complex reality of the subject; only then qualify, elaborate, and modify it. We have found that it is not effective to present new knowledge about language and style as a series of detailed, qualified, exception-laden observations. 
+
+If you think it is clear, revise it by reversing the principles and make the passage worse. Nothing highlights what counts as clear and di­ rect better than seeing it in contrast with what is not.
+
+
+“A scrupulous writer”, observed Orwell, “in every sentence that he writes will ask himself at least four questions, thus: What am I trying to say? What words will express it? What image or idiom will make it clearer? Is
+this image fresh enough to have an effect? And he will probably ask himself two more: could I put it more shortly? Have I said anything that is avoidably ugly?”
+
+“The paragraph”, according to Fowler, “is essentially a unit of thought, not of length; it must be homogeneous in subject matter and sequential in treatment.” One-sentence paragraphs should be used only occasionally.
+
+If too many sentences begin Compare, Consider, Expect, Imagine, Look at, Note, Prepare for, Remember or Take, readers will think they are reading a textbook (or, indeed, a style book). This may not be the way to persuade them to renew their subscriptions.
+
+don’t boast of your own cleverness by telling readers that you correctly predicted something or that you have a scoop. You are more likely to bore or irritate them than to impress them.
+
+Nobody needs to be described as silly: let your analysis show that he is. When you express opinions, do not simply make assertions. The aim is not just
+to tell readers what you think, but to persuade them; if you use arguments, reasoning and evidence, you may succeed. Go easy on the oughts and shoulds.
+
+Use the language of everyday speech, not that of spokesmen, lawyers or bureaucrats (so prefer let to permit, people to persons, buy to purchase, colleague to peer, way out to exit, present to gift, rich to wealthy, show to demonstrate, break to violate). Pomposity and long-windedness tend to obscure meaning, or reveal the lack of it: strip them away in favour of plain words.
+
+Articles in The Economist should be like essays, in that they have a beginning, a middle and an end. They should not be mere bits of information stitched together. Each should be a coherent whole, a series of paragraphs that follow logically in order and, ideally, will suffer if even one sentence is cut out. If the article is a report, the facts must be selected and presented as a story. If it is a leader or more analytical article, it should also have a sense of sequence, so that the reader feels he is progressing from a beginning to a conclusion.
+
+In starting your article, let your model be the essays of Francis Bacon. He starts “Of Riches” with “I cannot call riches better than the baggage of virtue.” “Of cunning” opens with “We take cunning for a sinister or crooked wisdom.” “Of Suspicion” is instantly on the wing with “Suspicions amongst thoughts are like bats amongst birds, they ever fly by twilight.” Each of these beginnings carries implicitly within it an entire essay. Each seizes the reader by the lapels and at once draws him into the subject.
+
+Catch the attention of the reader and then get straight into the article. do not spend several sentences clearing your throat, setting the scene or sketching in the background. 
+
+slow down -> dont' understand -> aggreviated -> stop
+
+Controlling the sequence in which you present your ideas is the single most important act necessary to clear writing. The clearest sequence is always to give the summarizing idea before you give the individual ideas being summarized. I cannot emphasize this point too much.
+
+Minto’s Pyramid Principle from the aforementioned book. Start by brainstorming your proposal into a series of arguments that support your answer. Once you’ve written them all down, group them into related arguments. Shape those groups into three top-level arguments, with up to three sub-arguments supporting each of those top-level arguments. Recursively apply this approach, ensuring each argument summarizes its at-most-three sub-arguments. Order the arguments within each group by descending importance. At that point, you’re done.
+
 Creative work is best done in short chunks with breaks. For example, you could write as rapidly as possible for 30 minutes, using short sentences and informal language. Take a 5 minute break, and then write about another idea.
 Set a deadline for when your madman will hand off his duties to the architect. At some point your ideas will need structure and strategy
 
 When producing, use the content generated from your brainstorming, researching, and freewriting. Insert that “raw material” into the outline. If you’re not sure what to do with a sentence, put it aside for the judge to decide.
 As with the madman, time your carpenter’s work. The goal is to write as rapidly as possible. If you review each sentence too carefully for grammar, punctuation, etc., you’ll slow down the building and probably feel blocked.
 
-* Objective testing – What did you want your document to achieve? Does it? Does it follow a logical structure, make an emotional connection and underline the credibility of the
-author? Does it lead your reader to your objectives?
 * Can you write the same thing but with fewer and/or shorter words? Is the whole piece too long or too short? Is your average sentence length between 15 and 20 words?
 * Does it pass the 20 second (or 2 second) test and grab your reader’s attention?
 * Have you read your work aloud to check for errors and improvements?
@@ -16,13 +51,6 @@ author? Does it lead your reader to your objectives?
 * "S" Situation, "M" Mission, "E" Execution, "A" Administration/Logistics, "C" Command/Signal.
 * Execution – If a briefing is considered to be a sandwich this would be considered the filling. It should be the longest part of the briefing and will explain in detail exactly what is going to be done under all conditions. This means the first plan of attack and any thing that will be done if the plan is compromised in any way for example if something unexpected happens.
 * Command and signal – This section involves mainly two things everything to do with radios and all passwords and code names and signals which may be used during the patrol.
-
-
-# AIDA framework
-* Attention: grab the reader's attion with something unexpected and catchy in a positive way. Offer startling stats and numbers. "see how much time was wasted on the old process"
-* Interest: a list to highlight the benefits
-* desire: anticipate the friction. can pre-emptive address thme
-* action: what steps we need to take. Exactly, need a sense of urgency
 
 
 ### On Slides
