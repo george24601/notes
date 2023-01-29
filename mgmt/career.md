@@ -1,3 +1,95 @@
+Once, I was participating in a design standup, during which UX designers shared what they’re currently working on and elicited feedback from their team members. One designer shared a flow that asked users to create an account and provide contact information. We discussed the design possibilities in great detail, including the proper order for collecting primary versus secondary contact information. After a lively debate, one person finally asked the right questions: What’s the overall goal here? What information is essential? What do we need to do with it once we’ve collected it? 
+
+During analysis of your research findings, it’s important to focus on your participants’ deeper needs and wants, not simply accept their initial suggestions. For example, if a participant says she wants color-coded communications, dig deeper to find out why she wants this. Does she need quick visual cues to aid in skimming content, or does she just want more color in her life? Her answer will have significant design and product implications.
+
+Make sure you don’t make assumptions based on what research participants say. Instead continue questioning participants until you fully understand their deeper needs. If you find a user has suggested color coding to help her categorize and scan communications more quickly, you can consider other options that would also aid quick skimming—such as clearer subject lines or having a consistent structure across all communications. As a researcher, you need to thoroughly understand the users’ problem and leave their solutions to product, design, and development.
+
+Once you’ve collected abundant, rich data from your qualitative research sessions, you’ll need to sift through your data to identify the valuable insights that address your main goals. But don’t be tricked by fool’s gold! At first, it might be painful to disregard much of your data, but this is necessary to gain clarity. The most digestible, effective research reports are concise, clearly organized, and succinctly address the key research questions through an engaging narrative.
+
+
+Our stakeholders wanted to focus on the usability issues because we had the most control over them, but we weren’t sure that fixing the usability issues would address the larger awareness and adoption issues. We raised this issue, asking our stakeholders to clarify our key goals for the research—improving adoption or improving usability? Only once our team had agreed upon our main goal could I start planning appropriately targeted research.
+
+Sometimes we throw ourselves into planning and executing our user research, getting caught up in the details, until someone barges in and asks a simple question: Why? Why are we doing this? What is the overall goal of the research?
+
+If strategic thinking is your goal, you must master your ability to break free periodically from the day-to-day in order to think more broadly, beyond your functional area and onto the bigger picture. When he was running Microsoft, Bill Gates was known to take entire weeks off to ruthlessly prioritize and ponder solutions, not deal with problems. 
+
+Find a partner. This is the most effective way to accelerate your progress. Who do you know who is proven to be a strategic thinker? Enlist them to be your accountability partner. It needs to be someone who’s invested in your success and able to observe your behavior on a regular basis. Let them know that you’re working on your own strategic thinking skills. Ask if they would be willing to provide feedback and tips along the way.
+
+Many managers find themselves in this trap – they are still so attached to the day-to-day execution of tasks that they have no brain space to do the strategic work necessary to advance themselves and their teams
+
+One great way to do this is with the classic six thinking hats methods: 
+
+White Hat: With this thinking hat, you focus on what you can learn from the available data, current and past trends. 
+Red Hat: You look at problems through the lens of feelings (yours and others), using your intuition and emotion.    
+Black Hat: Is the hat of caution. Look for weak points and think about how to create contingency plans to counter them. 
+Yellow Hat: Helps you look at the bright side. What is the most optimistic viewpoint?
+Green Hat: Uses creativity and leans into freewheeling, out-of-the-box ideas   
+Blue Hat: This hat represents processes and prompts you to bring order and structure to your thoughts
+
+For example, ask your team to come to a brainstorming meeting with three suggestions already formulated. If they bring a problem to you, coach them by asking questions like:
+
+What possibilities have you considered?
+If you were me, how would you approach this problem?
+Based on your experience, what do you propose as a next step? 
+
+
+
+If you’ve ever received feedback that you “need to be more strategic,” you know how frustrating it can feel. To add insult to injury, the feedback rarely comes with any concrete guidance on what to do about it.
+
+Be proactive about connecting with peers both in your organization and in your industry to understand their observations of the marketplace. Then, share your findings across your network.
+Understand the unique information and perspective that your function provides and define its impact on the corporate level strategy.
+For example, when working on an employee retention project she asked herself, “What does success look like in Year 1?”  “What does it look like in Year 3?” “What could impact the outcome in a negative way?” “What are the early signs of success/failure?” “What do business partners need to understand to ensure its success?” and “Do the outcomes support the broader goals of the organization?” By asking these tough questions first, she recognized that she could better engage with colleagues and senior executives early on in ways that would benefit the project — and would help shape the perception that she was thoughtful and strategic.
+
+
+
+https://hbr.org/2016/12/4-ways-to-improve-your-strategic-thinking-skills
+
+Common obstacles for leaders
+| “I’m not very organized with my time…”
+| “I don’t feel like I am adding value if I am not ‘doing’…”
+| “I don’t delegate to my team members as much as I should…”
+| “I don’t really know how to step back…”
+
+But the transition from tactical leadership to strategic leadership calls on you to ask questions rather than answer them, to focus on your highest value work rather than “block and tackle,” to chart new paths rather than continue to operate within and execute the status quo.
+
+The tactical mindset is about getting things done, putting out fires and being the expert. The strategic mindset is about aligning with organizational objectives, discovering the unknowns and being a facilitator between ideas, people and plans.
+
+Are you setting a large portion of your time aside for strategic big picture activities like visioning and relationship building?
+Are you proactively going into your quarter, month, weeks and days with the big picture in mind and structuring your activities accordingly?
+Are you getting the most strategic activities done first?
+How are you structuring your thinking?
+Do you have the end in mind?
+
+Being more strategic doesn’t necessarily mean making decisions that affect the whole organization. Nurturing a relationship, such as one that could provide unique insight into a supplier, a customer or a competitor can be highly strategic.
+
+We often find that leaders make assumptions about the skills, capabilities and motivation levels of others by applying a one-size-fits all delegation approach. Instead, good leaders need to asses each individual’s will and skill level in order to determine who can be trusted to handle what, and how much direction vs. support each individual needs. The ultimate goal is to need to provide less hands-on direction and more support.
+
+But you won’t be comfortable delegating until you have a clear understanding of your own highest value activities. This understanding will guide you in determining what other aspects of the business can be delegated to your direct reports. You need to know what only you can do and what can be done by others, while always keeping at the forefront the organization’s goals
+
+As a senior leader, highest value activities often include:
+
+Coaching direct reports to build a leadership pipeline and improve retention
+Nurturing strategic relationships with peers and brokering connections to break down silos and foster greater collaboration
+Bringing the big picture view to your teams that are focused necessarily on their specific tasks and goals, by creating a climate that sets them up for success
+Challenging the status quo to spark innovation
+Creating a culture that supports the vision and values of the organization
+
+Relationship building with people from across the industry helps to cross-pollinate ideas. The intention is to get outside the bubble. Bubbles don’t just keep others out. They keep you in.
+
+
+
+Action Steps: List down the things you KNOW you’re bad at. Hate email? Write it down. Want to spend a majority of your time on small details, even if it takes a lot of time? Write that down.
+
+Whatever your “bad” things are, consciously be aware of those things and find someone who is good at them!
+
+Merely fantasizing about your goal is de-motivating–it actually tricks the brain into thinking you already have achieved it.
+Goals that aren’t set up properly can end up having the opposite effect.
+
+Many clients know what they don’t want but aren’t as clear on what they do want. You need to be clear on what you want before you can effectively move forward.
+Some clients have gotten into the habit of making decisions based on what’s best for their career, family or others, and have forgotten to assess their own needs and desires.
+Others know to some extent what they want, but it’s not nearly specific enough for them to go out and get it. Saying “I want a new job” is really different than saying “I want a part-time job where I can be surrounded by like-minded people in sports entertainment.”
+
+
 Spend 15 minutes at the start of the day determining what to delegate and to whom
 Block out 15 minutes at the end of the day to wrap the day’s event into the “big picture”
 Block out 30 minutes per day for brainstorming on a different key topic or decision

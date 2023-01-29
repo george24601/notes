@@ -1,3 +1,13 @@
+A React component is literally the declaration of a component as we see it in the previous code snippet. In our case, it's a function component but it could be any other kind of React component (e.g. React Class Component) too.
+
+In the case of a function component, it is declared as a JavaScript function which returns React's JSX. 
+
+Rendering a component happens whenever we use this component as a React element with angle brackets (e.g. <Greeting />) in another component
+
+We can render a component as React element multiple times too. Whenever a component gets rendered as element, we create an instance of this component:
+
+Whenever a React component gets called (rendering), React calls its React.createElement() method
+
 ### useRef
 
 ### useLayoutEffect
