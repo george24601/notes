@@ -1,3 +1,21 @@
+As a final step to learning internals, I read recent commits relevant to the subsystems I’ve studied and test that I fully understand why the change was made. This is my “doing the problem set in the back of the textbook” portion of learning.
+
+I either view the commit history of the project or the commit history of a specific file or folder relevant to a subsystem I’ve studied. I then either study the solution first (the changes in the commit) or I see the bug it fixed and attempt to fix it myself and see if I arrive to a similar solution.
+
+To “work the problem”, I’ll checkout the repository at the commit just previous to the commit I’m studying. I’ll reproduce the bug it fixes (if it is a bug fix), and then attempt to implement the solution myself. Finally, I’ll compare my work to the commit done by the maintainer or contributor.
+
+The only hint I'll give myself is the change size necessary (the +/- lines on the VCS diff). I recommend avoiding changes that require more than 50 to 100 changed lines to start.
+
+In contrast, a passive mindset is a fairly unproductive one. As opposed to a targeted and intentional path through uncharted territory, I find that without actively maintained goals and subgoals, my time is spent meandering. After a few hours in this state, it’s not always easy to understand what was accomplished in that time, or where to even pick up when resuming.
+
+To generalize the above example, the basic idea is to lift from a low level abstraction to a high level one. Use what you know about the platforms, underlying framework, or 3rd party APIs to start your search and work bottom up to learn the codebase’s higher level abstractions. Candidate breakpoints include platform APIs (e.g. CreateFile, CreateThread, vkCreateBuffer, etc.), APIs of known dependencies related to your search (e.g. ASIO, Unreal engine APIs, protocol buffers, etc.), or functions that showed up directly in your frame capture.
+
+Now suppose you have a bunch of call stacks. You have the beginnings of a high level grasp of the execution flow of the program. The next order of business is to transition that understanding from execution to data. How are objects modeled? How are they stored? Who maintains what and how are lifetimes controlled? After identifying useful representative callstacks (this is the bottom up approach), the next thing to do is approach the codebase top down by studying the data structures themselves and understanding why and how a given callstack was formed.
+
+When teams try to meet the imaginary timeline produced by the crystal ball, tunnel vision creeps in. Like a Fata Morgana that appears when you’re stuck in the desert, the only thing everyone sees is the looming deadline. The whole discussion reverts to ‘How can we meet that deadline?’ while ‘Is it good enough?’ moves to the backseat, and ‘How can we move faster?’ climbs into the driver’s seat.
+
+Obsessive focus on ‘When will it be done?’ guarantees you will move the delivery of value to the backseat.
+
 ### reduce filler
 
 We use these words as a verbal place holder when we are thinking — while communicating. They are a verbal representation of our thinking and an indication to our listener that we are not yet done communicating. They are a signal that what we are saying is getting ahead of what we are thinking.
