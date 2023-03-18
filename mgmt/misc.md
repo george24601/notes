@@ -1,3 +1,11 @@
+Managers often say they'll reward something – perhaps they even believe it. But then they proceed to reward different things.
+
+I think people are fairly good at predicting this discrepancy. The more productive they are, the better they tend to be at predicting it. Consequently, management's stated goals will tend to go unfulfilled whenever deep down, management doesn't value the sort of work that goes into achieving these goals.
+
+When time comes to reward people, it is the gut feeling of whose work is truly remarkable that matters. And what you usually convince yourself of is that the goal is important – but not that achieving it is remarkable. In fact, often someone pursuing what you think are unimportant goals in a way that you admire will impress you more than someone doing "important grunt work" (in your eyes.)
+
+If something is rotten in an org, the root cause is a manager who doesn't value the work needed to fix it. They might value it being fixed, but of course no sane employee gives a shit about that. A sane employee cares whether they are valued.
+
 As a final step to learning internals, I read recent commits relevant to the subsystems I’ve studied and test that I fully understand why the change was made. This is my “doing the problem set in the back of the textbook” portion of learning.
 
 I either view the commit history of the project or the commit history of a specific file or folder relevant to a subsystem I’ve studied. I then either study the solution first (the changes in the commit) or I see the bug it fixed and attempt to fix it myself and see if I arrive to a similar solution.

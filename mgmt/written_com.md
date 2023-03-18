@@ -1,6 +1,20 @@
-This writer had to juggle several related actions, few of which he entirely understood, much less how they were related. When he had to express his confused ideas, he dumped onto the page all the concepts that seemed relevant, expressing them in abstractions loosely tied together with all-purpose prepositions.
+Good paragraphs answer the following three questions:
+* What are you trying to tell your reader?
+* Why is it important for the reader to know this?
+* How should the reader use this knowledge? Alternatively, how should the reader know your point to be true?
+  * The garp() function returns the delta between a dataset's mean and median. Many people believe unquestioningly that a mean always holds the truth. However, a mean is easily influenced by a few very large or very small data points. Call garp() to help determine whether a few very large or very small data points are influencing the mean too much. A relatively small garp() value suggests that the mean is more meaningful than when the garp() value is relatively high.
 
-some of us feel compelled to use pretentious language to make ideas that we think are too simple seem more impressive. In the same way, others use difficult and therefore intimidating lan­ guage to protect what they have from those who want a share of it
+
+good documentation = knowledge and skills your audience needs to do a task − your audience's current knowledge and skills
+
+In the United States, reserve which for nonessential subordinate clauses, and use that for an essential subordinate clause that the sentence can't live without
+
+Bash is a modern shell scripting language that takes many of its features from KornShell 88, which was developed at Bell Labs. The first subordinate clause extends the main idea, but the second subordinate clause goes in another direction. Divide this sentence in two.
+
+Lisp is a programming language that relies on Polish prefix notation, which is one of the systems invented by the Polish logician Jan Łukasiewicz. The first subordinate clause is clearly critical to the sentence, but the second subordinate clause takes the reader too far away from the main clause. Divide this sentence in two.
+
+I don't want to say that Fortran is old, but only radiocarbon dating can determine its true age. The subordinate clause is critical to the sentence, so this sentence is fine as is.
+
 
 There are risks in both pedagogies. In the first way a sche­ matic structure that we then modify and qualify we risk ap- pearing to be superficial before we have a chance to qualify and elaborate. We also risk the possibility that the learner will learn only the simple structure and then caricature it. But the second way   teaching a structure of knowledge by simultaneously de­ scribing, qualifying, elaborating, complicating every detail­ risks conceptual clutter
 
@@ -12,7 +26,7 @@ If you think it is clear, revise it by reversing the principles and make the pas
 “A scrupulous writer”, observed Orwell, “in every sentence that he writes will ask himself at least four questions, thus: What am I trying to say? What words will express it? What image or idiom will make it clearer? Is
 this image fresh enough to have an effect? And he will probably ask himself two more: could I put it more shortly? Have I said anything that is avoidably ugly?”
 
-“The paragraph”, according to Fowler, “is essentially a unit of thought, not of length; it must be homogeneous in subject matter and sequential in treatment.” One-sentence paragraphs should be used only occasionally.
+One-sentence paragraphs should be used only occasionally.
 
 If too many sentences begin Compare, Consider, Expect, Imagine, Look at, Note, Prepare for, Remember or Take, readers will think they are reading a textbook (or, indeed, a style book). This may not be the way to persuade them to renew their subscriptions.
 
@@ -21,9 +35,7 @@ don’t boast of your own cleverness by telling readers that you correctly predi
 Nobody needs to be described as silly: let your analysis show that he is. When you express opinions, do not simply make assertions. The aim is not just
 to tell readers what you think, but to persuade them; if you use arguments, reasoning and evidence, you may succeed. Go easy on the oughts and shoulds.
 
-Use the language of everyday speech, not that of spokesmen, lawyers or bureaucrats (so prefer let to permit, people to persons, buy to purchase, colleague to peer, way out to exit, present to gift, rich to wealthy, show to demonstrate, break to violate). Pomposity and long-windedness tend to obscure meaning, or reveal the lack of it: strip them away in favour of plain words.
-
-Articles in The Economist should be like essays, in that they have a beginning, a middle and an end. They should not be mere bits of information stitched together. Each should be a coherent whole, a series of paragraphs that follow logically in order and, ideally, will suffer if even one sentence is cut out. If the article is a report, the facts must be selected and presented as a story. If it is a leader or more analytical article, it should also have a sense of sequence, so that the reader feels he is progressing from a beginning to a conclusion.
+If the article is a report, the facts must be selected and presented as a story. If it is a leader or more analytical article, it should also have a sense of sequence, so that the reader feels he is progressing from a beginning to a conclusion.
 
 In starting your article, let your model be the essays of Francis Bacon. He starts “Of Riches” with “I cannot call riches better than the baggage of virtue.” “Of cunning” opens with “We take cunning for a sinister or crooked wisdom.” “Of Suspicion” is instantly on the wing with “Suspicions amongst thoughts are like bats amongst birds, they ever fly by twilight.” Each of these beginnings carries implicitly within it an entire essay. Each seizes the reader by the lapels and at once draws him into the subject.
 
