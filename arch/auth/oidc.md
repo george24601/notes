@@ -1,3 +1,5 @@
+In a standard OAuth, the key is created by the each site. In OpenID Connect, the keys are created by the UserInfo Endpoint. In another word, site X,Y,Z knows how to understand the keys provided by the UserInfo endpoint. For this to happen, the sites must (1) Trust the key providing party (2) be able to verify the validity of the keys. To achieve this, OpenID Connect uses JSON Web Token (JWT) as the format for the key (Access Token) using some cryptography
+
 In the domain model associated with OIDC, an identity provider is a special type of OAuth 2.0 authorization server.
 
 -----

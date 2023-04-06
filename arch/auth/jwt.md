@@ -1,10 +1,12 @@
+
+ When the token is stored in the cookie, they are less efficient when the JWT size is large. You can store the token in the session storage, but it’s cleared when the browser is closed. In the local storage, the JWT will be bound to a specific domain.
+
 Validation steps needed:
 
-Check that the JWT is well formed
-Check the signature
-Validate the standard claims
-Check the Client permissions (scopes)
-
+* Check that the JWT is well formed
+* Check the signature
+* Validate the standard claims
+* Check the Client permissions (scopes)
 
 subject: the user’s identity
 
@@ -14,9 +16,11 @@ Using the security context the AccessDecisionManager will be able to make a deci
 
 The one that’s used most often enables method security, which you enable by adding @EnableGlobalMethodSecurity(prePostEnabled = true) to your configuration.
 
-```
+```java
+
 @PreAuthorize("(authentication.principal.uuid == #uuid.toString()) or hasRole('ADMIN')")
 User findByUuid(@Param("uuid") UUID uuid);
+
 ```
 
 JWT spec that allows you to set signature algorithm to ‘none’.
@@ -24,5 +28,3 @@ JWT spec that allows you to set signature algorithm to ‘none’.
 If you worried about replay attacks, include a nonce (jti claim), expiration time (exp claim), and creation time (iat claim) in the claims. These are well defined in the JWT Spec
 
 As a JWT is included in a HTTP header, we've an upper limit (SO: Maximum on http header values) of 8K on the majority of current servers.
-
-

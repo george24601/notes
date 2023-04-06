@@ -1,3 +1,13 @@
+Some men have an irresistible desire to justify their every action. Some like to magnify themselves. Others like to provide an alibi ready for use if needed. Some, perhaps, just don’t think. In any event, they write a letter to some other department or to the boss. The letter first tells how much the writer or his group are doing. Then it puts the finger on others. Just write a few letters like this with plenty of copies sent around, and you’ll dig a grave you’ll never get out of.
+
+We don’t have to use words, either, to be unfair. Did you have to sit in court and listen to a prejudiced witness? He’s too intense. He’s too vehement. Quite evidently, he’s not satisfied with stating the facts as he knows them. No, sir! He’s out to prove the other fellow wrong. Result — nobody pays attention to him. Well, let’s be sure when we sit around a conference-table, we’re not like him. Better state our facts clearly, or our views. But let’s not be too anxious. Let’s not try to push either judge or jury. It doesn’t work.
+
+We have all been approached at some time or other by the Unwise Citer. He asks us to take some action, or refrain from one, solely because certain other people have done so under supposedly like circumstances. The citer, lacking good arguments, has sought to substitute secondhand opinions. This is unfair. It is not helpful. And it directly assaults our ego. We are not given credit for having brains and judgment of our own. Bad stuff.
+
+A somewhat more subtle form of negation, is refinement of measurement. One man says that a tank weights ninety tons. And for that particular discussion, accuracy is of no consequence. Yet someone’s ego speaks up and says, Ninety-two tons. Maybe he’s right at that. But he’s wrong just the same. […] This is a favorite husband-and-wife game. Let’s be on guard against it.
+
+Another thing. Don’t beg. People don’t like it. If then we speak up for some better job that’s open, let’s not till our talk with such words as hoping, thanking, eagerly, favor. If we are really worthy of the job, the Company will benefit by giving it to us every bit as much as we will profit by getting it. The thing works both ways. Why then use begging words that suggest we are thinking of ourselves, not of the Company? And why suggest that we’re not too confident in our ability?
+
 Managers often say they'll reward something – perhaps they even believe it. But then they proceed to reward different things.
 
 I think people are fairly good at predicting this discrepancy. The more productive they are, the better they tend to be at predicting it. Consequently, management's stated goals will tend to go unfulfilled whenever deep down, management doesn't value the sort of work that goes into achieving these goals.
