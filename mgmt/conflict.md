@@ -1,9 +1,125 @@
+Stages of dialogue
+* preparation
+  * work through your thoughts and feelings
+  * What is my intent going into this conversation?
+    * often unaware
+* invitation
+  * conversation starts poorly most likely ends poorly
+  * Use soft start
+    * something i have been thinking about lately
+    * I'd like to know you your point of view
+  * disatisfaction rather than blame
+    * I feel like I am the one doing all the clean up
+    * You people are such slobs
+  * use repair attempts throughput the conversation
+    * de-escalate the tension
+  * leveling statement
+    * starting stage or de-escalate during the dialouge
+    * state a concern w/o blame or hostality 
+    * express your desire to understand the other person's point of view
+    * let them know you'd like to work things out together
+    * focus on the process of communication rather than content
+    * It was upsetting to me to learn about the memo. However, I want to understand your pov and then figure out how we can better communication and coordniate our work in the future.
+    * I was surprised by what you said this morning during our coffee break. It seems you have some strong feels about this matter which i'd like to understand.
+    * I've been feeling uneasy in our relationship, ever since the board meeting in Sep. I'd like to understand your pov and see if we can get back to our previous working relationship  
+    * I sense you are not feeling good about our assignments. I am not either. Let's agree to talk about this in an open way until we find a solution we both feel good about
+    * I think we have different understanding of what he intended and what is fair to each of us. I'd like to understand your point of view and share mine as well and see if we can work this out
+    * I'm not feeling good about how this is escalating and you're prob not either. I want to understand how you are feeling and what we can do to calm our discussion and get it back on track.
+  * Clarifying you intent and/or concerns
+    * Point out what you do and do not intend
+  * Stating your commit to collaboration. Keep going back to it when you are bogged down during exploration
+ 
+#### exploration - hard part
+
+* mistake
+  * persuade, convince other into accepting your view at this stage  
+    * ignore complexity
+    * only pay attention to the data that supports your pov 
+  * moving too quickly into problem solving
+* inquries and advocacy loop
+* different assumptions set up for conflict because of ambiguity  
+* Create a pool of shared understanding
+  * Surface and understand the assumptions of all partities
+  * search for a common and more complete reality
+* Shared understanding does not mean agreement
+* Start by inquiring the view of others
+  * How are you feeling right now about what we've learned
+  * 
+* Case study: agreeing on property
+* priming
+  * state your best guess when other side closed down or is struggling identifying thoughts/feelings
+  * I would guess you're not in favor of what we've been discussing
+  * You prob like to participate but not sure if it is appropriate
+  * It seems you were offended by the comment
+  * I'll be it has been a difficult statement
+* Immediacy
+  * When you want to be heard
+  * commenting on the process of communication
+  * can we take a time out for just a moment?
+  * Seems that you are upset by my pov and you start talking over me. I want to hear what you want to say, but I also want to finish what I'm saying
+  * Seems that it is hard for you to hear what I have to say
+
+
+### collaboration
+* unmet needs are the heart of the conflict
+* People are not fighting solutions, rather what is important to them.
+* identify needs and what is important to each party
+  * They make promises to customers without having even a clue about how much it takes to build a good product.
+  * what is most important to you
+* Brainstorming 
+  * Make sure everyone understands desired outcome
+  * One thought at a time
+  * No criticism
+  * Outrangous ideas are encouraged 
+  * No discussion of ideas except to clarify its meaning
+  * Build on other's ideas
+* Come up actions or solutions.
+* consensus
+  * Everyone has contributed to brainstoriming the solution
+  * Support a final solution even though their favorite isn't part of it
+
+
+
+Conflict: circular - reinforcing circular reaction
+
+Be clear about the outcome you desire during negotiations, but not commiteed to solutions going in
+
+
+Often the meaning we put on other's behaivor is based on misunderstanding of their deeper intent and feelings or needs
+
+
+
+* Conflict triggering event
+* thought and feeling of the event
+* Choice
+  * trust - dialogue
+  * fear - Dominate/avoid/accomodate
+
+Argument/debate vs dialogue, the way to collaborate
+* Preoccupation with self (my own interest) vs concern for sell and other
+* adverarial vs unity mutually
+* "win" vs learn and explore
+* listen to respond vs listen to understand
+* Polarized vs many sides
+* Oversimplify vs nuances and complexities
+* "right"/"wrong" vs discovery the truth
+* confirming data vs enlightment
+
+
+### phases
+* harmony
+* discomfort
+* disagreement
+* discord
+* polarization
+* disintegration
+
+Trust building before resolving the conflict
+
+
 * Does this need to be said
 * Does this need to be said by me
 * Does this need to be said by me, now
-* Can i disagree and commit? Will you trust me on delivering it, even though i disagree?
-  * 100% commitment. No sabotoge or half hearted effort. No "I told you so" 
-  * Effort to make that decision a success 
 
 Task conflict: differences in methods, approaches
 can grow into
@@ -15,11 +131,6 @@ Indicators of conflict
 * lack of motiviation
 * poor decisions, e.g., unclear with goals and not enough focus
 
-Issues that get in the way
-* imposing your own goals
-* attacking the legimacy of the position and priorities of others
-* minimising or ignoring the concerns of others
-* supressing differences
 
 Trust is a fundamental part of conflict resolution
 
@@ -32,133 +143,19 @@ Propensity to trust: Suspicions - judgement - gullible
 
 Plutchik's Wheel of Emotions
 
-We tend to exaggerate during arguments
-* causes of the situation
-* consequences of the situation
-* conditions of the resolution
-Focus on the outcome you want from the conflict, rather than the need of you being heard
-
-Conflict toxin kicks in when what is said is taken literally.
-* Let it pass
-* Ask using neutral, open questions
-* Main reason for the conflict to continue is to focus on the position, rather than interests
-  * Ask why such position is important to them
-  * motive often different from what they say
-* often don't mean what they say
-* tune into other people's motivations
 
 LEAPS communication model
 
-Increasing intensity levels
-* Differences
-* misunderstanding
-* disagreement
-* discord and competition
-* Polarization
-
-More intense conflicts are harder to handle. 
-Can easily escalate by an ill-judged comment combined with an unfiltered response
-
-When someone is at the fight position - disarm
-* Don't aggrevate them by body language
-  * pointing fingers
-  * shaking hands
-  * Let them express the burst of anger, and keep the neutral facial expression and body position
-  * paraphase the information
-  * question the concerns
-  * calm and confident position
-  * Use the pace to lower the energy 
-
-flight position - intervening
-* avoid BL that is pushy or impatient
-  * extended eye contacts
-  * leaning in close
-* clarify what you head with qualities and quantities their points
-* use open body/hand gestures to represent 2-3 options, and ask if a decision would address their concern
-
-Anyone who can shift into the rational mind and can drive the opponent into the emotional response will have an upper hand.
-
-The awkward silence: when faced with an insult or a challenging questions, pause and think deepingly before answering
-helps move into the rational mind. Keep emotion under control. Answering what you believe rather than what others want to hear.
-
-Thomas-Kilman Conflict Mode assessment
-* assertive - own needs
-* cooperative
-
-competitive - collaborative - compromising in the middle -  accommondating - avoiding 
-
-Compromising
-When works
- * time constraint
- * relationship is importatnt
- * both sides equally strong argument
- * moderately important goals
- * temp mode for complex issues
- * backup mode for collaboration
-Not good
- * strategic or goals are involved
- * break of committment
-
-Competing
- * goal oriented
- * quick, difficult, or unpopular deicisons
- * when people take advantage of you
-Not good
- * hurs others
- * when there is resistence or sabotage
-
-Collaborating
- * goal oriented and people oriented
- * creative solutions
- * need good negotion skills
- * when objective to learn
- * both parties are willing to collaborate
- * merge insights from different povs
- * can't compromise both parties goals
-Not good
- * when lack of time
- * problem is trivial
- * no interesting in collaborating
-
-Avoiding
-  * mode of dipomancy
-  * trivial info
-  * pick your battle
-Not good
-  * the message is not heard
-  * the problem won't go away
-
-Accomodating
- * people oriented approach
- * need to build relationships
-Not good
- * can't please everyone 
- * bad ideas
- * expectations/roles are 
+* Increasing intensity levels
+  * Differences
+  * Misunderstanding
+  * Disagreement
+  * Discord and competition
+  * Polarization
 
 
-The words could have a big impact
-* "yes, but" 
-  * negate the other's contribution
-  * position your idea as the right now
-* "yes, and"
-  * affirming other's ideas
-  * communicating that they have been heard
-  * building upon their ideas
-* then to use "but" rather than "and" in the heat of discussion
-* 
-Third party intervention
-* listen carefully and dispassionately
-* agree and establish observable elements that will have an impact on the decision and outcome
-* ask them how to resolve the issue and to move forward
-* get agreed on what is agreed and the way forward
 
-important not to trace to its source and why it occured, but how to move it forward
 
-reduce aggression as much as possible
-
-put over challenge assertively without aggression and with clear goals. So you know where you are, and you know where you want to be. 
-* maybe just agreesing on goals and outcomes
 
 
 
