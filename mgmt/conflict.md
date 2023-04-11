@@ -1,93 +1,34 @@
+Removing specific personalities to avoid clashes will not work because there are benefits and value received from all personality types.
+
+Most conflicts do not get resolved. This is because people have not taken the time to truly understand the root cause of the conflict, and so they only deal with superficial issues.
+
+What do I hope to achieve by addressing this conflict? If you think to yourself, “showing that I’m right,” consider whether this goal is truly in the interest of the best long term outcome
+
+Do I have emotions attached to the conflict that may interfere in my ability to address it effectively? If so, what are they and how can I address them before hand?
+
+It’s important to understand a person’s perspective because once people pick a position they will find it challenging to abandon it, even if they are wrong.
+
+What do they want and need from this situation? (Keep in mind sometimes people just want to be heard and to feel that their opinions and concerns matter more than taking a specific action.)
+
+someone may feel like another employee is doing something hurtful intentionally, while the truth is that the other employee is completely unaware that they are causing harm.
+
+
+First, brainstorm to identify the core problem that needs to be solved and the 2 to 4 main
+positions being taken. Remind the group that the goal is not to determine which position is correct and which is wrong, but rather to use the prevailing viewpoints as a starting point for gaining clarity and identifying possible solutions.
+
+Have the group analyze each position, looking for assumptions, objective facts, and any uncertainty that would warrant additional exploration and fact-finding. Also, have them make note of areas where the viewpoints overlap or have common ground. By considering what leads to other people's positions, the group will gain a better understanding of each other’s perspectives. 
+
+
 Stages of dialogue
-* preparation
-  * work through your thoughts and feelings
-  * What is my intent going into this conversation?
-    * often unaware
-* invitation
-  * conversation starts poorly most likely ends poorly
-  * Use soft start
-    * something i have been thinking about lately
-    * I'd like to know you your point of view
-  * disatisfaction rather than blame
-    * I feel like I am the one doing all the clean up
-    * You people are such slobs
   * use repair attempts throughput the conversation
     * de-escalate the tension
-  * leveling statement
-    * starting stage or de-escalate during the dialouge
-    * state a concern w/o blame or hostality 
-    * express your desire to understand the other person's point of view
-    * let them know you'd like to work things out together
-    * focus on the process of communication rather than content
-    * It was upsetting to me to learn about the memo. However, I want to understand your pov and then figure out how we can better communication and coordniate our work in the future.
-    * I was surprised by what you said this morning during our coffee break. It seems you have some strong feels about this matter which i'd like to understand.
-    * I've been feeling uneasy in our relationship, ever since the board meeting in Sep. I'd like to understand your pov and see if we can get back to our previous working relationship  
-    * I sense you are not feeling good about our assignments. I am not either. Let's agree to talk about this in an open way until we find a solution we both feel good about
-    * I think we have different understanding of what he intended and what is fair to each of us. I'd like to understand your point of view and share mine as well and see if we can work this out
-    * I'm not feeling good about how this is escalating and you're prob not either. I want to understand how you are feeling and what we can do to calm our discussion and get it back on track.
-  * Clarifying you intent and/or concerns
-    * Point out what you do and do not intend
-  * Stating your commit to collaboration. Keep going back to it when you are bogged down during exploration
- 
-#### exploration - hard part
 
-* mistake
-  * persuade, convince other into accepting your view at this stage  
-    * ignore complexity
-    * only pay attention to the data that supports your pov 
-  * moving too quickly into problem solving
-* inquries and advocacy loop
-* different assumptions set up for conflict because of ambiguity  
-* Create a pool of shared understanding
-  * Surface and understand the assumptions of all partities
-  * search for a common and more complete reality
-* Shared understanding does not mean agreement
-* Start by inquiring the view of others
-  * How are you feeling right now about what we've learned
-  * 
 * Case study: agreeing on property
-* priming
-  * state your best guess when other side closed down or is struggling identifying thoughts/feelings
-  * I would guess you're not in favor of what we've been discussing
-  * You prob like to participate but not sure if it is appropriate
-  * It seems you were offended by the comment
-  * I'll be it has been a difficult statement
-* Immediacy
-  * When you want to be heard
-  * commenting on the process of communication
-  * can we take a time out for just a moment?
-  * Seems that you are upset by my pov and you start talking over me. I want to hear what you want to say, but I also want to finish what I'm saying
-  * Seems that it is hard for you to hear what I have to say
 
 
-### collaboration
-* unmet needs are the heart of the conflict
-* People are not fighting solutions, rather what is important to them.
-* identify needs and what is important to each party
-  * They make promises to customers without having even a clue about how much it takes to build a good product.
-  * what is most important to you
-* Brainstorming 
-  * Make sure everyone understands desired outcome
-  * One thought at a time
-  * No criticism
-  * Outrangous ideas are encouraged 
-  * No discussion of ideas except to clarify its meaning
-  * Build on other's ideas
-* Come up actions or solutions.
-* consensus
-  * Everyone has contributed to brainstoriming the solution
-  * Support a final solution even though their favorite isn't part of it
-
-
+* put over challenge assertively without aggression and with clear goals. So you know where you are, and you know where you want to be. maybe just agree on goals and outcomes
 
 Conflict: circular - reinforcing circular reaction
-
-Be clear about the outcome you desire during negotiations, but not commiteed to solutions going in
-
-
-Often the meaning we put on other's behaivor is based on misunderstanding of their deeper intent and feelings or needs
-
-
 
 * Conflict triggering event
 * thought and feeling of the event
@@ -115,7 +56,6 @@ Argument/debate vs dialogue, the way to collaborate
 * disintegration
 
 Trust building before resolving the conflict
-
 
 * Does this need to be said
 * Does this need to be said by me
@@ -153,18 +93,20 @@ LEAPS communication model
   * Discord and competition
   * Polarization
 
+* Conflict is against our instinct, but you must rise to the challenge
+* Anyone who can shift into the rational mind and can drive the opponent into the emotional response will have an upper hand.
 
+While you may not agree with what they’re saying, you can still accept it. Accept their views and opinions for what they are, and move forward with your new insight.
 
+Conflict is against our instinct, but you must rise now
 
+Even when one person becomes frustrated, you must strive to maintain a placid appearance. If you, yourself, become frustrated or impassioned, it will be even more difficult for the people having the conflict to calm down and resolve their differences.
 
+Ask each person what caused the conflict, if there have been past conflicts, and get their opinions on how to resolve the situation and prevent future issues.
 
+Try to find a common goal and agree on the solution
 
+Instead of focusing on conflict as a behavior issue, focus on the communication of it
 
-
-
-
-
-
-
-
+ To enhance this delegation of responsibility, clients sit facing directly across a table from each other, while the mediator sits at a distance from both. This assures that both parties must address each other, directly
 
