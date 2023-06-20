@@ -1,3 +1,7 @@
+Often the meaning we put on other's behaivor is based on misunderstanding of their deeper intent and feelings or needs
+
+Important not to trace to its source and why it occured, but how to move it forward
+
 Removing specific personalities to avoid clashes will not work because there are benefits and value received from all personality types.
 
 Most conflicts do not get resolved. This is because people have not taken the time to truly understand the root cause of the conflict, and so they only deal with superficial issues.
