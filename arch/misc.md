@@ -223,3 +223,13 @@ Use annotation to mark extension, Bootstrap type will scan the class and registe
 At run time, use TenantContext to choose the extension, TC is initialized before the business logic, via interceptor
 
 metadata to support extension?
+
+### When OS context switches
+* multi tasking
+* hardware interruption
+* between user mode and kernel mode, e.g., system calls
+
+### What if a hot cache key expires
+* Protect all the concurrent DB read with a distributed lock
+
+
