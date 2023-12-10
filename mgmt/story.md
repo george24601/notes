@@ -1,3 +1,29 @@
+You emphatically do not want to tell a beginning-to-end tale describing how results meet expectations. This is boring and banal. Instead, you want to display the struggle between expectation and reality in all its nastiness.
+
+Alternatively, the CEO could turn his pitch into a story, beginning with someone close to him—say, his father—who died of a heart attack. So nature itself is the first antagonist that the CEO-as-protagonist must overcome. The story might unfold like this: In his grief, he realizes that if there had been some chemical indication of heart disease, his father’s death could have been prevented. His company discovers a protein that’s present in the blood just before heart attacks and develops an easy-to-administer, low-cost test.
+
+But now it faces a new antagonist: the FDA. The approval process is fraught with risks and dangers. The FDA turns down the first application, but new research reveals that the test performs even better than anyone had expected, so the agency approves a second application. Meanwhile, Chemcorp is running out of money, and a key partner drops out and goes off to start his own company. Now Chemcorp is in a fight-to-the-finish patent race.
+
+This accumulation of antagonists creates great suspense. The protagonist has raised the idea in the bankers’ heads that the story might not have a happy ending. By now, he has them on the edges of their seats, and he says, “We won the race, we got the patent, we’re poised to go public and save a quarter-million lives a year.” And the bankers just throw money at him.
+
+When people ask me to help them turn their presentations into stories, I begin by asking questions. I kind of psychoanalyze their companies, and amazing dramas pour out. But most companies and executives sweep the dirty laundry, the difficulties, the antagonists, and the struggle under the carpet. They prefer to present a rosy—and boring—picture to the world. But as a storyteller, you want to position the problems in the foreground and then show how you’ve overcome them. When you tell the story of your struggles against real antagonists, your audience sees you as an exciting, dynamic person. And I know that the storytelling method works, because after I consulted with a dozen corporations whose principals told exciting stories to Wall Street, they all got their money.
+
+What’s wrong with painting a positive picture?
+
+It doesn’t ring true. You can send out a press release talking about increased sales and a bright future, but your audience knows it’s never that easy. They know you’re not spotless; they know your competitor doesn’t wear a black hat. They know you’ve slanted your statement to make your company look good. Positive, hypothetical pictures and boilerplate press releases actually work against you because they foment distrust among the people you’re trying to convince. I suspect that most CEOs do not believe their own spin doctors—and if they don’t believe the hype, why should the public?
+
+So acknowledging this dark side makes you more convincing?
+
+Of course. Because you’re more truthful. One of the principles of good storytelling is the understanding that we all live in dread. Fear is when you don’t know what’s going to happen. Dread is when you know what’s going to happen and there’s nothing you can do to stop it. Death is the great dread; we all live in an ever shrinking shadow of time, and between now and then all kinds of bad things could happen.
+
+CEOs, likewise, have to sit at the head of the table or in front of the microphone and navigate their companies through the storms of bad economies and tough competition. If you look your audience in the eye, lay out your really scary challenges, and say, “We’ll be lucky as hell if we get through this, but here’s what I think we should do,” they will listen to you.
+
+How do storytellers discover and unearth the stories that want to be told?
+
+The storyteller discovers a story by asking certain key questions. First, what does my protagonist want in order to restore balance in his or her life? Desire is the blood of a story. Desire is not a shopping list but a core need that, if satisfied, would stop the story in its tracks. Next, what is keeping my protagonist from achieving his or her desire? Forces within? Doubt? Fear? Confusion? Personal conflicts with friends, family, lovers? Social conflicts arising in the various institutions in society? Physical conflicts? The forces of Mother Nature? Lethal diseases in the air? Not enough time to get things done? The damned automobile that won’t start? Antagonists come from people, society, time, space, and every object in it, or any combination of these forces at once. Then, how would my protagonist decide to act in order to achieve his or her desire in the face of these antagonistic forces? It’s in the answer to that question that storytellers discover the truth of their characters, because the heart of a human being is revealed in the choices he or she makes under pressure. Finally, the storyteller leans back from the design of events he or she has created and asks, “Do I believe this? Is it neither an exaggeration nor a soft-soaping of the struggle? Is this an honest telling, though heaven may fall?”
+
+
+
 # Storytelling to influence
 * 30 - 90 sec stories, better many short ones than a long one
 * one story, multiple meanings. same story to reinforce multiple points

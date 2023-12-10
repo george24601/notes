@@ -46,23 +46,24 @@ In addition to Upgrade headers, the client sends a Sec-WebSocket-Key header cont
 
 It is important (from a security perspective) to validate the "Origin" header during the connection establishment process on the server side (against the expected origins) to avoid Cross-Site WebSocket Hijacking attacks, which might be possible when the connection is authenticated with Cookies or HTTP authentication. It is better to use tokens or similar protection mechanisms to authenticate the WebSocket connection when sensitive (private) data is being transferred over the WebSocket.
 
-http/tcp long connection???
+#### HTTP/2
 
-http 2.0?
+* Grpc runs on HTTP/2
+    * Multiplexing: HTTP/2 allows for multiple concurrent requests and responses over a single connection, thus avoiding the head-of-line blocking problem present in HTTP/1.1. This feature significantly improves the efficiency of data exchange.
+    * Header Compression: HTTP/2 uses HPACK compression for header fields, reducing overhead and improving efficiency by sending and receiving smaller header sizes.
+    * Server Push: HTTP/2 allows servers to push responses proactively to clients, which can help in delivering resources before the client even requests them, improving performance for applications with multiple resource dependencies.
+    * Binary Format: HTTP/2 uses a binary protocol as opposed to the plain text protocol used in HTTP/1.1, which also contributes to better efficiency.
+    * Prioritization and Dependency: HTTP/2 provides support for request prioritization, allowing more important resources to be delivered first, which can be critical for performance optimization.
 
+### Http keep-alive vs tcp keepalive
 
-### tcp long connection/keepalive
-when you set up a TCP connection, you associate a set of timers. Some of these timers deal with the keepalive procedure. When the keepalive timer reaches zero, you send your peer a keepalive probe packet with no data in it and the ACK flag turned on.
-
-### Http keep-alive
-
-client sends a Connection: keep-alive header, and server will respond with Conneciton:keep-alive in the header
-on the last request, client will use Conneciton:close in the header
-
-http keep-alive is to reuse existing connection
-tcp keep-alive is make sure the other end is still alive, but sending heartbeat packet
-using a single TCP connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair.
-
-In HTTP 1.1, all connections are considered persistent unless declared otherwise
+* also known as persistent connection, http keep-alive is to reuse existing connection
+  * Client sends a Connection: keep-alive header, and server will respond with Conneciton:keep-alive in the header
+  * On the last request, client will use Conneciton:close in the header
+  * using a single TCP connection to send and receive multiple HTTP requests/responses, as opposed to opening a new connection for every single request/response pair.
+  * In HTTP 1.1, all connections are considered persistent unless declared otherwise.
+* tcp keep-alive is make sure the other end is still alive, but sending heartbeat packet
+  * when you set up a TCP connection, you associate a set of timers. Some of these timers deal with the keepalive procedure. When the keepalive timer reaches zero, you send your peer a keepalive probe packet with no data in it and the ACK flag turned on.
+  * The TCP keepalive mechanism is typically set at the operating system level and can be configured on both the client and server sides.
 
 socket api is between application layer and transport layer
