@@ -1,10 +1,12 @@
 #!/bin/bash
 
+VENV_BIN=venv/bin
+python3 -m venv venv
+$(VENV_BIN)/pip install --upgrade pip
+$(VENV_BIN)/pip install -r requirements.txt
 
-python3 -m pip install locustio
-
-#To run Locust with the above Locust file, if it was named locustfile.py and located in the current working directory, we could run:
-locust --host=http://example.com
+#by default locust reads the locustfile.py
+locust --headless --users 1 --spawn-rate 1 -H http://your-server.com
 
 #To run Locust distributed across multiple processes we would start a master process by specifying --master:
 locust -f locust_files/my_locust_file.py --master --host=http://example.com
