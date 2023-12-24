@@ -23,7 +23,7 @@ func fibonacci(c, quit chan int) {
 	}
 }
 
-func main() {
+func concurrency() {
 	s := []int{7, 2, 8, -9, 4, 0}
 
 	c := make(chan int)
