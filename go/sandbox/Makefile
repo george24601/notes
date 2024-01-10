@@ -14,6 +14,13 @@ $(EXECUTABLE):
 run:
 	./$(EXECUTABLE)
 
+test:
+	go test -coverprofile=coverage.out
+
+html:
+	go tool cover -html=coverage.out
+
+
 # Clean up by removing the executable
 clean:
 	rm -f $(EXECUTABLE)
