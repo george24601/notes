@@ -1,4 +1,21 @@
+### influcence without authority
+
+My career lesson is that being right isn't the hard part of being a senior staff engineer. Being right isn't enough. It's building alignment across the entire org towards the right solution. That's the hard valuable problem that I'm paid to solve.
+
+The biggest challenge for DX teams remains figuring out how to (a) communicate but more importantly (b) align their work with the key priorities of the business. I got to be okay at (a) but never particularly succeeded at (b) in my time at LinkedIn.
+
+Positively trivial compared to py2 to 3. But management just were not up for it at all. Even with research done showing we could expect literally a baseline of 10% improvement in performance (so you do the math on that vs the 50M of spend), they just did not want to "waste time on version upgrades." The staff engineer was told they were being unreasonable in pushing so hard. Their manager tried to ditch them, but again, they're good at the staff eng game, so they switched teams due to being in the good graces (due to an excellent track record) with a middle manager above them. They decided, hey fuck you, I'm going to one man army this effort. They did, they had preview versions ready in less than a month and had migrated some of the bigger-win jobs within 2, saving their annual comp (which was prodigious) several times over just in that. Suddenly everyone was keen on moving their stuff over now that the startup cost (both political and eng-time) was paid.
+
+Because again being right -and getting buy in- is the important part. Not later giving everyone an 'I told you so'.
+
+5 year plan is sounding really bad, though
+
+Sometimes it is not about saying yes and no to them but listening to what they are trying to say. Sometimes if you ask a few questions they learned something about the business that makes their case come apart. Sometimes if you listen to them you find a good idea and it opens up a whole new area of the product. So I think it’s a false dichotomy and you have to be good at listening and asking the right questions to get your point across.
+
+
+
 ### away team
+
 When someone shows up at your cube and asks for a new feature in the service you are offering or to fix a bug or to optimize performance, what do you do? Do you let them have access to your source code? If a new feature is popular with users or customers, do you keep it for your team or give it to the team where it may more naturally belong? If your team could add a capability that would help other teams make more money, should you do that before what is on your approved roadmap?
 
 once a team is the only remaining user of an API, they become owners of that service, even if they didn’t initially develop it.
