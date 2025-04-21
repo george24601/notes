@@ -48,7 +48,8 @@ Only do so if your organization is committed to scrum, and invested in the proce
 Individuals and interactions over processes and tools
 Responding to change over following a plan
 
-###icebox
+### icebox
+
 Request in 2018, but got rejected in 2019-09:
 As a scrum master, I would like an icebox feature so that when I am planning, I have place to put issues on hold for now, but but still keep them in sight.  
 We have the sprint above the backlog.  We would like the icebox below the backlog.  I could do the same by creating a sprint called "icebox" but it appears above the backlog.  Instead, it should be below the backlog.  

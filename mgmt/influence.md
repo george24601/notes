@@ -1,0 +1,2 @@
+
+We have all been approached at some time or other by the Unwise Citer. He asks us to take some action, or refrain from one, solely because certain other people have done so under supposedly like circumstances. The citer, lacking good arguments, has sought to substitute secondhand opinions. This is unfair. It is not helpful. And it directly assaults our ego. We are not given credit for having brains and judgment of our own. Bad stuff.

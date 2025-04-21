@@ -1,47 +1,18 @@
-Our stakeholders wanted to focus on the usability issues because we had the most control over them, but we weren’t sure that fixing the usability issues would address the larger awareness and adoption issues. We raised this issue, asking our stakeholders to clarify our key goals for the research—improving adoption or improving usability? Only once our team had agreed upon our main goal could I start planning appropriately targeted research.
+### influcence without authority
 
-Sometimes we throw ourselves into planning and executing our user research, getting caught up in the details, until someone barges in and asks a simple question: Why? Why are we doing this? What is the overall goal of the research?
+My career lesson is that being right isn't the hard part of being a senior staff engineer. Being right isn't enough. It's building alignment across the entire org towards the right solution. That's the hard valuable problem that I'm paid to solve.
+
+The staff engineer was told they were being unreasonable in pushing so hard. Their manager tried to ditch them, but again, they're good at the staff eng game, so they switched teams due to being in the good graces (due to an excellent track record) with a middle manager above them. They decided, hey fuck you, I'm going to one man army this effort. They did, they had preview versions ready in less than a month and had migrated some of the bigger-win jobs within 2, saving their annual comp (which was prodigious) several times over just in that. Suddenly everyone was keen on moving their stuff over now that the startup cost (both political and eng-time) was paid.
+
+5 year plan is sounding really bad, though
+
+
 
 Find a partner. This is the most effective way to accelerate your progress. Who do you know who is proven to be a strategic thinker? Enlist them to be your accountability partner. It needs to be someone who’s invested in your success and able to observe your behavior on a regular basis. Let them know that you’re working on your own strategic thinking skills. Ask if they would be willing to provide feedback and tips along the way.
-
-One great way to do this is with the classic six thinking hats methods: 
-
-White Hat: With this thinking hat, you focus on what you can learn from the available data, current and past trends. 
-Red Hat: You look at problems through the lens of feelings (yours and others), using your intuition and emotion.    
-Black Hat: Is the hat of caution. Look for weak points and think about how to create contingency plans to counter them. 
-Yellow Hat: Helps you look at the bright side. What is the most optimistic viewpoint?
-Green Hat: Uses creativity and leans into freewheeling, out-of-the-box ideas   
-Blue Hat: This hat represents processes and prompts you to bring order and structure to your thoughts
-
-For example, ask your team to come to a brainstorming meeting with three suggestions already formulated. If they bring a problem to you, coach them by asking questions like:
-
-What possibilities have you considered?
-If you were me, how would you approach this problem?
-Based on your experience, what do you propose as a next step? 
-
-
-Understand the unique information and perspective that your function provides and define its impact on the corporate level strategy.
-For example, when working on an employee retention project she asked herself, “What does success look like in Year 1?”  “What does it look like in Year 3?” “What could impact the outcome in a negative way?” “What are the early signs of success/failure?” “What do business partners need to understand to ensure its success?” and “Do the outcomes support the broader goals of the organization?” By asking these tough questions first, she recognized that she could better engage with colleagues and senior executives early on in ways that would benefit the project — and would help shape the perception that she was thoughtful and strategic.
-
-
-
-https://hbr.org/2016/12/4-ways-to-improve-your-strategic-thinking-skills
 
 We often find that leaders make assumptions about the skills, capabilities and motivation levels of others by applying a one-size-fits all delegation approach. Instead, good leaders need to asses each individual’s will and skill level in order to determine who can be trusted to handle what, and how much direction vs. support each individual needs. The ultimate goal is to need to provide less hands-on direction and more support.
 
 But you won’t be comfortable delegating until you have a clear understanding of your own highest value activities. This understanding will guide you in determining what other aspects of the business can be delegated to your direct reports. You need to know what only you can do and what can be done by others, while always keeping at the forefront the organization’s goals
-
-Relationship building with people from across the industry helps to cross-pollinate ideas. The intention is to get outside the bubble. Bubbles don’t just keep others out. They keep you in.
-
-
-Action Steps: List down the things you KNOW you’re bad at. Hate email? Write it down. Want to spend a majority of your time on small details, even if it takes a lot of time? Write that down.
-
-Whatever your “bad” things are, consciously be aware of those things and find someone who is good at them!
-
-Goals that aren’t set up properly can end up having the opposite effect.
-
-Some clients have gotten into the habit of making decisions based on what’s best for their career, family or others, and have forgotten to assess their own needs and desires.
-
 
 Spend 15 minutes at the start of the day determining what to delegate and to whom
 Block out 15 minutes at the end of the day to wrap the day’s event into the “big picture”
@@ -59,25 +30,7 @@ What peer relationships do I need to nurture?
 What competencies need to be developed in the leadership pipeline?
 How are we defining success?
 
-Strategic leaders are always tapping into the vision, values and goals of the organization and finding ways to align to it. They are constantly looking at where they want to take the business, what is needed to get there and how to make the best use of the talent on hand. They look for gaps to fill as well as hidden resources.
-
-If you're in a management position, consider buddying with someone who reports to you: teammates who don't often get the chance to strategize will be energized by the opportunity to do it with you. Through this exercise, your teammates will get a sense of ownership over the conclusions you come to together, while you'll gain focus and clarity.
-
-* Are you setting a large portion of your time aside for strategic big picture activities like visioning and relationship building?
-* Are you proactively going into your quarter, month, weeks and days with the big picture in mind and structuring your activities accordingly?
-* Are you getting the most strategic activities done first?
-* How are you structuring your thinking?
-* Do you have the end in mind?
-
-Big questions are worth asking but they should be framed in a way that doesn't feel burdensome or insurmountable. If they do, decompose them into smaller pieces until each one feels doable. Identify a problem and several solutions. For example: How can I help the designers who report to me be as effective as possible? Solutions: Establish a mentorship program or a process for critique.
-
-Executives cannot afford to work the same way that they did when they were at a lower level because their scope, responsibilities, and expectations have completely changed.
-
 The challenge is to define the key points of collaboration and to avoid involving too many people at any one stage.  Beware of letting important decisions get bogged down with too many unnecessary levels of approvals.
-
-I utilized this break to  reevaluate what was important for the business and then understand where I was spending my time.  After my brainstorm, my number one priority is to focus the majority of my effort doing things that have a direct, positive impact for my students.  Things like creating new online courses, recording additional content to current courses, high student engagement, etc.  When I matched this renewed vision with where I had been spending my time over the past few months, I was shocked.  Only 15% of my time was being spent doing the things I had deemed the most important. 
-
-Let’s say you’re doing research with Sales, Service, and Implementation associates, studying internal communications around a new product. When creating the research guides for each of these three types of associates, you must maintain coherence and obtain complementary data across all participants, but you also might want to include some questions that are specific to each role. How will you balance convergent and divergent questioning with each associate type? How will you use your overall findings to impact your product’s internal communications strategy? If you pause and take a step back, you can focus on the larger context and goals, which will set you up for success.
 
 ### Personal vision
 
@@ -133,8 +86,6 @@ When an employee has a chance to reflect on (and select) their own development g
  * For example, any L&D resources, or experts, you can take advantage of? Bonus points for writing as “if x happens, I will do y”. Commit to a date by when you will have accomplished this.
 
 ### Brag doc
-
-I think it’s okay to make it quite long / comprehensive – 5-10 pages or more for a year of work doesn’t seem like too much to me, especially if you’re including some graphs/charts / screenshots to show the effects of what you did.
 
 * Goals for this year and Goals for next year
 * Projects: For each one, list contribution and impact. Impact may need to comeback and fill later

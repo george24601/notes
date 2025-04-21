@@ -1,3 +1,26 @@
+### Lessions
+
+Right
+* Mysql compatible gives a lot of compatibility and syntax issues, but overall worth it.
+* Migrated sqllogic test form SQLList
+* Implemented Jepsen test to find txn bugs
+* TLA+ formal proof on core lgoics
+* Chaos Mesh
+* Use Cloud to get quick feedback, and integrate back to LTS version
+
+Wrong
+* Region name is misleading. Often confused region in cloud
+* Should have reviewed client's SQL soonner. 
+* Should have built hot region partition tool sooner.
+* Lack of PM: no function priority. No product strategy. No deep research on the use case scenarios
+* Picked the Garnder to run our own k8s. Had to migrate off
+* Cloud disk turns out to be not bad, with much lower overhead
+
+Lession
+* Shared nothing was good. but is reaching bottleneck with cloud.
+* Every half year release is good balance of candence. Otherwise cherry pick is too much pain
+
+
 Note speical settings needed to truly enable prepared statements. Most likely you do not turn it on yet
 
 The recommended startup sequence: PD -> TiKV -> Pump -> TiDB -> Drainer
