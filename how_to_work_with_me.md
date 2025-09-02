@@ -113,12 +113,11 @@ My Observation: When a project is failing to meet its goals, the natural human t
 So, instead of saying: "This isn't working, we need to cancel it," or "We just need to push harder."
 
 I will try to ask:
+* "Let's separate the strategy from the execution. Is the feature underperforming because of technical issues, or was our initial hypothesis about the user's need incorrect?"
+* "What is the cheapest possible experiment we can run in the next two weeks to test if a pivot could salvage this? For example, can we change the user interface, target a different audience, or simplify the core functionality?"
+* "If we were a brand new team given this same project today, knowing what we know now, would we still choose to build it? If the answer is 'no,' our default decision should be to decommission it, and document our learnings in a post-mortem."
 
-"Let's separate the strategy from the execution. Is the feature underperforming because of technical issues, or was our initial hypothesis about the user's need incorrect?"
-
-"What is the cheapest possible experiment we can run in the next two weeks to test if a pivot could salvage this? For example, can we change the user interface, target a different audience, or simplify the core functionality?"
-
-"If we were a brand new team given this same project today, knowing what we know now, would we still choose to build it? If the answer is 'no,' our default decision should be to decommission it, document our learnings in a post-mortem, and celebrate the valuable insight we've gained."
+Note that decomissioning a failing project should be rare, because the huge gap between projection and reality means big gaps in the original assumptions/goals/non-goals discussion, or we didn't built things in easily reversible blocks.
 
 #### On reversible changes and blast radius
 
@@ -193,11 +192,13 @@ As a Tie-Breaker (Last Resort): If the team is deadlocked, I will make the final
 
 I will keep asking the assumptions behind a statement, and I will keep pressing on the prior probability of the statement, and marginal likelihood of each assumptions, because my observation is that wrong conclusion often comes from the lack of prior probability and marginal likelihood.
 
+### Simpson's Paradox
+
+When I see a claim on before vs after impact, I will push for before vs after data on different subgroups, and see if the trend is consistent across the groups. If there are outliers, we need to watch out for confounding variables that affects in both grouping (indepedent variables) and the outcome (dependent variables). Such check is obvious in hindsight but my observation is that many claims don't follow it.
+
 ### Leading and lagging indicators
 
 When look at numbers, I will be very explicit if we are watching a leading or a lagging indicator, because my observation is that engs tend to focus on leading indicators during execution, and such focus is likely to replace means (leading indicators) with goals (lagging indicators)
-
-
 
 # Communication Preferences
 ### Preferred Channels (by situation)
