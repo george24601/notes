@@ -50,7 +50,6 @@ Team needs to be aware of that LLM halluciates a lot when advicing on internal t
 
 Any build proposal need to include competitor analysis on how other teams handle similar scenarios. We can do things differently from most other teams, but we need to be aware that we are doing things differently and have clear reason and value propersition
 
-
 #### On project estimates and deadlines
 
 My Observation: An estimate is a probability distribution, not a commitment. Pressure to provide a single number often forces engineers to either omit buffers (leading to missed deadlines) or add excessive buffers (leading to sandbagging).
@@ -119,6 +118,16 @@ I will try to ask:
 
 Note that decomissioning a failing project should be rare, because the huge gap between projection and reality means big gaps in the original assumptions/goals/non-goals discussion, or we didn't built things in easily reversible blocks.
 
+#### On Evaluating Performance on a Failed Project
+My Observation: When a project is decommissioned, its direct business impact is, by definition, low. This is a real factor in performance reviews. However, punishing the team for an intelligent risk that didn't pay off creates a risk-averse culture that kills innovation. The challenge is to be honest about the low impact while fairly evaluating the team's work.
+
+So, instead of saying: "Don't worry, this won't affect your performance at all," or "Since the project had zero impact, the team's performance was poor."
+
+I will state the following:
+* "Let's be direct: because this project was decommissioned, its business impact was not what we hoped for, and we can't ignore that in our performance model. There are no late surprises here."
+* "However, impact is not solely defined by feature success. I will heavily weight my evaluation on the value of reusable building blocks for other projects, such as user stories, test cases, automation scripts, infra setup.
+* "Therefore, I will ask: Did we build a high-quality, reliable system based on what we knew? How quickly and cheaply did we run the experiment to invalidate our hypothesis? How insightful and actionable is our post-mortem? Proving an idea is wrong quickly is a valuable contribution, and I will ensure the skill and speed the team demonstrated in delivering that learning is what gets recognized."
+
 #### On reversible changes and blast radius
 
 My criteria for easily reversible changes is
@@ -186,7 +195,7 @@ As a Facilitator: My first priority is to ensure all viewpoints are heard, espec
 
 As an Information-Gatherer: I will ask clarifying questions to expose the core trade-offs and assumptions behind each position. In fact, my main focus will be assumptions because engs made wrong decisions not because the tech call is wrong, but because engs have incorrect/incomplete assumptions
 
-As a Tie-Breaker (Last Resort): If the team is deadlocked, I will make the final call based explicitly on the Decision-Making Framework above.
+As a Tie-Breaker (Last Resort): If the team is deadlocked, I will make the final call based explicitly on the Decision-Making Framework above. After I make a tie-breaking decision, my immediate next step is to connect with the proponents of the other path. My goal is to acknowledge the value of their arguments, ensure they feel heard, and explicitly check that they are on board to commit to the chosen direction.
 
 ### Bayesian inference
 
@@ -336,7 +345,9 @@ Such projects are best suited for engs looking for promotions
 
 ### New tech projects
 Such projects should be offline/controlled access, and is intended to be the POC sandbox of new techs. 
-Such projects are best suited for engs interested in new tech, and is not good fit for promotion packet
+Such projects are best suited for engs interested in new tech, and is not the best choice for promotion packet
+The ultimate goal for a successful 'new tech project' is to graduate into a 'business impact project.' The most compelling promotion packets often come from engineers who successfully shepherd a new technology from an offline POC to a core system that drives measurable user value.
+
 
 ### SFT our own LLM model
 
