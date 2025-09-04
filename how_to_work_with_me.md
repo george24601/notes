@@ -77,16 +77,20 @@ We follow "disagree and commit" model.
 * The decision is made by the LCA of reporting chains of stakeholders
 * However, we are open to pivot to a different option if the committed one is not working. That is why we compare and update project's impact and progress with metrics defined above at least once every 3 months. We will also define early-exit criteria or red flags that would trigger a re-evaluation before the 3-month milestone.
 
-#### On Code Ownership and Cross-Team Contributions
+#### How to define DRIs 
 
-Which team is owning what should be defined in the RFD/ERD, and reviewed by each team's engineering manager.
+DRIs should be defined in the RFD/ERD, and reviewed by each team's engineering manager.
+Each item should have a primary DRI and backup DRI, and teams should check with the DRIs for answers first before escalation.
+When DRIs change, old DRIs could still be consulted for opinions, but their opinion should not be blocking. Please escalate if old RIDs and new don't align
 
+
+#### Working on another team's project
+
+Senior engineers should understand how the immediate upstream and downstream systems work, that is, knowing the high level design/compoments of the system's dependnecy and customers, one level below the interface.
 Every eng is welcomed to contribute to another team's code base, on condition that,
 * The "giving team" eng's EM is aware of this cross-team contribution and ok with it
 * The receiving team has reviewed and approved design proposals with the "giving" team.
 * The receiving team owns its roadmap and operational load. To make a contribution likely to be accepted, I recommend the 'giving team' first aligns with the receiving team's priorities. The best cross-team features are those that solve a problem the receiving team already has on its roadmap or that significantly reduce their future maintenance burden.
-
-I expect senior engineers to understand how the immediate upstream and downstream systems work, that is, knowing the high level design/compoments of the system's dependnecy and users, one level below the interface
 
 
 #### On Prioritizing Bugs vs. Features
@@ -153,6 +157,8 @@ My Observation: A team builds a simple, effective solution for a specific proble
 
 My preference is for each team to own a separate solution. However, the common building blocks will be abstracted and owned by both teams - one primary DRI, and one backup DRI, one from each team. When there is a 3rd customer team, we will review the architecture and ownership again - very likely we need a small pod just to own both common buildig blocks and the sucesss of customer teams by then
 
+When I detect potential duplicate work between teams, I will kick off this general vs specifc discussion with teams' stakeholders.
+
 #### On Data-Driven Results vs. Product Intuition
 My Observation: sometimes quantitative data from an A/B test or analytics report points to a decision that conflicts with our core product principles or feels like a poor user experience. This often happens when the metric we're tracking is a proxy for, but not a perfect representation of, the actual user value we want to create.
 
@@ -163,10 +169,20 @@ I will try to ask:
 * "Let's articulate the specific product principle or user experience heuristic that this change seems to violate. Can we define the negative outcome we're predicting? Is that negative outcome something our current experiment is even capable of measuring?"
 * "Can we design a new, better experiment to resolve this conflict? For example, could we ship the change to 1% of users for a longer period and supplement it with a qualitative survey to measure satisfaction, in addition to the quantitative metric?"
 
-
 #### Knowledge vs skill
 
 Skill is much more valuable and harder to gain than knowledge. Therefore, I encourage knowledge sharing, but I would say knowledge sharing is at most 10% of a performance review. At the same time, mentoring on a specific skill with continous feedback loop is much more valulable and appreciated, and can go to 30% of a performance review. 
+
+
+#### On Interpreting Ambiguous Experiment Results
+My Observation: A/B tests don't always produce a clear, statistically significant winner. Results are often flat, statistically weak, or show a messy trade-off (e.g., conversion rate improves, but long-term engagement declines). Teams can get paralyzed in this situation, either by dogmatically refusing to ship anything without 95% significance or by arguing endlessly over how to interpret the murky data.
+
+So, instead of saying: "The result isn't statistically significant, so we have to kill the feature," or "It looks like it's trending positive, let's just ship it."
+
+I will try to ask:
+* "Let's assume the result is truly flat. What is the non-metric, strategic value of shipping this change? Does it align with our long-term product vision or simplify our tech stack? What is the cost of the added complexity if we do ship it?"
+* "Let's ignore the primary metric for a moment. Did the change cause any meaningful movement—positive or negative—in our key secondary or guardrail metrics? Did it disproportionately help or hurt a specific user segment (e.g., new vs. power users)?"
+* "What is the opportunity cost of continuing this experiment? If we spend another two weeks trying to get a clearer signal, what other feature are we not building or testing? Is a 'good enough' decision now more valuable than a 'perfect' decision a month from now?"
 
 # How I Make Decisions
 
@@ -176,7 +192,7 @@ Skill is much more valuable and harder to gain than knowledge. Therefore, I enco
 * Data and Evidence: What data supports this path? If we have no data, what is the fastest, cheapest experiment we can run to get a signal?
 * Cost & Resource Constraints: Does this fit within our budget, timeline, and available engineering resources? Can our team build, test, and operate this effectively with their current skills? Does it introduce a high operational burden or a steep learning curve? 
 
-### PRD/RFD/ERD
+### Design docs: PRD/RFD/ERD
 Rushing into coding with an unclear problem statement is the most common and expensive cause of wasted engineering effort. 
 
 I will make sure stakeholders are 80% confident with items below before kicking off the tech solution.
@@ -189,17 +205,32 @@ I will make sure stakeholders are 80% confident with items below before kicking 
 
 These answers are hard and require multiple iterations, but the dividend pays off immediately
 
+Design docs are expected to update continuously until at 50% into the project, because that is the first thing sister teams refer to.
+
+#### Design docs review
+Design docs need to be approved by 2-3 leads before moving onto the next stage. The approvers are also accountable for the overall success of projects and are expected to follow up throughout the lifecycle. When a projects involves multiple stakeholders, the approvers should be the LCA of the stakeholders reporting lines, as such projects often have big blast radius. 
+>80% of open threads should be closed by the time the design doc is approved.
+For people who are not accountable for the success of the project, their input is highly appreciated, but in most cases their input will not be considered impact. 
+
+
 ### My Role in a Technical Debate
 
-As a Facilitator: My first priority is to ensure all viewpoints are heard, especially from more junior engineers, and to keep the conversation focused on technical merits. This means I will interrupt the discussion if a point is dragging on for more than 5 mins, and I will ask stakeholders to research offline and come back later for a second round of discussion
+#### As a Facilitator 
+My first priority is to ensure all viewpoints are heard, especially from more junior engineers. We document the tradeoffs of each option and ready to switch to alternatives if needed.
+For my own proposals, I always try to incorporate ideas and components from other options, even though I am fully confident my approach would work. I will always ask "What does your suggestion solve that I might be missing?". I wish more people would follow this style but I acknowledge this is hard
+I will keep the conversation focused on technical merits. This means I will interrupt the discussion if a point is dragging on for more than 5 mins, and I will ask stakeholders to research offline and come back later for a second round of discussion
 
-As an Information-Gatherer: I will ask clarifying questions to expose the core trade-offs and assumptions behind each position. In fact, my main focus will be assumptions because engs made wrong decisions not because the tech call is wrong, but because engs have incorrect/incomplete assumptions
+#### As an Information-Gatherer
+I will ask clarifying questions to expose the core trade-offs and assumptions behind each position. In fact, my main focus will be assumptions and its prior probabilities because my observation is most wrong decisions are from incorrect/incomplete assumptions.
 
-As a Tie-Breaker (Last Resort): If the team is deadlocked, I will make the final call based explicitly on the Decision-Making Framework above. After I make a tie-breaking decision, my immediate next step is to connect with the proponents of the other path. My goal is to acknowledge the value of their arguments, ensure they feel heard, and explicitly check that they are on board to commit to the chosen direction.
+#### As a Tie-Breaker (Last Resort)
+If the team is deadlocked, I will make the final call based explicitly on the Decision-Making Framework above. After I make a tie-breaking decision, my immediate next step is to connect with the proponents of the other path. My goal is to acknowledge the value of their arguments, ensure they feel heard, and explicitly check that they are on board to commit to the chosen direction. I will also make sure the chosen path acknowledges the merits of the other path, and commited to pivot if the chosen path does not work out
+
 
 ### Bayesian inference
 
 I will keep asking the assumptions behind a statement, and I will keep pressing on the prior probability of the statement, and marginal likelihood of each assumptions, because my observation is that wrong conclusion often comes from the lack of prior probability and marginal likelihood.
+I will also use Bayeisan theorem to answer the question: how much guardrail is enough? Since the error state should be rare, we should look for a signal (or a combination of signals happening at the same time), that is rare to happen
 
 ### Simpson's Paradox
 
@@ -231,6 +262,7 @@ When look at numbers, I will be very explicit if we are watching a leading or a 
 * I use "I think", "I assume", "I feel" a lot, because I try hard to distinguish my preception of facts and facts itself, and I hope others pay attenion to the difference fact and preception too.
 * Conversely, I try not to use "You" statement because it often sounds more accusational than intended. In fact, LLMs will rewrite most of the "you" statements
 * I prefer being prescriptive and to go from bottom-up (fact to theory), rather than top-down (principle to action), because 1. the top-down approach often sounds more preachy than intended. 2. The same abstract principle means differently to different person (similar to why we need this doc to begin with)
+* Upon hearing a "no" from another team, I want to work with the other team to understand why my request does not align with the team's charter/goal/roadmap. This often signals oppurtunity in new projects, or an expanded scope of existing projects
 
 
 ### Response Times
@@ -274,15 +306,12 @@ I aim to review all PRs assigned to me within 4 business hours. For larger chang
 Comments prefixed with [nit], [question], [no need to change] are non-blocking. Other comments are blocking
 
 
-
 ### My Approach to Mentorship & Pairing
-My goal as a mentor is to help you become a better problem-solver, not just to give you the answer.
-
 When you're stuck: Please don't hesitate to reach out. Before you do, please be ready to articulate: 1) The problem you are trying to solve, 2) The approaches you have already tried, and 3) Why you think they didn't work.
 
 Our pairing sessions: you should be able to give an answer better than mine after our session, because you have more context on your problem. I will ask a lot of clarifying questions, and maintain that in our 1:1 doc  
 
-Beyond the code: Feel free to set up 15-30 mins 1:1 session with me on career development, navigating the organization, and improving communication skills. The agenda should be filled with hard/senstive, and specific questions. I prefer our 1:1 to be in person, and ideally I'd like to have a walk with you to talk through things
+Beyond the code: Feel free to set up 15-30 mins 1:1 session with me on career development, navigating the organization, and improving communication skills. The agenda should be filled with hard/senstive, and specific questions. I prefer our 1:1 to be in person, and ideally I'd like to walk with you in a park to talk through things
 
 ### Giving and Receiving Feedback
 
@@ -292,11 +321,17 @@ I genuinely want your feedback on everything, even if it is not tech related, fo
 
 #### Giving Feedback
 I follow the "radical candor" model, i.e., my feedbacks will be immediate, direct, and empathetic. For me, empathy means I will always deliver constructive feedback privately, focus on the work and behavior rather than the person, and be committed to helping you act on it. I totally expect people to be uncomfortable with negative feedbacks and let's do a mini-RCA together - it is possible I misinterpreted facts.
+I believe in a 'no surprises' policy for managers, as it ensures they always have the full context to support you. Therefore, I will briefly align with your manager before we discuss feedback, even for quick topics. The conversation itself will always be a direct one between you and me, but this approach ensures we are all working together from the same set of information.
+
+### Social 
+
+I will not go to most team social events where I am just listening, because I'd rather use that time on 1:1s on hard and senstitive topics. 
+During the team dinner, I will change my seat once every 30 mins, so that I can sit next to everyone during the dinner. I know this is a bit against the social norm but I think it is necessary to achieve the goal of connecting with people
 
 
 # My Technology Philosophy
 
-### My Definition of Technical Debt
+### Technical Debt projects
 Technical debt is any decision that makes future development slower or riskier. This isn't always "bad code"; it can be a "good" architecture that is simply wrong for our current scale and needs.
 
 #### Type 1: Implementation Debt (Shortcuts)
@@ -341,27 +376,26 @@ Driven by a non-negotiable business need like a contractual client SLA, a high-s
 ### Business impact driven projects
 Such projects are normally on the user's critical path
 This type of projects will follow "Boring is better". In general, A new tool/stack needs to be in action for other projects before it can be used here
-Such projects are best suited for engs looking for promotions
+Such projects are best suited for engs looking for promotions, and often involves around 5 engs
 
 ### New tech projects
 Such projects should be offline/controlled access, and is intended to be the POC sandbox of new techs. 
-Such projects are best suited for engs interested in new tech, and is not the best choice for promotion packet
+Such projects are best suited for engs interested in new tech, and is not the best choice for promotion packet. Such project normally employs 1-2 engs
 The ultimate goal for a successful 'new tech project' is to graduate into a 'business impact project.' The most compelling promotion packets often come from engineers who successfully shepherd a new technology from an offline POC to a core system that drives measurable user value.
 
 
-### SFT our own LLM model
-
-At this moment I prefer we use SFT only as the last resort, because
-* We experienced catastrophic forgetting with SFT model in the past
-* Once a new model is out every 6 months, we have to re-do the SFT 
-* Industry study shows that >70% of LLM quality issue can be mitigated by lower lift options, such as RAG or contextrual engineering
-
-At this moment, I feel the priority is to add the company's evals for LLMs
-
 ### Build our own infra stack
 
-I am neutral on this, because custom infra stack is a hard to reverse decision with very severe tradeoffs. See "Introduce new technology" and "build vs buy" section for more disucssion
+I am neutral on this, because custom infra stack is a hard to reverse decision with very severe tradeoffs. However, most medium-large company will end up with its own custom infra stack. See "Introduce new technology" and "build vs buy" section for more disucssion.
 
+### Open source our solutions
+
+Not very likely we will open source a brand new solution, because it is either too specific to the company's context, or too general to have mutliple competitors already. However, I do expect the team to add features, fix bugs for existing open source projects, and become PMC of these projects
+
+
+### Complexity relative to use cases
+
+I prefer to keep the design as simple as possible, unless at PRD stage we explicit say we need a highly scalable systems to handle complex use cases (which should be very rare). I'd rather we introduce complexity and do traffic switches as we onboard more use cases/traffics, so that we can launch and verify PMF sooner
 
 ### My Stance on Testing
 
@@ -432,3 +466,32 @@ My expectation is that at least 50% of our corrective actions from any major inc
 * I will ask questions on every SEV-2 and above RCA, and I expect >80% questions to be address before the RCA review.
 * I will act as a facilitator in RCA meetings to ensure they remain blameless and focused on systemic issues.
 * I will hold the team and leadership accountable for ensuring that "Long-Term" corrective actions are prioritized and completed, not just filed away.
+
+# Working with LLMs
+
+### SFT our own LLM model
+
+At this moment I prefer we use SFT only as the last resort, because
+* We experienced catastrophic forgetting with SFT model in the past
+* Once a new model is out every 6 months, we have to re-do the SFT 
+* Industry study shows that >70% of LLM quality issue can be mitigated by lower lift options, such as RAG or contextrual engineering
+
+At this moment, I feel the priority is to add the company's evals for LLMs
+
+### PMF for LLMs 
+At this moment, LLM-powered products are best fitted for internal tools and workflows. In most cases, I feel a LLM powered workflow is good enough. An single agent system is likely ovekill, and a multi-agent system is almost always an overkill
+
+### Code from LLM
+Treat LLM as a genius intern. The engs are still accountable for the LLM generated code, and code should be reviewed as if producted by human, because LLM often gives bad code because of lack of internal context.
+For production features, come up with an internal design doc for LLM. This internal design doc should include which components will be added/modified, and which internal libraries could be used in the place of external libraries. This internal design doc should be reviewed and commited first, and then fed into LLM to generate the actual code.
+
+# How I build trust with you
+
+The ultimate way is to deliver hard projects that aligns with your goals. To do this, I will
+
+* Check my understanding of the data model and system architecture with the engineers. The santity check is that I should be able to product a diagram of data model with roles and goals of each component
+* Go through the design docs of last half years and check my understanding of team's goals and roadmap with managers. The sanity check that I should be able maintain a roadmap which does not differ much from the team's goals
+* Go through the user workflows that covers 80% of use cases, and compare my understanding with PMs
+* Go through the RCAs of last half years and identify recurring patterns 
+* Have quarterly 1:1 all engineers to gather bottom up initiatives. The sanity check is that I should be able to call out at least 100 engs by name
+* Have monthly to bi-monthly 1:1 with sister teams managers to identify gaps and overlaps between teams
