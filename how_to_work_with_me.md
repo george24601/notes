@@ -4,12 +4,10 @@
 * This doc focuses on "how" of work by being prescriptive and objective with leading and lagging indicator, and tries to avoid descriptive and subjective terms like "principles"  
 
 #### How to use this document
-* Feed this doc into LLM
-* Describe your problem, and ask LLM for opinions based on this doc's framework.
-* If LLM is confident and you agree, then very likely you can go ahead with your judgement. For example, for small, local decisions, you can go ahead without approval. 
-    * If a situation involves complex team history or sensitive interpersonal dynamics, the LLM's advice might be logically sound but contextually incomplete. In those cases, a human conversation is always the better path.
-    * For hard to reverse changes, let's still have a quick call. See "Easily reversible changes" section for more details
-* If you disagree with the output, LLM is not very confident, let us have a 15 mins call to break ties
+* Feed this doc into LLM and Describe your problem
+* Use the LLM as a way to organize your thoughts against my framework. Ask it: 'Based on this guide, what questions would George likely ask about my proposal?' This will help you prepare your answers. 
+* If you've run through that exercise and your path seems clear and reversible, feel empowered to proceed. 
+* If the LLM's output highlights multiple trade-offs you're unsure about, that's the perfect agenda for our 15-minute call.
 
 # My Approach to Work & Decisions
 This section describes my philosophy through specific situations rather than abstract principles.
@@ -79,8 +77,8 @@ We follow "disagree and commit" model.
 
 #### How to define DRIs 
 
-DRIs should be defined in the RFD/ERD, and reviewed by each team's engineering manager.
-Each item should have a primary DRI and backup DRI, and teams should check with the DRIs for answers first before escalation.
+DRIs should be defined in the RFD/ERD, and reviewed by each team's engineering manager. I will try to align the project with 60% to 70% of the engs's interests. If the eng has strong opinion against the project, I will talk to the eng manager for alternatives.
+Each item should have a primary DRI and backup DRI, and teams should check with the DRIs for answers first before escalation. Primary DRI and backup DRI should and have the power to resolve 80% conflicts themselves.
 When DRIs change, old DRIs could still be consulted for opinions, but their opinion should not be blocking. Please escalate if old RIDs and new don't align
 
 
@@ -192,16 +190,52 @@ I will try to ask:
 * Data and Evidence: What data supports this path? If we have no data, what is the fastest, cheapest experiment we can run to get a signal?
 * Cost & Resource Constraints: Does this fit within our budget, timeline, and available engineering resources? Can our team build, test, and operate this effectively with their current skills? Does it introduce a high operational burden or a steep learning curve? 
 
-### Design docs: PRD/RFD/ERD
+### Working with product an design
+
+My Observation: The best products are built by a "triad" (Product, Design, and Engineering) operating as true partners with shared ownership. The worst outcomes happen when these roles become a transactional "service" model (e.g., Product hands a PRD "order" to Eng, Eng "receives" designs from Design). My goal is to be involved before the PRD is finalized, to help shape the problem definition so we can build the right solution sustainably.
+
+#### Common missing points in PRD
+
+These are obvious in hindsight, but my observation is that they are often missing
+
+* Ideally product should start with a reverse launch statement to help stakeholders visualize the impact
+* Competitor studies/prior lessons on user experience and product behavior
+* The non-goals (what we are explicitly not solving right now) 
+* The single, most important metric that will tell us if we are successful. 
+
+I will fill these sections if products has no bandwidth and review my changes with products to unblock tech discussion
+
+#### On Responding to Solution-First Problem Documents
+My Observation: Often, a PRD or request will jump directly to a solution (e.g., "We need a new service with these 3 endpoints," or "Build a dashboard with these 5 charts") without deeply validating the user problem. This is the single most common cause of wasted engineering effort.
+
+So, instead of saying: "Okay, I'll build this," or "This PRD is incomplete, I'm blocking it."
+
+I will try to ask: "Help me get to the 'why' behind this. What specific user behavior are we trying to change? What question is the user unable to answer today? Before we commit to this solution, let's confirm our assumptions about the problem. What is the absolute cheapest experiment we can run to prove our hypothesis about this user need?"
+
+#### On Negotiating Technically Expensive Designs
+My Observation: A designer will propose a fantastic, engaging user experience that, under the hood, requires a massive technical investment (e.g., a complex new data model, a technology we don't support, or a rewrite of a core component) for a feature that is still an unproven hypothesis.
+
+So, instead of saying: "That's impossible," or "This design will take 6 months to build."
+
+I will try to ask: "I love the user value this experience is targeting. The architecture required to support this specific design is a significant one-way-door investment. Can we partner to find an 80/20 version? What if we achieve the same core user goal with a simpler UI that lets us use our 'paved road' stack? This would let us validate the feature's core hypothesis in weeks, not months, and we can commit to this richer design once we have data that it's the right bet."
+
+#### On Handling Mid-Project Scope Changes
+My Observation: A "small tweak" or "minor addition" is requested by Product or Design for a project that is already estimated and in progress. The request seems simple on the surface but has deep architectural implications (e.g., "just add this one extra filter," which breaks the query model or requires a new index).
+
+So, instead of saying: "No, that's scope creep," or "Sure, we'll just add it" (and silently blowing the deadline).
+
+I will try to ask: "That's a valid new requirement. Given our current architecture, that change isn't trivial; it impacts [component X and data store Y]. This represents a formal scope change. We have two options: 1) We can treat this as a V1 priority, re-estimate the project, and communicate a new timeline, or 2) We can park this requirement for a V1.1 fast-follow and deliver the original scope on time. Which path better serves the immediate business goal?"
+
+
+### RFD/ERD
 Rushing into coding with an unclear problem statement is the most common and expensive cause of wasted engineering effort. 
 
 I will make sure stakeholders are 80% confident with items below before kicking off the tech solution.
 
-* The specific user problem we are solving. Ideally product should start with a reverse launch statement to help stakeholders visualize the impact
 * Assumptions on the state of the world/users. Align with the probability of each assumption, i.e., prior probability in Bayesian theorem. 
-* Competitor studies/prior lessons
-* The non-goals (what we are explicitly not solving right now) 
-* The single, most important metric that will tell us if we are successful. 
+* Competitor studies/prior lessons for tech solutions
+* Technical non-goals
+* Leading indictors to measure execution quality and speed, and lagging indicators to measure impact
 
 These answers are hard and require multiple iterations, but the dividend pays off immediately
 
@@ -215,13 +249,30 @@ For people who are not accountable for the success of the project, their input i
 
 ### My Role in a Technical Debate
 
+I value direct technical debate, but I understand that public disagreement can be uncomfortable. If you disagree with a direction, you do not have to wait for a large meeting. Sending me a direct message with your technical concerns, or scheduling a 15-minute 1:1 to walk me through your logic, is just as effective and welcome.
+
 #### As a Facilitator 
 My first priority is to ensure all viewpoints are heard, especially from more junior engineers. We document the tradeoffs of each option and ready to switch to alternatives if needed.
-For my own proposals, I always try to incorporate ideas and components from other options, even though I am fully confident my approach would work. I will always ask "What does your suggestion solve that I might be missing?". I wish more people would follow this style but I acknowledge this is hard
+
 I will keep the conversation focused on technical merits. This means I will interrupt the discussion if a point is dragging on for more than 5 mins, and I will ask stakeholders to research offline and come back later for a second round of discussion
+
+I will focus on depersonalize and reframe messages in a calm, objective way, because my observation is that such debate often becomes heated and emotional, e.g.,
+
+When people use a "you" statement: (e.g., "You didn't consider the security implications.")
+* Reframe it internally: Their statement isn't a personal attack; it's a poorly-phrased technical concern. They are trying to say, "There is a security implication that has not been addressed."
+* My verbal response: Ignore the "you" and address the substance directly. "That's a good point. Let's walk through the security model for this component."
+
+When people use a rhetorical question: (e.g., "Isn't it obvious that we need to use caching here?")
+* Reframe it internally: They are expressing a strong opinion and are not good at stating it plainly. They mean, "I believe strongly that we should use caching."
+* My verbal response: Answer it as if it were a genuine, polite question. "Caching is definitely an option we should consider. I'm thinking about potential data consistency issues. What are your thoughts on that?"
+
+When a difficult senior attacks a junior dev's idea, I will step in to interpret the message to create psychological safety. "I think that's an interesting point from Sarah. Let's explore it. Bob, I hear your concern is about [X]. Sarah, could you speak to how your proposal addresses [X]?" 
+
+When team is blocked by a reasoning such as ""We did it this way at a place you respect, so it must be right", I will clarify that "let's not appeal to authority, what are the cost of such decisions?"
 
 #### As an Information-Gatherer
 I will ask clarifying questions to expose the core trade-offs and assumptions behind each position. In fact, my main focus will be assumptions and its prior probabilities because my observation is most wrong decisions are from incorrect/incomplete assumptions.
+For my own proposals, I always try to incorporate ideas and components from other options, even though I am fully confident my approach would work. I will always ask "What does your suggestion solve that I might be missing?". I wish more people would follow this style but I acknowledge this is hard
 
 #### As a Tie-Breaker (Last Resort)
 If the team is deadlocked, I will make the final call based explicitly on the Decision-Making Framework above. After I make a tie-breaking decision, my immediate next step is to connect with the proponents of the other path. My goal is to acknowledge the value of their arguments, ensure they feel heard, and explicitly check that they are on board to commit to the chosen direction. I will also make sure the chosen path acknowledges the merits of the other path, and commited to pivot if the chosen path does not work out
@@ -231,6 +282,7 @@ If the team is deadlocked, I will make the final call based explicitly on the De
 
 I will keep asking the assumptions behind a statement, and I will keep pressing on the prior probability of the statement, and marginal likelihood of each assumptions, because my observation is that wrong conclusion often comes from the lack of prior probability and marginal likelihood.
 I will also use Bayeisan theorem to answer the question: how much guardrail is enough? Since the error state should be rare, we should look for a signal (or a combination of signals happening at the same time), that is rare to happen
+When advocating for a concensus, I follow a Bayesian equilibrium model. That is, I will have probability on each stakeholder's positions, and pick a strategy that is good enough and yet aligns more with team's interests over a best strategy (imo) but not align with teams' motivation, and I may pivot my position as I update my belief on each stakeholder's position.
 
 ### Simpson's Paradox
 
@@ -321,12 +373,11 @@ I genuinely want your feedback on everything, even if it is not tech related, fo
 
 #### Giving Feedback
 I follow the "radical candor" model, i.e., my feedbacks will be immediate, direct, and empathetic. For me, empathy means I will always deliver constructive feedback privately, focus on the work and behavior rather than the person, and be committed to helping you act on it. I totally expect people to be uncomfortable with negative feedbacks and let's do a mini-RCA together - it is possible I misinterpreted facts.
-I believe in a 'no surprises' policy for managers, as it ensures they always have the full context to support you. Therefore, I will briefly align with your manager before we discuss feedback, even for quick topics. The conversation itself will always be a direct one between you and me, but this approach ensures we are all working together from the same set of information.
+For immediate, in-the-moment feedback about a specific piece of work, code, or interaction, I will always come to you directly and privately first. 
+For persistent pattern over time, I believe in a 'no surprises' policy for managers, as it ensures they always have the full context to support you. Therefore, I will briefly align with your manager before we discuss feedback. The conversation itself will always be a direct one between you and me, but this approach ensures we are all working together from the same set of information.
 
 ### Social 
-
-I will not go to most team social events where I am just listening, because I'd rather use that time on 1:1s on hard and senstitive topics. 
-During the team dinner, I will change my seat once every 30 mins, so that I can sit next to everyone during the dinner. I know this is a bit against the social norm but I think it is necessary to achieve the goal of connecting with people
+I prioritize my time for deep, focused 1:1s on career and technical challenges, as I believe that's where I can provide the most value. This means I may attend fewer large social events. When I do join team gatherings, my goal is to connect with as many people as possible, so please don't be surprised if I move around frequently—I want to make sure I get a chance to chat with everyone.
 
 
 # My Technology Philosophy
