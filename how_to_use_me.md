@@ -25,7 +25,7 @@ My Observation: Technical debt is a tool, not an evil. Sometimes taking on 'debt
 
 So, instead of saying: "This is too hacky," or "Let's be pragmatic and just do the fast thing."
 
-I will try to ask: "If we choose this shortcut, what is the exact 'repayment' plan? Let's create a ticket right now with a specific, measurable trigger for when we must address this (e.g., 'once this endpoint exceeds 100 requests per second,' or 'before the end of Q4'). Are we all committing to prioritizing that ticket when the trigger hits?"
+I will try to ask: "If we choose this shortcut, what is the exact 'repayment' plan? Let's create a ticket right now with a specific, measurable trigger for when we must address this (e.g., 'once this endpoint exceeds 100 requests per second,' or 'before the end of Q4', 'once this module requires non-trivial changes by three different engineers'). Are we all committing to prioritizing that ticket when the trigger hits?"
 
 #### On introducing new technology
 
@@ -37,7 +37,7 @@ I will try to ask:
 * Beyond the initial implementation, who will be on-call for this? How will we monitor it? 
 * What is our 'off-ramp' strategy if we need to migrate away from this in two years? Or what is the backup option
 * What are some non-critical/offline systems we can POC first? Ideally we should deploy this on 2 non-critical/offline systems before we roll out the deployment
-* "What is the specific, measurable advantage of this new approach that justifies the cost of fragmentation? Is it a 10x improvement in performance or developer velocity, or is it a marginal gain?"
+* What is the specific, measurable advantage of this new approach that justifies the cost of fragmentation? Is it a 10x improvement in performance or developer velocity, or is it a marginal gain?. Does it unlock a new product capability that is impossible with our current stack, even if the initial version isn't 10x faster?
 * "Could we define this as a formal 'paved road' vs. 'dirt path' option? The 'paved road' is our standard, fully-supported stack. If you choose a 'dirt path' (a new technology), the proposing engineer is explicitly signing up to own its documentation, training, and initial operational support."
 
 #### On build vs buy
@@ -56,7 +56,7 @@ So, instead of saying: "Just give me the date," or "This will take 6 weeks."
 
 I will try to ask: 
 * What is your 50% confidence estimate (50/50 chance of being early or late)? 
-* And what is your 90% confidence estimate (the date you feel very certain you can hit)? The gap between those two numbers tells us where the real project risk is.
+* And what is your 90% confidence estimate (the date you feel very certain you can hit)? The gap between those two numbers tells us where the real project risk is. Maybe some POC can reduce the gap between the two?
 * Show us the DAG of execution orders, with each node takes no more than 1 week. This will help us identify the critical path and track if the project is on track
 * The POC effort should also be included in the effort estimation. I expect POC effort takes around 20% of the project timeline to expose unknown unknowns
 
@@ -72,7 +72,7 @@ I will try to ask: "How many developer-hours were spent debugging it last quarte
 We follow "disagree and commit" model. 
 * Each option should have a milestone with proxy metrics to achieve in the frame of 3 months
 * Once a decision is made, everyone expects to commit to its success. If an eng feels so strongly against the decided decision. Then I will talk to the engineering manager to find a solution that aligns with their convictions and career goals, which might include finding a better-suited project. Such eng may return to this project later when the direction changes or the eng's expertise is needed
-* The decision is made by the LCA of reporting chains of stakeholders
+* The decision is made by the LCA of reporting chains of stakeholders, or the LCA's delegate
 * However, we are open to pivot to a different option if the committed one is not working. That is why we compare and update project's impact and progress with metrics defined above at least once every 3 months. We will also define early-exit criteria or red flags that would trigger a re-evaluation before the 3-month milestone.
 
 #### How to define DRIs 
@@ -217,7 +217,7 @@ My Observation: A designer will propose a fantastic, engaging user experience th
 
 So, instead of saying: "That's impossible," or "This design will take 6 months to build."
 
-I will try to ask: "I love the user value this experience is targeting. The architecture required to support this specific design is a significant one-way-door investment. Can we partner to find an 80/20 version? What if we achieve the same core user goal with a simpler UI that lets us use our 'paved road' stack? This would let us validate the feature's core hypothesis in weeks, not months, and we can commit to this richer design once we have data that it's the right bet."
+I will try to ask: "The architecture required to support this specific design is a significant one-way-door investment. Can we partner to find an 80/20 version so that we can validate core user hypothesis sooner, i.e., in weeks? What if we achieve the same core user goal with a simpler UI that lets us use our 'paved road' stack? We can commit to this richer design once we have data that it's the right bet."
 
 #### On Handling Mid-Project Scope Changes
 My Observation: A "small tweak" or "minor addition" is requested by Product or Design for a project that is already estimated and in progress. The request seems simple on the surface but has deep architectural implications (e.g., "just add this one extra filter," which breaks the query model or requires a new index).
@@ -315,6 +315,7 @@ When look at numbers, I will be very explicit if we are watching a leading or a 
 * Conversely, I try not to use "You" statement because it often sounds more accusational than intended. In fact, LLMs will rewrite most of the "you" statements
 * I prefer being prescriptive and to go from bottom-up (fact to theory), rather than top-down (principle to action), because 1. the top-down approach often sounds more preachy than intended. 2. The same abstract principle means differently to different person (similar to why we need this doc to begin with)
 * Upon hearing a "no" from another team, I want to work with the other team to understand why my request does not align with the team's charter/goal/roadmap. This often signals oppurtunity in new projects, or an expanded scope of existing projects
+* When I see major gaps, such as missed timeline, wrong assumptions that could derail the whole design, I will call out the issues/risks, ask the meeting to move onto the next topic, and I will follow up with the gap's stakeholders right after the meeting to RCA and come up with a recovery plan, and inform stakeholders in Slack on the next action items
 
 
 ### Response Times
