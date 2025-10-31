@@ -190,6 +190,17 @@ I will try to ask:
 * Data and Evidence: What data supports this path? If we have no data, what is the fastest, cheapest experiment we can run to get a signal?
 * Cost & Resource Constraints: Does this fit within our budget, timeline, and available engineering resources? Can our team build, test, and operate this effectively with their current skills? Does it introduce a high operational burden or a steep learning curve? 
 
+### My role on a project
+
+To align expectations, I will clarify my role with stakeholders at the start of every project. My engagement will fall into one of these three categories. Please ask, "George, what is your role on this?" if it's ever unclear.
+* Consulting: I will leave comments on design docs and meeting notes, but I will skip most of the meetings. My goal is to provide context you may be missing. I will only block decisions that I believe will cause immediate, severe harm (e.g., a P0-level issue). I am not accountable for the project's success but am always ready to convert to a more involved role if needed.
+* Sponsoring: 
+  * I am the second point of contact. I am accountable for the project's strategic success and for providing the "Owner" with the resources they need.
+  * I will join key milestone meetings (e.g., kickoff, design review, launch review).
+  * I will not be in the day-to-day standups, but I expect the Owner to keep me informed of risks or blockers.
+  * My "block" is reserved for strategic misalignment (e.g., the decision contradicts our team's OKRs, a non-goal, or a cross-team commitment). For implementation-level decisions, I will voice my opinion, but I trust the "Owner" to make the final call, and we will follow the "disagree and commit" model.
+* Owning: I am the DRI (Directly Responsible Individual) and the first point of contact for this project. I am fully accountable for its success from inception to delivery and operation.
+
 ### Working with product an design
 
 My Observation: The best products are built by a "triad" (Product, Design, and Engineering) operating as true partners with shared ownership. The worst outcomes happen when these roles become a transactional "service" model (e.g., Product hands a PRD "order" to Eng, Eng "receives" designs from Design). My goal is to be involved before the PRD is finalized, to help shape the problem definition so we can build the right solution sustainably.
@@ -316,6 +327,12 @@ When look at numbers, I will be very explicit if we are watching a leading or a 
 * I prefer being prescriptive and to go from bottom-up (fact to theory), rather than top-down (principle to action), because 1. the top-down approach often sounds more preachy than intended. 2. The same abstract principle means differently to different person (similar to why we need this doc to begin with)
 * Upon hearing a "no" from another team, I want to work with the other team to understand why my request does not align with the team's charter/goal/roadmap. This often signals oppurtunity in new projects, or an expanded scope of existing projects
 * When I see major gaps, such as missed timeline, wrong assumptions that could derail the whole design, I will call out the issues/risks, ask the meeting to move onto the next topic, and I will follow up with the gap's stakeholders right after the meeting to RCA and come up with a recovery plan, and inform stakeholders in Slack on the next action items
+* When I ask questions, I often lead with a 'first guess'. You'll hear me say something like, "What is the benefit of this approach? My guess is it's because..." Please know that my guess is often incomplete or inaccurate, and that's intentional. I do this because:
+ * It's a forcing function for me to think through the problem.
+ * It makes the tone more collaborative.
+ * It's much easier for you to correct my wrong guess than to answer a cold, open-ended question.
+Please feel free to say "No, that's not quite right..." and give me the real answer. Don't treat my guess as the 'right' answer I want to hear.
+* I will iterate on my pitches. You will see me propose many ideas and initiatives. I fully expect most of my initial pitches won't be right, and that's a key part of the process. I see a "rejection" as valuable feedback that we're not yet aligned. My next pitch will simply be an iteration, built on the concerns and insights from the last one, until we have collectively found and aligned on the right strategic opportunity.
 
 
 ### Response Times
