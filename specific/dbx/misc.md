@@ -1,0 +1,2 @@
+You might have workloads that run outside of Databricks (for example, first mile ETL or last mile BI). Unity Catalog lets you add external lineage metadata to augment the Databricks data lineage it captures automatically, giving you an end-to-end lineage view in Unity Catalog. This is useful when you want to capture where data came from (for example, Salesforce or MySQL) before it was ingested into Unity Catalog or where data is being consumed outside of Unity Catalog (for example, Tableau or PowerBI).
+
