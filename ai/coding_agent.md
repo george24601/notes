@@ -1,9 +1,5 @@
 ### Codex
 
-Type /review in the CLI to open Codex’s review presets. The CLI launches a dedicated reviewer that reads the diff you select and reports prioritized, actionable findings without touching your working tree.
-
-Tap Esc twice while the composer is empty to edit your previous user message. Continue pressing Esc to walk further back in the transcript, then hit Enter to fork from that point.
-
 
 ### Cursor
 
