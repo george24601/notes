@@ -44,9 +44,9 @@ I will try to ask:
 
 The lower the stack, the more likely we need to buy. 
 
-Team needs to be aware of that LLM halluciates a lot when advicing on internal tools and processs, even with the help of RAG.
+Team needs to be aware that LLM hallucinates a lot when advising on internal tools and processes, even with the help of RAG.
 
-Any build proposal need to include competitor analysis on how other teams handle similar scenarios. We can do things differently from most other teams, but we need to be aware that we are doing things differently and have clear reason and value propersition
+Any build proposal need to include competitor analysis on how other teams handle similar scenarios. We can do things differently from most other teams, but we need to be aware that we are doing things differently and have clear reason and value proposition
 
 #### On project estimates and deadlines
 
@@ -84,7 +84,7 @@ When DRIs change, old DRIs could still be consulted for opinions, but their opin
 
 #### Working on another team's project
 
-Senior engineers should understand how the immediate upstream and downstream systems work, that is, knowing the high level design/compoments of the system's dependnecy and customers, one level below the interface.
+Senior engineers should understand how the immediate upstream and downstream systems work, that is, knowing the high level design/components of the system's dependency and customers, one level below the interface.
 Every eng is welcomed to contribute to another team's code base, on condition that,
 * The "giving team" eng's EM is aware of this cross-team contribution and ok with it
 * The receiving team has reviewed and approved design proposals with the "giving" team.
@@ -93,7 +93,7 @@ Every eng is welcomed to contribute to another team's code base, on condition th
 
 #### On Prioritizing Bugs vs. Features
 Bugs and features should share the same priority score so that the team can prioritize. 
-Any risk of data loss, security, privacy, or complaince is P0 immediately
+Any risk of data loss, security, privacy, or compliance is P0 immediately
 
 A eng should be able to claim fixing P0 and P1 bugs as impact on the highlight reel. In general, we expect no more 60% of efforts in a year are on bugs. For example, if an eng has spent 50% of time on bugs, then the eng should pick a P1 feature next instead of another bug. Note that we can frame bug fixing as backfill missing features.
 
@@ -104,8 +104,8 @@ If we find a team is consistently spending more than 60% of its time on reactive
 The user of the system should be main driver in updating said docs, similar to Feyman's technique of learning, and the system's owner team should review user's updates with high priority. 
 The system's user can claim updating said docs as "impact" in the high light reels with backing data. However, this should take less than 20% of the user's time. If more that 20%, then it is a miss on the system owner's side
 LLM-generated documentation can be added to code/wiki, only after every single line has been reviewed manually, because 
-* LLM often halluciates when documenting internal systems
-* LLM documentation is good at what the system/code is doing, but need huamn verifcation on why the system/code is behaving this way, if certain behavior is intended, or what invariants must the code/system hold.
+* LLM often hallucinates when documenting internal systems
+* LLM documentation is good at what the system/code is doing, but need human verification on why the system/code is behaving this way, if certain behavior is intended, or what invariants must the code/system hold.
 
 #### On Responding to a Failing Project or Underperforming Feature
 
@@ -118,7 +118,7 @@ I will try to ask:
 * "What is the cheapest possible experiment we can run in the next two weeks to test if a pivot could salvage this? For example, can we change the user interface, target a different audience, or simplify the core functionality?"
 * "If we were a brand new team given this same project today, knowing what we know now, would we still choose to build it? If the answer is 'no,' our default decision should be to decommission it, and document our learnings in a post-mortem."
 
-Note that decomissioning a failing project should be rare, because the huge gap between projection and reality means big gaps in the original assumptions/goals/non-goals discussion, or we didn't built things in easily reversible blocks.
+Note that decommissioning a failing project should be rare, because the huge gap between projection and reality means big gaps in the original assumptions/goals/non-goals discussion, or we didn't built things in easily reversible blocks.
 
 #### On Evaluating Performance on a Failed Project
 My Observation: When a project is decommissioned, its direct business impact is, by definition, low. This is a real factor in performance reviews. However, punishing the team for an intelligent risk that didn't pay off creates a risk-averse culture that kills innovation. The challenge is to be honest about the low impact while fairly evaluating the team's work.
@@ -153,9 +153,9 @@ I will try to ask:
 #### On Generalizing a Solution vs. Keeping it Specific
 My Observation: A team builds a simple, effective solution for a specific problem. Soon, another team requests a "slightly different" version. The immediate temptation is to rebuild the original solution as a generic, configurable platform to serve everyone. This often leads to over-engineering, as the "generic" solution is built on the assumptions of only two use cases and becomes complex and difficult to maintain.
 
-My preference is for each team to own a separate solution. However, the common building blocks will be abstracted and owned by both teams - one primary DRI, and one backup DRI, one from each team. When there is a 3rd customer team, we will review the architecture and ownership again - very likely we need a small pod just to own both common buildig blocks and the sucesss of customer teams by then
+My preference is for each team to own a separate solution. However, the common building blocks will be abstracted and owned by both teams - one primary DRI, and one backup DRI, one from each team. When there is a 3rd customer team, we will review the architecture and ownership again - very likely we need a small pod just to own both common building blocks and the success of customer teams by then
 
-When I detect potential duplicate work between teams, I will kick off this general vs specifc discussion with teams' stakeholders.
+When I detect potential duplicate work between teams, I will kick off this general vs specific discussion with teams' stakeholders.
 
 #### On Data-Driven Results vs. Product Intuition
 My Observation: sometimes quantitative data from an A/B test or analytics report points to a decision that conflicts with our core product principles or feels like a poor user experience. This often happens when the metric we're tracking is a proxy for, but not a perfect representation of, the actual user value we want to create.
@@ -169,7 +169,7 @@ I will try to ask:
 
 #### Knowledge vs skill
 
-Skill is much more valuable and harder to gain than knowledge. Therefore, I encourage knowledge sharing, but I would say knowledge sharing is at most 10% of a performance review. At the same time, mentoring on a specific skill with continous feedback loop is much more valulable and appreciated, and can go to 30% of a performance review. 
+Skill is much more valuable and harder to gain than knowledge. Therefore, I encourage knowledge sharing, but I would say knowledge sharing is at most 10% of a performance review. At the same time, mentoring on a specific skill with continuous feedback loop is much more valuable and appreciated, and can go to 30% of a performance review. 
 
 
 #### On Interpreting Ambiguous Experiment Results
@@ -286,18 +286,18 @@ I will ask clarifying questions to expose the core trade-offs and assumptions be
 For my own proposals, I always try to incorporate ideas and components from other options, even though I am fully confident my approach would work. I will always ask "What does your suggestion solve that I might be missing?". I wish more people would follow this style but I acknowledge this is hard
 
 #### As a Tie-Breaker (Last Resort)
-If the team is deadlocked, I will make the final call based explicitly on the Decision-Making Framework above. After I make a tie-breaking decision, my immediate next step is to connect with the proponents of the other path. My goal is to acknowledge the value of their arguments, ensure they feel heard, and explicitly check that they are on board to commit to the chosen direction. I will also make sure the chosen path acknowledges the merits of the other path, and commited to pivot if the chosen path does not work out
+If the team is deadlocked, I will make the final call based explicitly on the Decision-Making Framework above. After I make a tie-breaking decision, my immediate next step is to connect with the proponents of the other path. My goal is to acknowledge the value of their arguments, ensure they feel heard, and explicitly check that they are on board to commit to the chosen direction. I will also make sure the chosen path acknowledges the merits of the other path, and committed to pivot if the chosen path does not work out
 
 
 ### Bayesian inference
 
 I will keep asking the assumptions behind a statement, and I will keep pressing on the prior probability of the statement, and marginal likelihood of each assumptions, because my observation is that wrong conclusion often comes from the lack of prior probability and marginal likelihood.
-I will also use Bayeisan theorem to answer the question: how much guardrail is enough? Since the error state should be rare, we should look for a signal (or a combination of signals happening at the same time), that is rare to happen
-When advocating for a concensus, I follow a Bayesian equilibrium model. That is, I will have probability on each stakeholder's positions, and pick a strategy that is good enough and yet aligns more with team's interests over a best strategy (imo) but not align with teams' motivation, and I may pivot my position as I update my belief on each stakeholder's position.
+I will also use Bayesian theorem to answer the question: how much guardrail is enough? Since the error state should be rare, we should look for a signal (or a combination of signals happening at the same time), that is rare to happen
+When advocating for a consensus, I follow a Bayesian equilibrium model. That is, I will have probability on each stakeholder's positions, and pick a strategy that is good enough and yet aligns more with team's interests over a best strategy (imo) but not align with teams' motivation, and I may pivot my position as I update my belief on each stakeholder's position.
 
 ### Simpson's Paradox
 
-When I see a claim on before vs after impact, I will push for before vs after data on different subgroups, and see if the trend is consistent across the groups. If there are outliers, we need to watch out for confounding variables that affects in both grouping (indepedent variables) and the outcome (dependent variables). Such check is obvious in hindsight but my observation is that many claims don't follow it.
+When I see a claim on before vs after impact, I will push for before vs after data on different subgroups, and see if the trend is consistent across the groups. If there are outliers, we need to watch out for confounding variables that affects in both grouping (independent variables) and the outcome (dependent variables). Such check is obvious in hindsight but my observation is that many claims don't follow it.
 
 ### Leading and lagging indicators
 
@@ -318,14 +318,14 @@ When look at numbers, I will be very explicit if we are watching a leading or a 
 
 ### My Communication Style & What to Expect
 
-* I try to use positive framing and avoid negaitve whenever possible. For example, I will say, "add more guardrails to limit the blast radius" rather than "missing guardrails will greatly increase the blast radius". This is a style I wish more people will follow.
+* I try to use positive framing and avoid negative whenever possible. For example, I will say, "add more guardrails to limit the blast radius" rather than "missing guardrails will greatly increase the blast radius". This is a style I wish more people will follow.
 * I try to explain the reason behind my decision. For example, "let's add a feature flag, because this change needs to be easily reversible". This is a style I wish more people will follow.
 * When talking to people, I will interrupt the monologue from time to time to rephrase what you said, to make sure we are on the same page.
 * I try to maintain eye contact with people. Let me know if you prefer a different style.
-* I use "I think", "I assume", "I feel" a lot, because I try hard to distinguish my preception of facts and facts itself, and I hope others pay attenion to the difference fact and preception too.
-* Conversely, I try not to use "You" statement because it often sounds more accusational than intended. In fact, LLMs will rewrite most of the "you" statements
+* I use "I think", "I assume", "I feel" a lot, because I try hard to distinguish my perception of facts and facts itself, and I hope others pay attention to the difference fact and perception too.
+* Conversely, I try not to use "You" statement because it often sounds more accusatory than intended. In fact, LLMs will rewrite most of the "you" statements
 * I prefer being prescriptive and to go from bottom-up (fact to theory), rather than top-down (principle to action), because 1. the top-down approach often sounds more preachy than intended. 2. The same abstract principle means differently to different person (similar to why we need this doc to begin with)
-* Upon hearing a "no" from another team, I want to work with the other team to understand why my request does not align with the team's charter/goal/roadmap. This often signals oppurtunity in new projects, or an expanded scope of existing projects
+* Upon hearing a "no" from another team, I want to work with the other team to understand why my request does not align with the team's charter/goal/roadmap. This often signals opportunity in new projects, or an expanded scope of existing projects
 * When I see major gaps, such as missed timeline, wrong assumptions that could derail the whole design, I will call out the issues/risks, ask the meeting to move onto the next topic, and I will follow up with the gap's stakeholders right after the meeting to RCA and come up with a recovery plan, and inform stakeholders in Slack on the next action items
 * When I ask questions, I often lead with a 'first guess'. You'll hear me say something like, "What is the benefit of this approach? My guess is it's because..." Please know that my guess is often incomplete or inaccurate, and that's intentional. I do this because:
  * It's a forcing function for me to think through the problem.
@@ -381,7 +381,7 @@ When you're stuck: Please don't hesitate to reach out. Before you do, please be 
 
 Our pairing sessions: you should be able to give an answer better than mine after our session, because you have more context on your problem. I will ask a lot of clarifying questions, and maintain that in our 1:1 doc  
 
-Beyond the code: Feel free to set up 15-30 mins 1:1 session with me on career development, navigating the organization, and improving communication skills. The agenda should be filled with hard/senstive, and specific questions. I prefer our 1:1 to be in person, and ideally I'd like to walk with you in a park to talk through things
+Beyond the code: Feel free to set up 15-30 mins 1:1 session with me on career development, navigating the organization, and improving communication skills. The agenda should be filled with hard/sensitive, and specific questions. I prefer our 1:1 to be in person, and ideally I'd like to walk with you in a park to talk through things
 
 ### Giving and Receiving Feedback
 
@@ -455,11 +455,11 @@ The ultimate goal for a successful 'new tech project' is to graduate into a 'bus
 
 ### Build our own infra stack
 
-I am neutral on this, because custom infra stack is a hard to reverse decision with very severe tradeoffs. However, most medium-large company will end up with its own custom infra stack. See "Introduce new technology" and "build vs buy" section for more disucssion.
+I am neutral on this, because custom infra stack is a hard to reverse decision with very severe tradeoffs. However, most medium-large company will end up with its own custom infra stack. See "Introduce new technology" and "build vs buy" section for more discussion.
 
 ### Open source our solutions
 
-Not very likely we will open source a brand new solution, because it is either too specific to the company's context, or too general to have mutliple competitors already. However, I do expect the team to add features, fix bugs for existing open source projects, and become PMC of these projects
+Not very likely we will open source a brand new solution, because it is either too specific to the company's context, or too general to have multiple competitors already. However, I do expect the team to add features, fix bugs for existing open source projects, and become PMC of these projects
 
 
 ### Complexity relative to use cases
@@ -543,22 +543,22 @@ My expectation is that at least 50% of our corrective actions from any major inc
 At this moment I prefer we use SFT only as the last resort, because
 * We experienced catastrophic forgetting with SFT model in the past
 * Once a new model is out every 6 months, we have to re-do the SFT 
-* Industry study shows that >70% of LLM quality issue can be mitigated by lower lift options, such as RAG or contextrual engineering
+* Industry study shows that >70% of LLM quality issue can be mitigated by lower lift options, such as RAG or contextual engineering
 
 At this moment, I feel the priority is to add the company's evals for LLMs
 
 ### PMF for LLMs 
-At this moment, LLM-powered products are best fitted for internal tools and workflows. In most cases, I feel a LLM powered workflow is good enough. An single agent system is likely ovekill, and a multi-agent system is almost always an overkill
+At this moment, LLM-powered products are best fitted for internal tools and workflows. In most cases, I feel a LLM powered workflow is good enough. An single agent system is likely overkill, and a multi-agent system is almost always an overkill
 
 ### Code from LLM
-Treat LLM as a genius intern. The engs are still accountable for the LLM generated code, and code should be reviewed as if producted by human, because LLM often gives bad code because of lack of internal context.
-For production features, come up with an internal design doc for LLM. This internal design doc should include which components will be added/modified, and which internal libraries could be used in the place of external libraries. This internal design doc should be reviewed and commited first, and then fed into LLM to generate the actual code.
+Treat LLM as a genius intern. The engs are still accountable for the LLM generated code, and code should be reviewed as if produced by human, because LLM often gives bad code because of lack of internal context.
+For production features, come up with an internal design doc for LLM. This internal design doc should include which components will be added/modified, and which internal libraries could be used in the place of external libraries. This internal design doc should be reviewed and committed first, and then fed into LLM to generate the actual code.
 
 # How I build trust with you
 
 The ultimate way is to deliver hard projects that aligns with your goals. To do this, I will
 
-* Check my understanding of the data model and system architecture with the engineers. The santity check is that I should be able to product a diagram of data model with roles and goals of each component
+* Check my understanding of the data model and system architecture with the engineers. The sanity check is that I should be able to product a diagram of data model with roles and goals of each component
 * Go through the design docs of last half years and check my understanding of team's goals and roadmap with managers. The sanity check that I should be able maintain a roadmap which does not differ much from the team's goals
 * Go through the user workflows that covers 80% of use cases, and compare my understanding with PMs
 * Go through the RCAs of last half years and identify recurring patterns 
