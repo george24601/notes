@@ -1,1 +1,0 @@
-Describe a sequence of events that result in a client reading stale data from the Google File System
