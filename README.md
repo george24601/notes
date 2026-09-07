@@ -1,6 +1,6 @@
 # Personal Knowledge Base (PKB)
 
-> A high-signal personal knowledge base and second brain capturing engineering mental models, agent systems architecture, custom system design patterns, deep-dive data infrastructure, and personal operating heuristics.
+> A high-signal personal knowledge base and second brain capturing engineering mental models, agent systems architecture, practical data-mesh patterns, Japanese workplace-language practice, and personal operating heuristics.
 
 ---
 
@@ -9,8 +9,8 @@
 This repository is organized as an **AI-native Personal Knowledge Base (PKB)** focused strictly on **high-leverage, proprietary context** that general-purpose foundation models lack:
 1. **Operating Heuristics & Work Style**: George's mental models, trade-off evaluation matrices, decision-making frameworks, and collaboration expectations.
 2. **AI & Agent Systems**: Agent orchestration paradigms, evaluation harness patterns, RAG pipelines, and agent skill engineering.
-3. **Architecture & System Design**: Authentication protocols, distributed system design, data mesh, and domain modeling.
-4. **Deep-Dive Data Infrastructure**: Production configurations, operational runbooks, and deep-dive notes on specific distributed databases and tools (TiDB, Kafka, Vault, Elasticsearch, Databricks, MySQL/Aurora, Redis, Consul).
+3. **Data Mesh**: Practical discovery, interoperability, governance, and in-place consumption patterns.
+4. **Japanese Workplace Language**: Japanese-first practice for messages encountered at a Japanese internet company.
 
 ---
 
@@ -20,8 +20,8 @@ This repository is organized as an **AI-native Personal Knowledge Base (PKB)** f
 | :--- | :--- | :--- |
 | **🧠 Operating Heuristics** | [`how_to_use_me/`](how_to_use_me/) | Working style, trade-off evaluation, decision-making frameworks, communication, LLM philosophy, RCA expectations, and trust building. |
 | **🤖 AI & Agent Systems** | [`ai/`](ai/) | Agent orchestration patterns, evaluation frameworks, harness design, RAG pipelines, and agent skills. |
-| **🏛️ Architecture & System Design** | [`arch/`](arch/) | Distributed architectures, authentication/auth protocols (OAuth, OIDC, JWT), data mesh, star schema, API patterns, and syntax design. |
-| **🛠️ Deep-Dive Technologies** | [`specific/`](specific/) | Operational cheat sheets and architectures for data infrastructure: TiDB, Kafka, Vault, Elasticsearch, Databricks, MySQL, Redis, Consul, CockroachDB, Prometheus. |
+| **🏛️ Data Mesh** | [`arch/data_mesh.md`](arch/data_mesh.md) | Data-product discovery, metadata, governance, quality, and in-place access controls. |
+| **🇯🇵 Japanese Workplace Language** | [`specific/jp/`](specific/jp/) | Japanese-first practice for understanding and replying to workplace messages. |
 
 ---
 
@@ -36,7 +36,7 @@ Feed the relevant sections from [`how_to_use_me/`](how_to_use_me/) alongside you
 ```
 
 ### 2. Architecture & Systems Grounding
-When designing new infrastructure or data flows, query notes in [`arch/`](arch/) and [`specific/`](specific/) for established patterns, consensus constraints, and operational lessons.
+When designing data-product discovery, governance, or cross-domain consumption, query [`arch/data_mesh.md`](arch/data_mesh.md). For Japanese workplace-message practice, query [`specific/jp/`](specific/jp/).
 
 ### 3. Agent Navigation Guidelines
 See [`AGENTS.md`](AGENTS.md) at the repository root for explicit subagent loading strategies, editing rules, and topic boundaries.

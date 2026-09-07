@@ -9,8 +9,8 @@ Welcome to George's **Personal Knowledge Base (PKB)**. This document outlines gu
 This repository is an interconnected second brain focused on high-signal personal context, heuristics, and deep operational knowledge:
 1. **Operating Heuristics & Work Style** (`how_to_use_me/`)
 2. **AI & Agent Architecture Notes** (`ai/`)
-3. **System Architecture & Design Patterns** (`arch/`)
-4. **Deep-Dive Infrastructure & Tooling** (`specific/`)
+3. **Data Mesh Practices** (`arch/data_mesh.md`)
+4. **Japanese Workplace Language Practice** (`specific/jp/`)
 
 ---
 
@@ -20,8 +20,8 @@ This repository is an interconnected second brain focused on high-signal persona
 - **Root Index**: Always consult [README.md](README.md) to locate the canonical home for a topic.
 - **Operating Decisions**: For any task involving architectural decisions, trade-offs, tech evaluation, or team collaboration, check [how_to_use_me/](how_to_use_me/) first.
 - **Technical Deep Dives**:
-  - For concrete database and infrastructure operations (e.g., TiDB, Kafka, Vault, MySQL): look in [specific/](specific/).
-  - For architecture patterns and auth models: look in [arch/](arch/).
+  - For Japanese workplace-message practice: look in [specific/jp/](specific/jp/). Keep the interaction Japanese-first; do not translate into English unless explicitly asked.
+  - For data-product discovery, governance, and cross-domain access: look in [arch/data_mesh.md](arch/data_mesh.md).
   - For agent design, evals, and RAG architectures: look in [ai/](ai/).
 
 ---
