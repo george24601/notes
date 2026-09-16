@@ -1,35 +1,25 @@
 # AGENTS.md
 
-Work inside this project folder first. Avoid broad repo scans unless the task genuinely spans multiple projects.
+Instructions for AI assistants and autonomous tutors interacting with PJ Bento.
 
 ## Read Order
 
-1. `current.md` — capability snapshot and next actions (always read this first)
-2. `why.md` — study principles and rationale
-3. `open_loops.md` — open commitments and practice gaps
+1. [`frontier.md`](frontier.md) — **Read this first for all practice and planning tasks.** Contains operating heuristics, register constraints, tutoring rules, **2. What is Not Stable** (error tables, live pressure points, banned anchors), and **3. What to Learn & Next Actions** (frontier targets, drills).
+2. [`phrases.md`](phrases.md) — **Read for phrase selection and drill design.** Contains **1. What is Stable** (confirmed workplace phrases by function, representative outputs, rescue set).
+3. [`grammar.md`](grammar.md) — **Read for grammar questions or pattern mechanics.** Reference guide for syntax, connectors, and collocations.
 
-Stop after the first three files unless the task clearly needs more.
+Stop after `frontier.md` unless the task specifically requires phrase retrieval or grammar clarification.
 
-**Secondary reads by task type:**
-- Phrase selection or drill design → `phrases.md`
-- Grammar question or pattern explanation → `grammar.md`
-- Review drill design, error analysis, or correction work → `hard-points.md`
-- Roadmap or tutor scaffold → `visibility_first_japanese_100h_master_plan.md`
+## Tutoring & Interaction Heuristics
+
+- **Japanese-First**: Drills, prompts, role-plays, and summaries must be in Japanese. English is for brief explanation and correction only.
+- **Register Ceiling**: Direct assertive N3 (`〜します`, `〜して`, `〜しますので`). Never drill humble corporate loops (`〜したく存じます`) or managerial-style pushing.
+- **No Banned Anchors**: Never introduce or drill retired fillers (`把握しました`, generic `対応`, generic `進めます`, `〇〇の件`, `第一案`, `〜次第`, `現状を認識しております`).
+- **Voice-Input Tolerance**: Ignore IME / kanji / okurigana artifacts when spoken intent is clear. Prioritize spoken grammar, word choice, and natural delivery speed over writing perfection.
+- **Session Structure**: Default to `20-minute` chunks. Give one prompt at a time (3 prompts max).
 
 ## Editing Rules
 
-- Prefer editing existing files before creating new ones.
-- Store durable rationale in `why.md`, not in `current.md`.
-- Keep `current.md` focused on current state: capability snapshot, competency map, tutoring style, next actions.
-- Keep `phrases.md` organized by workplace function, not by session ID.
-- Keep `grammar.md` organized by grammatical concept, not by when a pattern was introduced.
-- Keep `hard-points.md` organized by error type; add new errors as they emerge from practice.
-- Keep `open_loops.md` focused on open practice commitments and strategic questions; remove completed rows.
-- Do not store synthetic session/chunk IDs as primary keys in canonical docs. Keep learned capability, next-study pressure, and difficulty points current. If a legacy alias is needed, confine it to a short clearly labeled historical note in `visibility_first_japanese_100h_master_plan.md`.
-- Omit redundant `owner` and empty `people` frontmatter unless those fields add real signal.
-
-## Scope Control
-
-- Stay within this project folder unless the task explicitly requires cross-project context.
-- Do not read sibling project folders for local project work.
-- If you create a new convention here, update `README.md` in the same change.
+- Keep [`frontier.md`](frontier.md) as the live working pad: update error tables when new mistakes emerge, and update *What to Learn & Next Actions* when targets are mastered.
+- When a phrase is confirmed and stable under speaking pressure, graduate it into [`phrases.md`](phrases.md) under the appropriate workplace function.
+- Do not re-introduce synthetic session IDs, module numbers, or fragmented tracking files.

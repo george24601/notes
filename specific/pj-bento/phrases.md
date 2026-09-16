@@ -3,9 +3,12 @@ type: phrase-bank
 project: pj-bento
 ---
 
-# Active Phrase Bank
+# 1. What is Stable: Active Phrase Bank
 
-Confirmed active phrases stay here. Upcoming targets live in a separate section. English glosses are intentionally minimized; this file is for usable production, not translation study.
+This document is the canonical inventory of **confirmed, deployable workplace Japanese phrases** and representative compound chains.
+- For current issues, errors, and what to learn: see [frontier.md](frontier.md).
+- For grammar pattern reference: see [grammar.md](grammar.md).
+- English glosses are intentionally minimized; this file is for usable production, not translation study.
 
 ---
 
@@ -200,28 +203,4 @@ Confirmed active phrases stay here. Upcoming targets live in a separate section.
 - 技術判断:
   `影響範囲を特定した上で、保守性の観点から、システムの堅牢性を担保します。`
 
----
 
-## 次の重点
-
-以下はまだ定着していない。次の練習対象として保持する。
-
-- `技術戦略に則り、`
-- `外部製品の導入を検討して、`
-- `費用対効果を見極めます。`
-- 目標連結:
-  `技術戦略に則り、他開発部署と歩調を合わせ、外部製品の導入を検討して、費用対効果を見極めます。`
-
----
-
-## 使わない
-
-以下は再導入しない。必要なら `hard-points.md` で置き換え先を確認する。
-
-- `把握しました`
-- `進めます`
-- `対応`
-- `〇〇の件`
-- `第一案`
-- `〜次第`
-- `現状を認識しております`

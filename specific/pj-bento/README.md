@@ -1,29 +1,19 @@
 # PJ Bento
 
-This project tracks the work of learning practical workplace Japanese in order to build trust, reduce friction, and improve day-to-day relationships with Japanese-speaking coworkers.
+This project tracks practical workplace Japanese learning to build trust, reduce friction, and collaborate effectively with Japanese-speaking coworkers in a Staff-level engineering context.
 
-## Default Read Order
+## Navigation & Read Order
 
-1. `current.md` — capability snapshot, competency map, and next actions
-2. `why.md` — rationale, study principles, and tradeoffs
-3. `open_loops.md` — open practice commitments, strategic questions, and blockers
-
-## Current Focus
-
-- Keep a clean canonical record of learned material, next-study pressure, and difficulty points so Gemini can generate the next study block from current state.
-- Consolidate Staff-level trade-off framing, cross-functional alignment, risk escalation / containment, and stability-defense phrasing under live speaking pressure.
-- Choose a dominant real-world pain context (meetings / 1:1s / casual chat) and transcript-backed listening resources to sharpen future drills.
+1. [`frontier.md`](frontier.md) — **Learning Frontier & Operational Hub**: Operating heuristics, tutoring rules, **2. What is Not Stable** (errors, fragile chains, banned anchors), and **3. What to Learn & Next Actions** (frontier targets, policy grammar combos, drills).
+2. [`phrases.md`](phrases.md) — **🟢 1. What is Stable**: Pure confirmed phrase bank organized by workplace function, plus representative compound chains and rescue phrases.
+3. [`grammar.md`](grammar.md) — **Grammar Reference**: Syntax patterns, connectors, and collocations (`〜た上で`, `〜に則り`, `〜の観点から`, `〜にかかわらず`, etc.).
 
 ## File Map
 
-| File | Purpose |
-| --- | --- |
-| `current.md` | Capability snapshot, competency map by workplace function, tutoring style, next actions |
-| `why.md` | Rationale, study principles, and tradeoffs |
-| `open_loops.md` | Open practice commitments, strategic questions, and blockers |
-| `phrases.md` | Active phrase bank organized by workplace function; confirmed final productions |
-| `grammar.md` | Grammar patterns organized by concept (sequencing, conditional, particles, register, etc.) |
-| `hard-points.md` | Known errors and correction notes organized by error type; use to seed review drills |
-| `visibility_first_japanese_100h_master_plan.md` | Compact tutor scaffold and progress guide for the next 100 hours; not a session tracker |
-
-Legacy H/M labels are optional historical shorthand only, kept in `visibility_first_japanese_100h_master_plan.md`. Canonical progress lives in capability, phrase, difficulty, and open-loop surfaces.
+| File | Type | Purpose |
+| :--- | :--- | :--- |
+| [`frontier.md`](frontier.md) | Operational Hub | Live learning edge: tutoring rules, error tables, live pressure points, next targets & drills |
+| [`phrases.md`](phrases.md) | Phrase Bank | Confirmed workplace Japanese phrases and compound outputs ready for production |
+| [`grammar.md`](grammar.md) | Reference | Key grammatical patterns, connectors, and usage notes |
+| [`flight_meeting_200_phrases.md`](flight_meeting_200_phrases.md) | Study Pack | Static offline review pack: 200 meeting phrases |
+| [`flight_return_200_workplace_phrases.md`](flight_return_200_workplace_phrases.md) | Study Pack | Static offline review pack: 200 1:1 and workplace interaction phrases |
