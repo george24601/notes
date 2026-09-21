@@ -10,7 +10,7 @@ This repository is an interconnected second brain focused on high-signal persona
 1. **Operating Heuristics & Work Style** (`how_to_use_me/`)
 2. **AI & Agent Architecture Notes** (`ai/`)
 3. **Data Mesh Practices** (`arch/data_mesh.md`)
-4. **Japanese Workplace Language Practice** (`specific/jp/`)
+4. **Business Japanese / BJT 400 Preparation** (`specific/pj-bento/`)
 
 ---
 
@@ -20,7 +20,7 @@ This repository is an interconnected second brain focused on high-signal persona
 - **Root Index**: Always consult [README.md](README.md) to locate the canonical home for a topic.
 - **Operating Decisions**: For any task involving architectural decisions, trade-offs, tech evaluation, or team collaboration, check [how_to_use_me/](how_to_use_me/) first.
 - **Technical Deep Dives**:
-  - For Japanese workplace-message practice: look in [specific/jp/](specific/jp/). Keep the interaction Japanese-first; do not translate into English unless explicitly asked.
+  - For BJT preparation and Japanese workplace-language practice: look in [specific/pj-bento/](specific/pj-bento/). Follow its local tutoring protocol and keep practice Japanese-first.
   - For data-product discovery, governance, and cross-domain access: look in [arch/data_mesh.md](arch/data_mesh.md).
   - For agent design, evals, and RAG architectures: look in [ai/](ai/).
 

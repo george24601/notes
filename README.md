@@ -1,6 +1,6 @@
 # Personal Knowledge Base (PKB)
 
-> A high-signal personal knowledge base and second brain capturing engineering mental models, agent systems architecture, practical data-mesh patterns, Japanese workplace-language practice, and personal operating heuristics.
+> A high-signal personal knowledge base and second brain capturing engineering mental models, agent systems architecture, practical data-mesh patterns, BJT preparation, and personal operating heuristics.
 
 ---
 
@@ -10,7 +10,7 @@ This repository is organized as an **AI-native Personal Knowledge Base (PKB)** f
 1. **Operating Heuristics & Work Style**: George's mental models, trade-off evaluation matrices, decision-making frameworks, and collaboration expectations.
 2. **AI & Agent Systems**: Agent orchestration paradigms, evaluation harness patterns, RAG pipelines, and agent skill engineering.
 3. **Data Mesh**: Practical discovery, interoperability, governance, and in-place consumption patterns.
-4. **Japanese Workplace Language**: Japanese-first practice for messages encountered at a Japanese internet company.
+4. **Business Japanese / BJT**: Readiness-based preparation for BJT 400 and the associated 10 Highly Skilled Professional points, with workplace comprehension as a secondary benefit.
 
 ---
 
@@ -21,7 +21,7 @@ This repository is organized as an **AI-native Personal Knowledge Base (PKB)** f
 | **🧠 Operating Heuristics** | [`how_to_use_me/`](how_to_use_me/) | Working style, trade-off evaluation, decision-making frameworks, communication, LLM philosophy, RCA expectations, and trust building. |
 | **🤖 AI & Agent Systems** | [`ai/`](ai/) | Agent orchestration patterns, evaluation frameworks, harness design, RAG pipelines, and agent skills. |
 | **🏛️ Data Mesh** | [`arch/data_mesh.md`](arch/data_mesh.md) | Data-product discovery, metadata, governance, quality, and in-place access controls. |
-| **🇯🇵 Japanese Workplace Language** | [`specific/jp/`](specific/jp/) | Japanese-first practice for understanding and replying to workplace messages. |
+| **🇯🇵 Business Japanese / BJT** | [`specific/pj-bento/`](specific/pj-bento/) | BJT 400 as the immigration-points north star, supported by adaptive listening, listening-reading, and reading practice. |
 
 ---
 
@@ -36,7 +36,7 @@ Feed the relevant sections from [`how_to_use_me/`](how_to_use_me/) alongside you
 ```
 
 ### 2. Architecture & Systems Grounding
-When designing data-product discovery, governance, or cross-domain consumption, query [`arch/data_mesh.md`](arch/data_mesh.md). For Japanese workplace-message practice, query [`specific/jp/`](specific/jp/).
+When designing data-product discovery, governance, or cross-domain consumption, query [`arch/data_mesh.md`](arch/data_mesh.md). For BJT preparation and Japanese workplace-language practice, query [`specific/pj-bento/`](specific/pj-bento/).
 
 ### 3. Agent Navigation Guidelines
 See [`AGENTS.md`](AGENTS.md) at the repository root for explicit subagent loading strategies, editing rules, and topic boundaries.
